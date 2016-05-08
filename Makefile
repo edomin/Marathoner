@@ -1,7 +1,7 @@
 CC = mingw32-gcc
 LD = mingw32-gcc
 OBJSDIR = obj
-BINDIR = bin
+BINDIR = plugin
 
 GENERAL_SDL2 = general/sdl2
 SCREEN_SDL2 = screen/sdl2
@@ -18,5 +18,6 @@ prebuild:
 clean:
 	-rm -f -r $(OBJSDIR)
 	-rm -f -r $(BINDIR)
+	-rm -f -r marathoner.exe
 
 .PHONY:

@@ -3,14 +3,14 @@ LD = mingw32-gcc
 CFLAGS = -Wall
 LDFLAGS = -shared
 OBJSDIR = ../../../obj
-BINDIR = ../../../bin
+BINDIR = ../../../plugin
 SRCDIR = ../../../src
 INCDIR = ../../../include
 
 all: $(BINDIR)/$(MODULE_NAME).dll
 
 $(BINDIR)/$(MODULE_NAME).dll: $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).o
-	$(LD) $(LDFLAGS) -o $(BINDIR)/$(MODULE_NAME).dll $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).o
+	$(LD) $(LDFLAGS) -o $(BINDIR)/mtr_$(MODULE_NAME).dll $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).o
 
 $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).o: $(SUBSYSTEM).c $(SUBSYSTEM).h
 	-mkdir $(OBJSDIR)/$(SUBSYSTEM)
