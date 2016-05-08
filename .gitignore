@@ -3,3 +3,5 @@ Marathoner.cbp
 *.dll
 bin/Marathoner.exe
 *.o
+*.log
+Marathoner.exe
