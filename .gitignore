@@ -1,2 +1,5 @@
 Marathoner.cbp
 *.layout
+*.dll
+bin/Marathoner.exe
+*.o
