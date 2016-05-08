@@ -3,12 +3,18 @@ LD = mingw32-gcc
 CFLAGS = -Wall
 LDFLAGS =
 OBJSDIR = ../../obj
-BINDIR = ../../bin
+BINDIR = ../..
+
+OBJS = $(OBJSDIR)/main.o \
+	$(OBJSDIR)/log.o
 
 all: Marathoner
 
-Marathoner: $(OBJSDIR)/engine.o
-	$(LD) $(LDFLAGS) -o $(BINDIR)/Marathoner.exe $(OBJSDIR)/engine.o
+Marathoner: $(OBJS)
+	$(LD) $(LDFLAGS) -o $(BINDIR)/Marathoner.exe $(OBJS)
 
-$(OBJSDIR)/engine.o: main.c
-	$(CC) $(CFLAGS) -c main.c -o $(OBJSDIR)/engine.o
+$(OBJSDIR)/main.o: main.c
+	$(CC) $(CFLAGS) -c main.c -o $(OBJSDIR)/main.o
+
+$(OBJSDIR)/log.o: log.c log.h
+	$(CC) $(CFLAGS) -c log.c -o $(OBJSDIR)/log.o
