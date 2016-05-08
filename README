@@ -1,0 +1,6 @@
+Marathoner - remake of the Run and Jump. This is game engine for GameDev Jams (for this moment). I want to make better flexibility compared with my previous Run and Jump: static-link-builded or optionally plugin-based core, real time redistribution (allocation/removing etc) of the game resources, more types of modules (old ones plus modules for 3D, gui, vector graphics, streaming video etc), may be more embedded script VMs. Everyone module will be based on opensource libraries (SDL, Freetype etc).
+Work in progress. Coming Soon.
+
+Source code under zlib license (for this moment. Read LICENSE)
+
+And I am sorry for my bad english.
