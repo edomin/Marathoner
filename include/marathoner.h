@@ -27,4 +27,12 @@ typedef struct mtrReport{
 #define MTR_DMT_FATAL   4
 #define MTR_DMT_DEBUG   5
 
+/* Notification texts */
+#define MTR_NTT_INFO    "Info"
+#define MTR_NTT_NOTE    "Note"
+#define MTR_NTT_WARNING "Warning"
+#define MTR_NTT_ERROR   "Error"
+#define MTR_NTT_FATAL   "Fatal Error"
+#define MTR_NTT_DEBUG   "Debug"
+
 #endif
