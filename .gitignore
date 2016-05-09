@@ -5,3 +5,4 @@ bin/Marathoner.exe
 *.o
 *.log
 Marathoner.exe
+include/bool/bool.h
