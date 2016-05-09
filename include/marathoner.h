@@ -10,6 +10,15 @@ typedef struct mtrReport{
     char   **prereqs;
 } mtrReport;
 #define MTR_DECLSPEC __declspec(dllexport)
+
+/* Log Message Types */
+#define MTR_LMT_INFO    0
+#define MTR_LMT_NOTE    1
+#define MTR_LMT_WARNING 2
+#define MTR_LMT_ERROR   3
+#define MTR_LMT_FATAL   4
+#define MTR_LMT_DEBUG   5
+
 /* Dialog Message Types */
 #define MTR_DMT_INFO    0
 #define MTR_DMT_NOTE    1

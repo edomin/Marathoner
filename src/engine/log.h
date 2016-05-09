@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <time.h>
 
+#include "marathoner.h"
+
 FILE      *mtrLogFile;
 time_t     mtrCurrentTime;
 struct tm *mtrNow;

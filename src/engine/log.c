@@ -12,22 +12,22 @@ void mtrLogWriteMeta(uint8_t messageType, uint8_t level)
       mtrNow->tm_hour, mtrNow->tm_min, mtrNow->tm_sec);
     switch (messageType)
     {
-        case 0:
+        case MTR_LMT_INFO:
             fprintf(mtrLogFile, "   Info: ");
             break;
-        case 1:
+        case MTR_LMT_NOTE:
             fprintf(mtrLogFile, "   Note: ");
             break;
-        case 2:
+        case MTR_LMT_WARNING:
             fprintf(mtrLogFile, "Warning: ");
             break;
-        case 3:
+        case MTR_LMT_ERROR:
             fprintf(mtrLogFile, "  Error: ");
             break;
-        case 4:
+        case MTR_LMT_FATAL:
             fprintf(mtrLogFile, "  Fatal: ");
             break;
-        case 5:
+        case MTR_LMT_DEBUG:
             fprintf(mtrLogFile, "  Debug: ");
             break;
     }
