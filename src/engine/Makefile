@@ -8,7 +8,8 @@ INCDIR = ../../include
 
 OBJS = $(OBJSDIR)/main.o \
 	$(OBJSDIR)/log.o \
-	$(OBJSDIR)/messagebox.o
+	$(OBJSDIR)/messagebox.o \
+	$(OBJSDIR)/notification.o
 
 all: Marathoner
 
@@ -23,3 +24,6 @@ $(OBJSDIR)/log.o: log.c log.h
 
 $(OBJSDIR)/messagebox.o: messagebox.c messagebox.h
 	$(CC) $(CFLAGS) -I$(INCDIR) -c messagebox.c -o $(OBJSDIR)/messagebox.o
+
+$(OBJSDIR)/notification.o: notification.c notification.h
+	$(CC) $(CFLAGS) -I$(INCDIR) -c notification.c -o $(OBJSDIR)/notification.o
