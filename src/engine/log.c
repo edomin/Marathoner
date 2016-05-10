@@ -56,7 +56,8 @@ void mtrLogWrite(char *message, uint8_t level, uint8_t messageType)
     fclose(mtrLogFile);
 }
 
-void mtrLogWrite_s(char *message, uint8_t level, uint8_t messageType, char * argument)
+void mtrLogWrite_s(char *message, uint8_t level, uint8_t messageType,
+  char * argument)
 {
     mtrLogWriteMeta(messageType, level);
     fprintf(mtrLogFile, message);
@@ -66,7 +67,8 @@ void mtrLogWrite_s(char *message, uint8_t level, uint8_t messageType, char * arg
     fclose(mtrLogFile);
 }
 
-void mtrLogWrite_i(char *message, uint8_t level, uint8_t messageType, int32_t argument)
+void mtrLogWrite_i(char *message, uint8_t level, uint8_t messageType,
+  int32_t argument)
 {
     mtrLogWriteMeta(messageType, level);
     fprintf(mtrLogFile, message);
@@ -75,7 +77,8 @@ void mtrLogWrite_i(char *message, uint8_t level, uint8_t messageType, int32_t ar
     fclose(mtrLogFile);
 }
 
-void mtrLogWrite_d(char *message, uint8_t level, uint8_t messageType, double argument)
+void mtrLogWrite_d(char *message, uint8_t level, uint8_t messageType,
+  double argument)
 {
     mtrLogWriteMeta(messageType, level);
     fprintf(mtrLogFile, message);
