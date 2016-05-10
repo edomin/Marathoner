@@ -6,10 +6,9 @@
 
 typedef struct mtrReport{
     char    *moduleID;
-    uint8_t prereqsCount;
+    uint8_t  prereqsCount;
     char   **prereqs;
 } mtrReport;
-#define MTR_DECLSPEC __declspec(dllexport)
 
 /* Log Message Types */
 #define MTR_LMT_INFO    0

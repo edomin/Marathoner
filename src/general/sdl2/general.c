@@ -1,6 +1,6 @@
 #include "general.h"
 
-MTR_DECLSPEC mtrReport* __stdcall mtrCreateReport(void)
+mtrReport* __stdcall mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -9,4 +9,3 @@ MTR_DECLSPEC mtrReport* __stdcall mtrCreateReport(void)
     report->prereqs = NULL;
     return report;
 }
-
