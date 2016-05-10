@@ -1,7 +1,7 @@
 CC = mingw32-gcc
 LD = mingw32-gcc
 CFLAGS = -Wall
-LDFLAGS = -shared
+LDFLAGS = -shared -Wl,--kill-at
 OBJSDIR = ../../../obj
 BINDIR = ../../../plugin
 SRCDIR = ../../../src
