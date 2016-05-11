@@ -1,6 +1,6 @@
 #include "screen.h"
 
-mtrReport* __stdcall mtrCreateReport(void)
+__declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -10,7 +10,7 @@ mtrReport* __stdcall mtrCreateReport(void)
     return report;
 }
 
-void mtrRequireEngineFuncs(mtrLogWriteFunc_t LogWriteFunc,
+__declspec(dllexport) void __stdcall mtrRequireEngineFuncs(mtrLogWriteFunc_t LogWriteFunc,
                            mtrLogWrite_sFunc_t LogWrite_sFunc,
                            mtrLogWrite_iFunc_t LogWrite_iFunc,
                            mtrLogWrite_dFunc_t LogWrite_dFunc,
