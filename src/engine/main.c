@@ -1,20 +1,7 @@
-#include <windows.h>
-#include <stdint.h>
-#include <stdlib.h>
-
 #include "marathoner.h"
 #include "log.h"
 #include "messagebox.h"
 #include "notification.h"
-
-typedef mtrReport* (__stdcall * mtrReportFunc)(void);
-mtrReportFunc mtrCreateReport;
-
-typedef struct mtrPlugin{
-    mtrReport *report;
-    char      *filename;
-    HMODULE    dll;
-} mtrPlugin;
 
 int main(int argc, char** argv)
 {

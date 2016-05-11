@@ -1,6 +1,9 @@
 #ifndef MTR_MARATHONER
 #define MTR_MARATHONER
 
+#ifndef MTR_PLUGIN
+    #include <windows.h>
+#endif
 #include <stdint.h> /* for uintXX_t types */
 #include <stdlib.h> /* for malloc */
 
@@ -36,6 +39,11 @@ typedef void (__stdcall * mtrNotifyFunc_t)(char *, uint8_t, uint8_t);
                                                          mtrNotifyFunc_t);
     mtrRequireEngineFuncsFunc mtrRequireEngineFuncs;
 
+    typedef struct mtrPlugin{
+        mtrReport *report;
+        char      *filename;
+        HMODULE    dll;
+    } mtrPlugin;
 #endif
 
 /* Log Message Types */
