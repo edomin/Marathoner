@@ -5,4 +5,7 @@ bin/Marathoner.exe
 *.o
 *.log
 Marathoner.exe
-include/bool/bool.h
+include/bool/*
+include/SDL2/*
+include/sdl_gpu/*
+lib/*
