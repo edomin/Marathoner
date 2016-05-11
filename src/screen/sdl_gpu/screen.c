@@ -23,12 +23,12 @@ void mtrRequireEngineFuncs(mtrLogWriteFunc_t LogWriteFunc,
     mtrNotify = NotifyFunc;
 }
 
-//void __stdcall mtrScreenInit(uint16_t width, uint16_t height)
-//{
-//    mtrScreen->screen = GPU_Init(width, height, GPU_DEFAULT_INIT_FLAGS);
-//}
-//
-//void __stdcall mtrScreenInit(void)
-//{
-//    GPU_Quit();
-//}
+void __stdcall mtrScreenInit(uint16_t width, uint16_t height)
+{
+    mtrScreen->screen = GPU_Init(width, height, GPU_DEFAULT_INIT_FLAGS);
+}
+
+void __stdcall mtrScreenQuit(void)
+{
+    GPU_Quit();
+}
