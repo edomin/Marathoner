@@ -101,7 +101,7 @@ int main(int argc, char** argv)
         while(FindNextFile(hf, &FindFileData) !=0 );
         FindClose(hf);
     }
-    /* Freing allocated structures and unload libraries */
+    /* Freing allocated structures and unloading libraries */
     for (i = 0; i < mtrPluginsFound; i++)
         FreeLibrary(mtrPluginData[i].dll);
     free(mtrPluginData);
