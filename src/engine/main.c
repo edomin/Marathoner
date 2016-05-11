@@ -88,6 +88,11 @@ int main(int argc, char** argv)
                           2, MTR_LMT_INFO);
                 }
 
+                mtrRequireEngineFuncs = (mtrRequireEngineFuncsFunc)GetProcAddress(mtrPluginData[currentPlugin].dll,
+                  "mtrRequireEngineFuncs");
+                mtrRequireEngineFuncs(mtrLogWrite, mtrLogWrite_s, mtrLogWrite_i,
+                  mtrLogWrite_d, mtrNotify);
+
                 currentPlugin++;
                 /* freing temporary allocated structures */
                 free(fullPluginFileName);

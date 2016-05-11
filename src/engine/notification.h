@@ -7,6 +7,6 @@
 #include "log.h"
 #include "messagebox.h"
 
-void mtrNotify(char *message, uint8_t level, uint8_t messageType);
+void __stdcall mtrNotify(char *message, uint8_t level, uint8_t messageType);
 
 #endif

@@ -10,6 +10,34 @@ typedef struct mtrReport{
     char   **prereqs;
 } mtrReport;
 
+typedef void (__stdcall * mtrLogWriteFunc_t)(char *, uint8_t, uint8_t);
+typedef void (__stdcall * mtrLogWrite_sFunc_t)(char *, uint8_t, uint8_t,
+                                               char *);
+typedef void (__stdcall * mtrLogWrite_iFunc_t)(char *, uint8_t, uint8_t,
+                                               int32_t);
+typedef void (__stdcall * mtrLogWrite_dFunc_t)(char *, uint8_t, uint8_t,
+                                               double);
+typedef void (__stdcall * mtrNotifyFunc_t)(char *, uint8_t, uint8_t);
+
+#ifdef MTR_PLUGIN
+    mtrLogWriteFunc_t mtrLogWrite;
+    mtrLogWrite_sFunc_t mtrLogWrite_s;
+    mtrLogWrite_iFunc_t mtrLogWrite_i;
+    mtrLogWrite_dFunc_t mtrLogWrite_d;
+    mtrNotifyFunc_t mtrNotify;
+#else
+    typedef mtrReport* (__stdcall * mtrReportFunc)(void);
+    mtrReportFunc mtrCreateReport;
+
+    typedef void (__stdcall * mtrRequireEngineFuncsFunc)(mtrLogWriteFunc_t,
+                                                         mtrLogWrite_sFunc_t,
+                                                         mtrLogWrite_iFunc_t,
+                                                         mtrLogWrite_dFunc_t,
+                                                         mtrNotifyFunc_t);
+    mtrRequireEngineFuncsFunc mtrRequireEngineFuncs;
+
+#endif
+
 /* Log Message Types */
 #define MTR_LMT_INFO    0
 #define MTR_LMT_NOTE    1
