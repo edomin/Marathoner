@@ -1,5 +1,3 @@
-CC = mingw32-gcc
-LD = mingw32-gcc
 OBJSDIR = obj
 BINDIR = plugin
 
