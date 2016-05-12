@@ -74,7 +74,7 @@ int main(int argc, char** argv)
                         mtrLogWrite(mtrPluginData[currentPlugin].report->prereqs[i],
                           2, MTR_LMT_INFO);
                 }
-
+                /* Plugin requiring some engine functions */
                 mtrRequireEngineFuncs = (mtrRequireEngineFuncsFunc)GetProcAddress(mtrPluginData[currentPlugin].dll,
                   "mtrRequireEngineFuncs");
                 mtrRequireEngineFuncs(mtrLogWrite, mtrLogWrite_s, mtrLogWrite_i,
