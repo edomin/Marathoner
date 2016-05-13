@@ -16,3 +16,16 @@ __declspec(dllexport) void __stdcall mtrRequirePluginData(mtrPlugin* pluginData,
     mtrPluginData = pluginData;
     mtrPluginsCount = mtrPluginsCount;
 }
+
+void *mtrFindFunction(char *moduleID, char *functionName)
+{
+    uint8_t i;
+    for (i = 0; i < mtrPluginsCount; i++)
+    {
+        if (mtrPluginData[i].report->moduleID == moduleID)
+        {
+            return (void *)GetProcAddress(mtrPluginData[i].dll, functionName);
+        }
+    }
+    return NULL;
+}
