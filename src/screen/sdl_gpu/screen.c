@@ -12,12 +12,12 @@ __declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
     return report;
 }
 
-void __stdcall mtrScreenInit(uint16_t width, uint16_t height)
+__declspec(dllexport) void __stdcall mtrScreenInit(uint16_t width, uint16_t height)
 {
     mtrScreen->screen = GPU_Init(width, height, GPU_DEFAULT_INIT_FLAGS);
 }
 
-void __stdcall mtrScreenQuit(void)
+__declspec(dllexport) void __stdcall mtrScreenQuit(void)
 {
     GPU_Quit();
 }
