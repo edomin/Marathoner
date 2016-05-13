@@ -12,7 +12,7 @@ __declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
     return report;
 }
 
-void ScriptsInit(void)
+void mtrScriptsInit(void)
 {
     mtrLogWrite("Initializing script subsystem", 0, MTR_LMT_INFO);
     mtrVm = luaL_newstate();
@@ -27,27 +27,27 @@ void ScriptsInit(void)
     mtrLogWrite("Script subsystem initialized", 0, MTR_LMT_INFO);
 }
 
-void ScriptsRegisterFunction(lua_CFunction func, char * funcname)
+__declspec(dllexport) void __stdcall mtrScriptsRegisterFunction(lua_CFunction func, char * funcname)
 {
     lua_register(mtrVm, funcname, func); /* регистрируем функцию */
     mtrLogWrite_s("Script function added:", 0, MTR_LMT_INFO, funcname);
 }
 
-void ScriptsRegisterStringVariable(char *name, char *value)
+void mtrScriptsRegisterStringVariable(char *name, char *value)
 {
     lua_pushstring(mtrVm, value);
     lua_setglobal(mtrVm, name);
     mtrLogWrite_s("Script const added:", 0, MTR_LMT_INFO, name);
 }
 
-void ScriptsRegisterNumericVariable(char *name, double value)
+void mtrScriptsRegisterNumericVariable(char *name, double value)
 {
     lua_pushnumber(mtrVm, value);
     lua_setglobal(mtrVm, name);
     mtrLogWrite_s("Script const added:", 0, MTR_LMT_INFO, name);
 }
 
-void ScriptsDoFile(char * filename)
+void mtrScriptsDoFile(char * filename)
 {
     bool error;
     error = luaL_dofile(mtrVm, filename);
@@ -58,7 +58,7 @@ void ScriptsDoFile(char * filename)
     }
 }
 
-void ScriptsQuit(void)
+void mtrScriptsQuit(void)
 {
     lua_close(mtrVm);
     mtrLogWrite("Lua VM closed", 0, MTR_LMT_INFO);
