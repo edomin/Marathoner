@@ -1,7 +1,7 @@
 SUBSYSTEM = screen
 MODULE = sdl_gpu_lua52
 MODULE_NAME = Screen_sdl_gpu_Lua52
-LIBS =
+LIBS = -llua52
 
 include ../../../Binding.mk
 
