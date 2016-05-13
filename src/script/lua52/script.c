@@ -22,9 +22,14 @@ void mtrScriptsInit(void)
         mtrNotify("Unable to create Lua VM", 1, MTR_DMT_FATAL);
     luaL_openlibs(mtrVm);
     mtrLogWrite("Lua libs opened", 1, MTR_LMT_INFO);
-//    RegisterAll();
-//    mtrLogWrite("Script functions registered", 1, MTR_LMT_INFO);
+    /* Registering functions from all binding plugins */
+    mtrLogWrite("Script functions registered", 1, MTR_LMT_INFO);
     mtrLogWrite("Script subsystem initialized", 0, MTR_LMT_INFO);
+}
+
+__declspec(dllexport) lua_State * __stdcall mtrScriptsGetVm(void)
+{
+    return mtrVm;
 }
 
 __declspec(dllexport) void __stdcall mtrScriptsRegisterFunction(lua_CFunction func, char * funcname)
