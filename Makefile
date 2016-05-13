@@ -24,4 +24,6 @@ clean:
 	-rm -f -r $(BINDIR)
 	-rm -f -r marathoner.exe
 
+remake: clean all
+
 .PHONY:
