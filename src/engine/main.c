@@ -10,7 +10,6 @@ int main(int argc, char** argv)
     char           *fullPluginFileName;
     int             i;
     uint8_t         mtrPluginsFound;
-    mtrPlugin      *mtrPluginData;
     uint8_t         currentPlugin;
 
     mtrLogInit();
@@ -79,6 +78,11 @@ int main(int argc, char** argv)
                   "mtrRequireEngineFuncs");
                 mtrRequireEngineFuncs(mtrLogWrite, mtrLogWrite_s, mtrLogWrite_i,
                   mtrLogWrite_d, mtrNotify);
+
+                /* Plugin requiring information about every other plugin */
+                mtrRequirePluginData = (mtrRequirePluginDataFunc)GetProcAddress(mtrPluginData[currentPlugin].dll,
+                  "mtrRequirePluginData");
+                mtrRequirePluginData(mtrPluginData, mtrPluginsFound);
 
                 currentPlugin++;
                 /* freing temporary allocated structures */
