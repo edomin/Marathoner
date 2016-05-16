@@ -14,6 +14,9 @@ __declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
 
 void mtrScriptsInit(void)
 {
+    uint8_t i;
+    uint8_t j;
+
     mtrLogWrite("Initializing script subsystem", 0, MTR_LMT_INFO);
     mtrVm = luaL_newstate();
     if (mtrVm != NULL)
@@ -23,6 +26,26 @@ void mtrScriptsInit(void)
     luaL_openlibs(mtrVm);
     mtrLogWrite("Lua libs opened", 1, MTR_LMT_INFO);
     /* Registering functions from all binding plugins */
+
+    mtrLogWrite("Registering functions of bindings", 1, MTR_LMT_INFO);
+    for (i = 0; i < mtrPluginsCount; i++)
+    {
+        for (j = 0; j < mtrPluginData[i].report->prereqsCount; j++)
+        {
+            if (strcmp(mtrPluginData[i].report->prereqs[j], "Script_Lua52") == 0)
+            {
+                 mtrLogWrite_s("Binding found:", 2, MTR_LMT_INFO,
+                  mtrPluginData[i].report->moduleID);
+                 mtrPluginInit = (mtrPluginInitFunc)mtrFindFunction(mtrPluginData[i].report->moduleID, "mtrPluginInit");
+                 if (mtrPluginInit != NULL)
+                    mtrPluginInit();
+                 else
+                    mtrNotify("Library not contain mtrPluginInit function", 1,
+                      MTR_LMT_ERROR);
+            }
+        }
+    }
+
     mtrLogWrite("Script functions registered", 1, MTR_LMT_INFO);
     mtrLogWrite("Script subsystem initialized", 0, MTR_LMT_INFO);
 }
