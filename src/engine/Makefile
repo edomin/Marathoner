@@ -1,7 +1,7 @@
 CC = mingw32-gcc
 LD = mingw32-gcc
 CFLAGS = -Wall
-LDFLAGS = -s
+LDFLAGS = -s -L../../lib
 OBJSDIR = ../../obj
 BINDIR = ../..
 INCDIR = ../../include
@@ -14,7 +14,7 @@ OBJS = $(OBJSDIR)/main.o \
 all: Marathoner
 
 Marathoner: $(OBJS)
-	$(LD) $(LDFLAGS) -o $(BINDIR)/Marathoner.exe $(OBJS)
+	$(LD) $(LDFLAGS) -o $(BINDIR)/Marathoner.exe $(OBJS) -lminini
 
 $(OBJSDIR)/main.o: main.c
 	$(CC) $(CFLAGS) -I$(INCDIR) -c main.c -o $(OBJSDIR)/main.o
