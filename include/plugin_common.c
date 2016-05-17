@@ -14,7 +14,7 @@ __declspec(dllexport) void __stdcall mtrRequireEngineFuncs(mtrLogWriteFunc_t Log
 __declspec(dllexport) void __stdcall mtrRequirePluginData(mtrPlugin* pluginData, uint8_t pluginsCount)
 {
     mtrPluginData = pluginData;
-    mtrPluginsCount = mtrPluginsCount;
+    mtrPluginsCount = pluginsCount;
 }
 
 void *mtrFindFunction(char *moduleID, char *functionName)
@@ -22,7 +22,7 @@ void *mtrFindFunction(char *moduleID, char *functionName)
     uint8_t i;
     for (i = 0; i < mtrPluginsCount; i++)
     {
-        if (mtrPluginData[i].report->moduleID == moduleID)
+        if (strcmp(mtrPluginData[i].report->moduleID, moduleID) == 0)
         {
             return (void *)GetProcAddress(mtrPluginData[i].dll, functionName);
         }
