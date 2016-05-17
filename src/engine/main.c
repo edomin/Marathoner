@@ -2,6 +2,7 @@
 #include "log.h"
 #include "messagebox.h"
 #include "notification.h"
+#include "configfile.h"
 
 int main(int argc, char** argv)
 {
@@ -161,6 +162,8 @@ int main(int argc, char** argv)
     for (i = 0; i < mtrPluginsFound; i++)
         FreeLibrary(mtrPluginData[i].dll);
     free(mtrPluginData);
+
+    mtrLogWrite("Engine stopped", 0, MTR_LMT_INFO);
 
     return 0;
 }
