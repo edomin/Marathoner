@@ -8,5 +8,6 @@ Marathoner.exe
 include/bool/*
 include/SDL2/*
 include/sdl_gpu/*
-include/lua52/
+include/lua52/*
+include/minINI/*
 lib/*
