@@ -11,6 +11,8 @@ int main(int argc, char** argv)
     int             i;
     uint8_t         mtrPluginsFound;
     uint8_t         currentPlugin;
+    char           *temp; /* Read config result */
+    bool            ok;
 
     mtrLogInit();
     mtrLogWrite("Searching available plugins", 0, MTR_LMT_INFO);
@@ -92,6 +94,69 @@ int main(int argc, char** argv)
         while(FindNextFile(hf, &FindFileData) !=0 );
         FindClose(hf);
     }
+
+//    for (i = 0; i < mtrPluginsFound; i++)
+//    {
+//
+//    }
+    mtrLogWrite("Reading 'Marathoner.cfg' for autorun options", 0,
+      MTR_LMT_INFO);
+    ok = false;
+    temp = mtrConfigfileReadString("Marathoner.cfg", "Autorun", "action",
+      "none");
+    if (strcmp(temp, "runScript") == 0)
+    {
+        free(temp);
+        temp = mtrConfigfileReadString("Marathoner.cfg", "Autorun", "plugin",
+          "none");
+        for (i = 0; i < mtrPluginsFound; i++)
+        {
+            if (strcmp(mtrPluginData[i].report->moduleID, temp) == 0)
+            {
+                ok = true;
+                currentPlugin = i;
+                break;
+            }
+        }
+        if (ok)
+        {
+            free(temp);
+            temp = mtrConfigfileReadString("Marathoner.cfg", "Autorun",
+              "script", "none");
+            if (strcmp(temp, "none") != 0)
+            {
+                mtrScriptsAutorun = (mtrScriptsAutorunFunc)GetProcAddress(mtrPluginData[currentPlugin].dll, "mtrScriptsAutorun");
+                if (mtrScriptsAutorun == NULL)
+                    mtrNotify("Unable to load autorun plugin function", 1,
+                      MTR_LMT_ERROR);
+                else
+                {
+                    mtrLogWrite_s("Running autorun function with file:", 0,
+                      MTR_LMT_INFO, temp);
+                    mtrScriptsAutorun(temp);
+                }
+                free(temp);
+            }
+            else
+            {
+                mtrNotify("Unable to read autorun script filename", 1,
+                  MTR_LMT_ERROR);
+                free(temp);
+            }
+        }
+        else
+        {
+            mtrNotify("Ivalid autorun plugin", 1, MTR_LMT_ERROR);
+            free(temp);
+        }
+    }
+    else
+    {
+        mtrNotify("Invalid autorun action command", 1, MTR_LMT_ERROR);
+        free(temp);
+    }
+
+    mtrLogWrite("Quiting Engine", 0, MTR_LMT_INFO);
     /* Freing allocated structures and unloading libraries */
     for (i = 0; i < mtrPluginsFound; i++)
         FreeLibrary(mtrPluginData[i].dll);

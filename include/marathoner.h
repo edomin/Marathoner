@@ -53,6 +53,9 @@ mtrPlugin *mtrPluginData;
 
     typedef void (__stdcall * mtrRequirePluginDataFunc)(mtrPlugin *, uint8_t);
     mtrRequirePluginDataFunc mtrRequirePluginData;
+
+    typedef void (__stdcall * mtrScriptsAutorunFunc)(char *);
+    mtrScriptsAutorunFunc mtrScriptsAutorun;
 #endif
 
 /* Log Message Types */

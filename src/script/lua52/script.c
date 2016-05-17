@@ -91,3 +91,9 @@ void mtrScriptsQuit(void)
     lua_close(mtrVm);
     mtrLogWrite("Lua VM closed", 0, MTR_LMT_INFO);
 }
+
+__declspec(dllexport) void __stdcall mtrScriptsAutorun(char * filename)
+{
+    mtrScriptsInit();
+    mtrScriptsDoFile(filename);
+}
