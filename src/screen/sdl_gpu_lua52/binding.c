@@ -16,14 +16,52 @@ __declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
 
 __declspec(dllexport) void __stdcall mtrPluginInit(void)
 {
+    bool ok;
+    ok = true;
     mtrScriptsRegisterFunction = (mtrScriptsRegisterFunctionFunc)mtrFindFunction("Script_Lua52", "mtrScriptsRegisterFunction");
-    mtrScriptsGetVm = (mtrScriptsGetVmFunc)mtrFindFunction("Script_Lua52", "mtrScriptsGetVm");
-
-    mtrScreenInit = (mtrScreenInitFunc)mtrFindFunction("Screen_sdl_gpu", "mtrScreenInit");
-    mtrScreenQuit = (mtrScreenQuitFunc)mtrFindFunction("Screen_sdl_gpu", "mtrScreenQuit");
-
-    mtrScriptsRegisterFunction(mtrSF_ScreenInit, "ScreenInit");
-    mtrScriptsRegisterFunction(mtrSF_ScreenQuit, "ScreenQuit");
+    if (mtrScriptsRegisterFunction == NULL)
+    {
+        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+          "mtrScriptsRegisterFunction");
+        ok = false;
+    }
+    mtrScriptsGetVm = (mtrScriptsGetVmFunc)mtrFindFunction("Script_Lua52",
+      "mtrScriptsGetVm");
+    if (mtrScriptsGetVm == NULL)
+    {
+        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+          "mtrScriptsGetVm");
+        ok = false;
+    }
+    else
+    {
+        mtrVm = mtrScriptsGetVm();
+        mtrScreenInit = (mtrScreenInitFunc)mtrFindFunction("Screen_sdl_gpu",
+          "mtrScreenInit");
+        if (mtrScreenInit == NULL)
+        {
+            mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+              "mtrScreenInit");
+            ok = false;
+        }
+        mtrScreenQuit = (mtrScreenQuitFunc)mtrFindFunction("Screen_sdl_gpu",
+          "mtrScreenQuit");
+        if (mtrScreenQuit == NULL)
+        {
+            mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+              "mtrScreenQuit");
+            ok = false;
+        }
+        if (ok)
+        {
+            mtrScriptsRegisterFunction(mtrSF_ScreenInit, "ScreenInit");
+            mtrScriptsRegisterFunction(mtrSF_ScreenQuit, "ScreenQuit");
+        }
+        else
+        {
+            mtrLogWrite("Functions not added", 3, MTR_LMT_ERROR);
+        }
+    }
 }
 
 int mtrSF_ScreenInit(lua_State* l)
