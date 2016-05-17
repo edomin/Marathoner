@@ -19,6 +19,9 @@ prebuild:
 	-mkdir $(OBJSDIR)
 	-mkdir $(BINDIR)
 
+engine: prebuild
+	make -C src/engine
+
 clean:
 	-rm -f -r $(OBJSDIR)
 	-rm -f -r $(BINDIR)
@@ -26,4 +29,4 @@ clean:
 
 remake: clean all
 
-.PHONY:
+.PHONY: engine prebuild remake clean all
