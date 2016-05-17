@@ -6,7 +6,7 @@ void __stdcall mtrLogWriteMeta(uint8_t messageType, uint8_t level)
 
     time(&mtrCurrentTime);
     mtrNow = localtime(&mtrCurrentTime);
-    mtrLogFile = fopen("Log.log", "a");
+    mtrLogFile = fopen("Marathoner.log", "a");
     fprintf(mtrLogFile, "[%i-%i-%i %i:%i:%i] ",
       mtrNow->tm_year + 1900, mtrNow->tm_mon + 1, mtrNow->tm_mday,
       mtrNow->tm_hour, mtrNow->tm_min, mtrNow->tm_sec);
@@ -41,7 +41,7 @@ void __stdcall mtrLogInit(void)
 {
     time(&mtrCurrentTime);
     mtrNow = localtime(&mtrCurrentTime);
-    mtrLogFile = fopen("Log.log", "w");
+    mtrLogFile = fopen("Marathoner.log", "w");
     fprintf(mtrLogFile, "[%i-%i-%i %i:%i:%i] Begin Logging.\n",
       mtrNow->tm_year + 1900, mtrNow->tm_mon + 1, mtrNow->tm_mday,
       mtrNow->tm_hour, mtrNow->tm_min, mtrNow->tm_sec);
