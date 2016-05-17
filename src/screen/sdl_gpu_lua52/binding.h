@@ -4,6 +4,8 @@
 #define MTR_PLUGIN
 #include "marathoner.h"
 
+#include "bool/bool.h"
+
 #include "lua52/lua.h"
 #include "lua52/lualib.h"
 #include "lua52/lauxlib.h"

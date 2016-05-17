@@ -4,6 +4,7 @@
 #include <windows.h> /* for HMODULE */
 #include <stdint.h> /* for uintXX_t types */
 #include <stdlib.h> /* for malloc */
+#include "bool/bool.h"
 
 /* Report of loaded dll-plugin */
 typedef struct mtrReport{
