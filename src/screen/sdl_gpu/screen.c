@@ -14,10 +14,21 @@ __declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
 
 __declspec(dllexport) void __stdcall mtrScreenInit(uint16_t width, uint16_t height)
 {
+    mtrLogWrite("Creating Window", 0, MTR_LMT_INFO);
+    mtrScreen = malloc(sizeof(mtrScreen_t));
+    if (mtrScreen == NULL)
+        mtrNotify("Unable to allocate memory for mtrScreen structure", 1,
+         MTR_LMT_ERROR);
     mtrScreen->screen = GPU_Init(width, height, GPU_DEFAULT_INIT_FLAGS);
+    if (mtrScreen->screen != NULL)
+        mtrLogWrite("Window created", 1, MTR_LMT_INFO);
+    else
+        mtrNotify("Unable to create window", 1, MTR_LMT_ERROR);
 }
 
 __declspec(dllexport) void __stdcall mtrScreenQuit(void)
 {
     GPU_Quit();
+    free(mtrScreen);
+    mtrLogWrite("Window destroyed", 0, MTR_LMT_INFO);;
 }
