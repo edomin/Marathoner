@@ -21,24 +21,29 @@ typedef struct mtrPlugin{
 } mtrPlugin;
 
 /* Pointers to engine functions */
-typedef void (__stdcall * mtrLogWriteFunc_t)(char *, uint8_t, uint8_t);
-typedef void (__stdcall * mtrLogWrite_sFunc_t)(char *, uint8_t, uint8_t,
-                                               char *);
-typedef void (__stdcall * mtrLogWrite_iFunc_t)(char *, uint8_t, uint8_t,
-                                               int32_t);
-typedef void (__stdcall * mtrLogWrite_dFunc_t)(char *, uint8_t, uint8_t,
-                                               double);
-typedef void (__stdcall * mtrNotifyFunc_t)(char *, uint8_t, uint8_t);
+typedef void     (__stdcall * mtrLogWriteFunc_t)(char *, uint8_t, uint8_t);
+typedef void     (__stdcall * mtrLogWrite_sFunc_t)(char *, uint8_t, uint8_t,
+                                                   char *);
+typedef void     (__stdcall * mtrLogWrite_iFunc_t)(char *, uint8_t, uint8_t,
+                                                   int32_t);
+typedef void     (__stdcall * mtrLogWrite_dFunc_t)(char *, uint8_t, uint8_t,
+                                                   double);
+typedef void     (__stdcall * mtrNotifyFunc_t)(char *, uint8_t, uint8_t);
+typedef void *   (__stdcall * mtrIndexkeeperCreateFunc_t)(uint32_t, uint32_t,
+                                                          size_t);
+typedef uint32_t (__stdcall * mtrIndexkeeperGetFreeIndexFunc_t)(void *);
 
 /* loaded dll-plugin data */
 mtrPlugin *mtrPluginData;
 
 #ifdef MTR_PLUGIN
-    mtrLogWriteFunc_t mtrLogWrite;
-    mtrLogWrite_sFunc_t mtrLogWrite_s;
-    mtrLogWrite_iFunc_t mtrLogWrite_i;
-    mtrLogWrite_dFunc_t mtrLogWrite_d;
-    mtrNotifyFunc_t mtrNotify;
+    mtrLogWriteFunc_t                mtrLogWrite;
+    mtrLogWrite_sFunc_t              mtrLogWrite_s;
+    mtrLogWrite_iFunc_t              mtrLogWrite_i;
+    mtrLogWrite_dFunc_t              mtrLogWrite_d;
+    mtrNotifyFunc_t                  mtrNotify;
+    mtrIndexkeeperCreateFunc_t       mtrIndexkeeperCreate;
+    mtrIndexkeeperGetFreeIndexFunc_t mtrIndexkeeperGetFreeIndex;
 
     uint8_t mtrPluginsCount;
 #else
@@ -49,7 +54,9 @@ mtrPlugin *mtrPluginData;
                                                          mtrLogWrite_sFunc_t,
                                                          mtrLogWrite_iFunc_t,
                                                          mtrLogWrite_dFunc_t,
-                                                         mtrNotifyFunc_t);
+                                                         mtrNotifyFunc_t,
+                                                         mtrIndexkeeperCreateFunc_t,
+                                                         mtrIndexkeeperGetFreeIndexFunc_t);
     mtrRequireEngineFuncsFunc mtrRequireEngineFuncs;
 
     typedef void (__stdcall * mtrRequirePluginDataFunc)(mtrPlugin *, uint8_t);
@@ -74,5 +81,10 @@ mtrPlugin *mtrPluginData;
 #define MTR_DMT_ERROR   3
 #define MTR_DMT_FATAL   4
 #define MTR_DMT_DEBUG   5
+
+/* Indexkeeper datamap size */
+#define MTR_IKDM_SMALL  8
+#define MTR_IKDM_MEDIUM 2048
+#define MTR_IKDM_LARGE  134217728
 
 #endif

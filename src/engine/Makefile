@@ -10,7 +10,8 @@ OBJS = $(OBJSDIR)/main.o \
 	$(OBJSDIR)/log.o \
 	$(OBJSDIR)/messagebox.o \
 	$(OBJSDIR)/notification.o \
-	$(OBJSDIR)/configfile.o
+	$(OBJSDIR)/configfile.o \
+	$(OBJSDIR)/indexkeeper.o
 
 all: Marathoner
 
@@ -31,3 +32,6 @@ $(OBJSDIR)/notification.o: notification.c notification.h
 
 $(OBJSDIR)/configfile.o: configfile.c configfile.h
 	$(CC) $(CFLAGS) -I$(INCDIR) -c configfile.c -o $(OBJSDIR)/configfile.o
+
+$(OBJSDIR)/indexkeeper.o: indexkeeper.c indexkeeper.h
+	$(CC) $(CFLAGS) -I$(INCDIR) -c indexkeeper.c -o $(OBJSDIR)/indexkeeper.o

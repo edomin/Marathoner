@@ -3,6 +3,7 @@
 #include "messagebox.h"
 #include "notification.h"
 #include "configfile.h"
+#include "indexkeeper.h"
 
 int main(int argc, char** argv)
 {
@@ -80,7 +81,8 @@ int main(int argc, char** argv)
                 mtrRequireEngineFuncs = (mtrRequireEngineFuncsFunc)GetProcAddress(mtrPluginData[currentPlugin].dll,
                   "mtrRequireEngineFuncs");
                 mtrRequireEngineFuncs(mtrLogWrite, mtrLogWrite_s, mtrLogWrite_i,
-                  mtrLogWrite_d, mtrNotify);
+                  mtrLogWrite_d, mtrNotify, mtrIndexkeeperCreate,
+                  mtrIndexkeeperGetFreeIndex);
 
                 /* Plugin requiring information about every other plugin */
                 mtrRequirePluginData = (mtrRequirePluginDataFunc)GetProcAddress(mtrPluginData[currentPlugin].dll,
