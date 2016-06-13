@@ -1,6 +1,17 @@
 #include "texture.h"
 
 #include "plugin_common.c"
+
+__declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
+{
+    mtrReport *report;
+    report = malloc(sizeof(mtrReport));
+    report->moduleID = "Texture_sdl_gpu";
+    report->prereqsCount = 0;
+    report->prereqs = NULL;
+    return report;
+}
+
 __declspec(dllexport) void __stdcall mtrTextureInit(uint16_t reservedCount)
 {
     mtrLogWrite("Initializing texture manager", 0, MTR_LMT_INFO);

@@ -1,6 +1,17 @@
 #include "formats.h"
 
 #include "plugin_common.c"
+
+__declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
+{
+    mtrReport *report;
+    report = malloc(sizeof(mtrReport));
+    report->moduleID = "Formats_sdl_gpu";
+    report->prereqsCount = 0;
+    report->prereqs = NULL;
+    return report;
+}
+
 __declspec(dllexport) GPU_Image* __stdcall mtrLoadJPEG(char *filename)
 {
     GPU_LoadImage((const char *)filename);
