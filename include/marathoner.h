@@ -32,6 +32,7 @@ typedef void     (__stdcall * mtrNotifyFunc_t)(char *, uint8_t, uint8_t);
 typedef void *   (__stdcall * mtrIndexkeeperCreateFunc_t)(uint32_t, uint32_t,
                                                           size_t);
 typedef uint32_t (__stdcall * mtrIndexkeeperGetFreeIndexFunc_t)(void *);
+typedef void     (__stdcall * mtrIndexkeeperDestroyFunc_t)(void *);
 
 /* loaded dll-plugin data */
 mtrPlugin *mtrPluginData;
@@ -44,6 +45,7 @@ mtrPlugin *mtrPluginData;
     mtrNotifyFunc_t                  mtrNotify;
     mtrIndexkeeperCreateFunc_t       mtrIndexkeeperCreate;
     mtrIndexkeeperGetFreeIndexFunc_t mtrIndexkeeperGetFreeIndex;
+    mtrIndexkeeperDestroyFunc_t      mtrIndexkeeperDestroy;
 
     uint8_t mtrPluginsCount;
 #else
@@ -56,7 +58,8 @@ mtrPlugin *mtrPluginData;
                                                          mtrLogWrite_dFunc_t,
                                                          mtrNotifyFunc_t,
                                                          mtrIndexkeeperCreateFunc_t,
-                                                         mtrIndexkeeperGetFreeIndexFunc_t);
+                                                         mtrIndexkeeperGetFreeIndexFunc_t,
+                                                         mtrIndexkeeperDestroyFunc_t);
     mtrRequireEngineFuncsFunc mtrRequireEngineFuncs;
 
     typedef void (__stdcall * mtrRequirePluginDataFunc)(mtrPlugin *, uint8_t);

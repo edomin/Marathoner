@@ -4,7 +4,8 @@ __declspec(dllexport) void __stdcall mtrRequireEngineFuncs(mtrLogWriteFunc_t Log
                mtrLogWrite_dFunc_t LogWrite_dFunc,
                mtrNotifyFunc_t NotifyFunc,
                mtrIndexkeeperCreateFunc_t mtrIndexkeeperCreateFunc,
-               mtrIndexkeeperGetFreeIndexFunc_t mtrIndexkeeperGetFreeIndexFunc)
+               mtrIndexkeeperGetFreeIndexFunc_t mtrIndexkeeperGetFreeIndexFunc,
+               mtrIndexkeeperDestroyFunc_t mtrIndexkeeperDestroyFunc)
 {
     mtrLogWrite = LogWriteFunc;
     mtrLogWrite_s = LogWrite_sFunc;

@@ -111,4 +111,11 @@ uint32_t __stdcall mtrIndexkeeperGetFreeIndex(void *ik)
     return dataNum;
 }
 
-/* TODO: freeing indexkeeper instance function */
+void __stdcall mtrIndexkeeperDestroy(void *ik)
+{
+    mtrIndexkeeper_t *indexkeeper;
+    indexkeeper = (mtrIndexkeeper_t *) ik;
+    free(indexkeeper->data);
+    free(indexkeeper->dataMap);
+    free(ik);
+}
