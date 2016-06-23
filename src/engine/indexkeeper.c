@@ -4,19 +4,30 @@ void *__stdcall mtrIndexkeeperCreate(uint32_t dmSize, uint32_t reservedCount,
                                      size_t datasize)
 {
     mtrIndexkeeper_t *indexkeeper;
-    uint32_t i;
-    uint32_t newDmSize;
+    uint32_t          i;
+    uint32_t          newDmSize;
 
     mtrLogWrite("Creating indexkeeper structure", 0, MTR_LMT_INFO);
 
     newDmSize = dmSize;
     indexkeeper = malloc(sizeof(mtrIndexkeeper_t));
+    if (indexkeeper == NULL)
+    {
+        mtrNotify("Unable to allocate memory for indexkeeper", 1, MTR_LMT_ERROR);
+        return (void *)(NULL);
+    }
     indexkeeper->dataSize = datasize;
     if (reservedCount <= dmSize * 32)
         if ((dmSize == MTR_IKDM_SMALL) ||
          (dmSize == MTR_IKDM_MEDIUM) ||
          (dmSize == MTR_IKDM_LARGE))
-            indexkeeper->reservedData = reservedCount;
+            if (reservedCount < 32)
+            {
+                mtrLogWrite("Reserved data places count are too few for correct working indexkeeper. Reserved data places count will be set to 32.", 0, MTR_LMT_WARNING);
+                indexkeeper->reservedData = 32;
+            }
+            else
+                indexkeeper->reservedData = reservedCount;
         else
         {
             mtrLogWrite("Invalid data map size value. Value set on default - MTR_IKDM_SMALL", 0, MTR_LMT_WARNING);
@@ -48,16 +59,27 @@ void *__stdcall mtrIndexkeeperCreate(uint32_t dmSize, uint32_t reservedCount,
     indexkeeper->dmSize = newDmSize;
     indexkeeper->dataMap = malloc(sizeof(uint32_t) * newDmSize);
     if (indexkeeper->dataMap == NULL)
+    {
         mtrNotify("Unable to allocate memory for indexkeeper data map", 1,
          MTR_LMT_ERROR);
-    for (i = 0; i < indexkeeper->dmSize; i++)
+        free(indexkeeper);
+        return (void *)(NULL);
+    }
+    /* zero index must be set and reserved for error index */
+    indexkeeper->dataMap[0] = 1;
+    for (i = 1; i < indexkeeper->dmSize; i++)
     {
         indexkeeper->dataMap[i] = 0;
     }
     indexkeeper->data = malloc(datasize * indexkeeper->reservedData);
     if (indexkeeper->data == NULL)
+    {
         mtrNotify("Unable to allocate memory for indexkeeper data", 1,
          MTR_LMT_ERROR);
+        free(indexkeeper->dataMap);
+        free(indexkeeper);
+        return (void *)(NULL);
+    }
     else
         mtrLogWrite_i("Memory for indexkeeper data allocated. Reserved places: ",
          0, MTR_LMT_INFO, indexkeeper->reservedData);

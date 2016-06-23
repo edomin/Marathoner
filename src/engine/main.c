@@ -82,7 +82,8 @@ int main(int argc, char** argv)
                   "mtrRequireEngineFuncs");
                 mtrRequireEngineFuncs(mtrLogWrite, mtrLogWrite_s, mtrLogWrite_i,
                   mtrLogWrite_d, mtrNotify, mtrIndexkeeperCreate,
-                  mtrIndexkeeperGetFreeIndex, mtrIndexkeeperDestroy);
+                  mtrIndexkeeperGetFreeIndex, mtrIndexkeeperFreeIndex,
+                  mtrIndexkeeperDestroy);
 
                 /* Plugin requiring information about every other plugin */
                 mtrRequirePluginData = (mtrRequirePluginDataFunc)GetProcAddress(mtrPluginData[currentPlugin].dll,

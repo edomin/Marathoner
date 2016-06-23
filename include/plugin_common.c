@@ -5,6 +5,7 @@ __declspec(dllexport) void __stdcall mtrRequireEngineFuncs(mtrLogWriteFunc_t Log
                mtrNotifyFunc_t NotifyFunc,
                mtrIndexkeeperCreateFunc_t mtrIndexkeeperCreateFunc,
                mtrIndexkeeperGetFreeIndexFunc_t mtrIndexkeeperGetFreeIndexFunc,
+               mtrIndexkeeperFreeIndexFunc_t mtrIndexkeeperFreeIndexFunc,
                mtrIndexkeeperDestroyFunc_t mtrIndexkeeperDestroyFunc)
 {
     mtrLogWrite = LogWriteFunc;
@@ -14,6 +15,8 @@ __declspec(dllexport) void __stdcall mtrRequireEngineFuncs(mtrLogWriteFunc_t Log
     mtrNotify = NotifyFunc;
     mtrIndexkeeperCreate = mtrIndexkeeperCreateFunc;
     mtrIndexkeeperGetFreeIndex = mtrIndexkeeperGetFreeIndexFunc;
+    mtrIndexkeeperFreeIndex = mtrIndexkeeperFreeIndexFunc;
+    mtrIndexkeeperDestroy = mtrIndexkeeperDestroyFunc;
 }
 
 __declspec(dllexport) void __stdcall mtrRequirePluginData(mtrPlugin* pluginData,
