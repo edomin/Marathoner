@@ -133,6 +133,18 @@ uint32_t __stdcall mtrIndexkeeperGetFreeIndex(void *ik)
     return dataNum;
 }
 
+void __stdcall mtrIndexkeeperFreeIndex(void *ik, uint32_t index)
+{
+    uint16_t          mapNumberNum;
+    uint8_t           bitNum;
+    mtrIndexkeeper_t *indexkeeper;
+
+    indexkeeper = (mtrIndexkeeper_t *)ik;
+    mapNumberNum = index >> 5; /* = index / 32 */
+    bitNum = index - (mapNumberNum << 5);
+    indexkeeper->dataMap[mapNumberNum] = indexkeeper->dataMap[mapNumberNum] - (1 << bitNum);
+}
+
 void __stdcall mtrIndexkeeperDestroy(void *ik)
 {
     mtrIndexkeeper_t *indexkeeper;
