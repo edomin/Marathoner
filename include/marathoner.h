@@ -23,7 +23,7 @@ typedef struct mtrPlugin{
 /* Pointers to engine functions */
 typedef void     (__stdcall * mtrLogWriteFunc_t)(char *, uint8_t, uint8_t);
 typedef void     (__stdcall * mtrLogWrite_sFunc_t)(char *, uint8_t, uint8_t,
-                                                   char *);
+                                                   const char *);
 typedef void     (__stdcall * mtrLogWrite_iFunc_t)(char *, uint8_t, uint8_t,
                                                    int32_t);
 typedef void     (__stdcall * mtrLogWrite_dFunc_t)(char *, uint8_t, uint8_t,

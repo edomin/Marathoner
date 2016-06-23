@@ -57,7 +57,7 @@ void __stdcall mtrLogWrite(char *message, uint8_t level, uint8_t messageType)
 }
 
 void __stdcall mtrLogWrite_s(char *message, uint8_t level, uint8_t messageType,
-  char * argument)
+  const char * argument)
 {
     mtrLogWriteMeta(messageType, level);
     fprintf(mtrLogFile, message);
