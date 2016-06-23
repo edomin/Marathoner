@@ -66,9 +66,9 @@ __declspec(dllexport) void __stdcall mtrPluginInit(void)
 
 int mtrSF_ScreenInit(lua_State* l)
 {
-    int w = lua_tonumber(mtrVm, 1); /* получаем 1-ый */
+    uint16_t w = lua_tonumber(mtrVm, 1); /* получаем 1-ый */
                                          /* переданный параметр */
-    int h = lua_tonumber(mtrVm, 2);
+    uint16_t h = lua_tonumber(mtrVm, 2);
 //    const char *title = lua_tostring(mtrVm, 3);
 //    bool fullscreen = lua_toboolean(mtrVm, 4);
     mtrScreenInit(w, h);
