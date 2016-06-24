@@ -10,8 +10,6 @@
 #include "lua52/lualib.h"
 #include "lua52/lauxlib.h"
 
-//#include "sdl_gpu/SDL_gpu.h"
-
 lua_State *mtrVm;
 
 typedef lua_State* (__stdcall * mtrScriptsGetVmFunc)(void);
@@ -29,8 +27,12 @@ mtrTextureLoadFunc mtrTextureLoad;
 typedef void (__stdcall * mtrTextureFreeFunc)(uint32_t);
 mtrTextureFreeFunc mtrTextureFree;
 
+typedef void (__stdcall * mtrTextureBlit_fFunc)(uint32_t, float, float);
+mtrTextureBlit_fFunc mtrTextureBlit_f;
+
 int mtrSF_TextureInit(lua_State* l);
 int mtrSF_TextureLoad(lua_State* l);
 int mtrSF_TextureFree(lua_State* l);
+int mtrSF_TextureBlit_f(lua_State* l);
 
 #endif

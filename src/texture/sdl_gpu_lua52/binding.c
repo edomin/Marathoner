@@ -60,11 +60,20 @@ __declspec(dllexport) void __stdcall mtrPluginInit(void)
               "mtrTextureFree");
             ok = false;
         }
+        mtrTextureBlit_f = (mtrTextureBlit_fFunc)mtrFindFunction("Texture_sdl_gpu",
+          "mtrTextureBlit_f");
+        if (mtrTextureBlit_f == NULL)
+        {
+            mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+              "mtrTextureBlit_f");
+            ok = false;
+        }
         if (ok)
         {
             mtrScriptsRegisterFunction(mtrSF_TextureInit, "TextureInit");
             mtrScriptsRegisterFunction(mtrSF_TextureLoad, "TextureLoad");
             mtrScriptsRegisterFunction(mtrSF_TextureFree, "TextureFree");
+            mtrScriptsRegisterFunction(mtrSF_TextureBlit_f, "TextureBlit_f");
         }
         else
         {
@@ -96,6 +105,16 @@ int mtrSF_TextureFree(lua_State* l)
 {
     uint32_t texNum = lua_tonumber(mtrVm, 1);
     mtrTextureFree(texNum);
+
+    return 0;
+}
+
+int mtrSF_TextureBlit_f(lua_State* l)
+{
+    uint32_t texNum = lua_tonumber(mtrVm, 1);
+    float x = (float)lua_tonumber(mtrVm, 2);
+    float y = (float)lua_tonumber(mtrVm, 3);
+    mtrTextureBlit_f(texNum, x, y);
 
     return 0;
 }
