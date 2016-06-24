@@ -61,14 +61,14 @@ __declspec(dllexport) void __stdcall mtrScriptsRegisterFunction(lua_CFunction fu
     mtrLogWrite_s("Script function added:", 3, MTR_LMT_INFO, funcname);
 }
 
-void mtrScriptsRegisterStringVariable(char *name, char *value)
+__declspec(dllexport) void __stdcall mtrScriptsRegisterStringVariable(char *name, char *value)
 {
     lua_pushstring(mtrVm, value);
     lua_setglobal(mtrVm, name);
     mtrLogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
 }
 
-void mtrScriptsRegisterNumericVariable(char *name, double value)
+__declspec(dllexport) void __stdcall mtrScriptsRegisterNumericVariable(char *name, double value)
 {
     lua_pushnumber(mtrVm, value);
     lua_setglobal(mtrVm, name);
