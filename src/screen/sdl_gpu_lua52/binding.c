@@ -52,10 +52,19 @@ __declspec(dllexport) void __stdcall mtrPluginInit(void)
               "mtrScreenQuit");
             ok = false;
         }
+        mtrScreenFlip = (mtrScreenFlipFunc)mtrFindFunction("Screen_sdl_gpu",
+          "mtrScreenFlip");
+        if (mtrScreenFlip == NULL)
+        {
+            mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+              "mtrScreenFlip");
+            ok = false;
+        }
         if (ok)
         {
             mtrScriptsRegisterFunction(mtrSF_ScreenInit, "ScreenInit");
             mtrScriptsRegisterFunction(mtrSF_ScreenQuit, "ScreenQuit");
+            mtrScriptsRegisterFunction(mtrSF_ScreenFlip, "ScreenFlip");
         }
         else
         {
@@ -78,5 +87,11 @@ int mtrSF_ScreenInit(lua_State* l)
 int mtrSF_ScreenQuit(lua_State* l)
 {
     mtrScreenQuit();
+    return 0;
+}
+
+int mtrSF_ScreenFlip(lua_State* l)
+{
+    mtrScreenFlip();
     return 0;
 }

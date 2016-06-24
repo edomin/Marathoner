@@ -30,5 +30,15 @@ __declspec(dllexport) void __stdcall mtrScreenQuit(void)
 {
     GPU_Quit();
     free(mtrScreen);
-    mtrLogWrite("Window destroyed", 0, MTR_LMT_INFO);;
+    mtrLogWrite("Window destroyed", 0, MTR_LMT_INFO);
+}
+
+__declspec(dllexport) void __stdcall mtrScreenFlip(void)
+{
+    GPU_Flip(mtrScreen->screen);
+}
+
+__declspec(dllexport) mtrScreen_t *__stdcall mtrGetScreen(void)
+{
+    return mtrScreen;
 }
