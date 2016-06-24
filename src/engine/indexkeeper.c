@@ -98,6 +98,9 @@ uint32_t __stdcall mtrIndexkeeperGetFreeIndex(void *ik)
     indexkeeper = (mtrIndexkeeper_t *)ik;
 
     /* Searching empty place on textures map */
+    dataNum = indexkeeper->reservedData;
+    mapNumberNum = (indexkeeper->reservedData >> 5);
+    bitNum = 0;
     for (i = 0; i < (indexkeeper->reservedData >> 5); i++) /* indexkeeper->reservedData >> 5 = */
     {                                                      /* indexkeeper->reservedData / 32   */
         if (indexkeeper->dataMap[i] < UINT32_MAX)
@@ -117,13 +120,17 @@ uint32_t __stdcall mtrIndexkeeperGetFreeIndex(void *ik)
     }
     /* if no empty space for data, then we need allocate new
      * array with length larger than old in 2 times */
-    if (dataNum > indexkeeper->reservedData)
+    if (dataNum >= indexkeeper->reservedData)
     {
+        mtrLogWrite("Indeces count exceeded reserved for indeces space. Reserved space will be doubled if possible",
+         0, MTR_LMT_WARNING);
         if (indexkeeper->reservedData != indexkeeper->dmSize << 5)
         {
             indexkeeper->data = realloc(indexkeeper->data, indexkeeper->dataSize *
              indexkeeper->reservedData * 2);
             indexkeeper->reservedData = indexkeeper->reservedData * 2;
+            mtrLogWrite_i("Memory for indeces reallocated. Current places for indeces (half of this is left empty for new indeces): ",
+             0, MTR_LMT_NOTE, indexkeeper->reservedData);
         }
         else
             mtrNotify("Unable to allocate memory for data indeces larger than data map size. Please, initialize indexkeeper with larger datamap size.", 1,
