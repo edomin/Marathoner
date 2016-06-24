@@ -25,9 +25,17 @@ void mtrScriptsInit(void)
         mtrNotify("Unable to create Lua VM", 1, MTR_DMT_FATAL);
     luaL_openlibs(mtrVm);
     mtrLogWrite("Lua libs opened", 1, MTR_LMT_INFO);
-    /* Registering functions from all binding plugins */
-
-    mtrLogWrite("Registering functions of bindings", 1, MTR_LMT_INFO);
+    /* Registering functions and constants from all binding plugins */
+    mtrLogWrite("Registering functions and constants of engine", 1,
+     MTR_LMT_INFO);
+    mtrScriptsRegisterNumericVariable("IKDM_SMALL", MTR_IKDM_SMALL);
+    mtrScriptsRegisterNumericVariable("IKDM_MEDIUM", MTR_IKDM_MEDIUM);
+    mtrScriptsRegisterNumericVariable("IKDM_LARGE", MTR_IKDM_LARGE);
+    mtrLogWrite("Script functions and constants of engine registered",
+     1, MTR_LMT_INFO);
+    /* Registering functions and constants from all binding plugins */
+    mtrLogWrite("Registering functions and constants of bindings", 1,
+     MTR_LMT_INFO);
     for (i = 0; i < mtrPluginsCount; i++)
     {
         for (j = 0; j < mtrPluginData[i].report->prereqsCount; j++)
@@ -46,7 +54,8 @@ void mtrScriptsInit(void)
         }
     }
 
-    mtrLogWrite("Script functions registered", 1, MTR_LMT_INFO);
+    mtrLogWrite("Script functions and constants of bindings registered",
+     1, MTR_LMT_INFO);
     mtrLogWrite("Script subsystem initialized", 0, MTR_LMT_INFO);
 }
 

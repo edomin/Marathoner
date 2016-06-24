@@ -14,5 +14,9 @@ mtrPluginInitFunc mtrPluginInit;
 
 lua_State *mtrVm;
 
+__declspec(dllexport) void __stdcall mtrScriptsRegisterFunction(lua_CFunction func, char * funcname);
+__declspec(dllexport) void __stdcall mtrScriptsRegisterStringVariable(char *name, char *value);
+__declspec(dllexport) void __stdcall mtrScriptsRegisterNumericVariable(char *name, double value);
+
 #endif
 
