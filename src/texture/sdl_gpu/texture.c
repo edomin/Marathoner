@@ -7,8 +7,9 @@ __declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
     report->moduleID = "Texture_sdl_gpu";
-    report->prereqsCount = 0;
-    report->prereqs = NULL;
+    report->prereqsCount = 1;
+    report->prereqs = malloc(sizeof(char *) * report->prereqsCount);
+    report->prereqs[0] = "Screen_sdl_gpu";
     return report;
 }
 
@@ -16,6 +17,15 @@ __declspec(dllexport) bool __stdcall mtrTextureInit(uint32_t dmSize,
  uint32_t reservedCount)
 {
     mtrLogWrite("Initializing texture manager", 0, MTR_LMT_INFO);
+
+    mtrGetScreen = (mtrGetScreenFunc)mtrFindFunction("Screen_sdl_gpu", "mtrGetScreen");
+    if (mtrGetScreen == NULL)
+    {
+        mtrNotify("Unable to load 'mtrGetScreen' function from 'Screen_sdl_gpu' module",
+         1, MTR_LMT_FATAL);
+        return false;
+    }
+    mtrScreen = mtrGetScreen();
 
     mtrTextureKeeper = (mtrIndexkeeper_t *)mtrIndexkeeperCreate(dmSize,
      reservedCount, sizeof(mtrTexture_t));
@@ -58,11 +68,20 @@ __declspec(dllexport) uint32_t __stdcall mtrTextureLoad(const char *filename)
 __declspec(dllexport) void __stdcall mtrTextureFree(uint32_t texNum)
 {
     mtrTexture_t *texture;
+    if (texNum != 0)
+    {
+        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        mtrLogWrite_s("Unloading texture", 0, MTR_LMT_INFO, texture->name);
+        free(texture->name);
+        GPU_FreeImage (texture->texture);
+        mtrIndexkeeperFreeIndex(mtrTextureKeeper, texNum);
+        mtrLogWrite("Texture unloaded", 0, MTR_LMT_INFO);
+    }
+}
 
+__declspec(dllexport) void __stdcall mtrTextureBlit_f(uint32_t texNum, float x, float y)
+{
+    mtrTexture_t *texture;
     texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
-    mtrLogWrite_s("Unloading texture", 0, MTR_LMT_INFO, texture->name);
-    free(texture->name);
-    GPU_FreeImage (texture->texture);
-    mtrIndexkeeperFreeIndex(mtrTextureKeeper, texNum);
-    mtrLogWrite("Texture unloaded", 0, MTR_LMT_INFO);
+    GPU_Blit(texture->texture, NULL, mtrScreen->screen, x, y);
 }
