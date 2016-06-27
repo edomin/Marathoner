@@ -26,6 +26,14 @@ __declspec(dllexport) void __stdcall mtrPluginInit(void)
           "mtrScriptsRegisterFunction");
         ok = false;
     }
+    mtrScriptsRegisterNumericVariable = (mtrScriptsRegisterNumericVariableFunc)mtrFindFunction("Script_Lua52",
+     "mtrScriptsRegisterNumericVariable");
+    if (mtrScriptsRegisterNumericVariable == NULL)
+    {
+        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+          "mtrScriptsRegisterNumericVariable");
+        ok = false;
+    }
     mtrScriptsGetVm = (mtrScriptsGetVmFunc)mtrFindFunction("Script_Lua52",
      "mtrScriptsGetVm");
     if (mtrScriptsGetVm == NULL)
@@ -111,6 +119,10 @@ __declspec(dllexport) void __stdcall mtrPluginInit(void)
         }
         if (ok)
         {
+            mtrScriptsRegisterNumericVariable("FLIP_NONE", MTR_FLIP_NONE);
+            mtrScriptsRegisterNumericVariable("FLIP_HORIZONTAL", MTR_FLIP_HORIZONTAL);
+            mtrScriptsRegisterNumericVariable("FLIP_VERTICAL", MTR_FLIP_VERTICAL);
+            mtrScriptsRegisterNumericVariable("FLIP_BOTH", MTR_FLIP_BOTH);
             mtrScriptsRegisterFunction(mtrSF_TextureInit, "TextureInit");
             mtrScriptsRegisterFunction(mtrSF_TextureLoad, "TextureLoad");
             mtrScriptsRegisterFunction(mtrSF_TextureFree, "TextureFree");

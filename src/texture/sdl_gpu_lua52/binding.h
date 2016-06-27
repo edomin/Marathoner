@@ -10,6 +10,11 @@
 #include "lua52/lualib.h"
 #include "lua52/lauxlib.h"
 
+#define MTR_FLIP_NONE       0
+#define MTR_FLIP_HORIZONTAL 1
+#define MTR_FLIP_VERTICAL   2
+#define MTR_FLIP_BOTH       3
+
 lua_State *mtrVm;
 
 typedef lua_State* (__stdcall * mtrScriptsGetVmFunc)(void);
@@ -17,6 +22,9 @@ mtrScriptsGetVmFunc mtrScriptsGetVm;
 
 typedef void (__stdcall * mtrScriptsRegisterFunctionFunc)(lua_CFunction, char *);
 mtrScriptsRegisterFunctionFunc mtrScriptsRegisterFunction;
+
+typedef void (__stdcall * mtrScriptsRegisterNumericVariableFunc)(char *, double);
+mtrScriptsRegisterNumericVariableFunc mtrScriptsRegisterNumericVariable;
 
 typedef bool (__stdcall * mtrTextureInitFunc)(uint32_t, uint32_t);
 mtrTextureInitFunc mtrTextureInit;
