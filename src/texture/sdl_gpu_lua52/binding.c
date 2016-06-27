@@ -18,7 +18,8 @@ __declspec(dllexport) void __stdcall mtrPluginInit(void)
 {
     bool ok;
     ok = true;
-    mtrScriptsRegisterFunction = (mtrScriptsRegisterFunctionFunc)mtrFindFunction("Script_Lua52", "mtrScriptsRegisterFunction");
+    mtrScriptsRegisterFunction = (mtrScriptsRegisterFunctionFunc)mtrFindFunction("Script_Lua52",
+     "mtrScriptsRegisterFunction");
     if (mtrScriptsRegisterFunction == NULL)
     {
         mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
@@ -26,7 +27,7 @@ __declspec(dllexport) void __stdcall mtrPluginInit(void)
         ok = false;
     }
     mtrScriptsGetVm = (mtrScriptsGetVmFunc)mtrFindFunction("Script_Lua52",
-      "mtrScriptsGetVm");
+     "mtrScriptsGetVm");
     if (mtrScriptsGetVm == NULL)
     {
         mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
@@ -68,12 +69,62 @@ __declspec(dllexport) void __stdcall mtrPluginInit(void)
               "mtrTextureBlit_f");
             ok = false;
         }
+        mtrTextureBlitRegion_f = (mtrTextureBlitRegion_fFunc)mtrFindFunction("Texture_sdl_gpu",
+          "mtrTextureBlitRegion_f");
+        if (mtrTextureBlitRegion_f == NULL)
+        {
+            mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+              "mtrTextureBlitRegion_f");
+            ok = false;
+        }
+        mtrTextureBlitRegionScaled_f = (mtrTextureBlitRegionScaled_fFunc)mtrFindFunction("Texture_sdl_gpu",
+          "mtrTextureBlitRegionScaled_f");
+        if (mtrTextureBlitRegionScaled_f == NULL)
+        {
+            mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+              "mtrTextureBlitRegionScaled_f");
+            ok = false;
+        }
+        mtrTextureBlitRegionAngled_f = (mtrTextureBlitRegionAngled_fFunc)mtrFindFunction("Texture_sdl_gpu",
+          "mtrTextureBlitRegionAngled_f");
+        if (mtrTextureBlitRegionAngled_f == NULL)
+        {
+            mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+              "mtrTextureBlitRegionAngled_f");
+            ok = false;
+        }
+        mtrTextureBlitRegionFlipped_f = (mtrTextureBlitRegionFlipped_fFunc)mtrFindFunction("Texture_sdl_gpu",
+          "mtrTextureBlitRegionFlipped_f");
+        if (mtrTextureBlitRegionFlipped_f == NULL)
+        {
+            mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+              "mtrTextureBlitRegionFlipped_f");
+            ok = false;
+        }
+        mtrTextureBlitRegionGeneral_f = (mtrTextureBlitRegionGeneral_fFunc)mtrFindFunction("Texture_sdl_gpu",
+          "mtrTextureBlitRegionGeneral_f");
+        if (mtrTextureBlitRegionGeneral_f == NULL)
+        {
+            mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+              "mtrTextureBlitRegionGeneral_f");
+            ok = false;
+        }
         if (ok)
         {
             mtrScriptsRegisterFunction(mtrSF_TextureInit, "TextureInit");
             mtrScriptsRegisterFunction(mtrSF_TextureLoad, "TextureLoad");
             mtrScriptsRegisterFunction(mtrSF_TextureFree, "TextureFree");
             mtrScriptsRegisterFunction(mtrSF_TextureBlit_f, "TextureBlit_f");
+            mtrScriptsRegisterFunction(mtrSF_TextureBlitRegion_f,
+             "TextureBlitRegion_f");
+            mtrScriptsRegisterFunction(mtrSF_TextureBlitRegionScaled_f,
+             "TextureBlitRegionScaled_f");
+            mtrScriptsRegisterFunction(mtrSF_TextureBlitRegionAngled_f,
+             "TextureBlitRegionAngled_f");
+            mtrScriptsRegisterFunction(mtrSF_TextureBlitRegionFlipped_f,
+             "TextureBlitRegionFlipped_f");
+            mtrScriptsRegisterFunction(mtrSF_TextureBlitRegionGeneral_f,
+             "TextureBlitRegionGeneral_f");
         }
         else
         {
@@ -115,6 +166,90 @@ int mtrSF_TextureBlit_f(lua_State* l)
     float x = (float)lua_tonumber(mtrVm, 2);
     float y = (float)lua_tonumber(mtrVm, 3);
     mtrTextureBlit_f(texNum, x, y);
+
+    return 0;
+}
+
+int mtrSF_TextureBlitRegion_f(lua_State* l)
+{
+    uint32_t texNum = lua_tonumber(mtrVm, 1);
+    float x = (float)lua_tonumber(mtrVm, 2);
+    float y = (float)lua_tonumber(mtrVm, 3);
+    float rx = (float)lua_tonumber(mtrVm, 4);
+    float ry = (float)lua_tonumber(mtrVm, 5);
+    float rw = (float)lua_tonumber(mtrVm, 6);
+    float rh = (float)lua_tonumber(mtrVm, 7);
+    mtrTextureBlitRegion_f(texNum, x, y, rx, ry, rw, rh);
+
+    return 0;
+}
+
+int mtrSF_TextureBlitRegionScaled_f(lua_State* l)
+{
+    uint32_t texNum = lua_tonumber(mtrVm, 1);
+    float x = (float)lua_tonumber(mtrVm, 2);
+    float y = (float)lua_tonumber(mtrVm, 3);
+    float w = (float)lua_tonumber(mtrVm, 4);
+    float h = (float)lua_tonumber(mtrVm, 5);
+    float rx = (float)lua_tonumber(mtrVm, 6);
+    float ry = (float)lua_tonumber(mtrVm, 7);
+    float rw = (float)lua_tonumber(mtrVm, 8);
+    float rh = (float)lua_tonumber(mtrVm, 9);
+    mtrTextureBlitRegionScaled_f(texNum, x, y, w, h, rx, ry, rw, rh);
+
+    return 0;
+}
+
+int mtrSF_TextureBlitRegionAngled_f(lua_State* l)
+{
+    uint32_t texNum = lua_tonumber(mtrVm, 1);
+    float x = (float)lua_tonumber(mtrVm, 2);
+    float y = (float)lua_tonumber(mtrVm, 3);
+    float rx = (float)lua_tonumber(mtrVm, 4);
+    float ry = (float)lua_tonumber(mtrVm, 5);
+    float rw = (float)lua_tonumber(mtrVm, 6);
+    float rh = (float)lua_tonumber(mtrVm, 7);
+    float angle = (float)lua_tonumber(mtrVm, 8);
+    float pivotX = (float)lua_tonumber(mtrVm, 9);
+    float pivotY = (float)lua_tonumber(mtrVm, 10);
+    mtrTextureBlitRegionAngled_f(texNum, x, y, rx, ry, rw, rh, angle, pivotX,
+     pivotY);
+
+    return 0;
+}
+
+int mtrSF_TextureBlitRegionFlipped_f(lua_State* l)
+{
+    uint32_t texNum = lua_tonumber(mtrVm, 1);
+    float x = (float)lua_tonumber(mtrVm, 2);
+    float y = (float)lua_tonumber(mtrVm, 3);
+    float rx = (float)lua_tonumber(mtrVm, 4);
+    float ry = (float)lua_tonumber(mtrVm, 5);
+    float rw = (float)lua_tonumber(mtrVm, 6);
+    float rh = (float)lua_tonumber(mtrVm, 7);
+    uint32_t flip = lua_tonumber(mtrVm, 8);
+    mtrTextureBlitRegionFlipped_f(texNum, x, y, rx, ry, rw, rh, flip);
+
+    return 0;
+}
+
+int mtrSF_TextureBlitRegionGeneral_f(lua_State* l)
+{
+    uint32_t texNum = lua_tonumber(mtrVm, 1);
+    float x = (float)lua_tonumber(mtrVm, 2);
+    float y = (float)lua_tonumber(mtrVm, 3);
+    float w = (float)lua_tonumber(mtrVm, 4);
+    float h = (float)lua_tonumber(mtrVm, 5);
+    float rx = (float)lua_tonumber(mtrVm, 6);
+    float ry = (float)lua_tonumber(mtrVm, 7);
+    float rw = (float)lua_tonumber(mtrVm, 8);
+    float rh = (float)lua_tonumber(mtrVm, 9);
+    float angle = (float)lua_tonumber(mtrVm, 10);
+    float pivotX = (float)lua_tonumber(mtrVm, 11);
+    float pivotY = (float)lua_tonumber(mtrVm, 12);
+    uint32_t flip = lua_tonumber(mtrVm, 13);
+    mtrTextureBlitRegionGeneral_f(texNum, x, y, w, h, rx, ry, rw, rh, angle,
+     pivotX, pivotY, flip);
 
     return 0;
 }

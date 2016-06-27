@@ -30,9 +30,34 @@ mtrTextureFreeFunc mtrTextureFree;
 typedef void (__stdcall * mtrTextureBlit_fFunc)(uint32_t, float, float);
 mtrTextureBlit_fFunc mtrTextureBlit_f;
 
+typedef void (__stdcall * mtrTextureBlitRegion_fFunc)(uint32_t, float, float,
+ float, float, float, float);
+mtrTextureBlitRegion_fFunc mtrTextureBlitRegion_f;
+
+typedef void (__stdcall * mtrTextureBlitRegionScaled_fFunc)(uint32_t, float,
+ float, float, float, float, float, float, float);
+mtrTextureBlitRegionScaled_fFunc mtrTextureBlitRegionScaled_f;
+
+typedef void (__stdcall * mtrTextureBlitRegionAngled_fFunc)(uint32_t, float,
+ float, float, float, float, float, float, float, float);
+mtrTextureBlitRegionAngled_fFunc mtrTextureBlitRegionAngled_f;
+
+typedef void (__stdcall * mtrTextureBlitRegionFlipped_fFunc)(uint32_t, float,
+ float, float, float, float, float, uint8_t);
+mtrTextureBlitRegionFlipped_fFunc mtrTextureBlitRegionFlipped_f;
+
+typedef void (__stdcall * mtrTextureBlitRegionGeneral_fFunc)(uint32_t, float,
+ float, float, float, float, float, float, float, float, float, float, uint8_t);
+mtrTextureBlitRegionGeneral_fFunc mtrTextureBlitRegionGeneral_f;
+
 int mtrSF_TextureInit(lua_State* l);
 int mtrSF_TextureLoad(lua_State* l);
 int mtrSF_TextureFree(lua_State* l);
 int mtrSF_TextureBlit_f(lua_State* l);
+int mtrSF_TextureBlitRegion_f(lua_State* l);
+int mtrSF_TextureBlitRegionScaled_f(lua_State* l);
+int mtrSF_TextureBlitRegionAngled_f(lua_State* l);
+int mtrSF_TextureBlitRegionFlipped_f(lua_State* l);
+int mtrSF_TextureBlitRegionGeneral_f(lua_State* l);
 
 #endif

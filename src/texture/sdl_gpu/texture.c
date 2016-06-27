@@ -79,9 +79,100 @@ __declspec(dllexport) void __stdcall mtrTextureFree(uint32_t texNum)
     }
 }
 
-__declspec(dllexport) void __stdcall mtrTextureBlit_f(uint32_t texNum, float x, float y)
+__declspec(dllexport) void __stdcall mtrTextureBlit_f(uint32_t texNum, float x,
+ float y)
 {
     mtrTexture_t *texture;
     texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
     GPU_Blit(texture->texture, NULL, mtrScreen->screen, x, y);
+}
+
+__declspec(dllexport) void __stdcall mtrTextureBlitRegion_f(uint32_t texNum,
+ float x, float y, float rx, float ry, float rw, float rh)
+{
+    GPU_Rect region;
+    mtrTexture_t *texture;
+    region.x = rx;
+    region.y = ry;
+    region.w = rw;
+    region.h = rh;
+    texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+    GPU_Blit(texture->texture, &region, mtrScreen->screen, x, y);
+}
+
+__declspec(dllexport) void __stdcall mtrTextureBlitRegionScaled_f(uint32_t texNum,
+ float x, float y, float w, float h, float rx, float ry, float rw, float rh)
+{
+    GPU_Rect region;
+    GPU_Rect outputRegion;
+    mtrTexture_t *texture;
+    region.x = rx;
+    region.y = ry;
+    region.w = rw;
+    region.h = rh;
+    outputRegion.x = x;
+    outputRegion.y = y;
+    outputRegion.w = w;
+    outputRegion.h = h;
+    texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+    GPU_BlitRect(texture->texture, &region, mtrScreen->screen, &outputRegion);
+}
+
+__declspec(dllexport) void __stdcall mtrTextureBlitRegionAngled_f(uint32_t texNum,
+ float x, float y, float rx, float ry, float rw, float rh, float angle,
+ float pivotX, float pivotY)
+{
+    GPU_Rect region;
+    GPU_Rect outputRegion;
+    mtrTexture_t *texture;
+    region.x = rx;
+    region.y = ry;
+    region.w = rw;
+    region.h = rh;
+    outputRegion.x = x;
+    outputRegion.y = y;
+    outputRegion.w = rw;
+    outputRegion.h = rh;
+    texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+    GPU_BlitRectX(texture->texture, &region, mtrScreen->screen, &outputRegion,
+     -angle, pivotX, pivotY, GPU_FLIP_NONE);
+}
+
+__declspec(dllexport) void __stdcall mtrTextureBlitRegionFlipped_f(uint32_t texNum,
+ float x, float y, float rx, float ry, float rw, float rh, uint8_t flip)
+{
+    GPU_Rect region;
+    GPU_Rect outputRegion;
+    mtrTexture_t *texture;
+    region.x = rx;
+    region.y = ry;
+    region.w = rw;
+    region.h = rh;
+    outputRegion.x = x;
+    outputRegion.y = y;
+    outputRegion.w = rw;
+    outputRegion.h = rh;
+    texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+    GPU_BlitRectX(texture->texture, &region, mtrScreen->screen, &outputRegion,
+     0.0f, rx, ry, flip);
+}
+
+__declspec(dllexport) void __stdcall mtrTextureBlitRegionGeneral_f(uint32_t texNum,
+ float x, float y, float w, float h, float rx, float ry, float rw, float rh,
+ float angle, float pivotX, float pivotY, uint8_t flip)
+{
+    GPU_Rect region;
+    GPU_Rect outputRegion;
+    mtrTexture_t *texture;
+    region.x = rx;
+    region.y = ry;
+    region.w = rw;
+    region.h = rh;
+    outputRegion.x = x;
+    outputRegion.y = y;
+    outputRegion.w = w;
+    outputRegion.h = h;
+    texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+    GPU_BlitRectX(texture->texture, &region, mtrScreen->screen, &outputRegion,
+     -angle, pivotX, pivotY, flip);
 }
