@@ -22,18 +22,18 @@ typedef bool (__stdcall * mtrPrimitiveInitFunc)(void);
 mtrPrimitiveInitFunc mtrPrimitiveInit;
 
 /* Fill */
-typedef void (__stdcall * mtrPrimitiveFill_rgb_fFunc)(uint8_t, uint8_t, uint8_t);
-mtrPrimitiveFill_rgb_fFunc mtrPrimitiveFill_rgb_f;
+typedef void (__stdcall * mtrPrimitiveFill_rgbFunc)(uint8_t, uint8_t, uint8_t);
+mtrPrimitiveFill_rgbFunc mtrPrimitiveFill_rgb;
 
-typedef void (__stdcall * mtrPrimitiveFill_rgba_fFunc)(uint8_t, uint8_t, uint8_t,
+typedef void (__stdcall * mtrPrimitiveFill_rgbaFunc)(uint8_t, uint8_t, uint8_t,
  uint8_t);
-mtrPrimitiveFill_rgba_fFunc mtrPrimitiveFill_rgba_f;
+mtrPrimitiveFill_rgbaFunc mtrPrimitiveFill_rgba;
 
-typedef void (__stdcall * mtrPrimitiveFill_c_fFunc)(uint32_t);
-mtrPrimitiveFill_c_fFunc mtrPrimitiveFill_c_f;
+typedef void (__stdcall * mtrPrimitiveFill_cFunc)(uint32_t);
+mtrPrimitiveFill_cFunc mtrPrimitiveFill_c;
 
-typedef void (__stdcall * mtrPrimitiveFill_ca_fFunc)(uint32_t);
-mtrPrimitiveFill_ca_fFunc mtrPrimitiveFill_ca_f;
+typedef void (__stdcall * mtrPrimitiveFill_caFunc)(uint32_t);
+mtrPrimitiveFill_caFunc mtrPrimitiveFill_ca;
 
 /* Pixel */
 typedef void (__stdcall * mtrPrimitivePixel_rgb_fFunc)(float, float, uint8_t,
@@ -123,7 +123,7 @@ typedef void (__stdcall * mtrPrimitiveCircleFilled_rgb_fFunc)(float, float, floa
  uint8_t, uint8_t, uint8_t);
 mtrPrimitiveCircleFilled_rgb_fFunc mtrPrimitiveCircleFilled_rgb_f;
 
-typedef void (__stdcall * mtrPrimitiveCircleFilled_rgbaFunc)(float, float,
+typedef void (__stdcall * mtrPrimitiveCircleFilled_rgba_fFunc)(float, float,
  float, uint8_t, uint8_t, uint8_t, uint8_t);
 mtrPrimitiveCircleFilled_rgba_fFunc mtrPrimitiveCircleFilled_rgba_f;
 
@@ -307,10 +307,10 @@ mtrPrimitiveRoundedRectangleFilled_ca_fFunc mtrPrimitiveRoundedRectangleFilled_c
 
 int mtrSF_PrimitiveInit(lua_State* l);
 
-int mtrSF_PrimitiveFill_rgb_f(lua_State* l);
-int mtrSF_PrimitiveFill_rgba_f(lua_State* l);
-int mtrSF_PrimitiveFill_c_f(lua_State* l);
-int mtrSF_PrimitiveFill_ca_f(lua_State* l);
+int mtrSF_PrimitiveFill_rgb(lua_State* l);
+int mtrSF_PrimitiveFill_rgba(lua_State* l);
+int mtrSF_PrimitiveFill_c(lua_State* l);
+int mtrSF_PrimitiveFill_ca(lua_State* l);
 
 int mtrSF_PrimitivePixel_rgb_f(lua_State* l);
 int mtrSF_PrimitivePixel_rgba_f(lua_State* l);
