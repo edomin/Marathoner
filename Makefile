@@ -9,6 +9,8 @@ PRIMITIVE_SDL_GPU = primitive/sdl_gpu
 PRIMITIVE_SDL_GPU_LUA52 = primitive/sdl_gpu_lua52
 TIMER_SDL_GPU = timer/sdl_gpu
 TIMER_SDL_GPU_LUA52 = timer/sdl_gpu_lua52
+UTILS_COLOR = utils/color
+UTILS_COLOR_LUA52 = utils/color_lua52
 SCRIPT_LUA52 = script/lua52
 
 all: prebuild
@@ -21,6 +23,8 @@ all: prebuild
 	make -C src/$(PRIMITIVE_SDL_GPU_LUA52)
 	make -C src/$(TIMER_SDL_GPU)
 	make -C src/$(TIMER_SDL_GPU_LUA52)
+	make -C src/$(UTILS_COLOR)
+	make -C src/$(UTILS_COLOR_LUA52)
 	make -C src/$(SCRIPT_LUA52)
 
 prebuild:
