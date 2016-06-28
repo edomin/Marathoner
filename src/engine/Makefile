@@ -1,6 +1,6 @@
 CC = mingw32-gcc
 LD = mingw32-gcc
-CFLAGS = -Wall
+CFLAGS = -Wall -O2
 LDFLAGS = -s -L../../lib -mwindows
 OBJSDIR = ../../obj
 BINDIR = ../..
