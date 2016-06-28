@@ -1,10 +1,10 @@
-#ifndef MTR_TIMER_SDL_GPU
-#define MTR_TIMER_SDL_GPU
+#ifndef MTR_TIMER_SDL2
+#define MTR_TIMER_SDL2
 
 #define MTR_PLUGIN
 #include "marathoner.h"
 
-#include "sdl_gpu/SDL_gpu.h"
+#include "SDL2/SDL.h"
 
 typedef struct mtrTimer_t{
     uint32_t startTime;

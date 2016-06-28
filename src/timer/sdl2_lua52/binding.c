@@ -6,10 +6,10 @@ __declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
-    report->moduleID = "Timer_sdl_gpu_Lua52";
+    report->moduleID = "Timer_SDL2_Lua52";
     report->prereqsCount = 2;
     report->prereqs = malloc(sizeof(char *) * report->prereqsCount);
-    report->prereqs[0] = "Timer_sdl_gpu";
+    report->prereqs[0] = "Timer_SDL2";
     report->prereqs[1] = "Script_Lua52";
     return report;
 }
@@ -36,7 +36,7 @@ __declspec(dllexport) void __stdcall mtrPluginInit(void)
     else
     {
         mtrVm = mtrScriptsGetVm();
-        mtrTimerStart = (mtrTimerStartFunc)mtrFindFunction("Timer_sdl_gpu",
+        mtrTimerStart = (mtrTimerStartFunc)mtrFindFunction("Timer_SDL2",
           "mtrTimerStart");
         if (mtrTimerStart == NULL)
         {
@@ -44,7 +44,7 @@ __declspec(dllexport) void __stdcall mtrPluginInit(void)
               "mtrTimerStart");
             ok = false;
         }
-        mtrTimerDelay = (mtrTimerDelayFunc)mtrFindFunction("Timer_sdl_gpu",
+        mtrTimerDelay = (mtrTimerDelayFunc)mtrFindFunction("Timer_SDL2",
           "mtrTimerDelay");
         if (mtrTimerDelay == NULL)
         {
@@ -52,7 +52,7 @@ __declspec(dllexport) void __stdcall mtrPluginInit(void)
               "mtrTimerDelay");
             ok = false;
         }
-        mtrTimerDelayForFPS = (mtrTimerDelayForFPSFunc)mtrFindFunction("Timer_sdl_gpu",
+        mtrTimerDelayForFPS = (mtrTimerDelayForFPSFunc)mtrFindFunction("Timer_SDL2",
           "mtrTimerDelayForFPS");
         if (mtrTimerDelayForFPS == NULL)
         {
@@ -60,7 +60,7 @@ __declspec(dllexport) void __stdcall mtrPluginInit(void)
               "mtrTimerDelayForFPS");
             ok = false;
         }
-        mtrTimerDelayForFPS_f = (mtrTimerDelayForFPS_fFunc)mtrFindFunction("Timer_sdl_gpu",
+        mtrTimerDelayForFPS_f = (mtrTimerDelayForFPS_fFunc)mtrFindFunction("Timer_SDL2",
           "mtrTimerDelayForFPS_f");
         if (mtrTimerDelayForFPS_f == NULL)
         {

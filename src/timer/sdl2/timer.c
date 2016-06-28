@@ -6,7 +6,7 @@ __declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
-    report->moduleID = "Timer_sdl_gpu";
+    report->moduleID = "Timer_SDL2";
     report->prereqsCount = 0;
     report->prereqs = NULL;
     return report;

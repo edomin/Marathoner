@@ -1,5 +1,5 @@
-#ifndef MTR_TIMER_SDL_GPU_LUA52
-#define MTR_TIMER_SDL_GPU_LUA52
+#ifndef MTR_TIMER_SDL2_LUA52
+#define MTR_TIMER_SDL2_LUA52
 
 #define MTR_PLUGIN
 #include "marathoner.h"
