@@ -74,6 +74,22 @@ __declspec(dllexport) void __stdcall mtrPluginInit(void)
               "mtrTextureFree");
             ok = false;
         }
+        mtrTextureSetBlendFunction = (mtrTextureSetBlendFunctionFunc)mtrFindFunction("Texture_sdl_gpu",
+          "mtrTextureSetBlendFunction");
+        if (mtrTextureSetBlendFunction == NULL)
+        {
+            mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+              "mtrTextureSetBlendFunction");
+            ok = false;
+        }
+        mtrTextureSetAlphaBlending = (mtrTextureSetAlphaBlendingFunc)mtrFindFunction("Texture_sdl_gpu",
+          "mtrTextureSetAlphaBlending");
+        if (mtrTextureSetAlphaBlending == NULL)
+        {
+            mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+              "mtrTextureSetAlphaBlending");
+            ok = false;
+        }
         mtrTextureBlit_f = (mtrTextureBlit_fFunc)mtrFindFunction("Texture_sdl_gpu",
           "mtrTextureBlit_f");
         if (mtrTextureBlit_f == NULL)
@@ -125,12 +141,36 @@ __declspec(dllexport) void __stdcall mtrPluginInit(void)
         if (ok)
         {
             mtrScriptsRegisterNumericVariable("FLIP_NONE", MTR_FLIP_NONE);
-            mtrScriptsRegisterNumericVariable("FLIP_HORIZONTAL", MTR_FLIP_HORIZONTAL);
-            mtrScriptsRegisterNumericVariable("FLIP_VERTICAL", MTR_FLIP_VERTICAL);
+            mtrScriptsRegisterNumericVariable("FLIP_HORIZONTAL",
+             MTR_FLIP_HORIZONTAL);
+            mtrScriptsRegisterNumericVariable("FLIP_VERTICAL",
+             MTR_FLIP_VERTICAL);
             mtrScriptsRegisterNumericVariable("FLIP_BOTH", MTR_FLIP_BOTH);
+            mtrScriptsRegisterNumericVariable("BLEND_ZERO", MTR_BLEND_ZERO);
+            mtrScriptsRegisterNumericVariable("BLEND_ONE", MTR_BLEND_ONE);
+            mtrScriptsRegisterNumericVariable("BLEND_SRC_COLOR",
+             MTR_BLEND_SRC_COLOR);
+            mtrScriptsRegisterNumericVariable("BLEND_DST_COLOR",
+             MTR_BLEND_DST_COLOR);
+            mtrScriptsRegisterNumericVariable("BLEND_ONE_MINUS_SRC",
+             MTR_BLEND_ONE_MINUS_SRC);
+            mtrScriptsRegisterNumericVariable("BLEND_ONE_MINUS_DST",
+             MTR_BLEND_ONE_MINUS_DST);
+            mtrScriptsRegisterNumericVariable("BLEND_SRC_ALPHA",
+             MTR_BLEND_SRC_ALPHA);
+            mtrScriptsRegisterNumericVariable("BLEND_DST_ALPHA",
+             MTR_BLEND_DST_ALPHA);
+            mtrScriptsRegisterNumericVariable("BLEND_ONE_MINUS_SRC_ALPHA",
+             MTR_BLEND_ONE_MINUS_SRC_ALPHA);
+            mtrScriptsRegisterNumericVariable("BLEND_ONE_MINUS_DST_ALPHA",
+             MTR_BLEND_ONE_MINUS_DST_ALPHA);
             mtrScriptsRegisterFunction(mtrSF_TextureInit, "TextureInit");
             mtrScriptsRegisterFunction(mtrSF_TextureLoad, "TextureLoad");
             mtrScriptsRegisterFunction(mtrSF_TextureFree, "TextureFree");
+            mtrScriptsRegisterFunction(mtrSF_TextureSetBlendFunction,
+             "TextureSetBlendFunction");
+            mtrScriptsRegisterFunction(mtrSF_TextureSetAlphaBlending,
+             "TextureSetBlending");
             mtrScriptsRegisterFunction(mtrSF_TextureBlit_f, "TextureBlit_f");
             mtrScriptsRegisterFunction(mtrSF_TextureBlitRegion_f,
              "TextureBlitRegion_f");
@@ -173,6 +213,27 @@ int mtrSF_TextureFree(lua_State* l)
 {
     uint32_t texNum = lua_tonumber(mtrVm, 1);
     mtrTextureFree(texNum);
+
+    return 0;
+}
+
+int mtrSF_TextureSetBlendFunction(lua_State* l)
+{
+    uint32_t texNum = lua_tonumber(mtrVm, 1);
+    uint8_t srcColor = (uint8_t)lua_tointeger(mtrVm, 2);
+    uint8_t destColor = (uint8_t)lua_tointeger(mtrVm, 3);
+    uint8_t srcAlpha = (uint8_t)lua_tointeger(mtrVm, 4);
+    uint8_t dstAlpha = (uint8_t)lua_tointeger(mtrVm, 5);
+    mtrTextureSetBlendFunction(texNum, srcColor, destColor, srcAlpha, dstAlpha);
+
+    return 0;
+}
+
+int mtrSF_TextureSetAlphaBlending(lua_State* l)
+{
+    uint32_t texNum = lua_tonumber(mtrVm, 1);
+    bool blending = lua_toboolean(mtrVm, 2);
+    mtrTextureSetBlending(texNum, blending);
 
     return 0;
 }

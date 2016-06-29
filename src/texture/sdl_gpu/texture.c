@@ -78,6 +78,35 @@ __declspec(dllexport) uint32_t __stdcall mtrTextureLoad(const char *filename)
     return 0;
 }
 
+__declspec(dllexport) uint32_t __stdcall mtrTextureCreateAlias(uint32_t texNum)
+{
+    uint32_t      freeIndex;
+    mtrTexture_t *texture;
+    mtrTexture_t *oldTexture;
+
+    mtrLogWrite("Creating texture alias", 0, MTR_LMT_INFO);
+    freeIndex = mtrIndexkeeperGetFreeIndex(mtrTextureKeeper);
+    mtrLogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
+    texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[freeIndex]);
+    oldTexture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+    texture->texture = GPU_CreateAliasImage(oldTexture->texture);
+    if (texture->texture != NULL)
+    {
+        texture->name = malloc(sizeof(char) * (strlen(oldTexture->name) + 1));
+        texture->name = strcpy(texture->name, oldTexture->name);
+        mtrLogWrite_s("Created alias for texture", 0, MTR_LMT_INFO,
+         oldTexture->name);
+        return freeIndex;
+    }
+    else
+    {
+        mtrNotify("Unable to create texture alias", 1, MTR_LMT_ERROR);
+        mtrIndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
+        return 0;
+    }
+    return 0;
+}
+
 __declspec(dllexport) void __stdcall mtrTextureFree(uint32_t texNum)
 {
     mtrTexture_t *texture;
@@ -89,6 +118,29 @@ __declspec(dllexport) void __stdcall mtrTextureFree(uint32_t texNum)
         GPU_FreeImage (texture->texture);
         mtrIndexkeeperFreeIndex(mtrTextureKeeper, texNum);
         mtrLogWrite("Texture unloaded", 0, MTR_LMT_INFO);
+    }
+}
+
+__declspec(dllexport) void __stdcall mtrTextureSetBlendFunction(uint32_t texNum,
+ uint8_t srcColor, uint8_t destColor, uint8_t srcAlpha, uint8_t dstAlpha)
+{
+    mtrTexture_t *texture;
+    if (texNum != 0)
+    {
+        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        GPU_SetBlendFunction(texture->texture, (int)srcColor, (int)destColor,
+         (int)srcAlpha, (int)dstAlpha);
+    }
+}
+
+__declspec(dllexport) void __stdcall mtrTextureSetAlphaBlending(uint32_t texNum,
+ bool blending)
+{
+    mtrTexture_t *texture;
+    if (texNum != 0)
+    {
+        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        GPU_SetBlending(texture->texture, blending);
     }
 }
 

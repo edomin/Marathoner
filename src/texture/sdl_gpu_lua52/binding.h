@@ -15,6 +15,17 @@
 #define MTR_FLIP_VERTICAL   2
 #define MTR_FLIP_BOTH       3
 
+#define MTR_BLEND_ZERO                  0
+#define MTR_BLEND_ONE                   1
+#define MTR_BLEND_SRC_COLOR             2
+#define MTR_BLEND_DST_COLOR             3
+#define MTR_BLEND_ONE_MINUS_SRC         4
+#define MTR_BLEND_ONE_MINUS_DST         5
+#define MTR_BLEND_SRC_ALPHA             6
+#define MTR_BLEND_DST_ALPHA             7
+#define MTR_BLEND_ONE_MINUS_SRC_ALPHA   8
+#define MTR_BLEND_ONE_MINUS_DST_ALPHA   9
+
 lua_State *mtrVm;
 
 typedef lua_State* (__stdcall * mtrScriptsGetVmFunc)(void);
@@ -34,6 +45,13 @@ mtrTextureLoadFunc mtrTextureLoad;
 
 typedef void (__stdcall * mtrTextureFreeFunc)(uint32_t);
 mtrTextureFreeFunc mtrTextureFree;
+
+typedef void (__stdcall * mtrTextureSetBlendFunctionFunc)(uint32_t, uint8_t,
+ uint8_t, uint8_t, uint8_t);
+mtrTextureSetBlendFunctionFunc mtrTextureSetBlendFunction;
+
+typedef void (__stdcall * mtrTextureSetAlphaBlendingFunc)(uint32_t, bool);
+mtrTextureSetAlphaBlendingFunc mtrTextureSetAlphaBlending;
 
 typedef void (__stdcall * mtrTextureBlit_fFunc)(uint32_t, float, float);
 mtrTextureBlit_fFunc mtrTextureBlit_f;
@@ -61,6 +79,8 @@ mtrTextureBlitRegionGeneral_fFunc mtrTextureBlitRegionGeneral_f;
 int mtrSF_TextureInit(lua_State* l);
 int mtrSF_TextureLoad(lua_State* l);
 int mtrSF_TextureFree(lua_State* l);
+int mtrSF_TextureSetBlendFunction(lua_State* l);
+int mtrSF_TextureSetAlphaBlending(lua_State* l);
 int mtrSF_TextureBlit_f(lua_State* l);
 int mtrSF_TextureBlitRegion_f(lua_State* l);
 int mtrSF_TextureBlitRegionScaled_f(lua_State* l);
