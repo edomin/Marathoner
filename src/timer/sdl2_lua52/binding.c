@@ -41,6 +41,14 @@ __declspec(dllexport) void __stdcall mtrPluginInit(void)
     else
     {
         mtrVm = mtrScriptsGetVm();
+        mtrTimerInit = (mtrTimerInitFunc)mtrFindFunction("Timer_SDL2",
+          "mtrTimerInit");
+        if (mtrTimerInit == NULL)
+        {
+            mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+              "mtrTimerInit");
+            ok = false;
+        }
         mtrTimerStart = (mtrTimerStartFunc)mtrFindFunction("Timer_SDL2",
           "mtrTimerStart");
         if (mtrTimerStart == NULL)
@@ -75,6 +83,7 @@ __declspec(dllexport) void __stdcall mtrPluginInit(void)
         }
         if (ok)
         {
+            mtrScriptsRegisterFunction(mtrSF_TimerInit, "TimerInit");
             mtrScriptsRegisterFunction(mtrSF_TimerStart, "TimerStart");
             mtrScriptsRegisterFunction(mtrSF_TimerDelay, "TimerDelay");
             mtrScriptsRegisterFunction(mtrSF_TimerDelayForFPS, "TimerDelayForFPS");
@@ -85,6 +94,14 @@ __declspec(dllexport) void __stdcall mtrPluginInit(void)
             mtrLogWrite("Functions not added", 3, MTR_LMT_ERROR);
         }
     }
+}
+
+int mtrSF_TimerInit(lua_State* l)
+{
+    bool success = mtrTimerInit();
+    lua_pushboolean(mtrVm, success);
+
+    return 1;
 }
 
 int mtrSF_TimerStart(lua_State* l)

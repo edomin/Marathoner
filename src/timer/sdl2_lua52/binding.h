@@ -18,6 +18,9 @@ mtrScriptsGetVmFunc mtrScriptsGetVm;
 typedef void (__stdcall * mtrScriptsRegisterFunctionFunc)(lua_CFunction, char *);
 mtrScriptsRegisterFunctionFunc mtrScriptsRegisterFunction;
 
+typedef bool (__stdcall * mtrTimerInitFunc)(void);
+mtrTimerInitFunc mtrTimerInit;
+
 typedef void (__stdcall * mtrTimerStartFunc)(void);
 mtrTimerStartFunc mtrTimerStart;
 
@@ -30,6 +33,7 @@ mtrTimerDelayForFPSFunc mtrTimerDelayForFPS;
 typedef float (__stdcall * mtrTimerDelayForFPS_fFunc)(float);
 mtrTimerDelayForFPS_fFunc mtrTimerDelayForFPS_f;
 
+int mtrSF_TimerInit(lua_State* l);
 int mtrSF_TimerStart(lua_State* l);
 int mtrSF_TimerDelay(lua_State* l);
 int mtrSF_TimerDelayForFPS(lua_State* l);

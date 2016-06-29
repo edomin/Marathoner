@@ -4,6 +4,8 @@
 #define MTR_PLUGIN
 #include "marathoner.h"
 
+#include "bool/bool.h"
+
 #include "SDL2/SDL.h"
 
 typedef struct mtrTimer_t{

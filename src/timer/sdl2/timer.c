@@ -13,6 +13,39 @@ __declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
     return report;
 }
 
+__declspec(dllexport) bool __stdcall mtrTimerInit(void)
+{
+    SDL_version compiled;
+    SDL_version linked;
+
+    mtrLogWrite("Initializing timer subsystem", 0, MTR_LMT_INFO);
+
+    mtrLogWrite("Reporting SDL compile-time version:", 1, MTR_LMT_INFO);
+    SDL_VERSION(&compiled);
+    mtrLogWrite_i("Major:", 2, MTR_LMT_INFO, compiled.major);
+    mtrLogWrite_i("Minor:", 2, MTR_LMT_INFO, compiled.minor);
+    mtrLogWrite_i("Patch:", 2, MTR_LMT_INFO, compiled.patch);
+    mtrLogWrite("Reporting SDL linked version:", 1, MTR_LMT_INFO);
+    SDL_GetVersion(&linked);
+    mtrLogWrite_i("Major:", 2, MTR_LMT_INFO, linked.major);
+    mtrLogWrite_i("Minor:", 2, MTR_LMT_INFO, linked.minor);
+    mtrLogWrite_i("Patch:", 2, MTR_LMT_INFO, linked.patch);
+
+    if(SDL_WasInit(SDL_INIT_TIMER) != 0)
+        if (SDL_InitSubSystem(SDL_INIT_TIMER) == 0)
+            mtrLogWrite("SDL timer subsystem initialized", 1, MTR_LMT_INFO);
+        else
+        {
+             mtrNotify("Unable to initialize SDL timer subsystem", 1,
+              MTR_LMT_ERROR);
+              return false;
+        }
+    else
+        mtrLogWrite("SDL timer subsystem already initialized", 1, MTR_LMT_INFO);
+    mtrLogWrite("Timer subsystem initialized", 0, MTR_LMT_INFO);
+    return true;
+}
+
 __declspec(dllexport) void __stdcall mtrTimerStart(void)
 {
     mtrTimer.startTime = SDL_GetTicks();
