@@ -7,6 +7,7 @@ __declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
     report->moduleID = "Primitive_sdl_gpu";
+    report->version = 0x000000;
     report->prereqsCount = 1;
     report->prereqs = malloc(sizeof(char *) * report->prereqsCount);
     report->prereqs[0] = "Screen_sdl_gpu";
@@ -15,7 +16,19 @@ __declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
 
 __declspec(dllexport) bool __stdcall mtrPrimitiveInit(void)
 {
+    SDL_version linked;
+
     mtrLogWrite("Initializing primitive drawing subsystem", 0, MTR_LMT_INFO);
+
+    mtrLogWrite("Reporting sdl_gpu compile-time version:", 1, MTR_LMT_INFO);
+    mtrLogWrite_i("Major:", 2, MTR_LMT_INFO, SDL_GPU_VERSION_MAJOR);
+    mtrLogWrite_i("Minor:", 2, MTR_LMT_INFO, SDL_GPU_VERSION_MINOR);
+    mtrLogWrite_i("Patch:", 2, MTR_LMT_INFO, SDL_GPU_VERSION_PATCH);
+    mtrLogWrite("Reporting sdl_gpu linked version:", 1, MTR_LMT_INFO);
+    linked = GPU_GetLinkedVersion();
+    mtrLogWrite_i("Major:", 2, MTR_LMT_INFO, linked.major);
+    mtrLogWrite_i("Minor:", 2, MTR_LMT_INFO, linked.minor);
+    mtrLogWrite_i("Patch:", 2, MTR_LMT_INFO, linked.patch);
 
     mtrGetScreen = (mtrGetScreenFunc)mtrFindFunction("Screen_sdl_gpu", "mtrGetScreen");
     if (mtrGetScreen == NULL)

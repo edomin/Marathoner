@@ -5,6 +5,7 @@
 #include "marathoner.h"
 
 #include "sdl_gpu/SDL_gpu.h"
+#include "SDL2/SDL.h"
 
 typedef struct mtrScreen_t {
     GPU_Target* screen;

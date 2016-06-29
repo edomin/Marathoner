@@ -7,6 +7,7 @@ __declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
     report->moduleID = "Texture_sdl_gpu_Lua52";
+    report->version = 0x000000;
     report->prereqsCount = 2;
     report->prereqs = malloc(sizeof(char *) * report->prereqsCount);
     report->prereqs[0] = "Texture_sdl_gpu";
@@ -18,6 +19,10 @@ __declspec(dllexport) void __stdcall mtrPluginInit(void)
 {
     bool ok;
     ok = true;
+
+    mtrLogWrite_s("Reporting Lua compile-time version:", 1, MTR_LMT_INFO,
+     LUA_RELEASE);
+
     mtrScriptsRegisterFunction = (mtrScriptsRegisterFunctionFunc)mtrFindFunction("Script_Lua52",
      "mtrScriptsRegisterFunction");
     if (mtrScriptsRegisterFunction == NULL)

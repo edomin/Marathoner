@@ -17,6 +17,15 @@ int main(int argc, char** argv)
     bool            ok;
 
     mtrLogInit();
+
+    mtrLogWrite("Reporting Marathoner version:", 0, MTR_LMT_INFO);
+    mtrLogWrite_i("Majon:", 1, MTR_LMT_INFO,
+     MTR_MARATHONER_VERSION >> 16);
+    mtrLogWrite_i("Minor:", 1, MTR_LMT_INFO,
+     (MTR_MARATHONER_VERSION << 8) >> 16);
+    mtrLogWrite_i("Patch:", 1, MTR_LMT_INFO,
+     (MTR_MARATHONER_VERSION << 16) >> 16);
+
     mtrLogWrite("Searching available plugins", 0, MTR_LMT_INFO);
 
     mtrPluginsFound = 0;
@@ -70,6 +79,13 @@ int main(int argc, char** argv)
                 mtrPluginData[currentPlugin].report = mtrCreateReport();
                 mtrLogWrite_s("Module ID:", 1, MTR_LMT_INFO,
                   mtrPluginData[currentPlugin].report->moduleID);
+                mtrLogWrite("Version:", 1, MTR_LMT_INFO);
+                mtrLogWrite_i("Majon:", 2, MTR_LMT_INFO,
+                  mtrPluginData[currentPlugin].report->version >> 16);
+                mtrLogWrite_i("Minor:", 2, MTR_LMT_INFO,
+                  (mtrPluginData[currentPlugin].report->version << 8) >> 16);
+                mtrLogWrite_i("Patch:", 2, MTR_LMT_INFO,
+                  (mtrPluginData[currentPlugin].report->version << 16) >> 16);
                 if (mtrPluginData[currentPlugin].report->prereqsCount > 0)
                 {
                     mtrLogWrite("Requirements:", 1, MTR_LMT_INFO);

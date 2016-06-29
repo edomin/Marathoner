@@ -7,6 +7,7 @@ __declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
     report->moduleID = "Script_Lua52";
+    report->version = 0x000000;
     report->prereqsCount = 0;
     report->prereqs = NULL;
     return report;
@@ -18,6 +19,10 @@ void mtrScriptsInit(void)
     uint8_t j;
 
     mtrLogWrite("Initializing script subsystem", 0, MTR_LMT_INFO);
+
+    mtrLogWrite_s("Reporting Lua compile-time version:", 1, MTR_LMT_INFO,
+     LUA_RELEASE);
+
     mtrVm = luaL_newstate();
     if (mtrVm != NULL)
         mtrLogWrite("Lua VM created", 1, MTR_LMT_INFO);
