@@ -20,7 +20,7 @@ __declspec(dllexport) void __stdcall mtrPluginInit(void)
     bool ok;
     ok = true;
 
-    mtrLogWrite_s("Reporting Lua compile-time version:", 1, MTR_LMT_INFO,
+    mtrLogWrite_s("Reporting Lua compile-time version:", 3, MTR_LMT_INFO,
      LUA_RELEASE);
 
     mtrScriptsRegisterFunction = (mtrScriptsRegisterFunctionFunc)mtrFindFunction("Script_Lua52",
