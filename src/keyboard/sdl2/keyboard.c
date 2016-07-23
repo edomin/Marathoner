@@ -47,7 +47,7 @@ __declspec(dllexport) bool __stdcall mtrKeyboardInit(void)
     mtrKeyboard.currentKeystate = SDL_GetKeyboardState(NULL);
     if (mtrKeyboard.currentKeystate != NULL)
     {
-        mtrLogWrite("Keyboard state get", 1, MT_INFO);
+        mtrLogWrite("Keyboard state get", 1, MTR_LMT_INFO);
     }
     else
     {
@@ -58,7 +58,7 @@ __declspec(dllexport) bool __stdcall mtrKeyboardInit(void)
     return true;
 }
 
-void KeyboardRefresh(void)
+__declspec(dllexport) void __stdcall mtrKeyboardRefresh(void)
 {
     uint16_t i;
     for (i = 0; i < SDL_NUM_SCANCODES; i++)
@@ -68,7 +68,7 @@ void KeyboardRefresh(void)
     SDL_PumpEvents();
 }
 
-bool KeyboardPress(uint16_t key)
+__declspec(dllexport) bool __stdcall mtrKeyboardPress(uint16_t key)
 {
     if (key >= SDL_NUM_SCANCODES)
         return false;
@@ -83,7 +83,7 @@ bool KeyboardPress(uint16_t key)
     }
 }
 
-bool KeyboardRelease(uint16_t key)
+__declspec(dllexport) bool __stdcall mtrKeyboardRelease(uint16_t key)
 {
     if (key >= SDL_NUM_SCANCODES)
         return false;
@@ -98,7 +98,7 @@ bool KeyboardRelease(uint16_t key)
     }
 }
 
-bool KeyboardPressed(uint16_t key)
+__declspec(dllexport) bool __stdcall mtrKeyboardPressed(uint16_t key)
 {
     if (key >= SDL_NUM_SCANCODES)
         return false;
