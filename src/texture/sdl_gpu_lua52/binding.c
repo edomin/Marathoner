@@ -233,7 +233,7 @@ int mtrSF_TextureSetAlphaBlending(lua_State* l)
 {
     uint32_t texNum = lua_tonumber(mtrVm, 1);
     bool blending = lua_toboolean(mtrVm, 2);
-    mtrTextureSetBlending(texNum, blending);
+    mtrTextureSetAlphaBlending(texNum, blending);
 
     return 0;
 }
