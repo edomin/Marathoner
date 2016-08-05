@@ -9,6 +9,8 @@ PRIMITIVE_SDL_GPU = primitive/sdl_gpu
 PRIMITIVE_SDL_GPU_LUA52 = primitive/sdl_gpu_lua52
 KEYBOARD_SDL2 = keyboard/sdl2
 KEYBOARD_SDL2_LUA52 = keyboard/sdl2_lua52
+MOUSE_SDL2 = mouse/sdl2
+MOUSE_SDL2_LUA52 = mouse/sdl2_lua52
 TIMER_SDL2 = timer/sdl2
 TIMER_SDL2_LUA52 = timer/sdl2_lua52
 UTILS_COLOR = utils/color
@@ -25,6 +27,8 @@ all: prebuild
 	make -C src/$(PRIMITIVE_SDL_GPU_LUA52)
 	make -C src/$(KEYBOARD_SDL2)
 	make -C src/$(KEYBOARD_SDL2_LUA52)
+	make -C src/$(MOUSE_SDL2)
+	make -C src/$(MOUSE_SDL2_LUA52)
 	make -C src/$(TIMER_SDL2)
 	make -C src/$(TIMER_SDL2_LUA52)
 	make -C src/$(UTILS_COLOR)
