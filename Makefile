@@ -11,6 +11,8 @@ KEYBOARD_SDL2 = keyboard/sdl2
 KEYBOARD_SDL2_LUA52 = keyboard/sdl2_lua52
 MOUSE_SDL2 = mouse/sdl2
 MOUSE_SDL2_LUA52 = mouse/sdl2_lua52
+GAME_CONTROLLER_SDL2 = game_controller/sdl2
+GAME_CONTROLLER_SDL2_LUA52 = game_controller/sdl2_lua52
 TIMER_SDL2 = timer/sdl2
 TIMER_SDL2_LUA52 = timer/sdl2_lua52
 UTILS_COLOR = utils/color
@@ -29,6 +31,8 @@ all: prebuild
 	make -C src/$(KEYBOARD_SDL2_LUA52)
 	make -C src/$(MOUSE_SDL2)
 	make -C src/$(MOUSE_SDL2_LUA52)
+	make -C src/$(GAME_CONTROLLER_SDL2)
+	make -C src/$(GAME_CONTROLLER_SDL2_LUA52)
 	make -C src/$(TIMER_SDL2)
 	make -C src/$(TIMER_SDL2_LUA52)
 	make -C src/$(UTILS_COLOR)
