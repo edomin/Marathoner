@@ -32,7 +32,7 @@ __declspec(dllexport) bool __stdcall mtrMouseInit(void)
     mtrLogWrite_i("Minor:", 2, MTR_LMT_INFO, linked.minor);
     mtrLogWrite_i("Patch:", 2, MTR_LMT_INFO, linked.patch);
 
-    if(SDL_WasInit(SDL_INIT_EVENTS) != 0)
+    if(SDL_WasInit(SDL_INIT_EVENTS) == 0)
         if (SDL_InitSubSystem(SDL_INIT_EVENTS) == 0)
             mtrLogWrite("SDL events subsystem initialized", 1, MTR_LMT_INFO);
         else
