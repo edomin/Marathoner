@@ -35,7 +35,7 @@ typedef void     (__stdcall * mtrNotifyFunc_t)(char *, uint8_t, uint8_t);
 typedef void *   (__stdcall * mtrIndexkeeperCreateFunc_t)(uint32_t, uint32_t,
                                                           size_t);
 typedef uint32_t (__stdcall * mtrIndexkeeperGetFreeIndexFunc_t)(void *);
-typedef void (__stdcall * mtrIndexkeeperFreeIndexFunc_t)(void *, uint32_t);
+typedef void     (__stdcall * mtrIndexkeeperFreeIndexFunc_t)(void *, uint32_t);
 typedef void     (__stdcall * mtrIndexkeeperDestroyFunc_t)(void *);
 
 /* loaded dll-plugin data */
@@ -66,17 +66,29 @@ mtrPlugin *mtrPluginData;
     typedef mtrReport* (__stdcall * mtrReportFunc)(void);
     mtrReportFunc mtrCreateReport;
 
-    typedef void (__stdcall * mtrRequireEngineFuncsFunc)(mtrLogWriteFunc_t,
-                                                         mtrLogWrite_sFunc_t,
-                                                         mtrLogWrite_iFunc_t,
-                                                         mtrLogWrite_dFunc_t,
-                                                         mtrNotifyFunc_t,
-                                                         mtrIndexkeeperCreateFunc_t,
-                                                         mtrIndexkeeperGetFreeIndexFunc_t,
-                                                         mtrIndexkeeperFreeIndexFunc_t,
-                                                         mtrIndexkeeperDestroyFunc_t);
-    mtrRequireEngineFuncsFunc mtrRequireEngineFuncs;
+    /* Engine funcs exported to every plugin */
+    typedef void (__stdcall * mtrRequireLogWriteFunc)(mtrLogWriteFunc_t);
+    mtrRequireLogWriteFunc mtrRequireLogWrite;
+    typedef void (__stdcall * mtrRequireLogWrite_sFunc)(mtrLogWrite_sFunc_t);
+    mtrRequireLogWrite_sFunc mtrRequireLogWrite_s;
+    typedef void (__stdcall * mtrRequireLogWrite_iFunc)(mtrLogWrite_iFunc_t);
+    mtrRequireLogWrite_iFunc mtrRequireLogWrite_i;
+    typedef void (__stdcall * mtrRequireLogWrite_dFunc)(mtrLogWrite_dFunc_t);
+    mtrRequireLogWrite_dFunc mtrRequireLogWrite_d;
 
+    typedef void (__stdcall * mtrRequireNotifyFunc)(mtrNotifyFunc_t);
+    mtrRequireNotifyFunc mtrRequireNotify;
+
+    typedef void (__stdcall * mtrRequireIndexkeeperCreateFunc)(mtrIndexkeeperCreateFunc_t);
+    mtrRequireIndexkeeperCreateFunc mtrRequireIndexkeeperCreate;
+    typedef void (__stdcall * mtrRequireIndexkeeperGetFreeIndexFunc)(mtrIndexkeeperGetFreeIndexFunc_t);
+    mtrRequireIndexkeeperGetFreeIndexFunc mtrRequireIndexkeeperGetFreeIndex;
+    typedef void (__stdcall * mtrRequireIndexkeeperFreeIndexFunc)(mtrIndexkeeperFreeIndexFunc_t);
+    mtrRequireIndexkeeperFreeIndexFunc mtrRequireIndexkeeperFreeIndex;
+    typedef void (__stdcall * mtrRequireIndexkeeperDestroyFunc)(mtrIndexkeeperDestroyFunc_t);
+    mtrRequireIndexkeeperDestroyFunc mtrRequireIndexkeeperDestroy;
+
+    /*  */
     typedef void (__stdcall * mtrRequirePluginDataFunc)(mtrPlugin *, uint8_t);
     mtrRequirePluginDataFunc mtrRequirePluginData;
 

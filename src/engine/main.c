@@ -5,6 +5,72 @@
 #include "configfile.h"
 #include "indexkeeper.h"
 
+void RequireEngineFuncs(uint8_t plugin)
+{
+    mtrRequireLogWrite = (mtrRequireLogWriteFunc)GetProcAddress(mtrPluginData[plugin].dll,
+     "mtrRequireLogWrite");
+    if (mtrRequireLogWrite != NULL)
+        mtrRequireLogWrite(mtrLogWrite);
+    else
+        mtrLogWrite("Module are not contain declaration for 'mtrLogWrite' function", 1, MTR_LMT_WARNING);
+
+    mtrRequireLogWrite_s = (mtrRequireLogWrite_sFunc)GetProcAddress(mtrPluginData[plugin].dll,
+     "mtrRequireLogWrite_s");
+    if (mtrRequireLogWrite_s != NULL)
+        mtrRequireLogWrite_s(mtrLogWrite_s);
+    else
+        mtrLogWrite("Module are not contain declaration for 'mtrLogWrite_s' function", 1, MTR_LMT_WARNING);
+
+    mtrRequireLogWrite_i = (mtrRequireLogWrite_iFunc)GetProcAddress(mtrPluginData[plugin].dll,
+     "mtrRequireLogWrite_i");
+    if (mtrRequireLogWrite_i != NULL)
+        mtrRequireLogWrite_i(mtrLogWrite_i);
+    else
+        mtrLogWrite("Module are not contain declaration for 'mtrLogWrite_i' function", 1, MTR_LMT_WARNING);
+
+    mtrRequireLogWrite_d = (mtrRequireLogWrite_dFunc)GetProcAddress(mtrPluginData[plugin].dll,
+     "mtrRequireLogWrite_d");
+    if (mtrRequireLogWrite_d != NULL)
+        mtrRequireLogWrite_d(mtrLogWrite_d);
+    else
+        mtrLogWrite("Module are not contain declaration for 'mtrLogWrite_d' function", 1, MTR_LMT_WARNING);
+
+    mtrRequireNotify = (mtrRequireNotifyFunc)GetProcAddress(mtrPluginData[plugin].dll,
+     "mtrRequireNotify");
+    if (mtrRequireNotify != NULL)
+        mtrRequireNotify(mtrNotify);
+    else
+        mtrLogWrite("Module are not contain declaration for 'mtrNotify' function", 1, MTR_LMT_WARNING);
+
+    mtrRequireIndexkeeperCreate = (mtrRequireIndexkeeperCreateFunc)GetProcAddress(mtrPluginData[plugin].dll,
+     "mtrRequireIndexkeeperCreate");
+    if (mtrRequireIndexkeeperCreate != NULL)
+        mtrRequireIndexkeeperCreate(mtrIndexkeeperCreate);
+    else
+        mtrLogWrite("Module are not contain declaration for 'mtrIndexkeeperCreate' function", 1, MTR_LMT_WARNING);
+
+    mtrRequireIndexkeeperGetFreeIndex = (mtrRequireIndexkeeperGetFreeIndexFunc)GetProcAddress(mtrPluginData[plugin].dll,
+     "mtrRequireIndexkeeperGetFreeIndex");
+    if (mtrRequireIndexkeeperGetFreeIndex != NULL)
+        mtrRequireIndexkeeperGetFreeIndex(mtrIndexkeeperGetFreeIndex);
+    else
+        mtrLogWrite("Module are not contain declaration for 'mtrIndexkeeperGetFreeIndex' function", 1, MTR_LMT_WARNING);
+
+    mtrRequireIndexkeeperFreeIndex = (mtrRequireIndexkeeperFreeIndexFunc)GetProcAddress(mtrPluginData[plugin].dll,
+     "mtrRequireIndexkeeperFreeIndex");
+    if (mtrRequireIndexkeeperFreeIndex != NULL)
+        mtrRequireIndexkeeperFreeIndex(mtrIndexkeeperFreeIndex);
+    else
+        mtrLogWrite("Module are not contain declaration for 'mtrIndexkeeperFreeIndex' function", 1, MTR_LMT_WARNING);
+
+    mtrRequireIndexkeeperDestroy = (mtrRequireIndexkeeperDestroyFunc)GetProcAddress(mtrPluginData[plugin].dll,
+     "mtrRequireIndexkeeperDestroy");
+    if (mtrRequireIndexkeeperDestroy != NULL)
+        mtrRequireIndexkeeperDestroy(mtrIndexkeeperDestroy);
+    else
+        mtrLogWrite("Module are not contain declaration for 'mtrIndexkeeperDestroy' function", 1, MTR_LMT_WARNING);
+}
+
 int main(int argc, char** argv)
 {
     WIN32_FIND_DATA FindFileData;
@@ -94,12 +160,7 @@ int main(int argc, char** argv)
                           2, MTR_LMT_INFO);
                 }
                 /* Plugin requiring some engine functions */
-                mtrRequireEngineFuncs = (mtrRequireEngineFuncsFunc)GetProcAddress(mtrPluginData[currentPlugin].dll,
-                  "mtrRequireEngineFuncs");
-                mtrRequireEngineFuncs(mtrLogWrite, mtrLogWrite_s, mtrLogWrite_i,
-                  mtrLogWrite_d, mtrNotify, mtrIndexkeeperCreate,
-                  mtrIndexkeeperGetFreeIndex, mtrIndexkeeperFreeIndex,
-                  mtrIndexkeeperDestroy);
+                RequireEngineFuncs(currentPlugin);
 
                 /* Plugin requiring information about every other plugin */
                 mtrRequirePluginData = (mtrRequirePluginDataFunc)GetProcAddress(mtrPluginData[currentPlugin].dll,
