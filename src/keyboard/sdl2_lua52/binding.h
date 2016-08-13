@@ -5,8 +5,7 @@
 #include "marathoner.h"
 
 #include <stdint.h>
-
-#include "bool/bool.h"
+#include <stdbool.h>
 
 #include "lua52/lua.h"
 #include "lua52/lualib.h"

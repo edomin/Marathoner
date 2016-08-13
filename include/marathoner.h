@@ -4,7 +4,7 @@
 #include <windows.h> /* for HMODULE */
 #include <stdint.h> /* for uintXX_t types */
 #include <stdlib.h> /* for malloc */
-#include "bool/bool.h"
+#include <stdbool.h>
 
 #define MTR_MARATHONER_VERSION 0x000000
 

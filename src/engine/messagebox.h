@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 #include <windows.h>
-#include "bool/bool.h"
+#include <stdbool.h>
 
 #include "marathoner.h"
 

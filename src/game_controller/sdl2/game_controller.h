@@ -4,7 +4,7 @@
 #define MTR_PLUGIN
 #include "marathoner.h"
 
-#include "bool/bool.h"
+#include <stdbool.h>
 
 #include "SDL2/SDL.h"
 
