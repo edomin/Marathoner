@@ -5,7 +5,7 @@
 #include <windows.h>
 #include <stdbool.h>
 
-#include "marathoner.h"
+#include "marathoner/engine.h"
 
 void mtrShowSimpleMessageBox(uint8_t type, char *title, char *message);
 bool mtrShowYesNoMessageBox(char *title, char *message);

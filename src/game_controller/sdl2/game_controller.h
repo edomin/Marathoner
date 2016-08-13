@@ -1,8 +1,7 @@
 #ifndef MTR_GAME_CONTROLLER_SDL2
 #define MTR_GAME_CONTROLLER_SDL2
 
-#define MTR_PLUGIN
-#include "marathoner.h"
+#include "marathoner/plugin.h"
 
 #include <stdbool.h>
 

@@ -1,8 +1,7 @@
 #ifndef MTR_TEXTURE_SDL_GPU_LUA52
 #define MTR_TEXTURE_SDL_GPU_LUA52
 
-#define MTR_PLUGIN
-#include "marathoner.h"
+#include "marathoner/plugin.h"
 
 #include <stdbool.h>
 

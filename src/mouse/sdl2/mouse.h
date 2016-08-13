@@ -1,8 +1,7 @@
 #ifndef MTR_MOUSE_SDL2
 #define MTR_MOUSE_SDL2
 
-#define MTR_PLUGIN
-#include "marathoner.h"
+#include "marathoner/plugin.h"
 
 #include <stdbool.h>
 

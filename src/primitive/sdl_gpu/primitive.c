@@ -1,6 +1,6 @@
 #include "primitive.h"
 
-#include "plugin_common.c"
+#include "marathoner/plugin_common.c"
 
 __declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
 {

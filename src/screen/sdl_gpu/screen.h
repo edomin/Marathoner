@@ -1,8 +1,7 @@
 #ifndef MTR_SCREEN_SDL_GPU
 #define MTR_SCREEN_SDL_GPU
 
-#define MTR_PLUGIN
-#include "marathoner.h"
+#include "marathoner/plugin.h"
 
 #include "sdl_gpu/SDL_gpu.h"
 

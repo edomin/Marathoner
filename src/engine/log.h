@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <time.h>
 
-#include "marathoner.h"
+#include "marathoner/engine.h"
 
 FILE      *mtrLogFile;
 time_t     mtrCurrentTime;

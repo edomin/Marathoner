@@ -1,4 +1,4 @@
-#include "marathoner.h"
+#include "marathoner/engine.h"
 #include "log.h"
 #include "messagebox.h"
 #include "notification.h"

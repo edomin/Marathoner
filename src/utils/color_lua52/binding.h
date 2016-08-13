@@ -1,9 +1,8 @@
 #ifndef MTR_PRIMITIVE_SDL_GPU_LUA52
 #define MTR_PRIMITIVE_SDL_GPU_LUA52
 
-#define MTR_PLUGIN
-#include "marathoner.h"
-#include "colors.h"
+#include "marathoner/plugin.h"
+#include "marathoner/colors.h"
 
 #include "lua52/lua.h"
 #include "lua52/lualib.h"

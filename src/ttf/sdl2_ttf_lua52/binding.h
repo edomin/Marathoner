@@ -1,8 +1,7 @@
 #ifndef MTR_TTF_SDL2_TTF_LUA52
 #define MTR_TTF_SDL2_TTF_LUA52
 
-#define MTR_PLUGIN
-#include "marathoner.h"
+#include "marathoner/plugin.h"
 
 #include <stdbool.h>
 

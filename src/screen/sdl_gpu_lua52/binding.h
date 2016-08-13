@@ -1,16 +1,13 @@
 #ifndef MTR_SCREEN_SDL_GPU_LUA52
 #define MTR_SCREEN_SDL_GPU_LUA52
 
-#define MTR_PLUGIN
-#include "marathoner.h"
+#include "marathoner/plugin.h"
 
 #include <stdbool.h>
 
 #include "lua52/lua.h"
 #include "lua52/lualib.h"
 #include "lua52/lauxlib.h"
-
-//#include "sdl_gpu/SDL_gpu.h"
 
 lua_State *mtrVm;
 

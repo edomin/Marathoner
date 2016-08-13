@@ -1,8 +1,7 @@
 #ifndef MTR_KEYBOARD_SDL2
 #define MTR_KEYBOARD_SDL2
 
-#define MTR_PLUGIN
-#include "marathoner.h"
+#include "marathoner/plugin.h"
 
 #include <stdbool.h>
 
