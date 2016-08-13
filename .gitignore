@@ -5,6 +5,7 @@ bin/Marathoner.exe
 *.o
 *.log
 Marathoner.exe
+include/deprecated/*
 include/bool/*
 include/SDL2/*
 include/sdl_gpu/*
