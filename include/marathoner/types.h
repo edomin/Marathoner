@@ -4,6 +4,8 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+/*
+
 typedef char                    mtr_char;
 typedef signed char             mtr_schar;
 typedef unsigned char           mtr_uchar;
@@ -149,5 +151,7 @@ typedef bool                    mtr_bool;
 #define MTR_INT64_FAST_MAX      INT_FAST64_MAX
 #define MTR_SINT64_FAST_MAX     INT_FAST64_MAX
 #define MTR_UINT64_FAST_MAX     UINT_FAST64_MAX
+
+*/
 
 #endif
