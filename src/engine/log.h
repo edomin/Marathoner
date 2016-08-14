@@ -1,7 +1,6 @@
 #ifndef MTR_ENGINE_LOG
 #define MTR_ENGINE_LOG
 
-#include <stdint.h>
 #include <stdio.h>
 #include <time.h>
 

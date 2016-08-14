@@ -1,11 +1,10 @@
 #ifndef MTR_ENGINE_NOTOFICATION
 #define MTR_ENGINE_NOTIFICATION
 
-#include <stdint.h>
-
-#include "marathoner/engine.h"
 #include "log.h"
 #include "messagebox.h"
+
+#include "marathoner/engine.h"
 
 /* Notification texts */
 #define MTR_NTT_INFO    "Info"

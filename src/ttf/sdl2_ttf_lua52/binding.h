@@ -1,15 +1,13 @@
 #ifndef MTR_TTF_SDL2_TTF_LUA52
 #define MTR_TTF_SDL2_TTF_LUA52
 
-#include "marathoner/plugin.h"
-
-#include <stdbool.h>
-
 #include "SDL2/SDL_ttf.h"
 
 #include "lua52/lua.h"
 #include "lua52/lualib.h"
 #include "lua52/lauxlib.h"
+
+#include "marathoner/plugin.h"
 
 #define MTR_FS_NORMAL           TTF_STYLE_NORMAL
 #define MTR_FS_BOLD             TTF_STYLE_BOLD

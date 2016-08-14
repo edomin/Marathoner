@@ -1,11 +1,9 @@
 #ifndef MTR_KEYBOARD_SDL2
 #define MTR_KEYBOARD_SDL2
 
-#include "marathoner/plugin.h"
-
-#include <stdbool.h>
-
 #include "SDL2/SDL.h"
+
+#include "marathoner/plugin.h"
 
 typedef struct mtrKeyboard_t{
     const uint8_t *currentKeystate;

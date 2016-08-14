@@ -1,11 +1,10 @@
 #ifndef MTR_ENGINE_INDEXKEEPER
 #define MTR_ENGINE_INDEXKEEPER
 
-#include <stdint.h>
-
-#include "marathoner/engine.h"
 #include "log.h"
 #include "notification.h"
+
+#include "marathoner/engine.h"
 
 typedef struct mtrIndexkeeper_t {
     void *data;

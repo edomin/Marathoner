@@ -1,11 +1,9 @@
 #ifndef MTR_GAME_CONTROLLER_SDL2
 #define MTR_GAME_CONTROLLER_SDL2
 
-#include "marathoner/plugin.h"
-
-#include <stdbool.h>
-
 #include "SDL2/SDL.h"
+
+#include "marathoner/plugin.h"
 
 typedef struct mtrTrackballDelta_t{
     int32_t dx;

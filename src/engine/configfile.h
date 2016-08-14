@@ -2,9 +2,10 @@
 #define MTR_ENGINE_CONFIGFILE
 
 #include <stdlib.h>
-#include <stdint.h>
 #include <string.h>
 #include "minINI/minIni.h"
+
+#include "marathoner/engine.h"
 
 #define sizearray(a)  (sizeof(a) / sizeof((a)[0]))
 char mtrConfigfileTempbuf[65536];

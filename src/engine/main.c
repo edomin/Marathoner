@@ -1,9 +1,10 @@
-#include "marathoner/engine.h"
 #include "log.h"
 #include "messagebox.h"
 #include "notification.h"
 #include "configfile.h"
 #include "indexkeeper.h"
+
+#include "marathoner/engine.h"
 
 void RequireEngineFuncs(uint8_t plugin)
 {

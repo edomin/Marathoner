@@ -1,10 +1,10 @@
 #ifndef MTR_TEXTURE_SDL_GPU
 #define MTR_TEXTURE_SDL_GPU
 
-#include "marathoner/plugin.h"
-
 #include "sdl_gpu/SDL_gpu.h"
 #include "SDL2/SDL.h"
+
+#include "marathoner/plugin.h"
 
 #define MTR_FLIP_NONE                   GPU_FLIP_NONE
 #define MTR_FLIP_HORIZONTAL             GPU_FLIP_HORIZONTAL

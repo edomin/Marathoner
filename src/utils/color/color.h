@@ -3,6 +3,4 @@
 
 #include "marathoner/plugin.h"
 
-#include <stdint.h>
-
 #endif

@@ -1,13 +1,11 @@
 #ifndef MTR_SCRIPT_LUA52
 #define MTR_SCRIPT_LUA52
 
-#include "marathoner/plugin.h"
-
-#include <stdbool.h>
-
 #include "lua52/lua.h"
 #include "lua52/lualib.h"
 #include "lua52/lauxlib.h"
+
+#include "marathoner/plugin.h"
 
 typedef void (__stdcall * mtrPluginInitFunc)(void);
 mtrPluginInitFunc mtrPluginInit;

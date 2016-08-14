@@ -1,13 +1,11 @@
 #ifndef MTR_TEXTURE_SDL_GPU_LUA52
 #define MTR_TEXTURE_SDL_GPU_LUA52
 
-#include "marathoner/plugin.h"
-
-#include <stdbool.h>
-
 #include "lua52/lua.h"
 #include "lua52/lualib.h"
 #include "lua52/lauxlib.h"
+
+#include "marathoner/plugin.h"
 
 #define MTR_FLIP_NONE       0
 #define MTR_FLIP_HORIZONTAL 1

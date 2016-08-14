@@ -1,16 +1,13 @@
 #ifndef MTR_GAME_CONTROLLER_SDL2_LUA52
 #define MTR_GAME_CONTROLLER_SDL2_LUA52
 
-#include "marathoner/plugin.h"
-
-#include <stdint.h>
-#include <stdbool.h>
-
 #include "SDL2/SDL.h"
 
 #include "lua52/lua.h"
 #include "lua52/lualib.h"
 #include "lua52/lauxlib.h"
+
+#include "marathoner/plugin.h"
 
 lua_State *mtrVm;
 

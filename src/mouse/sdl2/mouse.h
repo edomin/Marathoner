@@ -1,11 +1,9 @@
 #ifndef MTR_MOUSE_SDL2
 #define MTR_MOUSE_SDL2
 
-#include "marathoner/plugin.h"
-
-#include <stdbool.h>
-
 #include "SDL2/SDL.h"
+
+#include "marathoner/plugin.h"
 
 typedef struct mtrMouse_t{
     uint8_t  currentMousestate[5];
