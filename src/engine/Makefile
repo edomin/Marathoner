@@ -11,7 +11,8 @@ OBJS = $(OBJSDIR)/main.o \
 	$(OBJSDIR)/messagebox.o \
 	$(OBJSDIR)/notification.o \
 	$(OBJSDIR)/configfile.o \
-	$(OBJSDIR)/indexkeeper.o
+	$(OBJSDIR)/indexkeeper.o \
+	$(OBJSDIR)/encoding.o
 
 all: Marathoner
 
@@ -35,3 +36,6 @@ $(OBJSDIR)/configfile.o: configfile.c configfile.h
 
 $(OBJSDIR)/indexkeeper.o: indexkeeper.c indexkeeper.h
 	$(CC) $(CFLAGS) $(INCDIRS) -c indexkeeper.c -o $(OBJSDIR)/indexkeeper.o
+
+$(OBJSDIR)/encoding.o: encoding.c encoding.h
+	$(CC) $(CFLAGS) $(INCDIRS) -c encoding.c -o $(OBJSDIR)/encoding.o
