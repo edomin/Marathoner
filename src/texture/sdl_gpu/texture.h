@@ -1,8 +1,7 @@
 #ifndef MTR_TEXTURE_SDL_GPU
 #define MTR_TEXTURE_SDL_GPU
 
-#include "sdl_gpu/SDL_gpu.h"
-#include "SDL2/SDL.h"
+#include "SDL/SDL_gpu.h"
 
 #include "marathoner/plugin.h"
 

@@ -1,9 +1,9 @@
 #ifndef MTR_TEXTURE_SDL_GPU_LUA52
 #define MTR_TEXTURE_SDL_GPU_LUA52
 
-#include "lua52/lua.h"
-#include "lua52/lualib.h"
-#include "lua52/lauxlib.h"
+#include "lua.h"
+#include "lualib.h"
+#include "lauxlib.h"
 
 #include "marathoner/plugin.h"
 

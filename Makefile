@@ -1,3 +1,5 @@
+PREFIX = /usr/local/mingw32
+
 OBJSDIR = obj
 BINDIR = plugin
 
@@ -22,26 +24,26 @@ UTILS_COLOR_LUA52 = utils/color_lua52
 SCRIPT_LUA52 = script/lua52
 
 all: prebuild
-	make -C src/engine
-	make -C src/$(SCREEN_SDL_GPU)
-	make -C src/$(SCREEN_SDL_GPU_LUA52)
-	make -C src/$(TEXTURE_SDL_GPU)
-	make -C src/$(TEXTURE_SDL_GPU_LUA52)
-	make -C src/$(PRIMITIVE_SDL_GPU)
-	make -C src/$(PRIMITIVE_SDL_GPU_LUA52)
-	make -C src/$(TTF_SDL2_TTF)
-	make -C src/$(TTF_SDL2_TTF_LUA52)
-	make -C src/$(KEYBOARD_SDL2)
-	make -C src/$(KEYBOARD_SDL2_LUA52)
-	make -C src/$(MOUSE_SDL2)
-	make -C src/$(MOUSE_SDL2_LUA52)
-	make -C src/$(GAME_CONTROLLER_SDL2)
-	make -C src/$(GAME_CONTROLLER_SDL2_LUA52)
-	make -C src/$(TIMER_SDL2)
-	make -C src/$(TIMER_SDL2_LUA52)
-	make -C src/$(UTILS_COLOR)
-	make -C src/$(UTILS_COLOR_LUA52)
-	make -C src/$(SCRIPT_LUA52)
+	make -C src/engine PREFIX=$(PREFIX)
+	make -C src/$(SCREEN_SDL_GPU) PREFIX=$(PREFIX)
+	make -C src/$(SCREEN_SDL_GPU_LUA52) PREFIX=$(PREFIX)
+	make -C src/$(TEXTURE_SDL_GPU) PREFIX=$(PREFIX)
+	make -C src/$(TEXTURE_SDL_GPU_LUA52) PREFIX=$(PREFIX)
+	make -C src/$(PRIMITIVE_SDL_GPU) PREFIX=$(PREFIX)
+	make -C src/$(PRIMITIVE_SDL_GPU_LUA52) PREFIX=$(PREFIX)
+	make -C src/$(TTF_SDL2_TTF) PREFIX=$(PREFIX)
+	make -C src/$(TTF_SDL2_TTF_LUA52) PREFIX=$(PREFIX)
+	make -C src/$(KEYBOARD_SDL2) PREFIX=$(PREFIX)
+	make -C src/$(KEYBOARD_SDL2_LUA52) PREFIX=$(PREFIX)
+	make -C src/$(MOUSE_SDL2) PREFIX=$(PREFIX)
+	make -C src/$(MOUSE_SDL2_LUA52) PREFIX=$(PREFIX)
+	make -C src/$(GAME_CONTROLLER_SDL2) PREFIX=$(PREFIX)
+	make -C src/$(GAME_CONTROLLER_SDL2_LUA52) PREFIX=$(PREFIX)
+	make -C src/$(TIMER_SDL2) PREFIX=$(PREFIX)
+	make -C src/$(TIMER_SDL2_LUA52) PREFIX=$(PREFIX)
+	make -C src/$(UTILS_COLOR) PREFIX=$(PREFIX)
+	make -C src/$(UTILS_COLOR_LUA52) PREFIX=$(PREFIX)
+	make -C src/$(SCRIPT_LUA52) PREFIX=$(PREFIX)
 
 prebuild:
 	-mkdir $(OBJSDIR)

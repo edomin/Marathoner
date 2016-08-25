@@ -1,11 +1,11 @@
 CC = mingw32-gcc
 LD = mingw32-gcc
 CFLAGS = -Wall -O2
-LDFLAGS = -s -shared -Wl,--kill-at -L../../../lib
+LDFLAGS = -s -shared -Wl,--kill-at -L$(PREFIX)/lib
 OBJSDIR = ../../../obj
 BINDIR = ../../../plugin
 SRCDIR = ../../../src
-INCDIR = ../../../include
+INCDIRS = -I$(PREFIX)/include -I../../../include $(XINCDIRS)
 
 all: $(BINDIR)/$(MODULE_NAME).dll
 
@@ -14,7 +14,7 @@ $(BINDIR)/$(MODULE_NAME).dll: $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).o
 
 $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).o: $(SUBSYSTEM).c $(SUBSYSTEM).h
 	-mkdir $(OBJSDIR)/$(SUBSYSTEM)
-	$(CC) $(CFLAGS) -I$(INCDIR) -c $(SUBSYSTEM).c -o $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).o
+	$(CC) $(CFLAGS) $(INCDIRS) -c $(SUBSYSTEM).c -o $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).o
 
 $(SUBSYSTEM).c:
 
