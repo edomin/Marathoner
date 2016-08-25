@@ -6,11 +6,6 @@ bin/Marathoner.exe
 *.log
 Marathoner.exe
 include/deprecated/*
-include/bool/*
-include/SDL2/*
-include/sdl_gpu/*
-include/lua52/*
-include/minINI/*
 lib/*
 *.png
 TODO
