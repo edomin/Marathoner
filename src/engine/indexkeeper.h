@@ -9,7 +9,7 @@
 typedef struct mtrIndexkeeper_t {
     void *data;
     size_t dataSize;
-    uint32_t reservedData;
+    uint64_t reservedData;
     uint32_t dataCount;
     uint32_t dmSize;
     uint32_t *dataMap;
