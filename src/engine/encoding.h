@@ -1,5 +1,5 @@
-#ifndef MTR_TYPES
-#define MTR_TYPES
+#ifndef MTR_ENCODING
+#define MTR_ENCODING
 
 #include "utf8.h"
 
