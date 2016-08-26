@@ -11,6 +11,8 @@ PRIMITIVE_SDL_GPU = primitive/sdl_gpu
 PRIMITIVE_SDL_GPU_LUA52 = primitive/sdl_gpu_lua52
 TTF_SDL2_TTF = ttf/sdl2_ttf
 TTF_SDL2_TTF_LUA52 = ttf/sdl2_ttf_lua52
+AUDIO_SDL2_MIXER = audio/sdl2_mixer
+AUDIO_SDL2_MIXER_LUA52 = audio/sdl2_mixer_lua52
 KEYBOARD_SDL2 = keyboard/sdl2
 KEYBOARD_SDL2_LUA52 = keyboard/sdl2_lua52
 MOUSE_SDL2 = mouse/sdl2
@@ -33,6 +35,8 @@ all: prebuild
 	make -C src/$(PRIMITIVE_SDL_GPU_LUA52) PREFIX=$(PREFIX)
 	make -C src/$(TTF_SDL2_TTF) PREFIX=$(PREFIX)
 	make -C src/$(TTF_SDL2_TTF_LUA52) PREFIX=$(PREFIX)
+	make -C src/$(AUDIO_SDL2_MIXER) PREFIX=$(PREFIX)
+	make -C src/$(AUDIO_SDL2_MIXER_LUA52) PREFIX=$(PREFIX)
 	make -C src/$(KEYBOARD_SDL2) PREFIX=$(PREFIX)
 	make -C src/$(KEYBOARD_SDL2_LUA52) PREFIX=$(PREFIX)
 	make -C src/$(MOUSE_SDL2) PREFIX=$(PREFIX)
