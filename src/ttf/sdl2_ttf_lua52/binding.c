@@ -6,11 +6,11 @@ __declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
-    report->moduleID = "Texture_sdl_gpu_Lua52";
+    report->moduleID = "TTF_SDL2_ttf_Lua52";
     report->version = 0x000000;
     report->prereqsCount = 2;
     report->prereqs = malloc(sizeof(char *) * report->prereqsCount);
-    report->prereqs[0] = "Texture_sdl_gpu";
+    report->prereqs[0] = "TTF_SDL2_ttf";
     report->prereqs[1] = "Script_Lua52";
     return report;
 }
@@ -50,7 +50,7 @@ __declspec(dllexport) void __stdcall mtrPluginInit(void)
     else
     {
         mtrVm = mtrScriptsGetVm();
-        mtrTtfInit = (mtrTtfInitFunc)mtrFindFunction("Texture_sdl_gpu",
+        mtrTtfInit = (mtrTtfInitFunc)mtrFindFunction("TTF_SDL2_ttf",
           "mtrTtfInit");
         if (mtrTtfInit == NULL)
         {
@@ -58,7 +58,7 @@ __declspec(dllexport) void __stdcall mtrPluginInit(void)
               "mtrTtfInit");
             ok = false;
         }
-        mtrTtfQuit = (mtrTtfQuitFunc)mtrFindFunction("Texture_sdl_gpu",
+        mtrTtfQuit = (mtrTtfQuitFunc)mtrFindFunction("TTF_SDL2_ttf",
           "mtrTtfQuit");
         if (mtrTtfQuit == NULL)
         {
@@ -66,7 +66,7 @@ __declspec(dllexport) void __stdcall mtrPluginInit(void)
               "mtrTtfQuit");
             ok = false;
         }
-        mtrTtfLoad = (mtrTtfLoadFunc)mtrFindFunction("Texture_sdl_gpu",
+        mtrTtfLoad = (mtrTtfLoadFunc)mtrFindFunction("TTF_SDL2_ttf",
           "mtrTtfLoad");
         if (mtrTtfLoad == NULL)
         {
@@ -74,7 +74,7 @@ __declspec(dllexport) void __stdcall mtrPluginInit(void)
               "mtrTtfLoad");
             ok = false;
         }
-        mtrTtfFree = (mtrTtfFreeFunc)mtrFindFunction("Texture_sdl_gpu",
+        mtrTtfFree = (mtrTtfFreeFunc)mtrFindFunction("TTF_SDL2_ttf",
           "mtrTtfFree");
         if (mtrTtfFree == NULL)
         {
@@ -82,7 +82,7 @@ __declspec(dllexport) void __stdcall mtrPluginInit(void)
               "mtrTtfFree");
             ok = false;
         }
-        mtrTtfSetFontStyle = (mtrTtfSetFontStyleFunc)mtrFindFunction("Texture_sdl_gpu",
+        mtrTtfSetFontStyle = (mtrTtfSetFontStyleFunc)mtrFindFunction("TTF_SDL2_ttf",
           "mtrTtfSetFontStyle");
         if (mtrTtfSetFontStyle == NULL)
         {
@@ -90,7 +90,7 @@ __declspec(dllexport) void __stdcall mtrPluginInit(void)
               "mtrTtfSetFontStyle");
             ok = false;
         }
-        mtrTtfSetFontOutline = (mtrTtfSetFontOutlineFunc)mtrFindFunction("Texture_sdl_gpu",
+        mtrTtfSetFontOutline = (mtrTtfSetFontOutlineFunc)mtrFindFunction("TTF_SDL2_ttf",
           "mtrTtfSetFontOutline");
         if (mtrTtfSetFontOutline == NULL)
         {

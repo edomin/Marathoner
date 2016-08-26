@@ -26,7 +26,7 @@ __declspec(dllexport) bool __stdcall mtrTtfInit(uint32_t dmSize,
     mtrLogWrite_i("Major:", 2, MTR_LMT_INFO, compiled.major);
     mtrLogWrite_i("Minor:", 2, MTR_LMT_INFO, compiled.minor);
     mtrLogWrite_i("Patch:", 2, MTR_LMT_INFO, compiled.patch);
-    mtrLogWrite("Reporting SDL linked version:", 1, MTR_LMT_INFO);
+    mtrLogWrite("Reporting SDL_ttf linked version:", 1, MTR_LMT_INFO);
     linked = TTF_Linked_Version();
     mtrLogWrite_i("Major:", 2, MTR_LMT_INFO, linked->major);
     mtrLogWrite_i("Minor:", 2, MTR_LMT_INFO, linked->minor);
