@@ -229,7 +229,6 @@ int mtrSF_MouseGetWheelRelative(lua_State* l)
 int mtrSF_MouseGetX(lua_State* l)
 {
     int16_t x = mtrMouseGetX();
-    mtrLogWrite_i("Mouse support initialized", 0, MTR_LMT_DEBUG, mtrMouseGetX());
     lua_pushnumber(mtrVm, x);
 
     return 1;
