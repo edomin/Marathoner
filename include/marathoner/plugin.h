@@ -21,6 +21,7 @@ mtrIndexkeeperCreateFunc_t       mtrIndexkeeperCreate;
 mtrIndexkeeperGetFreeIndexFunc_t mtrIndexkeeperGetFreeIndex;
 mtrIndexkeeperFreeIndexFunc_t    mtrIndexkeeperFreeIndex;
 mtrIndexkeeperDestroyFunc_t      mtrIndexkeeperDestroy;
+mtrFileWriteLineFunc_t           mtrFileWriteLine;
 
 uint8_t mtrPluginsCount;
 

@@ -36,6 +36,9 @@ void mtrScriptsInit(void)
     mtrScriptsRegisterNumericVariable("IKDM_SMALL", MTR_IKDM_SMALL);
     mtrScriptsRegisterNumericVariable("IKDM_MEDIUM", MTR_IKDM_MEDIUM);
     mtrScriptsRegisterNumericVariable("IKDM_LARGE", MTR_IKDM_LARGE);
+    mtrScriptsRegisterNumericVariable("FM_WRITE", MTR_FM_WRITE);
+    mtrScriptsRegisterNumericVariable("FM_APPEND", MTR_FM_APPEND);
+    mtrScriptsRegisterFunction(mtrSF_FileWriteLine, "FileWriteLine");
     mtrLogWrite("Script functions and constants of engine registered",
      1, MTR_LMT_INFO);
     /* Registering functions and constants from all binding plugins */
@@ -110,4 +113,14 @@ __declspec(dllexport) void __stdcall mtrScriptsAutorun(char * filename)
 {
     mtrScriptsInit();
     mtrScriptsDoFile(filename);
+}
+
+int mtrSF_FileWriteLine(lua_State* l)
+{
+    const char *filename = lua_tostring(mtrVm, 1);
+    const char *string = lua_tostring(mtrVm, 2);
+    uint8_t mode = lua_tointeger(mtrVm, 3);
+    mtrFileWriteLine(filename, string, mode);
+
+    return 0;
 }

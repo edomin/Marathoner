@@ -28,6 +28,9 @@ mtrRequireIndexkeeperFreeIndexFunc mtrRequireIndexkeeperFreeIndex;
 typedef void (__stdcall * mtrRequireIndexkeeperDestroyFunc)(mtrIndexkeeperDestroyFunc_t);
 mtrRequireIndexkeeperDestroyFunc mtrRequireIndexkeeperDestroy;
 
+typedef void (__stdcall * mtrRequireFileWriteLineFunc)(mtrFileWriteLineFunc_t);
+mtrRequireFileWriteLineFunc mtrRequireFileWriteLine;
+
 /*  */
 typedef void (__stdcall * mtrRequirePluginDataFunc)(mtrPlugin *, uint8_t);
 mtrRequirePluginDataFunc mtrRequirePluginData;

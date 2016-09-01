@@ -12,7 +12,8 @@ OBJS = $(OBJSDIR)/main.o \
 	$(OBJSDIR)/notification.o \
 	$(OBJSDIR)/configfile.o \
 	$(OBJSDIR)/indexkeeper.o \
-	$(OBJSDIR)/encoding.o
+	$(OBJSDIR)/encoding.o \
+	$(OBJSDIR)/file.o
 
 all: Marathoner
 
@@ -39,3 +40,6 @@ $(OBJSDIR)/indexkeeper.o: indexkeeper.c indexkeeper.h
 
 $(OBJSDIR)/encoding.o: encoding.c encoding.h
 	$(CC) $(CFLAGS) $(INCDIRS) -c encoding.c -o $(OBJSDIR)/encoding.o
+
+$(OBJSDIR)/file.o: file.c file.h
+	$(CC) $(CFLAGS) $(INCDIRS) -c file.c -o $(OBJSDIR)/file.o

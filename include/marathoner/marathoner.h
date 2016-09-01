@@ -37,6 +37,7 @@ typedef void *   (__stdcall * mtrIndexkeeperCreateFunc_t)(uint32_t, uint32_t,
 typedef uint32_t (__stdcall * mtrIndexkeeperGetFreeIndexFunc_t)(void *);
 typedef void     (__stdcall * mtrIndexkeeperFreeIndexFunc_t)(void *, uint32_t);
 typedef void     (__stdcall * mtrIndexkeeperDestroyFunc_t)(void *);
+typedef void     (__stdcall * mtrFileWriteLineFunc_t)(const char *, const char *, uint8_t);
 
 /* loaded dll-plugin data */
 mtrPlugin *mtrPluginData;
@@ -61,5 +62,9 @@ mtrPlugin *mtrPluginData;
 #define MTR_IKDM_SMALL  8
 #define MTR_IKDM_MEDIUM 2048
 #define MTR_IKDM_LARGE  134217728
+
+/* Indexkeeper datamap size */
+#define MTR_FM_WRITE    0
+#define MTR_FM_APPEND   1
 
 #endif

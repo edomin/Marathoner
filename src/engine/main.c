@@ -3,6 +3,7 @@
 #include "notification.h"
 #include "configfile.h"
 #include "indexkeeper.h"
+#include "file.h"
 
 #include "marathoner/engine.h"
 
@@ -70,6 +71,13 @@ void RequireEngineFuncs(uint8_t plugin)
         mtrRequireIndexkeeperDestroy(mtrIndexkeeperDestroy);
     else
         mtrLogWrite("Module are not contain declaration for 'mtrIndexkeeperDestroy' function", 1, MTR_LMT_WARNING);
+
+    mtrRequireFileWriteLine = (mtrRequireFileWriteLineFunc)GetProcAddress(mtrPluginData[plugin].dll,
+     "mtrRequireFileWriteLine");
+    if (mtrRequireFileWriteLine != NULL)
+        mtrRequireFileWriteLine(mtrFileWriteLine);
+    else
+        mtrLogWrite("Module are not contain declaration for 'mtrFileWriteLine' function", 1, MTR_LMT_WARNING);
 }
 
 int main(int argc, char** argv)

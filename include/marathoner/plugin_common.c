@@ -43,6 +43,11 @@ __declspec(dllexport) void __stdcall mtrRequireIndexkeeperDestroy(mtrIndexkeeper
     mtrIndexkeeperDestroy = IndexkeeperDestroyFunc;
 }
 
+__declspec(dllexport) void __stdcall mtrRequireFileWriteLine(mtrFileWriteLineFunc_t FileWriteLineFunc)
+{
+    mtrFileWriteLine = FileWriteLineFunc;
+}
+
 __declspec(dllexport) void __stdcall mtrRequirePluginData(mtrPlugin* pluginData,
  uint8_t pluginsCount)
 {
