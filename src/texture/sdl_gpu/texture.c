@@ -66,6 +66,7 @@ __declspec(dllexport) uint32_t __stdcall mtrTextureLoad(const char *filename)
     {
         texture->name = malloc(sizeof(char) * (strlen(filename) + 1));
         texture->name = strcpy(texture->name, filename);
+        GPU_SetAnchor(texture->texture, 0.0, 0.0);
         mtrLogWrite_s("Texture loaded", 0, MTR_LMT_INFO, filename);
         return freeIndex;
     }
