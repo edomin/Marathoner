@@ -56,8 +56,6 @@ __declspec(dllexport) bool __stdcall mtrAudioInit(uint32_t sndDmSize,
     mtrLogWrite_i("Minor:", 2, MTR_LMT_INFO, linked->minor);
     mtrLogWrite_i("Patch:", 2, MTR_LMT_INFO, linked->patch);
 
-    mtrLogWrite("Checking audio device parameters:", 1, MTR_LMT_INFO);
-
     if (SDL_InitSubSystem(SDL_INIT_AUDIO) == 0)
         mtrLogWrite("SDL audio subsystem initialized", 1, MTR_LMT_INFO);
     else
@@ -114,7 +112,8 @@ __declspec(dllexport) bool __stdcall mtrAudioInit(uint32_t sndDmSize,
     else
     {
         frequency = freq;
-        mtrLogWrite_i("Choosed sampling frequency (Hz): ", 2, MTR_LMT_INFO, freq);
+        mtrLogWrite_i("Choosed sampling frequency (Hz): ", 2, MTR_LMT_INFO,
+         freq);
     }
     /* */
 
@@ -161,7 +160,8 @@ __declspec(dllexport) bool __stdcall mtrAudioInit(uint32_t sndDmSize,
     else
     {
         finalChunkSize = chunkSize;
-        mtrLogWrite_i("Choosed chunk size (bytes): ", 2, MTR_LMT_INFO, chunkSize);
+        mtrLogWrite_i("Choosed chunk size (bytes): ", 2, MTR_LMT_INFO,
+         chunkSize);
     }
     /* */
 
@@ -191,25 +191,29 @@ __declspec(dllexport) bool __stdcall mtrAudioInit(uint32_t sndDmSize,
      sndReservedCount, sizeof(mtrSound_t));
     if (mtrSoundKeeper == NULL)
     {
-        mtrNotify("Unable to initialize indexkeeper structure for sounds", 1, MTR_LMT_ERROR);
+        mtrNotify("Unable to initialize indexkeeper structure for sounds", 1,
+         MTR_LMT_ERROR);
         Mix_CloseAudio();
         Mix_Quit();
         return false;
     }
     else
-        mtrLogWrite("Indexkeeper structure for sounds initialized", 1, MTR_LMT_INFO);
+        mtrLogWrite("Indexkeeper structure for sounds initialized", 1,
+         MTR_LMT_INFO);
 
     mtrMusicKeeper = (mtrIndexkeeper_t *)mtrIndexkeeperCreate(musDmSize,
      musReservedCount, sizeof(mtrMusic_t));
     if (mtrMusicKeeper == NULL)
     {
-        mtrNotify("Unable to initialize indexkeeper structure for sounds", 1, MTR_LMT_ERROR);
+        mtrNotify("Unable to initialize indexkeeper structure for music", 1,
+         MTR_LMT_ERROR);
         Mix_CloseAudio();
         Mix_Quit();
         return false;
     }
     else
-        mtrLogWrite("Indexkeeper structure for sounds initialized", 1, MTR_LMT_INFO);
+        mtrLogWrite("Indexkeeper structure for music initialized", 1,
+         MTR_LMT_INFO);
 
     mtrLogWrite("Audio manager initialized", 0, MTR_LMT_INFO);
 
