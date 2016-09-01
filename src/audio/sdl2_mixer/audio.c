@@ -384,7 +384,8 @@ __declspec(dllexport) void __stdcall mtrAudioMusicPlay(uint32_t musicNum)
     Mix_PlayMusic(music->music, -1);
 }
 
-__declspec(dllexport) void __stdcall mtrAudioMusicFadeInPlay(uint32_t musicNum, uint32_t ms)
+__declspec(dllexport) void __stdcall mtrAudioMusicFadeInPlay(uint32_t musicNum,
+ uint32_t ms)
 {
     mtrMusic_t *music;
     music = (mtrMusic_t *)(&((mtrMusic_t *)mtrMusicKeeper->data)[musicNum]);
