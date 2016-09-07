@@ -3,10 +3,16 @@ include Build.mk
 OBJSDIR = obj
 BINDIR = plugin
 
+SCREEN_SDL2 = screen/sdl2
+SCREEN_SDL2_LUA52 = screen/sdl2_lua52
 SCREEN_SDL_GPU = screen/sdl_gpu
 SCREEN_SDL_GPU_LUA52 = screen/sdl_gpu_lua52
+TEXTURE_SDL2_IMAGE = texture/sdl2_image
+TEXTURE_SDL2_IMAGE_LUA52 = texture/sdl2_image_lua52
 TEXTURE_SDL_GPU = texture/sdl_gpu
 TEXTURE_SDL_GPU_LUA52 = texture/sdl_gpu_lua52
+PRIMITIVE_SDL2 = primitive/sdl2
+PRIMITIVE_SDL2_LUA52 = primitive/sdl2_lua52
 PRIMITIVE_SDL_GPU = primitive/sdl_gpu
 PRIMITIVE_SDL_GPU_LUA52 = primitive/sdl_gpu_lua52
 TTF_SDL2_TTF = ttf/sdl2_ttf
@@ -52,6 +58,12 @@ win32: prebuild
 	make -C src/$(SCRIPT_LUA52) PREFIX=$(PREFIX)
 
 html5: prebuild
+	make -C src/$(SCREEN_SDL2) PREFIX=$(PREFIX)
+	make -C src/$(SCREEN_SDL2_LUA52) PREFIX=$(PREFIX)
+	make -C src/$(TEXTURE_SDL2_IMAGE) PREFIX=$(PREFIX)
+	make -C src/$(TEXTURE_SDL2_IMAGE_LUA52) PREFIX=$(PREFIX)
+	make -C src/$(PRIMITIVE_SDL2) PREFIX=$(PREFIX)
+	make -C src/$(PRIMITIVE_SDL2_LUA52) PREFIX=$(PREFIX)
 	make -C src/$(TTF_SDL2_TTF) PREFIX=$(PREFIX)
 	make -C src/$(TTF_SDL2_TTF_LUA52) PREFIX=$(PREFIX)
 	make -C src/$(KEYBOARD_SDL2) PREFIX=$(PREFIX)
