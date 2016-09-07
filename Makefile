@@ -1,4 +1,4 @@
-PREFIX = /usr/local/mingw32
+include Build.mk
 
 OBJSDIR = obj
 BINDIR = plugin
@@ -25,7 +25,9 @@ UTILS_COLOR = utils/color
 UTILS_COLOR_LUA52 = utils/color_lua52
 SCRIPT_LUA52 = script/lua52
 
-all: prebuild
+all: $(PLATFORM)
+
+win32: prebuild
 	make -C src/engine PREFIX=$(PREFIX)
 	make -C src/$(SCREEN_SDL_GPU) PREFIX=$(PREFIX)
 	make -C src/$(SCREEN_SDL_GPU_LUA52) PREFIX=$(PREFIX)
@@ -49,17 +51,32 @@ all: prebuild
 	make -C src/$(UTILS_COLOR_LUA52) PREFIX=$(PREFIX)
 	make -C src/$(SCRIPT_LUA52) PREFIX=$(PREFIX)
 
+html5: prebuild
+	make -C src/$(TTF_SDL2_TTF) PREFIX=$(PREFIX)
+	make -C src/$(TTF_SDL2_TTF_LUA52) PREFIX=$(PREFIX)
+	make -C src/$(KEYBOARD_SDL2) PREFIX=$(PREFIX)
+	make -C src/$(KEYBOARD_SDL2_LUA52) PREFIX=$(PREFIX)
+	make -C src/$(MOUSE_SDL2) PREFIX=$(PREFIX)
+	make -C src/$(MOUSE_SDL2_LUA52) PREFIX=$(PREFIX)
+	make -C src/$(GAME_CONTROLLER_SDL2) PREFIX=$(PREFIX)
+	make -C src/$(GAME_CONTROLLER_SDL2_LUA52) PREFIX=$(PREFIX)
+	make -C src/$(TIMER_SDL2) PREFIX=$(PREFIX)
+	make -C src/$(TIMER_SDL2_LUA52) PREFIX=$(PREFIX)
+	make -C src/$(UTILS_COLOR) PREFIX=$(PREFIX)
+	make -C src/$(UTILS_COLOR_LUA52) PREFIX=$(PREFIX)
+	make -C src/$(SCRIPT_LUA52) PREFIX=$(PREFIX)
+	make -C src/engine PREFIX=$(PREFIX)
+
 prebuild:
 	-mkdir $(OBJSDIR)
 	-mkdir $(BINDIR)
-
-engine: prebuild
-	make -C src/engine
 
 clean:
 	-rm -f -r $(OBJSDIR)
 	-rm -f -r $(BINDIR)
 	-rm -f -r marathoner.exe
+	-rm -f -r marathoner.html
+	-rm -f -r marathoner.js
 
 remake: clean all
 
