@@ -1,7 +1,14 @@
+include ../../../Build.mk
+
 SUBSYSTEM = mouse
 MODULE = sdl2
 MODULE_NAME = Mouse_SDL2
-LIBS = -lSDL2.dll
+ifeq ($(PLATFORM), win32)
+  LIBS = -lSDL2.dll
+endif
+ifeq ($(PLATFORM), html5)
+  LIBS = $(PREFIX)/lib/sdl2.bc $(PREFIX)/lib/gl.bc
+endif
 
 include ../../../Subsystem.mk
 
