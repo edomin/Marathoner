@@ -1,11 +1,14 @@
 #ifndef MTR_MARATHONER
 #define MTR_MARATHONER
 
-#include <windows.h> /* for HMODULE */
-#include <stdint.h> /* for uintXX_t types */
-#include <stdlib.h> /* for malloc */
-#include <stdbool.h>
+#include "marathoner/version.h"
+#include "marathoner/types.h"
 
+#ifdef __EMSCRIPTEN__
+    #include <dlfcn.h>
+    #include <dirent.h>
+#endif
+#include <stdlib.h> /* for malloc */
 
 /* Report of loaded dll-plugin */
 typedef struct mtrReport{
@@ -17,9 +20,9 @@ typedef struct mtrReport{
 
 /* type of loaded dll-plugin data */
 typedef struct mtrPlugin{
-    mtrReport *report;
-    char      *filename;
-    HMODULE    dll;
+    mtrReport   *report;
+    char        *filename;
+    mtr_lhandler dll;
 } mtrPlugin;
 
 /* Pointers to engine functions */

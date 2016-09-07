@@ -1,3 +1,5 @@
+#include <string.h>
+
 MRT_EXPORT void MRT_CALL mtrRequireLogWrite(mtrLogWriteFunc_t LogWriteFunc)
 {
     mtrLogWrite = LogWriteFunc;
@@ -62,7 +64,8 @@ void *mtrFindFunction(char *moduleID, char *functionName)
     {
         if (strcmp(mtrPluginData[i].report->moduleID, moduleID) == 0)
         {
-            return (void *)GetProcAddress(mtrPluginData[i].dll, functionName);
+            return (void *)mtrLoadSymbolName(mtrPluginData[i].dll,
+             functionName);
         }
     }
     return NULL;

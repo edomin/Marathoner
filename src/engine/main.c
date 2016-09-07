@@ -9,70 +9,70 @@
 
 void RequireEngineFuncs(uint8_t plugin)
 {
-    mtrRequireLogWrite = (mtrRequireLogWriteFunc)GetProcAddress(mtrPluginData[plugin].dll,
+    mtrRequireLogWrite = (mtrRequireLogWriteFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
      "mtrRequireLogWrite");
     if (mtrRequireLogWrite != NULL)
         mtrRequireLogWrite(mtrLogWrite);
     else
         mtrLogWrite("Module are not contain declaration for 'mtrLogWrite' function", 1, MTR_LMT_WARNING);
 
-    mtrRequireLogWrite_s = (mtrRequireLogWrite_sFunc)GetProcAddress(mtrPluginData[plugin].dll,
+    mtrRequireLogWrite_s = (mtrRequireLogWrite_sFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
      "mtrRequireLogWrite_s");
     if (mtrRequireLogWrite_s != NULL)
         mtrRequireLogWrite_s(mtrLogWrite_s);
     else
         mtrLogWrite("Module are not contain declaration for 'mtrLogWrite_s' function", 1, MTR_LMT_WARNING);
 
-    mtrRequireLogWrite_i = (mtrRequireLogWrite_iFunc)GetProcAddress(mtrPluginData[plugin].dll,
+    mtrRequireLogWrite_i = (mtrRequireLogWrite_iFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
      "mtrRequireLogWrite_i");
     if (mtrRequireLogWrite_i != NULL)
         mtrRequireLogWrite_i(mtrLogWrite_i);
     else
         mtrLogWrite("Module are not contain declaration for 'mtrLogWrite_i' function", 1, MTR_LMT_WARNING);
 
-    mtrRequireLogWrite_d = (mtrRequireLogWrite_dFunc)GetProcAddress(mtrPluginData[plugin].dll,
+    mtrRequireLogWrite_d = (mtrRequireLogWrite_dFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
      "mtrRequireLogWrite_d");
     if (mtrRequireLogWrite_d != NULL)
         mtrRequireLogWrite_d(mtrLogWrite_d);
     else
         mtrLogWrite("Module are not contain declaration for 'mtrLogWrite_d' function", 1, MTR_LMT_WARNING);
 
-    mtrRequireNotify = (mtrRequireNotifyFunc)GetProcAddress(mtrPluginData[plugin].dll,
+    mtrRequireNotify = (mtrRequireNotifyFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
      "mtrRequireNotify");
     if (mtrRequireNotify != NULL)
         mtrRequireNotify(mtrNotify);
     else
         mtrLogWrite("Module are not contain declaration for 'mtrNotify' function", 1, MTR_LMT_WARNING);
 
-    mtrRequireIndexkeeperCreate = (mtrRequireIndexkeeperCreateFunc)GetProcAddress(mtrPluginData[plugin].dll,
+    mtrRequireIndexkeeperCreate = (mtrRequireIndexkeeperCreateFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
      "mtrRequireIndexkeeperCreate");
     if (mtrRequireIndexkeeperCreate != NULL)
         mtrRequireIndexkeeperCreate(mtrIndexkeeperCreate);
     else
         mtrLogWrite("Module are not contain declaration for 'mtrIndexkeeperCreate' function", 1, MTR_LMT_WARNING);
 
-    mtrRequireIndexkeeperGetFreeIndex = (mtrRequireIndexkeeperGetFreeIndexFunc)GetProcAddress(mtrPluginData[plugin].dll,
+    mtrRequireIndexkeeperGetFreeIndex = (mtrRequireIndexkeeperGetFreeIndexFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
      "mtrRequireIndexkeeperGetFreeIndex");
     if (mtrRequireIndexkeeperGetFreeIndex != NULL)
         mtrRequireIndexkeeperGetFreeIndex(mtrIndexkeeperGetFreeIndex);
     else
         mtrLogWrite("Module are not contain declaration for 'mtrIndexkeeperGetFreeIndex' function", 1, MTR_LMT_WARNING);
 
-    mtrRequireIndexkeeperFreeIndex = (mtrRequireIndexkeeperFreeIndexFunc)GetProcAddress(mtrPluginData[plugin].dll,
+    mtrRequireIndexkeeperFreeIndex = (mtrRequireIndexkeeperFreeIndexFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
      "mtrRequireIndexkeeperFreeIndex");
     if (mtrRequireIndexkeeperFreeIndex != NULL)
         mtrRequireIndexkeeperFreeIndex(mtrIndexkeeperFreeIndex);
     else
         mtrLogWrite("Module are not contain declaration for 'mtrIndexkeeperFreeIndex' function", 1, MTR_LMT_WARNING);
 
-    mtrRequireIndexkeeperDestroy = (mtrRequireIndexkeeperDestroyFunc)GetProcAddress(mtrPluginData[plugin].dll,
+    mtrRequireIndexkeeperDestroy = (mtrRequireIndexkeeperDestroyFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
      "mtrRequireIndexkeeperDestroy");
     if (mtrRequireIndexkeeperDestroy != NULL)
         mtrRequireIndexkeeperDestroy(mtrIndexkeeperDestroy);
     else
         mtrLogWrite("Module are not contain declaration for 'mtrIndexkeeperDestroy' function", 1, MTR_LMT_WARNING);
 
-    mtrRequireFileWriteLine = (mtrRequireFileWriteLineFunc)GetProcAddress(mtrPluginData[plugin].dll,
+    mtrRequireFileWriteLine = (mtrRequireFileWriteLineFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
      "mtrRequireFileWriteLine");
     if (mtrRequireFileWriteLine != NULL)
         mtrRequireFileWriteLine(mtrFileWriteLine);
@@ -82,8 +82,13 @@ void RequireEngineFuncs(uint8_t plugin)
 
 int main(int argc, char** argv)
 {
-    WIN32_FIND_DATA FindFileData;
-    HANDLE          hf;
+    #ifdef __MINGW32__
+        WIN32_FIND_DATA FindFileData;
+        HANDLE          hf;
+    #else
+        DIR           *d;
+        struct dirent *dir;
+    #endif
     char           *fullPluginFileName;
     int             i;
     uint8_t         mtrPluginsFound;
@@ -143,10 +148,15 @@ int main(int argc, char** argv)
                 strcpy(fullPluginFileName, "plugin/");
                 strcat(fullPluginFileName, FindFileData.cFileName);
                 /* Loading plugin library */
-                mtrPluginData[currentPlugin].dll = LoadLibrary(fullPluginFileName);
+                mtrPluginData[currentPlugin].dll = mtrLoadLibrary(fullPluginFileName);
                 if (mtrPluginData[currentPlugin].dll == NULL)
+                {
                     mtrNotify("Library not loaded", 1, MTR_LMT_ERROR);
-                mtrCreateReport = (mtrReportFunc)GetProcAddress(mtrPluginData[currentPlugin].dll,
+                    #ifdef __EMSCRIPTEN__
+                    mtrLogWrite(dlerror(), 1, MTR_LMT_ERROR);
+                    #endif
+                }
+                mtrCreateReport = (mtrReportFunc)mtrLoadSymbolName(mtrPluginData[currentPlugin].dll,
                   "mtrCreateReport");
                 if (mtrCreateReport == NULL)
                     mtrNotify("Library not contain mtrCreateReport function", 1,
@@ -172,7 +182,7 @@ int main(int argc, char** argv)
                 RequireEngineFuncs(currentPlugin);
 
                 /* Plugin requiring information about every other plugin */
-                mtrRequirePluginData = (mtrRequirePluginDataFunc)GetProcAddress(mtrPluginData[currentPlugin].dll,
+                mtrRequirePluginData = (mtrRequirePluginDataFunc)mtrLoadSymbolName(mtrPluginData[currentPlugin].dll,
                   "mtrRequirePluginData");
                 mtrRequirePluginData(mtrPluginData, mtrPluginsFound);
 
@@ -215,7 +225,7 @@ int main(int argc, char** argv)
               "script", "none");
             if (strcmp(temp, "none") != 0)
             {
-                mtrScriptsAutorun = (mtrScriptsAutorunFunc)GetProcAddress(mtrPluginData[currentPlugin].dll, "mtrScriptsAutorun");
+                mtrScriptsAutorun = (mtrScriptsAutorunFunc)mtrLoadSymbolName(mtrPluginData[currentPlugin].dll, "mtrScriptsAutorun");
                 if (mtrScriptsAutorun == NULL)
                     mtrNotify("Unable to load autorun plugin function", 1,
                       MTR_LMT_ERROR);
@@ -249,7 +259,7 @@ int main(int argc, char** argv)
     mtrLogWrite("Quiting Engine", 0, MTR_LMT_INFO);
     /* Freing allocated structures and unloading libraries */
     for (i = 0; i < mtrPluginsFound; i++)
-        FreeLibrary(mtrPluginData[i].dll);
+        mtrCloseLibrary(mtrPluginData[i].dll);
     free(mtrPluginData);
 
     mtrLogWrite("Engine stopped", 0, MTR_LMT_INFO);
