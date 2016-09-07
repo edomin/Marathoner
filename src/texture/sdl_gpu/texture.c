@@ -7,7 +7,7 @@ MRT_EXPORT mtrReport* MRT_CALL mtrCreateReport(void)
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
     report->moduleID = "Texture_sdl_gpu";
-    report->version = 0x000000;
+    report->version = MTR_VERSION_TEXTURE_SDL2_GPU;
     report->prereqsCount = 1;
     report->prereqs = malloc(sizeof(char *) * report->prereqsCount);
     report->prereqs[0] = "Screen_sdl_gpu";

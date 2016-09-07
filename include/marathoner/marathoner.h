@@ -6,7 +6,6 @@
 #include <stdlib.h> /* for malloc */
 #include <stdbool.h>
 
-#define MTR_MARATHONER_VERSION 0x000000
 
 /* Report of loaded dll-plugin */
 typedef struct mtrReport{

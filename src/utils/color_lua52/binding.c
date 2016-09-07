@@ -7,7 +7,7 @@ MRT_EXPORT mtrReport* MRT_CALL mtrCreateReport(void)
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
     report->moduleID = "Utils_color_Lua52";
-    report->version = 0x000000;
+    report->version = MTR_VERSION_UTILS_COLOR_LUA;
     report->prereqsCount = 2;
     report->prereqs = malloc(sizeof(char *) * report->prereqsCount);
     report->prereqs[0] = "Utils_color";

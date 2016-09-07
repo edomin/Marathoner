@@ -7,7 +7,7 @@ __declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
     report->moduleID = "Game_Controller_SDL2";
-    report->version = 0x000000;
+    report->version = MTR_VERSION_GAME_CONTROLLER_SDL2;
     report->prereqsCount = 0;
     report->prereqs = NULL;
     return report;

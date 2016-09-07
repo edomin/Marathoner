@@ -7,7 +7,7 @@ MRT_EXPORT mtrReport* MRT_CALL mtrCreateReport(void)
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
     report->moduleID = "TTF_SDL2_ttf_Lua52";
-    report->version = 0x000000;
+    report->version = MTR_VERSION_TTF_SDL2_TTF_LUA;
     report->prereqsCount = 2;
     report->prereqs = malloc(sizeof(char *) * report->prereqsCount);
     report->prereqs[0] = "TTF_SDL2_ttf";
