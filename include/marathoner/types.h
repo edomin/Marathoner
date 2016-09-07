@@ -5,6 +5,36 @@
 #include <stdbool.h>
 
 /*
+ * Types:
+ * mtr_lhandler         - shared library handle
+ * Macro (functions):
+ * mtrLoadLibrary       - load shared library
+ * mtrLoadSymbolName    - load function from shared library
+ * mtrCloseLibrary      - close shared library
+ * Macro (other):
+ * MRT_CALL             - calling convention
+ * MRT_EXPORT           - function's attribute for exporting it from shared library
+ */
+
+#ifdef __MINGW32__
+    #include <windows.h>
+    typedef HMODULE mtr_lhandler; /* Library handle type */
+    #define mtrLoadLibrary LoadLibrary
+    #define mtrLoadSymbolName GetProcAddress
+    #define mtrCloseLibrary FreeLibrary
+    #define MTR_CALL __stdcall
+    #define MRT_EXPORT __declspec(dllexport)
+#else
+    #include <emscripten.h>
+    typedef void* mtr_lhandler;
+    #define mtrLoadLibrary(filename) dlopen(filename, RTLD_LAZY)
+    #define mtrLoadSymbolName dlsym
+    #define mtrCloseLibrary dlclose
+    #define MRT_CALL
+    #define MRT_EXPORT EMSCRIPTEN_KEEPALIVE
+#endif
+
+/*
 
 typedef char                    mtr_char;
 typedef signed char             mtr_schar;
