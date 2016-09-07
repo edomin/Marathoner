@@ -1,6 +1,6 @@
 #include "encoding.h"
 
-size_t mtrEncodingUtf8ToUcs4(char * utf8Text, uint32_t *ucs4Text)
+size_t mtrEncodingUtf8ToUcs4(const char * utf8Text, uint32_t *ucs4Text)
 {
     size_t len;
     size_t max;
