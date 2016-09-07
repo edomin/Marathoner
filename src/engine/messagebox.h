@@ -1,9 +1,13 @@
 #ifndef MTR_ENGINE_MESSAGEBOX
 #define MTR_ENGINE_MESSAGEBOX
 
-#include <windows.h>
 #include "marathoner/marathoner.h"
 
+#ifdef __EMSCRIPTEN__
+    #include <emscripten.h>
+#else
+    #include <windows.h>
+#endif
 
 #include "marathoner/engine.h"
 
