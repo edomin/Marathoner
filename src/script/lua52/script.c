@@ -7,7 +7,7 @@ MRT_EXPORT mtrReport* MRT_CALL mtrCreateReport(void)
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
     report->moduleID = "Script_Lua52";
-    report->version = 0x000000;
+    report->version = MTR_VERSION_SCRIPT_LUA;
     report->prereqsCount = 0;
     report->prereqs = NULL;
     return report;
@@ -101,7 +101,8 @@ void mtrScriptsDoFile(char * filename)
     error = luaL_dofile(mtrVm, filename);
     if (error)
     {
-        mtrNotify("Error in the script or script file not found.", 0, MTR_DMT_ERROR);
+        mtrNotify("Error in the script or script file not found.", 0,
+         MTR_DMT_ERROR);
         mtrLogWrite((char *)(lua_tostring(mtrVm, -1)), 0, MTR_LMT_ERROR);
     }
 }
