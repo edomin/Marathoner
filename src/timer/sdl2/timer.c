@@ -58,7 +58,7 @@ MRT_EXPORT uint32_t MRT_CALL mtrTimerGetTicks(void)
 
 MRT_EXPORT uint32_t MRT_CALL mtrTimerDelay(uint32_t ms)
 {
-    if (ms > 0);
+    if (ms > 0)
         SDL_Delay(ms);
     return 1000 / mtrTimerGetTicks();
 }
