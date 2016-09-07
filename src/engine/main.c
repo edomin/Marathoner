@@ -100,11 +100,11 @@ int main(int argc, char** argv)
 
     mtrLogWrite("Reporting Marathoner version:", 0, MTR_LMT_INFO);
     mtrLogWrite_i("Majon:", 1, MTR_LMT_INFO,
-     MTR_MARATHONER_VERSION >> 16);
+     (MTR_VERSION_MARATHONER & 0xFF0000) >> 16);
     mtrLogWrite_i("Minor:", 1, MTR_LMT_INFO,
-     (MTR_MARATHONER_VERSION << 8) >> 16);
+     (MTR_VERSION_MARATHONER & 0x00FF00) >> 8);
     mtrLogWrite_i("Patch:", 1, MTR_LMT_INFO,
-     (MTR_MARATHONER_VERSION << 16) >> 16);
+     MTR_VERSION_MARATHONER & 0x0000FF);
 
     mtrLogWrite("Searching available plugins", 0, MTR_LMT_INFO);
 
