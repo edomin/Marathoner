@@ -17,31 +17,31 @@
 
 lua_State *mtrVm;
 
-typedef lua_State* (__stdcall * mtrScriptsGetVmFunc)(void);
+typedef lua_State* (MRT_CALL * mtrScriptsGetVmFunc)(void);
 mtrScriptsGetVmFunc mtrScriptsGetVm;
 
-typedef void (__stdcall * mtrScriptsRegisterFunctionFunc)(lua_CFunction, char *);
+typedef void (MRT_CALL * mtrScriptsRegisterFunctionFunc)(lua_CFunction, char *);
 mtrScriptsRegisterFunctionFunc mtrScriptsRegisterFunction;
 
-typedef void (__stdcall * mtrScriptsRegisterNumericVariableFunc)(char *, double);
+typedef void (MRT_CALL * mtrScriptsRegisterNumericVariableFunc)(char *, double);
 mtrScriptsRegisterNumericVariableFunc mtrScriptsRegisterNumericVariable;
 
-typedef bool (__stdcall * mtrTtfInitFunc)(uint32_t, uint32_t);
+typedef bool (MRT_CALL * mtrTtfInitFunc)(uint32_t, uint32_t);
 mtrTtfInitFunc mtrTtfInit;
 
-typedef void (__stdcall * mtrTtfQuitFunc)(void);
+typedef void (MRT_CALL * mtrTtfQuitFunc)(void);
 mtrTtfQuitFunc mtrTtfQuit;
 
-typedef uint32_t (__stdcall * mtrTtfLoadFunc)(const char *, uint16_t);
+typedef uint32_t (MRT_CALL * mtrTtfLoadFunc)(const char *, uint16_t);
 mtrTtfLoadFunc mtrTtfLoad;
 
-typedef void (__stdcall * mtrTtfFreeFunc)(uint32_t);
+typedef void (MRT_CALL * mtrTtfFreeFunc)(uint32_t);
 mtrTtfFreeFunc mtrTtfFree;
 
-typedef void (__stdcall * mtrTtfSetFontStyleFunc)(uint32_t, uint8_t);
+typedef void (MRT_CALL * mtrTtfSetFontStyleFunc)(uint32_t, uint8_t);
 mtrTtfSetFontStyleFunc mtrTtfSetFontStyle;
 
-typedef void (__stdcall * mtrTtfSetFontOutlineFunc)(uint32_t, uint16_t);
+typedef void (MRT_CALL * mtrTtfSetFontOutlineFunc)(uint32_t, uint16_t);
 mtrTtfSetFontOutlineFunc mtrTtfSetFontOutline;
 
 int mtrSF_TtfInit(lua_State* l);

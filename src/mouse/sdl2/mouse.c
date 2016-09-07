@@ -2,7 +2,7 @@
 
 #include "marathoner/plugin_common.c"
 
-__declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
+MRT_EXPORT mtrReport* MRT_CALL mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -13,7 +13,7 @@ __declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
     return report;
 }
 
-__declspec(dllexport) bool __stdcall mtrMouseInit(void)
+MRT_EXPORT bool MRT_CALL mtrMouseInit(void)
 {
     SDL_version compiled;
     SDL_version linked;
@@ -57,7 +57,7 @@ __declspec(dllexport) bool __stdcall mtrMouseInit(void)
     return true;
 }
 
-__declspec(dllexport) void __stdcall mtrMouseRefresh(void)
+MRT_EXPORT void MRT_CALL mtrMouseRefresh(void)
 {
     uint32_t mouseState;
     uint8_t i;
@@ -79,7 +79,7 @@ __declspec(dllexport) void __stdcall mtrMouseRefresh(void)
     }
 }
 
-__declspec(dllexport) bool __stdcall mtrMousePress(uint8_t button)
+MRT_EXPORT bool MRT_CALL mtrMousePress(uint8_t button)
 {
     if (button > 5)
         return false;
@@ -94,7 +94,7 @@ __declspec(dllexport) bool __stdcall mtrMousePress(uint8_t button)
     }
 }
 
-__declspec(dllexport) bool __stdcall mtrMouseRelease(uint8_t button)
+MRT_EXPORT bool MRT_CALL mtrMouseRelease(uint8_t button)
 {
     if (button > 5)
         return false;
@@ -109,7 +109,7 @@ __declspec(dllexport) bool __stdcall mtrMouseRelease(uint8_t button)
     }
 }
 
-__declspec(dllexport) bool __stdcall mtrMousePressed(uint8_t button)
+MRT_EXPORT bool MRT_CALL mtrMousePressed(uint8_t button)
 {
     if (button > 5)
         return false;
@@ -124,40 +124,38 @@ __declspec(dllexport) bool __stdcall mtrMousePressed(uint8_t button)
 }
 
 /* Dummy function for future compatibility */
-__declspec(dllexport) int8_t __stdcall mtrMouseGetWheelRelative(void)
+MRT_EXPORT int8_t MRT_CALL mtrMouseGetWheelRelative(void)
 {
     return 0;
 }
 
-__declspec(dllexport) int16_t __stdcall mtrMouseGetX(void)
+MRT_EXPORT int16_t MRT_CALL mtrMouseGetX(void)
 {
     return mtrMouse.x;
 }
 
-__declspec(dllexport) int16_t __stdcall mtrMouseGetY(void)
+MRT_EXPORT int16_t MRT_CALL mtrMouseGetY(void)
 {
     return mtrMouse.y;
 }
 
-__declspec(dllexport) void __stdcall mtrMouseGetXY(int16_t *mouseX,
- int16_t *mouseY)
+MRT_EXPORT void MRT_CALL mtrMouseGetXY(int16_t *mouseX, int16_t *mouseY)
 {
     *mouseX = mtrMouse.x;
     *mouseY = mtrMouse.y;
 }
 
-__declspec(dllexport) int16_t __stdcall mtrMouseGetDeltaX(void)
+MRT_EXPORT int16_t MRT_CALL mtrMouseGetDeltaX(void)
 {
     return mtrMouse.x - mtrMouse.previousX;
 }
 
-__declspec(dllexport) int16_t __stdcall mtrMouseGetDeltaY(void)
+MRT_EXPORT int16_t MRT_CALL mtrMouseGetDeltaY(void)
 {
     return mtrMouse.y - mtrMouse.previousY;
 }
 
-__declspec(dllexport) void __stdcall mtrMouseGetDeltaXY(int16_t *deltaX,
- int16_t *deltaY)
+MRT_EXPORT void MRT_CALL mtrMouseGetDeltaXY(int16_t *deltaX, int16_t *deltaY)
 {
     *deltaX = mtrMouse.x - mtrMouse.previousX;
     *deltaY = mtrMouse.y - mtrMouse.previousY;

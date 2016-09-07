@@ -9,19 +9,19 @@
 
 lua_State *mtrVm;
 
-typedef lua_State* (__stdcall * mtrScriptsGetVmFunc)(void);
+typedef lua_State* (MRT_CALL * mtrScriptsGetVmFunc)(void);
 mtrScriptsGetVmFunc mtrScriptsGetVm;
 
-typedef void (__stdcall * mtrScriptsRegisterFunctionFunc)(lua_CFunction, char *);
+typedef void (MRT_CALL * mtrScriptsRegisterFunctionFunc)(lua_CFunction, char *);
 mtrScriptsRegisterFunctionFunc mtrScriptsRegisterFunction;
 
-typedef void (__stdcall * mtrScreenInitFunc)(uint16_t, uint16_t);
+typedef void (MRT_CALL * mtrScreenInitFunc)(uint16_t, uint16_t);
 mtrScreenInitFunc mtrScreenInit;
 
-typedef void (__stdcall * mtrScreenQuitFunc)(void);
+typedef void (MRT_CALL * mtrScreenQuitFunc)(void);
 mtrScreenQuitFunc mtrScreenQuit;
 
-typedef void (__stdcall * mtrScreenFlipFunc)(void);
+typedef void (MRT_CALL * mtrScreenFlipFunc)(void);
 mtrScreenFlipFunc mtrScreenFlip;
 
 int mtrSF_ScreenInit(lua_State* l);

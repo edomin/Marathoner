@@ -1,6 +1,6 @@
 #include "file.h"
 
-void __stdcall mtrFileWriteLine(const char* filename, const char *text,
+void MRT_CALL mtrFileWriteLine(const char* filename, const char *text,
  uint8_t mode)
 {
     FILE *file;

@@ -2,7 +2,7 @@
 
 #include "marathoner/plugin_common.c"
 
-__declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
+MRT_EXPORT mtrReport* MRT_CALL mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -13,7 +13,7 @@ __declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
     return report;
 }
 
-__declspec(dllexport) void __stdcall mtrScreenInit(uint16_t width, uint16_t height)
+MRT_EXPORT void MRT_CALL mtrScreenInit(uint16_t width, uint16_t height)
 {
     mtrLogWrite("Creating Window", 0, MTR_LMT_INFO);
     mtrScreen = malloc(sizeof(mtrScreen_t));
@@ -27,19 +27,19 @@ __declspec(dllexport) void __stdcall mtrScreenInit(uint16_t width, uint16_t heig
         mtrNotify("Unable to create window", 1, MTR_LMT_ERROR);
 }
 
-__declspec(dllexport) void __stdcall mtrScreenQuit(void)
+MRT_EXPORT void MRT_CALL mtrScreenQuit(void)
 {
     GPU_Quit();
     free(mtrScreen);
     mtrLogWrite("Window destroyed", 0, MTR_LMT_INFO);
 }
 
-__declspec(dllexport) void __stdcall mtrScreenFlip(void)
+MRT_EXPORT void MRT_CALL mtrScreenFlip(void)
 {
     GPU_Flip(mtrScreen->screen);
 }
 
-__declspec(dllexport) mtrScreen_t *__stdcall mtrGetScreen(void)
+MRT_EXPORT mtrScreen_t *MRT_CALL mtrGetScreen(void)
 {
     return mtrScreen;
 }

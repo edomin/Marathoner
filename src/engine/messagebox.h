@@ -2,10 +2,13 @@
 #define MTR_ENGINE_MESSAGEBOX
 
 #include <windows.h>
+#include "marathoner/marathoner.h"
+
 
 #include "marathoner/engine.h"
 
-void mtrShowSimpleMessageBox(uint8_t type, char *title, char *message);
-bool mtrShowYesNoMessageBox(char *title, char *message);
+void MRT_CALL mtrShowSimpleMessageBox(uint8_t type, const char *title,
+ const char *message);
+bool MRT_CALL mtrShowYesNoMessageBox(const char *title, const char *message);
 
 #endif

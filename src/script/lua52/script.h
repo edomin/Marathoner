@@ -7,14 +7,17 @@
 
 #include "marathoner/plugin.h"
 
-typedef void (__stdcall * mtrPluginInitFunc)(void);
+typedef void (MRT_CALL * mtrPluginInitFunc)(void);
 mtrPluginInitFunc mtrPluginInit;
 
 lua_State *mtrVm;
 
-__declspec(dllexport) void __stdcall mtrScriptsRegisterFunction(lua_CFunction func, char * funcname);
-__declspec(dllexport) void __stdcall mtrScriptsRegisterStringVariable(char *name, char *value);
-__declspec(dllexport) void __stdcall mtrScriptsRegisterNumericVariable(char *name, double value);
+MRT_EXPORT void MRT_CALL mtrScriptsRegisterFunction(lua_CFunction func,
+ char * funcname);
+MRT_EXPORT void MRT_CALL mtrScriptsRegisterStringVariable(char *name,
+ char *value);
+MRT_EXPORT void MRT_CALL mtrScriptsRegisterNumericVariable(char *name,
+ double value);
 
 int mtrSF_FileWriteLine(lua_State* l);
 

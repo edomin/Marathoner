@@ -11,7 +11,7 @@ typedef struct mtrScreen_t {
 
 mtrScreen_t *mtrScreen; /* this will imported from screen plugin */
 
-typedef mtrScreen_t *(__stdcall * mtrGetScreenFunc)(void);
+typedef mtrScreen_t *(MRT_CALL * mtrGetScreenFunc)(void);
 mtrGetScreenFunc mtrGetScreen;
 
 #endif

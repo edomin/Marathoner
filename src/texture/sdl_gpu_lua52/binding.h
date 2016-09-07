@@ -25,51 +25,51 @@
 
 lua_State *mtrVm;
 
-typedef lua_State* (__stdcall * mtrScriptsGetVmFunc)(void);
+typedef lua_State* (MRT_CALL * mtrScriptsGetVmFunc)(void);
 mtrScriptsGetVmFunc mtrScriptsGetVm;
 
-typedef void (__stdcall * mtrScriptsRegisterFunctionFunc)(lua_CFunction, char *);
+typedef void (MRT_CALL * mtrScriptsRegisterFunctionFunc)(lua_CFunction, char *);
 mtrScriptsRegisterFunctionFunc mtrScriptsRegisterFunction;
 
-typedef void (__stdcall * mtrScriptsRegisterNumericVariableFunc)(char *, double);
+typedef void (MRT_CALL * mtrScriptsRegisterNumericVariableFunc)(char *, double);
 mtrScriptsRegisterNumericVariableFunc mtrScriptsRegisterNumericVariable;
 
-typedef bool (__stdcall * mtrTextureInitFunc)(uint32_t, uint32_t);
+typedef bool (MRT_CALL * mtrTextureInitFunc)(uint32_t, uint32_t);
 mtrTextureInitFunc mtrTextureInit;
 
-typedef uint32_t (__stdcall * mtrTextureLoadFunc)(const char *);
+typedef uint32_t (MRT_CALL * mtrTextureLoadFunc)(const char *);
 mtrTextureLoadFunc mtrTextureLoad;
 
-typedef void (__stdcall * mtrTextureFreeFunc)(uint32_t);
+typedef void (MRT_CALL * mtrTextureFreeFunc)(uint32_t);
 mtrTextureFreeFunc mtrTextureFree;
 
-typedef void (__stdcall * mtrTextureSetBlendFunctionFunc)(uint32_t, uint8_t,
+typedef void (MRT_CALL * mtrTextureSetBlendFunctionFunc)(uint32_t, uint8_t,
  uint8_t, uint8_t, uint8_t);
 mtrTextureSetBlendFunctionFunc mtrTextureSetBlendFunction;
 
-typedef void (__stdcall * mtrTextureSetAlphaBlendingFunc)(uint32_t, bool);
+typedef void (MRT_CALL * mtrTextureSetAlphaBlendingFunc)(uint32_t, bool);
 mtrTextureSetAlphaBlendingFunc mtrTextureSetAlphaBlending;
 
-typedef void (__stdcall * mtrTextureBlit_fFunc)(uint32_t, float, float);
+typedef void (MRT_CALL * mtrTextureBlit_fFunc)(uint32_t, float, float);
 mtrTextureBlit_fFunc mtrTextureBlit_f;
 
-typedef void (__stdcall * mtrTextureBlitRegion_fFunc)(uint32_t, float, float,
+typedef void (MRT_CALL * mtrTextureBlitRegion_fFunc)(uint32_t, float, float,
  float, float, float, float);
 mtrTextureBlitRegion_fFunc mtrTextureBlitRegion_f;
 
-typedef void (__stdcall * mtrTextureBlitRegionScaled_fFunc)(uint32_t, float,
+typedef void (MRT_CALL * mtrTextureBlitRegionScaled_fFunc)(uint32_t, float,
  float, float, float, float, float, float, float);
 mtrTextureBlitRegionScaled_fFunc mtrTextureBlitRegionScaled_f;
 
-typedef void (__stdcall * mtrTextureBlitRegionAngled_fFunc)(uint32_t, float,
+typedef void (MRT_CALL * mtrTextureBlitRegionAngled_fFunc)(uint32_t, float,
  float, float, float, float, float, float, float, float);
 mtrTextureBlitRegionAngled_fFunc mtrTextureBlitRegionAngled_f;
 
-typedef void (__stdcall * mtrTextureBlitRegionFlipped_fFunc)(uint32_t, float,
+typedef void (MRT_CALL * mtrTextureBlitRegionFlipped_fFunc)(uint32_t, float,
  float, float, float, float, float, uint8_t);
 mtrTextureBlitRegionFlipped_fFunc mtrTextureBlitRegionFlipped_f;
 
-typedef void (__stdcall * mtrTextureBlitRegionGeneral_fFunc)(uint32_t, float,
+typedef void (MRT_CALL * mtrTextureBlitRegionGeneral_fFunc)(uint32_t, float,
  float, float, float, float, float, float, float, float, float, float, uint8_t);
 mtrTextureBlitRegionGeneral_fFunc mtrTextureBlitRegionGeneral_f;
 

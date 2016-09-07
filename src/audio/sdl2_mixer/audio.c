@@ -2,7 +2,7 @@
 
 #include "marathoner/plugin_common.c"
 
-__declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
+MRT_EXPORT mtrReport* MRT_CALL mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -13,7 +13,7 @@ __declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
     return report;
 }
 
-__declspec(dllexport) bool __stdcall mtrAudioInit(uint32_t sndDmSize,
+MRT_EXPORT bool MRT_CALL mtrAudioInit(uint32_t sndDmSize,
  uint32_t sndReservedCount, uint32_t musDmSize, uint32_t musReservedCount,
  uint32_t freq, uint8_t channels, uint16_t chunkSize)
 {
@@ -220,7 +220,7 @@ __declspec(dllexport) bool __stdcall mtrAudioInit(uint32_t sndDmSize,
     return true;
 }
 
-__declspec(dllexport) void __stdcall mtrAudioQuit(void)
+MRT_EXPORT void MRT_CALL mtrAudioQuit(void)
 {
     mtrLogWrite("Destroying audio manager", 0, MTR_LMT_INFO);
     Mix_CloseAudio();
@@ -228,7 +228,7 @@ __declspec(dllexport) void __stdcall mtrAudioQuit(void)
     mtrLogWrite("Audio manager destroyed", 0, MTR_LMT_INFO);
 }
 
-__declspec(dllexport) uint32_t __stdcall mtrAudioSoundLoad(const char *filename)
+MRT_EXPORT uint32_t MRT_CALL mtrAudioSoundLoad(const char *filename)
 {
     uint32_t    freeIndex;
     mtrSound_t  *sound;
@@ -254,7 +254,7 @@ __declspec(dllexport) uint32_t __stdcall mtrAudioSoundLoad(const char *filename)
     return 0;
 }
 
-__declspec(dllexport) uint32_t __stdcall mtrAudioMusicLoad(const char *filename)
+MRT_EXPORT uint32_t MRT_CALL mtrAudioMusicLoad(const char *filename)
 {
     uint32_t    freeIndex;
     mtrMusic_t  *music;
@@ -318,22 +318,21 @@ __declspec(dllexport) uint32_t __stdcall mtrAudioMusicLoad(const char *filename)
     return 0;
 }
 
-__declspec(dllexport) void __stdcall mtrAudioSoundPlay(uint32_t soundNum)
+MRT_EXPORT void MRT_CALL mtrAudioSoundPlay(uint32_t soundNum)
 {
     mtrSound_t *sound;
     sound = (mtrSound_t *)(&((mtrSound_t *)mtrSoundKeeper->data)[soundNum]);
     Mix_PlayChannel(-1, sound->sound, 0);
 }
 
-__declspec(dllexport) void __stdcall mtrAudioSoundFadeInPlay(uint32_t soundNum,
- uint32_t ms)
+MRT_EXPORT void MRT_CALL mtrAudioSoundFadeInPlay(uint32_t soundNum, uint32_t ms)
 {
     mtrSound_t *sound;
     sound = (mtrSound_t *)(&((mtrSound_t *)mtrSoundKeeper->data)[soundNum]);
     Mix_FadeInChannel(-1, sound->sound, 0, ms);
 }
 
-__declspec(dllexport) void __stdcall mtrAudioSoundSetVolume(uint32_t soundNum,
+MRT_EXPORT void MRT_CALL mtrAudioSoundSetVolume(uint32_t soundNum,
  uint8_t volume)
 {
     mtrSound_t *sound;
@@ -341,7 +340,7 @@ __declspec(dllexport) void __stdcall mtrAudioSoundSetVolume(uint32_t soundNum,
     Mix_VolumeChunk(sound->sound, volume);
 }
 
-__declspec(dllexport) void __stdcall mtrAudioSoundSetVolume_f(uint32_t soundNum,
+MRT_EXPORT void MRT_CALL mtrAudioSoundSetVolume_f(uint32_t soundNum,
  float volume)
 {
     mtrSound_t *sound;
@@ -349,88 +348,87 @@ __declspec(dllexport) void __stdcall mtrAudioSoundSetVolume_f(uint32_t soundNum,
     Mix_VolumeChunk(sound->sound, (int)((float)MIX_MAX_VOLUME * volume));
 }
 
-__declspec(dllexport) void __stdcall mtrAudioChannelsSetVolume(uint8_t volume)
+MRT_EXPORT void MRT_CALL mtrAudioChannelsSetVolume(uint8_t volume)
 {
     Mix_Volume(-1, volume);
 }
 
-__declspec(dllexport) void __stdcall mtrAudioChannelsSetVolume_f(float volume)
+MRT_EXPORT void MRT_CALL mtrAudioChannelsSetVolume_f(float volume)
 {
     Mix_Volume(-1, (int)((float)MIX_MAX_VOLUME * volume));
 }
 
-__declspec(dllexport) void __stdcall mtrAudioChannelsPause(void)
+MRT_EXPORT void MRT_CALL mtrAudioChannelsPause(void)
 {
     if (Mix_Playing(-1) != 0)
         Mix_Pause(-1);
 }
 
-__declspec(dllexport) void __stdcall mtrAudioChannelsResume(void)
+MRT_EXPORT void MRT_CALL mtrAudioChannelsResume(void)
 {
     if (Mix_Paused(-1) != 0)
         Mix_Resume(-1);
 }
 
-__declspec(dllexport) void __stdcall mtrAudioChannelsStop(void)
+MRT_EXPORT void MRT_CALL mtrAudioChannelsStop(void)
 {
     Mix_HaltChannel(-1);
 }
 
-__declspec(dllexport) void __stdcall mtrAudioChannelsFadeOutStop(uint32_t ms)
+MRT_EXPORT void MRT_CALL mtrAudioChannelsFadeOutStop(uint32_t ms)
 {
     Mix_FadeOutChannel(-1, ms);
 }
 
-__declspec(dllexport) void __stdcall mtrAudioMusicPlay(uint32_t musicNum)
+MRT_EXPORT void MRT_CALL mtrAudioMusicPlay(uint32_t musicNum)
 {
     mtrMusic_t *music;
     music = (mtrMusic_t *)(&((mtrMusic_t *)mtrMusicKeeper->data)[musicNum]);
     Mix_PlayMusic(music->music, -1);
 }
 
-__declspec(dllexport) void __stdcall mtrAudioMusicFadeInPlay(uint32_t musicNum,
- uint32_t ms)
+MRT_EXPORT void MRT_CALL mtrAudioMusicFadeInPlay(uint32_t musicNum, uint32_t ms)
 {
     mtrMusic_t *music;
     music = (mtrMusic_t *)(&((mtrMusic_t *)mtrMusicKeeper->data)[musicNum]);
     Mix_FadeInMusic(music->music, -1, ms);
 }
 
-__declspec(dllexport) void __stdcall mtrAudioMusicPause(void)
+MRT_EXPORT void MRT_CALL mtrAudioMusicPause(void)
 {
     if(Mix_PausedMusic() == 0)
         Mix_PauseMusic();
 }
 
-__declspec(dllexport) void __stdcall mtrAudioMusicResume(void)
+MRT_EXPORT void MRT_CALL mtrAudioMusicResume(void)
 {
     if(Mix_PausedMusic() == 1)
         Mix_ResumeMusic();
 }
 
-__declspec(dllexport) void __stdcall mtrAudioMusicStop(void)
+MRT_EXPORT void MRT_CALL mtrAudioMusicStop(void)
 {
     if (Mix_PlayingMusic() == 1)
         Mix_HaltMusic();
 }
 
-__declspec(dllexport) void __stdcall mtrAudioMusicFadeOutStop(uint32_t ms)
+MRT_EXPORT void MRT_CALL mtrAudioMusicFadeOutStop(uint32_t ms)
 {
     if (Mix_PlayingMusic() == 1)
         Mix_FadeOutMusic(ms);
 }
 
-__declspec(dllexport) void __stdcall mtrAudioMusicSetVolume(uint8_t volume)
+MRT_EXPORT void MRT_CALL mtrAudioMusicSetVolume(uint8_t volume)
 {
     Mix_VolumeMusic(volume);
 }
 
-__declspec(dllexport) void __stdcall mtrAudioMusicSetVolume_f(float volume)
+MRT_EXPORT void MRT_CALL mtrAudioMusicSetVolume_f(float volume)
 {
     Mix_VolumeMusic((int)((float)MIX_MAX_VOLUME * volume));
 }
 
-__declspec(dllexport) void __stdcall mtrAudioSoundFree(uint32_t soundNum)
+MRT_EXPORT void MRT_CALL mtrAudioSoundFree(uint32_t soundNum)
 {
     mtrSound_t *sound;
     if (soundNum != 0)
@@ -444,7 +442,7 @@ __declspec(dllexport) void __stdcall mtrAudioSoundFree(uint32_t soundNum)
     }
 }
 
-__declspec(dllexport) void __stdcall mtrAudioMusicFree(uint32_t musicNum)
+MRT_EXPORT void MRT_CALL mtrAudioMusicFree(uint32_t musicNum)
 {
     mtrMusic_t *music;
     if (musicNum != 0)

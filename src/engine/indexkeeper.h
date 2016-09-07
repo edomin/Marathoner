@@ -1,6 +1,8 @@
 #ifndef MTR_ENGINE_INDEXKEEPER
 #define MTR_ENGINE_INDEXKEEPER
 
+#include "marathoner/marathoner.h"
+
 #include "log.h"
 #include "notification.h"
 
@@ -15,10 +17,10 @@ typedef struct mtrIndexkeeper_t {
     uint32_t *dataMap;
 } mtrIndexkeeper_t;
 
-void *__stdcall mtrIndexkeeperCreate(uint32_t dmSize, uint32_t reservedCount,
+void *MRT_CALL mtrIndexkeeperCreate(uint32_t dmSize, uint32_t reservedCount,
  size_t datasize);
-uint32_t __stdcall mtrIndexkeeperGetFreeIndex(void *ik);
-void __stdcall mtrIndexkeeperFreeIndex(void *ik, uint32_t index);
-void __stdcall mtrIndexkeeperDestroy(void *ik);
+uint32_t MRT_CALL mtrIndexkeeperGetFreeIndex(void *ik);
+void MRT_CALL mtrIndexkeeperFreeIndex(void *ik, uint32_t index);
+void MRT_CALL mtrIndexkeeperDestroy(void *ik);
 
 #endif

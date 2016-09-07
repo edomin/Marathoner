@@ -2,7 +2,7 @@
 
 #include "marathoner/plugin_common.c"
 
-__declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
+MRT_EXPORT mtrReport* MRT_CALL mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -14,8 +14,7 @@ __declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
     return report;
 }
 
-__declspec(dllexport) bool __stdcall mtrTextureInit(uint32_t dmSize,
- uint32_t reservedCount)
+MRT_EXPORT bool MRT_CALL mtrTextureInit(uint32_t dmSize, uint32_t reservedCount)
 {
     SDL_version linked;
 
@@ -52,7 +51,7 @@ __declspec(dllexport) bool __stdcall mtrTextureInit(uint32_t dmSize,
     return true;
 }
 
-__declspec(dllexport) uint32_t __stdcall mtrTextureLoad(const char *filename)
+MRT_EXPORT uint32_t MRT_CALL mtrTextureLoad(const char *filename)
 {
     uint32_t      freeIndex;
     mtrTexture_t *texture;
@@ -79,7 +78,7 @@ __declspec(dllexport) uint32_t __stdcall mtrTextureLoad(const char *filename)
     return 0;
 }
 
-__declspec(dllexport) uint32_t __stdcall mtrTextureCreateAlias(uint32_t texNum)
+MRT_EXPORT uint32_t MRT_CALL mtrTextureCreateAlias(uint32_t texNum)
 {
     uint32_t      freeIndex;
     mtrTexture_t *texture;
@@ -108,7 +107,7 @@ __declspec(dllexport) uint32_t __stdcall mtrTextureCreateAlias(uint32_t texNum)
     return 0;
 }
 
-__declspec(dllexport) void __stdcall mtrTextureFree(uint32_t texNum)
+MRT_EXPORT void MRT_CALL mtrTextureFree(uint32_t texNum)
 {
     mtrTexture_t *texture;
     if (texNum != 0)
@@ -122,7 +121,7 @@ __declspec(dllexport) void __stdcall mtrTextureFree(uint32_t texNum)
     }
 }
 
-__declspec(dllexport) void __stdcall mtrTextureSetBlendFunction(uint32_t texNum,
+MRT_EXPORT void MRT_CALL mtrTextureSetBlendFunction(uint32_t texNum,
  uint8_t srcColor, uint8_t destColor, uint8_t srcAlpha, uint8_t dstAlpha)
 {
     mtrTexture_t *texture;
@@ -134,7 +133,7 @@ __declspec(dllexport) void __stdcall mtrTextureSetBlendFunction(uint32_t texNum,
     }
 }
 
-__declspec(dllexport) void __stdcall mtrTextureSetAlphaBlending(uint32_t texNum,
+MRT_EXPORT void MRT_CALL mtrTextureSetAlphaBlending(uint32_t texNum,
  bool blending)
 {
     mtrTexture_t *texture;
@@ -145,16 +144,15 @@ __declspec(dllexport) void __stdcall mtrTextureSetAlphaBlending(uint32_t texNum,
     }
 }
 
-__declspec(dllexport) void __stdcall mtrTextureBlit_f(uint32_t texNum, float x,
- float y)
+MRT_EXPORT void MRT_CALL mtrTextureBlit_f(uint32_t texNum, float x, float y)
 {
     mtrTexture_t *texture;
     texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
     GPU_Blit(texture->texture, NULL, mtrScreen->screen, x, y);
 }
 
-__declspec(dllexport) void __stdcall mtrTextureBlitRegion_f(uint32_t texNum,
- float x, float y, float rx, float ry, float rw, float rh)
+MRT_EXPORT void MRT_CALL mtrTextureBlitRegion_f(uint32_t texNum, float x,
+ float y, float rx, float ry, float rw, float rh)
 {
     GPU_Rect region;
     mtrTexture_t *texture;
@@ -166,8 +164,8 @@ __declspec(dllexport) void __stdcall mtrTextureBlitRegion_f(uint32_t texNum,
     GPU_Blit(texture->texture, &region, mtrScreen->screen, x, y);
 }
 
-__declspec(dllexport) void __stdcall mtrTextureBlitRegionScaled_f(uint32_t texNum,
- float x, float y, float w, float h, float rx, float ry, float rw, float rh)
+MRT_EXPORT void MRT_CALL mtrTextureBlitRegionScaled_f(uint32_t texNum, float x,
+ float y, float w, float h, float rx, float ry, float rw, float rh)
 {
     GPU_Rect region;
     GPU_Rect outputRegion;
@@ -184,9 +182,9 @@ __declspec(dllexport) void __stdcall mtrTextureBlitRegionScaled_f(uint32_t texNu
     GPU_BlitRect(texture->texture, &region, mtrScreen->screen, &outputRegion);
 }
 
-__declspec(dllexport) void __stdcall mtrTextureBlitRegionAngled_f(uint32_t texNum,
- float x, float y, float rx, float ry, float rw, float rh, float angle,
- float pivotX, float pivotY)
+MRT_EXPORT void MRT_CALL mtrTextureBlitRegionAngled_f(uint32_t texNum, float x,
+ float y, float rx, float ry, float rw, float rh, float angle, float pivotX,
+ float pivotY)
 {
     GPU_Rect region;
     GPU_Rect outputRegion;
@@ -204,8 +202,8 @@ __declspec(dllexport) void __stdcall mtrTextureBlitRegionAngled_f(uint32_t texNu
      -angle, pivotX, pivotY, GPU_FLIP_NONE);
 }
 
-__declspec(dllexport) void __stdcall mtrTextureBlitRegionFlipped_f(uint32_t texNum,
- float x, float y, float rx, float ry, float rw, float rh, uint8_t flip)
+MRT_EXPORT void MRT_CALL mtrTextureBlitRegionFlipped_f(uint32_t texNum, float x,
+ float y, float rx, float ry, float rw, float rh, uint8_t flip)
 {
     GPU_Rect region;
     GPU_Rect outputRegion;
@@ -223,9 +221,9 @@ __declspec(dllexport) void __stdcall mtrTextureBlitRegionFlipped_f(uint32_t texN
      0.0f, rx, ry, flip);
 }
 
-__declspec(dllexport) void __stdcall mtrTextureBlitRegionGeneral_f(uint32_t texNum,
- float x, float y, float w, float h, float rx, float ry, float rw, float rh,
- float angle, float pivotX, float pivotY, uint8_t flip)
+MRT_EXPORT void MRT_CALL mtrTextureBlitRegionGeneral_f(uint32_t texNum, float x,
+ float y, float w, float h, float rx, float ry, float rw, float rh, float angle,
+ float pivotX, float pivotY, uint8_t flip)
 {
     GPU_Rect region;
     GPU_Rect outputRegion;

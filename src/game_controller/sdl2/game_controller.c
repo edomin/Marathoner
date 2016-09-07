@@ -13,7 +13,7 @@ __declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
     return report;
 }
 
-__declspec(dllexport) bool __stdcall mtrGameControllerInit(void)
+MRT_EXPORT bool MRT_CALL mtrGameControllerInit(void)
 {
     SDL_version compiled;
     SDL_version linked;
@@ -207,7 +207,7 @@ __declspec(dllexport) bool __stdcall mtrGameControllerInit(void)
     return true;
 }
 
-__declspec(dllexport) void __stdcall mtrGameControllerQuit(void)
+MRT_EXPORT void MRT_CALL mtrGameControllerQuit(void)
 {
     uint8_t i;
     mtrLogWrite("Disabling game controller support", 0, MTR_LMT_INFO);
@@ -237,7 +237,7 @@ __declspec(dllexport) void __stdcall mtrGameControllerQuit(void)
     mtrLogWrite("Game controller support disabled", 0, MTR_LMT_INFO);
 }
 
-__declspec(dllexport) void __stdcall mtrGameControllerRefresh(void)
+MRT_EXPORT void MRT_CALL mtrGameControllerRefresh(void)
 {
     int i;
     int j;
@@ -272,7 +272,7 @@ __declspec(dllexport) void __stdcall mtrGameControllerRefresh(void)
     }
 }
 
-__declspec(dllexport) bool __stdcall mtrGameControllerButtonPress(uint8_t controllerNum,
+MRT_EXPORT bool MRT_CALL mtrGameControllerButtonPress(uint8_t controllerNum,
  uint8_t button)
 {
     if (mtrGameControllersCount > controllerNum)
@@ -288,7 +288,7 @@ __declspec(dllexport) bool __stdcall mtrGameControllerButtonPress(uint8_t contro
         return false;
 }
 
-__declspec(dllexport) bool __stdcall mtrGameControllerButtonRelease(uint8_t controllerNum,
+MRT_EXPORT bool MRT_CALL mtrGameControllerButtonRelease(uint8_t controllerNum,
  uint8_t button)
 {
     if (mtrGameControllersCount > controllerNum)
@@ -304,7 +304,7 @@ __declspec(dllexport) bool __stdcall mtrGameControllerButtonRelease(uint8_t cont
         return false;
 }
 
-__declspec(dllexport) bool __stdcall mtrGameControllerButtonPressed(uint8_t controllerNum,
+MRT_EXPORT bool MRT_CALL mtrGameControllerButtonPressed(uint8_t controllerNum,
  uint8_t button)
 {
     if (mtrGameControllersCount > controllerNum)
@@ -316,7 +316,7 @@ __declspec(dllexport) bool __stdcall mtrGameControllerButtonPressed(uint8_t cont
         return false;
 }
 
-__declspec(dllexport) int16_t __stdcall mtrGameControllerGetAxis(uint8_t controllerNum,
+MRT_EXPORT int16_t MRT_CALL mtrGameControllerGetAxis(uint8_t controllerNum,
  uint8_t axisNum)
 {
     if (mtrGameControllersCount > controllerNum)
@@ -328,7 +328,7 @@ __declspec(dllexport) int16_t __stdcall mtrGameControllerGetAxis(uint8_t control
         return 0;
 }
 
-__declspec(dllexport) float __stdcall mtrGameControllerGetAxis_f(uint8_t controllerNum,
+MRT_EXPORT float MRT_CALL mtrGameControllerGetAxis_f(uint8_t controllerNum,
  uint8_t axisNum)
 {
     if (mtrGameControllersCount > controllerNum)
@@ -343,7 +343,7 @@ __declspec(dllexport) float __stdcall mtrGameControllerGetAxis_f(uint8_t control
         return 0.0f;
 }
 
-__declspec(dllexport) int32_t __stdcall mtrGameControllerGetAxisDelta(uint8_t controllerNum,
+MRT_EXPORT int32_t MRT_CALL mtrGameControllerGetAxisDelta(uint8_t controllerNum,
  uint8_t axisNum)
 {
     if (mtrGameControllersCount > controllerNum)
@@ -356,7 +356,7 @@ __declspec(dllexport) int32_t __stdcall mtrGameControllerGetAxisDelta(uint8_t co
         return 0;
 }
 
-__declspec(dllexport) float __stdcall mtrGameControllerGetAxisDelta_f(uint8_t controllerNum,
+MRT_EXPORT float MRT_CALL mtrGameControllerGetAxisDelta_f(uint8_t controllerNum,
  uint8_t axisNum)
 {
     if (mtrGameControllersCount > controllerNum)
@@ -369,7 +369,7 @@ __declspec(dllexport) float __stdcall mtrGameControllerGetAxisDelta_f(uint8_t co
         return 0.0f;
 }
 
-__declspec(dllexport) int32_t __stdcall mtrGameControllerGetTrackballDeltaX(uint8_t controllerNum,
+MRT_EXPORT int32_t MRT_CALL mtrGameControllerGetTrackballDeltaX(uint8_t controllerNum,
  uint8_t trackballNum)
 {
     if (mtrGameControllersCount > controllerNum)
@@ -381,7 +381,7 @@ __declspec(dllexport) int32_t __stdcall mtrGameControllerGetTrackballDeltaX(uint
         return 0;
 }
 
-__declspec(dllexport) int32_t __stdcall mtrGameControllerGetTrackballDeltaY(uint8_t controllerNum,
+MRT_EXPORT int32_t MRT_CALL mtrGameControllerGetTrackballDeltaY(uint8_t controllerNum,
  uint8_t trackballNum)
 {
     if (mtrGameControllersCount > controllerNum)
@@ -393,7 +393,7 @@ __declspec(dllexport) int32_t __stdcall mtrGameControllerGetTrackballDeltaY(uint
         return 0;
 }
 
-__declspec(dllexport) void __stdcall mtrGameControllerGetTrackballDeltaXY(uint8_t controllerNum,
+MRT_EXPORT void MRT_CALL mtrGameControllerGetTrackballDeltaXY(uint8_t controllerNum,
  uint8_t trackballNum, int32_t *deltaX, int32_t *deltaY)
 {
     if (mtrGameControllersCount > controllerNum)
@@ -414,7 +414,7 @@ __declspec(dllexport) void __stdcall mtrGameControllerGetTrackballDeltaXY(uint8_
     }
 }
 
-__declspec(dllexport) uint8_t __stdcall mtrGameControllerGetPovHat(uint8_t controllerNum,
+MRT_EXPORT uint8_t MRT_CALL mtrGameControllerGetPovHat(uint8_t controllerNum,
  uint8_t povHatNum)
 {
     if (mtrGameControllersCount > controllerNum)

@@ -1,6 +1,7 @@
 #include "messagebox.h"
 
-void mtrShowSimpleMessageBox(uint8_t type, char *title, char *message)
+void MRT_CALL mtrShowSimpleMessageBox(uint8_t type, const char *title,
+ const char *message)
 {
     switch (type)
     {
@@ -24,7 +25,7 @@ void mtrShowSimpleMessageBox(uint8_t type, char *title, char *message)
     }
 }
 
-bool mtrShowYesNoMessageBox(char *title, char *message)
+bool MRT_CALL mtrShowYesNoMessageBox(const char *title, const char *message)
 {
     switch (MessageBox(0, message, title,
       MB_YESNO | MB_ICONQUESTION | MB_TASKMODAL))

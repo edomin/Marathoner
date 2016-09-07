@@ -2,7 +2,7 @@
 
 #include "marathoner/plugin_common.c"
 
-__declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
+MRT_EXPORT mtrReport* MRT_CALL mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -13,8 +13,7 @@ __declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
     return report;
 }
 
-__declspec(dllexport) bool __stdcall mtrTtfInit(uint32_t dmSize,
- uint32_t reservedCount)
+MRT_EXPORT bool MRT_CALL mtrTtfInit(uint32_t dmSize, uint32_t reservedCount)
 {
     SDL_version compiled;
     const SDL_version *linked;
@@ -52,15 +51,14 @@ __declspec(dllexport) bool __stdcall mtrTtfInit(uint32_t dmSize,
     return true;
 }
 
-__declspec(dllexport) void __stdcall mtrTtfQuit(void)
+MRT_EXPORT void MRT_CALL mtrTtfQuit(void)
 {
     mtrLogWrite("Destroying TTF font manager", 0, MTR_LMT_INFO);
     TTF_Quit();
     mtrLogWrite("TTF font manager destroyed", 0, MTR_LMT_INFO);
 }
 
-__declspec(dllexport) uint32_t __stdcall mtrTtfLoad(const char *filename,
- uint16_t size)
+MRT_EXPORT uint32_t MRT_CALL mtrTtfLoad(const char *filename, uint16_t size)
 {
     uint32_t    freeIndex;
     mtrTtf_t   *font;
@@ -86,15 +84,14 @@ __declspec(dllexport) uint32_t __stdcall mtrTtfLoad(const char *filename,
     return 0;
 }
 
-__declspec(dllexport) void __stdcall mtrTtfSetFontStyle(uint32_t fontNum,
- uint8_t style)
+MRT_EXPORT void MRT_CALL mtrTtfSetFontStyle(uint32_t fontNum, uint8_t style)
 {
     mtrTtf_t *font;
     font = (mtrTtf_t *)(&((mtrTtf_t *)mtrTtfKeeper->data)[fontNum]);
     TTF_SetFontStyle(font->font, style);
 }
 
-__declspec(dllexport) void __stdcall mtrTtfSetFontOutline(uint32_t fontNum,
+MRT_EXPORT void MRT_CALL mtrTtfSetFontOutline(uint32_t fontNum,
  uint16_t outline)
 {
     mtrTtf_t *font;
@@ -102,7 +99,7 @@ __declspec(dllexport) void __stdcall mtrTtfSetFontOutline(uint32_t fontNum,
     TTF_SetFontOutline(font->font, outline);
 }
 
-__declspec(dllexport) void __stdcall mtrTtfFree(uint32_t fontNum)
+MRT_EXPORT void MRT_CALL mtrTtfFree(uint32_t fontNum)
 {
     mtrTtf_t *font;
     if (fontNum != 0)
