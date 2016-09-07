@@ -8,7 +8,6 @@ void MRT_CALL mtrFileWriteLine(const char* filename, const char *text,
         file = fopen(filename, "w");
     else
         file = fopen(filename, "a");
-    fprintf(file, text);
-    fprintf(file, "\n");
+    fprintf(file, "%s\n", text);
     fclose(file);
 }
