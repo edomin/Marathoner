@@ -153,7 +153,7 @@ int main(int argc, char** argv)
     else
     {
         mtrNotify("Plugins not Found", 0, MTR_LMT_FATAL);
-        return 1;
+        return 2;
     }
     /* Getting plugins data */
     #ifdef __MINGW32__
