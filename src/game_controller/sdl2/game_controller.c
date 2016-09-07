@@ -2,7 +2,7 @@
 
 #include "marathoner/plugin_common.c"
 
-__declspec(dllexport) mtrReport* __stdcall mtrCreateReport(void)
+MRT_EXPORT mtrReport* MRT_CALL mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
