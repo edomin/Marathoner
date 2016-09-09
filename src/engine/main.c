@@ -114,7 +114,7 @@ int main(int argc, char** argv)
         hf = FindFirstFile("plugin/*", &FindFileData);
         if(hf == INVALID_HANDLE_VALUE)
         {
-            mtrNotify("Unable to open 'plugin/*' directory for counting files",
+            mtrNotify("Unable to open 'plugin/' directory for counting files",
              0, MTR_LMT_FATAL);
             return 1;
         }
@@ -158,7 +158,7 @@ int main(int argc, char** argv)
     /* Getting plugins data */
     #ifdef __MINGW32__
     hf = FindFirstFile("plugin/*", &FindFileData);
-    if(hf == INVALID_HANDLE_VALUE)
+    if(hf != INVALID_HANDLE_VALUE)
     #else
     d = opendir("./plugin/");
     if (d != NULL)
