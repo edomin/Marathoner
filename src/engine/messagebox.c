@@ -1,6 +1,6 @@
 #include "messagebox.h"
 
-void MRT_CALL mtrShowSimpleMessageBox(uint8_t type, const char *title,
+void MTR_CALL mtrShowSimpleMessageBox(uint8_t type, const char *title,
  const char *message)
 {
     switch (type)
@@ -46,7 +46,7 @@ void MRT_CALL mtrShowSimpleMessageBox(uint8_t type, const char *title,
     }
 }
 
-bool MRT_CALL mtrShowYesNoMessageBox(const char *title, const char *message)
+bool MTR_CALL mtrShowYesNoMessageBox(const char *title, const char *message)
 {
     #ifdef __MINGW32__
         switch (MessageBox(0, message, title,

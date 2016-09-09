@@ -2,7 +2,7 @@
 
 #include "marathoner/plugin_common.c"
 
-MRT_EXPORT mtrReport* MRT_CALL mtrCreateReport(void)
+MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -13,7 +13,7 @@ MRT_EXPORT mtrReport* MRT_CALL mtrCreateReport(void)
     return report;
 }
 
-MRT_EXPORT bool MRT_CALL mtrMouseInit(void)
+MTR_EXPORT bool MTR_CALL mtrMouseInit(void)
 {
     SDL_version compiled;
     SDL_version linked;
@@ -57,7 +57,7 @@ MRT_EXPORT bool MRT_CALL mtrMouseInit(void)
     return true;
 }
 
-MRT_EXPORT void MRT_CALL mtrMouseRefresh(void)
+MTR_EXPORT void MTR_CALL mtrMouseRefresh(void)
 {
     uint32_t mouseState;
     uint8_t i;
@@ -79,7 +79,7 @@ MRT_EXPORT void MRT_CALL mtrMouseRefresh(void)
     }
 }
 
-MRT_EXPORT bool MRT_CALL mtrMousePress(uint8_t button)
+MTR_EXPORT bool MTR_CALL mtrMousePress(uint8_t button)
 {
     if (button > 5)
         return false;
@@ -94,7 +94,7 @@ MRT_EXPORT bool MRT_CALL mtrMousePress(uint8_t button)
     }
 }
 
-MRT_EXPORT bool MRT_CALL mtrMouseRelease(uint8_t button)
+MTR_EXPORT bool MTR_CALL mtrMouseRelease(uint8_t button)
 {
     if (button > 5)
         return false;
@@ -109,7 +109,7 @@ MRT_EXPORT bool MRT_CALL mtrMouseRelease(uint8_t button)
     }
 }
 
-MRT_EXPORT bool MRT_CALL mtrMousePressed(uint8_t button)
+MTR_EXPORT bool MTR_CALL mtrMousePressed(uint8_t button)
 {
     if (button > 5)
         return false;
@@ -124,38 +124,38 @@ MRT_EXPORT bool MRT_CALL mtrMousePressed(uint8_t button)
 }
 
 /* Dummy function for future compatibility */
-MRT_EXPORT int8_t MRT_CALL mtrMouseGetWheelRelative(void)
+MTR_EXPORT int8_t MTR_CALL mtrMouseGetWheelRelative(void)
 {
     return 0;
 }
 
-MRT_EXPORT int16_t MRT_CALL mtrMouseGetX(void)
+MTR_EXPORT int16_t MTR_CALL mtrMouseGetX(void)
 {
     return mtrMouse.x;
 }
 
-MRT_EXPORT int16_t MRT_CALL mtrMouseGetY(void)
+MTR_EXPORT int16_t MTR_CALL mtrMouseGetY(void)
 {
     return mtrMouse.y;
 }
 
-MRT_EXPORT void MRT_CALL mtrMouseGetXY(int16_t *mouseX, int16_t *mouseY)
+MTR_EXPORT void MTR_CALL mtrMouseGetXY(int16_t *mouseX, int16_t *mouseY)
 {
     *mouseX = mtrMouse.x;
     *mouseY = mtrMouse.y;
 }
 
-MRT_EXPORT int16_t MRT_CALL mtrMouseGetDeltaX(void)
+MTR_EXPORT int16_t MTR_CALL mtrMouseGetDeltaX(void)
 {
     return mtrMouse.x - mtrMouse.previousX;
 }
 
-MRT_EXPORT int16_t MRT_CALL mtrMouseGetDeltaY(void)
+MTR_EXPORT int16_t MTR_CALL mtrMouseGetDeltaY(void)
 {
     return mtrMouse.y - mtrMouse.previousY;
 }
 
-MRT_EXPORT void MRT_CALL mtrMouseGetDeltaXY(int16_t *deltaX, int16_t *deltaY)
+MTR_EXPORT void MTR_CALL mtrMouseGetDeltaXY(int16_t *deltaX, int16_t *deltaY)
 {
     *deltaX = mtrMouse.x - mtrMouse.previousX;
     *deltaY = mtrMouse.y - mtrMouse.previousY;

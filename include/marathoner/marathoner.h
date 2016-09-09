@@ -26,20 +26,20 @@ typedef struct mtrPlugin{
 } mtrPlugin;
 
 /* Pointers to engine functions */
-typedef void     (MRT_CALL * mtrLogWriteFunc_t)(const char *, uint8_t, uint8_t);
-typedef void     (MRT_CALL * mtrLogWrite_sFunc_t)(const char *, uint8_t,
+typedef void     (MTR_CALL * mtrLogWriteFunc_t)(const char *, uint8_t, uint8_t);
+typedef void     (MTR_CALL * mtrLogWrite_sFunc_t)(const char *, uint8_t,
  uint8_t, const char *);
-typedef void     (MRT_CALL * mtrLogWrite_iFunc_t)(const char *, uint8_t,
+typedef void     (MTR_CALL * mtrLogWrite_iFunc_t)(const char *, uint8_t,
  uint8_t, int32_t);
-typedef void     (MRT_CALL * mtrLogWrite_dFunc_t)(const char *, uint8_t,
+typedef void     (MTR_CALL * mtrLogWrite_dFunc_t)(const char *, uint8_t,
  uint8_t, double);
-typedef void     (MRT_CALL * mtrNotifyFunc_t)(const char *, uint8_t, uint8_t);
-typedef void *   (MRT_CALL * mtrIndexkeeperCreateFunc_t)(uint32_t, uint32_t,
+typedef void     (MTR_CALL * mtrNotifyFunc_t)(const char *, uint8_t, uint8_t);
+typedef void *   (MTR_CALL * mtrIndexkeeperCreateFunc_t)(uint32_t, uint32_t,
                                                           size_t);
-typedef uint32_t (MRT_CALL * mtrIndexkeeperGetFreeIndexFunc_t)(void *);
-typedef void     (MRT_CALL * mtrIndexkeeperFreeIndexFunc_t)(void *, uint32_t);
-typedef void     (MRT_CALL * mtrIndexkeeperDestroyFunc_t)(void *);
-typedef void     (MRT_CALL * mtrFileWriteLineFunc_t)(const char *, const char *,
+typedef uint32_t (MTR_CALL * mtrIndexkeeperGetFreeIndexFunc_t)(void *);
+typedef void     (MTR_CALL * mtrIndexkeeperFreeIndexFunc_t)(void *, uint32_t);
+typedef void     (MTR_CALL * mtrIndexkeeperDestroyFunc_t)(void *);
+typedef void     (MTR_CALL * mtrFileWriteLineFunc_t)(const char *, const char *,
  uint8_t);
 
 /* loaded dll-plugin data */

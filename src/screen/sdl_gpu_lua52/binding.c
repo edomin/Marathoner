@@ -2,7 +2,7 @@
 
 #include "marathoner/plugin_common.c"
 
-MRT_EXPORT mtrReport* MRT_CALL mtrCreateReport(void)
+MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -15,7 +15,7 @@ MRT_EXPORT mtrReport* MRT_CALL mtrCreateReport(void)
     return report;
 }
 
-MRT_EXPORT void MRT_CALL mtrPluginInit(void)
+MTR_EXPORT void MTR_CALL mtrPluginInit(void)
 {
     bool ok;
     ok = true;

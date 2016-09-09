@@ -2,7 +2,7 @@
 
 #include "marathoner/plugin_common.c"
 
-MRT_EXPORT mtrReport* MRT_CALL mtrCreateReport(void)
+MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -14,7 +14,7 @@ MRT_EXPORT mtrReport* MRT_CALL mtrCreateReport(void)
     return report;
 }
 
-MRT_EXPORT bool MRT_CALL mtrPrimitiveInit(void)
+MTR_EXPORT bool MTR_CALL mtrPrimitiveInit(void)
 {
     SDL_version linked;
 
@@ -43,18 +43,18 @@ MRT_EXPORT bool MRT_CALL mtrPrimitiveInit(void)
     return true;
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveFill_rgb(uint8_t r, uint8_t g, uint8_t b)
+MTR_EXPORT void MTR_CALL mtrPrimitiveFill_rgb(uint8_t r, uint8_t g, uint8_t b)
 {
     GPU_ClearRGB(mtrScreen->screen, r, g, b);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveFill_rgba(uint8_t r, uint8_t g, uint8_t b,
+MTR_EXPORT void MTR_CALL mtrPrimitiveFill_rgba(uint8_t r, uint8_t g, uint8_t b,
  uint8_t a)
 {
     GPU_ClearRGBA(mtrScreen->screen, r, g, b, a);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveFill_c(uint32_t color)
+MTR_EXPORT void MTR_CALL mtrPrimitiveFill_c(uint32_t color)
 {
     uint8_t r;
     uint8_t g;
@@ -65,7 +65,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveFill_c(uint32_t color)
     GPU_ClearRGB(mtrScreen->screen, r, g, b);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveFill_ca(uint32_t color)
+MTR_EXPORT void MTR_CALL mtrPrimitiveFill_ca(uint32_t color)
 {
     uint8_t r;
     uint8_t g;
@@ -79,7 +79,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveFill_ca(uint32_t color)
     GPU_ClearRGBA(mtrScreen->screen, r, g, b, a);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitivePixel_rgb_f(float x, float y, uint8_t r,
+MTR_EXPORT void MTR_CALL mtrPrimitivePixel_rgb_f(float x, float y, uint8_t r,
  uint8_t g, uint8_t b)
 {
     SDL_Color sdl_color;
@@ -90,7 +90,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitivePixel_rgb_f(float x, float y, uint8_t r,
     GPU_Pixel(mtrScreen->screen, x, y, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitivePixel_rgba_f(float x, float y, uint8_t r,
+MTR_EXPORT void MTR_CALL mtrPrimitivePixel_rgba_f(float x, float y, uint8_t r,
  uint8_t g, uint8_t b, uint8_t a)
 {
     SDL_Color sdl_color;
@@ -101,7 +101,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitivePixel_rgba_f(float x, float y, uint8_t r,
     GPU_Pixel(mtrScreen->screen, x, y, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitivePixel_c_f(float x, float y, uint32_t color)
+MTR_EXPORT void MTR_CALL mtrPrimitivePixel_c_f(float x, float y, uint32_t color)
 {
     SDL_Color sdl_color;
     sdl_color.r = (uint8_t)(color >> 16);
@@ -112,7 +112,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitivePixel_c_f(float x, float y, uint32_t color)
     GPU_Pixel(mtrScreen->screen, x, y, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitivePixel_ca_f(float x, float y,
+MTR_EXPORT void MTR_CALL mtrPrimitivePixel_ca_f(float x, float y,
  uint32_t color)
 {
     SDL_Color sdl_color;
@@ -125,7 +125,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitivePixel_ca_f(float x, float y,
     GPU_Pixel(mtrScreen->screen, x, y, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveLine_rgb_f(float x1, float y1, float x2,
+MTR_EXPORT void MTR_CALL mtrPrimitiveLine_rgb_f(float x1, float y1, float x2,
  float y2, uint8_t r, uint8_t g, uint8_t b)
 {
     SDL_Color sdl_color;
@@ -136,7 +136,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveLine_rgb_f(float x1, float y1, float x2,
     GPU_Line(mtrScreen->screen, x1, y1, x2, y2, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveLine_rgba_f(float x1, float y1, float x2,
+MTR_EXPORT void MTR_CALL mtrPrimitiveLine_rgba_f(float x1, float y1, float x2,
  float y2, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
     SDL_Color sdl_color;
@@ -147,7 +147,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveLine_rgba_f(float x1, float y1, float x2,
     GPU_Line(mtrScreen->screen, x1, y1, x2, y2, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveLine_c_f(float x1, float y1, float x2,
+MTR_EXPORT void MTR_CALL mtrPrimitiveLine_c_f(float x1, float y1, float x2,
  float y2, uint32_t color)
 {
     SDL_Color sdl_color;
@@ -159,7 +159,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveLine_c_f(float x1, float y1, float x2,
     GPU_Line(mtrScreen->screen, x1, y1, x2, y2, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveLine_ca_f(float x1, float y1, float x2,
+MTR_EXPORT void MTR_CALL mtrPrimitiveLine_ca_f(float x1, float y1, float x2,
  float y2, uint32_t color)
 {
     SDL_Color sdl_color;
@@ -172,7 +172,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveLine_ca_f(float x1, float y1, float x2,
     GPU_Line(mtrScreen->screen, x1, y1, x2, y2, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveArc_rgb_f(float x, float y, float radius,
+MTR_EXPORT void MTR_CALL mtrPrimitiveArc_rgb_f(float x, float y, float radius,
  float startAngle, float endAngle, uint8_t r, uint8_t g, uint8_t b)
 {
     SDL_Color sdl_color;
@@ -183,7 +183,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveArc_rgb_f(float x, float y, float radius,
     GPU_Arc(mtrScreen->screen, x, y, radius, -endAngle, -startAngle, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveArc_rgba_f(float x, float y, float radius,
+MTR_EXPORT void MTR_CALL mtrPrimitiveArc_rgba_f(float x, float y, float radius,
  float startAngle, float endAngle, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
     SDL_Color sdl_color;
@@ -194,7 +194,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveArc_rgba_f(float x, float y, float radius,
     GPU_Arc(mtrScreen->screen, x, y, radius, -endAngle, -startAngle, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveArc_c_f(float x, float y, float radius,
+MTR_EXPORT void MTR_CALL mtrPrimitiveArc_c_f(float x, float y, float radius,
  float startAngle, float endAngle, uint32_t color)
 {
     SDL_Color sdl_color;
@@ -206,7 +206,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveArc_c_f(float x, float y, float radius,
     GPU_Arc(mtrScreen->screen, x, y, radius, -endAngle, -startAngle, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveArc_ca_f(float x, float y, float radius,
+MTR_EXPORT void MTR_CALL mtrPrimitiveArc_ca_f(float x, float y, float radius,
  float startAngle, float endAngle, uint32_t color)
 {
     SDL_Color sdl_color;
@@ -219,7 +219,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveArc_ca_f(float x, float y, float radius,
     GPU_Arc(mtrScreen->screen, x, y, radius, -endAngle, -startAngle, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveSegmentFilled_rgb_f(float x, float y,
+MTR_EXPORT void MTR_CALL mtrPrimitiveSegmentFilled_rgb_f(float x, float y,
  float radius, float startAngle, float endAngle, uint8_t r, uint8_t g,
  uint8_t b)
 {
@@ -232,7 +232,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveSegmentFilled_rgb_f(float x, float y,
      sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveSegmentFilled_rgba_f(float x, float y,
+MTR_EXPORT void MTR_CALL mtrPrimitiveSegmentFilled_rgba_f(float x, float y,
  float radius, float startAngle, float endAngle, uint8_t r, uint8_t g,
  uint8_t b, uint8_t a)
 {
@@ -245,7 +245,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveSegmentFilled_rgba_f(float x, float y,
      sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveSegmentFilled_c_f(float x, float y,
+MTR_EXPORT void MTR_CALL mtrPrimitiveSegmentFilled_c_f(float x, float y,
  float radius, float startAngle, float endAngle, uint32_t color)
 {
     SDL_Color sdl_color;
@@ -258,7 +258,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveSegmentFilled_c_f(float x, float y,
      sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveSegmentFilled_ca_f(float x, float y,
+MTR_EXPORT void MTR_CALL mtrPrimitiveSegmentFilled_ca_f(float x, float y,
  float radius, float startAngle, float endAngle, uint32_t color)
 {
     SDL_Color sdl_color;
@@ -272,7 +272,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveSegmentFilled_ca_f(float x, float y,
      sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveCircle_rgb_f(float x, float y,
+MTR_EXPORT void MTR_CALL mtrPrimitiveCircle_rgb_f(float x, float y,
  float radius, uint8_t r, uint8_t g, uint8_t b)
 {
     SDL_Color sdl_color;
@@ -283,7 +283,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveCircle_rgb_f(float x, float y,
     GPU_Circle(mtrScreen->screen, x, y, radius, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveCircle_rgba_f(float x, float y,
+MTR_EXPORT void MTR_CALL mtrPrimitiveCircle_rgba_f(float x, float y,
  float radius, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
     SDL_Color sdl_color;
@@ -294,7 +294,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveCircle_rgba_f(float x, float y,
     GPU_Circle(mtrScreen->screen, x, y, radius, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveCircle_c_f(float x, float y, float radius,
+MTR_EXPORT void MTR_CALL mtrPrimitiveCircle_c_f(float x, float y, float radius,
  uint32_t color)
 {
     SDL_Color sdl_color;
@@ -306,7 +306,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveCircle_c_f(float x, float y, float radius,
     GPU_Circle(mtrScreen->screen, x, y, radius, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveCircle_ca_f(float x, float y, float radius,
+MTR_EXPORT void MTR_CALL mtrPrimitiveCircle_ca_f(float x, float y, float radius,
  uint32_t color)
 {
     SDL_Color sdl_color;
@@ -319,7 +319,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveCircle_ca_f(float x, float y, float radius,
     GPU_Circle(mtrScreen->screen, x, y, radius, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveCircleFilled_rgb_f(float x, float y,
+MTR_EXPORT void MTR_CALL mtrPrimitiveCircleFilled_rgb_f(float x, float y,
  float radius, uint8_t r, uint8_t g, uint8_t b)
 {
     SDL_Color sdl_color;
@@ -330,7 +330,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveCircleFilled_rgb_f(float x, float y,
     GPU_CircleFilled(mtrScreen->screen, x, y, radius, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveCircleFilled_rgba_f(float x, float y,
+MTR_EXPORT void MTR_CALL mtrPrimitiveCircleFilled_rgba_f(float x, float y,
  float radius, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
     SDL_Color sdl_color;
@@ -341,7 +341,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveCircleFilled_rgba_f(float x, float y,
     GPU_CircleFilled(mtrScreen->screen, x, y, radius, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveCircleFilled_c_f(float x, float y,
+MTR_EXPORT void MTR_CALL mtrPrimitiveCircleFilled_c_f(float x, float y,
  float radius, uint32_t color)
 {
     SDL_Color sdl_color;
@@ -353,7 +353,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveCircleFilled_c_f(float x, float y,
     GPU_CircleFilled(mtrScreen->screen, x, y, radius, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveCircleFilled_ca_f(float x, float y,
+MTR_EXPORT void MTR_CALL mtrPrimitiveCircleFilled_ca_f(float x, float y,
  float radius, uint32_t color)
 {
     SDL_Color sdl_color;
@@ -366,7 +366,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveCircleFilled_ca_f(float x, float y,
     GPU_CircleFilled(mtrScreen->screen, x, y, radius, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveEllipse_rgb_f(float x, float y, float rx,
+MTR_EXPORT void MTR_CALL mtrPrimitiveEllipse_rgb_f(float x, float y, float rx,
  float ry, float angle, uint8_t r, uint8_t g, uint8_t b)
 {
     SDL_Color sdl_color;
@@ -377,7 +377,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveEllipse_rgb_f(float x, float y, float rx,
     GPU_Ellipse(mtrScreen->screen, x, y, rx, ry, -angle, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveEllipse_rgba_f(float x, float y, float rx,
+MTR_EXPORT void MTR_CALL mtrPrimitiveEllipse_rgba_f(float x, float y, float rx,
  float ry, float angle, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
     SDL_Color sdl_color;
@@ -388,7 +388,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveEllipse_rgba_f(float x, float y, float rx,
     GPU_Ellipse(mtrScreen->screen, x, y, rx, ry, -angle, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveEllipse_c_f(float x, float y, float rx,
+MTR_EXPORT void MTR_CALL mtrPrimitiveEllipse_c_f(float x, float y, float rx,
  float ry, float angle, uint32_t color)
 {
     SDL_Color sdl_color;
@@ -400,7 +400,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveEllipse_c_f(float x, float y, float rx,
     GPU_Ellipse(mtrScreen->screen, x, y, rx, ry, -angle, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveEllipse_ca_f(float x, float y, float rx,
+MTR_EXPORT void MTR_CALL mtrPrimitiveEllipse_ca_f(float x, float y, float rx,
  float ry, float angle, uint32_t color)
 {
     SDL_Color sdl_color;
@@ -413,7 +413,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveEllipse_ca_f(float x, float y, float rx,
     GPU_Ellipse(mtrScreen->screen, x, y, rx, ry, -angle, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveEllipseFilled_rgb_f(float x, float y,
+MTR_EXPORT void MTR_CALL mtrPrimitiveEllipseFilled_rgb_f(float x, float y,
  float rx, float ry, float angle, uint8_t r, uint8_t g, uint8_t b)
 {
     SDL_Color sdl_color;
@@ -424,7 +424,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveEllipseFilled_rgb_f(float x, float y,
     GPU_EllipseFilled(mtrScreen->screen, x, y, rx, ry, -angle, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveEllipseFilled_rgba_f(float x, float y,
+MTR_EXPORT void MTR_CALL mtrPrimitiveEllipseFilled_rgba_f(float x, float y,
  float rx, float ry, float angle, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
     SDL_Color sdl_color;
@@ -435,7 +435,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveEllipseFilled_rgba_f(float x, float y,
     GPU_EllipseFilled(mtrScreen->screen, x, y, rx, ry, -angle, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveEllipseFilled_c_f(float x, float y,
+MTR_EXPORT void MTR_CALL mtrPrimitiveEllipseFilled_c_f(float x, float y,
  float rx, float ry, float angle, uint32_t color)
 {
     SDL_Color sdl_color;
@@ -447,7 +447,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveEllipseFilled_c_f(float x, float y,
     GPU_EllipseFilled(mtrScreen->screen, x, y, rx, ry, -angle, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveEllipseFilled_ca_f(float x, float y,
+MTR_EXPORT void MTR_CALL mtrPrimitiveEllipseFilled_ca_f(float x, float y,
  float rx, float ry, float angle, uint32_t color)
 {
     SDL_Color sdl_color;
@@ -460,7 +460,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveEllipseFilled_ca_f(float x, float y,
     GPU_EllipseFilled(mtrScreen->screen, x, y, rx, ry, -angle, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveRingSegment_rgb_f(float x, float y,
+MTR_EXPORT void MTR_CALL mtrPrimitiveRingSegment_rgb_f(float x, float y,
  float innerRadius, float outerRadius, float startAngle, float endAngle,
  uint8_t r, uint8_t g, uint8_t b)
 {
@@ -473,7 +473,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveRingSegment_rgb_f(float x, float y,
      -startAngle, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveRingSegment_rgba_f(float x, float y,
+MTR_EXPORT void MTR_CALL mtrPrimitiveRingSegment_rgba_f(float x, float y,
  float innerRadius, float outerRadius, float startAngle, float endAngle,
  uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
@@ -486,7 +486,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveRingSegment_rgba_f(float x, float y,
      -startAngle, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveRingSegment_c_f(float x, float y,
+MTR_EXPORT void MTR_CALL mtrPrimitiveRingSegment_c_f(float x, float y,
  float innerRadius, float outerRadius, float startAngle, float endAngle,
  uint32_t color)
 {
@@ -500,7 +500,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveRingSegment_c_f(float x, float y,
      -startAngle, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveRingSegment_ca_f(float x, float y,
+MTR_EXPORT void MTR_CALL mtrPrimitiveRingSegment_ca_f(float x, float y,
  float innerRadius, float outerRadius, float startAngle, float endAngle,
  uint32_t color)
 {
@@ -515,7 +515,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveRingSegment_ca_f(float x, float y,
      -startAngle, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveRingSegmentFilled_rgb_f(float x, float y,
+MTR_EXPORT void MTR_CALL mtrPrimitiveRingSegmentFilled_rgb_f(float x, float y,
  float innerRadius, float outerRadius, float startAngle, float endAngle,
  uint8_t r, uint8_t g, uint8_t b)
 {
@@ -528,7 +528,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveRingSegmentFilled_rgb_f(float x, float y,
      -endAngle, -startAngle, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveRingSegmentFilled_rgba_f(float x, float y,
+MTR_EXPORT void MTR_CALL mtrPrimitiveRingSegmentFilled_rgba_f(float x, float y,
  float innerRadius, float outerRadius, float startAngle, float endAngle,
  uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
@@ -541,7 +541,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveRingSegmentFilled_rgba_f(float x, float y,
      -endAngle, -startAngle, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveRingSegmentFilled_c_f(float x, float y,
+MTR_EXPORT void MTR_CALL mtrPrimitiveRingSegmentFilled_c_f(float x, float y,
  float innerRadius, float outerRadius, float startAngle, float endAngle,
  uint32_t color)
 {
@@ -555,7 +555,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveRingSegmentFilled_c_f(float x, float y,
      -endAngle, -startAngle, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveRingSegmentFilled_ca_f(float x, float y,
+MTR_EXPORT void MTR_CALL mtrPrimitiveRingSegmentFilled_ca_f(float x, float y,
  float innerRadius, float outerRadius, float startAngle, float endAngle,
  uint32_t color)
 {
@@ -570,7 +570,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveRingSegmentFilled_ca_f(float x, float y,
      -endAngle, -startAngle, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveTriangle_rgb_f(float x1, float y1,
+MTR_EXPORT void MTR_CALL mtrPrimitiveTriangle_rgb_f(float x1, float y1,
  float x2, float y2, float x3, float y3, uint8_t r, uint8_t g, uint8_t b)
 {
     SDL_Color sdl_color;
@@ -581,7 +581,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveTriangle_rgb_f(float x1, float y1,
     GPU_Tri(mtrScreen->screen, x1, y1, x2, y2, x3, y3, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveTriangle_rgba_f(float x1, float y1,
+MTR_EXPORT void MTR_CALL mtrPrimitiveTriangle_rgba_f(float x1, float y1,
  float x2, float y2, float x3, float y3, uint8_t r, uint8_t g, uint8_t b,
  uint8_t a)
 {
@@ -593,7 +593,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveTriangle_rgba_f(float x1, float y1,
     GPU_Tri(mtrScreen->screen, x1, y1, x2, y2, x3, y3, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveTriangle_c_f(float x1, float y1, float x2,
+MTR_EXPORT void MTR_CALL mtrPrimitiveTriangle_c_f(float x1, float y1, float x2,
  float y2, float x3, float y3, uint32_t color)
 {
     SDL_Color sdl_color;
@@ -605,7 +605,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveTriangle_c_f(float x1, float y1, float x2,
     GPU_Tri(mtrScreen->screen, x1, y1, x2, y2, x3, y3, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveTriangle_ca_f(float x1, float y1, float x2,
+MTR_EXPORT void MTR_CALL mtrPrimitiveTriangle_ca_f(float x1, float y1, float x2,
  float y2, float x3, float y3, uint32_t color)
 {
     SDL_Color sdl_color;
@@ -618,7 +618,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveTriangle_ca_f(float x1, float y1, float x2,
     GPU_Tri(mtrScreen->screen, x1, y1, x2, y2, x3, y3, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveTriangleFilled_rgb_f(float x1, float y1,
+MTR_EXPORT void MTR_CALL mtrPrimitiveTriangleFilled_rgb_f(float x1, float y1,
  float x2, float y2, float x3, float y3, uint8_t r, uint8_t g, uint8_t b)
 {
     SDL_Color sdl_color;
@@ -629,7 +629,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveTriangleFilled_rgb_f(float x1, float y1,
     GPU_TriFilled(mtrScreen->screen, x1, y1, x2, y2, x3, y3, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveTriangleFilled_rgba_f(float x1, float y1,
+MTR_EXPORT void MTR_CALL mtrPrimitiveTriangleFilled_rgba_f(float x1, float y1,
  float x2, float y2, float x3, float y3, uint8_t r, uint8_t g, uint8_t b,
  uint8_t a)
 {
@@ -641,7 +641,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveTriangleFilled_rgba_f(float x1, float y1,
     GPU_TriFilled(mtrScreen->screen, x1, y1, x2, y2, x3, y3, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveTriangleFilled_c_f(float x1, float y1,
+MTR_EXPORT void MTR_CALL mtrPrimitiveTriangleFilled_c_f(float x1, float y1,
  float x2, float y2, float x3, float y3, uint32_t color)
 {
     SDL_Color sdl_color;
@@ -653,7 +653,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveTriangleFilled_c_f(float x1, float y1,
     GPU_TriFilled(mtrScreen->screen, x1, y1, x2, y2, x3, y3, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveTriangleFilled_ca_f(float x1, float y1,
+MTR_EXPORT void MTR_CALL mtrPrimitiveTriangleFilled_ca_f(float x1, float y1,
  float x2, float y2, float x3, float y3, uint32_t color)
 {
     SDL_Color sdl_color;
@@ -666,7 +666,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveTriangleFilled_ca_f(float x1, float y1,
     GPU_TriFilled(mtrScreen->screen, x1, y1, x2, y2, x3, y3, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveRectangle_rgb_f(float x1, float y1,
+MTR_EXPORT void MTR_CALL mtrPrimitiveRectangle_rgb_f(float x1, float y1,
  float x2, float y2, uint8_t r, uint8_t g, uint8_t b)
 {
     SDL_Color sdl_color;
@@ -677,7 +677,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveRectangle_rgb_f(float x1, float y1,
     GPU_Rectangle(mtrScreen->screen, x1, y1, x2, y2, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveRectangle_rgba_f(float x1, float y1,
+MTR_EXPORT void MTR_CALL mtrPrimitiveRectangle_rgba_f(float x1, float y1,
  float x2, float y2, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
     SDL_Color sdl_color;
@@ -688,7 +688,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveRectangle_rgba_f(float x1, float y1,
     GPU_Rectangle(mtrScreen->screen, x1, y1, x2, y2, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveRectangle_c_f(float x1, float y1, float x2,
+MTR_EXPORT void MTR_CALL mtrPrimitiveRectangle_c_f(float x1, float y1, float x2,
  float y2, uint32_t color)
 {
     SDL_Color sdl_color;
@@ -700,7 +700,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveRectangle_c_f(float x1, float y1, float x2,
     GPU_Rectangle(mtrScreen->screen, x1, y1, x2, y2, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveRectangle_ca_f(float x1, float y1,
+MTR_EXPORT void MTR_CALL mtrPrimitiveRectangle_ca_f(float x1, float y1,
  float x2, float y2, uint32_t color)
 {
     SDL_Color sdl_color;
@@ -713,7 +713,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveRectangle_ca_f(float x1, float y1,
     GPU_Rectangle(mtrScreen->screen, x1, y1, x2, y2, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveRectangleFilled_rgb_f(float x1, float y1,
+MTR_EXPORT void MTR_CALL mtrPrimitiveRectangleFilled_rgb_f(float x1, float y1,
  float x2, float y2, uint8_t r, uint8_t g, uint8_t b)
 {
     SDL_Color sdl_color;
@@ -724,7 +724,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveRectangleFilled_rgb_f(float x1, float y1,
     GPU_RectangleFilled(mtrScreen->screen, x1, y1, x2, y2, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveRectangleFilled_rgba_f(float x1, float y1,
+MTR_EXPORT void MTR_CALL mtrPrimitiveRectangleFilled_rgba_f(float x1, float y1,
  float x2, float y2, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
     SDL_Color sdl_color;
@@ -735,7 +735,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveRectangleFilled_rgba_f(float x1, float y1,
     GPU_RectangleFilled(mtrScreen->screen, x1, y1, x2, y2, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveRectangleFilled_c_f(float x1, float y1,
+MTR_EXPORT void MTR_CALL mtrPrimitiveRectangleFilled_c_f(float x1, float y1,
  float x2, float y2, uint32_t color)
 {
     SDL_Color sdl_color;
@@ -747,7 +747,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveRectangleFilled_c_f(float x1, float y1,
     GPU_RectangleFilled(mtrScreen->screen, x1, y1, x2, y2, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveRectangleFilled_ca_f(float x1, float y1,
+MTR_EXPORT void MTR_CALL mtrPrimitiveRectangleFilled_ca_f(float x1, float y1,
  float x2, float y2, uint32_t color)
 {
     SDL_Color sdl_color;
@@ -760,7 +760,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveRectangleFilled_ca_f(float x1, float y1,
     GPU_RectangleFilled(mtrScreen->screen, x1, y1, x2, y2, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveRoundedRectangle_rgb_f(float x1, float y1,
+MTR_EXPORT void MTR_CALL mtrPrimitiveRoundedRectangle_rgb_f(float x1, float y1,
  float x2, float y2, float radius, uint8_t r, uint8_t g, uint8_t b)
 {
     SDL_Color sdl_color;
@@ -771,7 +771,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveRoundedRectangle_rgb_f(float x1, float y1,
     GPU_RectangleRound(mtrScreen->screen, x1, y1, x2, y2, radius, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveRoundedRectangle_rgba_f(float x1, float y1,
+MTR_EXPORT void MTR_CALL mtrPrimitiveRoundedRectangle_rgba_f(float x1, float y1,
  float x2, float y2, float radius, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
     SDL_Color sdl_color;
@@ -782,7 +782,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveRoundedRectangle_rgba_f(float x1, float y1,
     GPU_RectangleRound(mtrScreen->screen, x1, y1, x2, y2, radius, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveRoundedRectangle_c_f(float x1, float y1,
+MTR_EXPORT void MTR_CALL mtrPrimitiveRoundedRectangle_c_f(float x1, float y1,
  float x2, float y2, float radius, uint32_t color)
 {
     SDL_Color sdl_color;
@@ -794,7 +794,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveRoundedRectangle_c_f(float x1, float y1,
     GPU_RectangleRound(mtrScreen->screen, x1, y1, x2, y2, radius, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveRoundedRectangle_ca_f(float x1, float y1,
+MTR_EXPORT void MTR_CALL mtrPrimitiveRoundedRectangle_ca_f(float x1, float y1,
  float x2, float y2, float radius, uint32_t color)
 {
     SDL_Color sdl_color;
@@ -807,7 +807,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveRoundedRectangle_ca_f(float x1, float y1,
     GPU_RectangleRound(mtrScreen->screen, x1, y1, x2, y2, radius, sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveRoundedRectangleFilled_rgb_f(float x1,
+MTR_EXPORT void MTR_CALL mtrPrimitiveRoundedRectangleFilled_rgb_f(float x1,
  float y1, float x2, float y2, float radius, uint8_t r, uint8_t g, uint8_t b)
 {
     SDL_Color sdl_color;
@@ -819,7 +819,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveRoundedRectangleFilled_rgb_f(float x1,
      sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveRoundedRectangleFilled_rgba_f(float x1,
+MTR_EXPORT void MTR_CALL mtrPrimitiveRoundedRectangleFilled_rgba_f(float x1,
  float y1, float x2, float y2, float radius, uint8_t r, uint8_t g, uint8_t b,
  uint8_t a)
 {
@@ -832,7 +832,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveRoundedRectangleFilled_rgba_f(float x1,
      sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveRoundedRectangleFilled_c_f(float x1,
+MTR_EXPORT void MTR_CALL mtrPrimitiveRoundedRectangleFilled_c_f(float x1,
  float y1, float x2, float y2, float radius, uint32_t color)
 {
     SDL_Color sdl_color;
@@ -845,7 +845,7 @@ MRT_EXPORT void MRT_CALL mtrPrimitiveRoundedRectangleFilled_c_f(float x1,
      sdl_color);
 }
 
-MRT_EXPORT void MRT_CALL mtrPrimitiveRoundedRectangleFilled_ca_f(float x1,
+MTR_EXPORT void MTR_CALL mtrPrimitiveRoundedRectangleFilled_ca_f(float x1,
  float y1, float x2, float y2, float radius, uint32_t color)
 {
     SDL_Color sdl_color;

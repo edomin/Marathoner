@@ -2,7 +2,7 @@
 
 #include "marathoner/plugin_common.c"
 
-MRT_EXPORT mtrReport* MRT_CALL mtrCreateReport(void)
+MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -13,7 +13,7 @@ MRT_EXPORT mtrReport* MRT_CALL mtrCreateReport(void)
     return report;
 }
 
-MRT_EXPORT void MRT_CALL mtrScreenInit(uint16_t width,
+MTR_EXPORT void MTR_CALL mtrScreenInit(uint16_t width,
  uint16_t height)
 {
     SDL_version         compiled;
@@ -161,7 +161,7 @@ MRT_EXPORT void MRT_CALL mtrScreenInit(uint16_t width,
     mtrLogWrite("Screen initialized", 0, MTR_LMT_INFO);
 }
 
-MRT_EXPORT void MRT_CALL mtrScreenQuit(void)
+MTR_EXPORT void MTR_CALL mtrScreenQuit(void)
 {
     SDL_DestroyRenderer(mtrScreen->renderer);
     SDL_DestroyWindow(mtrScreen->screen);
@@ -169,12 +169,12 @@ MRT_EXPORT void MRT_CALL mtrScreenQuit(void)
     mtrLogWrite("Screen destroyed", 0, MTR_LMT_INFO);
 }
 
-MRT_EXPORT void MRT_CALL mtrScreenFlip(void)
+MTR_EXPORT void MTR_CALL mtrScreenFlip(void)
 {
     SDL_RenderPresent(mtrScreen->renderer);
 }
 
-MRT_EXPORT mtrScreen_t *MRT_CALL mtrGetScreen(void)
+MTR_EXPORT mtrScreen_t *MTR_CALL mtrGetScreen(void)
 {
     return mtrScreen;
 }

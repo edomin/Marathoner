@@ -11,60 +11,60 @@
 
 lua_State *mtrVm;
 
-typedef lua_State* (MRT_CALL * mtrScriptsGetVmFunc)(void);
+typedef lua_State* (MTR_CALL * mtrScriptsGetVmFunc)(void);
 mtrScriptsGetVmFunc mtrScriptsGetVm;
 
-typedef void (MRT_CALL * mtrScriptsRegisterFunctionFunc)(lua_CFunction, char *);
+typedef void (MTR_CALL * mtrScriptsRegisterFunctionFunc)(lua_CFunction, char *);
 mtrScriptsRegisterFunctionFunc mtrScriptsRegisterFunction;
 
-typedef void (MRT_CALL * mtrScriptsRegisterNumericVariableFunc)(char *, double);
+typedef void (MTR_CALL * mtrScriptsRegisterNumericVariableFunc)(char *, double);
 mtrScriptsRegisterNumericVariableFunc mtrScriptsRegisterNumericVariable;
 
-typedef bool (MRT_CALL * mtrGameControllerInitFunc)(void);
+typedef bool (MTR_CALL * mtrGameControllerInitFunc)(void);
 mtrGameControllerInitFunc mtrGameControllerInit;
 
-typedef void (MRT_CALL * mtrGameControllerQuitFunc)(void);
+typedef void (MTR_CALL * mtrGameControllerQuitFunc)(void);
 mtrGameControllerQuitFunc mtrGameControllerQuit;
 
-typedef void (MRT_CALL * mtrGameControllerRefreshFunc)(void);
+typedef void (MTR_CALL * mtrGameControllerRefreshFunc)(void);
 mtrGameControllerRefreshFunc mtrGameControllerRefresh;
 
-typedef bool (MRT_CALL * mtrGameControllerButtonPressFunc)(uint8_t, uint8_t);
+typedef bool (MTR_CALL * mtrGameControllerButtonPressFunc)(uint8_t, uint8_t);
 mtrGameControllerButtonPressFunc mtrGameControllerButtonPress;
 
-typedef bool (MRT_CALL * mtrGameControllerButtonReleaseFunc)(uint8_t, uint8_t);
+typedef bool (MTR_CALL * mtrGameControllerButtonReleaseFunc)(uint8_t, uint8_t);
 mtrGameControllerButtonReleaseFunc mtrGameControllerButtonRelease;
 
-typedef bool (MRT_CALL * mtrGameControllerButtonPressedFunc)(uint8_t, uint8_t);
+typedef bool (MTR_CALL * mtrGameControllerButtonPressedFunc)(uint8_t, uint8_t);
 mtrGameControllerButtonPressedFunc mtrGameControllerButtonPressed;
 
-typedef int16_t (MRT_CALL * mtrGameControllerGetAxisFunc)(uint8_t, uint8_t);
+typedef int16_t (MTR_CALL * mtrGameControllerGetAxisFunc)(uint8_t, uint8_t);
 mtrGameControllerGetAxisFunc mtrGameControllerGetAxis;
 
-typedef float (MRT_CALL * mtrGameControllerGetAxis_fFunc)(uint8_t, uint8_t);
+typedef float (MTR_CALL * mtrGameControllerGetAxis_fFunc)(uint8_t, uint8_t);
 mtrGameControllerGetAxis_fFunc mtrGameControllerGetAxis_f;
 
-typedef int32_t (MRT_CALL * mtrGameControllerGetAxisDeltaFunc)(uint8_t,
+typedef int32_t (MTR_CALL * mtrGameControllerGetAxisDeltaFunc)(uint8_t,
  uint8_t);
 mtrGameControllerGetAxisDeltaFunc mtrGameControllerGetAxisDelta;
 
-typedef float (MRT_CALL * mtrGameControllerGetAxisDelta_fFunc)(uint8_t,
+typedef float (MTR_CALL * mtrGameControllerGetAxisDelta_fFunc)(uint8_t,
  uint8_t);
 mtrGameControllerGetAxisDelta_fFunc mtrGameControllerGetAxisDelta_f;
 
-typedef int32_t (MRT_CALL * mtrGameControllerGetTrackballDeltaXFunc)(uint8_t,
+typedef int32_t (MTR_CALL * mtrGameControllerGetTrackballDeltaXFunc)(uint8_t,
  uint8_t);
 mtrGameControllerGetTrackballDeltaXFunc mtrGameControllerGetTrackballDeltaX;
 
-typedef int32_t (MRT_CALL * mtrGameControllerGetTrackballDeltaYFunc)(uint8_t,
+typedef int32_t (MTR_CALL * mtrGameControllerGetTrackballDeltaYFunc)(uint8_t,
  uint8_t);
 mtrGameControllerGetTrackballDeltaYFunc mtrGameControllerGetTrackballDeltaY;
 
-typedef void (MRT_CALL * mtrGameControllerGetTrackballDeltaXYFunc)(uint8_t,
+typedef void (MTR_CALL * mtrGameControllerGetTrackballDeltaXYFunc)(uint8_t,
  uint8_t, int32_t *, int32_t *);
 mtrGameControllerGetTrackballDeltaXYFunc mtrGameControllerGetTrackballDeltaXY;
 
-typedef uint8_t (MRT_CALL * mtrGameControllerGetPovHatFunc)(uint8_t, uint8_t);
+typedef uint8_t (MTR_CALL * mtrGameControllerGetPovHatFunc)(uint8_t, uint8_t);
 mtrGameControllerGetPovHatFunc mtrGameControllerGetPovHat;
 
 int mtrSF_GameControllerInit(lua_State* l);

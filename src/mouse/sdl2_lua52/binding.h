@@ -11,49 +11,49 @@
 
 lua_State *mtrVm;
 
-typedef lua_State* (MRT_CALL * mtrScriptsGetVmFunc)(void);
+typedef lua_State* (MTR_CALL * mtrScriptsGetVmFunc)(void);
 mtrScriptsGetVmFunc mtrScriptsGetVm;
 
-typedef void (MRT_CALL * mtrScriptsRegisterFunctionFunc)(lua_CFunction, char *);
+typedef void (MTR_CALL * mtrScriptsRegisterFunctionFunc)(lua_CFunction, char *);
 mtrScriptsRegisterFunctionFunc mtrScriptsRegisterFunction;
 
-typedef void (MRT_CALL * mtrScriptsRegisterNumericVariableFunc)(char *, double);
+typedef void (MTR_CALL * mtrScriptsRegisterNumericVariableFunc)(char *, double);
 mtrScriptsRegisterNumericVariableFunc mtrScriptsRegisterNumericVariable;
 
-typedef bool (MRT_CALL * mtrMouseInitFunc)(void);
+typedef bool (MTR_CALL * mtrMouseInitFunc)(void);
 mtrMouseInitFunc mtrMouseInit;
 
-typedef void (MRT_CALL * mtrMouseRefreshFunc)(void);
+typedef void (MTR_CALL * mtrMouseRefreshFunc)(void);
 mtrMouseRefreshFunc mtrMouseRefresh;
 
-typedef bool (MRT_CALL * mtrMousePressFunc)(uint8_t);
+typedef bool (MTR_CALL * mtrMousePressFunc)(uint8_t);
 mtrMousePressFunc mtrMousePress;
 
-typedef bool (MRT_CALL * mtrMouseReleaseFunc)(uint8_t);
+typedef bool (MTR_CALL * mtrMouseReleaseFunc)(uint8_t);
 mtrMouseReleaseFunc mtrMouseRelease;
 
-typedef bool (MRT_CALL * mtrMousePressedFunc)(uint8_t);
+typedef bool (MTR_CALL * mtrMousePressedFunc)(uint8_t);
 mtrMousePressedFunc mtrMousePressed;
 
-typedef uint8_t (MRT_CALL * mtrMouseGetWheelRelativeFunc)(void);
+typedef uint8_t (MTR_CALL * mtrMouseGetWheelRelativeFunc)(void);
 mtrMouseGetWheelRelativeFunc mtrMouseGetWheelRelative;
 
-typedef int16_t (MRT_CALL * mtrMouseGetXFunc)(void);
+typedef int16_t (MTR_CALL * mtrMouseGetXFunc)(void);
 mtrMouseGetXFunc mtrMouseGetX;
 
-typedef int16_t (MRT_CALL * mtrMouseGetYFunc)(void);
+typedef int16_t (MTR_CALL * mtrMouseGetYFunc)(void);
 mtrMouseGetYFunc mtrMouseGetY;
 
-typedef void (MRT_CALL * mtrMouseGetXYFunc)(int16_t *, int16_t *);
+typedef void (MTR_CALL * mtrMouseGetXYFunc)(int16_t *, int16_t *);
 mtrMouseGetXYFunc mtrMouseGetXY;
 
-typedef int16_t (MRT_CALL * mtrMouseGetDeltaXFunc)(void);
+typedef int16_t (MTR_CALL * mtrMouseGetDeltaXFunc)(void);
 mtrMouseGetDeltaXFunc mtrMouseGetDeltaX;
 
-typedef int16_t (MRT_CALL * mtrMouseGetDeltaYFunc)(void);
+typedef int16_t (MTR_CALL * mtrMouseGetDeltaYFunc)(void);
 mtrMouseGetDeltaYFunc mtrMouseGetDeltaY;
 
-typedef void (MRT_CALL * mtrMouseGetDeltaXYFunc)(int16_t *, int16_t *);
+typedef void (MTR_CALL * mtrMouseGetDeltaXYFunc)(int16_t *, int16_t *);
 mtrMouseGetDeltaXYFunc mtrMouseGetDeltaXY;
 
 int mtrSF_MouseInit(lua_State* l);

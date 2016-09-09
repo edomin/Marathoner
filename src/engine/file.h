@@ -7,7 +7,7 @@
 
 #include "marathoner/engine.h"
 
-void MRT_CALL mtrFileWriteLine(const char* filename, const char *text,
+void MTR_CALL mtrFileWriteLine(const char* filename, const char *text,
  uint8_t mode);
 
 #endif

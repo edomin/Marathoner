@@ -1,6 +1,6 @@
 #include "indexkeeper.h"
 
-void *MRT_CALL mtrIndexkeeperCreate(uint32_t dmSize, uint32_t reservedCount,
+void *MTR_CALL mtrIndexkeeperCreate(uint32_t dmSize, uint32_t reservedCount,
                                      size_t datasize)
 {
     mtrIndexkeeper_t *indexkeeper;
@@ -86,7 +86,7 @@ void *MRT_CALL mtrIndexkeeperCreate(uint32_t dmSize, uint32_t reservedCount,
     return (void *)indexkeeper;
 }
 
-uint32_t MRT_CALL mtrIndexkeeperGetFreeIndex(void *ik)
+uint32_t MTR_CALL mtrIndexkeeperGetFreeIndex(void *ik)
 {
     uint32_t i;
     uint8_t  j;
@@ -140,7 +140,7 @@ uint32_t MRT_CALL mtrIndexkeeperGetFreeIndex(void *ik)
     return dataNum;
 }
 
-void MRT_CALL mtrIndexkeeperFreeIndex(void *ik, uint32_t index)
+void MTR_CALL mtrIndexkeeperFreeIndex(void *ik, uint32_t index)
 {
     uint16_t          mapNumberNum;
     uint8_t           bitNum;
@@ -152,7 +152,7 @@ void MRT_CALL mtrIndexkeeperFreeIndex(void *ik, uint32_t index)
     indexkeeper->dataMap[mapNumberNum] = indexkeeper->dataMap[mapNumberNum] - (1 << bitNum);
 }
 
-void MRT_CALL mtrIndexkeeperDestroy(void *ik)
+void MTR_CALL mtrIndexkeeperDestroy(void *ik)
 {
     mtrIndexkeeper_t *indexkeeper;
     indexkeeper = (mtrIndexkeeper_t *) ik;

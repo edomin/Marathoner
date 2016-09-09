@@ -10,31 +10,31 @@
 
 lua_State *mtrVm;
 
-typedef lua_State* (MRT_CALL * mtrScriptsGetVmFunc)(void);
+typedef lua_State* (MTR_CALL * mtrScriptsGetVmFunc)(void);
 mtrScriptsGetVmFunc mtrScriptsGetVm;
 
-typedef void (MRT_CALL * mtrScriptsRegisterFunctionFunc)(lua_CFunction, char *);
+typedef void (MTR_CALL * mtrScriptsRegisterFunctionFunc)(lua_CFunction, char *);
 mtrScriptsRegisterFunctionFunc mtrScriptsRegisterFunction;
 
-typedef void (MRT_CALL * mtrScriptsRegisterNumericVariableFunc)(char *, double);
+typedef void (MTR_CALL * mtrScriptsRegisterNumericVariableFunc)(char *, double);
 mtrScriptsRegisterNumericVariableFunc mtrScriptsRegisterNumericVariable;
 
-typedef uint32_t (MRT_CALL * mtrColorAssembleRGBFunc)(uint8_t, uint8_t, uint8_t);
+typedef uint32_t (MTR_CALL * mtrColorAssembleRGBFunc)(uint8_t, uint8_t, uint8_t);
 mtrColorAssembleRGBFunc mtrColorAssembleRGB;
 
-typedef uint32_t (MRT_CALL * mtrColorAssembleRGBAFunc)(uint8_t, uint8_t, uint8_t, uint8_t);
+typedef uint32_t (MTR_CALL * mtrColorAssembleRGBAFunc)(uint8_t, uint8_t, uint8_t, uint8_t);
 mtrColorAssembleRGBAFunc mtrColorAssembleRGBA;
 
-typedef void (MRT_CALL * mtrColorSplitRGBFunc)(uint32_t, uint8_t *, uint8_t *, uint8_t *);
+typedef void (MTR_CALL * mtrColorSplitRGBFunc)(uint32_t, uint8_t *, uint8_t *, uint8_t *);
 mtrColorSplitRGBFunc mtrColorSplitRGB;
 
-typedef void (MRT_CALL * mtrColorSplitRGBAFunc)(uint32_t, uint8_t *, uint8_t *, uint8_t *, uint8_t *);
+typedef void (MTR_CALL * mtrColorSplitRGBAFunc)(uint32_t, uint8_t *, uint8_t *, uint8_t *, uint8_t *);
 mtrColorSplitRGBAFunc mtrColorSplitRGBA;
 
-typedef uint32_t (MRT_CALL * mtrColorRGBtoRGBAFunc)(uint32_t);
+typedef uint32_t (MTR_CALL * mtrColorRGBtoRGBAFunc)(uint32_t);
 mtrColorRGBtoRGBAFunc mtrColorRGBtoRGBA;
 
-typedef uint32_t (MRT_CALL * mtrColorRGBAtoRGBFunc)(uint32_t);
+typedef uint32_t (MTR_CALL * mtrColorRGBAtoRGBFunc)(uint32_t);
 mtrColorRGBAtoRGBFunc mtrColorRGBAtoRGB;
 
 int mtrSF_ColorAssembleRGB(lua_State* l);

@@ -2,7 +2,7 @@
 
 #include "marathoner/plugin_common.c"
 
-MRT_EXPORT mtrReport* MRT_CALL mtrCreateReport(void)
+MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -13,7 +13,7 @@ MRT_EXPORT mtrReport* MRT_CALL mtrCreateReport(void)
     return report;
 }
 
-MRT_EXPORT void MRT_CALL mtrScreenInit(uint16_t width, uint16_t height)
+MTR_EXPORT void MTR_CALL mtrScreenInit(uint16_t width, uint16_t height)
 {
     mtrLogWrite("Creating Window", 0, MTR_LMT_INFO);
     mtrScreen = malloc(sizeof(mtrScreen_t));
@@ -27,19 +27,19 @@ MRT_EXPORT void MRT_CALL mtrScreenInit(uint16_t width, uint16_t height)
         mtrNotify("Unable to create window", 1, MTR_LMT_ERROR);
 }
 
-MRT_EXPORT void MRT_CALL mtrScreenQuit(void)
+MTR_EXPORT void MTR_CALL mtrScreenQuit(void)
 {
     GPU_Quit();
     free(mtrScreen);
     mtrLogWrite("Window destroyed", 0, MTR_LMT_INFO);
 }
 
-MRT_EXPORT void MRT_CALL mtrScreenFlip(void)
+MTR_EXPORT void MTR_CALL mtrScreenFlip(void)
 {
     GPU_Flip(mtrScreen->screen);
 }
 
-MRT_EXPORT mtrScreen_t *MRT_CALL mtrGetScreen(void)
+MTR_EXPORT mtrScreen_t *MTR_CALL mtrGetScreen(void)
 {
     return mtrScreen;
 }

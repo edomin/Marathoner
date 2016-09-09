@@ -1,6 +1,6 @@
 #include "log.h"
 
-void MRT_CALL mtrLogWriteMeta(uint8_t messageType, uint8_t level)
+void MTR_CALL mtrLogWriteMeta(uint8_t messageType, uint8_t level)
 {
     uint8_t i;
 
@@ -68,7 +68,7 @@ void MRT_CALL mtrLogWriteMeta(uint8_t messageType, uint8_t level)
     #endif
 }
 
-void MRT_CALL mtrLogInit(void)
+void MTR_CALL mtrLogInit(void)
 {
     time(&mtrCurrentTime);
     mtrNow = localtime(&mtrCurrentTime);
@@ -85,7 +85,7 @@ void MRT_CALL mtrLogInit(void)
     #endif
 }
 
-void MRT_CALL mtrLogWrite(const char *message, uint8_t level,
+void MTR_CALL mtrLogWrite(const char *message, uint8_t level,
  uint8_t messageType)
 {
     mtrLogWriteMeta(messageType, level);
@@ -97,7 +97,7 @@ void MRT_CALL mtrLogWrite(const char *message, uint8_t level,
     #endif
 }
 
-void MRT_CALL mtrLogWrite_s(const char *message, uint8_t level,
+void MTR_CALL mtrLogWrite_s(const char *message, uint8_t level,
  uint8_t messageType, const char * argument)
 {
     mtrLogWriteMeta(messageType, level);
@@ -109,7 +109,7 @@ void MRT_CALL mtrLogWrite_s(const char *message, uint8_t level,
     #endif
 }
 
-void MRT_CALL mtrLogWrite_i(const char *message, uint8_t level,
+void MTR_CALL mtrLogWrite_i(const char *message, uint8_t level,
  uint8_t messageType, int32_t argument)
 {
     mtrLogWriteMeta(messageType, level);
@@ -121,7 +121,7 @@ void MRT_CALL mtrLogWrite_i(const char *message, uint8_t level,
     #endif
 }
 
-void MRT_CALL mtrLogWrite_d(const char *message, uint8_t level,
+void MTR_CALL mtrLogWrite_d(const char *message, uint8_t level,
  uint8_t messageType, double argument)
 {
     mtrLogWriteMeta(messageType, level);

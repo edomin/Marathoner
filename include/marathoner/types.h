@@ -12,8 +12,8 @@
  * mtrLoadSymbolName    - load function from shared library
  * mtrCloseLibrary      - close shared library
  * Macro (other):
- * MRT_CALL             - calling convention
- * MRT_EXPORT           - function's attribute for exporting it from shared library
+ * MTR_CALL             - calling convention
+ * MTR_EXPORT           - function's attribute for exporting it from shared library
  */
 
 #ifdef __MINGW32__
@@ -23,15 +23,15 @@
     #define mtrLoadSymbolName GetProcAddress
     #define mtrCloseLibrary FreeLibrary
     #define MTR_CALL __stdcall
-    #define MRT_EXPORT __declspec(dllexport)
+    #define MTR_EXPORT __declspec(dllexport)
 #else
     #include <emscripten.h>
     typedef void* mtr_lhandler;
     #define mtrLoadLibrary(filename) dlopen(filename, RTLD_LAZY)
     #define mtrLoadSymbolName dlsym
     #define mtrCloseLibrary dlclose
-    #define MRT_CALL
-    #define MRT_EXPORT EMSCRIPTEN_KEEPALIVE
+    #define MTR_CALL
+    #define MTR_EXPORT EMSCRIPTEN_KEEPALIVE
 #endif
 
 /*

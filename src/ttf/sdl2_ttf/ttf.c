@@ -2,7 +2,7 @@
 
 #include "marathoner/plugin_common.c"
 
-MRT_EXPORT mtrReport* MRT_CALL mtrCreateReport(void)
+MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -13,7 +13,7 @@ MRT_EXPORT mtrReport* MRT_CALL mtrCreateReport(void)
     return report;
 }
 
-MRT_EXPORT bool MRT_CALL mtrTtfInit(uint32_t dmSize, uint32_t reservedCount)
+MTR_EXPORT bool MTR_CALL mtrTtfInit(uint32_t dmSize, uint32_t reservedCount)
 {
     SDL_version compiled;
     const SDL_version *linked;
@@ -51,14 +51,14 @@ MRT_EXPORT bool MRT_CALL mtrTtfInit(uint32_t dmSize, uint32_t reservedCount)
     return true;
 }
 
-MRT_EXPORT void MRT_CALL mtrTtfQuit(void)
+MTR_EXPORT void MTR_CALL mtrTtfQuit(void)
 {
     mtrLogWrite("Destroying TTF font manager", 0, MTR_LMT_INFO);
     TTF_Quit();
     mtrLogWrite("TTF font manager destroyed", 0, MTR_LMT_INFO);
 }
 
-MRT_EXPORT uint32_t MRT_CALL mtrTtfLoad(const char *filename, uint16_t size)
+MTR_EXPORT uint32_t MTR_CALL mtrTtfLoad(const char *filename, uint16_t size)
 {
     uint32_t    freeIndex;
     mtrTtf_t   *font;
@@ -84,14 +84,14 @@ MRT_EXPORT uint32_t MRT_CALL mtrTtfLoad(const char *filename, uint16_t size)
     return 0;
 }
 
-MRT_EXPORT void MRT_CALL mtrTtfSetFontStyle(uint32_t fontNum, uint8_t style)
+MTR_EXPORT void MTR_CALL mtrTtfSetFontStyle(uint32_t fontNum, uint8_t style)
 {
     mtrTtf_t *font;
     font = (mtrTtf_t *)(&((mtrTtf_t *)mtrTtfKeeper->data)[fontNum]);
     TTF_SetFontStyle(font->font, style);
 }
 
-MRT_EXPORT void MRT_CALL mtrTtfSetFontOutline(uint32_t fontNum,
+MTR_EXPORT void MTR_CALL mtrTtfSetFontOutline(uint32_t fontNum,
  uint16_t outline)
 {
     mtrTtf_t *font;
@@ -99,7 +99,7 @@ MRT_EXPORT void MRT_CALL mtrTtfSetFontOutline(uint32_t fontNum,
     TTF_SetFontOutline(font->font, outline);
 }
 
-MRT_EXPORT void MRT_CALL mtrTtfFree(uint32_t fontNum)
+MTR_EXPORT void MTR_CALL mtrTtfFree(uint32_t fontNum)
 {
     mtrTtf_t *font;
     if (fontNum != 0)

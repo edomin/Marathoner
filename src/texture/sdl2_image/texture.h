@@ -35,7 +35,7 @@ typedef struct mtrTexture_t {
 mtrScreen_t *mtrScreen; /* this will imported from screen plugin */
 mtrIndexkeeper_t *mtrTextureKeeper;
 
-typedef mtrScreen_t *(MRT_CALL * mtrGetScreenFunc)(void);
+typedef mtrScreen_t *(MTR_CALL * mtrGetScreenFunc)(void);
 mtrGetScreenFunc mtrGetScreen;
 
 #endif

@@ -2,7 +2,7 @@
 
 #include "marathoner/plugin_common.c"
 
-MRT_EXPORT mtrReport* MRT_CALL mtrCreateReport(void)
+MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -13,7 +13,7 @@ MRT_EXPORT mtrReport* MRT_CALL mtrCreateReport(void)
     return report;
 }
 
-MRT_EXPORT bool MRT_CALL mtrGameControllerInit(void)
+MTR_EXPORT bool MTR_CALL mtrGameControllerInit(void)
 {
     SDL_version compiled;
     SDL_version linked;
@@ -207,7 +207,7 @@ MRT_EXPORT bool MRT_CALL mtrGameControllerInit(void)
     return true;
 }
 
-MRT_EXPORT void MRT_CALL mtrGameControllerQuit(void)
+MTR_EXPORT void MTR_CALL mtrGameControllerQuit(void)
 {
     uint8_t i;
     mtrLogWrite("Disabling game controller support", 0, MTR_LMT_INFO);
@@ -237,7 +237,7 @@ MRT_EXPORT void MRT_CALL mtrGameControllerQuit(void)
     mtrLogWrite("Game controller support disabled", 0, MTR_LMT_INFO);
 }
 
-MRT_EXPORT void MRT_CALL mtrGameControllerRefresh(void)
+MTR_EXPORT void MTR_CALL mtrGameControllerRefresh(void)
 {
     int i;
     int j;
@@ -272,7 +272,7 @@ MRT_EXPORT void MRT_CALL mtrGameControllerRefresh(void)
     }
 }
 
-MRT_EXPORT bool MRT_CALL mtrGameControllerButtonPress(uint8_t controllerNum,
+MTR_EXPORT bool MTR_CALL mtrGameControllerButtonPress(uint8_t controllerNum,
  uint8_t button)
 {
     if (mtrGameControllersCount > controllerNum)
@@ -288,7 +288,7 @@ MRT_EXPORT bool MRT_CALL mtrGameControllerButtonPress(uint8_t controllerNum,
         return false;
 }
 
-MRT_EXPORT bool MRT_CALL mtrGameControllerButtonRelease(uint8_t controllerNum,
+MTR_EXPORT bool MTR_CALL mtrGameControllerButtonRelease(uint8_t controllerNum,
  uint8_t button)
 {
     if (mtrGameControllersCount > controllerNum)
@@ -304,7 +304,7 @@ MRT_EXPORT bool MRT_CALL mtrGameControllerButtonRelease(uint8_t controllerNum,
         return false;
 }
 
-MRT_EXPORT bool MRT_CALL mtrGameControllerButtonPressed(uint8_t controllerNum,
+MTR_EXPORT bool MTR_CALL mtrGameControllerButtonPressed(uint8_t controllerNum,
  uint8_t button)
 {
     if (mtrGameControllersCount > controllerNum)
@@ -316,7 +316,7 @@ MRT_EXPORT bool MRT_CALL mtrGameControllerButtonPressed(uint8_t controllerNum,
         return false;
 }
 
-MRT_EXPORT int16_t MRT_CALL mtrGameControllerGetAxis(uint8_t controllerNum,
+MTR_EXPORT int16_t MTR_CALL mtrGameControllerGetAxis(uint8_t controllerNum,
  uint8_t axisNum)
 {
     if (mtrGameControllersCount > controllerNum)
@@ -328,7 +328,7 @@ MRT_EXPORT int16_t MRT_CALL mtrGameControllerGetAxis(uint8_t controllerNum,
         return 0;
 }
 
-MRT_EXPORT float MRT_CALL mtrGameControllerGetAxis_f(uint8_t controllerNum,
+MTR_EXPORT float MTR_CALL mtrGameControllerGetAxis_f(uint8_t controllerNum,
  uint8_t axisNum)
 {
     if (mtrGameControllersCount > controllerNum)
@@ -343,7 +343,7 @@ MRT_EXPORT float MRT_CALL mtrGameControllerGetAxis_f(uint8_t controllerNum,
         return 0.0f;
 }
 
-MRT_EXPORT int32_t MRT_CALL mtrGameControllerGetAxisDelta(uint8_t controllerNum,
+MTR_EXPORT int32_t MTR_CALL mtrGameControllerGetAxisDelta(uint8_t controllerNum,
  uint8_t axisNum)
 {
     if (mtrGameControllersCount > controllerNum)
@@ -356,7 +356,7 @@ MRT_EXPORT int32_t MRT_CALL mtrGameControllerGetAxisDelta(uint8_t controllerNum,
         return 0;
 }
 
-MRT_EXPORT float MRT_CALL mtrGameControllerGetAxisDelta_f(uint8_t controllerNum,
+MTR_EXPORT float MTR_CALL mtrGameControllerGetAxisDelta_f(uint8_t controllerNum,
  uint8_t axisNum)
 {
     if (mtrGameControllersCount > controllerNum)
@@ -369,7 +369,7 @@ MRT_EXPORT float MRT_CALL mtrGameControllerGetAxisDelta_f(uint8_t controllerNum,
         return 0.0f;
 }
 
-MRT_EXPORT int32_t MRT_CALL mtrGameControllerGetTrackballDeltaX(uint8_t controllerNum,
+MTR_EXPORT int32_t MTR_CALL mtrGameControllerGetTrackballDeltaX(uint8_t controllerNum,
  uint8_t trackballNum)
 {
     if (mtrGameControllersCount > controllerNum)
@@ -381,7 +381,7 @@ MRT_EXPORT int32_t MRT_CALL mtrGameControllerGetTrackballDeltaX(uint8_t controll
         return 0;
 }
 
-MRT_EXPORT int32_t MRT_CALL mtrGameControllerGetTrackballDeltaY(uint8_t controllerNum,
+MTR_EXPORT int32_t MTR_CALL mtrGameControllerGetTrackballDeltaY(uint8_t controllerNum,
  uint8_t trackballNum)
 {
     if (mtrGameControllersCount > controllerNum)
@@ -393,7 +393,7 @@ MRT_EXPORT int32_t MRT_CALL mtrGameControllerGetTrackballDeltaY(uint8_t controll
         return 0;
 }
 
-MRT_EXPORT void MRT_CALL mtrGameControllerGetTrackballDeltaXY(uint8_t controllerNum,
+MTR_EXPORT void MTR_CALL mtrGameControllerGetTrackballDeltaXY(uint8_t controllerNum,
  uint8_t trackballNum, int32_t *deltaX, int32_t *deltaY)
 {
     if (mtrGameControllersCount > controllerNum)
@@ -414,7 +414,7 @@ MRT_EXPORT void MRT_CALL mtrGameControllerGetTrackballDeltaXY(uint8_t controller
     }
 }
 
-MRT_EXPORT uint8_t MRT_CALL mtrGameControllerGetPovHat(uint8_t controllerNum,
+MTR_EXPORT uint8_t MTR_CALL mtrGameControllerGetPovHat(uint8_t controllerNum,
  uint8_t povHatNum)
 {
     if (mtrGameControllersCount > controllerNum)

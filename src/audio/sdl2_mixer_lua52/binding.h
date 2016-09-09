@@ -14,88 +14,88 @@
 
 lua_State *mtrVm;
 
-typedef lua_State* (MRT_CALL * mtrScriptsGetVmFunc)(void);
+typedef lua_State* (MTR_CALL * mtrScriptsGetVmFunc)(void);
 mtrScriptsGetVmFunc mtrScriptsGetVm;
 
-typedef void (MRT_CALL * mtrScriptsRegisterFunctionFunc)(lua_CFunction,
+typedef void (MTR_CALL * mtrScriptsRegisterFunctionFunc)(lua_CFunction,
  char *);
 mtrScriptsRegisterFunctionFunc mtrScriptsRegisterFunction;
 
-typedef void (MRT_CALL * mtrScriptsRegisterNumericVariableFunc)(char *,
+typedef void (MTR_CALL * mtrScriptsRegisterNumericVariableFunc)(char *,
  double);
 mtrScriptsRegisterNumericVariableFunc mtrScriptsRegisterNumericVariable;
 
-typedef bool (MRT_CALL * mtrAudioInitFunc)(uint32_t, uint32_t, uint32_t,
+typedef bool (MTR_CALL * mtrAudioInitFunc)(uint32_t, uint32_t, uint32_t,
  uint32_t, uint32_t, uint8_t, uint16_t);
 mtrAudioInitFunc mtrAudioInit;
 
-typedef void (MRT_CALL * mtrAudioQuitFunc)(void);
+typedef void (MTR_CALL * mtrAudioQuitFunc)(void);
 mtrAudioQuitFunc mtrAudioQuit;
 
-typedef uint32_t (MRT_CALL * mtrAudioSoundLoadFunc)(const char *);
+typedef uint32_t (MTR_CALL * mtrAudioSoundLoadFunc)(const char *);
 mtrAudioSoundLoadFunc mtrAudioSoundLoad;
 
-typedef uint32_t (MRT_CALL * mtrAudioMusicLoadFunc)(const char *);
+typedef uint32_t (MTR_CALL * mtrAudioMusicLoadFunc)(const char *);
 mtrAudioMusicLoadFunc mtrAudioMusicLoad;
 
-typedef void (MRT_CALL * mtrAudioSoundPlayFunc)(uint32_t);
+typedef void (MTR_CALL * mtrAudioSoundPlayFunc)(uint32_t);
 mtrAudioSoundPlayFunc mtrAudioSoundPlay;
 
-typedef void (MRT_CALL * mtrAudioSoundFadeInPlayFunc)(uint32_t, uint32_t);
+typedef void (MTR_CALL * mtrAudioSoundFadeInPlayFunc)(uint32_t, uint32_t);
 mtrAudioSoundFadeInPlayFunc mtrAudioSoundFadeInPlay;
 
-typedef void (MRT_CALL * mtrAudioSoundSetVolumeFunc)(uint32_t, uint8_t);
+typedef void (MTR_CALL * mtrAudioSoundSetVolumeFunc)(uint32_t, uint8_t);
 mtrAudioSoundSetVolumeFunc mtrAudioSoundSetVolume;
 
-typedef void (MRT_CALL * mtrAudioSoundSetVolume_fFunc)(uint32_t, float);
+typedef void (MTR_CALL * mtrAudioSoundSetVolume_fFunc)(uint32_t, float);
 mtrAudioSoundSetVolume_fFunc mtrAudioSoundSetVolume_f;
 
-typedef void (MRT_CALL * mtrAudioChannelsSetVolumeFunc)(uint8_t);
+typedef void (MTR_CALL * mtrAudioChannelsSetVolumeFunc)(uint8_t);
 mtrAudioChannelsSetVolumeFunc mtrAudioChannelsSetVolume;
 
-typedef void (MRT_CALL * mtrAudioChannelsSetVolume_fFunc)(float);
+typedef void (MTR_CALL * mtrAudioChannelsSetVolume_fFunc)(float);
 mtrAudioChannelsSetVolume_fFunc mtrAudioChannelsSetVolume_f;
 
-typedef void (MRT_CALL * mtrAudioChannelsPauseFunc)(void);
+typedef void (MTR_CALL * mtrAudioChannelsPauseFunc)(void);
 mtrAudioChannelsPauseFunc mtrAudioChannelsPause;
 
-typedef void (MRT_CALL * mtrAudioChannelsResumeFunc)(void);
+typedef void (MTR_CALL * mtrAudioChannelsResumeFunc)(void);
 mtrAudioChannelsResumeFunc mtrAudioChannelsResume;
 
-typedef void (MRT_CALL * mtrAudioChannelsStopFunc)(void);
+typedef void (MTR_CALL * mtrAudioChannelsStopFunc)(void);
 mtrAudioChannelsStopFunc mtrAudioChannelsStop;
 
-typedef void (MRT_CALL * mtrAudioChannelsFadeOutStopFunc)(uint32_t);
+typedef void (MTR_CALL * mtrAudioChannelsFadeOutStopFunc)(uint32_t);
 mtrAudioChannelsFadeOutStopFunc mtrAudioChannelsFadeOutStop;
 
-typedef void (MRT_CALL * mtrAudioMusicPlayFunc)(uint32_t);
+typedef void (MTR_CALL * mtrAudioMusicPlayFunc)(uint32_t);
 mtrAudioMusicPlayFunc mtrAudioMusicPlay;
 
-typedef void (MRT_CALL * mtrAudioMusicFadeInPlayFunc)(uint32_t, uint32_t);
+typedef void (MTR_CALL * mtrAudioMusicFadeInPlayFunc)(uint32_t, uint32_t);
 mtrAudioMusicFadeInPlayFunc mtrAudioMusicFadeInPlay;
 
-typedef void (MRT_CALL * mtrAudioMusicSetVolumeFunc)(uint8_t);
+typedef void (MTR_CALL * mtrAudioMusicSetVolumeFunc)(uint8_t);
 mtrAudioMusicSetVolumeFunc mtrAudioMusicSetVolume;
 
-typedef void (MRT_CALL * mtrAudioMusicSetVolume_fFunc)(float);
+typedef void (MTR_CALL * mtrAudioMusicSetVolume_fFunc)(float);
 mtrAudioMusicSetVolume_fFunc mtrAudioMusicSetVolume_f;
 
-typedef void (MRT_CALL * mtrAudioMusicPauseFunc)(void);
+typedef void (MTR_CALL * mtrAudioMusicPauseFunc)(void);
 mtrAudioMusicPauseFunc mtrAudioMusicPause;
 
-typedef void (MRT_CALL * mtrAudioMusicResumeFunc)(void);
+typedef void (MTR_CALL * mtrAudioMusicResumeFunc)(void);
 mtrAudioMusicResumeFunc mtrAudioMusicResume;
 
-typedef void (MRT_CALL * mtrAudioMusicStopFunc)(void);
+typedef void (MTR_CALL * mtrAudioMusicStopFunc)(void);
 mtrAudioMusicStopFunc mtrAudioMusicStop;
 
-typedef void (MRT_CALL * mtrAudioMusicFadeOutStopFunc)(uint32_t);
+typedef void (MTR_CALL * mtrAudioMusicFadeOutStopFunc)(uint32_t);
 mtrAudioMusicFadeOutStopFunc mtrAudioMusicFadeOutStop;
 
-typedef void (MRT_CALL * mtrAudioSoundFreeFunc)(uint32_t);
+typedef void (MTR_CALL * mtrAudioSoundFreeFunc)(uint32_t);
 mtrAudioSoundFreeFunc mtrAudioSoundFree;
 
-typedef void (MRT_CALL * mtrAudioMusicFreeFunc)(uint32_t);
+typedef void (MTR_CALL * mtrAudioMusicFreeFunc)(uint32_t);
 mtrAudioMusicFreeFunc mtrAudioMusicFree;
 
 int mtrSF_AudioInit(lua_State* l);

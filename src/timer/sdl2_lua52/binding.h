@@ -9,25 +9,25 @@
 
 lua_State *mtrVm;
 
-typedef lua_State* (MRT_CALL * mtrScriptsGetVmFunc)(void);
+typedef lua_State* (MTR_CALL * mtrScriptsGetVmFunc)(void);
 mtrScriptsGetVmFunc mtrScriptsGetVm;
 
-typedef void (MRT_CALL * mtrScriptsRegisterFunctionFunc)(lua_CFunction, char *);
+typedef void (MTR_CALL * mtrScriptsRegisterFunctionFunc)(lua_CFunction, char *);
 mtrScriptsRegisterFunctionFunc mtrScriptsRegisterFunction;
 
-typedef bool (MRT_CALL * mtrTimerInitFunc)(void);
+typedef bool (MTR_CALL * mtrTimerInitFunc)(void);
 mtrTimerInitFunc mtrTimerInit;
 
-typedef void (MRT_CALL * mtrTimerStartFunc)(void);
+typedef void (MTR_CALL * mtrTimerStartFunc)(void);
 mtrTimerStartFunc mtrTimerStart;
 
-typedef uint32_t (MRT_CALL * mtrTimerDelayFunc)(uint32_t);
+typedef uint32_t (MTR_CALL * mtrTimerDelayFunc)(uint32_t);
 mtrTimerDelayFunc mtrTimerDelay;
 
-typedef uint32_t (MRT_CALL * mtrTimerDelayForFPSFunc)(uint32_t);
+typedef uint32_t (MTR_CALL * mtrTimerDelayForFPSFunc)(uint32_t);
 mtrTimerDelayForFPSFunc mtrTimerDelayForFPS;
 
-typedef float (MRT_CALL * mtrTimerDelayForFPS_fFunc)(float);
+typedef float (MTR_CALL * mtrTimerDelayForFPS_fFunc)(float);
 mtrTimerDelayForFPS_fFunc mtrTimerDelayForFPS_f;
 
 int mtrSF_TimerInit(lua_State* l);

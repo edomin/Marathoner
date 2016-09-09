@@ -11,28 +11,28 @@
 
 lua_State *mtrVm;
 
-typedef lua_State* (MRT_CALL * mtrScriptsGetVmFunc)(void);
+typedef lua_State* (MTR_CALL * mtrScriptsGetVmFunc)(void);
 mtrScriptsGetVmFunc mtrScriptsGetVm;
 
-typedef void (MRT_CALL * mtrScriptsRegisterFunctionFunc)(lua_CFunction, char *);
+typedef void (MTR_CALL * mtrScriptsRegisterFunctionFunc)(lua_CFunction, char *);
 mtrScriptsRegisterFunctionFunc mtrScriptsRegisterFunction;
 
-typedef void (MRT_CALL * mtrScriptsRegisterNumericVariableFunc)(char *, double);
+typedef void (MTR_CALL * mtrScriptsRegisterNumericVariableFunc)(char *, double);
 mtrScriptsRegisterNumericVariableFunc mtrScriptsRegisterNumericVariable;
 
-typedef bool (MRT_CALL * mtrKeyboardInitFunc)(void);
+typedef bool (MTR_CALL * mtrKeyboardInitFunc)(void);
 mtrKeyboardInitFunc mtrKeyboardInit;
 
-typedef void (MRT_CALL * mtrKeyboardRefreshFunc)(void);
+typedef void (MTR_CALL * mtrKeyboardRefreshFunc)(void);
 mtrKeyboardRefreshFunc mtrKeyboardRefresh;
 
-typedef bool (MRT_CALL * mtrKeyboardPressFunc)(uint16_t);
+typedef bool (MTR_CALL * mtrKeyboardPressFunc)(uint16_t);
 mtrKeyboardPressFunc mtrKeyboardPress;
 
-typedef bool (MRT_CALL * mtrKeyboardReleaseFunc)(uint16_t);
+typedef bool (MTR_CALL * mtrKeyboardReleaseFunc)(uint16_t);
 mtrKeyboardReleaseFunc mtrKeyboardRelease;
 
-typedef bool (MRT_CALL * mtrKeyboardPressedFunc)(uint16_t);
+typedef bool (MTR_CALL * mtrKeyboardPressedFunc)(uint16_t);
 mtrKeyboardPressedFunc mtrKeyboardPressed;
 
 int mtrSF_KeyboardInit(lua_State* l);

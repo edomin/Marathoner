@@ -2,7 +2,7 @@
 
 #include "marathoner/plugin_common.c"
 
-MRT_EXPORT mtrReport* MRT_CALL mtrCreateReport(void)
+MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -13,7 +13,7 @@ MRT_EXPORT mtrReport* MRT_CALL mtrCreateReport(void)
     return report;
 }
 
-MRT_EXPORT bool MRT_CALL mtrTimerInit(void)
+MTR_EXPORT bool MTR_CALL mtrTimerInit(void)
 {
     SDL_version compiled;
     SDL_version linked;
@@ -46,24 +46,24 @@ MRT_EXPORT bool MRT_CALL mtrTimerInit(void)
     return true;
 }
 
-MRT_EXPORT void MRT_CALL mtrTimerStart(void)
+MTR_EXPORT void MTR_CALL mtrTimerStart(void)
 {
     mtrTimer.startTime = SDL_GetTicks();
 }
 
-MRT_EXPORT uint32_t MRT_CALL mtrTimerGetTicks(void)
+MTR_EXPORT uint32_t MTR_CALL mtrTimerGetTicks(void)
 {
     return SDL_GetTicks() - mtrTimer.startTime;
 }
 
-MRT_EXPORT uint32_t MRT_CALL mtrTimerDelay(uint32_t ms)
+MTR_EXPORT uint32_t MTR_CALL mtrTimerDelay(uint32_t ms)
 {
     if (ms > 0)
         SDL_Delay(ms);
     return 1000 / mtrTimerGetTicks();
 }
 
-MRT_EXPORT uint32_t MRT_CALL mtrTimerDelayForFPS(uint32_t fps)
+MTR_EXPORT uint32_t MTR_CALL mtrTimerDelayForFPS(uint32_t fps)
 {
     if (fps > 0)
         if(mtrTimerGetTicks() < 1000 / fps)
@@ -80,7 +80,7 @@ MRT_EXPORT uint32_t MRT_CALL mtrTimerDelayForFPS(uint32_t fps)
         return 1000 / mtrTimerGetTicks();
 }
 
-MRT_EXPORT float MRT_CALL mtrTimerDelayForFPS_f(float fps)
+MTR_EXPORT float MTR_CALL mtrTimerDelayForFPS_f(float fps)
 {
     if (fps > 0.0f)
         if(mtrTimerGetTicks() < 1000.0f / fps)

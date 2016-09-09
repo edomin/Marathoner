@@ -2,7 +2,7 @@
 
 #include "marathoner/plugin_common.c"
 
-MRT_EXPORT mtrReport* MRT_CALL mtrCreateReport(void)
+MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -67,19 +67,19 @@ void mtrScriptsInit(void)
     mtrLogWrite("Script subsystem initialized", 0, MTR_LMT_INFO);
 }
 
-MRT_EXPORT lua_State * MRT_CALL mtrScriptsGetVm(void)
+MTR_EXPORT lua_State * MTR_CALL mtrScriptsGetVm(void)
 {
     return mtrVm;
 }
 
-MRT_EXPORT void MRT_CALL mtrScriptsRegisterFunction(lua_CFunction func,
+MTR_EXPORT void MTR_CALL mtrScriptsRegisterFunction(lua_CFunction func,
  char * funcname)
 {
     lua_register(mtrVm, funcname, func); /* регистрируем функцию */
     mtrLogWrite_s("Script function added:", 3, MTR_LMT_INFO, funcname);
 }
 
-MRT_EXPORT void MRT_CALL mtrScriptsRegisterStringVariable(char *name,
+MTR_EXPORT void MTR_CALL mtrScriptsRegisterStringVariable(char *name,
  char *value)
 {
     lua_pushstring(mtrVm, value);
@@ -87,7 +87,7 @@ MRT_EXPORT void MRT_CALL mtrScriptsRegisterStringVariable(char *name,
     mtrLogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
 }
 
-MRT_EXPORT void MRT_CALL mtrScriptsRegisterNumericVariable(char *name,
+MTR_EXPORT void MTR_CALL mtrScriptsRegisterNumericVariable(char *name,
  double value)
 {
     lua_pushnumber(mtrVm, value);
@@ -113,7 +113,7 @@ void mtrScriptsQuit(void)
     mtrLogWrite("Lua VM closed", 0, MTR_LMT_INFO);
 }
 
-MRT_EXPORT void MRT_CALL mtrScriptsAutorun(char * filename)
+MTR_EXPORT void MTR_CALL mtrScriptsAutorun(char * filename)
 {
     mtrScriptsInit();
     mtrScriptsDoFile(filename);

@@ -2,7 +2,7 @@
 
 #include "marathoner/plugin_common.c"
 
-MRT_EXPORT mtrReport* MRT_CALL mtrCreateReport(void)
+MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -13,7 +13,7 @@ MRT_EXPORT mtrReport* MRT_CALL mtrCreateReport(void)
     return report;
 }
 
-MRT_EXPORT bool MRT_CALL mtrKeyboardInit(void)
+MTR_EXPORT bool MTR_CALL mtrKeyboardInit(void)
 {
     SDL_version compiled;
     SDL_version linked;
@@ -58,7 +58,7 @@ MRT_EXPORT bool MRT_CALL mtrKeyboardInit(void)
     return true;
 }
 
-MRT_EXPORT void MRT_CALL mtrKeyboardRefresh(void)
+MTR_EXPORT void MTR_CALL mtrKeyboardRefresh(void)
 {
     uint16_t i;
     for (i = 0; i < SDL_NUM_SCANCODES; i++)
@@ -68,7 +68,7 @@ MRT_EXPORT void MRT_CALL mtrKeyboardRefresh(void)
     SDL_PumpEvents();
 }
 
-MRT_EXPORT bool MRT_CALL mtrKeyboardPress(uint16_t key)
+MTR_EXPORT bool MTR_CALL mtrKeyboardPress(uint16_t key)
 {
     if (key >= SDL_NUM_SCANCODES)
         return false;
@@ -83,7 +83,7 @@ MRT_EXPORT bool MRT_CALL mtrKeyboardPress(uint16_t key)
     }
 }
 
-MRT_EXPORT bool MRT_CALL mtrKeyboardRelease(uint16_t key)
+MTR_EXPORT bool MTR_CALL mtrKeyboardRelease(uint16_t key)
 {
     if (key >= SDL_NUM_SCANCODES)
         return false;
@@ -98,7 +98,7 @@ MRT_EXPORT bool MRT_CALL mtrKeyboardRelease(uint16_t key)
     }
 }
 
-MRT_EXPORT bool MRT_CALL mtrKeyboardPressed(uint16_t key)
+MTR_EXPORT bool MTR_CALL mtrKeyboardPressed(uint16_t key)
 {
     if (key >= SDL_NUM_SCANCODES)
         return false;
