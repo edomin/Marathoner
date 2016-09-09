@@ -1,7 +1,11 @@
-CC = mingw32-gcc
-LD = mingw32-gcc
-CFLAGS = -Wall -O2
-LDFLAGS = -s -L$(PREFIX)/lib -mwindows
+include ../../Build.mk
+
+ifeq ($(PLATFORM), win32)
+  LDEXFLAGS = -L$(PREFIX)/lib
+endif
+ifeq ($(PLATFORM), html5)
+  LDEXFLAGS = -L$(PREFIX)/lib -s MAIN_MODULE=1
+endif
 OBJSDIR = ../../obj
 BINDIR = ../..
 INCDIRS = -I$(PREFIX)/include -I../../include
@@ -18,7 +22,12 @@ OBJS = $(OBJSDIR)/main.o \
 all: Marathoner
 
 Marathoner: $(OBJS)
-	$(LD) $(LDFLAGS) -o $(BINDIR)/Marathoner.exe $(OBJS) -lminini -lutf8
+ifeq ($(PLATFORM), win32)
+	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) $(OBJS) -lminini -lutf8
+endif
+ifeq ($(PLATFORM), html5)
+	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) $(OBJS) -lminini -lutf8 --preload-file ../../plugin@/plugin --preload-file ../../Marathoner.cfg@/ --preload-file ../../autorun@/autorun -s TOTAL_MEMORY=134217728
+endif
 
 $(OBJSDIR)/main.o: main.c
 	$(CC) $(CFLAGS) $(INCDIRS) -c main.c -o $(OBJSDIR)/main.o
