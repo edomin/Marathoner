@@ -52,10 +52,6 @@ MTR_EXPORT bool MTR_CALL mtrTextureInit(uint32_t dmSize, uint32_t reservedCount)
         return false;
     }
     mtrScreen = mtrGetScreen();
-    if (SDL_GetRenderer(mtrScreen->screen) != NULL)
-        mtrLogWrite("Renderer OK", 1, MTR_LMT_DEBUG);
-    else
-        mtrLogWrite(SDL_GetError(), 1, MTR_LMT_DEBUG);
 
     mtrTextureKeeper = (mtrIndexkeeper_t *)mtrIndexkeeperCreate(dmSize,
      reservedCount, sizeof(mtrTexture_t));
