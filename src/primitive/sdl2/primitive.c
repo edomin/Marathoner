@@ -459,8 +459,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRectangle_rgb_f(float x1, float y1,
     SDL_SetRenderDrawColor(mtrScreen->renderer, r, g, b, 0xFF);
     rect.x = x1;
     rect.y = y1;
-    rect.w = x2;
-    rect.h = y2;
+    rect.w = x2 - x1;
+    rect.h = y2 - y1;
     SDL_RenderDrawRect(mtrScreen->renderer, &rect);
 }
 
@@ -472,8 +472,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRectangle_rgba_f(float x1, float y1,
     SDL_SetRenderDrawColor(mtrScreen->renderer, r, g, b, a);
     rect.x = x1;
     rect.y = y1;
-    rect.w = x2;
-    rect.h = y2;
+    rect.w = x2 - x1;
+    rect.h = y2 - y1;
     SDL_RenderDrawRect(mtrScreen->renderer, &rect);
 }
 
@@ -490,8 +490,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRectangle_c_f(float x1, float y1, float x2,
     SDL_SetRenderDrawColor(mtrScreen->renderer, r, g, b, 0xFF);
     rect.x = x1;
     rect.y = y1;
-    rect.w = x2;
-    rect.h = y2;
+    rect.w = x2 - x1;
+    rect.h = y2 - y1;
     SDL_RenderDrawRect(mtrScreen->renderer, &rect);
 }
 
@@ -511,8 +511,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRectangle_ca_f(float x1, float y1,
     SDL_SetRenderDrawColor(mtrScreen->renderer, r, g, b, a);
     rect.x = x1;
     rect.y = y1;
-    rect.w = x2;
-    rect.h = y2;
+    rect.w = x2 - x1;
+    rect.h = y2 - y1;
     SDL_RenderDrawRect(mtrScreen->renderer, &rect);
 }
 
@@ -524,8 +524,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRectangleFilled_rgb_f(float x1, float y1,
     SDL_SetRenderDrawColor(mtrScreen->renderer, r, g, b, 0xFF);
     rect.x = x1;
     rect.y = y1;
-    rect.w = x2;
-    rect.h = y2;
+    rect.w = x2 - x1;
+    rect.h = y2 - y1;
     SDL_RenderFillRect(mtrScreen->renderer, &rect);
 }
 
@@ -537,8 +537,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRectangleFilled_rgba_f(float x1, float y1,
     SDL_SetRenderDrawColor(mtrScreen->renderer, r, g, b, a);
     rect.x = x1;
     rect.y = y1;
-    rect.w = x2;
-    rect.h = y2;
+    rect.w = x2 - x1;
+    rect.h = y2 - y1;
     SDL_RenderFillRect(mtrScreen->renderer, &rect);
 }
 
@@ -555,8 +555,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRectangleFilled_c_f(float x1, float y1,
     SDL_SetRenderDrawColor(mtrScreen->renderer, r, g, b, 0xFF);
     rect.x = x1;
     rect.y = y1;
-    rect.w = x2;
-    rect.h = y2;
+    rect.w = x2 - x1;
+    rect.h = y2 - y1;
     SDL_RenderFillRect(mtrScreen->renderer, &rect);
 }
 
@@ -576,8 +576,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRectangleFilled_ca_f(float x1, float y1,
     SDL_SetRenderDrawColor(mtrScreen->renderer, r, g, b, a);
     rect.x = x1;
     rect.y = y1;
-    rect.w = x2;
-    rect.h = y2;
+    rect.w = x2 - x1;
+    rect.h = y2 - y1;
     SDL_RenderFillRect(mtrScreen->renderer, &rect);
 }
 
