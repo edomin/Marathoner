@@ -173,7 +173,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegion_f(uint32_t texNum, float x,
     texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
     offset.x = x;
     offset.y = y;
-    SDL_QueryTexture(texture->texture, NULL, NULL, &offset.w, &offset.h);
+    offset.w = rw;
+    offset.h = rh;
     clip.x = rx;
     clip.y = ry;
     clip.w = rw;
@@ -211,7 +212,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionAngled_f(uint32_t texNum, float x,
     texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
     offset.x = x;
     offset.y = y;
-    SDL_QueryTexture(texture->texture, NULL, NULL, &offset.w, &offset.h);
+    offset.w = rw;
+    offset.h = rh;
     clip.x = rx;
     clip.y = ry;
     clip.w = rw;
@@ -219,7 +221,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionAngled_f(uint32_t texNum, float x,
     pivot.x = pivotX;
     pivot.y = pivotY;
     SDL_RenderCopyEx(mtrScreen->renderer, texture->texture, &clip, &offset,
-     angle, &pivot, MTR_FLIP_NONE);
+     -angle, &pivot, MTR_FLIP_NONE);
 }
 
 MTR_EXPORT void MTR_CALL mtrTextureBlitRegionFlipped_f(uint32_t texNum, float x,
@@ -231,7 +233,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionFlipped_f(uint32_t texNum, float x,
     texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
     offset.x = x;
     offset.y = y;
-    SDL_QueryTexture(texture->texture, NULL, NULL, &offset.w, &offset.h);
+    offset.w = rw;
+    offset.h = rh;
     clip.x = rx;
     clip.y = ry;
     clip.w = rw;
@@ -260,5 +263,5 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionGeneral_f(uint32_t texNum, float x,
     pivot.x = pivotX;
     pivot.y = pivotY;
     SDL_RenderCopyEx(mtrScreen->renderer, texture->texture, &clip, &offset,
-     angle, &pivot, flip);
+     -angle, &pivot, flip);
 }
