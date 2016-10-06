@@ -1,6 +1,7 @@
 include Build.mk
 
 OBJSDIR = obj
+LIBDIR = lib
 BINDIR = plugin
 
 SCREEN_SDL2 = screen/sdl2
@@ -34,7 +35,6 @@ SCRIPT_LUA52 = script/lua52
 all: $(PLATFORM)
 
 win32: prebuild
-	make -C src/engine PREFIX=$(PREFIX)
 	make -C src/$(SCREEN_SDL_GPU) PREFIX=$(PREFIX)
 	make -C src/$(SCREEN_SDL_GPU_LUA52) PREFIX=$(PREFIX)
 	make -C src/$(TEXTURE_SDL_GPU) PREFIX=$(PREFIX)
@@ -56,6 +56,7 @@ win32: prebuild
 	make -C src/$(UTILS_COLOR) PREFIX=$(PREFIX)
 	make -C src/$(UTILS_COLOR_LUA52) PREFIX=$(PREFIX)
 	make -C src/$(SCRIPT_LUA52) PREFIX=$(PREFIX)
+	make -C src/engine PREFIX=$(PREFIX)
 
 html5: prebuild
 	make -C src/$(SCREEN_SDL2) PREFIX=$(PREFIX)
@@ -81,10 +82,12 @@ html5: prebuild
 
 prebuild:
 	-mkdir $(OBJSDIR)
+	-mkdir $(LIBDIR)
 	-mkdir $(BINDIR)
 
 clean:
 	-rm -f -r $(OBJSDIR)
+	-rm -f -r $(LIBDIR)
 	-rm -f -r $(BINDIR)
 	-rm -f -r marathoner.exe
 	-rm -f -r marathoner.html
