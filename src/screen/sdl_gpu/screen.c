@@ -10,6 +10,8 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     report->version = MTR_VERSION_SCREEN_SDL2_GPU;
     report->prereqsCount = 0;
     report->prereqs = NULL;
+    report->prereqSubsystemsCount = 0;
+    report->prereqSubsystems = NULL;
     return report;
 }
 

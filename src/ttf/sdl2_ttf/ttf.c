@@ -10,6 +10,8 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     report->version = MTR_VERSION_TTF_SDL2_TTF;
     report->prereqsCount = 0;
     report->prereqs = NULL;
+    report->prereqSubsystemsCount = 0;
+    report->prereqSubsystems = NULL;
     return report;
 }
 

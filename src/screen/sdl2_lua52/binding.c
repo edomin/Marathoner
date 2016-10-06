@@ -15,6 +15,8 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     report->prereqs = malloc(sizeof(char *) * report->prereqsCount);
     report->prereqs[0] = "Screen_SDL2";
     report->prereqs[1] = "Script_Lua52";
+    report->prereqSubsystemsCount = 0;
+    report->prereqSubsystems = NULL;
     return report;
 }
 

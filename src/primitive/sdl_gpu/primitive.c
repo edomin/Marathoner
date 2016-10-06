@@ -11,6 +11,8 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     report->prereqsCount = 1;
     report->prereqs = malloc(sizeof(char *) * report->prereqsCount);
     report->prereqs[0] = "Screen_sdl_gpu";
+    report->prereqSubsystemsCount = 0;
+    report->prereqSubsystems = NULL;
     return report;
 }
 

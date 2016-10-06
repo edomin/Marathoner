@@ -10,3 +10,4 @@ lib/*
 *.png
 TODO
 J1PR.exe
+emsdk_set_env.bat

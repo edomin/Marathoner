@@ -10,6 +10,8 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     report->version = MTR_VERSION_TIMER_SDL2;
     report->prereqsCount = 0;
     report->prereqs = NULL;
+    report->prereqSubsystemsCount = 0;
+    report->prereqSubsystems = NULL;
     return report;
 }
 
