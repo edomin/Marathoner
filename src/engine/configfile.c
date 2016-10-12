@@ -5,7 +5,8 @@ void ConfigfileInit(void)
 
 }
 
-char *mtrConfigfileReadString(char* filename, char *section, char *key, char *defaultValue)
+char *mtrConfigfileReadString(char* filename, char *section, char *key,
+ char *defaultValue)
 {
     uint16_t valueLength;
     char *result;

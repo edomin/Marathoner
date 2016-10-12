@@ -10,6 +10,7 @@
 #define sizearray(a)  (sizeof(a) / sizeof((a)[0]))
 char mtrConfigfileTempbuf[65536];
 
-char *mtrConfigfileReadString(char* filename, char *section, char *key, char *defaultValue);
+char *mtrConfigfileReadString(char* filename, char *section, char *key,
+ char *defaultValue);
 
 #endif

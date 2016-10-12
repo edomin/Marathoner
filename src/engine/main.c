@@ -14,70 +14,80 @@ void RequireEngineFuncs(uint8_t plugin)
     if (mtrRequireLogWrite != NULL)
         mtrRequireLogWrite(mtrLogWrite);
     else
-        mtrLogWrite("Module are not contain declaration for 'mtrLogWrite' function", 1, MTR_LMT_WARNING);
+        mtrLogWrite("Module are not contain declaration for 'mtrLogWrite' function",
+         1, MTR_LMT_WARNING);
 
     mtrRequireLogWrite_s = (mtrRequireLogWrite_sFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
      "mtrRequireLogWrite_s");
     if (mtrRequireLogWrite_s != NULL)
         mtrRequireLogWrite_s(mtrLogWrite_s);
     else
-        mtrLogWrite("Module are not contain declaration for 'mtrLogWrite_s' function", 1, MTR_LMT_WARNING);
+        mtrLogWrite("Module are not contain declaration for 'mtrLogWrite_s' function",
+         1, MTR_LMT_WARNING);
 
     mtrRequireLogWrite_i = (mtrRequireLogWrite_iFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
      "mtrRequireLogWrite_i");
     if (mtrRequireLogWrite_i != NULL)
         mtrRequireLogWrite_i(mtrLogWrite_i);
     else
-        mtrLogWrite("Module are not contain declaration for 'mtrLogWrite_i' function", 1, MTR_LMT_WARNING);
+        mtrLogWrite("Module are not contain declaration for 'mtrLogWrite_i' function",
+         1, MTR_LMT_WARNING);
 
     mtrRequireLogWrite_d = (mtrRequireLogWrite_dFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
      "mtrRequireLogWrite_d");
     if (mtrRequireLogWrite_d != NULL)
         mtrRequireLogWrite_d(mtrLogWrite_d);
     else
-        mtrLogWrite("Module are not contain declaration for 'mtrLogWrite_d' function", 1, MTR_LMT_WARNING);
+        mtrLogWrite("Module are not contain declaration for 'mtrLogWrite_d' function",
+         1, MTR_LMT_WARNING);
 
     mtrRequireNotify = (mtrRequireNotifyFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
      "mtrRequireNotify");
     if (mtrRequireNotify != NULL)
         mtrRequireNotify(mtrNotify);
     else
-        mtrLogWrite("Module are not contain declaration for 'mtrNotify' function", 1, MTR_LMT_WARNING);
+        mtrLogWrite("Module are not contain declaration for 'mtrNotify' function",
+         1, MTR_LMT_WARNING);
 
     mtrRequireIndexkeeperCreate = (mtrRequireIndexkeeperCreateFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
      "mtrRequireIndexkeeperCreate");
     if (mtrRequireIndexkeeperCreate != NULL)
         mtrRequireIndexkeeperCreate(mtrIndexkeeperCreate);
     else
-        mtrLogWrite("Module are not contain declaration for 'mtrIndexkeeperCreate' function", 1, MTR_LMT_WARNING);
+        mtrLogWrite("Module are not contain declaration for 'mtrIndexkeeperCreate' function",
+         1, MTR_LMT_WARNING);
 
     mtrRequireIndexkeeperGetFreeIndex = (mtrRequireIndexkeeperGetFreeIndexFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
      "mtrRequireIndexkeeperGetFreeIndex");
     if (mtrRequireIndexkeeperGetFreeIndex != NULL)
         mtrRequireIndexkeeperGetFreeIndex(mtrIndexkeeperGetFreeIndex);
     else
-        mtrLogWrite("Module are not contain declaration for 'mtrIndexkeeperGetFreeIndex' function", 1, MTR_LMT_WARNING);
+        mtrLogWrite("Module are not contain declaration for 'mtrIndexkeeperGetFreeIndex' function",
+         1, MTR_LMT_WARNING);
 
     mtrRequireIndexkeeperFreeIndex = (mtrRequireIndexkeeperFreeIndexFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
      "mtrRequireIndexkeeperFreeIndex");
     if (mtrRequireIndexkeeperFreeIndex != NULL)
         mtrRequireIndexkeeperFreeIndex(mtrIndexkeeperFreeIndex);
     else
-        mtrLogWrite("Module are not contain declaration for 'mtrIndexkeeperFreeIndex' function", 1, MTR_LMT_WARNING);
+        mtrLogWrite("Module are not contain declaration for 'mtrIndexkeeperFreeIndex' function",
+         1, MTR_LMT_WARNING);
 
     mtrRequireIndexkeeperDestroy = (mtrRequireIndexkeeperDestroyFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
      "mtrRequireIndexkeeperDestroy");
     if (mtrRequireIndexkeeperDestroy != NULL)
         mtrRequireIndexkeeperDestroy(mtrIndexkeeperDestroy);
     else
-        mtrLogWrite("Module are not contain declaration for 'mtrIndexkeeperDestroy' function", 1, MTR_LMT_WARNING);
+        mtrLogWrite("Module are not contain declaration for 'mtrIndexkeeperDestroy' function",
+         1, MTR_LMT_WARNING);
 
     mtrRequireFileWriteLine = (mtrRequireFileWriteLineFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
      "mtrRequireFileWriteLine");
     if (mtrRequireFileWriteLine != NULL)
         mtrRequireFileWriteLine(mtrFileWriteLine);
     else
-        mtrLogWrite("Module are not contain declaration for 'mtrFileWriteLine' function", 1, MTR_LMT_WARNING);
+        mtrLogWrite("Module are not contain declaration for 'mtrFileWriteLine' function",
+         1, MTR_LMT_WARNING);
 }
 
 int main(int argc, char** argv)
