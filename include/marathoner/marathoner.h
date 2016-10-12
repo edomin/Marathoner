@@ -29,6 +29,29 @@ typedef struct mtrPlugin{
 } mtrPlugin;
 
 /* Pointers to engine functions */
+
+typedef char *(MTR_CALL * mtrConfigfileGetKeyNameFunc_t)(const char *,
+ const char *, int);
+typedef char *(MTR_CALL * mtrConfigfileGetSectionNameFunc_t)(const char*, int);
+typedef bool (MTR_CALL * mtrConfigfileDeleteKeyFunc_t)(const char *,
+ const char *, const char *);
+typedef bool (MTR_CALL * mtrConfigfileDeleteSectionFunc_t)(const char *,
+ const char *);
+typedef bool (MTR_CALL * mtrConfigfileReadBoolFunc_t)(const char *,
+ const char *, const char *, bool);
+typedef int (MTR_CALL * mtrConfigfileReadIntFunc_t)(const char *, const char *,
+ const char *, int);
+typedef float (MTR_CALL * mtrConfigfileReadSingleFunc_t)(const char *,
+ const char *, const char *, float);
+typedef char *(MTR_CALL * mtrConfigfileReadStringFunc_t)(const char *,
+ const char *, const char *, const char *);
+typedef bool (MTR_CALL * mtrConfigfileWriteIntFunc_t)(const char *,
+ const char *, const char *, int);
+typedef bool (MTR_CALL * mtrConfigfileWriteSingleFunc_t)(const char *,
+ const char *, const char *, float);
+typedef bool (MTR_CALL * mtrConfigfileWriteStringFunc_t)(const char *,
+ const char *, const char *, const char *);
+
 typedef void     (MTR_CALL * mtrLogWriteFunc_t)(const char *, uint8_t, uint8_t);
 typedef void     (MTR_CALL * mtrLogWrite_sFunc_t)(const char *, uint8_t,
  uint8_t, const char *);

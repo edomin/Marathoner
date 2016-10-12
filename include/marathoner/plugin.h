@@ -12,16 +12,31 @@ typedef struct mtrIndexkeeper_t {
     uint32_t *dataMap;
 } mtrIndexkeeper_t;
 
-mtrLogWriteFunc_t                mtrLogWrite;
-mtrLogWrite_sFunc_t              mtrLogWrite_s;
-mtrLogWrite_iFunc_t              mtrLogWrite_i;
-mtrLogWrite_dFunc_t              mtrLogWrite_d;
-mtrNotifyFunc_t                  mtrNotify;
-mtrIndexkeeperCreateFunc_t       mtrIndexkeeperCreate;
-mtrIndexkeeperGetFreeIndexFunc_t mtrIndexkeeperGetFreeIndex;
-mtrIndexkeeperFreeIndexFunc_t    mtrIndexkeeperFreeIndex;
-mtrIndexkeeperDestroyFunc_t      mtrIndexkeeperDestroy;
-mtrFileWriteLineFunc_t           mtrFileWriteLine;
+mtrConfigfileGetKeyNameFunc_t       mtrConfigfileGetKeyName;
+mtrConfigfileGetSectionNameFunc_t   mtrConfigfileGetSectionName;
+mtrConfigfileDeleteKeyFunc_t        mtrConfigfileDeleteKey;
+mtrConfigfileDeleteSectionFunc_t    mtrConfigfileDeleteSection;
+mtrConfigfileReadBoolFunc_t         mtrConfigfileReadBool;
+mtrConfigfileReadIntFunc_t          mtrConfigfileReadInt;
+mtrConfigfileReadSingleFunc_t       mtrConfigfileReadSingle;
+mtrConfigfileReadStringFunc_t       mtrConfigfileReadString;
+mtrConfigfileWriteIntFunc_t         mtrConfigfileWriteInt;
+mtrConfigfileWriteSingleFunc_t      mtrConfigfileWriteSingle;
+mtrConfigfileWriteStringFunc_t      mtrConfigfileWriteString;
+
+mtrLogWriteFunc_t                   mtrLogWrite;
+mtrLogWrite_sFunc_t                 mtrLogWrite_s;
+mtrLogWrite_iFunc_t                 mtrLogWrite_i;
+mtrLogWrite_dFunc_t                 mtrLogWrite_d;
+
+mtrNotifyFunc_t                     mtrNotify;
+
+mtrIndexkeeperCreateFunc_t          mtrIndexkeeperCreate;
+mtrIndexkeeperGetFreeIndexFunc_t    mtrIndexkeeperGetFreeIndex;
+mtrIndexkeeperFreeIndexFunc_t       mtrIndexkeeperFreeIndex;
+mtrIndexkeeperDestroyFunc_t         mtrIndexkeeperDestroy;
+
+mtrFileWriteLineFunc_t              mtrFileWriteLine;
 
 uint8_t mtrPluginsCount;
 

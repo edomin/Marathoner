@@ -1,3 +1,15 @@
+char *ConfigfileGetKeyName(const char *filename, const char *section, int index);
+char *ConfigfileGetSectionName(const char *filename, int index);
+bool ConfigfileDeleteKey(const char *filename, const char *section, const char *key);
+bool ConfigfileDeleteSection(const char *filename, const char *section);
+bool ConfigfileReadBool(const char *filename, const char *section, const char *key, bool defaultValue);
+int ConfigfileReadInt(const char *filename, const char *section, const char *key, int defaultValue);
+float ConfigfileReadSingle(const char *filename, const char *section, const char *key, float defaultValue);
+char *ConfigfileReadString(const char *filename, const char *section, const char *key, const char *defaultValue);
+bool ConfigfileWriteInt(const char *filename, const char *section, const char *key, int value);
+bool ConfigfileWriteSingle(const char *filename, const char *section, const char *key, float value);
+bool ConfigfileWriteString(const char *filename, const char *section, const char *key, const char *value);
+
 void ScreenInit(uint16_t width, uint16_t height)
 void ScreenQuit()
 void ScreenFlip()

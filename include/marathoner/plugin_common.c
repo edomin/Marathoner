@@ -1,5 +1,60 @@
 #include <string.h>
 
+MTR_EXPORT void MTR_CALL mtrRequireConfigfileGetKeyName(mtrConfigfileGetKeyNameFunc_t ConfigfileGetKeyNameFunc)
+{
+    mtrConfigfileGetKeyName = ConfigfileGetKeyNameFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireConfigfileGetSectionName(mtrConfigfileGetSectionNameFunc_t ConfigfileGetSectionNameFunc)
+{
+    mtrConfigfileGetSectionName = ConfigfileGetSectionNameFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireConfigfileDeleteKey(mtrConfigfileDeleteKeyFunc_t ConfigfileDeleteKeyFunc)
+{
+    mtrConfigfileDeleteKey = ConfigfileDeleteKeyFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireConfigfileDeleteSection(mtrConfigfileDeleteSectionFunc_t ConfigfileDeleteSectionFunc)
+{
+    mtrConfigfileDeleteSection = ConfigfileDeleteSectionFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireConfigfileReadBool(mtrConfigfileReadBoolFunc_t ConfigfileReadBoolFunc)
+{
+    mtrConfigfileReadBool = ConfigfileReadBoolFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireConfigfileReadInt(mtrConfigfileReadIntFunc_t ConfigfileReadIntFunc)
+{
+    mtrConfigfileReadInt = ConfigfileReadIntFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireConfigfileReadSingle(mtrConfigfileReadSingleFunc_t ConfigfileReadSingleFunc)
+{
+    mtrConfigfileReadSingle = ConfigfileReadSingleFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireConfigfileReadString(mtrConfigfileReadStringFunc_t ConfigfileReadStringFunc)
+{
+    mtrConfigfileReadString = ConfigfileReadStringFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireConfigfileWriteInt(mtrConfigfileWriteIntFunc_t ConfigfileWriteIntFunc)
+{
+    mtrConfigfileWriteInt = ConfigfileWriteIntFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireConfigfileWriteSingle(mtrConfigfileWriteSingleFunc_t ConfigfileWriteSingleFunc)
+{
+    mtrConfigfileWriteSingle = ConfigfileWriteSingleFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireConfigfileWriteString(mtrConfigfileWriteStringFunc_t ConfigfileWriteStringFunc)
+{
+    mtrConfigfileWriteString = ConfigfileWriteStringFunc;
+}
+
 MTR_EXPORT void MTR_CALL mtrRequireLogWrite(mtrLogWriteFunc_t LogWriteFunc)
 {
     mtrLogWrite = LogWriteFunc;

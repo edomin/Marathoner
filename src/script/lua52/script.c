@@ -41,7 +41,21 @@ void mtrScriptsInit(void)
     mtrScriptsRegisterNumericVariable("IKDM_LARGE", MTR_IKDM_LARGE);
     mtrScriptsRegisterNumericVariable("FM_WRITE", MTR_FM_WRITE);
     mtrScriptsRegisterNumericVariable("FM_APPEND", MTR_FM_APPEND);
+
+    mtrScriptsRegisterFunction(mtrSF_ConfigfileGetKeyName, "ConfigfileGetKeyName");
+    mtrScriptsRegisterFunction(mtrSF_ConfigfileGetSectionName, "ConfigfileGetSectionName");
+    mtrScriptsRegisterFunction(mtrSF_ConfigfileDeleteKey, "ConfigfileDeleteKey");
+    mtrScriptsRegisterFunction(mtrSF_ConfigfileDeleteKey, "ConfigfileDeleteKey");
+    mtrScriptsRegisterFunction(mtrSF_ConfigfileReadBool, "ConfigfileReadBool");
+    mtrScriptsRegisterFunction(mtrSF_ConfigfileReadBool, "ConfigfileReadBool");
+    mtrScriptsRegisterFunction(mtrSF_ConfigfileReadSingle, "ConfigfileReadSingle");
+    mtrScriptsRegisterFunction(mtrSF_ConfigfileReadString, "ConfigfileReadString");
+    mtrScriptsRegisterFunction(mtrSF_ConfigfileWriteInt, "ConfigfileWriteInt");
+    mtrScriptsRegisterFunction(mtrSF_ConfigfileWriteSingle, "ConfigfileWriteSingle");
+    mtrScriptsRegisterFunction(mtrSF_ConfigfileWriteString, "ConfigfileWriteString");
+
     mtrScriptsRegisterFunction(mtrSF_FileWriteLine, "FileWriteLine");
+
     mtrLogWrite("Script functions and constants of engine registered",
      1, MTR_LMT_INFO);
     /* Registering functions and constants from all binding plugins */
@@ -122,6 +136,154 @@ MTR_EXPORT void MTR_CALL mtrScriptsAutorun(char * filename)
     mtrScriptsDoFile(filename);
 }
 
+int mtrSF_ConfigfileGetKeyName(lua_State* l)
+{
+    const char *filename = lua_tostring(mtrVm, 1);
+    const char *section = lua_tostring(mtrVm, 2);
+    int         index = lua_tointeger(mtrVm, 3);
+    char       *result;
+    result = mtrConfigfileGetKeyName(filename, section, index);
+
+    lua_pushstring(mtrVm, result);
+
+    return 1;
+}
+
+int mtrSF_ConfigfileGetSectionName(lua_State* l)
+{
+    const char *filename = lua_tostring(mtrVm, 1);
+    int         index = lua_tointeger(mtrVm, 2);
+    char       *result;
+    result = mtrConfigfileGetSectionName(filename, index);
+
+    lua_pushstring(mtrVm, result);
+
+    return 1;
+}
+
+int mtrSF_ConfigfileDeleteKey(lua_State* l)
+{
+    const char *filename = lua_tostring(mtrVm, 1);
+    const char *section = lua_tostring(mtrVm, 2);
+    const char *key = lua_tostring(mtrVm, 3);
+    bool        result;
+    result = mtrConfigfileDeleteKey(filename, section, key);
+
+    lua_pushboolean(mtrVm, result);
+
+    return 1;
+}
+
+int mtrSF_ConfigfileDeleteSection(lua_State* l)
+{
+    const char *filename = lua_tostring(mtrVm, 1);
+    const char *section = lua_tostring(mtrVm, 2);
+    bool        result;
+    result = mtrConfigfileDeleteSection(filename, section);
+
+    lua_pushboolean(mtrVm, result);
+
+    return 1;
+}
+
+int mtrSF_ConfigfileReadBool(lua_State* l)
+{
+    const char *filename = lua_tostring(mtrVm, 1);
+    const char *section = lua_tostring(mtrVm, 2);
+    const char *key = lua_tostring(mtrVm, 3);
+    bool        defaultValue = lua_toboolean(mtrVm, 4);
+    bool        result;
+    result = mtrConfigfileReadBool(filename, section, key, defaultValue);
+
+    lua_pushboolean(mtrVm, result);
+
+    return 1;
+}
+
+int mtrSF_ConfigfileReadInt(lua_State* l)
+{
+    const char *filename = lua_tostring(mtrVm, 1);
+    const char *section = lua_tostring(mtrVm, 2);
+    const char *key = lua_tostring(mtrVm, 3);
+    int         defaultValue = lua_tointeger(mtrVm, 4);
+    int         result;
+    result = mtrConfigfileReadInt(filename, section, key, defaultValue);
+
+    lua_pushinteger(mtrVm, result);
+
+    return 1;
+}
+
+int mtrSF_ConfigfileReadSingle(lua_State* l)
+{
+    const char *filename = lua_tostring(mtrVm, 1);
+    const char *section = lua_tostring(mtrVm, 2);
+    const char *key = lua_tostring(mtrVm, 3);
+    float       defaultValue = (float)lua_tonumber(mtrVm, 4);
+    float       result;
+    result = mtrConfigfileReadSingle(filename, section, key, defaultValue);
+
+    lua_pushnumber(mtrVm, (double)result);
+
+    return 1;
+}
+
+int mtrSF_ConfigfileReadString(lua_State* l)
+{
+    const char *filename = lua_tostring(mtrVm, 1);
+    const char *section = lua_tostring(mtrVm, 2);
+    const char *key = lua_tostring(mtrVm, 3);
+    const char *defaultValue = lua_tostring(mtrVm, 4);
+    char       *result;
+    result = mtrConfigfileReadString(filename, section, key, defaultValue);
+
+    lua_pushstring(mtrVm, result);
+
+    return 1;
+}
+
+int mtrSF_ConfigfileWriteInt(lua_State* l)
+{
+    const char *filename = lua_tostring(mtrVm, 1);
+    const char *section = lua_tostring(mtrVm, 2);
+    const char *key = lua_tostring(mtrVm, 3);
+    int         value = lua_tointeger(mtrVm, 4);
+    bool        result;
+    result = mtrConfigfileWriteInt(filename, section, key, value);
+
+    lua_pushboolean(mtrVm, result);
+
+    return 1;
+}
+
+int mtrSF_ConfigfileWriteSingle(lua_State* l)
+{
+    const char *filename = lua_tostring(mtrVm, 1);
+    const char *section = lua_tostring(mtrVm, 2);
+    const char *key = lua_tostring(mtrVm, 3);
+    float       value = (float)lua_tonumber(mtrVm, 4);
+    bool        result;
+    result = mtrConfigfileWriteSingle(filename, section, key, value);
+
+    lua_pushboolean(mtrVm, result);
+
+    return 1;
+}
+
+int mtrSF_ConfigfileWriteString(lua_State* l)
+{
+    const char *filename = lua_tostring(mtrVm, 1);
+    const char *section = lua_tostring(mtrVm, 2);
+    const char *key = lua_tostring(mtrVm, 3);
+    const char *value = lua_tostring(mtrVm, 4);
+    bool        result;
+    result = mtrConfigfileWriteString(filename, section, key, value);
+
+    lua_pushboolean(mtrVm, result);
+
+    return 1;
+}
+
 int mtrSF_FileWriteLine(lua_State* l)
 {
     const char *filename = lua_tostring(mtrVm, 1);
@@ -129,5 +291,5 @@ int mtrSF_FileWriteLine(lua_State* l)
     uint8_t mode = lua_tointeger(mtrVm, 3);
     mtrFileWriteLine(filename, string, mode);
 
-    return 0;
+    return 1;
 }
