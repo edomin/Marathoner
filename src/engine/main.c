@@ -312,7 +312,7 @@ int main(int argc, char** argv)
 
                     if (strcmp(temp, mtrPluginData[i].report->moduleID) == 0)
                     {
-                        mtrLogWrite_s("Module will not loaded: ", 1,
+                        mtrLogWrite_s("Module will not loaded:", 1,
                          MTR_LMT_NOTE, mtrPluginData[j].report->moduleID);
                         mtrCloseLibrary(mtrPluginData[j].dll);
                         free(mtrPluginData[j].filename);
@@ -322,7 +322,7 @@ int main(int argc, char** argv)
                     }
                     if (strcmp(temp, mtrPluginData[j].report->moduleID) == 0)
                     {
-                        mtrLogWrite_s("Module will not loaded: ", 1,
+                        mtrLogWrite_s("Module will not loaded:", 1,
                          MTR_LMT_NOTE, mtrPluginData[i].report->moduleID);
                         mtrCloseLibrary(mtrPluginData[i].dll);
                         free(mtrPluginData[i].filename);
@@ -330,13 +330,13 @@ int main(int argc, char** argv)
                         break;
                     }
 
-                    mtrLogWrite_s("Conflicting modules of subsystem: ", 1,
+                    mtrLogWrite_s("Conflicting modules of subsystem:", 1,
                      MTR_LMT_ERROR, mtrPluginData[i].report->subsystem);
-                    mtrLogWrite_s("First module: ", 2, MTR_LMT_INFO,
+                    mtrLogWrite_s("First module:", 2, MTR_LMT_INFO,
                      mtrPluginData[i].report->moduleID);
-                    mtrLogWrite_s("Second module: ", 2, MTR_LMT_INFO,
+                    mtrLogWrite_s("Second module:", 2, MTR_LMT_INFO,
                      mtrPluginData[j].report->moduleID);
-                    mtrLogWrite_s("Module will not loaded: ", 1,
+                    mtrLogWrite_s("Module will not loaded:", 1,
                      MTR_LMT_WARNING, mtrPluginData[i].report->moduleID);
                     mtrCloseLibrary(mtrPluginData[i].dll);
                     free(mtrPluginData[i].filename);
@@ -371,10 +371,10 @@ int main(int argc, char** argv)
                 }
                 if (!ok)
                 {
-                    mtrLogWrite_s("Missing Prerequired subsystem module: ", 1,
+                    mtrLogWrite_s("Missing Prerequired subsystem module:", 1,
                      MTR_LMT_ERROR,
                      mtrPluginData[i].report->prereqSubsystems[j]);
-                    mtrLogWrite_s("Module will not loaded: ", 1,
+                    mtrLogWrite_s("Module will not loaded:", 1,
                      MTR_LMT_WARNING, mtrPluginData[i].report->moduleID);
                     mtrCloseLibrary(mtrPluginData[i].dll);
                     free(mtrPluginData[i].filename);
@@ -402,9 +402,9 @@ int main(int argc, char** argv)
                 }
                 if (!ok)
                 {
-                    mtrLogWrite_s("Missing Prerequisite module: ", 1,
+                    mtrLogWrite_s("Missing Prerequisite module:", 1,
                      MTR_LMT_ERROR, mtrPluginData[i].report->prereqs[j]);
-                    mtrLogWrite_s("Module will not loaded: ", 1,
+                    mtrLogWrite_s("Module will not loaded:", 1,
                      MTR_LMT_WARNING, mtrPluginData[i].report->moduleID);
                     mtrCloseLibrary(mtrPluginData[i].dll);
                     free(mtrPluginData[i].filename);
