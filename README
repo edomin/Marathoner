@@ -8,14 +8,21 @@ TODO
 General usage:
 TODO
 
-Usage configfile:
+Configfile usage:
 "Autorun" section - game starting settings
     "action" key - running way. Valid values: "runScript"
     "plugin" key (if "action = runScript") - ID of plugin that will be run VM
-    "script" key (if "action = runScript") - autorun script
+    "script" key (if "action = runScript") - autorun script filename
+"Module" section - mark modules for forced disable.
+    key-value format: "<plugin_ID> = 0|1"
+    0 - disabled
+    1 - enabled (default)
 "Subsystem" section - specify plugin ID of each subsystem for solve conflicts
-  of several plugins responsible for one subsystem
-    key-value format: "<subsystem_name> = <plugin_ID>"
+  of several plugins responsible for one subsystem or completely disable
+  subsystem
+    key-value format: "<subsystem_name> = <plugin_ID> | none"
+    <plugin_ID> for assign plufin
+    "none" for disable subsystem
 
 Copying:
 Source code are under zlib license (for this moment. Read LICENSE)

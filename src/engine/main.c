@@ -255,6 +255,21 @@ int main(int argc, char** argv)
     i = 0;
     while (i < mtrPluginsFound)
     {
+        if (!mtrConfigfileReadBool("Marathoner.cfg", "Module", mtrPluginData[i].report->moduleID, true))
+        {
+            mtrLogWrite_s("Module are disabled by configfile: ", 1,
+             MTR_LMT_NOTE, mtrPluginData[i].report->moduleID);
+
+            mtrCloseLibrary(mtrPluginData[i].dll);
+            free(mtrPluginData[i].filename);
+
+            for (j = i; j < mtrPluginsFound - 1; j++)
+                mtrPluginData[j] = mtrPluginData[j + 1];
+            mtrPluginsFound--;
+            i = 0;
+            continue;
+        }
+
         ok = true;
         /* searching conflicting subsystems */
         if ((strcmp(mtrPluginData[i].report->subsystem, "binding") != 0) &&
@@ -263,6 +278,20 @@ int main(int argc, char** argv)
         {
             for (j = 0; j < mtrPluginsFound; j++)
             {
+                temp = mtrConfigfileReadString("Marathoner.cfg",
+                 "Subsystem", mtrPluginData[i].report->subsystem,
+                "none");
+                if (strcmp(temp, "none") == 0)
+                {
+                    mtrLogWrite_s("Subsystem of module are disabled by configfile:",
+                     1, MTR_LMT_NOTE, mtrPluginData[i].report->moduleID);
+                    mtrCloseLibrary(mtrPluginData[i].dll);
+                    free(mtrPluginData[i].filename);
+                    free(temp);
+                    ok = false;
+                    break;
+                }
+
                 if ((strcmp(mtrPluginData[i].report->subsystem, mtrPluginData[j].report->subsystem) == 0) &&
                    (i != j))
                 {
