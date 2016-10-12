@@ -8,6 +8,7 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     report = malloc(sizeof(mtrReport));
     report->moduleID = "Screen_SDL2";
     report->version = MTR_VERSION_SCREEN_SDL2;
+    report->subsystem = "screen";
     report->prereqsCount = 0;
     report->prereqs = NULL;
     report->prereqSubsystemsCount = 0;

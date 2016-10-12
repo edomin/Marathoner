@@ -8,6 +8,7 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     report = malloc(sizeof(mtrReport));
     report->moduleID = "Script_Lua52";
     report->version = MTR_VERSION_SCRIPT_LUA;
+    report->subsystem = "script";
     report->prereqsCount = 0;
     report->prereqs = NULL;
     report->prereqSubsystemsCount = 0;

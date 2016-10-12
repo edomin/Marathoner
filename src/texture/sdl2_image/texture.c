@@ -8,6 +8,7 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     report = malloc(sizeof(mtrReport));
     report->moduleID = "Texture_SDL2_image";
     report->version = MTR_VERSION_TEXTURE_SDL2_IMAGE;
+    report->subsystem = "texture";
     report->prereqsCount = 1;
     report->prereqs = malloc(sizeof(char *) * report->prereqsCount);
     report->prereqs[0] = "Screen_SDL2";

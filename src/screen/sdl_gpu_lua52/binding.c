@@ -8,6 +8,7 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     report = malloc(sizeof(mtrReport));
     report->moduleID = "Screen_sdl_gpu_Lua52";
     report->version = MTR_VERSION_SCREEN_SDL2_GPU_LUA;
+    report->subsystem = "binding";
     report->prereqsCount = 2;
     report->prereqs = malloc(sizeof(char *) * report->prereqsCount);
     report->prereqs[0] = "Screen_sdl_gpu";

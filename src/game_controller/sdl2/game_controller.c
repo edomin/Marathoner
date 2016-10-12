@@ -8,6 +8,7 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     report = malloc(sizeof(mtrReport));
     report->moduleID = "Game_Controller_SDL2";
     report->version = MTR_VERSION_GAME_CONTROLLER_SDL2;
+    report->subsystem = "game_controller";
     report->prereqsCount = 0;
     report->prereqs = NULL;
     report->prereqSubsystemsCount = 0;

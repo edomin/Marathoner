@@ -8,6 +8,7 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     report = malloc(sizeof(mtrReport));
     report->moduleID = "Audio_SDL2_mixer_Lua52";
     report->version = MTR_VERSION_AUDIO_SDL2_MIXER_LUA;
+    report->subsystem = "binding";
     report->prereqsCount = 2;
     report->prereqs = malloc(sizeof(char *) * report->prereqsCount);
     report->prereqs[0] = "Audio_SDL2_mixer";
