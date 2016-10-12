@@ -4,6 +4,7 @@
 #include "configfile.h"
 #include "indexkeeper.h"
 #include "file.h"
+#include "directory.h"
 
 #include "marathoner/engine.h"
 
@@ -90,19 +91,39 @@ void RequireEngineFuncs(uint8_t plugin)
          1, MTR_LMT_WARNING);
 }
 
+int CountPlugins(char *directoryName)
+{
+    mtrDirectory_t *pluginDirectory;
+    int mtrPluginsFound;
+
+    mtrPluginsFound = 0;
+    pluginDirectory = mtrDirectoryOpen(directoryName);
+    if (pluginDirectory == NULL)
+        return -1;
+    else
+    {
+        while (mtrDirectoryNextFile(pluginDirectory))
+        {
+            if (!mtrDirectoryFileIsDir(pluginDirectory))
+                mtrPluginsFound++;
+        }
+        mtrDirectoryClose(pluginDirectory);
+    }
+    return mtrPluginsFound;
+}
+
 int main(int argc, char** argv)
 {
-    #ifdef __MINGW32__
-        WIN32_FIND_DATA FindFileData;
-        HANDLE          hf;
-    #else
-        DIR           *d;
-        struct dirent *dir;
-    #endif
+    #ifdef MTR_MOD_PLUGIN
+    mtrDirectory_t *pluginDirectory;
+    char           *tempFilename;
     char           *fullPluginFileName;
-    int             i;
-    uint8_t         mtrPluginsFound;
+    int             mtrPluginsFound;
     uint8_t         currentPlugin;
+    #endif /* MTR_MOD_PLUGIN */
+    int             i;
+    int             j;
+    int             k;
     char           *temp; /* Read config result */
     bool            ok;
 
@@ -120,43 +141,13 @@ int main(int argc, char** argv)
 
     mtrPluginsFound = 0;
     /* Counting available plugins */
-    #ifdef __MINGW32__
-        hf = FindFirstFile("plugin/*", &FindFileData);
-        if(hf == INVALID_HANDLE_VALUE)
-        {
-            mtrNotify("Unable to open 'plugin/' directory for counting files",
-             0, MTR_LMT_FATAL);
-            return 1;
-        }
-        else
-        {
-            do
-            {
-                if(FindFileData.dwFileAttributes != FILE_ATTRIBUTE_DIRECTORY)
-                    mtrPluginsFound++;
-            }
-            while(FindNextFile(hf, &FindFileData) != 0);
-            FindClose(hf);
-        }
-    #else
-        d = opendir("./plugin/");
-        if (d == NULL)
-        {
-            mtrNotify("Unable to open './plugin' directory for counting files",
-             0, MTR_LMT_FATAL);
-            return 1;
-        }
-        else
-        {
-            while ((dir = readdir(d)) != NULL)
-            {
-                if((strcmp(dir->d_name, "..") != 0) &&
-                 (strcmp(dir->d_name, ".") != 0))
-                    mtrPluginsFound++;
-            }
-            closedir(d);
-        }
-    #endif
+    mtrPluginsFound = CountPlugins("./plugin/");
+    if (mtrPluginsFound == -1)
+    {
+        mtrNotify("Unable to open 'plugin/' directory for counting files",
+         0, MTR_LMT_FATAL);
+        return 1;
+    }
     /* Allocating plugin data structures */
     if (mtrPluginsFound != 0)
         mtrPluginData = malloc(sizeof(mtrPlugin) * mtrPluginsFound);
@@ -166,49 +157,23 @@ int main(int argc, char** argv)
         return 2;
     }
     /* Getting plugins data */
-    #ifdef __MINGW32__
-    hf = FindFirstFile("plugin/*", &FindFileData);
-    if(hf != INVALID_HANDLE_VALUE)
-    #else
-    d = opendir("./plugin/");
-    if (d != NULL)
-    #endif
+    pluginDirectory = mtrDirectoryOpen("./plugin/");
+    if (pluginDirectory != NULL)
     {
         currentPlugin = 0;
-        #ifdef __MINGW32__
-        do
-        #else
-        while ((dir = readdir(d)) != NULL)
-        #endif
+        while (mtrDirectoryNextFile(pluginDirectory))
         {
-            #ifdef __MINGW32__
-            if(FindFileData.dwFileAttributes != FILE_ATTRIBUTE_DIRECTORY)
-            #else
-            if((strcmp(dir->d_name, "..") != 0) &&
-             (strcmp(dir->d_name, ".") != 0))
-            #endif
+            tempFilename = mtrDirectoryGetFilename(pluginDirectory);
+            if (!mtrDirectoryFileIsDir(pluginDirectory))
             {
-                #ifdef __MINGW32__
-                    mtrLogWrite_s("Plugin found:", 0, MTR_LMT_INFO,
-                     FindFileData.cFileName);
-                    /* file name in plugin/ directory */
-                    mtrPluginData[currentPlugin].filename = FindFileData.cFileName;
-                    /* temporary plugin file name with relative path */
-                    fullPluginFileName = malloc(strlen("plugin/") +
-                     strlen(FindFileData.cFileName) + 1);
-                    strcpy(fullPluginFileName, "plugin/");
-                    strcat(fullPluginFileName, FindFileData.cFileName);
-                #else
-                    mtrLogWrite_s("Plugin found:", 0, MTR_LMT_INFO,
-                     dir->d_name);
-                    /* file name in plugin/ directory */
-                    mtrPluginData[currentPlugin].filename = dir->d_name;
-                    /* temporary plugin file name with relative path */
-                    fullPluginFileName = malloc(strlen("plugin/") +
-                     strlen(dir->d_name) + 1);
-                    strcpy(fullPluginFileName, "plugin/");
-                    strcat(fullPluginFileName, dir->d_name);
-                #endif
+                mtrLogWrite_s("Plugin found:", 0, MTR_LMT_INFO, tempFilename);
+                /* file name in plugin/ directory */
+                mtrPluginData[currentPlugin].filename = tempFilename;
+                /* temporary plugin file name with relative path */
+                fullPluginFileName = malloc(strlen("plugin/") +
+                 strlen(tempFilename) + 1);
+                strcpy(fullPluginFileName, "plugin/");
+                strcat(fullPluginFileName, tempFilename);
                 /* Loading plugin library */
                 mtrPluginData[currentPlugin].dll = mtrLoadLibrary(fullPluginFileName);
                 if (mtrPluginData[currentPlugin].dll == NULL)
@@ -253,12 +218,7 @@ int main(int argc, char** argv)
                 free(fullPluginFileName);
             }
         }
-        #ifdef __MINGW32__
-        while(FindNextFile(hf, &FindFileData) !=0 );
-        FindClose(hf);
-        #else
-        closedir(d);
-        #endif
+        mtrDirectoryClose(pluginDirectory);
     }
     mtrLogWrite("Processing modules' reports", 0, MTR_LMT_INFO);
     ok = false;
