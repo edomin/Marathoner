@@ -1,6 +1,23 @@
-Marathoner - remake of the Run and Jump. This is game engine for GameDev Jams (for this moment). I want to make better flexibility compared with my previous Run and Jump: static-link-builded or optionally plugin-based core, real time redistribution (allocation/removing etc) of the game resources, more types of modules (old ones plus modules for 3D, gui, vector graphics, streaming video etc), may be more embedded script VMs. Everyone module will be based on opensource libraries (SDL, Freetype etc).
-Work in progress. Coming Soon.
+Marathoner - game engine for Game Jams.
+Work in progress. Strongly not recommended for use.
+TODO: more detailed description.
 
-Source code under zlib license (for this moment. Read LICENSE)
+How to build:
+TODO
+
+General usage:
+TODO
+
+Usage configfile:
+"Autorun" section - game starting settings
+    "action" key - running way. Valid values: "runScript"
+    "plugin" key (if "action = runScript") - ID of plugin that will be run VM
+    "script" key (if "action = runScript") - autorun script
+"Subsystem" section - specify plugin ID of each subsystem for solve conflicts
+  of several plugins responsible for one subsystem
+    key-value format: "<subsystem_name> = <plugin_ID>"
+
+Copying:
+Source code are under zlib license (for this moment. Read LICENSE)
 
 And I am sorry for my bad english.
