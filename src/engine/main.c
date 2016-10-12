@@ -228,11 +228,11 @@ int main(int argc, char** argv)
                   mtrPluginData[currentPlugin].report->moduleID);
                 mtrLogWrite("Version:", 1, MTR_LMT_INFO);
                 mtrLogWrite_i("Majon:", 2, MTR_LMT_INFO,
-                  mtrPluginData[currentPlugin].report->version >> 16);
+                  (mtrPluginData[currentPlugin].report->version & 0xFF0000) >> 16);
                 mtrLogWrite_i("Minor:", 2, MTR_LMT_INFO,
-                  (mtrPluginData[currentPlugin].report->version << 8) >> 16);
+                  (mtrPluginData[currentPlugin].report->version & 0x00FF00) >> 8);
                 mtrLogWrite_i("Patch:", 2, MTR_LMT_INFO,
-                  (mtrPluginData[currentPlugin].report->version << 16) >> 16);
+                  mtrPluginData[currentPlugin].report->version & 0x0000FF);
                 if (mtrPluginData[currentPlugin].report->prereqsCount > 0)
                 {
                     mtrLogWrite("Requirements:", 1, MTR_LMT_INFO);
