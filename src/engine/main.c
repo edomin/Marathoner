@@ -250,11 +250,136 @@ int main(int argc, char** argv)
         closedir(d);
         #endif
     }
+    mtrLogWrite("Processing modules' reports", 0, MTR_LMT_INFO);
+    ok = false;
+    i = 0;
+    while (i < mtrPluginsFound)
+    {
+        ok = true;
+        /* searching conflicting subsystems */
+        if ((strcmp(mtrPluginData[i].report->subsystem, "binding") != 0) &&
+         (strcmp(mtrPluginData[i].report->subsystem, "utils") != 0) &&
+         (strcmp(mtrPluginData[i].report->subsystem, "abstraction") != 0))
+        {
+            for (j = 0; j < mtrPluginsFound; j++)
+            {
+                if ((strcmp(mtrPluginData[i].report->subsystem, mtrPluginData[j].report->subsystem) == 0) &&
+                   (i != j))
+                {
+                    ok = false;
+                    temp = mtrConfigfileReadString("Marathoner.cfg",
+                     "Subsystem", mtrPluginData[i].report->subsystem,
+                    "none");
 
-//    for (i = 0; i < mtrPluginsFound; i++)
-//    {
-//
-//    }
+                    if (strcmp(temp, mtrPluginData[i].report->moduleID) == 0)
+                    {
+                        mtrLogWrite_s("Module will not loaded: ", 1,
+                         MTR_LMT_NOTE, mtrPluginData[j].report->moduleID);
+                        mtrCloseLibrary(mtrPluginData[j].dll);
+                        free(mtrPluginData[j].filename);
+                        i = j;
+                        free(temp);
+                        break;
+                    }
+                    if (strcmp(temp, mtrPluginData[j].report->moduleID) == 0)
+                    {
+                        mtrLogWrite_s("Module will not loaded: ", 1,
+                         MTR_LMT_NOTE, mtrPluginData[i].report->moduleID);
+                        mtrCloseLibrary(mtrPluginData[i].dll);
+                        free(mtrPluginData[i].filename);
+                        free(temp);
+                        break;
+                    }
+
+                    mtrLogWrite_s("Conflicting modules of subsystem: ", 1,
+                     MTR_LMT_ERROR, mtrPluginData[i].report->subsystem);
+                    mtrLogWrite_s("First module: ", 2, MTR_LMT_INFO,
+                     mtrPluginData[i].report->moduleID);
+                    mtrLogWrite_s("Second module: ", 2, MTR_LMT_INFO,
+                     mtrPluginData[j].report->moduleID);
+                    mtrLogWrite_s("Module will not loaded: ", 1,
+                     MTR_LMT_WARNING, mtrPluginData[i].report->moduleID);
+                    mtrCloseLibrary(mtrPluginData[i].dll);
+                    free(mtrPluginData[i].filename);
+
+                    free(temp);
+                    break;
+                }
+            }
+            if (!ok)
+            {
+
+                for (j = i; j < mtrPluginsFound - 1; j++)
+                    mtrPluginData[j] = mtrPluginData[j + 1];
+                mtrPluginsFound--;
+                i = 0;
+                continue;
+            }
+        }
+        /* searching existing of prerequied subsystems */
+        if (mtrPluginData[i].report->prereqSubsystemsCount > 0)
+        {
+            for (j = 0; j < mtrPluginData[i].report->prereqSubsystemsCount; j++)
+            {
+                ok = false;
+                for (k = 0; k < mtrPluginsFound; k++)
+                {
+                    if (strcmp(mtrPluginData[i].report->prereqSubsystems[j], mtrPluginData[k].report->subsystem) == 0)
+                    {
+                        ok = true;
+                        break;
+                    }
+                }
+                if (!ok)
+                {
+                    mtrLogWrite_s("Missing Prerequired subsystem module: ", 1,
+                     MTR_LMT_ERROR,
+                     mtrPluginData[i].report->prereqSubsystems[j]);
+                    mtrLogWrite_s("Module will not loaded: ", 1,
+                     MTR_LMT_WARNING, mtrPluginData[i].report->moduleID);
+                    mtrCloseLibrary(mtrPluginData[i].dll);
+                    free(mtrPluginData[i].filename);
+                    for (j = i; j < mtrPluginsFound - 1; j++)
+                        mtrPluginData[j] = mtrPluginData[j + 1];
+                    mtrPluginsFound--;
+                    i = 0;
+                    continue;
+                }
+            }
+        }
+        /* checking existing of prerequisites */
+        if (mtrPluginData[i].report->prereqsCount > 0)
+        {
+            for (j = 0; j < mtrPluginData[i].report->prereqsCount; j++)
+            {
+                ok = false;
+                for (k = 0; k < mtrPluginsFound; k++)
+                {
+                    if (strcmp(mtrPluginData[i].report->prereqs[j], mtrPluginData[k].report->moduleID) == 0)
+                    {
+                        ok = true;
+                        break;
+                    }
+                }
+                if (!ok)
+                {
+                    mtrLogWrite_s("Missing Prerequisite module: ", 1,
+                     MTR_LMT_ERROR, mtrPluginData[i].report->prereqs[j]);
+                    mtrLogWrite_s("Module will not loaded: ", 1,
+                     MTR_LMT_WARNING, mtrPluginData[i].report->moduleID);
+                    mtrCloseLibrary(mtrPluginData[i].dll);
+                    free(mtrPluginData[i].filename);
+                    for (j = i; j < mtrPluginsFound - 1; j++)
+                        mtrPluginData[j] = mtrPluginData[j + 1];
+                    mtrPluginsFound--;
+                    i = 0;
+                    continue;
+                }
+            }
+        }
+        i++;
+    }
+    mtrLogWrite("Modules' reports processed", 0, MTR_LMT_INFO);
     mtrLogWrite("Reading 'Marathoner.cfg' for autorun options", 0,
       MTR_LMT_INFO);
     ok = false;
