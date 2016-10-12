@@ -14,8 +14,11 @@
 typedef struct mtrReport{
     char    *moduleID;
     uint32_t version;
+    char    *subsystem;
     uint8_t  prereqsCount;
     char   **prereqs;
+    uint8_t  prereqSubsystemsCount;
+    char   **prereqSubsystems;
 } mtrReport;
 
 /* type of loaded dll-plugin data */
