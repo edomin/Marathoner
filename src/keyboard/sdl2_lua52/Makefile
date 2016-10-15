@@ -1,6 +1,0 @@
-SUBSYSTEM = keyboard
-MODULE = sdl2_lua52
-MODULE_NAME = Keyboard_SDL2_Lua52
-LIBS = -llua
-
-include ../../../Binding.mk
