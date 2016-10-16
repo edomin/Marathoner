@@ -98,30 +98,4 @@ mtrAudioSoundFreeFunc mtrAudioSoundFree;
 typedef void (MTR_CALL * mtrAudioMusicFreeFunc)(uint32_t);
 mtrAudioMusicFreeFunc mtrAudioMusicFree;
 
-int mtrSF_AudioInit(lua_State* l);
-int mtrSF_AudioQuit(lua_State* l);
-int mtrSF_AudioSoundLoad(lua_State* l);
-int mtrSF_AudioMusicLoad(lua_State* l);
-int mtrSF_AudioSoundPlay(lua_State* l);
-int mtrSF_AudioSoundFadeInPlay(lua_State* l);
-int mtrSF_AudioSoundSetVolume(lua_State* l);
-int mtrSF_AudioSoundSetVolume_f(lua_State* l);
-int mtrSF_AudioChannelsSetVolume(lua_State* l);
-int mtrSF_AudioChannelsSetVolume_f(lua_State* l);
-int mtrSF_AudioChannelsPause(lua_State* l);
-int mtrSF_AudioChannelsResume(lua_State* l);
-int mtrSF_AudioChannelsStop(lua_State* l);
-int mtrSF_AudioChannelsFadeOutStop(lua_State* l);
-int mtrSF_AudioMusicPlay(lua_State* l);
-int mtrSF_AudioMusicFadeInPlay(lua_State* l);
-int mtrSF_AudioMusicSetVolume(lua_State* l);
-int mtrSF_AudioMusicSetVolume_f(lua_State* l);
-int mtrSF_AudioMusicPause(lua_State* l);
-int mtrSF_AudioMusicResume(lua_State* l);
-int mtrSF_AudioMusicStop(lua_State* l);
-int mtrSF_AudioMusicFadeOutStop(lua_State* l);
-int mtrSF_AudioSoundFree(lua_State* l);
-int mtrSF_AudioMusicFree(lua_State* l);
-
 #endif
-

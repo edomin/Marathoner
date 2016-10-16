@@ -67,21 +67,6 @@ mtrGameControllerGetTrackballDeltaXYFunc mtrGameControllerGetTrackballDeltaXY;
 typedef uint8_t (MTR_CALL * mtrGameControllerGetPovHatFunc)(uint8_t, uint8_t);
 mtrGameControllerGetPovHatFunc mtrGameControllerGetPovHat;
 
-int mtrSF_GameControllerInit(lua_State* l);
-int mtrSF_GameControllerQuit(lua_State* l);
-int mtrSF_GameControllerRefresh(lua_State* l);
-int mtrSF_GameControllerButtonPress(lua_State* l);
-int mtrSF_GameControllerButtonRelease(lua_State* l);
-int mtrSF_GameControllerButtonPressed(lua_State* l);
-int mtrSF_GameControllerGetAxis(lua_State* l);
-int mtrSF_GameControllerGetAxis_f(lua_State* l);
-int mtrSF_GameControllerGetAxisDelta(lua_State* l);
-int mtrSF_GameControllerGetAxisDelta_f(lua_State* l);
-int mtrSF_GameControllerGetTrackballDeltaX(lua_State* l);
-int mtrSF_GameControllerGetTrackballDeltaY(lua_State* l);
-int mtrSF_GameControllerGetTrackballDeltaXY(lua_State* l);
-int mtrSF_GameControllerGetPovHat(lua_State* l);
-
 #define MTR_POVHAT_CENTER       SDL_HAT_CENTERED
 #define MTR_POVHAT_UP           SDL_HAT_UP
 #define MTR_POVHAT_DOWN         SDL_HAT_DOWN

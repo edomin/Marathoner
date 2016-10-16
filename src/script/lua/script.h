@@ -19,19 +19,5 @@ MTR_EXPORT void MTR_CALL mtrScriptsRegisterStringVariable(char *name,
 MTR_EXPORT void MTR_CALL mtrScriptsRegisterNumericVariable(char *name,
  double value);
 
-int mtrSF_ConfigfileGetKeyName(lua_State* l);
-int mtrSF_ConfigfileGetSectionName(lua_State* l);
-int mtrSF_ConfigfileDeleteKey(lua_State* l);
-int mtrSF_ConfigfileDeleteSection(lua_State* l);
-int mtrSF_ConfigfileReadBool(lua_State* l);
-int mtrSF_ConfigfileReadInt(lua_State* l);
-int mtrSF_ConfigfileReadSingle(lua_State* l);
-int mtrSF_ConfigfileReadString(lua_State* l);
-int mtrSF_ConfigfileWriteInt(lua_State* l);
-int mtrSF_ConfigfileWriteSingle(lua_State* l);
-int mtrSF_ConfigfileWriteString(lua_State* l);
-
-int mtrSF_FileWriteLine(lua_State* l);
-
 #endif
 
