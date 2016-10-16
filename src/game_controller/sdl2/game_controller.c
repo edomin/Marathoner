@@ -20,9 +20,9 @@ MTR_EXPORT bool MTR_CALL mtrGameControllerInit(void)
 {
     SDL_version compiled;
     SDL_version linked;
-    uint8_t i;
-    uint8_t j;
-    bool ok;
+    int         i;
+    int         j;
+    bool        ok;
 
     mtrLogWrite("Initializing game controller support", 0, MTR_LMT_INFO);
 
@@ -275,8 +275,8 @@ MTR_EXPORT void MTR_CALL mtrGameControllerRefresh(void)
     }
 }
 
-MTR_EXPORT bool MTR_CALL mtrGameControllerButtonPress(uint8_t controllerNum,
- uint8_t button)
+MTR_EXPORT bool MTR_CALL mtrGameControllerButtonPress(int controllerNum,
+ int button)
 {
     if (mtrGameControllersCount > controllerNum)
         if (button < mtrGameController[controllerNum].buttonsCount)
@@ -291,8 +291,8 @@ MTR_EXPORT bool MTR_CALL mtrGameControllerButtonPress(uint8_t controllerNum,
         return false;
 }
 
-MTR_EXPORT bool MTR_CALL mtrGameControllerButtonRelease(uint8_t controllerNum,
- uint8_t button)
+MTR_EXPORT bool MTR_CALL mtrGameControllerButtonRelease(int controllerNum,
+ int button)
 {
     if (mtrGameControllersCount > controllerNum)
         if (button < mtrGameController[controllerNum].buttonsCount)
@@ -307,8 +307,8 @@ MTR_EXPORT bool MTR_CALL mtrGameControllerButtonRelease(uint8_t controllerNum,
         return false;
 }
 
-MTR_EXPORT bool MTR_CALL mtrGameControllerButtonPressed(uint8_t controllerNum,
- uint8_t button)
+MTR_EXPORT bool MTR_CALL mtrGameControllerButtonPressed(int controllerNum,
+ int button)
 {
     if (mtrGameControllersCount > controllerNum)
         if (button < mtrGameController[controllerNum].buttonsCount)
@@ -319,8 +319,8 @@ MTR_EXPORT bool MTR_CALL mtrGameControllerButtonPressed(uint8_t controllerNum,
         return false;
 }
 
-MTR_EXPORT int16_t MTR_CALL mtrGameControllerGetAxis(uint8_t controllerNum,
- uint8_t axisNum)
+MTR_EXPORT int16_t MTR_CALL mtrGameControllerGetAxis(int controllerNum,
+ int axisNum)
 {
     if (mtrGameControllersCount > controllerNum)
         if (axisNum < mtrGameController[controllerNum].axesCount)
@@ -331,8 +331,8 @@ MTR_EXPORT int16_t MTR_CALL mtrGameControllerGetAxis(uint8_t controllerNum,
         return 0;
 }
 
-MTR_EXPORT float MTR_CALL mtrGameControllerGetAxis_f(uint8_t controllerNum,
- uint8_t axisNum)
+MTR_EXPORT float MTR_CALL mtrGameControllerGetAxis_f(int controllerNum,
+ int axisNum)
 {
     if (mtrGameControllersCount > controllerNum)
         if (axisNum < mtrGameController[controllerNum].axesCount)
@@ -346,8 +346,8 @@ MTR_EXPORT float MTR_CALL mtrGameControllerGetAxis_f(uint8_t controllerNum,
         return 0.0f;
 }
 
-MTR_EXPORT int32_t MTR_CALL mtrGameControllerGetAxisDelta(uint8_t controllerNum,
- uint8_t axisNum)
+MTR_EXPORT int MTR_CALL mtrGameControllerGetAxisDelta(int controllerNum,
+ int axisNum)
 {
     if (mtrGameControllersCount > controllerNum)
         if (axisNum < mtrGameController[controllerNum].axesCount)
@@ -359,8 +359,8 @@ MTR_EXPORT int32_t MTR_CALL mtrGameControllerGetAxisDelta(uint8_t controllerNum,
         return 0;
 }
 
-MTR_EXPORT float MTR_CALL mtrGameControllerGetAxisDelta_f(uint8_t controllerNum,
- uint8_t axisNum)
+MTR_EXPORT float MTR_CALL mtrGameControllerGetAxisDelta_f(int controllerNum,
+ int axisNum)
 {
     if (mtrGameControllersCount > controllerNum)
         if (axisNum < mtrGameController[controllerNum].axesCount)
@@ -372,8 +372,8 @@ MTR_EXPORT float MTR_CALL mtrGameControllerGetAxisDelta_f(uint8_t controllerNum,
         return 0.0f;
 }
 
-MTR_EXPORT int32_t MTR_CALL mtrGameControllerGetTrackballDeltaX(uint8_t controllerNum,
- uint8_t trackballNum)
+MTR_EXPORT int MTR_CALL mtrGameControllerGetTrackballDeltaX(int controllerNum,
+ int trackballNum)
 {
     if (mtrGameControllersCount > controllerNum)
         if (trackballNum < mtrGameController[controllerNum].trackballsCount)
@@ -384,8 +384,8 @@ MTR_EXPORT int32_t MTR_CALL mtrGameControllerGetTrackballDeltaX(uint8_t controll
         return 0;
 }
 
-MTR_EXPORT int32_t MTR_CALL mtrGameControllerGetTrackballDeltaY(uint8_t controllerNum,
- uint8_t trackballNum)
+MTR_EXPORT int MTR_CALL mtrGameControllerGetTrackballDeltaY(int controllerNum,
+ int trackballNum)
 {
     if (mtrGameControllersCount > controllerNum)
         if (trackballNum < mtrGameController[controllerNum].trackballsCount)
@@ -396,8 +396,8 @@ MTR_EXPORT int32_t MTR_CALL mtrGameControllerGetTrackballDeltaY(uint8_t controll
         return 0;
 }
 
-MTR_EXPORT void MTR_CALL mtrGameControllerGetTrackballDeltaXY(uint8_t controllerNum,
- uint8_t trackballNum, int32_t *deltaX, int32_t *deltaY)
+MTR_EXPORT void MTR_CALL mtrGameControllerGetTrackballDeltaXY(int controllerNum,
+ int trackballNum, int *deltaX, int *deltaY)
 {
     if (mtrGameControllersCount > controllerNum)
         if (trackballNum < mtrGameController[controllerNum].trackballsCount)
@@ -417,8 +417,8 @@ MTR_EXPORT void MTR_CALL mtrGameControllerGetTrackballDeltaXY(uint8_t controller
     }
 }
 
-MTR_EXPORT uint8_t MTR_CALL mtrGameControllerGetPovHat(uint8_t controllerNum,
- uint8_t povHatNum)
+MTR_EXPORT uint8_t MTR_CALL mtrGameControllerGetPovHat(int controllerNum,
+ int povHatNum)
 {
     if (mtrGameControllersCount > controllerNum)
         if (povHatNum < mtrGameController[controllerNum].povHatsCount)

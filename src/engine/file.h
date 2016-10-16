@@ -8,6 +8,6 @@
 #include "marathoner/engine.h"
 
 void MTR_CALL mtrFileWriteLine(const char* filename, const char *text,
- uint8_t mode);
+ int mode);
 
 #endif

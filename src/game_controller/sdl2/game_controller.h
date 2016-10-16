@@ -6,8 +6,8 @@
 #include "marathoner/plugin.h"
 
 typedef struct mtrTrackballDelta_t{
-    int32_t dx;
-    int32_t dy;
+    int dx;
+    int dy;
 }mtrTrackballDelta_t;
 
 typedef struct mtrGameController_t{
@@ -18,13 +18,13 @@ typedef struct mtrGameController_t{
     int16_t             *previousAxis;
     mtrTrackballDelta_t *trackballDelta;
     uint8_t             *povHat;
-    uint8_t              buttonsCount;
-    uint8_t              axesCount;
-    uint8_t              trackballsCount;
-    uint8_t              povHatsCount;
+    int                  buttonsCount;
+    int                  axesCount;
+    int                  trackballsCount;
+    int                  povHatsCount;
 } mtrGameController_t;
 
-uint8_t mtrGameControllersCount;
+int                  mtrGameControllersCount;
 mtrGameController_t *mtrGameController;
 
 #define MTR_POVHAT_CENTER       SDL_HAT_CENTERED

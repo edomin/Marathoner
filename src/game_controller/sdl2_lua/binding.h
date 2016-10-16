@@ -29,42 +29,38 @@ mtrGameControllerQuitFunc mtrGameControllerQuit;
 typedef void (MTR_CALL * mtrGameControllerRefreshFunc)(void);
 mtrGameControllerRefreshFunc mtrGameControllerRefresh;
 
-typedef bool (MTR_CALL * mtrGameControllerButtonPressFunc)(uint8_t, uint8_t);
+typedef bool (MTR_CALL * mtrGameControllerButtonPressFunc)(int, int);
 mtrGameControllerButtonPressFunc mtrGameControllerButtonPress;
 
-typedef bool (MTR_CALL * mtrGameControllerButtonReleaseFunc)(uint8_t, uint8_t);
+typedef bool (MTR_CALL * mtrGameControllerButtonReleaseFunc)(int, int);
 mtrGameControllerButtonReleaseFunc mtrGameControllerButtonRelease;
 
-typedef bool (MTR_CALL * mtrGameControllerButtonPressedFunc)(uint8_t, uint8_t);
+typedef bool (MTR_CALL * mtrGameControllerButtonPressedFunc)(int, int);
 mtrGameControllerButtonPressedFunc mtrGameControllerButtonPressed;
 
-typedef int16_t (MTR_CALL * mtrGameControllerGetAxisFunc)(uint8_t, uint8_t);
+typedef int16_t (MTR_CALL * mtrGameControllerGetAxisFunc)(int, int);
 mtrGameControllerGetAxisFunc mtrGameControllerGetAxis;
 
-typedef float (MTR_CALL * mtrGameControllerGetAxis_fFunc)(uint8_t, uint8_t);
+typedef float (MTR_CALL * mtrGameControllerGetAxis_fFunc)(int, int);
 mtrGameControllerGetAxis_fFunc mtrGameControllerGetAxis_f;
 
-typedef int32_t (MTR_CALL * mtrGameControllerGetAxisDeltaFunc)(uint8_t,
- uint8_t);
+typedef int (MTR_CALL * mtrGameControllerGetAxisDeltaFunc)(int, int);
 mtrGameControllerGetAxisDeltaFunc mtrGameControllerGetAxisDelta;
 
-typedef float (MTR_CALL * mtrGameControllerGetAxisDelta_fFunc)(uint8_t,
- uint8_t);
+typedef float (MTR_CALL * mtrGameControllerGetAxisDelta_fFunc)(int, int);
 mtrGameControllerGetAxisDelta_fFunc mtrGameControllerGetAxisDelta_f;
 
-typedef int32_t (MTR_CALL * mtrGameControllerGetTrackballDeltaXFunc)(uint8_t,
- uint8_t);
+typedef int (MTR_CALL * mtrGameControllerGetTrackballDeltaXFunc)(int, int);
 mtrGameControllerGetTrackballDeltaXFunc mtrGameControllerGetTrackballDeltaX;
 
-typedef int32_t (MTR_CALL * mtrGameControllerGetTrackballDeltaYFunc)(uint8_t,
- uint8_t);
+typedef int (MTR_CALL * mtrGameControllerGetTrackballDeltaYFunc)(int, int);
 mtrGameControllerGetTrackballDeltaYFunc mtrGameControllerGetTrackballDeltaY;
 
-typedef void (MTR_CALL * mtrGameControllerGetTrackballDeltaXYFunc)(uint8_t,
- uint8_t, int32_t *, int32_t *);
+typedef void (MTR_CALL * mtrGameControllerGetTrackballDeltaXYFunc)(int, int,
+ int *, int *);
 mtrGameControllerGetTrackballDeltaXYFunc mtrGameControllerGetTrackballDeltaXY;
 
-typedef uint8_t (MTR_CALL * mtrGameControllerGetPovHatFunc)(uint8_t, uint8_t);
+typedef uint8_t (MTR_CALL * mtrGameControllerGetPovHatFunc)(int, int);
 mtrGameControllerGetPovHatFunc mtrGameControllerGetPovHat;
 
 #define MTR_POVHAT_CENTER       SDL_HAT_CENTERED

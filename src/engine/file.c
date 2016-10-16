@@ -1,7 +1,7 @@
 #include "file.h"
 
 void MTR_CALL mtrFileWriteLine(const char* filename, const char *text,
- uint8_t mode)
+ int mode)
 {
     FILE *file;
     if (mode == MTR_FM_WRITE)

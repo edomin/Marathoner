@@ -69,7 +69,7 @@ typedef void     (MTR_CALL * mtrIndexkeeperFreeIndexFunc_t)(void *, uint32_t);
 typedef void     (MTR_CALL * mtrIndexkeeperDestroyFunc_t)(void *);
 
 typedef void     (MTR_CALL * mtrFileWriteLineFunc_t)(const char *, const char *,
- uint8_t);
+ int);
 
 /* loaded dll-plugin data */
 mtrPlugin *mtrPluginData;
