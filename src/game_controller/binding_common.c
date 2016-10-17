@@ -1,6 +1,6 @@
 #include "marathoner/script_func.h"
 
-int mtrSF_GameControllerInit(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_GameControllerInit)
 {
     bool success;
 
@@ -11,21 +11,21 @@ int mtrSF_GameControllerInit(lua_State* l)
     return 1;
 }
 
-int mtrSF_GameControllerQuit(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_GameControllerQuit)
 {
     mtrGameControllerQuit();
 
     return 0;
 }
 
-int mtrSF_GameControllerRefresh(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_GameControllerRefresh)
 {
     mtrGameControllerRefresh();
 
     return 0;
 }
 
-int mtrSF_GameControllerButtonPress(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_GameControllerButtonPress)
 {
     int  controllerNum;
     int  button;
@@ -40,7 +40,7 @@ int mtrSF_GameControllerButtonPress(lua_State* l)
     return 1;
 }
 
-int mtrSF_GameControllerButtonRelease(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_GameControllerButtonRelease)
 {
     int  controllerNum;
     int  button;
@@ -55,7 +55,7 @@ int mtrSF_GameControllerButtonRelease(lua_State* l)
     return 1;
 }
 
-int mtrSF_GameControllerButtonPressed(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_GameControllerButtonPressed)
 {
     int  controllerNum;
     int  button;
@@ -70,7 +70,7 @@ int mtrSF_GameControllerButtonPressed(lua_State* l)
     return 1;
 }
 
-int mtrSF_GameControllerGetAxis(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_GameControllerGetAxis)
 {
     int     controllerNum;
     int     axis;
@@ -85,7 +85,7 @@ int mtrSF_GameControllerGetAxis(lua_State* l)
     return 1;
 }
 
-int mtrSF_GameControllerGetAxis_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_GameControllerGetAxis_f)
 {
     int     controllerNum;
     int     axis;
@@ -100,7 +100,7 @@ int mtrSF_GameControllerGetAxis_f(lua_State* l)
     return 1;
 }
 
-int mtrSF_GameControllerGetAxisDelta(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_GameControllerGetAxisDelta)
 {
     int controllerNum;
     int axis;
@@ -115,7 +115,7 @@ int mtrSF_GameControllerGetAxisDelta(lua_State* l)
     return 1;
 }
 
-int mtrSF_GameControllerGetAxisDelta_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_GameControllerGetAxisDelta_f)
 {
     int   controllerNum;
     int   axis;
@@ -130,7 +130,7 @@ int mtrSF_GameControllerGetAxisDelta_f(lua_State* l)
     return 1;
 }
 
-int mtrSF_GameControllerGetTrackballDeltaX(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_GameControllerGetTrackballDeltaX)
 {
     int controllerNum;
     int trackball;
@@ -145,7 +145,7 @@ int mtrSF_GameControllerGetTrackballDeltaX(lua_State* l)
     return 1;
 }
 
-int mtrSF_GameControllerGetTrackballDeltaY(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_GameControllerGetTrackballDeltaY)
 {
     int controllerNum;
     int trackball;
@@ -160,7 +160,7 @@ int mtrSF_GameControllerGetTrackballDeltaY(lua_State* l)
     return 1;
 }
 
-int mtrSF_GameControllerGetTrackballDeltaXY(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_GameControllerGetTrackballDeltaXY)
 {
     int controllerNum;
     int trackball;
@@ -178,7 +178,7 @@ int mtrSF_GameControllerGetTrackballDeltaXY(lua_State* l)
     return 2;
 }
 
-int mtrSF_GameControllerGetPovHat(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_GameControllerGetPovHat)
 {
     int     controllerNum;
     int     povHat;
