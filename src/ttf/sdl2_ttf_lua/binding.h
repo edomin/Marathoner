@@ -44,11 +44,4 @@ mtrTtfSetFontStyleFunc mtrTtfSetFontStyle;
 typedef void (MTR_CALL * mtrTtfSetFontOutlineFunc)(uint32_t, uint16_t);
 mtrTtfSetFontOutlineFunc mtrTtfSetFontOutline;
 
-int mtrSF_TtfInit(lua_State* l);
-int mtrSF_TtfQuit(lua_State* l);
-int mtrSF_TtfLoad(lua_State* l);
-int mtrSF_TtfFree(lua_State* l);
-int mtrSF_TtfSetFontStyle(lua_State* l);
-int mtrSF_TtfSetFontOutline(lua_State* l);
-
 #endif

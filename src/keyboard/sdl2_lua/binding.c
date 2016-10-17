@@ -1,6 +1,7 @@
 #include "binding.h"
 
 #include "marathoner/plugin_common.c"
+#include "../binding_common.c"
 
 MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
@@ -364,46 +365,4 @@ MTR_EXPORT void MTR_CALL mtrPluginInit(void)
             mtrLogWrite("Functions not added", 3, MTR_LMT_ERROR);
         }
     }
-}
-
-int mtrSF_KeyboardInit(lua_State* l)
-{
-    bool success = mtrKeyboardInit();
-    lua_pushboolean(mtrVm, success);
-
-    return 1;
-}
-
-int mtrSF_KeyboardRefresh(lua_State* l)
-{
-    mtrKeyboardRefresh();
-
-    return 0;
-}
-
-int mtrSF_KeyboardPress(lua_State* l)
-{
-    uint16_t key = lua_tonumber(mtrVm, 1);
-    bool result = mtrKeyboardPress(key);
-    lua_pushboolean(mtrVm, result);
-
-    return 1;
-}
-
-int mtrSF_KeyboardRelease(lua_State* l)
-{
-    uint16_t key = lua_tonumber(mtrVm, 1);
-    bool result = mtrKeyboardRelease(key);
-    lua_pushboolean(mtrVm, result);
-
-    return 1;
-}
-
-int mtrSF_KeyboardPressed(lua_State* l)
-{
-    uint16_t key = lua_tonumber(mtrVm, 1);
-    bool result = mtrKeyboardPressed(key);
-    lua_pushboolean(mtrVm, result);
-
-    return 1;
 }

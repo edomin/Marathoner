@@ -73,16 +73,4 @@ typedef void (MTR_CALL * mtrTextureBlitRegionGeneral_fFunc)(uint32_t, float,
  float, float, float, float, float, float, float, float, float, float, uint8_t);
 mtrTextureBlitRegionGeneral_fFunc mtrTextureBlitRegionGeneral_f;
 
-int mtrSF_TextureInit(lua_State* l);
-int mtrSF_TextureLoad(lua_State* l);
-int mtrSF_TextureFree(lua_State* l);
-int mtrSF_TextureSetBlendFunction(lua_State* l);
-int mtrSF_TextureSetAlphaBlending(lua_State* l);
-int mtrSF_TextureBlit_f(lua_State* l);
-int mtrSF_TextureBlitRegion_f(lua_State* l);
-int mtrSF_TextureBlitRegionScaled_f(lua_State* l);
-int mtrSF_TextureBlitRegionAngled_f(lua_State* l);
-int mtrSF_TextureBlitRegionFlipped_f(lua_State* l);
-int mtrSF_TextureBlitRegionGeneral_f(lua_State* l);
-
 #endif

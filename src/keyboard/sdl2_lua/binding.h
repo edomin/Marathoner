@@ -35,12 +35,6 @@ mtrKeyboardReleaseFunc mtrKeyboardRelease;
 typedef bool (MTR_CALL * mtrKeyboardPressedFunc)(uint16_t);
 mtrKeyboardPressedFunc mtrKeyboardPressed;
 
-int mtrSF_KeyboardInit(lua_State* l);
-int mtrSF_KeyboardRefresh(lua_State* l);
-int mtrSF_KeyboardPress(lua_State* l);
-int mtrSF_KeyboardRelease(lua_State* l);
-int mtrSF_KeyboardPressed(lua_State* l);
-
 #define MTR_KEY_A                   SDL_SCANCODE_A
 #define MTR_KEY_B                   SDL_SCANCODE_B
 #define MTR_KEY_C                   SDL_SCANCODE_C

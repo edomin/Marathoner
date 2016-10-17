@@ -1,6 +1,7 @@
 #include "binding.h"
 
 #include "marathoner/plugin_common.c"
+#include "../binding_common.c"
 
 MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
@@ -80,27 +81,4 @@ MTR_EXPORT void MTR_CALL mtrPluginInit(void)
             mtrLogWrite("Functions not added", 3, MTR_LMT_ERROR);
         }
     }
-}
-
-int mtrSF_ScreenInit(lua_State* l)
-{
-    uint16_t w = lua_tonumber(mtrVm, 1); /* получаем 1-ый */
-                                         /* переданный параметр */
-    uint16_t h = lua_tonumber(mtrVm, 2);
-//    const char *title = lua_tostring(mtrVm, 3);
-//    bool fullscreen = lua_toboolean(mtrVm, 4);
-    mtrScreenInit(w, h);
-    return 0;
-}
-
-int mtrSF_ScreenQuit(lua_State* l)
-{
-    mtrScreenQuit();
-    return 0;
-}
-
-int mtrSF_ScreenFlip(lua_State* l)
-{
-    mtrScreenFlip();
-    return 0;
 }

@@ -56,19 +56,6 @@ mtrMouseGetDeltaYFunc mtrMouseGetDeltaY;
 typedef void (MTR_CALL * mtrMouseGetDeltaXYFunc)(int16_t *, int16_t *);
 mtrMouseGetDeltaXYFunc mtrMouseGetDeltaXY;
 
-int mtrSF_MouseInit(lua_State* l);
-int mtrSF_MouseRefresh(lua_State* l);
-int mtrSF_MousePress(lua_State* l);
-int mtrSF_MouseRelease(lua_State* l);
-int mtrSF_MousePressed(lua_State* l);
-int mtrSF_MouseGetWheelRelative(lua_State* l);
-int mtrSF_MouseGetX(lua_State* l);
-int mtrSF_MouseGetY(lua_State* l);
-int mtrSF_MouseGetXY(lua_State* l);
-int mtrSF_MouseGetDeltaX(lua_State* l);
-int mtrSF_MouseGetDeltaY(lua_State* l);
-int mtrSF_MouseGetDeltaXY(lua_State* l);
-
 #define MTR_MOUSE_LEFT   SDL_BUTTON_LEFT
 #define MTR_MOUSE_RIGHT  SDL_BUTTON_RIGHT
 #define MTR_MOUSE_MIDDLE SDL_BUTTON_MIDDLE
@@ -76,5 +63,3 @@ int mtrSF_MouseGetDeltaXY(lua_State* l);
 #define MTR_MOUSE_X2     SDL_BUTTON_X2
 
 #endif
-
-

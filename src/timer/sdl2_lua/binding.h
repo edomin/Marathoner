@@ -30,10 +30,4 @@ mtrTimerDelayForFPSFunc mtrTimerDelayForFPS;
 typedef float (MTR_CALL * mtrTimerDelayForFPS_fFunc)(float);
 mtrTimerDelayForFPS_fFunc mtrTimerDelayForFPS_f;
 
-int mtrSF_TimerInit(lua_State* l);
-int mtrSF_TimerStart(lua_State* l);
-int mtrSF_TimerDelay(lua_State* l);
-int mtrSF_TimerDelayForFPS(lua_State* l);
-int mtrSF_TimerDelayForFPS_f(lua_State* l);
-
 #endif

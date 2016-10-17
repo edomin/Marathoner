@@ -1,6 +1,7 @@
 #include "binding.h"
 
 #include "marathoner/plugin_common.c"
+#include "../binding_common.c"
 
 MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
@@ -98,46 +99,4 @@ MTR_EXPORT void MTR_CALL mtrPluginInit(void)
             mtrLogWrite("Functions not added", 3, MTR_LMT_ERROR);
         }
     }
-}
-
-int mtrSF_TimerInit(lua_State* l)
-{
-    bool success = mtrTimerInit();
-    lua_pushboolean(mtrVm, success);
-
-    return 1;
-}
-
-int mtrSF_TimerStart(lua_State* l)
-{
-    mtrTimerStart();
-
-    return 0;
-}
-
-int mtrSF_TimerDelay(lua_State* l)
-{
-    uint32_t ms = lua_tonumber(mtrVm, 1);
-    uint32_t fps = mtrTimerDelay(ms);
-    lua_pushnumber(mtrVm, fps);
-
-    return 1;
-}
-
-int mtrSF_TimerDelayForFPS(lua_State* l)
-{
-    uint32_t fps = lua_tonumber(mtrVm, 1);
-    uint32_t resultFps = mtrTimerDelayForFPS(fps);
-    lua_pushnumber(mtrVm, resultFps);
-
-    return 1;
-}
-
-int mtrSF_TimerDelayForFPS_f(lua_State* l)
-{
-    float fps = lua_tonumber(mtrVm, 1);
-    float resultFps = mtrTimerDelayForFPS_f(fps);
-    lua_pushnumber(mtrVm, resultFps);
-
-    return 1;
 }

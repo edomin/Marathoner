@@ -1,6 +1,7 @@
 #include "binding.h"
 
 #include "marathoner/plugin_common.c"
+#include "../binding_common.c"
 
 MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
@@ -124,57 +125,4 @@ MTR_EXPORT void MTR_CALL mtrPluginInit(void)
             mtrLogWrite("Functions not added", 3, MTR_LMT_ERROR);
         }
     }
-}
-
-int mtrSF_TtfInit(lua_State* l)
-{
-    uint32_t dmSize = lua_tonumber(mtrVm, 1);
-    uint32_t reservedCount = lua_tonumber(mtrVm, 2);
-    bool     success = mtrTtfInit(dmSize, reservedCount);
-    lua_pushboolean(mtrVm, success);
-
-    return 1;
-}
-
-int mtrSF_TtfQuit(lua_State* l)
-{
-    mtrTtfQuit();
-
-    return 0;
-}
-
-int mtrSF_TtfLoad(lua_State* l)
-{
-    const char *filename = lua_tostring(mtrVm, 1);
-    uint16_t    size = lua_tointeger(mtrVm, 2);
-    uint32_t    fontNum = mtrTtfLoad(filename, size);
-    lua_pushnumber(mtrVm, fontNum);
-
-    return 1;
-}
-
-int mtrSF_TtfFree(lua_State* l)
-{
-    uint32_t fontNum = lua_tonumber(mtrVm, 1);
-    mtrTtfFree(fontNum);
-
-    return 0;
-}
-
-int mtrSF_TtfSetFontStyle(lua_State* l)
-{
-    uint32_t texNum = lua_tonumber(mtrVm, 1);
-    uint8_t style = lua_tointeger(mtrVm, 2);
-    mtrTtfSetFontStyle(texNum, style);
-
-    return 0;
-}
-
-int mtrSF_TtfSetFontOutline(lua_State* l)
-{
-    uint32_t texNum = lua_tonumber(mtrVm, 1);
-    uint16_t outline = lua_tointeger(mtrVm, 2);
-    mtrTtfSetFontOutline(texNum, outline);
-
-    return 0;
 }

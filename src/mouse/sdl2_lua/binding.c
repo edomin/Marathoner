@@ -1,6 +1,7 @@
 #include "binding.h"
 
 #include "marathoner/plugin_common.c"
+#include "../binding_common.c"
 
 MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
@@ -177,108 +178,4 @@ MTR_EXPORT void MTR_CALL mtrPluginInit(void)
             mtrLogWrite("Functions not added", 3, MTR_LMT_ERROR);
         }
     }
-}
-
-int mtrSF_MouseInit(lua_State* l)
-{
-    bool success = mtrMouseInit();
-    lua_pushboolean(mtrVm, success);
-
-    return 1;
-}
-
-int mtrSF_MouseRefresh(lua_State* l)
-{
-    mtrMouseRefresh();
-
-    return 0;
-}
-
-int mtrSF_MousePress(lua_State* l)
-{
-    uint8_t button = (uint8_t)lua_tointeger(mtrVm, 1);
-    bool result = mtrMousePress(button);
-    lua_pushboolean(mtrVm, result);
-
-    return 1;
-}
-
-int mtrSF_MouseRelease(lua_State* l)
-{
-    uint8_t button = (uint8_t)lua_tointeger(mtrVm, 1);
-    bool result = mtrMouseRelease(button);
-    lua_pushboolean(mtrVm, result);
-
-    return 1;
-}
-
-int mtrSF_MousePressed(lua_State* l)
-{
-    uint8_t button = (uint8_t)lua_tointeger(mtrVm, 1);
-    bool result = mtrMousePressed(button);
-    lua_pushboolean(mtrVm, result);
-
-    return 1;
-}
-
-int mtrSF_MouseGetWheelRelative(lua_State* l)
-{
-    uint8_t result = mtrMouseGetWheelRelative();
-    lua_pushinteger(mtrVm, result);
-
-    return 1;
-}
-
-int mtrSF_MouseGetX(lua_State* l)
-{
-    int16_t x = mtrMouseGetX();
-    lua_pushnumber(mtrVm, x);
-
-    return 1;
-}
-
-int mtrSF_MouseGetY(lua_State* l)
-{
-    int16_t y = mtrMouseGetY();
-    lua_pushinteger(mtrVm, y);
-
-    return 1;
-}
-
-int mtrSF_MouseGetXY(lua_State* l)
-{
-    int16_t x;
-    int16_t y;
-    mtrMouseGetXY(&x, &y);
-    lua_pushinteger(mtrVm, x);
-    lua_pushinteger(mtrVm, y);
-
-    return 2;
-}
-
-int mtrSF_MouseGetDeltaX(lua_State* l)
-{
-    int16_t deltaX = mtrMouseGetDeltaX();
-    lua_pushnumber(mtrVm, deltaX);
-
-    return 1;
-}
-
-int mtrSF_MouseGetDeltaY(lua_State* l)
-{
-    int16_t deltaY = mtrMouseGetDeltaY();
-    lua_pushinteger(mtrVm, deltaY);
-
-    return 1;
-}
-
-int mtrSF_MouseGetDeltaXY(lua_State* l)
-{
-    int16_t deltaX;
-    int16_t deltaY;
-    mtrMouseGetDeltaXY(&deltaX, &deltaY);
-    lua_pushinteger(mtrVm, deltaX);
-    lua_pushinteger(mtrVm, deltaY);
-
-    return 2;
 }

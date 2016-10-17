@@ -24,9 +24,4 @@ mtrScreenQuitFunc mtrScreenQuit;
 typedef void (MTR_CALL * mtrScreenFlipFunc)(void);
 mtrScreenFlipFunc mtrScreenFlip;
 
-int mtrSF_ScreenInit(lua_State* l);
-int mtrSF_ScreenQuit(lua_State* l);
-int mtrSF_ScreenFlip(lua_State* l);
-
 #endif
-

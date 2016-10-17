@@ -1,6 +1,7 @@
 #include "binding.h"
 
 #include "marathoner/plugin_common.c"
+#include "../color_binding_common.c"
 
 MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
@@ -1033,73 +1034,4 @@ MTR_EXPORT void MTR_CALL mtrPluginInit(void)
             mtrLogWrite("Functions not added", 3, MTR_LMT_ERROR);
         }
     }
-}
-
-int mtrSF_ColorAssembleRGB(lua_State* l)
-{
-    uint8_t r = lua_tointeger(mtrVm, 1);
-    uint8_t g = lua_tointeger(mtrVm, 2);
-    uint8_t b = lua_tointeger(mtrVm, 3);
-    uint32_t rgb = mtrColorAssembleRGB(r, g, b);
-    lua_pushnumber(mtrVm, rgb);
-
-    return 1;
-}
-
-int mtrSF_ColorAssembleRGBA(lua_State* l)
-{
-    uint8_t r = lua_tointeger(mtrVm, 1);
-    uint8_t g = lua_tointeger(mtrVm, 2);
-    uint8_t b = lua_tointeger(mtrVm, 3);
-    uint8_t a = lua_tointeger(mtrVm, 4);
-    uint32_t rgba = mtrColorAssembleRGBA(r, g, b, a);
-    lua_pushnumber(mtrVm, rgba);
-
-    return 1;
-}
-
-int mtrSF_ColorSplitRGB(lua_State* l)
-{
-    uint8_t r;
-    uint8_t g;
-    uint8_t b;
-    uint32_t rgb = lua_tonumber(mtrVm, 1);
-    mtrColorSplitRGB(rgb, &r, &g, &b);
-    lua_pushinteger(mtrVm, r);
-    lua_pushinteger(mtrVm, g);
-    lua_pushinteger(mtrVm, b);
-
-    return 3;
-}
-
-int mtrSF_ColorSplitRGBA(lua_State* l)
-{
-    uint8_t r;
-    uint8_t g;
-    uint8_t b;
-    uint8_t a;
-    uint32_t rgb = lua_tonumber(mtrVm, 1);
-    mtrColorSplitRGBA(rgb, &r, &g, &b, &a);
-    lua_pushinteger(mtrVm, r);
-    lua_pushinteger(mtrVm, g);
-    lua_pushinteger(mtrVm, b);
-    lua_pushinteger(mtrVm, a);
-
-    return 4;
-}
-
-int mtrSF_ColorRGBtoRGBA(lua_State* l)
-{
-    uint32_t rgb = lua_tonumber(mtrVm, 1);
-    lua_pushnumber(mtrVm, mtrColorRGBtoRGBA(rgb));
-
-    return 1;
-}
-
-int mtrSF_ColorRGBAtoRGB(lua_State* l)
-{
-    uint32_t rgba = lua_tonumber(mtrVm, 1);
-    lua_pushnumber(mtrVm, mtrColorRGBAtoRGB(rgba));
-
-    return 1;
 }

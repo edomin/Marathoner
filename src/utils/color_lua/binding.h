@@ -37,11 +37,4 @@ mtrColorRGBtoRGBAFunc mtrColorRGBtoRGBA;
 typedef uint32_t (MTR_CALL * mtrColorRGBAtoRGBFunc)(uint32_t);
 mtrColorRGBAtoRGBFunc mtrColorRGBAtoRGB;
 
-int mtrSF_ColorAssembleRGB(lua_State* l);
-int mtrSF_ColorAssembleRGBA(lua_State* l);
-int mtrSF_ColorSplitRGB(lua_State* l);
-int mtrSF_ColorSplitRGBA(lua_State* l);
-int mtrSF_ColorRGBtoRGBA(lua_State* l);
-int mtrSF_ColorRGBAtoRGB(lua_State* l);
-
 #endif
