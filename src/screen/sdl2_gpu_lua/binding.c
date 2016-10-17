@@ -28,11 +28,11 @@ MTR_EXPORT void MTR_CALL mtrPluginInit(void)
      LUA_RELEASE);
 
     mtrScriptsRegisterFunction = (mtrScriptsRegisterFunctionFunc)mtrFindFunction("Script_Lua",
-      "mtrScriptsRegisterFunction");
+     "mtrScriptsRegisterFunction");
     if (mtrScriptsRegisterFunction == NULL)
     {
         mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrScriptsRegisterFunction");
+         "mtrScriptsRegisterFunction");
         ok = false;
     }
     mtrScriptsGetVm = (mtrScriptsGetVmFunc)mtrFindFunction("Script_Lua",
@@ -40,34 +40,34 @@ MTR_EXPORT void MTR_CALL mtrPluginInit(void)
     if (mtrScriptsGetVm == NULL)
     {
         mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrScriptsGetVm");
+         "mtrScriptsGetVm");
         ok = false;
     }
     else
     {
         mtrVm = mtrScriptsGetVm();
         mtrScreenInit = (mtrScreenInitFunc)mtrFindFunction("Screen_SDL2_gpu",
-          "mtrScreenInit");
+         "mtrScreenInit");
         if (mtrScreenInit == NULL)
         {
             mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-              "mtrScreenInit");
+             "mtrScreenInit");
             ok = false;
         }
         mtrScreenQuit = (mtrScreenQuitFunc)mtrFindFunction("Screen_SDL2_gpu",
-          "mtrScreenQuit");
+         "mtrScreenQuit");
         if (mtrScreenQuit == NULL)
         {
             mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-              "mtrScreenQuit");
+             "mtrScreenQuit");
             ok = false;
         }
         mtrScreenFlip = (mtrScreenFlipFunc)mtrFindFunction("Screen_SDL2_gpu",
-          "mtrScreenFlip");
+         "mtrScreenFlip");
         if (mtrScreenFlip == NULL)
         {
             mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-              "mtrScreenFlip");
+             "mtrScreenFlip");
             ok = false;
         }
         if (ok)
