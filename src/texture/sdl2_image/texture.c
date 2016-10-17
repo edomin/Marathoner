@@ -17,7 +17,7 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
-MTR_EXPORT bool MTR_CALL mtrTextureInit(uint32_t dmSize, uint32_t reservedCount)
+MTR_EXPORT bool MTR_CALL mtrTextureInit(int dmSize, int reservedCount)
 {
     SDL_version        compiled;
     SDL_version        sdlLinked;
@@ -81,9 +81,9 @@ MTR_EXPORT bool MTR_CALL mtrTextureInit(uint32_t dmSize, uint32_t reservedCount)
     return true;
 }
 
-MTR_EXPORT uint32_t MTR_CALL mtrTextureLoad(const char *filename)
+MTR_EXPORT int MTR_CALL mtrTextureLoad(const char *filename)
 {
-    uint32_t      freeIndex;
+    int           freeIndex;
     mtrTexture_t *texture;
     SDL_Surface  *loadedImage;
 
@@ -121,12 +121,12 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureLoad(const char *filename)
     return 0;
 }
 
-MTR_EXPORT uint32_t MTR_CALL mtrTextureCreateAlias(uint32_t texNum)
+MTR_EXPORT int MTR_CALL mtrTextureCreateAlias(int texNum)
 {
     return 0;
 }
 
-MTR_EXPORT void MTR_CALL mtrTextureFree(uint32_t texNum)
+MTR_EXPORT void MTR_CALL mtrTextureFree(int texNum)
 {
     mtrTexture_t *texture;
     if (texNum != 0)
@@ -140,19 +140,18 @@ MTR_EXPORT void MTR_CALL mtrTextureFree(uint32_t texNum)
     }
 }
 
-MTR_EXPORT void MTR_CALL mtrTextureSetBlendFunction(uint32_t texNum,
- uint8_t srcColor, uint8_t destColor, uint8_t srcAlpha, uint8_t dstAlpha)
+MTR_EXPORT void MTR_CALL mtrTextureSetBlendFunction(int texNum, int srcColor,
+ int destColor, int srcAlpha, int dstAlpha)
 {
     return;
 }
 
-MTR_EXPORT void MTR_CALL mtrTextureSetAlphaBlending(uint32_t texNum,
- bool blending)
+MTR_EXPORT void MTR_CALL mtrTextureSetAlphaBlending(int texNum, bool blending)
 {
     return;
 }
 
-MTR_EXPORT void MTR_CALL mtrTextureBlit_f(uint32_t texNum, float x, float y)
+MTR_EXPORT void MTR_CALL mtrTextureBlit_f(int texNum, float x, float y)
 {
     mtrTexture_t *texture;
     SDL_Rect offset;
@@ -167,8 +166,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlit_f(uint32_t texNum, float x, float y)
     SDL_RenderCopy(mtrScreen->renderer, texture->texture, &clip, &offset);
 }
 
-MTR_EXPORT void MTR_CALL mtrTextureBlitRegion_f(uint32_t texNum, float x,
- float y, float rx, float ry, float rw, float rh)
+MTR_EXPORT void MTR_CALL mtrTextureBlitRegion_f(int texNum, float x, float y,
+ float rx, float ry, float rw, float rh)
 {
     mtrTexture_t *texture;
     SDL_Rect offset;
@@ -185,7 +184,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegion_f(uint32_t texNum, float x,
     SDL_RenderCopy(mtrScreen->renderer, texture->texture, &clip, &offset);
 }
 
-MTR_EXPORT void MTR_CALL mtrTextureBlitRegionScaled_f(uint32_t texNum, float x,
+MTR_EXPORT void MTR_CALL mtrTextureBlitRegionScaled_f(int texNum, float x,
  float y, float w, float h, float rx, float ry, float rw, float rh)
 {
     mtrTexture_t *texture;
@@ -204,7 +203,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionScaled_f(uint32_t texNum, float x,
      NULL, MTR_FLIP_NONE);
 }
 
-MTR_EXPORT void MTR_CALL mtrTextureBlitRegionAngled_f(uint32_t texNum, float x,
+MTR_EXPORT void MTR_CALL mtrTextureBlitRegionAngled_f(int texNum, float x,
  float y, float rx, float ry, float rw, float rh, float angle, float pivotX,
  float pivotY)
 {
@@ -227,8 +226,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionAngled_f(uint32_t texNum, float x,
      -angle, &pivot, MTR_FLIP_NONE);
 }
 
-MTR_EXPORT void MTR_CALL mtrTextureBlitRegionFlipped_f(uint32_t texNum, float x,
- float y, float rx, float ry, float rw, float rh, uint8_t flip)
+MTR_EXPORT void MTR_CALL mtrTextureBlitRegionFlipped_f(int texNum, float x,
+ float y, float rx, float ry, float rw, float rh, int flip)
 {
     mtrTexture_t *texture;
     SDL_Rect offset;
@@ -246,9 +245,9 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionFlipped_f(uint32_t texNum, float x,
      NULL, flip);
 }
 
-MTR_EXPORT void MTR_CALL mtrTextureBlitRegionGeneral_f(uint32_t texNum, float x,
+MTR_EXPORT void MTR_CALL mtrTextureBlitRegionGeneral_f(int texNum, float x,
  float y, float w, float h, float rx, float ry, float rw, float rh, float angle,
- float pivotX, float pivotY, uint8_t flip)
+ float pivotX, float pivotY, int flip)
 {
     mtrTexture_t *texture;
     SDL_Rect offset;

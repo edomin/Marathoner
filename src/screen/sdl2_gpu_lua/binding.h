@@ -15,7 +15,7 @@ mtrScriptsGetVmFunc mtrScriptsGetVm;
 typedef void (MTR_CALL * mtrScriptsRegisterFunctionFunc)(lua_CFunction, char *);
 mtrScriptsRegisterFunctionFunc mtrScriptsRegisterFunction;
 
-typedef void (MTR_CALL * mtrScreenInitFunc)(uint16_t, uint16_t);
+typedef void (MTR_CALL * mtrScreenInitFunc)(int, int);
 mtrScreenInitFunc mtrScreenInit;
 
 typedef void (MTR_CALL * mtrScreenQuitFunc)(void);

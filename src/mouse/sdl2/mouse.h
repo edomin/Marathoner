@@ -6,13 +6,13 @@
 #include "marathoner/plugin.h"
 
 typedef struct mtrMouse_t{
-    uint8_t  currentMousestate[5];
-    uint8_t  previousMousestate[5];
-    int16_t x;
-    int16_t y;
-    int16_t previousX;
-    int16_t previousY;
-    int8_t  relativeWheel;
+    int currentMousestate[5];
+    int previousMousestate[5];
+    int x;
+    int y;
+    int previousX;
+    int previousY;
+    int  relativeWheel;
 } mtrMouse_t;
 
 mtrMouse_t mtrMouse;

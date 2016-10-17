@@ -16,8 +16,8 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
-MTR_EXPORT void MTR_CALL mtrScreenInit(uint16_t width,
- uint16_t height)
+MTR_EXPORT void MTR_CALL mtrScreenInit(int width,
+ int height)
 {
     SDL_version         compiled;
     SDL_version         sdlLinked;

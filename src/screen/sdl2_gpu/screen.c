@@ -16,7 +16,7 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
-MTR_EXPORT void MTR_CALL mtrScreenInit(uint16_t width, uint16_t height)
+MTR_EXPORT void MTR_CALL mtrScreenInit(int width, int height)
 {
     mtrLogWrite("Creating Window", 0, MTR_LMT_INFO);
     mtrScreen = malloc(sizeof(mtrScreen_t));

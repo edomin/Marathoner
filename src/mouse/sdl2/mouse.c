@@ -62,8 +62,8 @@ MTR_EXPORT bool MTR_CALL mtrMouseInit(void)
 
 MTR_EXPORT void MTR_CALL mtrMouseRefresh(void)
 {
-    uint32_t mouseState;
-    uint8_t i;
+    int mouseState;
+    int i;
     int mouseX;
     int mouseY;
 
@@ -73,8 +73,8 @@ MTR_EXPORT void MTR_CALL mtrMouseRefresh(void)
     mouseState = SDL_GetMouseState(&mouseX, &mouseY);
     mtrMouse.previousX = mtrMouse.x;
     mtrMouse.previousY = mtrMouse.y;
-    mtrMouse.x = (int16_t)mouseX;
-    mtrMouse.y = (int16_t)mouseY;
+    mtrMouse.x = mouseX;
+    mtrMouse.y = mouseY;
     for (i = 0; i < 5; i++)
     {
         mtrMouse.previousMousestate[i] = mtrMouse.currentMousestate[i];
@@ -82,7 +82,7 @@ MTR_EXPORT void MTR_CALL mtrMouseRefresh(void)
     }
 }
 
-MTR_EXPORT bool MTR_CALL mtrMousePress(uint8_t button)
+MTR_EXPORT bool MTR_CALL mtrMousePress(int button)
 {
     if (button > 5)
         return false;
@@ -97,7 +97,7 @@ MTR_EXPORT bool MTR_CALL mtrMousePress(uint8_t button)
     }
 }
 
-MTR_EXPORT bool MTR_CALL mtrMouseRelease(uint8_t button)
+MTR_EXPORT bool MTR_CALL mtrMouseRelease(int button)
 {
     if (button > 5)
         return false;
@@ -112,7 +112,7 @@ MTR_EXPORT bool MTR_CALL mtrMouseRelease(uint8_t button)
     }
 }
 
-MTR_EXPORT bool MTR_CALL mtrMousePressed(uint8_t button)
+MTR_EXPORT bool MTR_CALL mtrMousePressed(int button)
 {
     if (button > 5)
         return false;
@@ -127,38 +127,38 @@ MTR_EXPORT bool MTR_CALL mtrMousePressed(uint8_t button)
 }
 
 /* Dummy function for future compatibility */
-MTR_EXPORT int8_t MTR_CALL mtrMouseGetWheelRelative(void)
+MTR_EXPORT int MTR_CALL mtrMouseGetWheelRelative(void)
 {
     return 0;
 }
 
-MTR_EXPORT int16_t MTR_CALL mtrMouseGetX(void)
+MTR_EXPORT int MTR_CALL mtrMouseGetX(void)
 {
     return mtrMouse.x;
 }
 
-MTR_EXPORT int16_t MTR_CALL mtrMouseGetY(void)
+MTR_EXPORT int MTR_CALL mtrMouseGetY(void)
 {
     return mtrMouse.y;
 }
 
-MTR_EXPORT void MTR_CALL mtrMouseGetXY(int16_t *mouseX, int16_t *mouseY)
+MTR_EXPORT void MTR_CALL mtrMouseGetXY(int *mouseX, int *mouseY)
 {
     *mouseX = mtrMouse.x;
     *mouseY = mtrMouse.y;
 }
 
-MTR_EXPORT int16_t MTR_CALL mtrMouseGetDeltaX(void)
+MTR_EXPORT int MTR_CALL mtrMouseGetDeltaX(void)
 {
     return mtrMouse.x - mtrMouse.previousX;
 }
 
-MTR_EXPORT int16_t MTR_CALL mtrMouseGetDeltaY(void)
+MTR_EXPORT int MTR_CALL mtrMouseGetDeltaY(void)
 {
     return mtrMouse.y - mtrMouse.previousY;
 }
 
-MTR_EXPORT void MTR_CALL mtrMouseGetDeltaXY(int16_t *deltaX, int16_t *deltaY)
+MTR_EXPORT void MTR_CALL mtrMouseGetDeltaXY(int *deltaX, int *deltaY)
 {
     *deltaX = mtrMouse.x - mtrMouse.previousX;
     *deltaY = mtrMouse.y - mtrMouse.previousY;

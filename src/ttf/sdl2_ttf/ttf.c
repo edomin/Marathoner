@@ -16,7 +16,7 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
-MTR_EXPORT bool MTR_CALL mtrTtfInit(uint32_t dmSize, uint32_t reservedCount)
+MTR_EXPORT bool MTR_CALL mtrTtfInit(int dmSize, int reservedCount)
 {
     SDL_version compiled;
     const SDL_version *linked;
@@ -61,9 +61,9 @@ MTR_EXPORT void MTR_CALL mtrTtfQuit(void)
     mtrLogWrite("TTF font manager destroyed", 0, MTR_LMT_INFO);
 }
 
-MTR_EXPORT uint32_t MTR_CALL mtrTtfLoad(const char *filename, uint16_t size)
+MTR_EXPORT uint32_t MTR_CALL mtrTtfLoad(const char *filename, int size)
 {
-    uint32_t    freeIndex;
+    int         freeIndex;
     mtrTtf_t   *font;
 
     mtrLogWrite_s("Loading TTF font", 0, MTR_LMT_INFO, filename);
@@ -87,22 +87,21 @@ MTR_EXPORT uint32_t MTR_CALL mtrTtfLoad(const char *filename, uint16_t size)
     return 0;
 }
 
-MTR_EXPORT void MTR_CALL mtrTtfSetFontStyle(uint32_t fontNum, uint8_t style)
+MTR_EXPORT void MTR_CALL mtrTtfSetFontStyle(int fontNum, int style)
 {
     mtrTtf_t *font;
     font = (mtrTtf_t *)(&((mtrTtf_t *)mtrTtfKeeper->data)[fontNum]);
     TTF_SetFontStyle(font->font, style);
 }
 
-MTR_EXPORT void MTR_CALL mtrTtfSetFontOutline(uint32_t fontNum,
- uint16_t outline)
+MTR_EXPORT void MTR_CALL mtrTtfSetFontOutline(int fontNum, int outline)
 {
     mtrTtf_t *font;
     font = (mtrTtf_t *)(&((mtrTtf_t *)mtrTtfKeeper->data)[fontNum]);
     TTF_SetFontOutline(font->font, outline);
 }
 
-MTR_EXPORT void MTR_CALL mtrTtfFree(uint32_t fontNum)
+MTR_EXPORT void MTR_CALL mtrTtfFree(int fontNum)
 {
     mtrTtf_t *font;
     if (fontNum != 0)

@@ -59,14 +59,14 @@ MTR_EXPORT uint32_t MTR_CALL mtrTimerGetTicks(void)
     return SDL_GetTicks() - mtrTimer.startTime;
 }
 
-MTR_EXPORT uint32_t MTR_CALL mtrTimerDelay(uint32_t ms)
+MTR_EXPORT int MTR_CALL mtrTimerDelay(int ms)
 {
     if (ms > 0)
         SDL_Delay(ms);
     return 1000 / mtrTimerGetTicks();
 }
 
-MTR_EXPORT uint32_t MTR_CALL mtrTimerDelayForFPS(uint32_t fps)
+MTR_EXPORT int MTR_CALL mtrTimerDelayForFPS(int fps)
 {
     if (fps > 0)
         if(mtrTimerGetTicks() < 1000 / fps)

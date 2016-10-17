@@ -63,7 +63,7 @@ MTR_EXPORT bool MTR_CALL mtrKeyboardInit(void)
 
 MTR_EXPORT void MTR_CALL mtrKeyboardRefresh(void)
 {
-    uint16_t i;
+    int i;
     for (i = 0; i < SDL_NUM_SCANCODES; i++)
     {
         mtrKeyboard.previousKeystate[i] = (uint8_t)mtrKeyboard.currentKeystate[i];
@@ -71,7 +71,7 @@ MTR_EXPORT void MTR_CALL mtrKeyboardRefresh(void)
     SDL_PumpEvents();
 }
 
-MTR_EXPORT bool MTR_CALL mtrKeyboardPress(uint16_t key)
+MTR_EXPORT bool MTR_CALL mtrKeyboardPress(int key)
 {
     if (key >= SDL_NUM_SCANCODES)
         return false;
@@ -86,7 +86,7 @@ MTR_EXPORT bool MTR_CALL mtrKeyboardPress(uint16_t key)
     }
 }
 
-MTR_EXPORT bool MTR_CALL mtrKeyboardRelease(uint16_t key)
+MTR_EXPORT bool MTR_CALL mtrKeyboardRelease(int key)
 {
     if (key >= SDL_NUM_SCANCODES)
         return false;
@@ -101,7 +101,7 @@ MTR_EXPORT bool MTR_CALL mtrKeyboardRelease(uint16_t key)
     }
 }
 
-MTR_EXPORT bool MTR_CALL mtrKeyboardPressed(uint16_t key)
+MTR_EXPORT bool MTR_CALL mtrKeyboardPressed(int key)
 {
     if (key >= SDL_NUM_SCANCODES)
         return false;

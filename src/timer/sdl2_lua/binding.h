@@ -21,10 +21,10 @@ mtrTimerInitFunc mtrTimerInit;
 typedef void (MTR_CALL * mtrTimerStartFunc)(void);
 mtrTimerStartFunc mtrTimerStart;
 
-typedef uint32_t (MTR_CALL * mtrTimerDelayFunc)(uint32_t);
+typedef int (MTR_CALL * mtrTimerDelayFunc)(int);
 mtrTimerDelayFunc mtrTimerDelay;
 
-typedef uint32_t (MTR_CALL * mtrTimerDelayForFPSFunc)(uint32_t);
+typedef int (MTR_CALL * mtrTimerDelayForFPSFunc)(int);
 mtrTimerDelayForFPSFunc mtrTimerDelayForFPS;
 
 typedef float (MTR_CALL * mtrTimerDelayForFPS_fFunc)(float);

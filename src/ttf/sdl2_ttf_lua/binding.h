@@ -26,22 +26,22 @@ mtrScriptsRegisterFunctionFunc mtrScriptsRegisterFunction;
 typedef void (MTR_CALL * mtrScriptsRegisterNumericVariableFunc)(char *, double);
 mtrScriptsRegisterNumericVariableFunc mtrScriptsRegisterNumericVariable;
 
-typedef bool (MTR_CALL * mtrTtfInitFunc)(uint32_t, uint32_t);
+typedef bool (MTR_CALL * mtrTtfInitFunc)(int, int);
 mtrTtfInitFunc mtrTtfInit;
 
 typedef void (MTR_CALL * mtrTtfQuitFunc)(void);
 mtrTtfQuitFunc mtrTtfQuit;
 
-typedef uint32_t (MTR_CALL * mtrTtfLoadFunc)(const char *, uint16_t);
+typedef int (MTR_CALL * mtrTtfLoadFunc)(const char *, int);
 mtrTtfLoadFunc mtrTtfLoad;
 
-typedef void (MTR_CALL * mtrTtfFreeFunc)(uint32_t);
+typedef void (MTR_CALL * mtrTtfFreeFunc)(int);
 mtrTtfFreeFunc mtrTtfFree;
 
-typedef void (MTR_CALL * mtrTtfSetFontStyleFunc)(uint32_t, uint8_t);
+typedef void (MTR_CALL * mtrTtfSetFontStyleFunc)(int, int);
 mtrTtfSetFontStyleFunc mtrTtfSetFontStyle;
 
-typedef void (MTR_CALL * mtrTtfSetFontOutlineFunc)(uint32_t, uint16_t);
+typedef void (MTR_CALL * mtrTtfSetFontOutlineFunc)(int, int);
 mtrTtfSetFontOutlineFunc mtrTtfSetFontOutline;
 
 #endif

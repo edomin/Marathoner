@@ -26,13 +26,13 @@ mtrKeyboardInitFunc mtrKeyboardInit;
 typedef void (MTR_CALL * mtrKeyboardRefreshFunc)(void);
 mtrKeyboardRefreshFunc mtrKeyboardRefresh;
 
-typedef bool (MTR_CALL * mtrKeyboardPressFunc)(uint16_t);
+typedef bool (MTR_CALL * mtrKeyboardPressFunc)(int);
 mtrKeyboardPressFunc mtrKeyboardPress;
 
-typedef bool (MTR_CALL * mtrKeyboardReleaseFunc)(uint16_t);
+typedef bool (MTR_CALL * mtrKeyboardReleaseFunc)(int);
 mtrKeyboardReleaseFunc mtrKeyboardRelease;
 
-typedef bool (MTR_CALL * mtrKeyboardPressedFunc)(uint16_t);
+typedef bool (MTR_CALL * mtrKeyboardPressedFunc)(int);
 mtrKeyboardPressedFunc mtrKeyboardPressed;
 
 #define MTR_KEY_A                   SDL_SCANCODE_A

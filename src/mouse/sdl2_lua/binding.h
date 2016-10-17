@@ -26,34 +26,34 @@ mtrMouseInitFunc mtrMouseInit;
 typedef void (MTR_CALL * mtrMouseRefreshFunc)(void);
 mtrMouseRefreshFunc mtrMouseRefresh;
 
-typedef bool (MTR_CALL * mtrMousePressFunc)(uint8_t);
+typedef bool (MTR_CALL * mtrMousePressFunc)(int);
 mtrMousePressFunc mtrMousePress;
 
-typedef bool (MTR_CALL * mtrMouseReleaseFunc)(uint8_t);
+typedef bool (MTR_CALL * mtrMouseReleaseFunc)(int);
 mtrMouseReleaseFunc mtrMouseRelease;
 
-typedef bool (MTR_CALL * mtrMousePressedFunc)(uint8_t);
+typedef bool (MTR_CALL * mtrMousePressedFunc)(int);
 mtrMousePressedFunc mtrMousePressed;
 
-typedef uint8_t (MTR_CALL * mtrMouseGetWheelRelativeFunc)(void);
+typedef int (MTR_CALL * mtrMouseGetWheelRelativeFunc)(void);
 mtrMouseGetWheelRelativeFunc mtrMouseGetWheelRelative;
 
-typedef int16_t (MTR_CALL * mtrMouseGetXFunc)(void);
+typedef int (MTR_CALL * mtrMouseGetXFunc)(void);
 mtrMouseGetXFunc mtrMouseGetX;
 
-typedef int16_t (MTR_CALL * mtrMouseGetYFunc)(void);
+typedef int (MTR_CALL * mtrMouseGetYFunc)(void);
 mtrMouseGetYFunc mtrMouseGetY;
 
-typedef void (MTR_CALL * mtrMouseGetXYFunc)(int16_t *, int16_t *);
+typedef void (MTR_CALL * mtrMouseGetXYFunc)(int *, int *);
 mtrMouseGetXYFunc mtrMouseGetXY;
 
-typedef int16_t (MTR_CALL * mtrMouseGetDeltaXFunc)(void);
+typedef int (MTR_CALL * mtrMouseGetDeltaXFunc)(void);
 mtrMouseGetDeltaXFunc mtrMouseGetDeltaX;
 
-typedef int16_t (MTR_CALL * mtrMouseGetDeltaYFunc)(void);
+typedef int (MTR_CALL * mtrMouseGetDeltaYFunc)(void);
 mtrMouseGetDeltaYFunc mtrMouseGetDeltaY;
 
-typedef void (MTR_CALL * mtrMouseGetDeltaXYFunc)(int16_t *, int16_t *);
+typedef void (MTR_CALL * mtrMouseGetDeltaXYFunc)(int *, int *);
 mtrMouseGetDeltaXYFunc mtrMouseGetDeltaXY;
 
 #define MTR_MOUSE_LEFT   SDL_BUTTON_LEFT
