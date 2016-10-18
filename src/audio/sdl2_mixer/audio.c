@@ -16,8 +16,9 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
-MTR_EXPORT bool MTR_CALL mtrAudioInit(int sndDmSize, int sndReservedCount,
- int musDmSize, int musReservedCount, int freq, int channels, int chunkSize)
+MTR_EXPORT bool MTR_CALL mtrAudioInit(uint32_t sndDmSize,
+ uint32_t sndReservedCount, uint32_t musDmSize, uint32_t musReservedCount,
+ int freq, int channels, int chunkSize)
 {
     SDL_version compiled;
     const SDL_version *linked;
@@ -230,9 +231,9 @@ MTR_EXPORT void MTR_CALL mtrAudioQuit(void)
     mtrLogWrite("Audio manager destroyed", 0, MTR_LMT_INFO);
 }
 
-MTR_EXPORT int MTR_CALL mtrAudioSoundLoad(const char *filename)
+MTR_EXPORT uint32_t MTR_CALL mtrAudioSoundLoad(const char *filename)
 {
-    int         freeIndex;
+    uint32_t    freeIndex;
     mtrSound_t *sound;
 
     mtrLogWrite_s("Loading sound", 0, MTR_LMT_INFO, filename);
@@ -256,9 +257,9 @@ MTR_EXPORT int MTR_CALL mtrAudioSoundLoad(const char *filename)
     return 0;
 }
 
-MTR_EXPORT int MTR_CALL mtrAudioMusicLoad(const char *filename)
+MTR_EXPORT uint32_t MTR_CALL mtrAudioMusicLoad(const char *filename)
 {
-    int          freeIndex;
+    uint32_t     freeIndex;
     mtrMusic_t  *music;
     int          musicType;
 
@@ -320,21 +321,21 @@ MTR_EXPORT int MTR_CALL mtrAudioMusicLoad(const char *filename)
     return 0;
 }
 
-MTR_EXPORT void MTR_CALL mtrAudioSoundPlay(int soundNum)
+MTR_EXPORT void MTR_CALL mtrAudioSoundPlay(uint32_t soundNum)
 {
     mtrSound_t *sound;
     sound = (mtrSound_t *)(&((mtrSound_t *)mtrSoundKeeper->data)[soundNum]);
     Mix_PlayChannel(-1, sound->sound, 0);
 }
 
-MTR_EXPORT void MTR_CALL mtrAudioSoundFadeInPlay(int soundNum, int ms)
+MTR_EXPORT void MTR_CALL mtrAudioSoundFadeInPlay(uint32_t soundNum, int ms)
 {
     mtrSound_t *sound;
     sound = (mtrSound_t *)(&((mtrSound_t *)mtrSoundKeeper->data)[soundNum]);
     Mix_FadeInChannel(-1, sound->sound, 0, ms);
 }
 
-MTR_EXPORT void MTR_CALL mtrAudioSoundSetVolume(int soundNum,
+MTR_EXPORT void MTR_CALL mtrAudioSoundSetVolume(uint32_t soundNum,
  int volume)
 {
     mtrSound_t *sound;
@@ -342,7 +343,7 @@ MTR_EXPORT void MTR_CALL mtrAudioSoundSetVolume(int soundNum,
     Mix_VolumeChunk(sound->sound, volume);
 }
 
-MTR_EXPORT void MTR_CALL mtrAudioSoundSetVolume_f(int soundNum,
+MTR_EXPORT void MTR_CALL mtrAudioSoundSetVolume_f(uint32_t soundNum,
  float volume)
 {
     mtrSound_t *sound;
@@ -382,14 +383,14 @@ MTR_EXPORT void MTR_CALL mtrAudioChannelsFadeOutStop(int ms)
     Mix_FadeOutChannel(-1, ms);
 }
 
-MTR_EXPORT void MTR_CALL mtrAudioMusicPlay(int musicNum)
+MTR_EXPORT void MTR_CALL mtrAudioMusicPlay(uint32_t musicNum)
 {
     mtrMusic_t *music;
     music = (mtrMusic_t *)(&((mtrMusic_t *)mtrMusicKeeper->data)[musicNum]);
     Mix_PlayMusic(music->music, -1);
 }
 
-MTR_EXPORT void MTR_CALL mtrAudioMusicFadeInPlay(int musicNum, int ms)
+MTR_EXPORT void MTR_CALL mtrAudioMusicFadeInPlay(uint32_t musicNum, int ms)
 {
     mtrMusic_t *music;
     music = (mtrMusic_t *)(&((mtrMusic_t *)mtrMusicKeeper->data)[musicNum]);
@@ -430,7 +431,7 @@ MTR_EXPORT void MTR_CALL mtrAudioMusicSetVolume_f(float volume)
     Mix_VolumeMusic((int)((float)MIX_MAX_VOLUME * volume));
 }
 
-MTR_EXPORT void MTR_CALL mtrAudioSoundFree(int soundNum)
+MTR_EXPORT void MTR_CALL mtrAudioSoundFree(uint32_t soundNum)
 {
     mtrSound_t *sound;
     if (soundNum != 0)
@@ -444,7 +445,7 @@ MTR_EXPORT void MTR_CALL mtrAudioSoundFree(int soundNum)
     }
 }
 
-MTR_EXPORT void MTR_CALL mtrAudioMusicFree(int musicNum)
+MTR_EXPORT void MTR_CALL mtrAudioMusicFree(uint32_t musicNum)
 {
     mtrMusic_t *music;
     if (musicNum != 0)

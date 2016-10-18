@@ -2,12 +2,12 @@
 
 MTR_SCRIPT_FUNC(mtrSF_TextureInit)
 {
-    int  dmSize;
-    int  reservedCount;
-    bool success;
+    uint32_t  dmSize;
+    uint32_t  reservedCount;
+    bool      success;
 
-    MTR_SF_GET_INT(dmSize, 1);
-    MTR_SF_GET_INT(reservedCount, 2);
+    MTR_SF_GET_UINT32(dmSize, 1);
+    MTR_SF_GET_UINT32(reservedCount, 2);
     success = mtrTextureInit(dmSize, reservedCount);
 
     MTR_SF_PUSH_BOOL(success);
@@ -18,21 +18,21 @@ MTR_SCRIPT_FUNC(mtrSF_TextureInit)
 MTR_SCRIPT_FUNC(mtrSF_TextureLoad)
 {
     const char *filename;
-    int         texNum;
+    uint32_t    texNum;
 
     MTR_SF_GET_STRING(filename, 1);
     texNum = mtrTextureLoad(filename);
 
-    MTR_SF_PUSH_INT(texNum);
+    MTR_SF_PUSH_UINT32(texNum);
 
     return 1;
 }
 
 MTR_SCRIPT_FUNC(mtrSF_TextureFree)
 {
-    int texNum;
+    uint32_t texNum;
 
-    MTR_SF_GET_INT(texNum, 1);
+    MTR_SF_GET_UINT32(texNum, 1);
     mtrTextureFree(texNum);
 
     return 0;
@@ -40,13 +40,13 @@ MTR_SCRIPT_FUNC(mtrSF_TextureFree)
 
 MTR_SCRIPT_FUNC(mtrSF_TextureSetBlendFunction)
 {
-    int texNum;
-    int srcColor;
-    int destColor;
-    int srcAlpha;
-    int dstAlpha;
+    uint32_t texNum;
+    int      srcColor;
+    int      destColor;
+    int      srcAlpha;
+    int      dstAlpha;
 
-    MTR_SF_GET_INT(texNum, 1);
+    MTR_SF_GET_UINT32(texNum, 1);
     MTR_SF_GET_INT(srcColor, 2);
     MTR_SF_GET_INT(destColor, 3);
     MTR_SF_GET_INT(srcAlpha, 4);
@@ -58,10 +58,10 @@ MTR_SCRIPT_FUNC(mtrSF_TextureSetBlendFunction)
 
 MTR_SCRIPT_FUNC(mtrSF_TextureSetAlphaBlending)
 {
-    int  texNum;
-    bool blending;
+    uint32_t texNum;
+    bool     blending;
 
-    MTR_SF_GET_INT(texNum, 1);
+    MTR_SF_GET_UINT32(texNum, 1);
     MTR_SF_GET_BOOL(blending, 2);
     mtrTextureSetAlphaBlending(texNum, blending);
 
@@ -70,11 +70,11 @@ MTR_SCRIPT_FUNC(mtrSF_TextureSetAlphaBlending)
 
 MTR_SCRIPT_FUNC(mtrSF_TextureBlit_f)
 {
-    int   texNum;
-    float x;
-    float y;
+    uint32_t texNum;
+    float    x;
+    float    y;
 
-    MTR_SF_GET_INT(texNum, 1);
+    MTR_SF_GET_UINT32(texNum, 1);
     MTR_SF_GET_SINGLE(x, 2);
     MTR_SF_GET_SINGLE(y, 3);
     mtrTextureBlit_f(texNum, x, y);
@@ -84,15 +84,15 @@ MTR_SCRIPT_FUNC(mtrSF_TextureBlit_f)
 
 MTR_SCRIPT_FUNC(mtrSF_TextureBlitRegion_f)
 {
-    int   texNum;
-    float x;
-    float y;
-    float rx;
-    float ry;
-    float rw;
-    float rh;
+    uint32_t texNum;
+    float    x;
+    float    y;
+    float    rx;
+    float    ry;
+    float    rw;
+    float    rh;
 
-    MTR_SF_GET_INT(texNum, 1);
+    MTR_SF_GET_UINT32(texNum, 1);
     MTR_SF_GET_SINGLE(x, 2);
     MTR_SF_GET_SINGLE(y, 3);
     MTR_SF_GET_SINGLE(rx, 4);
@@ -106,17 +106,17 @@ MTR_SCRIPT_FUNC(mtrSF_TextureBlitRegion_f)
 
 MTR_SCRIPT_FUNC(mtrSF_TextureBlitRegionScaled_f)
 {
-    int   texNum;
-    float x;
-    float y;
-    float w;
-    float h;
-    float rx;
-    float ry;
-    float rw;
-    float rh;
+    uint32_t texNum;
+    float    x;
+    float    y;
+    float    w;
+    float    h;
+    float    rx;
+    float    ry;
+    float    rw;
+    float    rh;
 
-    MTR_SF_GET_INT(texNum, 1);
+    MTR_SF_GET_UINT32(texNum, 1);
     MTR_SF_GET_SINGLE(x, 2);
     MTR_SF_GET_SINGLE(y, 3);
     MTR_SF_GET_SINGLE(w, 4);
@@ -132,18 +132,18 @@ MTR_SCRIPT_FUNC(mtrSF_TextureBlitRegionScaled_f)
 
 MTR_SCRIPT_FUNC(mtrSF_TextureBlitRegionAngled_f)
 {
-    int   texNum;
-    float x;
-    float y;
-    float rx;
-    float ry;
-    float rw;
-    float rh;
-    float angle;
-    float pivotX;
-    float pivotY;
+    uint32_t texNum;
+    float    x;
+    float    y;
+    float    rx;
+    float    ry;
+    float    rw;
+    float    rh;
+    float    angle;
+    float    pivotX;
+    float    pivotY;
 
-    MTR_SF_GET_INT(texNum, 1);
+    MTR_SF_GET_UINT32(texNum, 1);
     MTR_SF_GET_SINGLE(x, 2);
     MTR_SF_GET_SINGLE(y, 3);
     MTR_SF_GET_SINGLE(rx, 4);
@@ -161,16 +161,16 @@ MTR_SCRIPT_FUNC(mtrSF_TextureBlitRegionAngled_f)
 
 MTR_SCRIPT_FUNC(mtrSF_TextureBlitRegionFlipped_f)
 {
-    int   texNum;
-    float x;
-    float y;
-    float rx;
-    float ry;
-    float rw;
-    float rh;
-    int   flip;
+    uint32_t texNum;
+    float    x;
+    float    y;
+    float    rx;
+    float    ry;
+    float    rw;
+    float    rh;
+    int      flip;
 
-    MTR_SF_GET_INT(texNum, 1);
+    MTR_SF_GET_UINT32(texNum, 1);
     MTR_SF_GET_SINGLE(x, 2);
     MTR_SF_GET_SINGLE(y, 3);
     MTR_SF_GET_SINGLE(rx, 4);
@@ -185,21 +185,21 @@ MTR_SCRIPT_FUNC(mtrSF_TextureBlitRegionFlipped_f)
 
 MTR_SCRIPT_FUNC(mtrSF_TextureBlitRegionGeneral_f)
 {
-    int   texNum;
-    float x;
-    float y;
-    float w;
-    float h;
-    float rx;
-    float ry;
-    float rw;
-    float rh;
-    float angle;
-    float pivotX;
-    float pivotY;
-    int   flip;
+    uint32_t texNum;
+    float    x;
+    float    y;
+    float    w;
+    float    h;
+    float    rx;
+    float    ry;
+    float    rw;
+    float    rh;
+    float    angle;
+    float    pivotX;
+    float    pivotY;
+    int      flip;
 
-    MTR_SF_GET_INT(texNum, 1);
+    MTR_SF_GET_UINT32(texNum, 1);
     MTR_SF_GET_SINGLE(x, 2);
     MTR_SF_GET_SINGLE(y, 3);
     MTR_SF_GET_SINGLE(w, 4);

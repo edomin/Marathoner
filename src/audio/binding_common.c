@@ -2,19 +2,19 @@
 
 MTR_SCRIPT_FUNC(mtrSF_AudioInit)
 {
-    int  sndDmSize;
-    int  sndReservedCount;
-    int  musDmSize;
-    int  musReservedCount;
-    int  freq;
-    int  channels;
-    int  chunkSize;
-    bool success;
+    uint32_t  sndDmSize;
+    uint32_t  sndReservedCount;
+    uint32_t  musDmSize;
+    uint32_t  musReservedCount;
+    int       freq;
+    int       channels;
+    int       chunkSize;
+    bool      success;
 
-    MTR_SF_GET_INT(sndDmSize, 1);
-    MTR_SF_GET_INT(sndReservedCount, 2);
-    MTR_SF_GET_INT(musDmSize, 3);
-    MTR_SF_GET_INT(musReservedCount, 4);
+    MTR_SF_GET_UINT32(sndDmSize, 1);
+    MTR_SF_GET_UINT32(sndReservedCount, 2);
+    MTR_SF_GET_UINT32(musDmSize, 3);
+    MTR_SF_GET_UINT32(musReservedCount, 4);
     MTR_SF_GET_INT(freq, 5);
     MTR_SF_GET_INT(channels, 6);
     MTR_SF_GET_INT(chunkSize, 7);
@@ -36,12 +36,12 @@ MTR_SCRIPT_FUNC(mtrSF_AudioQuit)
 MTR_SCRIPT_FUNC(mtrSF_AudioSoundLoad)
 {
     const char *filename;
-    int         soundNum;
+    uint32_t    soundNum;
 
     MTR_SF_GET_STRING(filename, 1);
     soundNum = mtrAudioSoundLoad(filename);
 
-    MTR_SF_PUSH_INT(soundNum);
+    MTR_SF_PUSH_UINT32(soundNum);
 
     return 1;
 }
@@ -49,21 +49,21 @@ MTR_SCRIPT_FUNC(mtrSF_AudioSoundLoad)
 MTR_SCRIPT_FUNC(mtrSF_AudioMusicLoad)
 {
     const char *filename;
-    int         musicNum;
+    uint32_t    musicNum;
 
     MTR_SF_GET_STRING(filename, 1);
     musicNum = mtrAudioMusicLoad(filename);
 
-    MTR_SF_PUSH_INT(musicNum);
+    MTR_SF_PUSH_UINT32(musicNum);
 
     return 1;
 }
 
 MTR_SCRIPT_FUNC(mtrSF_AudioSoundPlay)
 {
-    int soundNum;
+    uint32_t soundNum;
 
-    MTR_SF_GET_INT(soundNum, 1);
+    MTR_SF_GET_UINT32(soundNum, 1);
     mtrAudioSoundPlay(soundNum);
 
     return 0;
@@ -71,10 +71,10 @@ MTR_SCRIPT_FUNC(mtrSF_AudioSoundPlay)
 
 MTR_SCRIPT_FUNC(mtrSF_AudioSoundFadeInPlay)
 {
-    int soundNum;
-    int ms;
+    uint32_t soundNum;
+    int      ms;
 
-    MTR_SF_GET_INT(soundNum, 1);
+    MTR_SF_GET_UINT32(soundNum, 1);
     MTR_SF_GET_INT(ms, 2);
     mtrAudioSoundFadeInPlay(soundNum, ms);
 
@@ -83,10 +83,10 @@ MTR_SCRIPT_FUNC(mtrSF_AudioSoundFadeInPlay)
 
 MTR_SCRIPT_FUNC(mtrSF_AudioSoundSetVolume)
 {
-    int soundNum;
-    int volume;
+    uint32_t soundNum;
+    int      volume;
 
-    MTR_SF_GET_INT(soundNum, 1);
+    MTR_SF_GET_UINT32(soundNum, 1);
     MTR_SF_GET_INT(volume, 2);
     mtrAudioSoundSetVolume(soundNum, volume);
 
@@ -95,10 +95,10 @@ MTR_SCRIPT_FUNC(mtrSF_AudioSoundSetVolume)
 
 MTR_SCRIPT_FUNC(mtrSF_AudioSoundSetVolume_f)
 {
-    int   soundNum;
-    float volume;
+    uint32_t soundNum;
+    float    volume;
 
-    MTR_SF_GET_INT(soundNum, 1);
+    MTR_SF_GET_UINT32(soundNum, 1);
     MTR_SF_GET_SINGLE(volume, 2);
     mtrAudioSoundSetVolume_f(soundNum, volume);
 
@@ -158,9 +158,9 @@ MTR_SCRIPT_FUNC(mtrSF_AudioChannelsFadeOutStop)
 
 MTR_SCRIPT_FUNC(mtrSF_AudioMusicPlay)
 {
-    int musicNum;
+    uint32_t musicNum;
 
-    MTR_SF_GET_INT(musicNum, 1);
+    MTR_SF_GET_UINT32(musicNum, 1);
     mtrAudioMusicPlay(musicNum);
 
     return 0;
@@ -168,10 +168,10 @@ MTR_SCRIPT_FUNC(mtrSF_AudioMusicPlay)
 
 MTR_SCRIPT_FUNC(mtrSF_AudioMusicFadeInPlay)
 {
-    int musicNum;
-    int ms;
+    uint32_t musicNum;
+    int      ms;
 
-    MTR_SF_GET_INT(musicNum, 1);
+    MTR_SF_GET_UINT32(musicNum, 1);
     MTR_SF_GET_INT(ms, 2);
     mtrAudioMusicFadeInPlay(musicNum, ms);
 
@@ -231,9 +231,9 @@ MTR_SCRIPT_FUNC(mtrSF_AudioMusicFadeOutStop)
 
 MTR_SCRIPT_FUNC(mtrSF_AudioSoundFree)
 {
-    int sound;
+    uint32_t sound;
 
-    MTR_SF_GET_INT(sound, 1);
+    MTR_SF_GET_UINT32(sound, 1);
     mtrAudioSoundFree(sound);
 
     return 0;
@@ -241,9 +241,9 @@ MTR_SCRIPT_FUNC(mtrSF_AudioSoundFree)
 
 MTR_SCRIPT_FUNC(mtrSF_AudioMusicFree)
 {
-    int music;
+    uint32_t music;
 
-    MTR_SF_GET_INT(music, 1);
+    MTR_SF_GET_UINT32(music, 1);
     mtrAudioMusicFree(music);
 
     return 0;
