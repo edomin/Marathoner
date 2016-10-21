@@ -303,4 +303,25 @@ typedef void (MTR_CALL * mtrPrimitiveRoundedRectangleFilled_ca_fFunc)(float,
  float, float, float, float, uint32_t);
 mtrPrimitiveRoundedRectangleFilled_ca_fFunc mtrPrimitiveRoundedRectangleFilled_ca_f;
 
+/* LineBegin, LineTo, LineEnd */
+typedef void (MTR_CALL * mtrPrimitiveLineBegin_fFunc)(float, float);
+mtrPrimitiveLineBegin_fFunc mtrPrimitiveLineBegin_f;
+
+typedef void (MTR_CALL * mtrPrimitiveLineTo_rgb_fFunc)(float, float, uint8_t, 
+ uint8_t, uint8_t);
+mtrPrimitiveLineTo_rgb_fFunc mtrPrimitiveLineTo_rgb_f;
+
+typedef void (MTR_CALL * mtrPrimitiveLineTo_rgba_fFunc)(float, float, uint8_t, 
+ uint8_t, uint8_t, uint8_t);
+mtrPrimitiveLineTo_rgba_fFunc mtrPrimitiveLineTo_rgba_f;
+
+typedef void (MTR_CALL * mtrPrimitiveLineTo_c_fFunc)(float, float, uint32_t);
+mtrPrimitiveLineTo_c_fFunc mtrPrimitiveLineTo_c_f;
+
+typedef void (MTR_CALL * mtrPrimitiveLineTo_ca_fFunc)(float, float, uint32_t);
+mtrPrimitiveLineTo_ca_fFunc mtrPrimitiveLineTo_ca_f;
+
+typedef void (MTR_CALL * mtrPrimitiveLineEndFunc)(void);
+mtrPrimitiveLineEndFunc mtrPrimitiveLineEnd;
+
 #endif

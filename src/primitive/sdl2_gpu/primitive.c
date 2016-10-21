@@ -42,7 +42,8 @@ MTR_EXPORT bool MTR_CALL mtrPrimitiveInit(void)
         return false;
     }
     mtrScreen = mtrGetScreen();
-
+    mtrLineDrawing = false;
+    
     mtrLogWrite("Primitive drawing subsystem initialized", 0, MTR_LMT_INFO);
     return true;
 }
@@ -861,4 +862,88 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRoundedRectangleFilled_ca_f(float x1,
      ((uint32_t)sdl_color.g << 16) - ((uint32_t)sdl_color.b << 8));
     GPU_RectangleRoundFilled(mtrScreen->screen, x1, y1, x2, y2, radius,
      sdl_color);
+}
+
+MTR_EXPORT void MTR_CALL mtrPrimitiveLineBegin_f(float x, float y)
+{
+    mtrLinePointX_f = x;
+    mtrLinePointY_f = y;
+    mtrLineDrawing = true;
+}
+
+MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_rgb_f(float x, float y, uint8_t r, 
+ uint8_t g, uint8_t b)
+{
+    SDL_Color sdl_color;
+    
+    if (!mtrLineDrawing)
+    {
+        mtrPrimitiveLineBegin_f(x, y);
+        return;
+    }
+    
+    MTR_RGB_TO_SDL_COLOR(sdl_color, r, g, b);
+    GPU_Line(mtrScreen->screen, mtrLinePointX_f, mtrLinePointY_f, x, y, 
+     sdl_color);
+    mtrLinePointX_f = x;
+    mtrLinePointY_f = y;
+}
+
+MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_rgba_f(float x, float y, uint8_t r, 
+ uint8_t g, uint8_t b, uint8_t a)
+{
+    SDL_Color sdl_color;
+    
+    if (!mtrLineDrawing)
+    {
+        mtrPrimitiveLineBegin_f(x, y);
+        return;
+    }
+    
+    MTR_RGBA_TO_SDL_COLOR(sdl_color, r, g, b, a);
+    GPU_Line(mtrScreen->screen, mtrLinePointX_f, mtrLinePointY_f, x, y, 
+     sdl_color);
+    mtrLinePointX_f = x;
+    mtrLinePointY_f = y;
+}
+
+MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_c_f(float x, float y, 
+ uint32_t color)
+{
+    SDL_Color sdl_color;
+    
+    if (!mtrLineDrawing)
+    {
+        mtrPrimitiveLineBegin_f(x, y);
+        return;
+    }
+    
+    MTR_COLOR24_TO_SDL_COLOR(sdl_color, color);
+    GPU_Line(mtrScreen->screen, mtrLinePointX_f, mtrLinePointY_f, x, y, 
+     sdl_color);
+    mtrLinePointX_f = x;
+    mtrLinePointY_f = y;
+}
+
+MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_ca_f(float x, float y, 
+ uint32_t color)
+{
+    SDL_Color sdl_color;
+    
+    if (!mtrLineDrawing)
+    {
+        mtrPrimitiveLineBegin_f(x, y);
+        return;
+    }
+    
+    MTR_COLOR32_TO_SDL_COLOR(sdl_color, color);
+    GPU_Line(mtrScreen->screen, mtrLinePointX_f, mtrLinePointY_f, x, y, 
+     sdl_color);
+    mtrLinePointX_f = x;
+    mtrLinePointY_f = y;
+}
+
+MTR_EXPORT void MTR_CALL mtrPrimitiveLineEnd(void)
+{
+    mtrLineDrawing = false;
 }

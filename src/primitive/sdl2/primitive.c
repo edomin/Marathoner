@@ -44,6 +44,7 @@ MTR_EXPORT bool MTR_CALL mtrPrimitiveInit(void)
         return false;
     }
     mtrScreen = mtrGetScreen();
+    mtrLineDrawing = false;
 
     mtrLogWrite("Primitive drawing subsystem initialized", 0, MTR_LMT_INFO);
     return true;
@@ -631,4 +632,97 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRoundedRectangleFilled_ca_f(float x1,
  float y1, float x2, float y2, float radius, uint32_t color)
 {
     return;
+}
+
+MTR_EXPORT void MTR_CALL mtrPrimitiveLineBegin_f(float x, float y)
+{
+    mtrLineDrawing = true;
+    mtrLinePointX_f = x;
+    mtrLinePointY_f = y;
+}
+
+MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_rgb_f(float x, float y, 
+ uint8_t r, uint8_t g, uint8_t b)
+{
+    if (!mtrLineDrawing)
+    {
+        mtrPrimitiveLineBegin_f(x, y);
+        return;
+    }
+    
+    SDL_SetRenderDrawColor(mtrScreen->renderer, r, g, b, 0xFF);
+    SDL_RenderDrawLine(mtrScreen->renderer, mtrLinePointX_f, mtrLinePointY_f, 
+     x, y);
+    mtrLinePointX_f = x;
+    mtrLinePointY_f = y;
+}
+
+MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_rgba_f(float x, float y, 
+ uint8_t r, uint8_t g, uint8_t b, uint8_t a)
+{
+    if (!mtrLineDrawing)
+    {
+        mtrPrimitiveLineBegin_f(x, y);
+        return;
+    }
+    
+    SDL_SetRenderDrawColor(mtrScreen->renderer, r, g, b, a);
+    SDL_RenderDrawLine(mtrScreen->renderer, mtrLinePointX_f, mtrLinePointY_f, 
+     x, y);
+    mtrLinePointX_f = x;
+    mtrLinePointY_f = y;
+}
+
+MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_c_f(float x, float y, 
+ uint32_t color)
+{
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
+    
+    if (!mtrLineDrawing)
+    {
+        mtrPrimitiveLineBegin_f(x, y);
+        return;
+    }
+    
+    r = (uint8_t)(color >> 16);
+    g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
+    b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
+    SDL_SetRenderDrawColor(mtrScreen->renderer, r, g, b, 0xFF);
+    SDL_RenderDrawLine(mtrScreen->renderer, mtrLinePointX_f, mtrLinePointY_f, 
+     x, y);
+    mtrLinePointX_f = x;
+    mtrLinePointY_f = y;
+}
+
+MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_ca_f(float x, float y, 
+ uint32_t color)
+{
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
+    uint8_t a;
+    
+    if (!mtrLineDrawing)
+    {
+        mtrPrimitiveLineBegin_f(x, y);
+        return;
+    }
+    
+    r = (uint8_t)(color >> 24);
+    g = (uint8_t)((color >> 16) - ((uint32_t)r << 8));
+    b = (uint8_t)((color >> 8) - ((uint32_t)r << 16) - ((uint32_t)g << 8));
+    a = (uint8_t)(color  - ((uint32_t)r << 24) - ((uint32_t)g << 16) -
+     ((uint32_t)b << 8));
+    SDL_SetRenderDrawColor(mtrScreen->renderer, r, g, b, a);
+    SDL_RenderDrawLine(mtrScreen->renderer, mtrLinePointX_f, mtrLinePointY_f, 
+     x, y);
+    mtrLinePointX_f = x;
+    mtrLinePointY_f = y;
+}
+
+MTR_EXPORT void MTR_CALL mtrPrimitiveLineEnd(void)
+{
+    mtrLineDrawing = false;
 }

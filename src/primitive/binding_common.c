@@ -1463,3 +1463,88 @@ int mtrSF_PrimitiveRoundedRectangleFilled_ca_f(lua_State* l)
 
     return 0;
 }
+
+int mtrSF_PrimitiveLineBegin_f(lua_State* l)
+{
+    float x;
+    float y;
+    
+    MTR_SF_GET_SINGLE(x, 1);
+    MTR_SF_GET_SINGLE(y, 2);
+    mtrPrimitiveLineBegin_f(x, y);
+    
+    return 0;
+}
+
+int mtrSF_PrimitiveLineTo_rgb_f(lua_State* l)
+{
+    float x;
+    float y;
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
+    
+    MTR_SF_GET_SINGLE(x, 1);
+    MTR_SF_GET_SINGLE(y, 2);
+    MTR_SF_GET_UINT8(r, 3);
+    MTR_SF_GET_UINT8(g, 4);
+    MTR_SF_GET_UINT8(b, 5);
+    mtrPrimitiveLineTo_rgb_f(x, y, r, g, b);
+    
+    return 0;
+}
+
+int mtrSF_PrimitiveLineTo_rgba_f(lua_State* l)
+{
+    float x;
+    float y;
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
+    uint8_t a;
+    
+    MTR_SF_GET_SINGLE(x, 1);
+    MTR_SF_GET_SINGLE(y, 2);
+    MTR_SF_GET_UINT8(r, 3);
+    MTR_SF_GET_UINT8(g, 4);
+    MTR_SF_GET_UINT8(b, 5);
+    MTR_SF_GET_UINT8(a, 6);
+    mtrPrimitiveLineTo_rgba_f(x, y, r, g, b, a);
+    
+    return 0;
+}
+
+int mtrSF_PrimitiveLineTo_c_f(lua_State* l)
+{
+    float x;
+    float y;
+    uint32_t color;
+    
+    MTR_SF_GET_SINGLE(x, 1);
+    MTR_SF_GET_SINGLE(y, 2);
+    MTR_SF_GET_UINT32(color, 3);
+    mtrPrimitiveLineTo_c_f(x, y, color);
+    
+    return 0;
+}
+
+int mtrSF_PrimitiveLineTo_ca_f(lua_State* l)
+{
+    float x;
+    float y;
+    uint32_t color;
+    
+    MTR_SF_GET_SINGLE(x, 1);
+    MTR_SF_GET_SINGLE(y, 2);
+    MTR_SF_GET_UINT32(color, 3);
+    mtrPrimitiveLineTo_ca_f(x, y, color);
+    
+    return 0;
+}
+
+int mtrSF_PrimitiveLineEnd(lua_State* l)
+{
+    mtrPrimitiveLineEnd();
+    
+    return 0;
+}

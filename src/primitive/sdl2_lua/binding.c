@@ -615,6 +615,54 @@ MTR_EXPORT void MTR_CALL mtrPluginInit(void)
               "mtrPrimitiveRoundedRectangleFilled_ca_f");
             ok = false;
         }
+        mtrPrimitiveLineBegin_f = (mtrPrimitiveLineBegin_fFunc)mtrFindFunction("Primitive_SDL2",
+          "mtrPrimitiveLineBegin_f");
+        if (mtrPrimitiveLineBegin_f == NULL)
+        {
+            mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+              "mtrPrimitiveLineBegin_f");
+            ok = false;
+        }
+        mtrPrimitiveLineTo_rgb_f = (mtrPrimitiveLineTo_rgb_fFunc)mtrFindFunction("Primitive_SDL2",
+          "mtrPrimitiveLineTo_rgb_f");
+        if (mtrPrimitiveLineTo_rgb_f == NULL)
+        {
+            mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+              "mtrPrimitiveLineTo_rgb_f");
+            ok = false;
+        }
+        mtrPrimitiveLineTo_rgba_f = (mtrPrimitiveLineTo_rgba_fFunc)mtrFindFunction("Primitive_SDL2",
+          "mtrPrimitiveLineTo_rgba_f");
+        if (mtrPrimitiveLineTo_rgba_f == NULL)
+        {
+            mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+              "mtrPrimitiveLineTo_rgba_f");
+            ok = false;
+        }
+        mtrPrimitiveLineTo_c_f = (mtrPrimitiveLineTo_c_fFunc)mtrFindFunction("Primitive_SDL2",
+          "mtrPrimitiveLineTo_c_f");
+        if (mtrPrimitiveLineTo_c_f == NULL)
+        {
+            mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+              "mtrPrimitiveLineTo_c_f");
+            ok = false;
+        }
+        mtrPrimitiveLineTo_ca_f = (mtrPrimitiveLineTo_ca_fFunc)mtrFindFunction("Primitive_SDL2",
+          "mtrPrimitiveLineTo_ca_f");
+        if (mtrPrimitiveLineTo_ca_f == NULL)
+        {
+            mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+              "mtrPrimitiveLineTo_ca_f");
+            ok = false;
+        }
+        mtrPrimitiveLineEnd = (mtrPrimitiveLineEndFunc)mtrFindFunction("Primitive_SDL2",
+          "mtrPrimitiveLineEnd");
+        if (mtrPrimitiveLineEnd == NULL)
+        {
+            mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+              "mtrPrimitiveLineEnd");
+            ok = false;
+        }
         if (ok)
         {
             mtrScriptsRegisterFunction(mtrSF_PrimitiveInit, "PrimitiveInit");
@@ -771,6 +819,19 @@ MTR_EXPORT void MTR_CALL mtrPluginInit(void)
              "PrimitiveRoundedRectangleFilled_c_f");
             mtrScriptsRegisterFunction(mtrSF_PrimitiveRoundedRectangleFilled_ca_f,
              "PrimitiveRoundedRectangleFilled_ca_f");
+            
+            mtrScriptsRegisterFunction(mtrSF_PrimitiveLineBegin_f,
+             "PrimitiveLineBegin_f");
+            mtrScriptsRegisterFunction(mtrSF_PrimitiveLineTo_rgb_f,
+             "PrimitiveLineTo_rgb_f");
+            mtrScriptsRegisterFunction(mtrSF_PrimitiveLineTo_rgba_f,
+             "PrimitiveLineTo_rgba_f");
+            mtrScriptsRegisterFunction(mtrSF_PrimitiveLineTo_c_f,
+             "PrimitiveLineTo_c_f");
+            mtrScriptsRegisterFunction(mtrSF_PrimitiveLineTo_ca_f,
+             "PrimitiveLineTo_ca_f");
+            mtrScriptsRegisterFunction(mtrSF_PrimitiveLineEnd,
+             "PrimitiveLineEnd");
         }
         else
         {
