@@ -114,13 +114,11 @@ int CountPlugins(char *directoryName)
 
 int main(int argc, char** argv)
 {
-    #ifdef MTR_MOD_PLUGIN
     mtrDirectory_t *pluginDirectory;
     char           *tempFilename;
     char           *fullPluginFileName;
     int             mtrPluginsFound;
     uint8_t         currentPlugin;
-    #endif /* MTR_MOD_PLUGIN */
     int             i;
     int             j;
     int             k;
@@ -136,7 +134,6 @@ int main(int argc, char** argv)
      (MTR_VERSION_MARATHONER & 0x00FF00) >> 8);
     mtrLogWrite_i("Patch:", 1, MTR_LMT_INFO,
      MTR_VERSION_MARATHONER & 0x0000FF);
-
     mtrLogWrite("Searching available plugins", 0, MTR_LMT_INFO);
 
     mtrPluginsFound = 0;
