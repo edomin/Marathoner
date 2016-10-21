@@ -1,7 +1,7 @@
 #ifndef MTR_PRIMITIVE_SDL2_GPU
 #define MTR_PRIMITIVE_SDL2_GPU
 
-#include "SDL/SDL_gpu.h"
+#include "SDL2/SDL_gpu.h"
 
 #include "marathoner/plugin.h"
 
