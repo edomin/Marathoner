@@ -50,6 +50,12 @@ mtrAudioSoundSetVolumeFunc mtrAudioSoundSetVolume;
 typedef void (MTR_CALL * mtrAudioSoundSetVolume_fFunc)(uint32_t, float);
 mtrAudioSoundSetVolume_fFunc mtrAudioSoundSetVolume_f;
 
+typedef void (MTR_CALL * mtrAudioSoundStopFunc)(uint32_t);
+mtrAudioSoundStopFunc mtrAudioSoundStop;
+
+typedef void (MTR_CALL * mtrAudioSoundFadeOutStopFunc)(uint32_t, int);
+mtrAudioSoundFadeOutStopFunc mtrAudioSoundFadeOutStop;
+
 typedef void (MTR_CALL * mtrAudioChannelsSetVolumeFunc)(int);
 mtrAudioChannelsSetVolumeFunc mtrAudioChannelsSetVolume;
 

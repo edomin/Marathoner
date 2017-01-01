@@ -105,6 +105,28 @@ MTR_SCRIPT_FUNC(mtrSF_AudioSoundSetVolume_f)
     return 0;
 }
 
+MTR_SCRIPT_FUNC(mtrSF_AudioSoundStop)
+{
+    uint32_t soundNum;
+
+    MTR_SF_GET_UINT32(soundNum, 1);
+    mtrAudioSoundStop(soundNum);
+
+    return 0;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_AudioSoundFadeOutStop)
+{
+    uint32_t soundNum;
+    int      ms;
+
+    MTR_SF_GET_UINT32(soundNum, 1);
+    MTR_SF_GET_INT(ms, 2);
+    mtrAudioSoundFadeOutStop(soundNum, ms);
+
+    return 0;
+}
+
 MTR_SCRIPT_FUNC(mtrSF_AudioChannelsSetVolume)
 {
     int volume;

@@ -118,6 +118,30 @@ MTR_EXPORT void MTR_CALL mtrPluginInit(void)
               "mtrAudioSoundSetVolume_f");
             ok = false;
         }
+        mtrAudioSoundStop = (mtrAudioSoundStopFunc)mtrFindFunction("Audio_SDL2_mixer",
+          "mtrAudioSoundStop");
+        if (mtrAudioSoundStop == NULL)
+        {
+            mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+              "mtrAudioSoundStop");
+            ok = false;
+        }
+        mtrAudioSoundFadeOutStop = (mtrAudioSoundFadeOutStopFunc)mtrFindFunction("Audio_SDL2_mixer",
+          "mtrAudioSoundFadeOutStop");
+        if (mtrAudioSoundFadeOutStop == NULL)
+        {
+            mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+              "mtrAudioSoundFadeOutStop");
+            ok = false;
+        }
+        mtrAudioSoundSetVolume = (mtrAudioSoundSetVolumeFunc)mtrFindFunction("Audio_SDL2_mixer",
+          "mtrAudioSoundSetVolume");
+        if (mtrAudioSoundSetVolume == NULL)
+        {
+            mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+              "mtrAudioSoundSetVolume");
+            ok = false;
+        }
         mtrAudioChannelsSetVolume = (mtrAudioChannelsSetVolumeFunc)mtrFindFunction("Audio_SDL2_mixer",
           "mtrAudioChannelsSetVolume");
         if (mtrAudioChannelsSetVolume == NULL)
@@ -268,6 +292,10 @@ MTR_EXPORT void MTR_CALL mtrPluginInit(void)
              "AudioSoundSetVolume");
             mtrScriptsRegisterFunction(mtrSF_AudioSoundSetVolume_f,
              "AudioSoundSetVolume_f");
+            mtrScriptsRegisterFunction(mtrSF_AudioSoundStop,
+             "AudioSoundStop");
+            mtrScriptsRegisterFunction(mtrSF_AudioSoundFadeOutStop,
+             "AudioSoundFadeOutStop");
             mtrScriptsRegisterFunction(mtrSF_AudioChannelsSetVolume,
              "AudioChannelsSetVolume");
             mtrScriptsRegisterFunction(mtrSF_AudioChannelsSetVolume_f,

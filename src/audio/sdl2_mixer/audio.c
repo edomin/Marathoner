@@ -351,6 +351,42 @@ MTR_EXPORT void MTR_CALL mtrAudioSoundSetVolume_f(uint32_t soundNum,
     Mix_VolumeChunk(sound->sound, (int)((float)MIX_MAX_VOLUME * volume));
 }
 
+MTR_EXPORT void MTR_CALL mtrAudioSoundStop(uint32_t soundNum)
+{
+    int i;
+    int channelsCount;
+    mtrSound_t *sound;
+    Mix_Chunk *playingChunk;
+    sound = (mtrSound_t *)(&((mtrSound_t *)mtrSoundKeeper->data)[soundNum]);
+    channelsCount = 32;
+    for (i = 0; i < channelsCount; i++)
+    {
+        playingChunk = Mix_GetChunk(i);
+        if (sound->sound == playingChunk)
+        {
+            Mix_HaltChannel(i);
+        }
+    }
+}
+
+MTR_EXPORT void MTR_CALL mtrAudioSoundFadeOutStop(uint32_t soundNum, int ms)
+{
+    int i;
+    int channelsCount;
+    mtrSound_t *sound;
+    Mix_Chunk *playingChunk;
+    sound = (mtrSound_t *)(&((mtrSound_t *)mtrSoundKeeper->data)[soundNum]);
+    channelsCount = 32;
+    for (i = 0; i < channelsCount; i++)
+    {
+        playingChunk = Mix_GetChunk(i);
+        if (sound->sound == playingChunk)
+        {
+            Mix_FadeOutChannel(i, ms);
+        }
+    }
+}
+
 MTR_EXPORT void MTR_CALL mtrAudioChannelsSetVolume(int volume)
 {
     Mix_Volume(-1, volume);
