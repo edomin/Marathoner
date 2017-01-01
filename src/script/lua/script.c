@@ -94,7 +94,7 @@ MTR_EXPORT lua_State * MTR_CALL mtrScriptsGetVm(void)
 }
 
 MTR_EXPORT void MTR_CALL mtrScriptsRegisterFunction(lua_CFunction func,
- char * funcname)
+ const char * funcname)
 {
     lua_register(mtrVm, funcname, func); /* регистрируем функцию */
     mtrLogWrite_s("Script function added:", 3, MTR_LMT_INFO, funcname);
