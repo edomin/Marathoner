@@ -86,8 +86,8 @@ MTR_EXPORT bool MTR_CALL mtrMousePress(int button)
 {
     if (button > 5)
         return false;
-    if ((mtrMouse.previousMousestate[button]) &&
-        !(mtrMouse.currentMousestate[button]))
+    if (!(mtrMouse.previousMousestate[button]) &&
+        (mtrMouse.currentMousestate[button]))
     {
         return true;
     }
@@ -101,8 +101,8 @@ MTR_EXPORT bool MTR_CALL mtrMouseRelease(int button)
 {
     if (button > 5)
         return false;
-    if (!(mtrMouse.currentMousestate[button]) &&
-        (mtrMouse.previousMousestate[button]))
+    if ((mtrMouse.previousMousestate[button]) &&
+        !(mtrMouse.currentMousestate[button]))
     {
         return true;
     }
