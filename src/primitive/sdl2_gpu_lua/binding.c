@@ -615,7 +615,7 @@ MTR_EXPORT void MTR_CALL mtrPluginInit(void)
               "mtrPrimitiveRoundedRectangleFilled_ca_f");
             ok = false;
         }
-        mtrPrimitiveLineBegin_f = (mtrPrimitiveLineBegin_fFunc)mtrFindFunction("Primitive_SDL2",
+        mtrPrimitiveLineBegin_f = (mtrPrimitiveLineBegin_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
           "mtrPrimitiveLineBegin_f");
         if (mtrPrimitiveLineBegin_f == NULL)
         {
@@ -623,7 +623,7 @@ MTR_EXPORT void MTR_CALL mtrPluginInit(void)
               "mtrPrimitiveLineBegin_f");
             ok = false;
         }
-        mtrPrimitiveLineTo_rgb_f = (mtrPrimitiveLineTo_rgb_fFunc)mtrFindFunction("Primitive_SDL2",
+        mtrPrimitiveLineTo_rgb_f = (mtrPrimitiveLineTo_rgb_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
           "mtrPrimitiveLineTo_rgb_f");
         if (mtrPrimitiveLineTo_rgb_f == NULL)
         {
@@ -631,7 +631,7 @@ MTR_EXPORT void MTR_CALL mtrPluginInit(void)
               "mtrPrimitiveLineTo_rgb_f");
             ok = false;
         }
-        mtrPrimitiveLineTo_rgba_f = (mtrPrimitiveLineTo_rgba_fFunc)mtrFindFunction("Primitive_SDL2",
+        mtrPrimitiveLineTo_rgba_f = (mtrPrimitiveLineTo_rgba_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
           "mtrPrimitiveLineTo_rgba_f");
         if (mtrPrimitiveLineTo_rgba_f == NULL)
         {
@@ -639,7 +639,7 @@ MTR_EXPORT void MTR_CALL mtrPluginInit(void)
               "mtrPrimitiveLineTo_rgba_f");
             ok = false;
         }
-        mtrPrimitiveLineTo_c_f = (mtrPrimitiveLineTo_c_fFunc)mtrFindFunction("Primitive_SDL2",
+        mtrPrimitiveLineTo_c_f = (mtrPrimitiveLineTo_c_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
           "mtrPrimitiveLineTo_c_f");
         if (mtrPrimitiveLineTo_c_f == NULL)
         {
@@ -647,7 +647,7 @@ MTR_EXPORT void MTR_CALL mtrPluginInit(void)
               "mtrPrimitiveLineTo_c_f");
             ok = false;
         }
-        mtrPrimitiveLineTo_ca_f = (mtrPrimitiveLineTo_ca_fFunc)mtrFindFunction("Primitive_SDL2",
+        mtrPrimitiveLineTo_ca_f = (mtrPrimitiveLineTo_ca_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
           "mtrPrimitiveLineTo_ca_f");
         if (mtrPrimitiveLineTo_ca_f == NULL)
         {
@@ -655,7 +655,7 @@ MTR_EXPORT void MTR_CALL mtrPluginInit(void)
               "mtrPrimitiveLineTo_ca_f");
             ok = false;
         }
-        mtrPrimitiveLineEnd = (mtrPrimitiveLineEndFunc)mtrFindFunction("Primitive_SDL2",
+        mtrPrimitiveLineEnd = (mtrPrimitiveLineEndFunc)mtrFindFunction("Primitive_SDL2_gpu",
           "mtrPrimitiveLineEnd");
         if (mtrPrimitiveLineEnd == NULL)
         {
