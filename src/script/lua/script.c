@@ -43,6 +43,9 @@ void mtrScriptsInit(void)
     mtrScriptsRegisterNumericVariable("FM_WRITE", MTR_FM_WRITE);
     mtrScriptsRegisterNumericVariable("FM_APPEND", MTR_FM_APPEND);
 
+    mtrScriptsRegisterFunction(mtrSF_ScriptsRegisterStringVariable, "RegisterStringVariable");
+    mtrScriptsRegisterFunction(mtrSF_ScriptsRegisterNumericVariable, "RegisterNumericVariable");
+
     mtrScriptsRegisterFunction(mtrSF_ConfigfileGetKeyName, "ConfigfileGetKeyName");
     mtrScriptsRegisterFunction(mtrSF_ConfigfileGetSectionName, "ConfigfileGetSectionName");
     mtrScriptsRegisterFunction(mtrSF_ConfigfileDeleteKey, "ConfigfileDeleteKey");
@@ -97,15 +100,15 @@ MTR_EXPORT void MTR_CALL mtrScriptsRegisterFunction(lua_CFunction func,
     mtrLogWrite_s("Script function added:", 3, MTR_LMT_INFO, funcname);
 }
 
-MTR_EXPORT void MTR_CALL mtrScriptsRegisterStringVariable(char *name,
- char *value)
+MTR_EXPORT void MTR_CALL mtrScriptsRegisterStringVariable(const char *name,
+ const char *value)
 {
     lua_pushstring(mtrVm, value);
     lua_setglobal(mtrVm, name);
     mtrLogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
 }
 
-MTR_EXPORT void MTR_CALL mtrScriptsRegisterNumericVariable(char *name,
+MTR_EXPORT void MTR_CALL mtrScriptsRegisterNumericVariable(const char *name,
  double value)
 {
     lua_pushnumber(mtrVm, value);

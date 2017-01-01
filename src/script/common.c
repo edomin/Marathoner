@@ -1,5 +1,29 @@
 #include "marathoner/script_func.h"
 
+MTR_SCRIPT_FUNC(mtrSF_ScriptsRegisterStringVariable)
+{
+    const char *varName;
+    const char *value;
+
+    MTR_SF_GET_STRING(varName, 1);
+    MTR_SF_GET_STRING(value, 2);
+    mtrScriptsRegisterStringVariable(varName, value);
+
+    return 0;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_ScriptsRegisterNumericVariable)
+{
+    const char *varName;
+    double      value;
+
+    MTR_SF_GET_STRING(varName, 1);
+    MTR_SF_GET_DOUBLE(value, 2);
+    mtrScriptsRegisterNumericVariable(varName, value);
+
+    return 0;
+}
+
 MTR_SCRIPT_FUNC(mtrSF_ConfigfileGetKeyName)
 {
     const char *filename;

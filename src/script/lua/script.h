@@ -13,10 +13,10 @@ mtrPluginInitFunc mtrPluginInit;
 lua_State *mtrVm;
 
 MTR_EXPORT void MTR_CALL mtrScriptsRegisterFunction(lua_CFunction func,
- char * funcname);
-MTR_EXPORT void MTR_CALL mtrScriptsRegisterStringVariable(char *name,
- char *value);
-MTR_EXPORT void MTR_CALL mtrScriptsRegisterNumericVariable(char *name,
+ const char * funcname);
+MTR_EXPORT void MTR_CALL mtrScriptsRegisterStringVariable(const char *name,
+ const char *value);
+MTR_EXPORT void MTR_CALL mtrScriptsRegisterNumericVariable(const char *name,
  double value);
 
 #endif
