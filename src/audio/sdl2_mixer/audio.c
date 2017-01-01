@@ -189,6 +189,7 @@ MTR_EXPORT bool MTR_CALL mtrAudioInit(uint32_t sndDmSize,
         Mix_Quit();
         return false;
     }
+    Mix_AllocateChannels(32);
 
     mtrSoundKeeper = (mtrIndexkeeper_t *)mtrIndexkeeperCreate(sndDmSize,
      sndReservedCount, sizeof(mtrSound_t));
