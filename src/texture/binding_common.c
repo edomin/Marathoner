@@ -15,6 +15,40 @@ MTR_SCRIPT_FUNC(mtrSF_TextureInit)
     return 1;
 }
 
+MTR_SCRIPT_FUNC(mtrSF_TextureBeginTarget)
+{
+    uint32_t texNum;
+
+    MTR_SF_GET_UINT32(texNum, 1);
+    mtrTextureBeginTarget(texNum);
+
+    return 0;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_TextureEndTarget)
+{
+    mtrTextureEndTarget();
+
+    return 0;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_TextureCreate)
+{
+    const char *name;
+    int         width;
+    int         height;
+    uint32_t    texNum;
+
+    MTR_SF_GET_STRING(name, 1);
+    MTR_SF_GET_INT(width, 2);
+    MTR_SF_GET_INT(height, 3);
+    texNum = mtrTextureCreate(name, width, height);
+
+    MTR_SF_PUSH_UINT32(texNum);
+
+    return 1;
+}
+
 MTR_SCRIPT_FUNC(mtrSF_TextureLoad)
 {
     const char *filename;

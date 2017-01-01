@@ -23,11 +23,14 @@ MTR_EXPORT void MTR_CALL mtrScreenInit(int width, int height)
     if (mtrScreen == NULL)
         mtrNotify("Unable to allocate memory for mtrScreen structure", 1,
          MTR_LMT_ERROR);
-    mtrScreen->screen = GPU_Init(width, height, GPU_DEFAULT_INIT_FLAGS);
+        mtrScreen->screen = GPU_Init(width, height, GPU_DEFAULT_INIT_FLAGS);
+//    mtrScreen->screen = GPU_Init(width, height, GPU_INIT_ENABLE_VSYNC);
+//    GPU_SetFullscreen(true, false);
     if (mtrScreen->screen != NULL)
         mtrLogWrite("Window created", 1, MTR_LMT_INFO);
     else
         mtrNotify("Unable to create window", 1, MTR_LMT_ERROR);
+    mtrScreen->target = mtrScreen->screen;
 }
 
 MTR_EXPORT void MTR_CALL mtrScreenQuit(void)

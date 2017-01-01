@@ -62,6 +62,30 @@ MTR_EXPORT void MTR_CALL mtrPluginInit(void)
               "mtrTextureInit");
             ok = false;
         }
+        mtrTextureBeginTarget = (mtrTextureBeginTargetFunc)mtrFindFunction("Texture_SDL2_gpu",
+          "mtrTextureBeginTarget");
+        if (mtrTextureBeginTarget == NULL)
+        {
+            mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+              "mtrTextureBeginTarget");
+            ok = false;
+        }
+        mtrTextureEndTarget = (mtrTextureEndTargetFunc)mtrFindFunction("Texture_SDL2_gpu",
+          "mtrTextureEndTarget");
+        if (mtrTextureEndTarget == NULL)
+        {
+            mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+              "mtrTextureEndTarget");
+            ok = false;
+        }
+        mtrTextureCreate = (mtrTextureCreateFunc)mtrFindFunction("Texture_SDL2_gpu",
+          "mtrTextureCreate");
+        if (mtrTextureCreate == NULL)
+        {
+            mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+              "mtrTextureCreate");
+            ok = false;
+        }
         mtrTextureLoad = (mtrTextureLoadFunc)mtrFindFunction("Texture_SDL2_gpu",
           "mtrTextureLoad");
         if (mtrTextureLoad == NULL)
@@ -169,6 +193,9 @@ MTR_EXPORT void MTR_CALL mtrPluginInit(void)
             mtrScriptsRegisterNumericVariable("BLEND_ONE_MINUS_DST_ALPHA",
              MTR_BLEND_ONE_MINUS_DST_ALPHA);
             mtrScriptsRegisterFunction(mtrSF_TextureInit, "TextureInit");
+            mtrScriptsRegisterFunction(mtrSF_TextureBeginTarget, "TextureBeginTarget");
+            mtrScriptsRegisterFunction(mtrSF_TextureEndTarget, "TextureEndTarget");
+            mtrScriptsRegisterFunction(mtrSF_TextureCreate, "TextureCreate");
             mtrScriptsRegisterFunction(mtrSF_TextureLoad, "TextureLoad");
             mtrScriptsRegisterFunction(mtrSF_TextureFree, "TextureFree");
             mtrScriptsRegisterFunction(mtrSF_TextureSetBlendFunction,

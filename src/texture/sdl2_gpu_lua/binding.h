@@ -37,6 +37,15 @@ mtrScriptsRegisterNumericVariableFunc mtrScriptsRegisterNumericVariable;
 typedef bool (MTR_CALL * mtrTextureInitFunc)(uint32_t, uint32_t);
 mtrTextureInitFunc mtrTextureInit;
 
+typedef void (MTR_CALL * mtrTextureBeginTargetFunc)(int);
+mtrTextureBeginTargetFunc mtrTextureBeginTarget;
+
+typedef void (MTR_CALL * mtrTextureEndTargetFunc)(void);
+mtrTextureEndTargetFunc mtrTextureEndTarget;
+
+typedef uint32_t (MTR_CALL * mtrTextureCreateFunc)(const char *, int, int);
+mtrTextureCreateFunc mtrTextureCreate;
+
 typedef uint32_t (MTR_CALL * mtrTextureLoadFunc)(const char *);
 mtrTextureLoadFunc mtrTextureLoad;
 

@@ -7,6 +7,7 @@
 
 typedef struct mtrScreen_t {
     GPU_Target* screen;
+    GPU_Target* target;
 } mtrScreen_t;
 
 mtrScreen_t *mtrScreen;

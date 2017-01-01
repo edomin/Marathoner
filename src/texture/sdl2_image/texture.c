@@ -81,6 +81,48 @@ MTR_EXPORT bool MTR_CALL mtrTextureInit(uint32_t dmSize, uint32_t reservedCount)
     return true;
 }
 
+MTR_EXPORT void MTR_CALL mtrTextureBeginTarget(uint32_t texNum)
+{
+    mtrTexture_t *texture;
+    texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+    SDL_SetRenderTarget(mtrScreen->renderer, texture->texture);
+}
+
+MTR_EXPORT void MTR_CALL mtrTextureEndTarget()
+{
+    SDL_SetRenderTarget(mtrScreen->renderer, NULL);
+}
+
+MTR_EXPORT uint32_t MTR_CALL mtrTextureCreate(const char *name, int width, int height)
+{
+    uint32_t      freeIndex;
+    mtrTexture_t *texture;
+
+    mtrLogWrite_s("Creating texture", 0, MTR_LMT_INFO, name);
+    freeIndex = mtrIndexkeeperGetFreeIndex(mtrTextureKeeper);
+    mtrLogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
+    texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[freeIndex]);
+
+    texture->texture = SDL_CreateTexture(mtrScreen->renderer,
+     SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, width, height);
+
+    if (texture->texture != NULL)
+    {
+        texture->name = malloc(sizeof(char) * (strlen(name) + 1));
+        texture->name = strcpy(texture->name, name);
+        mtrLogWrite_s("Texture created", 0, MTR_LMT_INFO, name);
+        return freeIndex;
+    }
+    else
+    {
+        mtrNotify("Unable to create texture", 1, MTR_LMT_ERROR);
+        mtrLogWrite(SDL_GetError(), 1, MTR_LMT_ERROR);
+        mtrIndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
+        return 0;
+    }
+    return 0;
+}
+
 MTR_EXPORT uint32_t MTR_CALL mtrTextureLoad(const char *filename)
 {
     uint32_t      freeIndex;

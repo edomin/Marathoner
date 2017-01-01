@@ -55,6 +55,51 @@ MTR_EXPORT bool MTR_CALL mtrTextureInit(uint32_t dmSize, uint32_t reservedCount)
     return true;
 }
 
+MTR_EXPORT void MTR_CALL mtrTextureBeginTarget(uint32_t texNum)
+{
+    mtrTexture_t *texture;
+    texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+    mtrScreen->target = texture->texture->target;
+}
+
+MTR_EXPORT void MTR_CALL mtrTextureEndTarget(void)
+{
+    mtrScreen->target = mtrScreen->screen;
+}
+
+MTR_EXPORT uint32_t MTR_CALL mtrTextureCreate(const char *name, int width, int height)
+{
+    uint32_t      freeIndex;
+    mtrTexture_t *texture;
+    GPU_Target* target;
+
+    mtrLogWrite_s("Creating texture", 0, MTR_LMT_INFO, name);
+    freeIndex = mtrIndexkeeperGetFreeIndex(mtrTextureKeeper);
+    mtrLogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
+    texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[freeIndex]);
+    texture->texture = GPU_CreateImage(width, height, GPU_FORMAT_RGBA);
+    if (texture->texture != NULL)
+    {
+        texture->name = malloc(sizeof(char) * (strlen(name) + 1));
+        texture->name = strcpy(texture->name, name);
+        GPU_SetAnchor(texture->texture, 0.0, 0.0);
+        mtrLogWrite_s("Texture created", 0, MTR_LMT_INFO, name);
+        target = GPU_LoadTarget(texture->texture);
+        if (target == NULL)
+        {
+            mtrLogWrite_s("Texture can not be used as render targer", 0, MTR_LMT_INFO, name);
+        }
+        return freeIndex;
+    }
+    else
+    {
+        mtrNotify("Unable to create texture", 1, MTR_LMT_ERROR);
+        mtrIndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
+        return 0;
+    }
+    return 0;
+}
+
 MTR_EXPORT uint32_t MTR_CALL mtrTextureLoad(const char *filename)
 {
     uint32_t      freeIndex;
@@ -152,7 +197,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlit_f(uint32_t texNum, float x, float y)
 {
     mtrTexture_t *texture;
     texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
-    GPU_Blit(texture->texture, NULL, mtrScreen->screen, x, y);
+    GPU_Blit(texture->texture, NULL, mtrScreen->target, x, y);
 }
 
 MTR_EXPORT void MTR_CALL mtrTextureBlitRegion_f(uint32_t texNum, float x,
@@ -165,7 +210,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegion_f(uint32_t texNum, float x,
     region.w = rw;
     region.h = rh;
     texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
-    GPU_Blit(texture->texture, &region, mtrScreen->screen, x, y);
+    GPU_Blit(texture->texture, &region, mtrScreen->target, x, y);
 }
 
 MTR_EXPORT void MTR_CALL mtrTextureBlitRegionScaled_f(uint32_t texNum, float x,
@@ -183,7 +228,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionScaled_f(uint32_t texNum, float x,
     outputRegion.w = w;
     outputRegion.h = h;
     texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
-    GPU_BlitRect(texture->texture, &region, mtrScreen->screen, &outputRegion);
+    GPU_BlitRect(texture->texture, &region, mtrScreen->target, &outputRegion);
 }
 
 MTR_EXPORT void MTR_CALL mtrTextureBlitRegionAngled_f(uint32_t texNum, float x,
@@ -202,7 +247,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionAngled_f(uint32_t texNum, float x,
     outputRegion.w = rw;
     outputRegion.h = rh;
     texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
-    GPU_BlitRectX(texture->texture, &region, mtrScreen->screen, &outputRegion,
+    GPU_BlitRectX(texture->texture, &region, mtrScreen->target, &outputRegion,
      -angle, pivotX, pivotY, GPU_FLIP_NONE);
 }
 
@@ -221,7 +266,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionFlipped_f(uint32_t texNum, float x,
     outputRegion.w = rw;
     outputRegion.h = rh;
     texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
-    GPU_BlitRectX(texture->texture, &region, mtrScreen->screen, &outputRegion,
+    GPU_BlitRectX(texture->texture, &region, mtrScreen->target, &outputRegion,
      0.0f, rx, ry, flip);
 }
 
@@ -241,6 +286,6 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionGeneral_f(uint32_t texNum, float x,
     outputRegion.w = w;
     outputRegion.h = h;
     texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
-    GPU_BlitRectX(texture->texture, &region, mtrScreen->screen, &outputRegion,
+    GPU_BlitRectX(texture->texture, &region, mtrScreen->target, &outputRegion,
      -angle, pivotX, pivotY, flip);
 }

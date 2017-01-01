@@ -23,6 +23,7 @@
 
 typedef struct mtrScreen_t {
     GPU_Target* screen;
+    GPU_Target* target;
 } mtrScreen_t;
 
 typedef struct mtrTexture_t {
