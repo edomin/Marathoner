@@ -46,42 +46,8 @@ MTR_EXPORT void MTR_CALL mtrPluginInit(void)
           "mtrScriptsGetVm");
         ok = false;
     }
-    else
+    if (ok)
     {
-        mtrVm = mtrScriptsGetVm();
-        mtrScreenInit = (mtrScreenInitFunc)mtrFindFunction("Screen_SDL2",
-         "mtrScreenInit");
-        if (mtrScreenInit == NULL)
-        {
-            mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-              "mtrScreenInit");
-            ok = false;
-        }
-        mtrScreenQuit = (mtrScreenQuitFunc)mtrFindFunction("Screen_SDL2",
-         "mtrScreenQuit");
-        if (mtrScreenQuit == NULL)
-        {
-            mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-              "mtrScreenQuit");
-            ok = false;
-        }
-        mtrScreenFlip = (mtrScreenFlipFunc)mtrFindFunction("Screen_SDL2",
-         "mtrScreenFlip");
-        if (mtrScreenFlip == NULL)
-        {
-            mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-              "mtrScreenFlip");
-            ok = false;
-        }
-        if (ok)
-        {
-            mtrScriptsRegisterFunction(mtrSF_ScreenInit, "ScreenInit");
-            mtrScriptsRegisterFunction(mtrSF_ScreenQuit, "ScreenQuit");
-            mtrScriptsRegisterFunction(mtrSF_ScreenFlip, "ScreenFlip");
-        }
-        else
-        {
-            mtrLogWrite("Functions not added", 3, MTR_LMT_ERROR);
-        }
+        mtrScriptsRegisterAll();
     }
 }

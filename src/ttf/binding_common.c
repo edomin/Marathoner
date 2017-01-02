@@ -70,3 +70,81 @@ MTR_SCRIPT_FUNC(mtrSF_TtfSetFontOutline)
 
     return 0;
 }
+
+void mtrScriptsRegisterAll(void)
+{
+    bool ok;
+    ok = true;
+
+    mtrVm = mtrScriptsGetVm();
+    mtrTtfInit = (mtrTtfInitFunc)mtrFindFunction("TTF_SDL2_ttf",
+      "mtrTtfInit");
+    if (mtrTtfInit == NULL)
+    {
+        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+          "mtrTtfInit");
+        ok = false;
+    }
+    mtrTtfQuit = (mtrTtfQuitFunc)mtrFindFunction("TTF_SDL2_ttf",
+      "mtrTtfQuit");
+    if (mtrTtfQuit == NULL)
+    {
+        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+          "mtrTtfQuit");
+        ok = false;
+    }
+    mtrTtfLoad = (mtrTtfLoadFunc)mtrFindFunction("TTF_SDL2_ttf",
+      "mtrTtfLoad");
+    if (mtrTtfLoad == NULL)
+    {
+        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+          "mtrTtfLoad");
+        ok = false;
+    }
+    mtrTtfFree = (mtrTtfFreeFunc)mtrFindFunction("TTF_SDL2_ttf",
+      "mtrTtfFree");
+    if (mtrTtfFree == NULL)
+    {
+        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+          "mtrTtfFree");
+        ok = false;
+    }
+    mtrTtfSetFontStyle = (mtrTtfSetFontStyleFunc)mtrFindFunction("TTF_SDL2_ttf",
+      "mtrTtfSetFontStyle");
+    if (mtrTtfSetFontStyle == NULL)
+    {
+        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+          "mtrTtfSetFontStyle");
+        ok = false;
+    }
+    mtrTtfSetFontOutline = (mtrTtfSetFontOutlineFunc)mtrFindFunction("TTF_SDL2_ttf",
+      "mtrTtfSetFontOutline");
+    if (mtrTtfSetFontOutline == NULL)
+    {
+        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+          "mtrTtfSetFontOutline");
+        ok = false;
+    }
+    if (ok)
+    {
+        mtrScriptsRegisterNumericVariable("FS_NORMAL", MTR_FS_NORMAL);
+        mtrScriptsRegisterNumericVariable("FS_BOLD", MTR_FS_BOLD);
+        mtrScriptsRegisterNumericVariable("FS_ITALIC", MTR_FS_ITALIC);
+        mtrScriptsRegisterNumericVariable("FS_UNDERLINE", MTR_FS_UNDERLINE);
+        mtrScriptsRegisterNumericVariable("FS_STRIKETHROUGH",
+         MTR_FS_STRIKETHROUGH);
+
+        mtrScriptsRegisterFunction(mtrSF_TtfInit, "TtfInit");
+        mtrScriptsRegisterFunction(mtrSF_TtfQuit, "TtfQuit");
+        mtrScriptsRegisterFunction(mtrSF_TtfLoad, "TtfLoad");
+        mtrScriptsRegisterFunction(mtrSF_TtfFree, "TtfFree");
+        mtrScriptsRegisterFunction(mtrSF_TtfSetFontStyle,
+         "TtfSetFontStyle");
+        mtrScriptsRegisterFunction(mtrSF_TtfSetFontOutline,
+         "TtfSetFontOutline");
+    }
+    else
+    {
+        mtrLogWrite("Functions not added", 3, MTR_LMT_ERROR);
+    }
+}

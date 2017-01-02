@@ -6,6 +6,7 @@
 #include "lauxlib.h"
 
 #include "marathoner/plugin.h"
+#include "../binding_common.h"
 
 lua_State *mtrVm;
 
@@ -14,14 +15,5 @@ mtrScriptsGetVmFunc mtrScriptsGetVm;
 
 typedef void (MTR_CALL * mtrScriptsRegisterFunctionFunc)(lua_CFunction, char *);
 mtrScriptsRegisterFunctionFunc mtrScriptsRegisterFunction;
-
-typedef void (MTR_CALL * mtrScreenInitFunc)(int, int);
-mtrScreenInitFunc mtrScreenInit;
-
-typedef void (MTR_CALL * mtrScreenQuitFunc)(void);
-mtrScreenQuitFunc mtrScreenQuit;
-
-typedef void (MTR_CALL * mtrScreenFlipFunc)(void);
-mtrScreenFlipFunc mtrScreenFlip;
 
 #endif
