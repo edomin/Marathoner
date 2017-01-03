@@ -207,7 +207,7 @@ int main(int argc, char** argv)
 
                 /* Plugin requiring information about every other plugin */
                 mtrRequirePluginData = (mtrRequirePluginDataFunc)mtrLoadSymbolName(mtrPluginData[currentPlugin].dll,
-                  "mtrRequirePluginData");
+                 "mtrRequirePluginData");
                 mtrRequirePluginData(mtrPluginData, mtrPluginsFound);
 
                 currentPlugin++;
@@ -375,6 +375,15 @@ int main(int argc, char** argv)
         }
         i++;
     }
+
+    /* Plugins updating information about every other plugin */
+    for (i = 0; i < mtrPluginsFound; i++)
+    {
+        mtrRequirePluginData = (mtrRequirePluginDataFunc)mtrLoadSymbolName(mtrPluginData[i].dll,
+         "mtrRequirePluginData");
+        mtrRequirePluginData(mtrPluginData, mtrPluginsFound);
+    }
+
     mtrLogWrite("Modules' reports processed", 0, MTR_LMT_INFO);
     mtrLogWrite("Reading 'Marathoner.cfg' for autorun options", 0,
       MTR_LMT_INFO);
