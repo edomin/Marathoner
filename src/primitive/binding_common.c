@@ -1,6 +1,6 @@
 #include "marathoner/script_func.h"
 
-int mtrSF_PrimitiveInit(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveInit)
 {
     bool success;
 
@@ -11,7 +11,7 @@ int mtrSF_PrimitiveInit(lua_State* l)
     return 1;
 }
 
-int mtrSF_PrimitiveFill_rgb(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveFill_rgb)
 {
     uint8_t r;
     uint8_t g;
@@ -25,7 +25,7 @@ int mtrSF_PrimitiveFill_rgb(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveFill_rgba(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveFill_rgba)
 {
     uint8_t r;
     uint8_t g;
@@ -41,7 +41,7 @@ int mtrSF_PrimitiveFill_rgba(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveFill_c(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveFill_c)
 {
     uint32_t color;
 
@@ -51,7 +51,7 @@ int mtrSF_PrimitiveFill_c(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveFill_ca(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveFill_ca)
 {
     uint32_t color;
 
@@ -61,7 +61,7 @@ int mtrSF_PrimitiveFill_ca(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitivePixel_rgb_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitivePixel_rgb_f)
 {
     float   x;
     float   y;
@@ -79,7 +79,7 @@ int mtrSF_PrimitivePixel_rgb_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitivePixel_rgba_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitivePixel_rgba_f)
 {
     float   x;
     float   y;
@@ -99,7 +99,7 @@ int mtrSF_PrimitivePixel_rgba_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitivePixel_c_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitivePixel_c_f)
 {
     float    x;
     float    y;
@@ -113,7 +113,7 @@ int mtrSF_PrimitivePixel_c_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitivePixel_ca_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitivePixel_ca_f)
 {
     float    x;
     float    y;
@@ -127,7 +127,7 @@ int mtrSF_PrimitivePixel_ca_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveLine_rgb_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveLine_rgb_f)
 {
     float   x1;
     float   y1;
@@ -149,7 +149,7 @@ int mtrSF_PrimitiveLine_rgb_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveLine_rgba_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveLine_rgba_f)
 {
     float   x1;
     float   y1;
@@ -173,7 +173,7 @@ int mtrSF_PrimitiveLine_rgba_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveLine_c_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveLine_c_f)
 {
     float    x1;
     float    y1;
@@ -191,7 +191,7 @@ int mtrSF_PrimitiveLine_c_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveLine_ca_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveLine_ca_f)
 {
     float    x1;
     float    y1;
@@ -209,7 +209,7 @@ int mtrSF_PrimitiveLine_ca_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveArc_rgb_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveArc_rgb_f)
 {
     float   x;
     float   y;
@@ -233,7 +233,7 @@ int mtrSF_PrimitiveArc_rgb_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveArc_rgba_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveArc_rgba_f)
 {
     float   x;
     float   y;
@@ -259,7 +259,7 @@ int mtrSF_PrimitiveArc_rgba_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveArc_c_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveArc_c_f)
 {
     float    x;
     float    y;
@@ -279,7 +279,7 @@ int mtrSF_PrimitiveArc_c_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveArc_ca_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveArc_ca_f)
 {
     float    x;
     float    y;
@@ -299,7 +299,7 @@ int mtrSF_PrimitiveArc_ca_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveSegmentFilled_rgb_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveSegmentFilled_rgb_f)
 {
     float   x;
     float   y;
@@ -324,7 +324,7 @@ int mtrSF_PrimitiveSegmentFilled_rgb_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveSegmentFilled_rgba_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveSegmentFilled_rgba_f)
 {
     float   x;
     float   y;
@@ -351,7 +351,7 @@ int mtrSF_PrimitiveSegmentFilled_rgba_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveSegmentFilled_c_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveSegmentFilled_c_f)
 {
     float    x;
     float    y;
@@ -371,7 +371,7 @@ int mtrSF_PrimitiveSegmentFilled_c_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveSegmentFilled_ca_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveSegmentFilled_ca_f)
 {
     float    x;
     float    y;
@@ -391,7 +391,7 @@ int mtrSF_PrimitiveSegmentFilled_ca_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveCircle_rgb_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveCircle_rgb_f)
 {
     float   x;
     float   y;
@@ -411,7 +411,7 @@ int mtrSF_PrimitiveCircle_rgb_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveCircle_rgba_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveCircle_rgba_f)
 {
     float   x;
     float   y;
@@ -433,7 +433,7 @@ int mtrSF_PrimitiveCircle_rgba_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveCircle_c_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveCircle_c_f)
 {
     float    x;
     float    y;
@@ -449,7 +449,7 @@ int mtrSF_PrimitiveCircle_c_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveCircle_ca_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveCircle_ca_f)
 {
     float    x;
     float    y;
@@ -465,7 +465,7 @@ int mtrSF_PrimitiveCircle_ca_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveCircleFilled_rgb_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveCircleFilled_rgb_f)
 {
     float   x;
     float   y;
@@ -485,7 +485,7 @@ int mtrSF_PrimitiveCircleFilled_rgb_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveCircleFilled_rgba_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveCircleFilled_rgba_f)
 {
     float   x;
     float   y;
@@ -507,7 +507,7 @@ int mtrSF_PrimitiveCircleFilled_rgba_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveCircleFilled_c_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveCircleFilled_c_f)
 {
     float    x;
     float    y;
@@ -523,7 +523,7 @@ int mtrSF_PrimitiveCircleFilled_c_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveCircleFilled_ca_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveCircleFilled_ca_f)
 {
     float    x;
     float    y;
@@ -539,7 +539,7 @@ int mtrSF_PrimitiveCircleFilled_ca_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveEllipse_rgb_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveEllipse_rgb_f)
 {
     float   x;
     float   y;
@@ -563,7 +563,7 @@ int mtrSF_PrimitiveEllipse_rgb_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveEllipse_rgba_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveEllipse_rgba_f)
 {
     float   x;
     float   y;
@@ -589,7 +589,7 @@ int mtrSF_PrimitiveEllipse_rgba_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveEllipse_c_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveEllipse_c_f)
 {
     float    x;
     float    y;
@@ -609,7 +609,7 @@ int mtrSF_PrimitiveEllipse_c_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveEllipse_ca_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveEllipse_ca_f)
 {
     float    x;
     float    y;
@@ -629,7 +629,7 @@ int mtrSF_PrimitiveEllipse_ca_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveEllipseFilled_rgb_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveEllipseFilled_rgb_f)
 {
     float   x;
     float   y;
@@ -653,7 +653,7 @@ int mtrSF_PrimitiveEllipseFilled_rgb_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveEllipseFilled_rgba_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveEllipseFilled_rgba_f)
 {
     float   x;
     float   y;
@@ -679,7 +679,7 @@ int mtrSF_PrimitiveEllipseFilled_rgba_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveEllipseFilled_c_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveEllipseFilled_c_f)
 {
     float    x;
     float    y;
@@ -699,7 +699,7 @@ int mtrSF_PrimitiveEllipseFilled_c_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveEllipseFilled_ca_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveEllipseFilled_ca_f)
 {
     float    x;
     float    y;
@@ -719,7 +719,7 @@ int mtrSF_PrimitiveEllipseFilled_ca_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveRingSegment_rgb_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveRingSegment_rgb_f)
 {
     float   x;
     float   y;
@@ -746,7 +746,7 @@ int mtrSF_PrimitiveRingSegment_rgb_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveRingSegment_rgba_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveRingSegment_rgba_f)
 {
     float   x;
     float   y;
@@ -775,7 +775,7 @@ int mtrSF_PrimitiveRingSegment_rgba_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveRingSegment_c_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveRingSegment_c_f)
 {
     float    x;
     float    y;
@@ -798,7 +798,7 @@ int mtrSF_PrimitiveRingSegment_c_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveRingSegment_ca_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveRingSegment_ca_f)
 {
     float    x;
     float    y;
@@ -821,7 +821,7 @@ int mtrSF_PrimitiveRingSegment_ca_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveRingSegmentFilled_rgb_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveRingSegmentFilled_rgb_f)
 {
     float   x;
     float   y;
@@ -848,7 +848,7 @@ int mtrSF_PrimitiveRingSegmentFilled_rgb_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveRingSegmentFilled_rgba_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveRingSegmentFilled_rgba_f)
 {
     float   x;
     float   y;
@@ -877,7 +877,7 @@ int mtrSF_PrimitiveRingSegmentFilled_rgba_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveRingSegmentFilled_c_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveRingSegmentFilled_c_f)
 {
     float    x;
     float    y;
@@ -900,7 +900,7 @@ int mtrSF_PrimitiveRingSegmentFilled_c_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveRingSegmentFilled_ca_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveRingSegmentFilled_ca_f)
 {
     float    x;
     float    y;
@@ -923,7 +923,7 @@ int mtrSF_PrimitiveRingSegmentFilled_ca_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveTriangle_rgb_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveTriangle_rgb_f)
 {
     float   x1;
     float   y1;
@@ -949,7 +949,7 @@ int mtrSF_PrimitiveTriangle_rgb_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveTriangle_rgba_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveTriangle_rgba_f)
 {
     float   x1;
     float   y1;
@@ -977,7 +977,7 @@ int mtrSF_PrimitiveTriangle_rgba_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveTriangle_c_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveTriangle_c_f)
 {
     float    x1;
     float    y1;
@@ -999,7 +999,7 @@ int mtrSF_PrimitiveTriangle_c_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveTriangle_ca_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveTriangle_ca_f)
 {
     float    x1;
     float    y1;
@@ -1021,7 +1021,7 @@ int mtrSF_PrimitiveTriangle_ca_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveTriangleFilled_rgb_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveTriangleFilled_rgb_f)
 {
     float   x1;
     float   y1;
@@ -1047,7 +1047,7 @@ int mtrSF_PrimitiveTriangleFilled_rgb_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveTriangleFilled_rgba_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveTriangleFilled_rgba_f)
 {
     float   x1;
     float   y1;
@@ -1075,7 +1075,7 @@ int mtrSF_PrimitiveTriangleFilled_rgba_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveTriangleFilled_c_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveTriangleFilled_c_f)
 {
     float    x1;
     float    y1;
@@ -1097,7 +1097,7 @@ int mtrSF_PrimitiveTriangleFilled_c_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveTriangleFilled_ca_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveTriangleFilled_ca_f)
 {
     float    x1;
     float    y1;
@@ -1119,7 +1119,7 @@ int mtrSF_PrimitiveTriangleFilled_ca_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveRectangle_rgb_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveRectangle_rgb_f)
 {
     float   x1;
     float   y1;
@@ -1141,7 +1141,7 @@ int mtrSF_PrimitiveRectangle_rgb_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveRectangle_rgba_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveRectangle_rgba_f)
 {
     float   x1;
     float   y1;
@@ -1165,7 +1165,7 @@ int mtrSF_PrimitiveRectangle_rgba_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveRectangle_c_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveRectangle_c_f)
 {
     float    x1;
     float    y1;
@@ -1183,7 +1183,7 @@ int mtrSF_PrimitiveRectangle_c_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveRectangle_ca_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveRectangle_ca_f)
 {
     float    x1;
     float    y1;
@@ -1201,7 +1201,7 @@ int mtrSF_PrimitiveRectangle_ca_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveRectangleFilled_rgb_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveRectangleFilled_rgb_f)
 {
     float   x1;
     float   y1;
@@ -1223,7 +1223,7 @@ int mtrSF_PrimitiveRectangleFilled_rgb_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveRectangleFilled_rgba_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveRectangleFilled_rgba_f)
 {
     float   x1;
     float   y1;
@@ -1247,7 +1247,7 @@ int mtrSF_PrimitiveRectangleFilled_rgba_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveRectangleFilled_c_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveRectangleFilled_c_f)
 {
     float    x1;
     float    y1;
@@ -1265,7 +1265,7 @@ int mtrSF_PrimitiveRectangleFilled_c_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveRectangleFilled_ca_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveRectangleFilled_ca_f)
 {
     float    x1;
     float    y1;
@@ -1283,7 +1283,7 @@ int mtrSF_PrimitiveRectangleFilled_ca_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveRoundedRectangle_rgb_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveRoundedRectangle_rgb_f)
 {
     float   x1;
     float   y1;
@@ -1307,7 +1307,7 @@ int mtrSF_PrimitiveRoundedRectangle_rgb_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveRoundedRectangle_rgba_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveRoundedRectangle_rgba_f)
 {
     float   x1;
     float   y1;
@@ -1333,7 +1333,7 @@ int mtrSF_PrimitiveRoundedRectangle_rgba_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveRoundedRectangle_c_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveRoundedRectangle_c_f)
 {
     float    x1;
     float    y1;
@@ -1353,7 +1353,7 @@ int mtrSF_PrimitiveRoundedRectangle_c_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveRoundedRectangle_ca_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveRoundedRectangle_ca_f)
 {
     float    x1;
     float    y1;
@@ -1373,7 +1373,7 @@ int mtrSF_PrimitiveRoundedRectangle_ca_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveRoundedRectangleFilled_rgb_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveRoundedRectangleFilled_rgb_f)
 {
     float   x1;
     float   y1;
@@ -1397,7 +1397,7 @@ int mtrSF_PrimitiveRoundedRectangleFilled_rgb_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveRoundedRectangleFilled_rgba_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveRoundedRectangleFilled_rgba_f)
 {
     float   x1;
     float   y1;
@@ -1424,7 +1424,7 @@ int mtrSF_PrimitiveRoundedRectangleFilled_rgba_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveRoundedRectangleFilled_c_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveRoundedRectangleFilled_c_f)
 {
     float    x1;
     float    y1;
@@ -1444,7 +1444,7 @@ int mtrSF_PrimitiveRoundedRectangleFilled_c_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveRoundedRectangleFilled_ca_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveRoundedRectangleFilled_ca_f)
 {
     float    x1;
     float    y1;
@@ -1464,7 +1464,7 @@ int mtrSF_PrimitiveRoundedRectangleFilled_ca_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveLineBegin_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveLineBegin_f)
 {
     float x;
     float y;
@@ -1476,7 +1476,7 @@ int mtrSF_PrimitiveLineBegin_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveLineTo_rgb_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveLineTo_rgb_f)
 {
     float x;
     float y;
@@ -1494,7 +1494,7 @@ int mtrSF_PrimitiveLineTo_rgb_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveLineTo_rgba_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveLineTo_rgba_f)
 {
     float x;
     float y;
@@ -1514,7 +1514,7 @@ int mtrSF_PrimitiveLineTo_rgba_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveLineTo_c_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveLineTo_c_f)
 {
     float x;
     float y;
@@ -1528,7 +1528,7 @@ int mtrSF_PrimitiveLineTo_c_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveLineTo_ca_f(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveLineTo_ca_f)
 {
     float x;
     float y;
@@ -1542,7 +1542,7 @@ int mtrSF_PrimitiveLineTo_ca_f(lua_State* l)
     return 0;
 }
 
-int mtrSF_PrimitiveLineEnd(lua_State* l)
+MTR_SCRIPT_FUNC(mtrSF_PrimitiveLineEnd)
 {
     mtrPrimitiveLineEnd();
 
