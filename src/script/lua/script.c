@@ -116,7 +116,7 @@ MTR_EXPORT void MTR_CALL mtrScriptsRegisterNumericVariable(const char *name,
     mtrLogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
 }
 
-void mtrScriptsDoFile(char * filename)
+void mtrScriptsDoFile(const char * filename)
 {
     bool error;
     error = luaL_dofile(mtrVm, filename);
