@@ -18,3 +18,68 @@
     #define MTR_SF_PUSH_STRING(value)                lua_pushstring(mtrVm, value)
     #define MTR_SF_PUSH_NIL()                        lua_pushnil(mtrVm)
 #endif
+#ifdef _SQUIRREL_H_
+    #include <limits.h>
+    #if defined (SQUSEDOUBLE)
+        double  mtrSfFloatTemp;
+    #else
+        float   mtrSfFloatTemp;
+    #endif
+    SQBool      mtrSfBoolTemp;
+    int         mtrSfIntTemp;
+    #if ((defined (_SQ64)) && (LLONG_MAX == INT64_MAX))
+        int64_t mtrSFInt64Temp;
+    #endif
+
+    #define MTR_SCRIPT_FUNC(funcname)                SQInteger funcname(HSQUIRRELVM v)
+
+    #define MTR_SF_GET_BOOL(varname, stackpos)       sq_getbool(mtrVm, stackpos + 1, &mtrSfBoolTemp); \
+                                                     varname = (bool)mtrSfBoolTemp;
+    #if ((defined (_SQ64)) && (LLONG_MAX == INT64_MAX))
+        #define MTR_SF_GET_INT(varname, stackpos)    sq_getinteger(mtrVm, stackpos + 1, &mtrSFInt64Temp); \
+                                                     varname = (int)mtrSfIntTemp;
+        #define MTR_SF_GET_UINT8(varname, stackpos)  sq_getinteger(mtrVm, stackpos + 1, &mtrSFInt64Temp); \
+                                                     varname = (uint8_t)mtrSfIntTemp;
+        #define MTR_SF_GET_UINT32(varname, stackpos) sq_getinteger(mtrVm, stackpos + 1, &mtrSFInt64Temp); \
+                                                     varname = (uint32_t)mtrSFInt64Temp;
+    #else
+        #define MTR_SF_GET_INT(varname, stackpos)    sq_getinteger(mtrVm, stackpos + 1, &varname)
+        #define MTR_SF_GET_UINT8(varname, stackpos)  sq_getinteger(mtrVm, stackpos + 1, &mtrSfIntTemp); \
+                                                     varname = (uint8_t)mtrSfIntTemp;
+        #define MTR_SF_GET_UINT32(varname, stackpos) sq_getfloat(mtrVm, stackpos + 1, &mtrSfFloatTemp); \
+                                                     varname = (uint32_t)mtrSfFloatTemp;
+    #endif
+    #if defined (SQUSEDOUBLE)
+        #define MTR_SF_GET_SINGLE(varname, stackpos) sq_getfloat(mtrVm, stackpos + 1, &mtrSfFloatTemp); \
+                                                     varname = (float)mtrSfFloatTemp;
+        #define MTR_SF_GET_DOUBLE(varname, stackpos) sq_getfloat(mtrVm, stackpos + 1, &varname)
+    #else
+        #define MTR_SF_GET_SINGLE(varname, stackpos) sq_getfloat(mtrVm, stackpos + 1, &varname)
+        #define MTR_SF_GET_DOUBLE(varname, stackpos) sq_getfloat(mtrVm, stackpos + 1, &mtrSfFloatTemp); \
+                                                     varname = (double)mtrSfFloatTemp;
+    #endif
+    #define MTR_SF_GET_STRING(varname, stackpos)     sq_getstring(mtrVm, stackpos + 1, &varname)
+
+    #define MTR_SF_PUSH_BOOL(value)                  mtrSfBoolTemp = value + UINT_MAX + 1; \
+                                                     sq_pushbool(mtrVm, mtrSfBoolTemp);
+    #define MTR_SF_PUSH_INT(value)                   sq_pushinteger(mtrVm, value)
+    #define MTR_SF_PUSH_UINT8(value)                 sq_pushinteger(mtrVm, (int)value)
+    #if ((defined (_SQ64)) && (LLONG_MAX == INT64_MAX))
+        #define MTR_SF_PUSH_UINT32(value)            sq_pushinteger(mtrVm, value)
+    #else
+        #if defined (SQUSEDOUBLE)
+            #define MTR_SF_PUSH_UINT32(value)        sq_pushfloat(mtrVm, (double)value)
+        #else
+            #define MTR_SF_PUSH_UINT32(value)        sq_pushfloat(mtrVm, (float)value)
+        #endif
+    #endif
+    #if defined (SQUSEDOUBLE)
+        #define MTR_SF_PUSH_SINGLE(value)            sq_pushfloat(mtrVm, (double)value)
+        #define MTR_SF_PUSH_DOUBLE(value)            sq_pushfloat(mtrVm, value)
+    #else
+        #define MTR_SF_PUSH_SINGLE(value)            sq_pushfloat(mtrVm, value)
+        #define MTR_SF_PUSH_DOUBLE(value)            sq_pushfloat(mtrVm, (float)value)
+    #endif
+    #define MTR_SF_PUSH_STRING(value)                sq_pushstring(mtrVm, value, -1)
+    #define MTR_SF_PUSH_NIL()                        sq_pushnull(mtrVm)
+#endif
