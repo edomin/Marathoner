@@ -4,5 +4,3 @@ MODULE_NAME = TTF_SDL2_ttf_Lua
 LIBS = -llua
 
 include ../../../Binding.mk
-
-

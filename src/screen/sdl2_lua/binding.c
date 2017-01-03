@@ -1,6 +1,3 @@
-/* TODO: It is look too like sdl_gpu binding. I need to separate common code
- * of each module to single source
- */
 #include "binding.h"
 
 #include "marathoner/plugin_common.c"

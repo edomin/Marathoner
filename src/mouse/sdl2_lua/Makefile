@@ -4,4 +4,3 @@ MODULE_NAME = Mouse_SDL2_Lua
 LIBS = -llua
 
 include ../../../Binding.mk
-
