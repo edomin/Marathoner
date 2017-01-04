@@ -150,7 +150,7 @@ void mtrScriptErrorFunc(HSQUIRRELVM v,const SQChar *s,...)
 
 void mtrScriptsDoFile(const char * filename)
 {
-    bool error;
+    SQRESULT error;
     sqstd_seterrorhandlers(mtrVm); //registers the default error handlers
     sq_setprintfunc(mtrVm, mtrScriptPrintFunc, mtrScriptErrorFunc); //sets the print function
     sq_pushroottable(mtrVm);
