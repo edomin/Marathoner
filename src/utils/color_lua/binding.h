@@ -6,7 +6,7 @@
 #include "lauxlib.h"
 
 #include "marathoner/plugin.h"
-#include "marathoner/colors.h"
+#include "../color_common.h"
 #include "../color_binding_common.h"
 
 lua_State *mtrVm;

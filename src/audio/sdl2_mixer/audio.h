@@ -5,6 +5,7 @@
 #include "SDL2/SDL_mixer.h"
 
 #include "marathoner/plugin.h"
+#include "../common.h"
 
 typedef struct mtrSound_t {
     Mix_Chunk *sound;
@@ -18,11 +19,6 @@ typedef struct mtrMusic_t {
 
 mtrIndexkeeper_t *mtrSoundKeeper;
 mtrIndexkeeper_t *mtrMusicKeeper;
-
-#define MTR_AU_FREQ_DEFAULT         0
-#define MTR_AU_CHANNELS_DEFAULT     0
-#define MTR_AU_CHUNK_SIZE_DEFAULT   0
-#define MTR_AU_DEFAULT              0
 
 #endif
 
