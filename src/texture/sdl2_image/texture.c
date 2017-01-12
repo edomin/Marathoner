@@ -84,8 +84,11 @@ MTR_EXPORT bool MTR_CALL mtrTextureInit(uint32_t dmSize, uint32_t reservedCount)
 MTR_EXPORT void MTR_CALL mtrTextureBeginTarget(uint32_t texNum)
 {
     mtrTexture_t *texture;
-    texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
-    SDL_SetRenderTarget(mtrScreen->renderer, texture->texture);
+    if (texNum != 0)
+    {
+        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        SDL_SetRenderTarget(mtrScreen->renderer, texture->texture);
+    }
 }
 
 MTR_EXPORT void MTR_CALL mtrTextureEndTarget()
@@ -244,14 +247,17 @@ MTR_EXPORT void MTR_CALL mtrTextureBlit_f(uint32_t texNum, float x, float y)
     mtrTexture_t *texture;
     SDL_Rect offset;
     SDL_Rect clip;
-    texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
-    offset.x = x;
-    offset.y = y;
-    SDL_QueryTexture(texture->texture, NULL, NULL, &offset.w, &offset.h);
-    clip.x = 0;
-    clip.y = 0;
-    SDL_QueryTexture(texture->texture, NULL, NULL, &clip.w, &clip.h);
-    SDL_RenderCopy(mtrScreen->renderer, texture->texture, &clip, &offset);
+    if (texNum != 0)
+    {
+        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        offset.x = x;
+        offset.y = y;
+        SDL_QueryTexture(texture->texture, NULL, NULL, &offset.w, &offset.h);
+        clip.x = 0;
+        clip.y = 0;
+        SDL_QueryTexture(texture->texture, NULL, NULL, &clip.w, &clip.h);
+        SDL_RenderCopy(mtrScreen->renderer, texture->texture, &clip, &offset);
+    }
 }
 
 MTR_EXPORT void MTR_CALL mtrTextureBlitRegion_f(uint32_t texNum, float x,
@@ -260,16 +266,19 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegion_f(uint32_t texNum, float x,
     mtrTexture_t *texture;
     SDL_Rect offset;
     SDL_Rect clip;
-    texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
-    offset.x = x;
-    offset.y = y;
-    offset.w = rw;
-    offset.h = rh;
-    clip.x = rx;
-    clip.y = ry;
-    clip.w = rw;
-    clip.h = rh;
-    SDL_RenderCopy(mtrScreen->renderer, texture->texture, &clip, &offset);
+    if (texNum != 0)
+    {
+        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        offset.x = x;
+        offset.y = y;
+        offset.w = rw;
+        offset.h = rh;
+        clip.x = rx;
+        clip.y = ry;
+        clip.w = rw;
+        clip.h = rh;
+        SDL_RenderCopy(mtrScreen->renderer, texture->texture, &clip, &offset);
+    }
 }
 
 MTR_EXPORT void MTR_CALL mtrTextureBlitRegionScaled_f(uint32_t texNum, float x,
@@ -278,17 +287,20 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionScaled_f(uint32_t texNum, float x,
     mtrTexture_t *texture;
     SDL_Rect offset;
     SDL_Rect clip;
-    texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
-    offset.x = x;
-    offset.y = y;
-    offset.w = w;
-    offset.h = h;
-    clip.x = rx;
-    clip.y = ry;
-    clip.w = rw;
-    clip.h = rh;
-    SDL_RenderCopyEx(mtrScreen->renderer, texture->texture, &clip, &offset, 0,
-     NULL, MTR_FLIP_NONE);
+    if (texNum != 0)
+    {
+        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        offset.x = x;
+        offset.y = y;
+        offset.w = w;
+        offset.h = h;
+        clip.x = rx;
+        clip.y = ry;
+        clip.w = rw;
+        clip.h = rh;
+        SDL_RenderCopyEx(mtrScreen->renderer, texture->texture, &clip, &offset,
+         0, NULL, MTR_FLIP_NONE);
+    }
 }
 
 MTR_EXPORT void MTR_CALL mtrTextureBlitRegionAngled_f(uint32_t texNum, float x,
@@ -299,19 +311,22 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionAngled_f(uint32_t texNum, float x,
     SDL_Rect offset;
     SDL_Rect clip;
     SDL_Point pivot;
-    texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
-    offset.x = x;
-    offset.y = y;
-    offset.w = rw;
-    offset.h = rh;
-    clip.x = rx;
-    clip.y = ry;
-    clip.w = rw;
-    clip.h = rh;
-    pivot.x = pivotX;
-    pivot.y = pivotY;
-    SDL_RenderCopyEx(mtrScreen->renderer, texture->texture, &clip, &offset,
-     -angle, &pivot, MTR_FLIP_NONE);
+    if (texNum != 0)
+    {
+        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        offset.x = x;
+        offset.y = y;
+        offset.w = rw;
+        offset.h = rh;
+        clip.x = rx;
+        clip.y = ry;
+        clip.w = rw;
+        clip.h = rh;
+        pivot.x = pivotX;
+        pivot.y = pivotY;
+        SDL_RenderCopyEx(mtrScreen->renderer, texture->texture, &clip, &offset,
+         -angle, &pivot, MTR_FLIP_NONE);
+    }
 }
 
 MTR_EXPORT void MTR_CALL mtrTextureBlitRegionFlipped_f(uint32_t texNum, float x,
@@ -320,17 +335,20 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionFlipped_f(uint32_t texNum, float x,
     mtrTexture_t *texture;
     SDL_Rect offset;
     SDL_Rect clip;
-    texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
-    offset.x = x;
-    offset.y = y;
-    offset.w = rw;
-    offset.h = rh;
-    clip.x = rx;
-    clip.y = ry;
-    clip.w = rw;
-    clip.h = rh;
-    SDL_RenderCopyEx(mtrScreen->renderer, texture->texture, &clip, &offset, 0,
-     NULL, flip);
+    if (texNum != 0)
+    {
+        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        offset.x = x;
+        offset.y = y;
+        offset.w = rw;
+        offset.h = rh;
+        clip.x = rx;
+        clip.y = ry;
+        clip.w = rw;
+        clip.h = rh;
+        SDL_RenderCopyEx(mtrScreen->renderer, texture->texture, &clip, &offset,
+         0, NULL, flip);
+    }
 }
 
 MTR_EXPORT void MTR_CALL mtrTextureBlitRegionGeneral_f(uint32_t texNum, float x,
@@ -341,17 +359,20 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionGeneral_f(uint32_t texNum, float x,
     SDL_Rect offset;
     SDL_Rect clip;
     SDL_Point pivot;
-    texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
-    offset.x = x;
-    offset.y = y;
-    offset.w = w;
-    offset.h = h;
-    clip.x = rx;
-    clip.y = ry;
-    clip.w = rw;
-    clip.h = rh;
-    pivot.x = pivotX;
-    pivot.y = pivotY;
-    SDL_RenderCopyEx(mtrScreen->renderer, texture->texture, &clip, &offset,
-     -angle, &pivot, flip);
+    if (texNum != 0)
+    {
+        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        offset.x = x;
+        offset.y = y;
+        offset.w = w;
+        offset.h = h;
+        clip.x = rx;
+        clip.y = ry;
+        clip.w = rw;
+        clip.h = rh;
+        pivot.x = pivotX;
+        pivot.y = pivotY;
+        SDL_RenderCopyEx(mtrScreen->renderer, texture->texture, &clip, &offset,
+         -angle, &pivot, flip);
+    }
 }
