@@ -125,3 +125,22 @@ void *mtrFindFunction(char *moduleID, char *functionName)
     }
     return NULL;
 }
+
+void *mtrFindFunctionInSubsystem(char *subsystem, char *functionName)
+{
+    uint8_t i;
+    if ((strcmp(subsystem, "binding") == 0) ||
+     (strcmp(subsystem, "abstraction") == 0) ||
+     (strcmp(subsystem, "utils") == 0))
+        return NULL;
+    else
+        for (i = 0; i < mtrPluginsCount; i++)
+        {
+            if (strcmp(mtrPluginData[i].report->subsystem, subsystem) == 0)
+            {
+                return (void *)mtrLoadSymbolName(mtrPluginData[i].dll,
+                 functionName);
+            }
+        }
+    return NULL;
+}
