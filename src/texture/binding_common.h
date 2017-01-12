@@ -10,6 +10,15 @@ mtrTextureBeginTargetFunc mtrTextureBeginTarget;
 typedef void (MTR_CALL * mtrTextureEndTargetFunc)(void);
 mtrTextureEndTargetFunc mtrTextureEndTarget;
 
+typedef int (MTR_CALL * mtrTextureGetWidthFunc)(uint32_t);
+mtrTextureGetWidthFunc mtrTextureGetWidth;
+
+typedef int (MTR_CALL * mtrTextureGetHeightFunc)(uint32_t);
+mtrTextureGetHeightFunc mtrTextureGetHeight;
+
+typedef void (MTR_CALL * mtrTextureGetSizesFunc)(uint32_t, int *, int *);
+mtrTextureGetSizesFunc mtrTextureGetSizes;
+
 typedef uint32_t (MTR_CALL * mtrTextureCreateFunc)(const char *, int, int);
 mtrTextureCreateFunc mtrTextureCreate;
 

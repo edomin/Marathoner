@@ -32,6 +32,47 @@ MTR_SCRIPT_FUNC(mtrSF_TextureEndTarget)
     return 0;
 }
 
+MTR_SCRIPT_FUNC(mtrSF_TextureGetWidth)
+{
+    uint32_t texNum;
+    int      width;
+
+    MTR_SF_GET_UINT32(texNum, 1);
+    width = mtrTextureGetWidth(texNum);
+
+    MTR_SF_PUSH_INT(width);
+
+    return 0;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_TextureGetHeight)
+{
+    uint32_t texNum;
+    int      height;
+
+    MTR_SF_GET_UINT32(texNum, 1);
+    height = mtrTextureGetHeight(texNum);
+
+    MTR_SF_PUSH_INT(height);
+
+    return 0;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_TextureGetSizes)
+{
+    uint32_t texNum;
+    int      width;
+    int      height;
+
+    MTR_SF_GET_UINT32(texNum, 1);
+    mtrTextureGetSizes(texNum, &width, &height);
+
+    MTR_SF_PUSH_INT(width);
+    MTR_SF_PUSH_INT(height);
+
+    return 0;
+}
+
 MTR_SCRIPT_FUNC(mtrSF_TextureCreate)
 {
     const char *name;
@@ -282,6 +323,30 @@ void mtrScriptsRegisterAll(void)
           "mtrTextureEndTarget");
         ok = false;
     }
+    mtrTextureGetWidth = (mtrTextureGetWidthFunc)mtrFindFunction("Texture_SDL2_gpu",
+      "mtrTextureGetWidth");
+    if (mtrTextureGetWidth == NULL)
+    {
+        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+          "mtrTextureGetWidth");
+        ok = false;
+    }
+    mtrTextureGetHeight = (mtrTextureGetHeightFunc)mtrFindFunction("Texture_SDL2_gpu",
+      "mtrTextureGetHeight");
+    if (mtrTextureGetHeight == NULL)
+    {
+        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+          "mtrTextureGetHeight");
+        ok = false;
+    }
+    mtrTextureGetSizes = (mtrTextureGetSizesFunc)mtrFindFunction("Texture_SDL2_gpu",
+      "mtrTextureGetSizes");
+    if (mtrTextureGetSizes == NULL)
+    {
+        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
+          "mtrTextureGetSizes");
+        ok = false;
+    }
     mtrTextureCreate = (mtrTextureCreateFunc)mtrFindFunction("Texture_SDL2_gpu",
       "mtrTextureCreate");
     if (mtrTextureCreate == NULL)
@@ -397,8 +462,14 @@ void mtrScriptsRegisterAll(void)
 //        mtrScriptsRegisterNumericVariable("BLEND_ONE_MINUS_DST_ALPHA",
 //         MTR_BLEND_ONE_MINUS_DST_ALPHA);
         mtrScriptsRegisterFunction(mtrSF_TextureInit, "TextureInit");
-        mtrScriptsRegisterFunction(mtrSF_TextureBeginTarget, "TextureBeginTarget");
+        mtrScriptsRegisterFunction(mtrSF_TextureBeginTarget,
+         "TextureBeginTarget");
         mtrScriptsRegisterFunction(mtrSF_TextureEndTarget, "TextureEndTarget");
+        mtrScriptsRegisterFunction(mtrSF_TextureGetWidth, "TextureGetWidth");
+        mtrScriptsRegisterFunction(mtrSF_TextureGetHeight,
+         "mtrSF_TextureGetHeight");
+        mtrScriptsRegisterFunction(mtrSF_TextureGetSizes,
+         "mtrSF_TextureGetSizes");
         mtrScriptsRegisterFunction(mtrSF_TextureCreate, "TextureCreate");
         mtrScriptsRegisterFunction(mtrSF_TextureLoad, "TextureLoad");
         mtrScriptsRegisterFunction(mtrSF_TextureFree, "TextureFree");

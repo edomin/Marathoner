@@ -67,7 +67,49 @@ MTR_EXPORT void MTR_CALL mtrTextureEndTarget(void)
     mtrScreen->target = mtrScreen->screen;
 }
 
-MTR_EXPORT uint32_t MTR_CALL mtrTextureCreate(const char *name, int width, int height)
+MTR_EXPORT int MTR_CALL mtrTextureGetWidth(uint32_t texNum)
+{
+    mtrTexture_t *texture;
+    if (texNum != 0)
+    {
+        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        return texture->texture->w;
+    }
+    else
+        return 0;
+}
+
+MTR_EXPORT int MTR_CALL mtrTextureGetHeight(uint32_t texNum)
+{
+    mtrTexture_t *texture;
+    if (texNum != 0)
+    {
+    texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+    return texture->texture->h;
+    }
+    else
+        return 0;
+}
+
+MTR_EXPORT void MTR_CALL mtrTextureGetSizes(uint32_t texNum, int *width,
+ int *height)
+{
+    mtrTexture_t *texture;
+    if (texNum != 0)
+    {
+        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        *width = texture->texture->w;
+        *height = texture->texture->h;
+    }
+    else
+    {
+        *width = 0;
+        *height = 0;
+    }
+}
+
+MTR_EXPORT uint32_t MTR_CALL mtrTextureCreate(const char *name, int width,
+ int height)
 {
     uint32_t      freeIndex;
     mtrTexture_t *texture;
