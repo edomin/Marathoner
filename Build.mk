@@ -8,9 +8,11 @@ ifeq ($(PLATFORM), win32)
 	CC = mingw32-gcc
 	LD = mingw32-gcc
 	AR = mingw32-ar
+	RC = mingw32-windres
 	CFLAGS = -Wall -Werror -O2
 	LDFLAGS = -s -mwindows
 	ARFLAGS = rcs
+	RCFLAGS = -O coff -v
 	SO_PR =
 	SO_EXT = .dll
 	A_PR = lib

@@ -8,6 +8,7 @@ ifeq ($(PLATFORM), html5)
 endif
 OBJSDIR = ../../obj
 BINDIR = ../..
+RCDIR = ../../rc
 INCDIRS = -I$(PREFIX)/include -I../../include
 
 OBJS = $(OBJSDIR)/main.o \
@@ -18,7 +19,12 @@ OBJS = $(OBJSDIR)/main.o \
 	$(OBJSDIR)/indexkeeper.o \
 	$(OBJSDIR)/encoding.o \
 	$(OBJSDIR)/file.o \
-	$(OBJSDIR)/directory.o
+	$(OBJSDIR)/directory.o \
+	$(OBJSDIR)/version.res
+
+ifeq ($(PLATFORM), win32)
+  OBJS += $(OBJSDIR)/version.res
+endif
 
 all: Marathoner
 
@@ -56,3 +62,9 @@ $(OBJSDIR)/file.o: file.c file.h
 
 $(OBJSDIR)/directory.o: directory.c directory.h
 	$(CC) $(CFLAGS) $(INCDIRS) -c directory.c -o $(OBJSDIR)/directory.o
+
+$(OBJSDIR)/version.res: version.rc
+	$(RC) $(RCFLAGS) -i $(RCDIR)/version.rc -o $(OBJSDIR)/version.res
+
+version.rc:
+	../../rcgen ../../include/marathoner/version.h $(RCDIR)/version.rc MTR_VERSION_MARATHONER Marathoner "Marathoner game engine" Marathoner.exe

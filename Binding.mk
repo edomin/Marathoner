@@ -10,10 +10,19 @@ OBJSDIR = ../../../obj
 LIBDIR = ../../../lib
 BINDIR = ../../../plugin
 SRCDIR = ../../../src
+RCDIR = ../../../rc
 INCDIRS = -I$(PREFIX)/include -I../../../include $(XINCDIRS)
 
 STATIC_NAME = $(A_PR)mtr_$(MODULE_NAME)$(A_EXT)
 PLUGIN_NAME = $(SO_PR)mtr_$(MODULE_NAME)$(SO_EXT)
+
+CONST = $(shell echo $(MODULE_NAME) | tr a-z A-Z)
+CONST_VER = MTR_VERSION_$(CONST)
+
+ifeq ($(PLATFORM), win32)
+  OBJS = $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).o \
+    $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).res
+endif
 
 ifeq ($(MOD), static)
 all: $(LIBDIR)/$(STATIC_NAME)
@@ -25,14 +34,19 @@ endif
 $(LIBDIR)/$(STATIC_NAME): $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).o
 	$(AR) $(ARFLAGS) $(LIBDIR)/$(STATIC_NAME) $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).o
 
-$(BINDIR)/$(PLUGIN_NAME): $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).o
-	$(LD) $(LDFLAGS) -o $(BINDIR)/$(PLUGIN_NAME) $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).o $(LIBS)
+$(BINDIR)/$(PLUGIN_NAME): $(OBJS)
+	$(LD) $(LDFLAGS) -o $(BINDIR)/$(PLUGIN_NAME) $(OBJS) $(LIBS)
 
 $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).o: binding.c binding.h
 	-mkdir $(OBJSDIR)/$(SUBSYSTEM)
 	$(CC) $(CFLAGS) $(INCDIRS) -c binding.c -o $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).o
 
+$(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).res: $(RCDIR)/$(MODULE_NAME).rc
+	$(RC) $(RCFLAGS) -i $(RCDIR)/$(MODULE_NAME).rc -o $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).res
+
+$(RCDIR)/$(MODULE_NAME).rc:
+	../../../rcgen ../../../include/marathoner/version.h $(RCDIR)/$(MODULE_NAME).rc $(CONST_VER) $(MODULE_NAME) $(MODULE_NAME) $(MODULE_NAME).dll
+
 binding.c:
 
 binding.h:
-

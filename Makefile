@@ -3,6 +3,7 @@ include Build.mk
 OBJSDIR = obj
 LIBDIR = lib
 BINDIR = plugin
+RCDIR = rc
 
 SCREEN_SDL2 = screen/sdl2
 SCREEN_SDL2_LUA = screen/sdl2_lua
@@ -52,6 +53,8 @@ ABSTRACTION_SPRITE_SQUIRREL = abstraction/sprite_squirrel
 all: $(PLATFORM)
 
 win32: prebuild
+	make -C src/platform_specific/windows PREFIX=$(PREFIX)
+
 	make -C src/$(SCREEN_SDL2_GPU) PREFIX=$(PREFIX)
 	make -C src/$(SCREEN_SDL2_GPU_LUA) PREFIX=$(PREFIX)
 	make -C src/$(SCREEN_SDL2_GPU_SQUIRREL) PREFIX=$(PREFIX)
@@ -126,14 +129,21 @@ prebuild:
 	-mkdir $(OBJSDIR)
 	-mkdir $(LIBDIR)
 	-mkdir $(BINDIR)
+ifeq ($(PLATFORM), win32)
+	-mkdir $(RCDIR)
+endif
 
 clean:
 	-rm -f -r $(OBJSDIR)
 	-rm -f -r $(LIBDIR)
 	-rm -f -r $(BINDIR)
+	-rm -f -r $(RCDIR)
 	-rm -f -r marathoner.exe
 	-rm -f -r marathoner.html
 	-rm -f -r marathoner.js
+ifeq ($(PLATFORM), win32)
+	-rm -f -r rcgen.exe
+endif
 
 remake: clean all
 
