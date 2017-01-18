@@ -45,6 +45,9 @@ UTILS_COLOR_LUA = utils/color_lua
 UTILS_COLOR_SQUIRREL = utils/color_squirrel
 SCRIPT_LUA = script/lua
 SCRIPT_SQUIRREL = script/squirrel
+ABSTRACTION_SPRITE = abstraction/sprite
+ABSTRACTION_SPRITE_LUA = abstraction/sprite_lua
+ABSTRACTION_SPRITE_SQUIRREL = abstraction/sprite_squirrel
 
 all: $(PLATFORM)
 
@@ -92,6 +95,9 @@ win32: prebuild
 	make -C src/$(UTILS_COLOR_SQUIRREL) PREFIX=$(PREFIX)
 	make -C src/$(SCRIPT_LUA) PREFIX=$(PREFIX)
 	make -C src/$(SCRIPT_SQUIRREL) PREFIX=$(PREFIX)
+	make -C src/$(ABSTRACTION_SPRITE) PREFIX=$(PREFIX)
+	make -C src/$(ABSTRACTION_SPRITE_LUA) PREFIX=$(PREFIX)
+	make -C src/$(ABSTRACTION_SPRITE_SQUIRREL) PREFIX=$(PREFIX)
 	make -C src/engine PREFIX=$(PREFIX)
 
 html5: prebuild
