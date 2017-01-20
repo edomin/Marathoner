@@ -10,7 +10,7 @@ ifeq ($(PLATFORM), win32)
 	AR = mingw32-ar
 	RC = mingw32-windres
 	CFLAGS = -Wall -Werror -O2
-	LDFLAGS = -s -mwindows
+	LDFLAGS = -s -mwindows -shared-libgcc
 	ARFLAGS = rcs
 	RCFLAGS = -O coff -v
 	SO_PR =
