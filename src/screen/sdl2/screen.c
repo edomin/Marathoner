@@ -18,7 +18,7 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
-MTR_EXPORT void MTR_CALL mtrScreenInit(int width,
+MTR_EXPORT bool MTR_CALL mtrScreenInit(int width,
  int height)
 {
     SDL_version         compiled;
@@ -46,6 +46,7 @@ MTR_EXPORT void MTR_CALL mtrScreenInit(int width,
     {
         mtrNotify("Unable to allocate memory for mtrScreen structure", 1,
          MTR_LMT_ERROR);
+        return false;
     }
 
     if(SDL_WasInit(SDL_INIT_VIDEO | SDL_INIT_EVENTS) == 0)
@@ -58,7 +59,7 @@ MTR_EXPORT void MTR_CALL mtrScreenInit(int width,
              1, MTR_LMT_ERROR);
             free(mtrScreen);
             mtrNotify("Screen not initialized", 0, MTR_LMT_ERROR);
-            return;
+            return false;
         }
     else
         mtrLogWrite("SDL library with video and events subsystems already initialized",
@@ -112,7 +113,7 @@ MTR_EXPORT void MTR_CALL mtrScreenInit(int width,
         mtrNotify("Unable to create window", 1, MTR_LMT_ERROR);
         free(mtrScreen);
         mtrNotify("Screen not initialized", 0, MTR_LMT_ERROR);
-        return;
+        return false;
     }
 
     mtrLogWrite("Checking available renderers", 1, MTR_LMT_INFO);
@@ -163,9 +164,11 @@ MTR_EXPORT void MTR_CALL mtrScreenInit(int width,
         SDL_DestroyWindow(mtrScreen->screen);
         free(mtrScreen);
         mtrNotify("Screen not initialized", 0, MTR_LMT_ERROR);
-        return;
+        return false;
     }
     mtrLogWrite("Screen initialized", 0, MTR_LMT_INFO);
+
+    return true;
 }
 
 MTR_EXPORT void MTR_CALL mtrScreenQuit(void)

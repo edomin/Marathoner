@@ -4,10 +4,13 @@ MTR_SCRIPT_FUNC(mtrSF_ScreenInit)
 {
     int w;
     int h;
+    bool result;
 
     MTR_SF_GET_INT(w, 1);
     MTR_SF_GET_INT(h, 2);
-    mtrScreenInit(w, h);
+    result = mtrScreenInit(w, h);
+
+    MTR_SF_PUSH_BOOL(result);
 
     return 0;
 }

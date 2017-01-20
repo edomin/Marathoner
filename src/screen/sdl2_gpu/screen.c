@@ -18,7 +18,7 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
-MTR_EXPORT void MTR_CALL mtrScreenInit(int width, int height)
+MTR_EXPORT bool MTR_CALL mtrScreenInit(int width, int height)
 {
     mtrLogWrite("Creating Window", 0, MTR_LMT_INFO);
     mtrScreen = malloc(sizeof(mtrScreen_t));
@@ -37,8 +37,11 @@ MTR_EXPORT void MTR_CALL mtrScreenInit(int width, int height)
     {
         mtrNotify("Unable to create window", 1, MTR_LMT_ERROR);
         free(mtrScreen);
+        return false;
     }
     mtrScreen->target = mtrScreen->screen;
+
+    return true;
 }
 
 MTR_EXPORT void MTR_CALL mtrScreenQuit(void)
