@@ -58,6 +58,7 @@ MTR_SCRIPT_FUNC(mtrSF_TextureGetHeight)
     return 0;
 }
 
+#ifndef _SQUIRREL_H_
 MTR_SCRIPT_FUNC(mtrSF_TextureGetSizes)
 {
     uint32_t texNum;
@@ -72,6 +73,7 @@ MTR_SCRIPT_FUNC(mtrSF_TextureGetSizes)
 
     return 0;
 }
+#endif
 
 MTR_SCRIPT_FUNC(mtrSF_TextureCreate)
 {
@@ -339,6 +341,7 @@ void mtrScriptsRegisterAll(void)
           "mtrTextureGetHeight");
         ok = false;
     }
+    #ifndef _SQUIRREL_H_
     mtrTextureGetSizes = (mtrTextureGetSizesFunc)mtrFindFunction("Texture_SDL2_gpu",
       "mtrTextureGetSizes");
     if (mtrTextureGetSizes == NULL)
@@ -347,6 +350,7 @@ void mtrScriptsRegisterAll(void)
           "mtrTextureGetSizes");
         ok = false;
     }
+    #endif
     mtrTextureCreate = (mtrTextureCreateFunc)mtrFindFunction("Texture_SDL2_gpu",
       "mtrTextureCreate");
     if (mtrTextureCreate == NULL)
@@ -468,8 +472,10 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterFunction(mtrSF_TextureGetWidth, "TextureGetWidth");
         mtrScriptsRegisterFunction(mtrSF_TextureGetHeight,
          "mtrSF_TextureGetHeight");
+        #ifndef _SQUIRREL_H_
         mtrScriptsRegisterFunction(mtrSF_TextureGetSizes,
          "mtrSF_TextureGetSizes");
+        #endif
         mtrScriptsRegisterFunction(mtrSF_TextureCreate, "TextureCreate");
         mtrScriptsRegisterFunction(mtrSF_TextureLoad, "TextureLoad");
         mtrScriptsRegisterFunction(mtrSF_TextureFree, "TextureFree");

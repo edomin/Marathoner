@@ -90,6 +90,7 @@ MTR_SCRIPT_FUNC(mtrSF_MouseGetY)
     return 1;
 }
 
+#ifndef _SQUIRREL_H_
 MTR_SCRIPT_FUNC(mtrSF_MouseGetXY)
 {
     int x;
@@ -102,6 +103,7 @@ MTR_SCRIPT_FUNC(mtrSF_MouseGetXY)
 
     return 2;
 }
+#endif
 
 MTR_SCRIPT_FUNC(mtrSF_MouseGetDeltaX)
 {
@@ -125,6 +127,7 @@ MTR_SCRIPT_FUNC(mtrSF_MouseGetDeltaY)
     return 1;
 }
 
+#ifndef _SQUIRREL_H_
 MTR_SCRIPT_FUNC(mtrSF_MouseGetDeltaXY)
 {
     int deltaX;
@@ -137,6 +140,7 @@ MTR_SCRIPT_FUNC(mtrSF_MouseGetDeltaXY)
 
     return 2;
 }
+#endif
 
 void mtrScriptsRegisterAll(void)
 {
@@ -208,6 +212,7 @@ void mtrScriptsRegisterAll(void)
           "mtrMouseGetY");
         ok = false;
     }
+    #ifndef _SQUIRREL_H_
     mtrMouseGetXY = (mtrMouseGetXYFunc)mtrFindFunction("Mouse_SDL2",
       "mtrMouseGetXY");
     if (mtrMouseGetXY == NULL)
@@ -216,6 +221,7 @@ void mtrScriptsRegisterAll(void)
           "mtrMouseGetXY");
         ok = false;
     }
+    #endif
     mtrMouseGetDeltaX = (mtrMouseGetDeltaXFunc)mtrFindFunction("Mouse_SDL2",
       "mtrMouseGetDeltaX");
     if (mtrMouseGetDeltaX == NULL)
@@ -232,6 +238,7 @@ void mtrScriptsRegisterAll(void)
           "mtrMouseGetDeltaY");
         ok = false;
     }
+    #ifndef _SQUIRREL_H_
     mtrMouseGetDeltaXY = (mtrMouseGetDeltaXYFunc)mtrFindFunction("Mouse_SDL2",
       "mtrMouseGetDeltaXY");
     if (mtrMouseGetDeltaXY == NULL)
@@ -240,6 +247,7 @@ void mtrScriptsRegisterAll(void)
           "mtrMouseGetDeltaXY");
         ok = false;
     }
+    #endif
     if (ok)
     {
         mtrScriptsRegisterNumericVariable("MOUSE_LEFT", MTR_MOUSE_LEFT);
@@ -257,11 +265,15 @@ void mtrScriptsRegisterAll(void)
          "MouseGetWheelRelative");
         mtrScriptsRegisterFunction(mtrSF_MouseGetX, "MouseGetX");
         mtrScriptsRegisterFunction(mtrSF_MouseGetY, "MouseGetY");
+        #ifndef _SQUIRREL_H_
         mtrScriptsRegisterFunction(mtrSF_MouseGetXY, "MouseGetXY");
+        #endif
         mtrScriptsRegisterFunction(mtrSF_MouseGetDeltaX, "MouseGetDeltaX");
         mtrScriptsRegisterFunction(mtrSF_MouseGetDeltaY, "MouseGetDeltaY");
+        #ifndef _SQUIRREL_H_
         mtrScriptsRegisterFunction(mtrSF_MouseGetDeltaXY,
          "MouseGetDeltaXY");
+        #endif
     }
     else
     {

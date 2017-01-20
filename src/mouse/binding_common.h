@@ -25,8 +25,10 @@ mtrMouseGetXFunc mtrMouseGetX;
 typedef int (MTR_CALL * mtrMouseGetYFunc)(void);
 mtrMouseGetYFunc mtrMouseGetY;
 
+#ifndef _SQUIRREL_H_
 typedef void (MTR_CALL * mtrMouseGetXYFunc)(int *, int *);
 mtrMouseGetXYFunc mtrMouseGetXY;
+#endif
 
 typedef int (MTR_CALL * mtrMouseGetDeltaXFunc)(void);
 mtrMouseGetDeltaXFunc mtrMouseGetDeltaX;
@@ -34,7 +36,9 @@ mtrMouseGetDeltaXFunc mtrMouseGetDeltaX;
 typedef int (MTR_CALL * mtrMouseGetDeltaYFunc)(void);
 mtrMouseGetDeltaYFunc mtrMouseGetDeltaY;
 
+#ifndef _SQUIRREL_H_
 typedef void (MTR_CALL * mtrMouseGetDeltaXYFunc)(int *, int *);
 mtrMouseGetDeltaXYFunc mtrMouseGetDeltaXY;
+#endif
 
 #endif

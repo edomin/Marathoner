@@ -16,8 +16,10 @@ mtrTextureGetWidthFunc mtrTextureGetWidth;
 typedef int (MTR_CALL * mtrTextureGetHeightFunc)(uint32_t);
 mtrTextureGetHeightFunc mtrTextureGetHeight;
 
+#ifndef _SQUIRREL_H_
 typedef void (MTR_CALL * mtrTextureGetSizesFunc)(uint32_t, int *, int *);
 mtrTextureGetSizesFunc mtrTextureGetSizes;
+#endif
 
 typedef uint32_t (MTR_CALL * mtrTextureCreateFunc)(const char *, int, int);
 mtrTextureCreateFunc mtrTextureCreate;
