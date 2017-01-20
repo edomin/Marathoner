@@ -6,6 +6,8 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
+    if (report == NULL)
+        return NULL;
     report->moduleID = "Audio_SDL2_mixer";
     report->version = MTR_VERSION_AUDIO_SDL2_MIXER;
     report->subsystem = "audio";
@@ -245,6 +247,14 @@ MTR_EXPORT uint32_t MTR_CALL mtrAudioSoundLoad(const char *filename)
     if (sound->sound != NULL)
     {
         sound->name = malloc(sizeof(char) * (strlen(filename) + 1));
+        if (sound->name == NULL)
+        {
+            mtrNotify("Unable to allocate memory for sound's name", 1,
+             MTR_LMT_ERROR);
+            Mix_FreeChunk(sound->sound);
+            mtrIndexkeeperFreeIndex(mtrSoundKeeper, freeIndex);
+            return 0;
+        }
         sound->name = strcpy(sound->name, filename);
         mtrLogWrite_s("Sound loaded", 0, MTR_LMT_INFO, filename);
         return freeIndex;
@@ -272,6 +282,14 @@ MTR_EXPORT uint32_t MTR_CALL mtrAudioMusicLoad(const char *filename)
     if (music->music != NULL)
     {
         music->name = malloc(sizeof(char) * (strlen(filename) + 1));
+        if (music->name == NULL)
+        {
+            mtrNotify("Unable to allocate memory for music's name", 1,
+             MTR_LMT_ERROR);
+            Mix_FreeMusic(music->music);
+            mtrIndexkeeperFreeIndex(mtrMusicKeeper, freeIndex);
+            return 0;
+        }
         music->name = strcpy(music->name, filename);
         mtrLogWrite_s("Music file loaded", 0, MTR_LMT_INFO, filename);
         musicType = Mix_GetMusicType(music->music);

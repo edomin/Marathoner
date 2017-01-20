@@ -14,7 +14,10 @@ MTR_EXPORT char *MTR_CALL mtrConfigfileGetKeyName(const char* filename,
         if (valueLength)
         {
             result = malloc(sizeof(char *) * valueLength + 1);
-            return strcpy(result, (const char *)mtrConfigfileTempbuf);
+            if (result == NULL)
+                return NULL;
+            else
+                return strcpy(result, (const char *)mtrConfigfileTempbuf);
         }
         else
             return NULL;
@@ -37,7 +40,10 @@ MTR_EXPORT char *MTR_CALL mtrConfigfileGetSectionName(const char* filename,
         if (valueLength)
         {
             result = malloc(sizeof(char *) * valueLength + 1);
-            return strcpy(result, (const char *)mtrConfigfileTempbuf);
+            if (result == NULL)
+                return NULL;
+            else
+                return strcpy(result, (const char *)mtrConfigfileTempbuf);
         }
         else
             return NULL;
@@ -105,12 +111,18 @@ MTR_EXPORT char *MTR_CALL mtrConfigfileReadString(const char* filename,
         valueLength = ini_gets(section, key, defaultValue, mtrConfigfileTempbuf,
          sizearray(mtrConfigfileTempbuf), filename);
         result = malloc(sizeof(char *) * valueLength + 1);
-        return strcpy(result, (const char *)mtrConfigfileTempbuf);
+        if (result == NULL)
+            return NULL;
+        else
+            return strcpy(result, (const char *)mtrConfigfileTempbuf);
     }
     else
     {
         result = malloc(sizeof(char *) * strlen(defaultValue));
-        return strcpy(result, (const char *)defaultValue);
+        if (result == NULL)
+            return NULL;
+        else
+            return strcpy(result, (const char *)defaultValue);
     }
 }
 

@@ -19,6 +19,11 @@ mtrDirectory_t *mtrDirectoryOpen(const char *directoryName)
     mtrDirectory->endOfDirectory = false;
     #ifdef __MINGW32__
     dirTempName = malloc(strlen(directoryName) + 1);
+    if (dirTempName == NULL)
+    {
+        free(mtrDirectory);
+        return NULL;
+    }
     strcpy(dirTempName, directoryName);
     strcat(dirTempName, "*");
 

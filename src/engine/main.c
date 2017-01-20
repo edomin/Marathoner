@@ -147,11 +147,19 @@ int main(int argc, char** argv)
     }
     /* Allocating plugin data structures */
     if (mtrPluginsFound != 0)
+    {
         mtrPluginData = malloc(sizeof(mtrPlugin) * mtrPluginsFound);
+        if (mtrPluginData == NULL)
+        {
+            mtrNotify("Unable to allocate memory for plugin data", 0,
+             MTR_LMT_FATAL);
+            return 2;
+        }
+    }
     else
     {
         mtrNotify("Plugins not Found", 0, MTR_LMT_FATAL);
-        return 2;
+        return 3;
     }
     /* Getting plugins data */
     pluginDirectory = mtrDirectoryOpen("./plugin/");
@@ -165,12 +173,20 @@ int main(int argc, char** argv)
             {
                 mtrLogWrite_s("Plugin found:", 0, MTR_LMT_INFO, tempFilename);
                 /* file name in plugin/ directory */
-                mtrPluginData[currentPlugin].filename = tempFilename;
+                mtrPluginData[currentPlugin].filename = malloc(strlen(tempFilename) + 1);
+                strcpy(mtrPluginData[currentPlugin].filename, tempFilename);
+                //mtrPluginData[currentPlugin].filename = tempFilename;
                 /* temporary plugin file name with relative path */
                 fullPluginFileName = malloc(strlen("plugin/") +
-                 strlen(tempFilename) + 1);
+                 strlen(mtrPluginData[currentPlugin].filename) + 1);
+                if (fullPluginFileName == NULL)
+                {
+                    mtrNotify("Unable to allocate memory for plugin's full filename: ",
+                     1, MTR_LMT_ERROR);
+                    continue;
+                }
                 strcpy(fullPluginFileName, "plugin/");
-                strcat(fullPluginFileName, tempFilename);
+                strcat(fullPluginFileName, mtrPluginData[currentPlugin].filename);
                 /* Loading plugin library */
                 mtrPluginData[currentPlugin].dll = mtrLoadLibrary(fullPluginFileName);
                 if (mtrPluginData[currentPlugin].dll == NULL)
@@ -179,13 +195,22 @@ int main(int argc, char** argv)
                     #ifdef __EMSCRIPTEN__
                     mtrLogWrite(dlerror(), 1, MTR_LMT_ERROR);
                     #endif
+                    continue;
                 }
                 mtrCreateReport = (mtrReportFunc)mtrLoadSymbolName(mtrPluginData[currentPlugin].dll,
                   "mtrCreateReport");
                 if (mtrCreateReport == NULL)
                     mtrNotify("Library not contain mtrCreateReport function", 1,
-                      MTR_LMT_ERROR);
+                     MTR_LMT_ERROR);
                 mtrPluginData[currentPlugin].report = mtrCreateReport();
+                if (mtrPluginData[currentPlugin].report == NULL)
+                {
+                    mtrNotify("Module are not returned report", 1,
+                     MTR_LMT_ERROR);
+                    free(fullPluginFileName);
+                    mtrCloseLibrary(mtrPluginData[currentPlugin].dll);
+                    continue;
+                }
                 mtrLogWrite_s("Module ID:", 1, MTR_LMT_INFO,
                   mtrPluginData[currentPlugin].report->moduleID);
                 mtrLogWrite("Version:", 1, MTR_LMT_INFO);
@@ -224,7 +249,7 @@ int main(int argc, char** argv)
     {
         if (!mtrConfigfileReadBool("Marathoner.cfg", "Module", mtrPluginData[i].report->moduleID, true))
         {
-            mtrLogWrite_s("Module are disabled by configfile: ", 1,
+            mtrLogWrite_s("Module are disabled by configfile:", 1,
              MTR_LMT_NOTE, mtrPluginData[i].report->moduleID);
 
             mtrCloseLibrary(mtrPluginData[i].dll);

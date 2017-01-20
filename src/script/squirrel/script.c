@@ -7,6 +7,8 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
+    if (report == NULL)
+        return NULL;
     report->moduleID = "Script_Squirrel";
     report->version = MTR_VERSION_SCRIPT_SQUIRREL;
     report->subsystem = "script";

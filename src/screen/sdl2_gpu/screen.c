@@ -6,6 +6,8 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
+    if (report == NULL)
+        return NULL;
     report->moduleID = "Screen_SDL2_gpu";
     report->version = MTR_VERSION_SCREEN_SDL2_GPU;
     report->subsystem = "screen";
@@ -21,15 +23,21 @@ MTR_EXPORT void MTR_CALL mtrScreenInit(int width, int height)
     mtrLogWrite("Creating Window", 0, MTR_LMT_INFO);
     mtrScreen = malloc(sizeof(mtrScreen_t));
     if (mtrScreen == NULL)
+    {
         mtrNotify("Unable to allocate memory for mtrScreen structure", 1,
          MTR_LMT_ERROR);
-        mtrScreen->screen = GPU_Init(width, height, GPU_DEFAULT_INIT_FLAGS);
+        return false;
+    }
+    mtrScreen->screen = GPU_Init(width, height, GPU_DEFAULT_INIT_FLAGS);
 //    mtrScreen->screen = GPU_Init(width, height, GPU_INIT_ENABLE_VSYNC);
 //    GPU_SetFullscreen(true, false);
     if (mtrScreen->screen != NULL)
         mtrLogWrite("Window created", 1, MTR_LMT_INFO);
     else
+    {
         mtrNotify("Unable to create window", 1, MTR_LMT_ERROR);
+        free(mtrScreen);
+    }
     mtrScreen->target = mtrScreen->screen;
 }
 

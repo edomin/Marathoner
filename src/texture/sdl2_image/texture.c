@@ -6,11 +6,18 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
+    if (report == NULL)
+        return NULL;
     report->moduleID = "Texture_SDL2_image";
     report->version = MTR_VERSION_TEXTURE_SDL2_IMAGE;
     report->subsystem = "texture";
     report->prereqsCount = 1;
     report->prereqs = malloc(sizeof(char *) * report->prereqsCount);
+    if (report->prereqs == NULL)
+    {
+        free(report);
+        return NULL;
+    }
     report->prereqs[0] = "Screen_SDL2";
     report->prereqSubsystemsCount = 0;
     report->prereqSubsystems = NULL;
@@ -157,6 +164,14 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCreate(const char *name, int width,
     if (texture->texture != NULL)
     {
         texture->name = malloc(sizeof(char) * (strlen(name) + 1));
+        if (texture->name == NULL)
+        {
+            mtrNotify("Unable to allocate memory for texture's name", 1,
+             MTR_LMT_ERROR);
+            SDL_DestroyTexture(texture->texture);
+            mtrIndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
+            return 0;
+        }
         texture->name = strcpy(texture->name, name);
         mtrLogWrite_s("Texture created", 0, MTR_LMT_INFO, name);
         return freeIndex;
@@ -197,6 +212,14 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureLoad(const char *filename)
     if (texture->texture != NULL)
     {
         texture->name = malloc(sizeof(char) * (strlen(filename) + 1));
+        if (texture->name == NULL)
+        {
+            mtrNotify("Unable to allocate memory for texture's name", 1,
+             MTR_LMT_ERROR);
+            SDL_DestroyTexture(texture->texture);
+            mtrIndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
+            return 0;
+        }
         texture->name = strcpy(texture->name, filename);
         mtrLogWrite_s("Texture loaded", 0, MTR_LMT_INFO, filename);
         return freeIndex;

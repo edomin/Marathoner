@@ -6,6 +6,8 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
+    if (report == NULL)
+        return NULL;
     report->moduleID = "Screen_SDL2";
     report->version = MTR_VERSION_SCREEN_SDL2;
     report->subsystem = "screen";
@@ -41,8 +43,10 @@ MTR_EXPORT void MTR_CALL mtrScreenInit(int width,
 
     mtrScreen = malloc(sizeof(mtrScreen_t));
     if (mtrScreen == NULL)
+    {
         mtrNotify("Unable to allocate memory for mtrScreen structure", 1,
          MTR_LMT_ERROR);
+    }
 
     if(SDL_WasInit(SDL_INIT_VIDEO | SDL_INIT_EVENTS) == 0)
         if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) == 0)

@@ -6,6 +6,8 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
+    if (report == NULL)
+        return NULL;
     report->moduleID = "Utils_color";
     report->version = MTR_VERSION_UTILS_COLOR;
     report->subsystem = "utils";

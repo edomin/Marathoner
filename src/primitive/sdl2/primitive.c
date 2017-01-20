@@ -6,11 +6,18 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
+    if (report == NULL)
+        return NULL;
     report->moduleID = "Primitive_SDL2";
     report->version = MTR_VERSION_PRIMITIVE_SDL2;
     report->subsystem = "primitive";
     report->prereqsCount = 1;
     report->prereqs = malloc(sizeof(char *) * report->prereqsCount);
+    if (report->prereqs == NULL)
+    {
+        free(report);
+        return NULL;
+    }
     report->prereqs[0] = "Screen_SDL2";
     report->prereqSubsystemsCount = 0;
     report->prereqSubsystems = NULL;
@@ -182,13 +189,13 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveArc_rgb_f(float x, float y, float radius,
     int i;
     float resultX;
     float resultY;
-    float currentAngle; 
-    
+    float currentAngle;
+
     currentAngle = (startAngle * MTR_PI_180_F);
     for (i = 0; i < MTR_ARC_SEGMENTS_COUNT; i++)
     {
         if (i != 0)
-            currentAngle = (startAngle + (endAngle - startAngle) / 
+            currentAngle = (startAngle + (endAngle - startAngle) /
              MTR_ARC_SEGMENTS_COUNT * i) * MTR_PI_180_F;
         else
             currentAngle = startAngle * MTR_PI_180_F;
@@ -211,13 +218,13 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveArc_rgba_f(float x, float y, float radius,
     int i;
     float resultX;
     float resultY;
-    float currentAngle; 
-    
+    float currentAngle;
+
     currentAngle = (startAngle * MTR_PI_180_F);
     for (i = 0; i < MTR_ARC_SEGMENTS_COUNT; i++)
     {
         if (i != 0)
-            currentAngle = (startAngle + (endAngle - startAngle) / 
+            currentAngle = (startAngle + (endAngle - startAngle) /
              MTR_ARC_SEGMENTS_COUNT * i) * MTR_PI_180_F;
         else
             currentAngle = startAngle * MTR_PI_180_F;
@@ -240,13 +247,13 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveArc_c_f(float x, float y, float radius,
     int i;
     float resultX;
     float resultY;
-    float currentAngle; 
-    
+    float currentAngle;
+
     currentAngle = (startAngle * MTR_PI_180_F);
     for (i = 0; i < MTR_ARC_SEGMENTS_COUNT; i++)
     {
         if (i != 0)
-            currentAngle = (startAngle + (endAngle - startAngle) / 
+            currentAngle = (startAngle + (endAngle - startAngle) /
              MTR_ARC_SEGMENTS_COUNT * i) * MTR_PI_180_F;
         else
             currentAngle = startAngle * MTR_PI_180_F;
@@ -269,13 +276,13 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveArc_ca_f(float x, float y, float radius,
     int i;
     float resultX;
     float resultY;
-    float currentAngle; 
-    
+    float currentAngle;
+
     currentAngle = (startAngle * MTR_PI_180_F);
     for (i = 0; i < MTR_ARC_SEGMENTS_COUNT; i++)
     {
         if (i != 0)
-            currentAngle = (startAngle + (endAngle - startAngle) / 
+            currentAngle = (startAngle + (endAngle - startAngle) /
              MTR_ARC_SEGMENTS_COUNT * i) * MTR_PI_180_F;
         else
             currentAngle = startAngle * MTR_PI_180_F;
@@ -326,8 +333,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveCircle_rgb_f(float x, float y,
     float resultY;
     float startX;
     float startY;
-    float currentAngle; 
-    
+    float currentAngle;
+
     currentAngle = 0.0f;
     startX = radius * cosf((float)M_PI * 2);
     startY = radius * sinf((float)M_PI * 2);
@@ -356,8 +363,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveCircle_rgba_f(float x, float y,
     float resultY;
     float startX;
     float startY;
-    float currentAngle; 
-    
+    float currentAngle;
+
     currentAngle = 0.0f;
     startX = radius * cosf((float)M_PI * 2);
     startY = radius * sinf((float)M_PI * 2);
@@ -386,8 +393,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveCircle_c_f(float x, float y, float radius,
     float resultY;
     float startX;
     float startY;
-    float currentAngle; 
-    
+    float currentAngle;
+
     currentAngle = 0.0f;
     startX = radius * cosf((float)M_PI * 2);
     startY = radius * sinf((float)M_PI * 2);
@@ -416,8 +423,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveCircle_ca_f(float x, float y, float radius,
     float resultY;
     float startX;
     float startY;
-    float currentAngle; 
-    
+    float currentAngle;
+
     currentAngle = 0.0f;
     startX = radius * cosf((float)M_PI * 2);
     startY = radius * sinf((float)M_PI * 2);
@@ -780,7 +787,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRoundedRectangle_rgb_f(float x1, float y1,
     mtrPrimitiveLine_rgb_f(x1 + radius, y2, x2 - radius, y2, r, g, b);
     mtrPrimitiveLine_rgb_f(x1, y1 + radius, x1, y2 - radius, r, g, b);
     mtrPrimitiveLine_rgb_f(x2, y1 + radius, x2, y2 - radius, r, g, b);
-    
+
     mtrPrimitiveArc_rgb_f(x1 + radius, y1 + radius, radius, 90, 180, r, g, b);
     mtrPrimitiveArc_rgb_f(x1 + radius, y2 - radius, radius, 180, 270, r, g, b);
     mtrPrimitiveArc_rgb_f(x2 - radius, y1 + radius, radius, 0, 90, r, g, b);
@@ -794,13 +801,13 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRoundedRectangle_rgba_f(float x1, float y1,
     mtrPrimitiveLine_rgba_f(x1 + radius, y2, x2 - radius, y2, r, g, b, a);
     mtrPrimitiveLine_rgba_f(x1, y1 + radius, x1, y2 - radius, r, g, b, a);
     mtrPrimitiveLine_rgba_f(x2, y1 + radius, x2, y2 - radius, r, g, b, a);
-    
-    mtrPrimitiveArc_rgba_f(x1 + radius, y1 + radius, radius, 90, 180, r, g, b, 
+
+    mtrPrimitiveArc_rgba_f(x1 + radius, y1 + radius, radius, 90, 180, r, g, b,
      a);
-    mtrPrimitiveArc_rgba_f(x1 + radius, y2 - radius, radius, 180, 270, r, g, b, 
+    mtrPrimitiveArc_rgba_f(x1 + radius, y2 - radius, radius, 180, 270, r, g, b,
      a);
     mtrPrimitiveArc_rgba_f(x2 - radius, y1 + radius, radius, 0, 90, r, g, b, a);
-    mtrPrimitiveArc_rgba_f(x2 - radius, y2 - radius, radius, 270, 360, r, g, b, 
+    mtrPrimitiveArc_rgba_f(x2 - radius, y2 - radius, radius, 270, 360, r, g, b,
      a);
 }
 
@@ -811,7 +818,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRoundedRectangle_c_f(float x1, float y1,
     mtrPrimitiveLine_c_f(x1 + radius, y2, x2 - radius, y2, color);
     mtrPrimitiveLine_c_f(x1, y1 + radius, x1, y2 - radius, color);
     mtrPrimitiveLine_c_f(x2, y1 + radius, x2, y2 - radius, color);
-    
+
     mtrPrimitiveArc_c_f(x1 + radius, y1 + radius, radius, 90, 180, color);
     mtrPrimitiveArc_c_f(x1 + radius, y2 - radius, radius, 180, 270, color);
     mtrPrimitiveArc_c_f(x2 - radius, y1 + radius, radius, 0, 90, color);
@@ -825,7 +832,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRoundedRectangle_ca_f(float x1, float y1,
     mtrPrimitiveLine_ca_f(x1 + radius, y2, x2 - radius, y2, color);
     mtrPrimitiveLine_ca_f(x1, y1 + radius, x1, y2 - radius, color);
     mtrPrimitiveLine_ca_f(x2, y1 + radius, x2, y2 - radius, color);
-    
+
     mtrPrimitiveArc_ca_f(x1 + radius, y1 + radius, radius, 90, 180, color);
     mtrPrimitiveArc_ca_f(x1 + radius, y2 - radius, radius, 180, 270, color);
     mtrPrimitiveArc_ca_f(x2 - radius, y1 + radius, radius, 0, 90, color);
@@ -864,7 +871,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveLineBegin_f(float x, float y)
     mtrLinePointY_f = y;
 }
 
-MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_rgb_f(float x, float y, 
+MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_rgb_f(float x, float y,
  uint8_t r, uint8_t g, uint8_t b)
 {
     if (!mtrLineDrawing)
@@ -872,15 +879,15 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_rgb_f(float x, float y,
         mtrPrimitiveLineBegin_f(x, y);
         return;
     }
-    
+
     SDL_SetRenderDrawColor(mtrScreen->renderer, r, g, b, 0xFF);
-    SDL_RenderDrawLine(mtrScreen->renderer, mtrLinePointX_f, mtrLinePointY_f, 
+    SDL_RenderDrawLine(mtrScreen->renderer, mtrLinePointX_f, mtrLinePointY_f,
      x, y);
     mtrLinePointX_f = x;
     mtrLinePointY_f = y;
 }
 
-MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_rgba_f(float x, float y, 
+MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_rgba_f(float x, float y,
  uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
     if (!mtrLineDrawing)
@@ -888,58 +895,58 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_rgba_f(float x, float y,
         mtrPrimitiveLineBegin_f(x, y);
         return;
     }
-    
+
     SDL_SetRenderDrawColor(mtrScreen->renderer, r, g, b, a);
-    SDL_RenderDrawLine(mtrScreen->renderer, mtrLinePointX_f, mtrLinePointY_f, 
+    SDL_RenderDrawLine(mtrScreen->renderer, mtrLinePointX_f, mtrLinePointY_f,
      x, y);
     mtrLinePointX_f = x;
     mtrLinePointY_f = y;
 }
 
-MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_c_f(float x, float y, 
+MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_c_f(float x, float y,
  uint32_t color)
 {
     uint8_t r;
     uint8_t g;
     uint8_t b;
-    
+
     if (!mtrLineDrawing)
     {
         mtrPrimitiveLineBegin_f(x, y);
         return;
     }
-    
+
     r = (uint8_t)(color >> 16);
     g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
     b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
     SDL_SetRenderDrawColor(mtrScreen->renderer, r, g, b, 0xFF);
-    SDL_RenderDrawLine(mtrScreen->renderer, mtrLinePointX_f, mtrLinePointY_f, 
+    SDL_RenderDrawLine(mtrScreen->renderer, mtrLinePointX_f, mtrLinePointY_f,
      x, y);
     mtrLinePointX_f = x;
     mtrLinePointY_f = y;
 }
 
-MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_ca_f(float x, float y, 
+MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_ca_f(float x, float y,
  uint32_t color)
 {
     uint8_t r;
     uint8_t g;
     uint8_t b;
     uint8_t a;
-    
+
     if (!mtrLineDrawing)
     {
         mtrPrimitiveLineBegin_f(x, y);
         return;
     }
-    
+
     r = (uint8_t)(color >> 24);
     g = (uint8_t)((color >> 16) - ((uint32_t)r << 8));
     b = (uint8_t)((color >> 8) - ((uint32_t)r << 16) - ((uint32_t)g << 8));
     a = (uint8_t)(color  - ((uint32_t)r << 24) - ((uint32_t)g << 16) -
      ((uint32_t)b << 8));
     SDL_SetRenderDrawColor(mtrScreen->renderer, r, g, b, a);
-    SDL_RenderDrawLine(mtrScreen->renderer, mtrLinePointX_f, mtrLinePointY_f, 
+    SDL_RenderDrawLine(mtrScreen->renderer, mtrLinePointX_f, mtrLinePointY_f,
      x, y);
     mtrLinePointX_f = x;
     mtrLinePointY_f = y;

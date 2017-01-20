@@ -7,11 +7,18 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
+    if (report == NULL)
+        return NULL;
     report->moduleID = "Mouse_SDL2_Squirrel";
     report->version = MTR_VERSION_MOUSE_SDL2_SQUIRREL;
     report->subsystem = "binding";
     report->prereqsCount = 2;
     report->prereqs = malloc(sizeof(char *) * report->prereqsCount);
+    if (report->prereqs == NULL)
+    {
+        free(report);
+        return NULL;
+    }
     report->prereqs[0] = "Mouse_SDL2";
     report->prereqs[1] = "Script_Squirrel";
     report->prereqSubsystemsCount = 0;

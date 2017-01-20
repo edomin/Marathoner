@@ -6,6 +6,8 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
+    if (report == NULL)
+        return NULL;
     report->moduleID = "Abstraction_sprite";
     report->version = MTR_VERSION_ABSTRACTION_SPRITE;
     report->subsystem = "abstraction";
@@ -13,6 +15,11 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     report->prereqs = NULL;
     report->prereqSubsystemsCount = 1;
     report->prereqSubsystems = malloc(sizeof(char *) * report->prereqSubsystemsCount);
+    if (report->prereqSubsystems == NULL)
+    {
+        free(report);
+        return NULL;
+    }
     report->prereqSubsystems[0] = "texture";
     return report;
 }
@@ -129,6 +136,13 @@ MTR_EXPORT uint32_t MTR_CALL mtrSpriteLoad(const char *filename, int clipWidth,
     if (sprite->textureIndex != 0)
     {
         sprite->name = malloc(sizeof(char) * (strlen(filename) + 1));
+        if (sprite->name == NULL)
+        {
+            mtrNotify("Unable to allocate memory for sprite's name", 1,
+             MTR_LMT_ERROR);
+            mtrIndexkeeperFreeIndex(mtrSpriteKeeper, freeIndex);
+            return 0;
+        }
         sprite->name = strcpy(sprite->name, filename);
         /* TODO: Write actual values in log */
         mtrTextureGetSizes(sprite->textureIndex, &textureWidth, &textureHeight);
@@ -165,6 +179,8 @@ MTR_EXPORT uint32_t MTR_CALL mtrSpriteLoad(const char *filename, int clipWidth,
             mtrNotify("Unable to allocate memory for clips' coords array", 1,
              MTR_LMT_ERROR);
             mtrIndexkeeperFreeIndex(mtrSpriteKeeper, freeIndex);
+            free(sprite->name);
+            return 0;
         }
 
         for (i = 0; i < sprite->clipsCount; i++)

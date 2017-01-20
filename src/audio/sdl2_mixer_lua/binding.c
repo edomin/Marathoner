@@ -12,6 +12,11 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     report->subsystem = "binding";
     report->prereqsCount = 2;
     report->prereqs = malloc(sizeof(char *) * report->prereqsCount);
+    if (report->prereqs == NULL)
+    {
+        free(report);
+        return NULL;
+    }
     report->prereqs[0] = "Audio_SDL2_mixer";
     report->prereqs[1] = "Script_Lua";
     report->prereqSubsystemsCount = 0;

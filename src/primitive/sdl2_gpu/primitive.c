@@ -6,11 +6,18 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
+    if (report == NULL)
+        return NULL;
     report->moduleID = "Primitive_SDL2_gpu";
     report->version = MTR_VERSION_PRIMITIVE_SDL2_GPU;
     report->subsystem = "primitive";
     report->prereqsCount = 1;
     report->prereqs = malloc(sizeof(char *) * report->prereqsCount);
+    if (report->prereqs == NULL)
+    {
+        free(report);
+        return NULL;
+    }
     report->prereqs[0] = "Screen_SDL2_gpu";
     report->prereqSubsystemsCount = 0;
     report->prereqSubsystems = NULL;

@@ -6,6 +6,8 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
+    if (report == NULL)
+        return NULL;
     report->moduleID = "TTF_SDL2_ttf";
     report->version = MTR_VERSION_TTF_SDL2_TTF;
     report->subsystem = "ttf";
@@ -74,6 +76,14 @@ MTR_EXPORT uint32_t MTR_CALL mtrTtfLoad(const char *filename, int size)
     if (font->font != NULL)
     {
         font->name = malloc(sizeof(char) * (strlen(filename) + 1));
+        if (font->name == NULL)
+        {
+            mtrNotify("Unable to allocate memory fot TTF font's name", 1,
+             MTR_LMT_ERROR);
+            TTF_CloseFont(font->font);
+            mtrIndexkeeperFreeIndex(mtrTtfKeeper, freeIndex);
+            return 0;
+        }
         font->name = strcpy(font->name, filename);
         mtrLogWrite_s("TTF font loaded", 0, MTR_LMT_INFO, filename);
         return freeIndex;

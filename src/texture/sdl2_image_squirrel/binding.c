@@ -7,11 +7,18 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
+    if (report == NULL)
+        return NULL;
     report->moduleID = "Texture_SDL2_image_Squirrel";
     report->version = MTR_VERSION_TEXTURE_SDL2_IMAGE_SQUIRREL;
     report->subsystem = "binding";
     report->prereqsCount = 2;
     report->prereqs = malloc(sizeof(char *) * report->prereqsCount);
+    if (report->prereqs == NULL)
+    {
+        free(report);
+        return NULL;
+    }
     report->prereqs[0] = "Texture_SDL2_image";
     report->prereqs[1] = "Script_Squirrel";
     report->prereqSubsystemsCount = 0;
