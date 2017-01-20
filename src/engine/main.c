@@ -220,9 +220,16 @@ int main(int argc, char** argv)
                   (mtrPluginData[currentPlugin].report->version & 0x00FF00) >> 8);
                 mtrLogWrite_i("Patch:", 2, MTR_LMT_INFO,
                   mtrPluginData[currentPlugin].report->version & 0x0000FF);
+                if (mtrPluginData[currentPlugin].report->prereqSubsystemsCount > 0)
+                {
+                    mtrLogWrite("Requirement subsystems:", 1, MTR_LMT_INFO);
+                    for (i = 0; i < mtrPluginData[currentPlugin].report->prereqSubsystemsCount; i++)
+                        mtrLogWrite(mtrPluginData[currentPlugin].report->prereqSubsystems[i],
+                          2, MTR_LMT_INFO);
+                }
                 if (mtrPluginData[currentPlugin].report->prereqsCount > 0)
                 {
-                    mtrLogWrite("Requirements:", 1, MTR_LMT_INFO);
+                    mtrLogWrite("Requirement modules:", 1, MTR_LMT_INFO);
                     for (i = 0; i < mtrPluginData[currentPlugin].report->prereqsCount; i++)
                         mtrLogWrite(mtrPluginData[currentPlugin].report->prereqs[i],
                           2, MTR_LMT_INFO);
@@ -470,7 +477,10 @@ int main(int argc, char** argv)
     mtrLogWrite("Quiting Engine", 0, MTR_LMT_INFO);
     /* Freing allocated structures and unloading libraries */
     for (i = 0; i < mtrPluginsFound; i++)
+    {
+        mtrLogWrite_s("Unloading plugin", 0, MTR_LMT_INFO, mtrPluginData[i].report->moduleID);
         mtrCloseLibrary(mtrPluginData[i].dll);
+    }
     free(mtrPluginData);
 
     mtrLogWrite("Engine stopped", 0, MTR_LMT_INFO);
