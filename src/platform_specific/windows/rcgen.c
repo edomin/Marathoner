@@ -105,7 +105,8 @@ int main(int argc, char **argv)
                 case '8':
                 case '9':
                 {
-                    version = version + (valuePos[i] - 0x30) * (int)pow(16, 5 - digit);
+                    version = version + (valuePos[i] - 0x30) *
+                     (int)pow(16, 5 - digit);
                     break;
                 }
                 case 'A':
@@ -115,7 +116,8 @@ int main(int argc, char **argv)
                 case 'E':
                 case 'F':
                 {
-                    version = version + (valuePos[i] - 0x41) * (int)pow(16, 5 - digit);
+                    version = version + (valuePos[i] - 0x41) *
+                     (int)pow(16, 5 - digit);
                     break;
                 }
                 default:
@@ -139,8 +141,10 @@ int main(int argc, char **argv)
 
         fprintf(outputFile, "%s\n", "#include <winver.h>");
         fprintf(outputFile, "%s\n", "VS_VERSION_INFO VERSIONINFO");
-        fprintf(outputFile, "FILEVERSION %i,%i,%i,0\n", verMajor, verMinor, verPatch);
-        fprintf(outputFile, "PRODUCTVERSION %i,%i,%i,0\n", verMajor, verMinor, verPatch);
+        fprintf(outputFile, "FILEVERSION %i,%i,%i,0\n", verMajor, verMinor,
+         verPatch);
+        fprintf(outputFile, "PRODUCTVERSION %i,%i,%i,0\n", verMajor, verMinor,
+         verPatch);
         fprintf(outputFile, "%s\n", "FILEFLAGSMASK  	VS_FFI_FILEFLAGSMASK");
         fprintf(outputFile, "%s\n", "FILEFLAGS      	VS_FF_PRERELEASE");
         fprintf(outputFile, "%s\n", "FILEOS         	VOS_NT_WINDOWS32");
@@ -154,14 +158,23 @@ int main(int argc, char **argv)
             fprintf(outputFile, "%s\n", "BEGIN");
                 fprintf(outputFile, "%s\n", "BLOCK \"041904E3\""); /* 040904E4 */
                 fprintf(outputFile, "%s\n", "BEGIN");
-                    fprintf(outputFile, "%s\n", "VALUE \"CompanyName\", \"Vasiliy Edomin\"");
-                    fprintf(outputFile, "VALUE \"FileDescription\", \"%s\"\n", description);
-                    fprintf(outputFile, "VALUE \"FileVersion\", \"%i,%i,%i,0\"\n", verMajor, verMinor, verPatch);
-                    fprintf(outputFile, "VALUE \"InternalName\", \"%s\"\n", name);
+                    fprintf(outputFile, "%s\n",
+                     "VALUE \"CompanyName\", \"Vasiliy Edomin\"");
+                    fprintf(outputFile, "VALUE \"FileDescription\", \"%s\"\n",
+                     description);
+                    fprintf(outputFile,
+                     "VALUE \"FileVersion\", \"%i,%i,%i,0\"\n", verMajor,
+                     verMinor, verPatch);
+                    fprintf(outputFile, "VALUE \"InternalName\", \"%s\"\n",
+                     name);
 
-                    fprintf(outputFile, "VALUE \"OriginalFilename\", \"%s\"\n", filename);
-                    fprintf(outputFile, "VALUE \"ProductName\", \"%s\"\n", name);
-                    fprintf(outputFile, "VALUE \"ProductVersion\", \"%i,%i,%i,0\"\n", verMajor, verMinor, verPatch);
+                    fprintf(outputFile, "VALUE \"OriginalFilename\", \"%s\"\n",
+                     filename);
+                    fprintf(outputFile, "VALUE \"ProductName\", \"%s\"\n",
+                     name);
+                    fprintf(outputFile,
+                     "VALUE \"ProductVersion\", \"%i,%i,%i,0\"\n", verMajor,
+                     verMinor, verPatch);
                 fprintf(outputFile, "%s\n", "END");
             fprintf(outputFile, "%s\n", "END");
 
