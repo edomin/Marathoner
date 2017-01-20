@@ -15,11 +15,17 @@ bool ConfigfileWriteString(const char *filename, const char *section, const char
 
 void FileWriteLine(const char* filename, const char *text, uint8_t mode);
 
-void ScreenInit(int width, int height)
+bool ScreenInit(int width, int height)
 void ScreenQuit()
 void ScreenFlip()
 
 bool TextureInit(uint32_t dmSize, uint32_t reservedCount)
+void TextureBeginTarget(uint32_t texNum)
+void TextureEndTarget(void)
+int TextureGetWidth(uint32_t texNum)
+int TextureGetHeight(uint32_t texNum)
+int, int TextureGetSizes(uint32_t texNum)
+uint32_t TextureCreate(const char *name, int widthm int height)
 uint32_t TextureLoad(const char *filename)
 void TextureFree(uint32_t texNum)
 void TextureBlit_f(uint32_t texNum, float x, float y)
@@ -185,3 +191,12 @@ uint8_t, uint8_t, uint8_t ColorSplitRGB(uint32_t rgb)
 uint8_t, uint8_t, uint8_t, uint8_t ColorSplitRGBA(uint32_t rgba)
 uint32_t ColorRGBtoRGBA(uint32_t rgb)
 uint32_t ColorRGBAtoRGB(uint32_t rgba)
+
+bool SpriteInit(uint32_t dmSize, uint32_t reservedCount)
+uint32_t SpriteLoad(const char *filename, int clipWidth, int clipHeight, int rowsCount, int colsCount, int clipsCount, int anchorX, int anchorY)
+void SpriteFree(uint32_t sprNum)
+void SpriteDraw_f(uint32_t sprNum, int clipNum, float x, float y)
+void SpriteDrawScaled_f(uint32_t sprNum, int clipNum, float x, float y, float w, float h)
+void SpriteDrawAngled_f(uint32_t sprNum, int clipNum, float x, float y, float angle)
+void SpriteDrawFlipped_f(uint32_t sprNum, int clipNum, float x, float y, int flip)
+void SpriteDrawGeneral_f(uint32_t sprNum, int clipNum, float x, float y, float w, float h, float angle, int flip)
