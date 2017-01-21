@@ -30,26 +30,27 @@ typedef struct mtrPlugin{
 
 /* Pointers to engine functions */
 
-typedef char *(MTR_CALL * mtrConfigfileGetKeyNameFunc_t)(const char *,
+typedef char *   (MTR_CALL * mtrConfigfileGetKeyNameFunc_t)(const char *,
  const char *, int);
-typedef char *(MTR_CALL * mtrConfigfileGetSectionNameFunc_t)(const char*, int);
-typedef bool (MTR_CALL * mtrConfigfileDeleteKeyFunc_t)(const char *,
+typedef char *   (MTR_CALL * mtrConfigfileGetSectionNameFunc_t)(const char*,
+ int);
+typedef bool     (MTR_CALL * mtrConfigfileDeleteKeyFunc_t)(const char *,
  const char *, const char *);
-typedef bool (MTR_CALL * mtrConfigfileDeleteSectionFunc_t)(const char *,
+typedef bool     (MTR_CALL * mtrConfigfileDeleteSectionFunc_t)(const char *,
  const char *);
-typedef bool (MTR_CALL * mtrConfigfileReadBoolFunc_t)(const char *,
+typedef bool     (MTR_CALL * mtrConfigfileReadBoolFunc_t)(const char *,
  const char *, const char *, bool);
-typedef int (MTR_CALL * mtrConfigfileReadIntFunc_t)(const char *, const char *,
- const char *, int);
-typedef float (MTR_CALL * mtrConfigfileReadSingleFunc_t)(const char *,
- const char *, const char *, float);
-typedef char *(MTR_CALL * mtrConfigfileReadStringFunc_t)(const char *,
- const char *, const char *, const char *);
-typedef bool (MTR_CALL * mtrConfigfileWriteIntFunc_t)(const char *,
+typedef int      (MTR_CALL * mtrConfigfileReadIntFunc_t)(const char *,
  const char *, const char *, int);
-typedef bool (MTR_CALL * mtrConfigfileWriteSingleFunc_t)(const char *,
+typedef float    (MTR_CALL * mtrConfigfileReadSingleFunc_t)(const char *,
  const char *, const char *, float);
-typedef bool (MTR_CALL * mtrConfigfileWriteStringFunc_t)(const char *,
+typedef char *   (MTR_CALL * mtrConfigfileReadStringFunc_t)(const char *,
+ const char *, const char *, const char *);
+typedef bool     (MTR_CALL * mtrConfigfileWriteIntFunc_t)(const char *,
+ const char *, const char *, int);
+typedef bool     (MTR_CALL * mtrConfigfileWriteSingleFunc_t)(const char *,
+ const char *, const char *, float);
+typedef bool     (MTR_CALL * mtrConfigfileWriteStringFunc_t)(const char *,
  const char *, const char *, const char *);
 
 typedef void     (MTR_CALL * mtrLogWriteFunc_t)(const char *, uint8_t, uint8_t);
@@ -77,29 +78,30 @@ typedef void     (MTR_CALL * mtrFileWriteLineFunc_t)(const char *, const char *,
 mtrPlugin *mtrPluginData;
 
 /* Log Message Types */
-#define MTR_LMT_INFO    0
-#define MTR_LMT_NOTE    1
-#define MTR_LMT_WARNING 2
-#define MTR_LMT_ERROR   3
-#define MTR_LMT_FATAL   4
-#define MTR_LMT_DEBUG   5
+#define MTR_LMT_INFO        0
+#define MTR_LMT_NOTE        1
+#define MTR_LMT_WARNING     2
+#define MTR_LMT_ERROR       3
+#define MTR_LMT_FATAL       4
+#define MTR_LMT_DEBUG       5
 
 /* Dialog Message Types */
-#define MTR_DMT_INFO    0
-#define MTR_DMT_NOTE    1
-#define MTR_DMT_WARNING 2
-#define MTR_DMT_ERROR   3
-#define MTR_DMT_FATAL   4
-#define MTR_DMT_DEBUG   5
+#define MTR_DMT_INFO        0
+#define MTR_DMT_NOTE        1
+#define MTR_DMT_WARNING     2
+#define MTR_DMT_ERROR       3
+#define MTR_DMT_FATAL       4
+#define MTR_DMT_DEBUG       5
 
 /* Indexkeeper datamap size */
-#define MTR_IKDM_SMALL  8
-#define MTR_IKDM_MEDIUM 2048
-#define MTR_IKDM_LARGE  134217728
+#define MTR_IKDM_SMALL      8
+#define MTR_IKDM_MEDIUM     2048
+#define MTR_IKDM_LARGE      134217728
 
 /* Indexkeeper datamap size */
-#define MTR_FM_WRITE    0
-#define MTR_FM_APPEND   1
+#define MTR_FM_WRITE        0
+#define MTR_FM_APPEND       1
+
 /* Texture flipping constants */
 #define MTR_FLIP_NONE       0
 #define MTR_FLIP_HORIZONTAL 1
