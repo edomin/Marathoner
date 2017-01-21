@@ -74,6 +74,14 @@ void RequireEngineFuncs(uint8_t plugin)
         mtrLogWrite("Module are not contain declaration for 'mtrIndexkeeperFreeIndex' function",
          1, MTR_LMT_WARNING);
 
+    mtrRequireIndexkeeperIndexIsEmpty = (mtrRequireIndexkeeperIndexIsEmptyFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
+     "mtrRequireIndexkeeperIndexIsEmpty");
+    if (mtrRequireIndexkeeperIndexIsEmpty != NULL)
+        mtrRequireIndexkeeperIndexIsEmpty(mtrIndexkeeperIndexIsEmpty);
+    else
+        mtrLogWrite("Module are not contain declaration for 'mtrIndexkeeperIndexIsEmpty' function",
+         1, MTR_LMT_WARNING);
+
     mtrRequireIndexkeeperDestroy = (mtrRequireIndexkeeperDestroyFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
      "mtrRequireIndexkeeperDestroy");
     if (mtrRequireIndexkeeperDestroy != NULL)

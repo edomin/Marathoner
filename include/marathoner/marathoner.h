@@ -66,6 +66,8 @@ typedef void *   (MTR_CALL * mtrIndexkeeperCreateFunc_t)(uint32_t, uint32_t,
  size_t);
 typedef uint32_t (MTR_CALL * mtrIndexkeeperGetFreeIndexFunc_t)(void *);
 typedef void     (MTR_CALL * mtrIndexkeeperFreeIndexFunc_t)(void *, uint32_t);
+typedef bool     (MTR_CALL * mtrIndexkeeperIndexIsEmptyFunc_t)(void *,
+ uint32_t);
 typedef void     (MTR_CALL * mtrIndexkeeperDestroyFunc_t)(void *);
 
 typedef void     (MTR_CALL * mtrFileWriteLineFunc_t)(const char *, const char *,

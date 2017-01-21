@@ -34,6 +34,7 @@ mtrNotifyFunc_t                     mtrNotify;
 mtrIndexkeeperCreateFunc_t          mtrIndexkeeperCreate;
 mtrIndexkeeperGetFreeIndexFunc_t    mtrIndexkeeperGetFreeIndex;
 mtrIndexkeeperFreeIndexFunc_t       mtrIndexkeeperFreeIndex;
+mtrIndexkeeperIndexIsEmptyFunc_t    mtrIndexkeeperIndexIsEmpty;
 mtrIndexkeeperDestroyFunc_t         mtrIndexkeeperDestroy;
 
 mtrFileWriteLineFunc_t              mtrFileWriteLine;

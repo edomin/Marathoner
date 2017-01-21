@@ -95,6 +95,11 @@ MTR_EXPORT void MTR_CALL mtrRequireIndexkeeperFreeIndex(mtrIndexkeeperFreeIndexF
     mtrIndexkeeperFreeIndex = IndexkeeperFreeIndexFunc;
 }
 
+MTR_EXPORT void MTR_CALL mtrRequireIndexkeeperIndexIsEmpty(mtrIndexkeeperIndexIsEmptyFunc_t IndexkeeperIndexIsEmptyFunc)
+{
+    mtrIndexkeeperIndexIsEmpty = IndexkeeperIndexIsEmptyFunc;
+}
+
 MTR_EXPORT void MTR_CALL mtrRequireIndexkeeperDestroy(mtrIndexkeeperDestroyFunc_t IndexkeeperDestroyFunc)
 {
     mtrIndexkeeperDestroy = IndexkeeperDestroyFunc;
