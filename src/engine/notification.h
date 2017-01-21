@@ -1,5 +1,5 @@
-#ifndef MTR_ENGINE_NOTIFICATION
-#define MTR_ENGINE_NOTIFICATION
+#ifndef MTR_ENGINE_NOTIFICATION_H
+#define MTR_ENGINE_NOTIFICATION_H
 
 #include "marathoner/marathoner.h"
 

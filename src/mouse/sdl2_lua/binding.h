@@ -1,5 +1,5 @@
-#ifndef MTR_MOUSE_SDL2_LUA
-#define MTR_MOUSE_SDL2_LUA
+#ifndef MTR_MOUSE_SDL2_LUA_H
+#define MTR_MOUSE_SDL2_LUA_H
 
 #include "lua.h"
 #include "lualib.h"

@@ -1,5 +1,5 @@
-#ifndef MTR_MOUSE_SDL2_SQUIRREL
-#define MTR_MOUSE_SDL2_SQUIRREL
+#ifndef MTR_MOUSE_SDL2_SQUIRREL_H
+#define MTR_MOUSE_SDL2_SQUIRREL_H
 
 #include "squirrel.h"
 

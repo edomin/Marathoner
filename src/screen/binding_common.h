@@ -1,5 +1,5 @@
-#ifndef MTR_SCREEN_BINDING_COMMON
-#define MTR_SCREEN_BINDING_COMMON
+#ifndef MTR_SCREEN_BINDING_COMMON_H
+#define MTR_SCREEN_BINDING_COMMON_H
 
 typedef bool (MTR_CALL * mtrScreenInitFunc)(int, int);
 mtrScreenInitFunc mtrScreenInit;

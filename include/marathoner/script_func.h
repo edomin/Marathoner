@@ -1,3 +1,6 @@
+#ifndef SCRIPT_FUNC_H
+#define SCRIPT_FUNC_H
+
 #ifdef lua_h
     #define MTR_SCRIPT_FUNC(funcname)                int funcname(lua_State* l)
 
@@ -82,4 +85,6 @@
     #endif
     #define MTR_SF_PUSH_STRING(value)                sq_pushstring(mtrVm, value, -1)
     #define MTR_SF_PUSH_NIL()                        sq_pushnull(mtrVm)
+#endif
+
 #endif

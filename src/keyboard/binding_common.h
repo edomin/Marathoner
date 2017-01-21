@@ -1,5 +1,5 @@
-#ifndef MTR_GAME_CONTROLLER_BINDING_COMMON
-#define MTR_GAME_CONTROLLER_BINDING_COMMON
+#ifndef MTR_KEYBOARD_BINDING_COMMON_H
+#define MTR_KEYBOARD_BINDING_COMMON_H
 
 typedef bool (MTR_CALL * mtrKeyboardInitFunc)(void);
 mtrKeyboardInitFunc mtrKeyboardInit;

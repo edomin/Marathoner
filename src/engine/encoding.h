@@ -1,5 +1,5 @@
-#ifndef MTR_ENCODING
-#define MTR_ENCODING
+#ifndef MTR_ENCODING_H
+#define MTR_ENCODING_H
 
 #include <string.h>
 

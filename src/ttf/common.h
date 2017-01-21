@@ -1,5 +1,5 @@
-#ifndef MTR_TTF_COMMON
-#define MTR_TTF_COMMON
+#ifndef MTR_TTF_COMMON_H
+#define MTR_TTF_COMMON_H
 
 #ifdef _SDL_TTF_H
     #define MTR_FS_NORMAL           TTF_STYLE_NORMAL

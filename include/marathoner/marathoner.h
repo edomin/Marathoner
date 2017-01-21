@@ -1,5 +1,5 @@
-#ifndef MTR_MARATHONER
-#define MTR_MARATHONER
+#ifndef MTR_MARATHONER_H
+#define MTR_MARATHONER_H
 
 #include "marathoner/version.h"
 #include "marathoner/types.h"

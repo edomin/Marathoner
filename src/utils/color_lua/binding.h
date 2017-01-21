@@ -1,5 +1,5 @@
-#ifndef MTR_UTILS_COLOR_LUA
-#define MTR_UTILS_COLOR_LUA
+#ifndef MTR_UTILS_COLOR_LUA_H
+#define MTR_UTILS_COLOR_LUA_H
 
 #include "lua.h"
 #include "lualib.h"

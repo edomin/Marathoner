@@ -1,5 +1,5 @@
-#ifndef MTR_UTILS_COLOR_SQUIRREL
-#define MTR_UTILS_COLOR_SQUIRREL
+#ifndef MTR_UTILS_COLOR_SQUIRREL_H
+#define MTR_UTILS_COLOR_SQUIRREL_H
 
 #include "squirrel.h"
 

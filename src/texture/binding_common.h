@@ -1,5 +1,5 @@
-#ifndef MTR_TEXTURE_BINDING_COMMON
-#define MTR_TEXTURE_BINDING_COMMON
+#ifndef MTR_TEXTURE_BINDING_COMMON_H
+#define MTR_TEXTURE_BINDING_COMMON_H
 
 typedef bool (MTR_CALL * mtrTextureInitFunc)(uint32_t, uint32_t);
 mtrTextureInitFunc mtrTextureInit;

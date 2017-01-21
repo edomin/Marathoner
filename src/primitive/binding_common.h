@@ -1,5 +1,5 @@
-#ifndef MTR_PRIMITIVE_BINDING_COMMON
-#define MTR_PRIMITIVE_BINDING_COMMON
+#ifndef MTR_PRIMITIVE_BINDING_COMMON_H
+#define MTR_PRIMITIVE_BINDING_COMMON_H
 
 typedef bool (MTR_CALL * mtrPrimitiveInitFunc)(void);
 mtrPrimitiveInitFunc mtrPrimitiveInit;

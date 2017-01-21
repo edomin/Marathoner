@@ -1,5 +1,5 @@
-#ifndef MTR_TTF_SDL2_TTF_LUA
-#define MTR_TTF_SDL2_TTF_LUA
+#ifndef MTR_TTF_SDL2_TTF_LUA_H
+#define MTR_TTF_SDL2_TTF_LUA_H
 
 #include "SDL2/SDL_ttf.h"
 

@@ -1,5 +1,5 @@
-#ifndef MTR_TEXTURE_SDL2_IMAGE
-#define MTR_TEXTURE_SDL2_IMAGE
+#ifndef MTR_TEXTURE_SDL2_IMAGE_H
+#define MTR_TEXTURE_SDL2_IMAGE_H
 
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"

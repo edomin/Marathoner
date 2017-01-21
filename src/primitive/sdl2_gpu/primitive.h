@@ -1,5 +1,5 @@
-#ifndef MTR_PRIMITIVE_SDL2_GPU
-#define MTR_PRIMITIVE_SDL2_GPU
+#ifndef MTR_PRIMITIVE_SDL2_GPU_H
+#define MTR_PRIMITIVE_SDL2_GPU_H
 
 #include "SDL2/SDL_gpu.h"
 

@@ -1,5 +1,5 @@
-#ifndef MTR_ABSTRACTION_SPRITE_LUA
-#define MTR_ABSTRACTION_SPRITE_LUA
+#ifndef MTR_ABSTRACTION_SPRITE_LUA_H
+#define MTR_ABSTRACTION_SPRITE_LUA_H
 
 #include "lua.h"
 #include "lualib.h"

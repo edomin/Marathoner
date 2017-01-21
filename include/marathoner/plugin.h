@@ -1,5 +1,5 @@
-#ifndef MTR_PLUGIN
-#define MTR_PLUGIN
+#ifndef MTR_PLUGIN_H
+#define MTR_PLUGIN_H
 
 #include "marathoner/marathoner.h"
 

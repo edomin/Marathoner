@@ -1,5 +1,5 @@
-#ifndef MTR_VERSION
-#define MTR_VERSION
+#ifndef MTR_VERSION_H
+#define MTR_VERSION_H
 
 #define MTR_VERSION_MARATHONER                      0x000100
 

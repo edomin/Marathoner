@@ -1,5 +1,5 @@
-#ifndef MTR_SCREEN_SDL2
-#define MTR_SCREEN_SDL2
+#ifndef MTR_SCREEN_SDL2_H
+#define MTR_SCREEN_SDL2_H
 
 #include "SDL2/SDL.h"
 

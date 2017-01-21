@@ -1,3 +1,6 @@
+#ifndef MTR_PLUGIN_COMMON_C
+#define MTR_PLUGIN_COMMON_C
+
 #include <string.h>
 
 MTR_EXPORT void MTR_CALL mtrRequireConfigfileGetKeyName(mtrConfigfileGetKeyNameFunc_t ConfigfileGetKeyNameFunc)
@@ -149,3 +152,5 @@ void *mtrFindFunctionInSubsystem(char *subsystem, char *functionName)
         }
     return NULL;
 }
+
+#endif

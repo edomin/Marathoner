@@ -1,5 +1,5 @@
-#ifndef MTR_AUDIO_BINDING_COMMON
-#define MTR_AUDIO_BINDING_COMMON
+#ifndef MTR_AUDIO_BINDING_COMMON_H
+#define MTR_AUDIO_BINDING_COMMON_H
 
 typedef bool (MTR_CALL * mtrAudioInitFunc)(uint32_t, uint32_t, uint32_t,
  uint32_t, int, int, int);

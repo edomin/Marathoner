@@ -1,5 +1,5 @@
-#ifndef MTR_SCRIPT_SQUIRREL
-#define MTR_SCRIPT_SQUIRREL
+#ifndef MTR_SCRIPT_SQUIRREL_H
+#define MTR_SCRIPT_SQUIRREL_H
 
 #include <stdio.h>
 

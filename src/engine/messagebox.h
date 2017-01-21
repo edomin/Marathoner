@@ -1,5 +1,5 @@
-#ifndef MTR_ENGINE_MESSAGEBOX
-#define MTR_ENGINE_MESSAGEBOX
+#ifndef MTR_ENGINE_MESSAGEBOX_H
+#define MTR_ENGINE_MESSAGEBOX_H
 
 #include "marathoner/marathoner.h"
 

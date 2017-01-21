@@ -1,5 +1,5 @@
-#ifndef MTR_PRIMITIVE_SDL2_GPU_LUA
-#define MTR_PRIMITIVE_SDL2_GPU_LUA
+#ifndef MTR_PRIMITIVE_SDL2_GPU_LUA_H
+#define MTR_PRIMITIVE_SDL2_GPU_LUA_H
 
 #include "lua.h"
 #include "lualib.h"

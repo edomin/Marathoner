@@ -1,5 +1,5 @@
-#ifndef MTR_SCREEN_SDL2_GPU_LUA
-#define MTR_SCREEN_SDL2_GPU_LUA
+#ifndef MTR_SCREEN_SDL2_GPU_LUA_H
+#define MTR_SCREEN_SDL2_GPU_LUA_H
 
 #include "lua.h"
 #include "lualib.h"

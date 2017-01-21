@@ -1,5 +1,5 @@
-#ifndef MTR_TEXTURE_SDL2_GPU
-#define MTR_TEXTURE_SDL2_GPU
+#ifndef MTR_TEXTURE_SDL2_GPU_H
+#define MTR_TEXTURE_SDL2_GPU_H
 
 #include "SDL/SDL_gpu.h"
 

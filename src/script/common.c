@@ -1,3 +1,6 @@
+#ifndef MTR_SCRIPT_COMMON_C
+#define MTR_SCRIPT_COMMON_C
+
 #include "marathoner/script_func.h"
 
 MTR_SCRIPT_FUNC(mtrSF_ScriptsRegisterStringVariable)
@@ -234,3 +237,5 @@ MTR_SCRIPT_FUNC(mtrSF_FileWriteLine)
 
     return 0;
 }
+
+#endif

@@ -1,5 +1,5 @@
-#ifndef MTR_KEYBOARD_SDL2
-#define MTR_KEYBOARD_SDL2
+#ifndef MTR_KEYBOARD_SDL2_H
+#define MTR_KEYBOARD_SDL2_H
 
 #include "SDL2/SDL.h"
 

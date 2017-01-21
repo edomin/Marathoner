@@ -1,5 +1,5 @@
-#ifndef MTR_UTILS_COLOR_COMMON
-#define MTR_UTILS_COLOR_COMMON
+#ifndef MTR_UTILS_COLOR_COMMON_H
+#define MTR_UTILS_COLOR_COMMON_H
 
 #define MTR_CLR_WEB_WHITE                    0xFFFFFF
 #define MTR_CLR_WEB_SILVER                   0xC0C0C0

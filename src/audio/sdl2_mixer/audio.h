@@ -1,5 +1,5 @@
-#ifndef MTR_AUDIO_SDL2_MIXER
-#define MTR_AUDIO_SDL2_MIXER
+#ifndef MTR_AUDIO_SDL2_MIXER_H
+#define MTR_AUDIO_SDL2_MIXER_H
 
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_mixer.h"

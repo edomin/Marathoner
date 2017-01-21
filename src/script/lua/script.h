@@ -1,5 +1,5 @@
-#ifndef MTR_SCRIPT_LUA
-#define MTR_SCRIPT_LUA
+#ifndef MTR_SCRIPT_LUA_H
+#define MTR_SCRIPT_LUA_H
 
 #include "lua.h"
 #include "lualib.h"

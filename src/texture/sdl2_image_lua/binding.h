@@ -1,5 +1,5 @@
-#ifndef MTR_TEXTURE_SDL2_IMAGE_LUA
-#define MTR_TEXTURE_SDL2_IMAGE_LUA
+#ifndef MTR_TEXTURE_SDL2_IMAGE_LUA_H
+#define MTR_TEXTURE_SDL2_IMAGE_LUA_H
 
 #include "lua.h"
 #include "lualib.h"

@@ -1,5 +1,5 @@
-#ifndef MTR_ENGINE_FILE
-#define MTR_ENGINE_FILE
+#ifndef MTR_ENGINE_FILE_H
+#define MTR_ENGINE_FILE_H
 
 #include "marathoner/marathoner.h"
 

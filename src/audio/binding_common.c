@@ -1,3 +1,6 @@
+#ifndef MTR_AUDIO_BINDING_COMMON_C
+#define MTR_AUDIO_BINDING_COMMON_C
+
 #include "marathoner/script_func.h"
 
 MTR_SCRIPT_FUNC(mtrSF_AudioInit)
@@ -554,3 +557,5 @@ void mtrScriptsRegisterAll(void)
         mtrLogWrite("Functions not added", 3, MTR_LMT_ERROR);
     }
 }
+
+#endif

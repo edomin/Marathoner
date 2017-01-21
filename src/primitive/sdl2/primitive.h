@@ -1,5 +1,5 @@
-#ifndef MTR_PRIMITIVE_SDL2
-#define MTR_PRIMITIVE_SDL2
+#ifndef MTR_PRIMITIVE_SDL2_H
+#define MTR_PRIMITIVE_SDL2_H
 
 #include "SDL2/SDL.h"
 

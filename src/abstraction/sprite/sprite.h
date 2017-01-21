@@ -1,5 +1,5 @@
-#ifndef MTR_ABSTRACTION_SPRITE
-#define MTR_ABSTRACTION_SPRITE
+#ifndef MTR_ABSTRACTION_SPRITE_H
+#define MTR_ABSTRACTION_SPRITE_H
 
 #include "marathoner/plugin.h"
 

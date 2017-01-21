@@ -1,5 +1,5 @@
-#ifndef MTR_TTF_BINDING_COMMON
-#define MTR_TTF_BINDING_COMMON
+#ifndef MTR_TTF_BINDING_COMMON_H
+#define MTR_TTF_BINDING_COMMON_H
 
 typedef bool (MTR_CALL * mtrTtfInitFunc)(uint32_t, uint32_t);
 mtrTtfInitFunc mtrTtfInit;
