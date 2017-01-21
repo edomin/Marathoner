@@ -43,17 +43,22 @@ void mtrScriptsInit(void)
     mtrScriptsRegisterNumericVariable("FM_WRITE", MTR_FM_WRITE);
     mtrScriptsRegisterNumericVariable("FM_APPEND", MTR_FM_APPEND);
 
-    mtrScriptsRegisterFunction(mtrSF_ConfigfileGetKeyName, "ConfigfileGetKeyName");
-    mtrScriptsRegisterFunction(mtrSF_ConfigfileGetSectionName, "ConfigfileGetSectionName");
-    mtrScriptsRegisterFunction(mtrSF_ConfigfileDeleteKey, "ConfigfileDeleteKey");
-    mtrScriptsRegisterFunction(mtrSF_ConfigfileDeleteKey, "ConfigfileDeleteKey");
+    mtrScriptsRegisterFunction(mtrSF_ConfigfileGetKeyName,
+     "ConfigfileGetKeyName");
+    mtrScriptsRegisterFunction(mtrSF_ConfigfileGetSectionName,
+     "ConfigfileGetSectionName");
+    mtrScriptsRegisterFunction(mtrSF_ConfigfileDeleteKey,
+     "ConfigfileDeleteKey");
     mtrScriptsRegisterFunction(mtrSF_ConfigfileReadBool, "ConfigfileReadBool");
-    mtrScriptsRegisterFunction(mtrSF_ConfigfileReadBool, "ConfigfileReadBool");
-    mtrScriptsRegisterFunction(mtrSF_ConfigfileReadSingle, "ConfigfileReadSingle");
-    mtrScriptsRegisterFunction(mtrSF_ConfigfileReadString, "ConfigfileReadString");
+    mtrScriptsRegisterFunction(mtrSF_ConfigfileReadSingle,
+     "ConfigfileReadSingle");
+    mtrScriptsRegisterFunction(mtrSF_ConfigfileReadString,
+     "ConfigfileReadString");
     mtrScriptsRegisterFunction(mtrSF_ConfigfileWriteInt, "ConfigfileWriteInt");
-    mtrScriptsRegisterFunction(mtrSF_ConfigfileWriteSingle, "ConfigfileWriteSingle");
-    mtrScriptsRegisterFunction(mtrSF_ConfigfileWriteString, "ConfigfileWriteString");
+    mtrScriptsRegisterFunction(mtrSF_ConfigfileWriteSingle,
+     "ConfigfileWriteSingle");
+    mtrScriptsRegisterFunction(mtrSF_ConfigfileWriteString,
+     "ConfigfileWriteString");
 
     mtrScriptsRegisterFunction(mtrSF_FileWriteLine, "FileWriteLine");
 
