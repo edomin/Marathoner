@@ -24,6 +24,28 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
+int mtrFlipToActualFlip(int flip)
+{
+    switch (flip)
+    {
+        case MTR_FLIP_NONE:
+            return GPU_FLIP_NONE;
+            break;
+        case MTR_FLIP_HORIZONTAL:
+            return  GPU_FLIP_HORIZONTAL;
+            break;
+        case MTR_FLIP_VERTICAL:
+            return GPU_FLIP_VERTICAL;
+            break;
+        case MTR_FLIP_BOTH:
+            return (GPU_FLIP_HORIZONTAL | GPU_FLIP_VERTICAL);
+            break;
+        default:
+            return GPU_FLIP_NONE;
+            break;
+    }
+}
+
 MTR_EXPORT bool MTR_CALL mtrTextureInit(uint32_t dmSize, uint32_t reservedCount)
 {
     SDL_version linked;
@@ -338,8 +360,10 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionFlipped_f(uint32_t texNum, float x,
     GPU_Rect region;
     GPU_Rect outputRegion;
     mtrTexture_t *texture;
+    int actualFlip;
     if (texNum != 0)
     {
+        actualFlip = mtrFlipToActualFlip(flip);
         region.x = rx;
         region.y = ry;
         region.w = rw;
@@ -350,7 +374,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionFlipped_f(uint32_t texNum, float x,
         outputRegion.h = rh;
         texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
         GPU_BlitRectX(texture->texture, &region, mtrScreen->target,
-         &outputRegion, 0.0f, rx, ry, flip);
+         &outputRegion, 0.0f, rx, ry, actualFlip);
     }
 }
 
@@ -361,8 +385,10 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionGeneral_f(uint32_t texNum, float x,
     GPU_Rect region;
     GPU_Rect outputRegion;
     mtrTexture_t *texture;
+    int actualFlip;
     if (texNum != 0)
     {
+        actualFlip = mtrFlipToActualFlip(flip);
         region.x = rx;
         region.y = ry;
         region.w = rw;
@@ -373,6 +399,6 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionGeneral_f(uint32_t texNum, float x,
         outputRegion.h = h;
         texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
         GPU_BlitRectX(texture->texture, &region, mtrScreen->target,
-         &outputRegion, -angle, pivotX, pivotY, flip);
+         &outputRegion, -angle, pivotX, pivotY, actualFlip);
     }
 }

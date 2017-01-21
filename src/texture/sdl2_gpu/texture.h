@@ -5,11 +5,6 @@
 
 #include "marathoner/plugin.h"
 
-#define MTR_FLIP_NONE                   GPU_FLIP_NONE
-#define MTR_FLIP_HORIZONTAL             GPU_FLIP_HORIZONTAL
-#define MTR_FLIP_VERTICAL               GPU_FLIP_VERTICAL
-#define MTR_FLIP_BOTH                   (GPU_FLIP_HORIZONTAL | GPU_FLIP_VERTICAL)
-
 #define MTR_BLEND_ZERO                  GPU_FUNC_ZERO
 #define MTR_BLEND_ONE                   GPU_FUNC_ONE
 #define MTR_BLEND_SRC_COLOR             GPU_FUNC_SRC_COLOR

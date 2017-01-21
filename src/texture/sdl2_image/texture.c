@@ -24,6 +24,28 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
+int mtrFlipToActualFlip(int flip)
+{
+    switch (flip)
+    {
+        case MTR_FLIP_NONE:
+            return SDL_FLIP_NONE;
+            break;
+        case MTR_FLIP_HORIZONTAL:
+            return  SDL_FLIP_HORIZONTAL;
+            break;
+        case MTR_FLIP_VERTICAL:
+            return SDL_FLIP_VERTICAL;
+            break;
+        case MTR_FLIP_BOTH:
+            return (SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL);
+            break;
+        default:
+            return SDL_FLIP_NONE;
+            break;
+    }
+}
+
 MTR_EXPORT bool MTR_CALL mtrTextureInit(uint32_t dmSize, uint32_t reservedCount)
 {
     SDL_version        compiled;
@@ -358,9 +380,11 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionFlipped_f(uint32_t texNum, float x,
     mtrTexture_t *texture;
     SDL_Rect offset;
     SDL_Rect clip;
+    int actualFlip;
     if (texNum != 0)
     {
         texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        actualFlip = mtrFlipToActualFlip(flip);
         offset.x = x;
         offset.y = y;
         offset.w = rw;
@@ -370,7 +394,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionFlipped_f(uint32_t texNum, float x,
         clip.w = rw;
         clip.h = rh;
         SDL_RenderCopyEx(mtrScreen->renderer, texture->texture, &clip, &offset,
-         0, NULL, flip);
+         0, NULL, actualFlip);
     }
 }
 
@@ -382,9 +406,11 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionGeneral_f(uint32_t texNum, float x,
     SDL_Rect offset;
     SDL_Rect clip;
     SDL_Point pivot;
+    int actualFlip;
     if (texNum != 0)
     {
         texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        actualFlip = mtrFlipToActualFlip(flip);
         offset.x = x;
         offset.y = y;
         offset.w = w;
@@ -396,6 +422,6 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionGeneral_f(uint32_t texNum, float x,
         pivot.x = pivotX;
         pivot.y = pivotY;
         SDL_RenderCopyEx(mtrScreen->renderer, texture->texture, &clip, &offset,
-         -angle, &pivot, flip);
+         -angle, &pivot, actualFlip);
     }
 }
