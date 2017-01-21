@@ -45,7 +45,7 @@ $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).res: $(RCDIR)/$(MODULE_NAME).rc
 	$(RC) $(RCFLAGS) -i $(RCDIR)/$(MODULE_NAME).rc -o $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).res
 
 $(RCDIR)/$(MODULE_NAME).rc:
-	../../../rcgen ../../../include/marathoner/version.h $(RCDIR)/$(MODULE_NAME).rc $(CONST_VER) $(MODULE_NAME) $(MODULE_NAME) mtr_$(MODULE_NAME).dll
+	../../../rcgen ../../../include/marathoner/version.h $(RCDIR)/$(MODULE_NAME).rc $(CONST_VER) $(MODULE_NAME) "$(MODULE_NAME) plugin for Marathoner Engine" mtr_$(MODULE_NAME).dll
 
 $(SUBSYSTEM).c:
 
