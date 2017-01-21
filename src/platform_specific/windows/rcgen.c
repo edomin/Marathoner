@@ -156,7 +156,7 @@ int main(int argc, char **argv)
         fprintf(outputFile, "%s\n", "BEGIN");
             fprintf(outputFile, "%s\n", "BLOCK \"StringFileInfo\"");
             fprintf(outputFile, "%s\n", "BEGIN");
-                fprintf(outputFile, "%s\n", "BLOCK \"041904E3\""); /* 040904E4 */
+                fprintf(outputFile, "%s\n", "BLOCK \"040904E4\""); /* 040904E4 */
                 fprintf(outputFile, "%s\n", "BEGIN");
                     fprintf(outputFile, "%s\n",
                      "VALUE \"CompanyName\", \"Vasiliy Edomin\"");
@@ -167,7 +167,8 @@ int main(int argc, char **argv)
                      verMinor, verPatch);
                     fprintf(outputFile, "VALUE \"InternalName\", \"%s\"\n",
                      name);
-
+                    fprintf(outputFile, "%s\n",
+                     "VALUE \"LegalCopyright\", \"(C) 2016-2017 Vasiliy Edomin\"");
                     fprintf(outputFile, "VALUE \"OriginalFilename\", \"%s\"\n",
                      filename);
                     fprintf(outputFile, "VALUE \"ProductName\", \"%s\"\n",
@@ -178,6 +179,11 @@ int main(int argc, char **argv)
                 fprintf(outputFile, "%s\n", "END");
             fprintf(outputFile, "%s\n", "END");
 
+            fprintf(outputFile, "%s\n", "BLOCK \"VarFileInfo\"");
+            fprintf(outputFile, "%s\n", "BEGIN");
+                fprintf(outputFile, "%s\n",
+                 "VALUE \"Translation\", 0x0409, 1252");
+            fprintf(outputFile, "%s\n", "END");
         fprintf(outputFile, "%s\n", "END");
 
         if (fclose(outputFile) == EOF)
