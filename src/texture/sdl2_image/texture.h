@@ -6,10 +6,6 @@
 
 #include "marathoner/plugin.h"
 
-#define MTR_FLIP_NONE                   SDL_FLIP_NONE
-#define MTR_FLIP_HORIZONTAL             SDL_FLIP_HORIZONTAL
-#define MTR_FLIP_VERTICAL               SDL_FLIP_VERTICAL
-#define MTR_FLIP_BOTH                   (SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL)
 /*
 #define MTR_BLEND_ZERO                  GPU_FUNC_ZERO
 #define MTR_BLEND_ONE                   GPU_FUNC_ONE
