@@ -22,9 +22,9 @@ typedef mtrScreen_t *(MTR_CALL * mtrGetScreenFunc)(void);
 mtrGetScreenFunc mtrGetScreen;
 
 MTR_EXPORT void MTR_CALL mtrPrimitiveLineBegin_f(float, float);
-MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_rgb_f(float, float, uint8_t, 
+MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_rgb_f(float, float, uint8_t,
  uint8_t, uint8_t);
-MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_rgba_f(float, float, uint8_t, 
+MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_rgba_f(float, float, uint8_t,
  uint8_t, uint8_t, uint8_t);
 MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_c_f(float, float, uint32_t);
 MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_ca_f(float, float, uint32_t);
