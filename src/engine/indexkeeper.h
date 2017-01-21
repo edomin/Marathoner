@@ -21,6 +21,7 @@ void *MTR_CALL mtrIndexkeeperCreate(uint32_t dmSize, uint32_t reservedCount,
  size_t datasize);
 uint32_t MTR_CALL mtrIndexkeeperGetFreeIndex(void *ik);
 void MTR_CALL mtrIndexkeeperFreeIndex(void *ik, uint32_t index);
+bool MTR_CALL mtrIndexkeeperIndexIsEmpty(void *ik, uint32_t index)
 void MTR_CALL mtrIndexkeeperDestroy(void *ik);
 
 #endif

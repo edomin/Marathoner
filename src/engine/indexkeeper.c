@@ -18,9 +18,11 @@ void *MTR_CALL mtrIndexkeeperCreate(uint32_t dmSize, uint32_t reservedCount,
     }
     indexkeeper->dataSize = datasize;
     if (reservedCount <= dmSize * 32)
+    {
         if ((dmSize == MTR_IKDM_SMALL) ||
          (dmSize == MTR_IKDM_MEDIUM) ||
          (dmSize == MTR_IKDM_LARGE))
+        {
             if (reservedCount < 32)
             {
                 mtrLogWrite("Reserved data places count are too few for correct working indexkeeper. Reserved data places count will be set to 32.", 0, MTR_LMT_WARNING);
@@ -28,11 +30,13 @@ void *MTR_CALL mtrIndexkeeperCreate(uint32_t dmSize, uint32_t reservedCount,
             }
             else
                 indexkeeper->reservedData = reservedCount;
+        }
         else
         {
             mtrLogWrite("Invalid data map size value. Value set on default - MTR_IKDM_SMALL", 0, MTR_LMT_WARNING);
             newDmSize = MTR_IKDM_SMALL;
         }
+    }
     else
     {
         mtrLogWrite("Reserved data places count are larger than data map size. Reserved data places count will be lowed to max data map size.", 0, MTR_LMT_WARNING);
@@ -88,16 +92,16 @@ void *MTR_CALL mtrIndexkeeperCreate(uint32_t dmSize, uint32_t reservedCount,
 
 uint32_t MTR_CALL mtrIndexkeeperGetFreeIndex(void *ik)
 {
-    uint32_t i;
-    uint8_t  j;
-    uint16_t dataNum;
-    uint16_t mapNumberNum;
-    uint8_t  bitNum;
-    mtrIndexkeeper_t *indexkeeper;
+    uint32_t            i;
+    uint8_t             j;
+    uint16_t            dataNum;
+    uint16_t            mapNumberNum;
+    uint8_t             bitNum;
+    mtrIndexkeeper_t   *indexkeeper;
 
     indexkeeper = (mtrIndexkeeper_t *)ik;
 
-    /* Searching empty place on textures map */
+    /* Searching empty place on data map */
     dataNum = indexkeeper->reservedData;
     mapNumberNum = (indexkeeper->reservedData >> 5);
     bitNum = 0;
@@ -150,6 +154,23 @@ void MTR_CALL mtrIndexkeeperFreeIndex(void *ik, uint32_t index)
     mapNumberNum = index >> 5; /* = index / 32 */
     bitNum = index - (mapNumberNum << 5);
     indexkeeper->dataMap[mapNumberNum] = indexkeeper->dataMap[mapNumberNum] - (1 << bitNum);
+}
+
+bool MTR_CALL mtrIndexkeeperIndexIsEmpty(void *ik, uint32_t index)
+{
+    mtrIndexkeeper_t *indexkeeper;
+    uint16_t          mapNumberNum;
+    uint8_t           bitNum;
+
+    indexkeeper = (mtrIndexkeeper_t *)ik;
+
+    mapNumberNum = index >> 5;
+    bitNum = index - (mapNumberNum << 5);
+
+    if ((indexkeeper->dataMap[mapNumberNum] | (1 << bitNum)) == 0)
+        return true;
+    else
+        return false;
 }
 
 void MTR_CALL mtrIndexkeeperDestroy(void *ik)
