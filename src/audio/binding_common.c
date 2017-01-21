@@ -280,222 +280,33 @@ void mtrScriptsRegisterAll(void)
     ok = true;
 
     mtrVm = mtrScriptsGetVm();
-    mtrAudioInit = (mtrAudioInitFunc)mtrFindFunction("Audio_SDL2_mixer",
-      "mtrAudioInit");
-    if (mtrAudioInit == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrAudioInit");
-        ok = false;
-    }
-    mtrAudioQuit = (mtrAudioQuitFunc)mtrFindFunction("Audio_SDL2_mixer",
-      "mtrAudioQuit");
-    if (mtrAudioQuit == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrAudioQuit");
-        ok = false;
-    }
-    mtrAudioSoundLoad = (mtrAudioSoundLoadFunc)mtrFindFunction("Audio_SDL2_mixer",
-      "mtrAudioSoundLoad");
-    if (mtrAudioSoundLoad == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrAudioSoundLoad");
-        ok = false;
-    }
-    mtrAudioMusicLoad = (mtrAudioMusicLoadFunc)mtrFindFunction("Audio_SDL2_mixer",
-      "mtrAudioMusicLoad");
-    if (mtrAudioMusicLoad == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrAudioMusicLoad");
-        ok = false;
-    }
-    mtrAudioSoundPlay = (mtrAudioSoundPlayFunc)mtrFindFunction("Audio_SDL2_mixer",
-      "mtrAudioSoundPlay");
-    if (mtrAudioSoundPlay == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrAudioSoundPlay");
-        ok = false;
-    }
-    mtrAudioSoundFadeInPlay = (mtrAudioSoundFadeInPlayFunc)mtrFindFunction("Audio_SDL2_mixer",
-      "mtrAudioSoundFadeInPlay");
-    if (mtrAudioSoundFadeInPlay == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrAudioSoundFadeInPlay");
-        ok = false;
-    }
-    mtrAudioSoundSetVolume = (mtrAudioSoundSetVolumeFunc)mtrFindFunction("Audio_SDL2_mixer",
-      "mtrAudioSoundSetVolume");
-    if (mtrAudioSoundSetVolume == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrAudioSoundSetVolume");
-        ok = false;
-    }
-    mtrAudioSoundSetVolume_f = (mtrAudioSoundSetVolume_fFunc)mtrFindFunction("Audio_SDL2_mixer",
-      "mtrAudioSoundSetVolume_f");
-    if (mtrAudioSoundSetVolume_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrAudioSoundSetVolume_f");
-        ok = false;
-    }
-    mtrAudioSoundStop = (mtrAudioSoundStopFunc)mtrFindFunction("Audio_SDL2_mixer",
-      "mtrAudioSoundStop");
-    if (mtrAudioSoundStop == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrAudioSoundStop");
-        ok = false;
-    }
-    mtrAudioSoundFadeOutStop = (mtrAudioSoundFadeOutStopFunc)mtrFindFunction("Audio_SDL2_mixer",
-      "mtrAudioSoundFadeOutStop");
-    if (mtrAudioSoundFadeOutStop == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrAudioSoundFadeOutStop");
-        ok = false;
-    }
-    mtrAudioSoundSetVolume = (mtrAudioSoundSetVolumeFunc)mtrFindFunction("Audio_SDL2_mixer",
-      "mtrAudioSoundSetVolume");
-    if (mtrAudioSoundSetVolume == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrAudioSoundSetVolume");
-        ok = false;
-    }
-    mtrAudioChannelsSetVolume = (mtrAudioChannelsSetVolumeFunc)mtrFindFunction("Audio_SDL2_mixer",
-      "mtrAudioChannelsSetVolume");
-    if (mtrAudioChannelsSetVolume == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrAudioChannelsSetVolume");
-        ok = false;
-    }
-    mtrAudioChannelsSetVolume_f = (mtrAudioChannelsSetVolume_fFunc)mtrFindFunction("Audio_SDL2_mixer",
-      "mtrAudioChannelsSetVolume_f");
-    if (mtrAudioChannelsSetVolume_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrAudioChannelsSetVolume_f");
-        ok = false;
-    }
-    mtrAudioChannelsPause = (mtrAudioChannelsPauseFunc)mtrFindFunction("Audio_SDL2_mixer",
-      "mtrAudioChannelsPause");
-    if (mtrAudioChannelsPause == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrAudioChannelsPause");
-        ok = false;
-    }
-    mtrAudioChannelsResume = (mtrAudioChannelsResumeFunc)mtrFindFunction("Audio_SDL2_mixer",
-      "mtrAudioChannelsResume");
-    if (mtrAudioChannelsResume == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrAudioChannelsResume");
-        ok = false;
-    }
-    mtrAudioChannelsStop = (mtrAudioChannelsStopFunc)mtrFindFunction("Audio_SDL2_mixer",
-      "mtrAudioChannelsStop");
-    if (mtrAudioChannelsStop == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrAudioChannelsStop");
-        ok = false;
-    }
-    mtrAudioChannelsFadeOutStop = (mtrAudioChannelsFadeOutStopFunc)mtrFindFunction("Audio_SDL2_mixer",
-      "mtrAudioChannelsFadeOutStop");
-    if (mtrAudioChannelsFadeOutStop == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrAudioChannelsFadeOutStop");
-        ok = false;
-    }
-    mtrAudioMusicPlay = (mtrAudioMusicPlayFunc)mtrFindFunction("Audio_SDL2_mixer",
-      "mtrAudioMusicPlay");
-    if (mtrAudioMusicPlay == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrAudioMusicPlay");
-        ok = false;
-    }
-    mtrAudioMusicFadeInPlay = (mtrAudioMusicFadeInPlayFunc)mtrFindFunction("Audio_SDL2_mixer",
-      "mtrAudioMusicFadeInPlay");
-    if (mtrAudioMusicFadeInPlay == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrAudioMusicFadeInPlay");
-        ok = false;
-    }
-    mtrAudioMusicSetVolume = (mtrAudioMusicSetVolumeFunc)mtrFindFunction("Audio_SDL2_mixer",
-      "mtrAudioMusicSetVolume");
-    if (mtrAudioMusicSetVolume == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrAudioMusicSetVolume");
-        ok = false;
-    }
-    mtrAudioMusicSetVolume_f = (mtrAudioMusicSetVolume_fFunc)mtrFindFunction("Audio_SDL2_mixer",
-      "mtrAudioMusicSetVolume_f");
-    if (mtrAudioMusicSetVolume_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrAudioMusicSetVolume_f");
-        ok = false;
-    }
-    mtrAudioMusicPause = (mtrAudioMusicPauseFunc)mtrFindFunction("Audio_SDL2_mixer",
-      "mtrAudioMusicPause");
-    if (mtrAudioMusicPause == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrAudioMusicPause");
-        ok = false;
-    }
-    mtrAudioMusicResume = (mtrAudioMusicResumeFunc)mtrFindFunction("Audio_SDL2_mixer",
-      "mtrAudioMusicResume");
-    if (mtrAudioMusicResume == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrAudioMusicResume");
-        ok = false;
-    }
-    mtrAudioMusicStop = (mtrAudioMusicStopFunc)mtrFindFunction("Audio_SDL2_mixer",
-      "mtrAudioMusicStop");
-    if (mtrAudioMusicStop == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrAudioMusicStop");
-        ok = false;
-    }
-    mtrAudioMusicFadeOutStop = (mtrAudioMusicFadeOutStopFunc)mtrFindFunction("Audio_SDL2_mixer",
-      "mtrAudioMusicFadeOutStop");
-    if (mtrAudioMusicFadeOutStop == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrAudioMusicFadeOutStop");
-        ok = false;
-    }
-    mtrAudioSoundFree = (mtrAudioSoundFreeFunc)mtrFindFunction("Audio_SDL2_mixer",
-      "mtrAudioSoundFree");
-    if (mtrAudioSoundFree == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrAudioSoundFree");
-        ok = false;
-    }
-    mtrAudioMusicFree = (mtrAudioMusicFreeFunc)mtrFindFunction("Audio_SDL2_mixer",
-      "mtrAudioMusicFree");
-    if (mtrAudioMusicFree == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrAudioMusicFree");
-        ok = false;
-    }
+
+    MTR_FIND_FUNCTION(mtrAudioInit, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrAudioQuit, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrAudioSoundLoad, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrAudioMusicLoad, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrAudioSoundPlay, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrAudioSoundFadeInPlay, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrAudioSoundSetVolume, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrAudioSoundSetVolume_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrAudioSoundStop, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrAudioSoundFadeOutStop, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrAudioChannelsSetVolume, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrAudioChannelsSetVolume_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrAudioChannelsPause, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrAudioChannelsResume, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrAudioChannelsStop, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrAudioChannelsFadeOutStop, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrAudioMusicPlay, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrAudioMusicFadeInPlay, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrAudioMusicSetVolume, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrAudioMusicSetVolume_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrAudioMusicPause, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrAudioMusicResume, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrAudioMusicStop, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrAudioMusicFadeOutStop, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrAudioSoundFree, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrAudioMusicFree, MTR_SOURCE_MODULE);
 
     if (ok)
     {

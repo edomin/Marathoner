@@ -11,6 +11,8 @@
 #include "../binding_common.h"
 #include "../common.h"
 
+#define MTR_SOURCE_MODULE "Keyboard_SDL2"
+
 lua_State *mtrVm;
 
 typedef lua_State* (MTR_CALL * mtrScriptsGetVmFunc)(void);

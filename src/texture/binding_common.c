@@ -304,144 +304,27 @@ void mtrScriptsRegisterAll(void)
     ok = true;
 
     mtrVm = mtrScriptsGetVm();
-    mtrTextureInit = (mtrTextureInitFunc)mtrFindFunction("Texture_SDL2_gpu",
-      "mtrTextureInit");
-    if (mtrTextureInit == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrTextureInit");
-        ok = false;
-    }
-    mtrTextureBeginTarget = (mtrTextureBeginTargetFunc)mtrFindFunction("Texture_SDL2_gpu",
-      "mtrTextureBeginTarget");
-    if (mtrTextureBeginTarget == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrTextureBeginTarget");
-        ok = false;
-    }
-    mtrTextureEndTarget = (mtrTextureEndTargetFunc)mtrFindFunction("Texture_SDL2_gpu",
-      "mtrTextureEndTarget");
-    if (mtrTextureEndTarget == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrTextureEndTarget");
-        ok = false;
-    }
-    mtrTextureGetWidth = (mtrTextureGetWidthFunc)mtrFindFunction("Texture_SDL2_gpu",
-      "mtrTextureGetWidth");
-    if (mtrTextureGetWidth == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrTextureGetWidth");
-        ok = false;
-    }
-    mtrTextureGetHeight = (mtrTextureGetHeightFunc)mtrFindFunction("Texture_SDL2_gpu",
-      "mtrTextureGetHeight");
-    if (mtrTextureGetHeight == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrTextureGetHeight");
-        ok = false;
-    }
+
+    MTR_FIND_FUNCTION(mtrTextureInit, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrTextureBeginTarget, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrTextureEndTarget, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrTextureGetWidth, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrTextureGetHeight, MTR_SOURCE_MODULE);
     #ifndef _SQUIRREL_H_
-    mtrTextureGetSizes = (mtrTextureGetSizesFunc)mtrFindFunction("Texture_SDL2_gpu",
-      "mtrTextureGetSizes");
-    if (mtrTextureGetSizes == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrTextureGetSizes");
-        ok = false;
-    }
+    MTR_FIND_FUNCTION(mtrTextureGetSizes, MTR_SOURCE_MODULE);
     #endif
-    mtrTextureCreate = (mtrTextureCreateFunc)mtrFindFunction("Texture_SDL2_gpu",
-      "mtrTextureCreate");
-    if (mtrTextureCreate == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrTextureCreate");
-        ok = false;
-    }
-    mtrTextureLoad = (mtrTextureLoadFunc)mtrFindFunction("Texture_SDL2_gpu",
-      "mtrTextureLoad");
-    if (mtrTextureLoad == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrTextureLoad");
-        ok = false;
-    }
-    mtrTextureFree = (mtrTextureFreeFunc)mtrFindFunction("Texture_SDL2_gpu",
-      "mtrTextureFree");
-    if (mtrTextureFree == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrTextureFree");
-        ok = false;
-    }
-    mtrTextureSetBlendFunction = (mtrTextureSetBlendFunctionFunc)mtrFindFunction("Texture_SDL2_gpu",
-      "mtrTextureSetBlendFunction");
-    if (mtrTextureSetBlendFunction == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrTextureSetBlendFunction");
-        ok = false;
-    }
-    mtrTextureSetAlphaBlending = (mtrTextureSetAlphaBlendingFunc)mtrFindFunction("Texture_SDL2_gpu",
-      "mtrTextureSetAlphaBlending");
-    if (mtrTextureSetAlphaBlending == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrTextureSetAlphaBlending");
-        ok = false;
-    }
-    mtrTextureBlit_f = (mtrTextureBlit_fFunc)mtrFindFunction("Texture_SDL2_gpu",
-      "mtrTextureBlit_f");
-    if (mtrTextureBlit_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrTextureBlit_f");
-        ok = false;
-    }
-    mtrTextureBlitRegion_f = (mtrTextureBlitRegion_fFunc)mtrFindFunction("Texture_SDL2_gpu",
-      "mtrTextureBlitRegion_f");
-    if (mtrTextureBlitRegion_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrTextureBlitRegion_f");
-        ok = false;
-    }
-    mtrTextureBlitRegionScaled_f = (mtrTextureBlitRegionScaled_fFunc)mtrFindFunction("Texture_SDL2_gpu",
-      "mtrTextureBlitRegionScaled_f");
-    if (mtrTextureBlitRegionScaled_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrTextureBlitRegionScaled_f");
-        ok = false;
-    }
-    mtrTextureBlitRegionAngled_f = (mtrTextureBlitRegionAngled_fFunc)mtrFindFunction("Texture_SDL2_gpu",
-      "mtrTextureBlitRegionAngled_f");
-    if (mtrTextureBlitRegionAngled_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrTextureBlitRegionAngled_f");
-        ok = false;
-    }
-    mtrTextureBlitRegionFlipped_f = (mtrTextureBlitRegionFlipped_fFunc)mtrFindFunction("Texture_SDL2_gpu",
-      "mtrTextureBlitRegionFlipped_f");
-    if (mtrTextureBlitRegionFlipped_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrTextureBlitRegionFlipped_f");
-        ok = false;
-    }
-    mtrTextureBlitRegionGeneral_f = (mtrTextureBlitRegionGeneral_fFunc)mtrFindFunction("Texture_SDL2_gpu",
-      "mtrTextureBlitRegionGeneral_f");
-    if (mtrTextureBlitRegionGeneral_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrTextureBlitRegionGeneral_f");
-        ok = false;
-    }
+    MTR_FIND_FUNCTION(mtrTextureCreate, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrTextureLoad, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrTextureFree, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrTextureSetBlendFunction, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrTextureSetAlphaBlending, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrTextureBlit_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrTextureBlitRegion_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrTextureBlitRegionScaled_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrTextureBlitRegionAngled_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrTextureBlitRegionFlipped_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrTextureBlitRegionGeneral_f, MTR_SOURCE_MODULE);
+
     if (ok)
     {
         mtrScriptsRegisterNumericVariable("FLIP_NONE", MTR_FLIP_NONE);

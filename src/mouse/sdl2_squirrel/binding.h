@@ -9,6 +9,8 @@
 #include "../binding_common.h"
 #include "../common.h"
 
+#define MTR_SOURCE_MODULE "Mouse_SDL2"
+
 HSQUIRRELVM mtrVm;
 
 typedef HSQUIRRELVM (MTR_CALL * mtrScriptsGetVmFunc)(void);

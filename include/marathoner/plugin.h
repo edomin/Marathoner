@@ -41,4 +41,24 @@ mtrFileWriteLineFunc_t              mtrFileWriteLine;
 
 uint8_t mtrPluginsCount;
 
+#define MTR_FIND_FUNCTION(function, module)                        \
+    function = (function ## Func)mtrFindFunction(module,           \
+    #function);                                                    \
+    if (function == NULL)                                          \
+    {                                                              \
+        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR, \
+         #function);                                               \
+        ok = false;                                                \
+    }
+
+#define MTR_FIND_FUNCTION_IN_SUBSYSTEM(function, subsystem)             \
+    function = (function ## Func)mtrFindFunctionInSubsystem(#subsystem, \
+    #function);                                                         \
+    if (function == NULL)                                               \
+    {                                                                   \
+        mtrLogWrite_s("Unable to load function", 1, MTR_LMT_ERROR,      \
+         #function);                                                    \
+        return false;                                                   \
+    }
+
 #endif

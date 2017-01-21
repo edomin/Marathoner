@@ -66,46 +66,13 @@ void mtrScriptsRegisterAll(void)
     ok = true;
 
     mtrVm = mtrScriptsGetVm();
-    mtrKeyboardInit = (mtrKeyboardInitFunc)mtrFindFunction("Keyboard_SDL2",
-      "mtrKeyboardInit");
-    if (mtrKeyboardInit == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrKeyboardInit");
-        ok = false;
-    }
-    mtrKeyboardRefresh = (mtrKeyboardRefreshFunc)mtrFindFunction("Keyboard_SDL2",
-      "mtrKeyboardRefresh");
-    if (mtrKeyboardRefresh == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrKeyboardRefresh");
-        ok = false;
-    }
-    mtrKeyboardPress = (mtrKeyboardPressFunc)mtrFindFunction("Keyboard_SDL2",
-      "mtrKeyboardPress");
-    if (mtrKeyboardPress == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrKeyboardPress");
-        ok = false;
-    }
-    mtrKeyboardRelease = (mtrKeyboardReleaseFunc)mtrFindFunction("Keyboard_SDL2",
-      "mtrKeyboardRelease");
-    if (mtrKeyboardRelease == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrKeyboardRelease");
-        ok = false;
-    }
-    mtrKeyboardPressed = (mtrKeyboardPressedFunc)mtrFindFunction("Keyboard_SDL2",
-      "mtrKeyboardPressed");
-    if (mtrKeyboardPressed == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrKeyboardPressed");
-        ok = false;
-    }
+
+    MTR_FIND_FUNCTION(mtrKeyboardInit, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrKeyboardRefresh, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrKeyboardPress, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrKeyboardRelease, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrKeyboardPressed, MTR_SOURCE_MODULE);
+
     if (ok)
     {
         mtrScriptsRegisterNumericVariable("KEY_A", MTR_KEY_A);

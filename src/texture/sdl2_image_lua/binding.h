@@ -9,6 +9,8 @@
 #include "marathoner/plugin.h"
 #include "../binding_common.h"
 
+#define MTR_SOURCE_MODULE "Texture_SDL2"
+
 #define MTR_FLIP_NONE                   SDL_FLIP_NONE
 #define MTR_FLIP_HORIZONTAL             SDL_FLIP_HORIZONTAL
 #define MTR_FLIP_VERTICAL               SDL_FLIP_VERTICAL

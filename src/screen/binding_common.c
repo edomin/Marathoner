@@ -39,30 +39,11 @@ void mtrScriptsRegisterAll(void)
     ok = true;
 
     mtrVm = mtrScriptsGetVm();
-    mtrScreenInit = (mtrScreenInitFunc)mtrFindFunction("Screen_SDL2_gpu",
-     "mtrScreenInit");
-    if (mtrScreenInit == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-         "mtrScreenInit");
-        ok = false;
-    }
-    mtrScreenQuit = (mtrScreenQuitFunc)mtrFindFunction("Screen_SDL2_gpu",
-     "mtrScreenQuit");
-    if (mtrScreenQuit == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-         "mtrScreenQuit");
-        ok = false;
-    }
-    mtrScreenFlip = (mtrScreenFlipFunc)mtrFindFunction("Screen_SDL2_gpu",
-     "mtrScreenFlip");
-    if (mtrScreenFlip == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-         "mtrScreenFlip");
-        ok = false;
-    }
+
+    MTR_FIND_FUNCTION(mtrScreenInit, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrScreenQuit, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrScreenFlip, MTR_SOURCE_MODULE);
+
     if (ok)
     {
         mtrScriptsRegisterFunction(mtrSF_ScreenInit, "ScreenInit");

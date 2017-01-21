@@ -1558,623 +1558,125 @@ void mtrScriptsRegisterAll(void)
     ok = true;
 
     mtrVm = mtrScriptsGetVm();
-    mtrPrimitiveInit = (mtrPrimitiveInitFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveInit");
-    if (mtrPrimitiveInit == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveInit");
-        ok = false;
-    }
+
+    MTR_FIND_FUNCTION(mtrPrimitiveInit, MTR_SOURCE_MODULE);
+
     /* Fill */
-    mtrPrimitiveFill_rgb = (mtrPrimitiveFill_rgbFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveFill_rgb");
-    if (mtrPrimitiveFill_rgb == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveFill_rgb");
-        ok = false;
-    }
-    mtrPrimitiveFill_rgba = (mtrPrimitiveFill_rgbaFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveFill_rgba");
-    if (mtrPrimitiveFill_rgba == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveFill_rgba");
-        ok = false;
-    }
-    mtrPrimitiveFill_c = (mtrPrimitiveFill_cFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveFill_c");
-    if (mtrPrimitiveFill_c == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveFill_c");
-        ok = false;
-    }
-    mtrPrimitiveFill_ca = (mtrPrimitiveFill_caFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveFill_ca");
-    if (mtrPrimitiveFill_ca == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveFill_ca");
-        ok = false;
-    }
+    MTR_FIND_FUNCTION(mtrPrimitiveFill_rgb, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveFill_rgba, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveFill_c, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveFill_ca, MTR_SOURCE_MODULE);
+
     /* Pixel */
-    mtrPrimitivePixel_rgb_f = (mtrPrimitivePixel_rgb_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitivePixel_rgb_f");
-    if (mtrPrimitivePixel_rgb_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitivePixel_rgb_f");
-        ok = false;
-    }
-    mtrPrimitivePixel_rgba_f = (mtrPrimitivePixel_rgba_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitivePixel_rgba_f");
-    if (mtrPrimitivePixel_rgba_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitivePixel_rgba_f");
-        ok = false;
-    }
-    mtrPrimitivePixel_c_f = (mtrPrimitivePixel_c_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitivePixel_c_f");
-    if (mtrPrimitivePixel_c_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitivePixel_c_f");
-        ok = false;
-    }
-    mtrPrimitivePixel_ca_f = (mtrPrimitivePixel_ca_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitivePixel_ca_f");
-    if (mtrPrimitivePixel_ca_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitivePixel_ca_f");
-        ok = false;
-    }
+    MTR_FIND_FUNCTION(mtrPrimitivePixel_rgb_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitivePixel_rgba_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitivePixel_c_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitivePixel_ca_f, MTR_SOURCE_MODULE);
+
     /* Line */
-    mtrPrimitiveLine_rgb_f = (mtrPrimitiveLine_rgb_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveLine_rgb_f");
-    if (mtrPrimitiveLine_rgb_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveLine_rgb_f");
-        ok = false;
-    }
-    mtrPrimitiveLine_rgba_f = (mtrPrimitiveLine_rgba_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveLine_rgba_f");
-    if (mtrPrimitiveLine_rgba_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveLine_rgba_f");
-        ok = false;
-    }
-    mtrPrimitiveLine_c_f = (mtrPrimitiveLine_c_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveLine_c_f");
-    if (mtrPrimitiveLine_c_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveLine_c_f");
-        ok = false;
-    }
-    mtrPrimitiveLine_ca_f = (mtrPrimitiveLine_ca_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveLine_ca_f");
-    if (mtrPrimitiveLine_ca_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveLine_ca_f");
-        ok = false;
-    }
+    MTR_FIND_FUNCTION(mtrPrimitiveLine_rgb_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveLine_rgba_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveLine_c_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveLine_ca_f, MTR_SOURCE_MODULE);
+
     /* Arc */
-    mtrPrimitiveArc_rgb_f = (mtrPrimitiveArc_rgb_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveArc_rgb_f");
-    if (mtrPrimitiveArc_rgb_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveArc_rgb_f");
-        ok = false;
-    }
-    mtrPrimitiveArc_rgba_f = (mtrPrimitiveArc_rgba_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveArc_rgba_f");
-    if (mtrPrimitiveArc_rgba_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveArc_rgba_f");
-        ok = false;
-    }
-    mtrPrimitiveArc_c_f = (mtrPrimitiveArc_c_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveArc_c_f");
-    if (mtrPrimitiveArc_c_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveArc_c_f");
-        ok = false;
-    }
-    mtrPrimitiveArc_ca_f = (mtrPrimitiveArc_ca_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveArc_ca_f");
-    if (mtrPrimitiveArc_ca_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveArc_ca_f");
-        ok = false;
-    }
+    MTR_FIND_FUNCTION(mtrPrimitiveArc_rgb_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveArc_rgba_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveArc_c_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveArc_ca_f, MTR_SOURCE_MODULE);
+
     /* SegmentFilled */
-    mtrPrimitiveSegmentFilled_rgb_f = (mtrPrimitiveSegmentFilled_rgb_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveSegmentFilled_rgb_f");
-    if (mtrPrimitiveSegmentFilled_rgb_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveSegmentFilled_rgb_f");
-        ok = false;
-    }
-    mtrPrimitiveSegmentFilled_rgba_f = (mtrPrimitiveSegmentFilled_rgba_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveSegmentFilled_rgba_f");
-    if (mtrPrimitiveSegmentFilled_rgba_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveSegmentFilled_rgba_f");
-        ok = false;
-    }
-    mtrPrimitiveSegmentFilled_c_f = (mtrPrimitiveSegmentFilled_c_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveSegmentFilled_c_f");
-    if (mtrPrimitiveSegmentFilled_c_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveSegmentFilled_c_f");
-        ok = false;
-    }
-    mtrPrimitiveSegmentFilled_ca_f = (mtrPrimitiveSegmentFilled_ca_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveSegmentFilled_ca_f");
-    if (mtrPrimitiveSegmentFilled_ca_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveSegmentFilled_ca_f");
-        ok = false;
-    }
+    MTR_FIND_FUNCTION(mtrPrimitiveSegmentFilled_rgb_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveSegmentFilled_rgba_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveSegmentFilled_c_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveSegmentFilled_ca_f, MTR_SOURCE_MODULE);
+
     /* Circle */
-    mtrPrimitiveCircle_rgb_f = (mtrPrimitiveCircle_rgb_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveCircle_rgb_f");
-    if (mtrPrimitiveCircle_rgb_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveCircle_rgb_f");
-        ok = false;
-    }
-    mtrPrimitiveCircle_rgba_f = (mtrPrimitiveCircle_rgba_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveCircle_rgba_f");
-    if (mtrPrimitiveCircle_rgba_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveCircle_rgba_f");
-        ok = false;
-    }
-    mtrPrimitiveCircle_c_f = (mtrPrimitiveCircle_c_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveCircle_c_f");
-    if (mtrPrimitiveCircle_c_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveCircle_c_f");
-        ok = false;
-    }
-    mtrPrimitiveCircle_ca_f = (mtrPrimitiveCircle_ca_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveCircle_ca_f");
-    if (mtrPrimitiveCircle_ca_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveCircle_ca_f");
-        ok = false;
-    }
+    MTR_FIND_FUNCTION(mtrPrimitiveCircle_rgb_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveCircle_rgba_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveCircle_c_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveCircle_ca_f, MTR_SOURCE_MODULE);
+
     /* CircleFilled */
-    mtrPrimitiveCircleFilled_rgb_f = (mtrPrimitiveCircleFilled_rgb_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveCircleFilled_rgb_f");
-    if (mtrPrimitiveCircleFilled_rgb_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveCircleFilled_rgb_f");
-        ok = false;
-    }
-    mtrPrimitiveCircleFilled_rgba_f = (mtrPrimitiveCircleFilled_rgba_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveCircleFilled_rgba_f");
-    if (mtrPrimitiveCircleFilled_rgba_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveCircleFilled_rgba_f");
-        ok = false;
-    }
-    mtrPrimitiveCircleFilled_c_f = (mtrPrimitiveCircleFilled_c_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveCircleFilled_c_f");
-    if (mtrPrimitiveCircleFilled_c_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveCircleFilled_c_f");
-        ok = false;
-    }
-    mtrPrimitiveCircleFilled_ca_f = (mtrPrimitiveCircleFilled_ca_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveCircleFilled_ca_f");
-    if (mtrPrimitiveCircleFilled_ca_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveCircleFilled_ca_f");
-        ok = false;
-    }
+    MTR_FIND_FUNCTION(mtrPrimitiveCircleFilled_rgb_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveCircleFilled_rgba_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveCircleFilled_c_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveCircleFilled_ca_f, MTR_SOURCE_MODULE);
+
     /* Ellipse */
-    mtrPrimitiveEllipse_rgb_f = (mtrPrimitiveEllipse_rgb_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveEllipse_rgb_f");
-    if (mtrPrimitiveEllipse_rgb_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveEllipse_rgb_f");
-        ok = false;
-    }
-    mtrPrimitiveEllipse_rgba_f = (mtrPrimitiveEllipse_rgba_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveEllipse_rgba_f");
-    if (mtrPrimitiveEllipse_rgba_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveEllipse_rgba_f");
-        ok = false;
-    }
-    mtrPrimitiveEllipse_c_f = (mtrPrimitiveEllipse_c_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveEllipse_c_f");
-    if (mtrPrimitiveEllipse_c_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveEllipse_c_f");
-        ok = false;
-    }
-    mtrPrimitiveEllipse_ca_f = (mtrPrimitiveEllipse_ca_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveEllipse_ca_f");
-    if (mtrPrimitiveEllipse_ca_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveEllipse_ca_f");
-        ok = false;
-    }
+    MTR_FIND_FUNCTION(mtrPrimitiveEllipse_rgb_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveEllipse_rgba_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveEllipse_c_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveEllipse_ca_f, MTR_SOURCE_MODULE);
+
     /* EllipseFilled */
-    mtrPrimitiveEllipseFilled_rgb_f = (mtrPrimitiveEllipseFilled_rgb_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveEllipseFilled_rgb_f");
-    if (mtrPrimitiveEllipseFilled_rgb_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveEllipseFilled_rgb_f");
-        ok = false;
-    }
-    mtrPrimitiveEllipseFilled_rgba_f = (mtrPrimitiveEllipseFilled_rgba_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveEllipseFilled_rgba_f");
-    if (mtrPrimitiveEllipseFilled_rgba_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveEllipseFilled_rgba_f");
-        ok = false;
-    }
-    mtrPrimitiveEllipseFilled_c_f = (mtrPrimitiveEllipseFilled_c_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveEllipseFilled_c_f");
-    if (mtrPrimitiveEllipseFilled_c_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveEllipseFilled_c_f");
-        ok = false;
-    }
-    mtrPrimitiveEllipseFilled_ca_f = (mtrPrimitiveEllipseFilled_ca_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveEllipseFilled_ca_f");
-    if (mtrPrimitiveEllipseFilled_ca_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveEllipseFilled_ca_f");
-        ok = false;
-    }
+    MTR_FIND_FUNCTION(mtrPrimitiveEllipseFilled_rgb_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveEllipseFilled_rgba_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveEllipseFilled_c_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveEllipseFilled_ca_f, MTR_SOURCE_MODULE);
+
     /* RingSegment */
-    mtrPrimitiveRingSegment_rgb_f = (mtrPrimitiveRingSegment_rgb_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveRingSegment_rgb_f");
-    if (mtrPrimitiveRingSegment_rgb_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveRingSegment_rgb_f");
-        ok = false;
-    }
-    mtrPrimitiveRingSegment_rgba_f = (mtrPrimitiveRingSegment_rgba_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveRingSegment_rgba_f");
-    if (mtrPrimitiveRingSegment_rgba_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveRingSegment_rgba_f");
-        ok = false;
-    }
-    mtrPrimitiveRingSegment_c_f = (mtrPrimitiveRingSegment_c_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveRingSegment_c_f");
-    if (mtrPrimitiveRingSegment_c_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveRingSegment_c_f");
-        ok = false;
-    }
-    mtrPrimitiveRingSegment_ca_f = (mtrPrimitiveRingSegment_ca_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveRingSegment_ca_f");
-    if (mtrPrimitiveRingSegment_ca_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveRingSegment_ca_f");
-        ok = false;
-    }
+    MTR_FIND_FUNCTION(mtrPrimitiveRingSegment_rgb_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveRingSegment_rgba_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveRingSegment_c_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveRingSegment_ca_f, MTR_SOURCE_MODULE);
+
     /* RingSegmentFilled */
-    mtrPrimitiveRingSegmentFilled_rgb_f = (mtrPrimitiveRingSegmentFilled_rgb_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveRingSegmentFilled_rgb_f");
-    if (mtrPrimitiveRingSegmentFilled_rgb_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveRingSegmentFilled_rgb_f");
-        ok = false;
-    }
-    mtrPrimitiveRingSegmentFilled_rgba_f = (mtrPrimitiveRingSegmentFilled_rgba_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveRingSegmentFilled_rgba_f");
-    if (mtrPrimitiveRingSegmentFilled_rgba_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveRingSegmentFilled_rgba_f");
-        ok = false;
-    }
-    mtrPrimitiveRingSegmentFilled_c_f = (mtrPrimitiveRingSegmentFilled_c_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveRingSegmentFilled_c_f");
-    if (mtrPrimitiveRingSegmentFilled_c_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveRingSegmentFilled_c_f");
-        ok = false;
-    }
-    mtrPrimitiveRingSegmentFilled_ca_f = (mtrPrimitiveRingSegmentFilled_ca_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveRingSegmentFilled_ca_f");
-    if (mtrPrimitiveRingSegmentFilled_ca_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveRingSegmentFilled_ca_f");
-        ok = false;
-    }
+    MTR_FIND_FUNCTION(mtrPrimitiveRingSegmentFilled_rgb_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveRingSegmentFilled_rgba_f,
+     MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveRingSegmentFilled_c_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveRingSegmentFilled_ca_f, MTR_SOURCE_MODULE);
+
     /* Triangle */
-    mtrPrimitiveTriangle_rgb_f = (mtrPrimitiveTriangle_rgb_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveTriangle_rgb_f");
-    if (mtrPrimitiveTriangle_rgb_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveTriangle_rgb_f");
-        ok = false;
-    }
-    mtrPrimitiveTriangle_rgba_f = (mtrPrimitiveTriangle_rgba_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveTriangle_rgba_f");
-    if (mtrPrimitiveTriangle_rgba_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveTriangle_rgba_f");
-        ok = false;
-    }
-    mtrPrimitiveTriangle_c_f = (mtrPrimitiveTriangle_c_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveTriangle_c_f");
-    if (mtrPrimitiveTriangle_c_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveTriangle_c_f");
-        ok = false;
-    }
-    mtrPrimitiveTriangle_ca_f = (mtrPrimitiveTriangle_ca_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveTriangle_ca_f");
-    if (mtrPrimitiveTriangle_ca_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveTriangle_ca_f");
-        ok = false;
-    }
+    MTR_FIND_FUNCTION(mtrPrimitiveTriangle_rgb_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveTriangle_rgba_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveTriangle_c_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveTriangle_ca_f, MTR_SOURCE_MODULE);
+
     /* TriangleFilled */
-    mtrPrimitiveTriangleFilled_rgb_f = (mtrPrimitiveTriangleFilled_rgb_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveTriangleFilled_rgb_f");
-    if (mtrPrimitiveTriangleFilled_rgb_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveTriangleFilled_rgb_f");
-        ok = false;
-    }
-    mtrPrimitiveTriangleFilled_rgba_f = (mtrPrimitiveTriangleFilled_rgba_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveTriangleFilled_rgba_f");
-    if (mtrPrimitiveTriangleFilled_rgba_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveTriangleFilled_rgba_f");
-        ok = false;
-    }
-    mtrPrimitiveTriangleFilled_c_f = (mtrPrimitiveTriangleFilled_c_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveTriangleFilled_c_f");
-    if (mtrPrimitiveTriangleFilled_c_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveTriangleFilled_c_f");
-        ok = false;
-    }
-    mtrPrimitiveTriangleFilled_ca_f = (mtrPrimitiveTriangleFilled_ca_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveTriangleFilled_ca_f");
-    if (mtrPrimitiveTriangleFilled_ca_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveTriangleFilled_ca_f");
-        ok = false;
-    }
+    MTR_FIND_FUNCTION(mtrPrimitiveTriangleFilled_rgb_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveTriangleFilled_rgba_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveTriangleFilled_c_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveTriangleFilled_ca_f, MTR_SOURCE_MODULE);
+
     /* Rectangle */
-    mtrPrimitiveRectangle_rgb_f = (mtrPrimitiveRectangle_rgb_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveRectangle_rgb_f");
-    if (mtrPrimitiveRectangle_rgb_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveRectangle_rgb_f");
-        ok = false;
-    }
-    mtrPrimitiveRectangle_rgba_f = (mtrPrimitiveRectangle_rgba_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveRectangle_rgba_f");
-    if (mtrPrimitiveRectangle_rgba_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveRectangle_rgba_f");
-        ok = false;
-    }
-    mtrPrimitiveRectangle_c_f = (mtrPrimitiveRectangle_c_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveRectangle_c_f");
-    if (mtrPrimitiveRectangle_c_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveRectangle_c_f");
-        ok = false;
-    }
-    mtrPrimitiveRectangle_ca_f = (mtrPrimitiveRectangle_ca_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveRectangle_ca_f");
-    if (mtrPrimitiveRectangle_ca_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveRectangle_ca_f");
-        ok = false;
-    }
+    MTR_FIND_FUNCTION(mtrPrimitiveRectangle_rgb_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveRectangle_rgba_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveRectangle_c_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveRectangle_ca_f, MTR_SOURCE_MODULE);
+
     /* RectangleFilled */
-    mtrPrimitiveRectangleFilled_rgb_f = (mtrPrimitiveRectangleFilled_rgb_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveRectangleFilled_rgb_f");
-    if (mtrPrimitiveRectangleFilled_rgb_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveRectangleFilled_rgb_f");
-        ok = false;
-    }
-    mtrPrimitiveRectangleFilled_rgba_f = (mtrPrimitiveRectangleFilled_rgba_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveRectangleFilled_rgba_f");
-    if (mtrPrimitiveRectangleFilled_rgba_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveRectangleFilled_rgba_f");
-        ok = false;
-    }
-    mtrPrimitiveRectangleFilled_c_f = (mtrPrimitiveRectangleFilled_c_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveRectangleFilled_c_f");
-    if (mtrPrimitiveRectangleFilled_c_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveRectangleFilled_c_f");
-        ok = false;
-    }
-    mtrPrimitiveRectangleFilled_ca_f = (mtrPrimitiveRectangleFilled_ca_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveRectangleFilled_ca_f");
-    if (mtrPrimitiveRectangleFilled_ca_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveRectangleFilled_ca_f");
-        ok = false;
-    }
+    MTR_FIND_FUNCTION(mtrPrimitiveRectangleFilled_rgb_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveRectangleFilled_rgba_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveRectangleFilled_c_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveRectangleFilled_ca_f, MTR_SOURCE_MODULE);
+
     /* RoundedRectangle */
-    mtrPrimitiveRoundedRectangle_rgb_f = (mtrPrimitiveRoundedRectangle_rgb_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveRoundedRectangle_rgb_f");
-    if (mtrPrimitiveRoundedRectangle_rgb_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveRoundedRectangle_rgb_f");
-        ok = false;
-    }
-    mtrPrimitiveRoundedRectangle_rgba_f = (mtrPrimitiveRoundedRectangle_rgba_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveRoundedRectangle_rgba_f");
-    if (mtrPrimitiveRoundedRectangle_rgba_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveRoundedRectangle_rgba_f");
-        ok = false;
-    }
-    mtrPrimitiveRoundedRectangle_c_f = (mtrPrimitiveRoundedRectangle_c_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveRoundedRectangle_c_f");
-    if (mtrPrimitiveRoundedRectangle_c_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveRoundedRectangle_c_f");
-        ok = false;
-    }
-    mtrPrimitiveRoundedRectangle_ca_f = (mtrPrimitiveRoundedRectangle_ca_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveRoundedRectangle_ca_f");
-    if (mtrPrimitiveRoundedRectangle_ca_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveRoundedRectangle_ca_f");
-        ok = false;
-    }
+    MTR_FIND_FUNCTION(mtrPrimitiveRoundedRectangle_rgb_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveRoundedRectangle_rgba_f,
+     MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveRoundedRectangle_c_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveRoundedRectangle_ca_f, MTR_SOURCE_MODULE);
+
     /* RoundedRectangleFilled */
-    mtrPrimitiveRoundedRectangleFilled_rgb_f = (mtrPrimitiveRoundedRectangleFilled_rgb_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveRoundedRectangleFilled_rgb_f");
-    if (mtrPrimitiveRoundedRectangleFilled_rgb_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveRoundedRectangleFilled_rgb_f");
-        ok = false;
-    }
-    mtrPrimitiveRoundedRectangleFilled_rgba_f = (mtrPrimitiveRoundedRectangleFilled_rgba_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveRoundedRectangleFilled_rgba_f");
-    if (mtrPrimitiveRoundedRectangleFilled_rgba_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveRoundedRectangleFilled_rgba_f");
-        ok = false;
-    }
-    mtrPrimitiveRoundedRectangleFilled_c_f = (mtrPrimitiveRoundedRectangleFilled_c_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveRoundedRectangleFilled_c_f");
-    if (mtrPrimitiveRoundedRectangleFilled_c_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveRoundedRectangleFilled_c_f");
-        ok = false;
-    }
-    mtrPrimitiveRoundedRectangleFilled_ca_f = (mtrPrimitiveRoundedRectangleFilled_ca_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveRoundedRectangleFilled_ca_f");
-    if (mtrPrimitiveRoundedRectangleFilled_ca_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveRoundedRectangleFilled_ca_f");
-        ok = false;
-    }
-    mtrPrimitiveLineBegin_f = (mtrPrimitiveLineBegin_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveLineBegin_f");
-    if (mtrPrimitiveLineBegin_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveLineBegin_f");
-        ok = false;
-    }
-    mtrPrimitiveLineTo_rgb_f = (mtrPrimitiveLineTo_rgb_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveLineTo_rgb_f");
-    if (mtrPrimitiveLineTo_rgb_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveLineTo_rgb_f");
-        ok = false;
-    }
-    mtrPrimitiveLineTo_rgba_f = (mtrPrimitiveLineTo_rgba_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveLineTo_rgba_f");
-    if (mtrPrimitiveLineTo_rgba_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveLineTo_rgba_f");
-        ok = false;
-    }
-    mtrPrimitiveLineTo_c_f = (mtrPrimitiveLineTo_c_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveLineTo_c_f");
-    if (mtrPrimitiveLineTo_c_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveLineTo_c_f");
-        ok = false;
-    }
-    mtrPrimitiveLineTo_ca_f = (mtrPrimitiveLineTo_ca_fFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveLineTo_ca_f");
-    if (mtrPrimitiveLineTo_ca_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveLineTo_ca_f");
-        ok = false;
-    }
-    mtrPrimitiveLineEnd = (mtrPrimitiveLineEndFunc)mtrFindFunction("Primitive_SDL2_gpu",
-      "mtrPrimitiveLineEnd");
-    if (mtrPrimitiveLineEnd == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrPrimitiveLineEnd");
-        ok = false;
-    }
+    MTR_FIND_FUNCTION(mtrPrimitiveRoundedRectangleFilled_rgb_f,
+     MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveRoundedRectangleFilled_rgba_f,
+     MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveRoundedRectangleFilled_c_f,
+     MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveRoundedRectangleFilled_ca_f,
+     MTR_SOURCE_MODULE);
+
+    /* Stroke Line */
+    MTR_FIND_FUNCTION(mtrPrimitiveLineBegin_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveLineTo_rgb_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveLineTo_rgba_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveLineTo_c_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveLineTo_ca_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrPrimitiveLineEnd, MTR_SOURCE_MODULE);
+
     if (ok)
     {
         mtrScriptsRegisterFunction(mtrSF_PrimitiveInit, "PrimitiveInit");

@@ -9,6 +9,8 @@
 #include "../binding_common.h"
 #include "../common.h"
 
+#define MTR_SOURCE_MODULE "Audio_SDL2_mixer"
+
 lua_State *mtrVm;
 
 typedef lua_State* (MTR_CALL * mtrScriptsGetVmFunc)(void);

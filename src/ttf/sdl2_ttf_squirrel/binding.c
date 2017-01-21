@@ -36,30 +36,10 @@ MTR_EXPORT void MTR_CALL mtrPluginInit(void)
     mtrLogWrite_i("Reporting Squirrel linked version:", 1, MTR_LMT_INFO,
      sq_getversion());
 
-    mtrScriptsRegisterFunction = (mtrScriptsRegisterFunctionFunc)mtrFindFunction("Script_Squirrel",
-     "mtrScriptsRegisterFunction");
-    if (mtrScriptsRegisterFunction == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrScriptsRegisterFunction");
-        ok = false;
-    }
-    mtrScriptsRegisterNumericVariable = (mtrScriptsRegisterNumericVariableFunc)mtrFindFunction("Script_Squirrel",
-     "mtrScriptsRegisterNumericVariable");
-    if (mtrScriptsRegisterNumericVariable == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrScriptsRegisterNumericVariable");
-        ok = false;
-    }
-    mtrScriptsGetVm = (mtrScriptsGetVmFunc)mtrFindFunction("Script_Squirrel",
-     "mtrScriptsGetVm");
-    if (mtrScriptsGetVm == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrScriptsGetVm");
-        ok = false;
-    }
+    MTR_FIND_FUNCTION(mtrScriptsRegisterFunction, "Script_Squirrel");
+    MTR_FIND_FUNCTION(mtrScriptsRegisterNumericVariable, "Script_Squirrel");
+    MTR_FIND_FUNCTION(mtrScriptsGetVm, "Script_Squirrel");
+
     if (ok)
     {
         mtrScriptsRegisterAll();

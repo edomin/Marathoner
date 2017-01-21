@@ -7,6 +7,8 @@
 #include "../binding_common.h"
 #include "../common.h"
 
+#define MTR_SOURCE_MODULE "Audio_SDL2_mixer"
+
 HSQUIRRELVM mtrVm;
 
 typedef HSQUIRRELVM (MTR_CALL * mtrScriptsGetVmFunc)(void);

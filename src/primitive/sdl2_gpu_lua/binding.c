@@ -34,22 +34,9 @@ MTR_EXPORT void MTR_CALL mtrPluginInit(void)
     mtrLogWrite_s("Reporting Lua compile-time version:", 3, MTR_LMT_INFO,
      LUA_RELEASE);
 
-    mtrScriptsRegisterFunction = (mtrScriptsRegisterFunctionFunc)mtrFindFunction("Script_Lua",
-     "mtrScriptsRegisterFunction");
-    if (mtrScriptsRegisterFunction == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrScriptsRegisterFunction");
-        ok = false;
-    }
-    mtrScriptsGetVm = (mtrScriptsGetVmFunc)mtrFindFunction("Script_Lua",
-      "mtrScriptsGetVm");
-    if (mtrScriptsGetVm == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrScriptsGetVm");
-        ok = false;
-    }
+    MTR_FIND_FUNCTION(mtrScriptsRegisterFunction, "Script_Lua");
+    MTR_FIND_FUNCTION(mtrScriptsGetVm, "Script_Lua");
+
     if (ok)
     {
         mtrScriptsRegisterAll();

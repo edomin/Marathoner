@@ -6,6 +6,8 @@
 #include "marathoner/plugin.h"
 #include "../binding_common.h"
 
+#define MTR_SOURCE_MODULE "Primitive_SDL2"
+
 HSQUIRRELVM mtrVm;
 
 typedef HSQUIRRELVM (MTR_CALL * mtrScriptsGetVmFunc)(void);

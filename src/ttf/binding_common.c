@@ -80,54 +80,14 @@ void mtrScriptsRegisterAll(void)
     ok = true;
 
     mtrVm = mtrScriptsGetVm();
-    mtrTtfInit = (mtrTtfInitFunc)mtrFindFunction("TTF_SDL2_ttf",
-      "mtrTtfInit");
-    if (mtrTtfInit == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrTtfInit");
-        ok = false;
-    }
-    mtrTtfQuit = (mtrTtfQuitFunc)mtrFindFunction("TTF_SDL2_ttf",
-      "mtrTtfQuit");
-    if (mtrTtfQuit == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrTtfQuit");
-        ok = false;
-    }
-    mtrTtfLoad = (mtrTtfLoadFunc)mtrFindFunction("TTF_SDL2_ttf",
-      "mtrTtfLoad");
-    if (mtrTtfLoad == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrTtfLoad");
-        ok = false;
-    }
-    mtrTtfFree = (mtrTtfFreeFunc)mtrFindFunction("TTF_SDL2_ttf",
-      "mtrTtfFree");
-    if (mtrTtfFree == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrTtfFree");
-        ok = false;
-    }
-    mtrTtfSetFontStyle = (mtrTtfSetFontStyleFunc)mtrFindFunction("TTF_SDL2_ttf",
-      "mtrTtfSetFontStyle");
-    if (mtrTtfSetFontStyle == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrTtfSetFontStyle");
-        ok = false;
-    }
-    mtrTtfSetFontOutline = (mtrTtfSetFontOutlineFunc)mtrFindFunction("TTF_SDL2_ttf",
-      "mtrTtfSetFontOutline");
-    if (mtrTtfSetFontOutline == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrTtfSetFontOutline");
-        ok = false;
-    }
+
+    MTR_FIND_FUNCTION(mtrTtfInit, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrTtfQuit, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrTtfLoad, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrTtfFree, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrTtfSetFontStyle, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrTtfSetFontOutline, MTR_SOURCE_MODULE);
+
     if (ok)
     {
         mtrScriptsRegisterNumericVariable("FS_NORMAL", MTR_FS_NORMAL);

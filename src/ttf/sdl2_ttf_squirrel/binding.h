@@ -9,6 +9,8 @@
 #include "../binding_common.h"
 #include "../common.h"
 
+#define MTR_SOURCE_MODULE "TTF_SDL2_ttf"
+
 HSQUIRRELVM mtrVm;
 
 typedef HSQUIRRELVM (MTR_CALL * mtrScriptsGetVmFunc)(void);

@@ -28,77 +28,14 @@ MTR_EXPORT bool MTR_CALL mtrSpriteInit(uint32_t dmSize, uint32_t reservedCount)
 {
     mtrLogWrite("Initializing sprite abstraction manager", 0, MTR_LMT_INFO);
 
-    mtrTextureLoad = (mtrTextureLoadFunc)mtrFindFunctionInSubsystem("texture",
-     "mtrTextureLoad");
-    if (mtrTextureLoad == NULL)
-    {
-        mtrNotify("Unable to get 'mtrTextureLoad' function from texture manager",
-         1, MTR_LMT_FATAL);
-        return false;
-    }
-
-    mtrTextureFree = (mtrTextureFreeFunc)mtrFindFunctionInSubsystem("texture",
-     "mtrTextureFree");
-    if (mtrTextureFree == NULL)
-    {
-        mtrNotify("Unable to get 'mtrTextureFree' function from texture manager",
-         1, MTR_LMT_FATAL);
-        return false;
-    }
-
-    mtrTextureGetSizes = (mtrTextureGetSizesFunc)mtrFindFunctionInSubsystem("texture",
-     "mtrTextureGetSizes");
-    if (mtrTextureGetSizes == NULL)
-    {
-        mtrNotify("Unable to get 'mtrTextureGetSizes' function from texture manager",
-         1, MTR_LMT_FATAL);
-        return false;
-    }
-
-    mtrTextureBlitRegion_f = (mtrTextureBlitRegion_fFunc)mtrFindFunctionInSubsystem("texture",
-     "mtrTextureBlitRegion_f");
-    if (mtrTextureBlitRegion_f == NULL)
-    {
-        mtrNotify("Unable to get 'mtrTextureBlitRegion_f' function from texture manager",
-         1, MTR_LMT_FATAL);
-        return false;
-    }
-
-    mtrTextureBlitRegionScaled_f = (mtrTextureBlitRegionScaled_fFunc)mtrFindFunctionInSubsystem("texture",
-     "mtrTextureBlitRegionScaled_f");
-    if (mtrTextureBlitRegionScaled_f == NULL)
-    {
-        mtrNotify("Unable to get 'mtrTextureBlitRegionScaled_f' function from texture manager",
-         1, MTR_LMT_FATAL);
-        return false;
-    }
-
-    mtrTextureBlitRegionAngled_f = (mtrTextureBlitRegionAngled_fFunc)mtrFindFunctionInSubsystem("texture",
-     "mtrTextureBlitRegionAngled_f");
-    if (mtrTextureBlitRegionAngled_f == NULL)
-    {
-        mtrNotify("Unable to get 'mtrTextureBlitRegionAngled_f' function from texture manager",
-         1, MTR_LMT_FATAL);
-        return false;
-    }
-
-    mtrTextureBlitRegionFlipped_f = (mtrTextureBlitRegionFlipped_fFunc)mtrFindFunctionInSubsystem("texture",
-     "mtrTextureBlitRegionFlipped_f");
-    if (mtrTextureBlitRegionFlipped_f == NULL)
-    {
-        mtrNotify("Unable to get 'mtrTextureBlitRegionFlipped_f' function from texture manager",
-         1, MTR_LMT_FATAL);
-        return false;
-    }
-
-    mtrTextureBlitRegionGeneral_f = (mtrTextureBlitRegionGeneral_fFunc)mtrFindFunctionInSubsystem("texture",
-     "mtrTextureBlitRegionGeneral_f");
-    if (mtrTextureBlitRegionGeneral_f == NULL)
-    {
-        mtrNotify("Unable to get 'mtrTextureBlitRegionGeneral_f' function from texture manager",
-         1, MTR_LMT_FATAL);
-        return false;
-    }
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTextureLoad, "texture");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTextureFree, "texture");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTextureGetSizes, "texture");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTextureBlitRegion_f, "texture");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTextureBlitRegionScaled_f, "texture");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTextureBlitRegionAngled_f, "texture");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTextureBlitRegionFlipped_f, "texture");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTextureBlitRegionGeneral_f, "texture");
 
     mtrSpriteKeeper = (mtrIndexkeeper_t *)mtrIndexkeeperCreate(dmSize,
      reservedCount, sizeof(mtrSprite_t));

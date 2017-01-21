@@ -151,106 +151,24 @@ void mtrScriptsRegisterAll(void)
     ok = true;
 
     mtrVm = mtrScriptsGetVm();
-    mtrMouseInit = (mtrMouseInitFunc)mtrFindFunction("Mouse_SDL2",
-      "mtrMouseInit");
-    if (mtrMouseInit == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrMouseInit");
-        ok = false;
-    }
-    mtrMouseRefresh = (mtrMouseRefreshFunc)mtrFindFunction("Mouse_SDL2",
-      "mtrMouseRefresh");
-    if (mtrMouseRefresh == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrMouseRefresh");
-        ok = false;
-    }
-    mtrMousePress = (mtrMousePressFunc)mtrFindFunction("Mouse_SDL2",
-      "mtrMousePress");
-    if (mtrMousePress == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrMousePress");
-        ok = false;
-    }
-    mtrMouseRelease = (mtrMouseReleaseFunc)mtrFindFunction("Mouse_SDL2",
-      "mtrMouseRelease");
-    if (mtrMouseRelease == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrMouseRelease");
-        ok = false;
-    }
-    mtrMousePressed = (mtrMousePressedFunc)mtrFindFunction("Mouse_SDL2",
-      "mtrMousePressed");
-    if (mtrMousePressed == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrMousePressed");
-        ok = false;
-    }
-    mtrMouseGetWheelRelative = (mtrMouseGetWheelRelativeFunc)mtrFindFunction("Mouse_SDL2",
-      "mtrMouseGetWheelRelative");
-    if (mtrMouseGetWheelRelative == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrMouseGetWheelRelative");
-        ok = false;
-    }
-    mtrMouseGetX = (mtrMouseGetXFunc)mtrFindFunction("Mouse_SDL2",
-      "mtrMouseGetX");
-    if (mtrMouseGetX == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrMouseGetX");
-        ok = false;
-    }
-    mtrMouseGetY = (mtrMouseGetYFunc)mtrFindFunction("Mouse_SDL2",
-      "mtrMouseGetY");
-    if (mtrMouseGetY == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrMouseGetY");
-        ok = false;
-    }
+
+    MTR_FIND_FUNCTION(mtrMouseInit, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrMouseRefresh, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrMousePress, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrMouseRelease, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrMousePressed, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrMouseGetWheelRelative, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrMouseGetX, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrMouseGetY, MTR_SOURCE_MODULE);
     #ifndef _SQUIRREL_H_
-    mtrMouseGetXY = (mtrMouseGetXYFunc)mtrFindFunction("Mouse_SDL2",
-      "mtrMouseGetXY");
-    if (mtrMouseGetXY == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrMouseGetXY");
-        ok = false;
-    }
+    MTR_FIND_FUNCTION(mtrMouseGetXY, MTR_SOURCE_MODULE);
     #endif
-    mtrMouseGetDeltaX = (mtrMouseGetDeltaXFunc)mtrFindFunction("Mouse_SDL2",
-      "mtrMouseGetDeltaX");
-    if (mtrMouseGetDeltaX == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrMouseGetDeltaX");
-        ok = false;
-    }
-    mtrMouseGetDeltaY = (mtrMouseGetDeltaYFunc)mtrFindFunction("Mouse_SDL2",
-      "mtrMouseGetDeltaY");
-    if (mtrMouseGetDeltaY == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrMouseGetDeltaY");
-        ok = false;
-    }
+    MTR_FIND_FUNCTION(mtrMouseGetDeltaX, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrMouseGetDeltaY, MTR_SOURCE_MODULE);
     #ifndef _SQUIRREL_H_
-    mtrMouseGetDeltaXY = (mtrMouseGetDeltaXYFunc)mtrFindFunction("Mouse_SDL2",
-      "mtrMouseGetDeltaXY");
-    if (mtrMouseGetDeltaXY == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrMouseGetDeltaXY");
-        ok = false;
-    }
+    MTR_FIND_FUNCTION(mtrMouseGetDeltaXY, MTR_SOURCE_MODULE);
     #endif
+
     if (ok)
     {
         mtrScriptsRegisterNumericVariable("MOUSE_LEFT", MTR_MOUSE_LEFT);

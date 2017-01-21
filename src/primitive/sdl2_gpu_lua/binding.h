@@ -8,6 +8,8 @@
 #include "marathoner/plugin.h"
 #include "../binding_common.h"
 
+#define MTR_SOURCE_MODULE "Primitive_SDL2_gpu"
+
 lua_State *mtrVm;
 
 typedef lua_State* (MTR_CALL * mtrScriptsGetVmFunc)(void);

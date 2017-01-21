@@ -107,54 +107,14 @@ void mtrScriptsRegisterAll(void)
     ok = true;
 
     mtrVm = mtrScriptsGetVm();
-    mtrColorAssembleRGB = (mtrColorAssembleRGBFunc)mtrFindFunction("Utils_color",
-      "mtrColorAssembleRGB");
-    if (mtrColorAssembleRGB == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrColorAssembleRGB");
-        ok = false;
-    }
-    mtrColorAssembleRGBA = (mtrColorAssembleRGBAFunc)mtrFindFunction("Utils_color",
-      "mtrColorAssembleRGBA");
-    if (mtrColorAssembleRGBA == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrColorAssembleRGBA");
-        ok = false;
-    }
-    mtrColorSplitRGB = (mtrColorSplitRGBFunc)mtrFindFunction("Utils_color",
-      "mtrColorSplitRGB");
-    if (mtrColorSplitRGB == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrColorSplitRGB");
-        ok = false;
-    }
-    mtrColorSplitRGBA = (mtrColorSplitRGBAFunc)mtrFindFunction("Utils_color",
-      "mtrColorSplitRGBA");
-    if (mtrColorSplitRGBA == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrColorSplitRGBA");
-        ok = false;
-    }
-    mtrColorRGBtoRGBA = (mtrColorRGBtoRGBAFunc)mtrFindFunction("Utils_color",
-      "mtrColorRGBtoRGBA");
-    if (mtrColorRGBtoRGBA == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrColorRGBtoRGBA");
-        ok = false;
-    }
-    mtrColorRGBAtoRGB = (mtrColorRGBAtoRGBFunc)mtrFindFunction("Utils_color",
-      "mtrColorRGBAtoRGB");
-    if (mtrColorRGBAtoRGB == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrColorRGBAtoRGB");
-        ok = false;
-    }
+
+    MTR_FIND_FUNCTION(mtrColorAssembleRGB, "Utils_color");
+    MTR_FIND_FUNCTION(mtrColorAssembleRGBA, "Utils_color");
+    MTR_FIND_FUNCTION(mtrColorSplitRGB, "Utils_color");
+    MTR_FIND_FUNCTION(mtrColorSplitRGBA, "Utils_color");
+    MTR_FIND_FUNCTION(mtrColorRGBtoRGBA, "Utils_color");
+    MTR_FIND_FUNCTION(mtrColorRGBAtoRGB, "Utils_color");
+
     if (ok)
     {
         mtrScriptsRegisterNumericVariable("WEB_WHITE", MTR_CLR_WEB_WHITE);

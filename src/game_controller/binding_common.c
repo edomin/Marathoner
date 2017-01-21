@@ -202,118 +202,22 @@ void mtrScriptsRegisterAll(void)
     ok = true;
 
     mtrVm = mtrScriptsGetVm();
-    mtrGameControllerInit = (mtrGameControllerInitFunc)mtrFindFunction("Game_Controller_SDL2",
-      "mtrGameControllerInit");
-    if (mtrGameControllerInit == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrGameControllerInit");
-        ok = false;
-    }
-    mtrGameControllerQuit = (mtrGameControllerQuitFunc)mtrFindFunction("Game_Controller_SDL2",
-      "mtrGameControllerQuit");
-    if (mtrGameControllerQuit == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrGameControllerQuit");
-        ok = false;
-    }
-    mtrGameControllerRefresh = (mtrGameControllerRefreshFunc)mtrFindFunction("Game_Controller_SDL2",
-      "mtrGameControllerRefresh");
-    if (mtrGameControllerRefresh == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrGameControllerRefresh");
-        ok = false;
-    }
-    mtrGameControllerButtonPress = (mtrGameControllerButtonPressFunc)mtrFindFunction("Game_Controller_SDL2",
-      "mtrGameControllerButtonPress");
-    if (mtrGameControllerButtonPress == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrGameControllerButtonPress");
-        ok = false;
-    }
-    mtrGameControllerButtonRelease = (mtrGameControllerButtonReleaseFunc)mtrFindFunction("Game_Controller_SDL2",
-      "mtrGameControllerButtonRelease");
-    if (mtrGameControllerButtonRelease == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrGameControllerButtonRelease");
-        ok = false;
-    }
-    mtrGameControllerButtonPressed = (mtrGameControllerButtonPressedFunc)mtrFindFunction("Game_Controller_SDL2",
-      "mtrGameControllerButtonPressed");
-    if (mtrGameControllerButtonPressed == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrGameControllerButtonPressed");
-        ok = false;
-    }
-    mtrGameControllerGetAxis = (mtrGameControllerGetAxisFunc)mtrFindFunction("Game_Controller_SDL2",
-      "mtrGameControllerGetAxis");
-    if (mtrGameControllerGetAxis == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrGameControllerGetAxis");
-        ok = false;
-    }
-    mtrGameControllerGetAxis_f = (mtrGameControllerGetAxis_fFunc)mtrFindFunction("Game_Controller_SDL2",
-      "mtrGameControllerGetAxis_f");
-    if (mtrGameControllerGetAxis_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrGameControllerGetAxis_f");
-        ok = false;
-    }
-    mtrGameControllerGetAxisDelta = (mtrGameControllerGetAxisDeltaFunc)mtrFindFunction("Game_Controller_SDL2",
-      "mtrGameControllerGetAxisDelta");
-    if (mtrGameControllerGetAxisDelta == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrGameControllerGetAxisDelta");
-        ok = false;
-    }
-    mtrGameControllerGetAxisDelta_f = (mtrGameControllerGetAxisDelta_fFunc)mtrFindFunction("Game_Controller_SDL2",
-      "mtrGameControllerGetAxisDelta_f");
-    if (mtrGameControllerGetAxisDelta_f == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrGameControllerGetAxisDelta_f");
-        ok = false;
-    }
-    mtrGameControllerGetTrackballDeltaX = (mtrGameControllerGetTrackballDeltaXFunc)mtrFindFunction("Game_Controller_SDL2",
-      "mtrGameControllerGetTrackballDeltaX");
-    if (mtrGameControllerGetTrackballDeltaX == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrGameControllerGetTrackballDeltaX");
-        ok = false;
-    }
-    mtrGameControllerGetTrackballDeltaY = (mtrGameControllerGetTrackballDeltaYFunc)mtrFindFunction("Game_Controller_SDL2",
-      "mtrGameControllerGetTrackballDeltaY");
-    if (mtrGameControllerGetTrackballDeltaY == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrGameControllerGetTrackballDeltaY");
-        ok = false;
-    }
-    mtrGameControllerGetTrackballDeltaXY = (mtrGameControllerGetTrackballDeltaXYFunc)mtrFindFunction("Game_Controller_SDL2",
-      "mtrGameControllerGetTrackballDeltaXY");
-    if (mtrGameControllerGetTrackballDeltaXY == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrGameControllerGetTrackballDeltaXY");
-        ok = false;
-    }
-    mtrGameControllerGetPovHat = (mtrGameControllerGetPovHatFunc)mtrFindFunction("Game_Controller_SDL2",
-      "mtrGameControllerGetPovHat");
-    if (mtrGameControllerGetPovHat == NULL)
-    {
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,
-          "mtrGameControllerGetPovHat");
-        ok = false;
-    }
+
+    MTR_FIND_FUNCTION(mtrGameControllerInit, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrGameControllerQuit, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrGameControllerRefresh, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrGameControllerButtonPress, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrGameControllerButtonRelease, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrGameControllerButtonPressed, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrGameControllerGetAxis, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrGameControllerGetAxis_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrGameControllerGetAxisDelta, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrGameControllerGetAxisDelta_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrGameControllerGetTrackballDeltaX, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrGameControllerGetTrackballDeltaY, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrGameControllerGetTrackballDeltaXY, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrGameControllerGetPovHat, MTR_SOURCE_MODULE);
+
     if (ok)
     {
         mtrScriptsRegisterNumericVariable("POVHAT_CENTER",
