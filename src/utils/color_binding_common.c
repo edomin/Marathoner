@@ -39,6 +39,7 @@ MTR_SCRIPT_FUNC(mtrSF_ColorAssembleRGBA)
     return 1;
 }
 
+#ifndef _SQUIRREL_H_
 MTR_SCRIPT_FUNC(mtrSF_ColorSplitRGB)
 {
     uint8_t r;
@@ -74,6 +75,7 @@ MTR_SCRIPT_FUNC(mtrSF_ColorSplitRGBA)
 
     return 4;
 }
+#endif
 
 MTR_SCRIPT_FUNC(mtrSF_ColorRGBtoRGBA)
 {
@@ -110,8 +112,10 @@ void mtrScriptsRegisterAll(void)
 
     MTR_FIND_FUNCTION(mtrColorAssembleRGB, "Utils_color");
     MTR_FIND_FUNCTION(mtrColorAssembleRGBA, "Utils_color");
+    #ifndef _SQUIRREL_H_
     MTR_FIND_FUNCTION(mtrColorSplitRGB, "Utils_color");
     MTR_FIND_FUNCTION(mtrColorSplitRGBA, "Utils_color");
+    #endif
     MTR_FIND_FUNCTION(mtrColorRGBtoRGBA, "Utils_color");
     MTR_FIND_FUNCTION(mtrColorRGBAtoRGB, "Utils_color");
 
@@ -1037,8 +1041,10 @@ void mtrScriptsRegisterAll(void)
          "ColorAssembleRGB");
         mtrScriptsRegisterFunction(mtrSF_ColorAssembleRGBA,
          "ColorAssembleRGBA");
+        #ifndef _SQUIRREL_H_
         mtrScriptsRegisterFunction(mtrSF_ColorSplitRGB, "ColorSplitRGB");
         mtrScriptsRegisterFunction(mtrSF_ColorSplitRGBA, "ColorSplitRGBA");
+        #endif
         mtrScriptsRegisterFunction(mtrSF_ColorRGBtoRGBA, "ColorRGBtoRGBA");
         mtrScriptsRegisterFunction(mtrSF_ColorRGBAtoRGB, "ColorRGBAtoRGB");
     }
