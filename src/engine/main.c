@@ -127,12 +127,11 @@ int main(int argc, char** argv)
     char           *fullPluginFileName;
     int             mtrPluginsFound;
     uint8_t         currentPlugin;
-    int             i;
-    int             j;
-    int             k;
+    uint8_t             i;
+    uint8_t             j;
+    uint8_t             k;
     char           *temp; /* Read config result */
     bool            ok;
-
     mtrLogInit();
 
     mtrLogWrite("Reporting Marathoner version:", 0, MTR_LMT_INFO);
@@ -266,17 +265,13 @@ int main(int argc, char** argv)
         {
             mtrLogWrite_s("Module are disabled by configfile:", 1,
              MTR_LMT_NOTE, mtrPluginData[i].report->moduleID);
-
-            mtrCloseLibrary(mtrPluginData[i].dll);
             free(mtrPluginData[i].filename);
-
             for (j = i; j < mtrPluginsFound - 1; j++)
                 mtrPluginData[j] = mtrPluginData[j + 1];
             mtrPluginsFound--;
             i = 0;
             continue;
         }
-
         ok = true;
         /* searching conflicting subsystems */
         if ((strcmp(mtrPluginData[i].report->subsystem, "binding") != 0) &&
