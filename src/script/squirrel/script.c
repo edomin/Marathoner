@@ -69,10 +69,6 @@ void mtrScriptsInit(void)
      MTR_LMT_INFO);
     for (i = 0; i < mtrPluginsCount; i++)
     {
-        mtrLogWrite_s("Module found:", 2, MTR_LMT_DEBUG, mtrPluginData[i].report->moduleID);
-    }
-    for (i = 0; i < mtrPluginsCount; i++)
-    {
         for (j = 0; j < mtrPluginData[i].report->prereqsCount; j++)
         {
             if (strcmp(mtrPluginData[i].report->prereqs[j], "Script_Squirrel") == 0)
