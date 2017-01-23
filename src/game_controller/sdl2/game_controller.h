@@ -23,10 +23,13 @@ typedef struct mtrGameController_t{
     int                  axesCount;
     int                  trackballsCount;
     int                  povHatsCount;
+    const char          *name; /* Added for Controller Keeper */
 } mtrGameController_t;
 
 int                  mtrGameControllersCount;
 mtrGameController_t *mtrGameController;
+
+mtrIndexkeeper_t *mtrGameControllerKeeper;
 
 #endif
 
