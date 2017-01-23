@@ -2,17 +2,12 @@
 #define MTR_TEXTURE_SDL2_IMAGE_SQUIRREL_H
 
 #include "squirrel.h"
-#include "SDL2/SDL.h"
 
 #include "marathoner/plugin.h"
 #include "../binding_common.h"
 
 #define MTR_SOURCE_MODULE "Texture_SDL2"
 
-#define MTR_FLIP_NONE                   SDL_FLIP_NONE
-#define MTR_FLIP_HORIZONTAL             SDL_FLIP_HORIZONTAL
-#define MTR_FLIP_VERTICAL               SDL_FLIP_VERTICAL
-#define MTR_FLIP_BOTH                   (SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL)
 /*
 #define MTR_BLEND_ZERO                  0
 #define MTR_BLEND_ONE                   1

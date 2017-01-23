@@ -10,11 +10,6 @@
 
 #define MTR_SOURCE_MODULE "Texture_SDL2_gpu"
 
-#define MTR_FLIP_NONE       0
-#define MTR_FLIP_HORIZONTAL 1
-#define MTR_FLIP_VERTICAL   2
-#define MTR_FLIP_BOTH       3
-
 #define MTR_BLEND_ZERO                  0
 #define MTR_BLEND_ONE                   1
 #define MTR_BLEND_SRC_COLOR             2
