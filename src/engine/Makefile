@@ -71,4 +71,4 @@ $(OBJSDIR)/version.res: version.rc
 	$(RC) $(RCFLAGS) -i $(RCDIR)/version.rc -o $(OBJSDIR)/version.res
 
 version.rc:
-	../../rcgen ../../include/marathoner/version.h $(RCDIR)/version.rc MTR_VERSION_MARATHONER Marathoner "Marathoner game engine" Marathoner.exe
+	../../rcgen ../../include/marathoner/version.h $(RCDIR)/version.rc MTR_VERSION_MARATHONER Marathoner "Marathoner Game Engine core application" Marathoner.exe
