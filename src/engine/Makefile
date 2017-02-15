@@ -20,6 +20,7 @@ OBJS = $(OBJSDIR)/main.o \
 	$(OBJSDIR)/encoding.o \
 	$(OBJSDIR)/file.o \
 	$(OBJSDIR)/directory.o \
+	$(OBJSDIR)/plugin_loader.o \
 	$(OBJSDIR)/version.res
 
 ifeq ($(PLATFORM), win32)
@@ -62,6 +63,9 @@ $(OBJSDIR)/file.o: file.c file.h
 
 $(OBJSDIR)/directory.o: directory.c directory.h
 	$(CC) $(CFLAGS) $(INCDIRS) -c directory.c -o $(OBJSDIR)/directory.o
+
+$(OBJSDIR)/plugin_loader.o: plugin_loader.c plugin_loader.h
+	$(CC) $(CFLAGS) $(INCDIRS) -c plugin_loader.c -o $(OBJSDIR)/plugin_loader.o
 
 $(OBJSDIR)/version.res: version.rc
 	$(RC) $(RCFLAGS) -i $(RCDIR)/version.rc -o $(OBJSDIR)/version.res
