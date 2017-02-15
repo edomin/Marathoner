@@ -7,8 +7,8 @@ ifeq ($(PLATFORM), win32)
 	PREFIX = /usr/local/mingw32
 	CC = mingw32-gcc
 	LD = mingw32-gcc
-	AR = mingw32-ar
-	RC = mingw32-windres
+	AR = ar
+	RC = windres
 	CFLAGS = -Wall -Werror -O2
 	LDFLAGS = -s -mwindows -shared-libgcc
 	ARFLAGS = rcs
