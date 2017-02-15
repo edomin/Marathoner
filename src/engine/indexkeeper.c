@@ -162,12 +162,14 @@ bool MTR_CALL mtrIndexkeeperIndexIsEmpty(void *ik, uint32_t index)
     uint16_t          mapNumberNum;
     uint8_t           bitNum;
 
+    if (index == 0)
+        return true;
+
     indexkeeper = (mtrIndexkeeper_t *)ik;
 
     mapNumberNum = index >> 5;
     bitNum = index - (mapNumberNum << 5);
-
-    if ((indexkeeper->dataMap[mapNumberNum] | (1 << bitNum)) == 0)
+    if ((indexkeeper->dataMap[mapNumberNum] & (1 << bitNum)) == 0)
         return true;
     else
         return false;
