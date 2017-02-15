@@ -132,7 +132,7 @@ int main(int argc, char** argv)
     uint8_t             k;
     char           *temp; /* Read config result */
     bool            ok;
-    mtrLogInit();
+    mtrLogInit("Marathoner.log");
 
     mtrLogWrite("Reporting Marathoner version:", 0, MTR_LMT_INFO);
     mtrLogWrite_i("Majon:", 1, MTR_LMT_INFO,

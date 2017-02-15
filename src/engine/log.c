@@ -7,7 +7,7 @@ void MTR_CALL mtrLogWriteMeta(uint8_t messageType, uint8_t level)
     time(&mtrCurrentTime);
     mtrNow = localtime(&mtrCurrentTime);
     #ifdef __MINGW32__
-        mtrLogFile = fopen("Marathoner.log", "a");
+        mtrLogFile = fopen(logFilename, "a");
         fprintf(mtrLogFile, "[%i-%i-%i %i:%i:%i] ",
          mtrNow->tm_year + 1900, mtrNow->tm_mon + 1, mtrNow->tm_mday,
          mtrNow->tm_hour, mtrNow->tm_min, mtrNow->tm_sec);
@@ -68,12 +68,13 @@ void MTR_CALL mtrLogWriteMeta(uint8_t messageType, uint8_t level)
     #endif
 }
 
-void MTR_CALL mtrLogInit(void)
+void MTR_CALL mtrLogInit(const char *filename)
 {
+    logFilename = filename;
     time(&mtrCurrentTime);
     mtrNow = localtime(&mtrCurrentTime);
     #ifdef __MINGW32__
-        mtrLogFile = fopen("Marathoner.log", "w");
+        mtrLogFile = fopen(logFilename, "w");
         fprintf(mtrLogFile, "[%i-%i-%i %i:%i:%i]          Begin Logging.\n",
          mtrNow->tm_year + 1900, mtrNow->tm_mon + 1, mtrNow->tm_mday,
          mtrNow->tm_hour, mtrNow->tm_min, mtrNow->tm_sec);
