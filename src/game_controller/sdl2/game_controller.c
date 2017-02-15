@@ -235,7 +235,7 @@ MTR_EXPORT void MTR_CALL mtrGameControllerQuit(void)
     mtrGameController_t *gameController;
 
     mtrLogWrite("Disabling game controller support", 0, MTR_LMT_INFO);
-    for (i = 0; i < mtrGameControllerKeeper->reservedData; i++)
+    for (i = 1; i <= mtrGameControllerKeeper->reservedData; i++)
     {
         if (!mtrIndexkeeperIndexIsEmpty(mtrGameControllerKeeper, i))
         {
