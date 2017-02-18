@@ -150,6 +150,8 @@ int main(int argc, char **argv)
         fprintf(outputFile, "%s\n", "FILEOS         	VOS_NT_WINDOWS32");
         if (strcmp(name, "Marathoner") == 0)
             fprintf(outputFile, "%s\n", "FILETYPE       	VFT_APP");
+        else if (strcmp(name, "Launcher") == 0)
+            fprintf(outputFile, "%s\n", "FILETYPE       	VFT_APP");
         else
             fprintf(outputFile, "%s\n", "FILETYPE       	VFT_DLL");
         fprintf(outputFile, "%s\n", "FILESUBTYPE    	VFT2_UNKNOWN");

@@ -101,7 +101,7 @@ win32: prebuild
 	make -C src/$(ABSTRACTION_SPRITE) PREFIX=$(PREFIX)
 	make -C src/$(ABSTRACTION_SPRITE_LUA) PREFIX=$(PREFIX)
 	make -C src/$(ABSTRACTION_SPRITE_SQUIRREL) PREFIX=$(PREFIX)
-	make -C src/engine PREFIX=$(PREFIX)
+	make -C src/core PREFIX=$(PREFIX)
 
 html5: prebuild
 	make -C src/$(SCREEN_SDL2) PREFIX=$(PREFIX)
@@ -123,7 +123,7 @@ html5: prebuild
 	make -C src/$(UTILS_COLOR) PREFIX=$(PREFIX)
 	make -C src/$(UTILS_COLOR_LUA) PREFIX=$(PREFIX)
 	make -C src/$(SCRIPT_LUA) PREFIX=$(PREFIX)
-	make -C src/engine PREFIX=$(PREFIX)
+	make -C src/core PREFIX=$(PREFIX)
 
 prebuild:
 	-mkdir $(OBJSDIR)

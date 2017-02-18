@@ -3,6 +3,8 @@
 
 #define MTR_VERSION_MARATHONER                      0x000100
 
+#define MTR_VERSION_LAUNCHER                        0x000000
+
 #define MTR_VERSION_AUDIO_SDL2_MIXER                0x000100
 #define MTR_VERSION_AUDIO_SDL2_MIXER_LUA            0x000100
 #define MTR_VERSION_AUDIO_SDL2_MIXER_SQUIRREL       0x000000
