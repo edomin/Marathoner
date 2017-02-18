@@ -15,6 +15,7 @@ typedef struct mtrDirectory_t{
     bool            endOfDirectory;
 } mtrDirectory_t;
 
+char *mtrGetCurrentDirectory(void);
 /* directoryName format: "./<directoryName>/" */
 mtrDirectory_t *mtrDirectoryOpen(const char *directoryName);
 bool mtrDirectoryNextFile(mtrDirectory_t *directory);

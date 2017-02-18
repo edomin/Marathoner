@@ -288,15 +288,15 @@ int main(int argc, char** argv)
 
     mtrLogWrite("Modules' reports processed", 0, MTR_LMT_INFO);
     mtrLogWrite("Reading 'Marathoner.cfg' for autorun options", 0,
-      MTR_LMT_INFO);
+     MTR_LMT_INFO);
     ok = false;
     temp = mtrConfigfileReadString("Marathoner.cfg", "Autorun", "action",
-      "none");
+     "none");
     if (strcmp(temp, "runScript") == 0)
     {
         free(temp);
         temp = mtrConfigfileReadString("Marathoner.cfg", "Autorun", "plugin",
-          "none");
+         "none");
         for (i = 0; i < mtrPluginsFound; i++)
         {
             if (strcmp(mtrPluginData[i].report->moduleID, temp) == 0)
@@ -310,17 +310,17 @@ int main(int argc, char** argv)
         {
             free(temp);
             temp = mtrConfigfileReadString("Marathoner.cfg", "Autorun",
-              "script", "none");
+             "script", "none");
             if (strcmp(temp, "none") != 0)
             {
                 mtrScriptsAutorun = (mtrScriptsAutorunFunc)mtrLoadSymbolName(mtrPluginData[currentPlugin].dll, "mtrScriptsAutorun");
                 if (mtrScriptsAutorun == NULL)
                     mtrNotify("Unable to load autorun plugin function", 1,
-                      MTR_LMT_ERROR);
+                     MTR_LMT_ERROR);
                 else
                 {
                     mtrLogWrite_s("Running autorun function with file:", 0,
-                      MTR_LMT_INFO, temp);
+                     MTR_LMT_INFO, temp);
                     mtrScriptsAutorun(temp);
                 }
                 free(temp);
@@ -328,7 +328,7 @@ int main(int argc, char** argv)
             else
             {
                 mtrNotify("Unable to read autorun script filename", 1,
-                  MTR_LMT_ERROR);
+                 MTR_LMT_ERROR);
                 free(temp);
             }
         }

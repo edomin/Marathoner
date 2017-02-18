@@ -31,6 +31,8 @@ MTR_EXPORT float MTR_CALL mtrConfigfileReadSingle(const char *filename,
 MTR_EXPORT char *MTR_CALL mtrConfigfileReadString(const char *filename,
  const char *section, const char *key, const char *defaultValue);
 
+MTR_EXPORT bool MTR_CALL mtrConfigfileWriteBool(const char* filename,
+ const char *section, const char *key, bool value);
 MTR_EXPORT bool MTR_CALL mtrConfigfileWriteInt(const char *filename,
  const char *section, const char *key, int value);
 MTR_EXPORT bool MTR_CALL mtrConfigfileWriteSingle(const char *filename,

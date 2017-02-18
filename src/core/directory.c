@@ -1,5 +1,22 @@
 #include "directory.h"
 
+/* Win32 only */
+char *mtrGetCurrentDirectory(void)
+{
+    char *directoryName;
+    int directoryNameLength;
+
+    directoryNameLength = GetCurrentDirectory(0, NULL);
+    if (directoryNameLength == 0)
+        return NULL;
+    directoryName = malloc(sizeof(char) * (directoryNameLength + 1));
+
+    if (GetCurrentDirectory(directoryNameLength, directoryName) != 0)
+        return directoryName;
+    else
+        return NULL;
+}
+
 mtrDirectory_t *mtrDirectoryOpen(const char *directoryName)
 {
     mtrDirectory_t *mtrDirectory;

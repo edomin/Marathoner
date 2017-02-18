@@ -6,13 +6,14 @@
 #ifdef __EMSCRIPTEN__
     #include <emscripten.h>
 #else
-    #include <windows.h>
+    #include "tinyfiledialogs.h"
 #endif
 
 #include "marathoner/engine.h"
 
-void MTR_CALL mtrShowSimpleMessageBox(uint8_t type, const char *title,
+MTR_EXPORT void MTR_CALL mtrShowSimpleMessageBox(uint8_t type,
+ const char *title, const char *message);
+MTR_EXPORT bool MTR_CALL mtrShowYesNoMessageBox(const char *title,
  const char *message);
-bool MTR_CALL mtrShowYesNoMessageBox(const char *title, const char *message);
 
 #endif

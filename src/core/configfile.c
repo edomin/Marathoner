@@ -126,6 +126,18 @@ MTR_EXPORT char *MTR_CALL mtrConfigfileReadString(const char* filename,
     }
 }
 
+MTR_EXPORT bool MTR_CALL mtrConfigfileWriteBool(const char* filename,
+ const char *section, const char *key, bool value)
+{
+    if ((key != NULL) && (filename != NULL))
+        if (ini_putl(section, key, (long)(value == true), filename) == 1)
+            return true;
+        else
+            return false;
+    else
+        return false;
+}
+
 MTR_EXPORT bool MTR_CALL mtrConfigfileWriteInt(const char* filename,
  const char *section, const char *key, int value)
 {
