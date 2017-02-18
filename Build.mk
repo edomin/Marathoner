@@ -2,6 +2,8 @@
 PLATFORM = win32
 #static, plugin
 MOD = plugin
+# yes, no
+DEBUG = yes
 
 ifeq ($(PLATFORM), win32)
 	PREFIX = /usr/local/mingw32
@@ -9,8 +11,14 @@ ifeq ($(PLATFORM), win32)
 	LD = mingw32-gcc
 	AR = ar
 	RC = windres
-	CFLAGS = -Wall -Werror -O2
-	LDFLAGS = -s -mwindows -shared-libgcc
+	ifeq ($(DEBUG), no)
+        CFLAGS = -Wall -Werror -O2
+        LDFLAGS = -s -mwindows
+	endif
+	ifeq ($(DEBUG), yes)
+        CFLAGS = -Wall -Werror -g
+        LDFLAGS = -mwindows
+	endif
 	ARFLAGS = rcs
 	RCFLAGS = -O coff -v
 	SO_PR =
