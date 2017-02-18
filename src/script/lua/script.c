@@ -61,6 +61,8 @@ void mtrScriptsInit(void)
      "ConfigfileReadSingle");
     mtrScriptsRegisterFunction(mtrSF_ConfigfileReadString,
      "ConfigfileReadString");
+    mtrScriptsRegisterFunction(mtrSF_ConfigfileWriteBool,
+     "ConfigfileWriteBool");
     mtrScriptsRegisterFunction(mtrSF_ConfigfileWriteInt, "ConfigfileWriteInt");
     mtrScriptsRegisterFunction(mtrSF_ConfigfileWriteSingle,
      "ConfigfileWriteSingle");

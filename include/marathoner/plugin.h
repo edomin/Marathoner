@@ -20,6 +20,7 @@ mtrConfigfileReadBoolFunc_t         mtrConfigfileReadBool;
 mtrConfigfileReadIntFunc_t          mtrConfigfileReadInt;
 mtrConfigfileReadSingleFunc_t       mtrConfigfileReadSingle;
 mtrConfigfileReadStringFunc_t       mtrConfigfileReadString;
+mtrConfigfileWriteBoolFunc_t        mtrConfigfileWriteBool;
 mtrConfigfileWriteIntFunc_t         mtrConfigfileWriteInt;
 mtrConfigfileWriteSingleFunc_t      mtrConfigfileWriteSingle;
 mtrConfigfileWriteStringFunc_t      mtrConfigfileWriteString;

@@ -167,6 +167,25 @@ MTR_SCRIPT_FUNC(mtrSF_ConfigfileReadString)
     return 1;
 }
 
+MTR_SCRIPT_FUNC(mtrSF_ConfigfileWriteBool)
+{
+    const char *filename;
+    const char *section;
+    const char *key;
+    bool        value;
+    bool        result;
+
+    MTR_SF_GET_STRING(filename, 1);
+    MTR_SF_GET_STRING(section, 2);
+    MTR_SF_GET_STRING(key, 3);
+    MTR_SF_GET_BOOL(value, 4);
+    result = mtrConfigfileWriteBool(filename, section, key, value);
+
+    MTR_SF_PUSH_BOOL(result);
+
+    return 1;
+}
+
 MTR_SCRIPT_FUNC(mtrSF_ConfigfileWriteInt)
 {
     const char *filename;

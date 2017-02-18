@@ -43,6 +43,11 @@ MTR_EXPORT void MTR_CALL mtrRequireConfigfileReadString(mtrConfigfileReadStringF
     mtrConfigfileReadString = ConfigfileReadStringFunc;
 }
 
+MTR_EXPORT void MTR_CALL mtrRequireConfigfileWriteBool(mtrConfigfileWriteBoolFunc_t ConfigfileWriteBoolFunc)
+{
+    mtrConfigfileWriteBool = ConfigfileWriteBoolFunc;
+}
+
 MTR_EXPORT void MTR_CALL mtrRequireConfigfileWriteInt(mtrConfigfileWriteIntFunc_t ConfigfileWriteIntFunc)
 {
     mtrConfigfileWriteInt = ConfigfileWriteIntFunc;

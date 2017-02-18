@@ -46,6 +46,8 @@ typedef float    (MTR_CALL * mtrConfigfileReadSingleFunc_t)(const char *,
  const char *, const char *, float);
 typedef char *   (MTR_CALL * mtrConfigfileReadStringFunc_t)(const char *,
  const char *, const char *, const char *);
+typedef bool     (MTR_CALL * mtrConfigfileWriteBoolFunc_t)(const char *,
+ const char *, const char *, bool);
 typedef bool     (MTR_CALL * mtrConfigfileWriteIntFunc_t)(const char *,
  const char *, const char *, int);
 typedef bool     (MTR_CALL * mtrConfigfileWriteSingleFunc_t)(const char *,
