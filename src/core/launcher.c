@@ -1042,8 +1042,8 @@ int main(int argc, char** argv)
                     strcat(temp, "\\");
                     strcat(temp, scriptName);
                 }
-                ctemp = tinyfd_openFileDialog("Choose autorun script...", temp,
-                 0, NULL, NULL, 0);
+                ctemp = mtrShowOpenFileDialog("Choose autorun script...", temp,
+                 0, NULL, NULL);
                 if (ctemp != NULL)
                 {
                     free(temp);

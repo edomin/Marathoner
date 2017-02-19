@@ -24,6 +24,7 @@
 #include "log.h"
 #include "notification.h"
 #include "configfile.h"
+#include "messagebox.h"
 #include "plugin_loader.h"
 #include "marathoner/marathoner.h"
 
