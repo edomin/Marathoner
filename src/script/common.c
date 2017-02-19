@@ -243,6 +243,179 @@ MTR_SCRIPT_FUNC(mtrSF_ConfigfileWriteString)
     return 1;
 }
 
+MTR_SCRIPT_FUNC(mtrSF_LogWrite)
+{
+    const char *message;
+    uint8_t     level;
+    uint8_t     messageType;
+
+    MTR_SF_GET_STRING(message, 1);
+    MTR_SF_GET_UINT8(level, 2);
+    MTR_SF_GET_UINT8(messageType, 3);
+    mtrLogWrite(message, level, messageType);
+
+    return 0;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_LogWrite_s)
+{
+    const char *message;
+    uint8_t     level;
+    uint8_t     messageType;
+    const char *argument;
+
+    MTR_SF_GET_STRING(message, 1);
+    MTR_SF_GET_UINT8(level, 2);
+    MTR_SF_GET_UINT8(messageType, 3);
+    MTR_SF_GET_STRING(argument, 4);
+    mtrLogWrite_s(message, level, messageType, argument);
+
+    return 0;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_LogWrite_i)
+{
+    const char *message;
+    uint8_t     level;
+    uint8_t     messageType;
+    uint32_t    argument;
+
+    MTR_SF_GET_STRING(message, 1);
+    MTR_SF_GET_UINT8(level, 2);
+    MTR_SF_GET_UINT8(messageType, 3);
+    MTR_SF_GET_UINT32(argument, 4);
+    mtrLogWrite_i(message, level, messageType, argument);
+
+    return 0;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_LogWrite_d)
+{
+    const char *message;
+    uint8_t     level;
+    uint8_t     messageType;
+    double      argument;
+
+    MTR_SF_GET_STRING(message, 1);
+    MTR_SF_GET_UINT8(level, 2);
+    MTR_SF_GET_UINT8(messageType, 3);
+    MTR_SF_GET_DOUBLE(argument, 4);
+    mtrLogWrite_d(message, level, messageType, argument);
+
+    return 0;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_ShowSimpleMessageBox)
+{
+    uint8_t     type;
+    const char *title;
+    const char *message;
+
+    MTR_SF_GET_UINT8(type, 1);
+    MTR_SF_GET_STRING(title, 2);
+    MTR_SF_GET_STRING(message, 3);
+    mtrShowSimpleMessageBox(type, title, message);
+
+    return 0;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_ShowYesNoMessageBox)
+{
+    const char *title;
+    const char *message;
+    bool        result;
+
+    MTR_SF_GET_STRING(title, 1);
+    MTR_SF_GET_STRING(message, 2);
+    result = mtrShowYesNoMessageBox(title, message);
+
+    MTR_SF_PUSH_BOOL(result);
+
+    return 1;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_ShowOkCancelMessageBox)
+{
+    const char *title;
+    const char *message;
+    bool        result;
+
+    MTR_SF_GET_STRING(title, 1);
+    MTR_SF_GET_STRING(message, 2);
+    result = mtrShowOkCancelMessageBox(title, message);
+
+    MTR_SF_PUSH_BOOL(result);
+
+    return 1;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_ShowInputDialog)
+{
+    const char *title;
+    const char *message;
+    const char *defaultInput;
+    const char *result;
+
+    MTR_SF_GET_STRING(title, 1);
+    MTR_SF_GET_STRING(message, 2);
+    MTR_SF_GET_STRING(defaultInput, 3);
+    result = mtrShowInputDialog(title, message, defaultInput);
+
+    MTR_SF_PUSH_STRING(result);
+
+    return 1;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_ShowPasswordDialog)
+{
+    const char *title;
+    const char *message;
+    const char *result;
+
+    MTR_SF_GET_STRING(title, 1);
+    MTR_SF_GET_STRING(message, 2);
+    result = mtrShowPasswordDialog(title, message);
+
+    MTR_SF_PUSH_STRING(result);
+
+    return 1;
+}
+
+/*
+TODO:
+ShowSaveFileDialog
+ShowOpenFileDialog
+*/
+
+MTR_SCRIPT_FUNC(mtrSF_ShowSelectFolderDialog)
+{
+    const char *title;
+    const char *defaultPath;
+    const char *result;
+
+    MTR_SF_GET_STRING(title, 1);
+    MTR_SF_GET_STRING(defaultPath, 2);
+    result = mtrShowSelectFolderDialog(title, defaultPath);
+
+    MTR_SF_PUSH_STRING(result);
+
+    return 1;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_Notify)
+{
+    const char *message;
+    uint8_t     level;
+    uint8_t     messageType;
+
+    MTR_SF_GET_STRING(message, 1);
+    MTR_SF_GET_UINT8(level, 2);
+    MTR_SF_GET_UINT8(messageType, 3);
+    mtrNotify(message, level, messageType);
+
+    return 0;
+}
+
 MTR_SCRIPT_FUNC(mtrSF_FileWriteLine)
 {
     const char *filename;

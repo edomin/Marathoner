@@ -64,6 +64,22 @@ typedef void     (MTR_CALL * mtrLogWrite_dFunc_t)(const char *, uint8_t,
  uint8_t, double);
 
 typedef void     (MTR_CALL * mtrNotifyFunc_t)(const char *, uint8_t, uint8_t);
+typedef void        (MTR_CALL * mtrShowSimpleMessageBoxFunc_t)(uint8_t,
+ const char *, const char *);
+typedef bool        (MTR_CALL * mtrShowYesNoMessageBoxFunc_t)(const char *,
+ const char *);
+typedef bool        (MTR_CALL * mtrShowOkCancelMessageBoxFunc_t)(const char *,
+ const char *);
+typedef const char *(MTR_CALL * mtrShowInputDialogFunc_t)(const char *,
+ const char *, const char *);
+typedef const char *(MTR_CALL * mtrShowPasswordDialogFunc_t)(const char *,
+ const char *);
+typedef const char *(MTR_CALL * mtrShowSaveFileDialogFunc_t)(const char *,
+ const char *, int, const char **, const char *);
+typedef const char *(MTR_CALL * mtrShowOpenFileDialogFunc_t)(const char *,
+ const char *, int, const char **, const char *);
+typedef const char *(MTR_CALL * mtrShowSelectFolderDialogFunc_t)(const char *,
+ const char *);
 
 typedef void *   (MTR_CALL * mtrIndexkeeperCreateFunc_t)(uint32_t, uint32_t,
  size_t);

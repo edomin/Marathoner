@@ -30,6 +30,15 @@ mtrLogWrite_sFunc_t                 mtrLogWrite_s;
 mtrLogWrite_iFunc_t                 mtrLogWrite_i;
 mtrLogWrite_dFunc_t                 mtrLogWrite_d;
 
+mtrShowSimpleMessageBoxFunc_t       mtrShowSimpleMessageBox;
+mtrShowYesNoMessageBoxFunc_t        mtrShowYesNoMessageBox;
+mtrShowOkCancelMessageBoxFunc_t     mtrShowOkCancelMessageBox;
+mtrShowInputDialogFunc_t            mtrShowInputDialog;
+mtrShowPasswordDialogFunc_t         mtrShowPasswordDialog;
+mtrShowSaveFileDialogFunc_t         mtrShowSaveFileDialog;
+mtrShowOpenFileDialogFunc_t         mtrShowOpenFileDialog;
+mtrShowSelectFolderDialogFunc_t     mtrShowSelectFolderDialog;
+
 mtrNotifyFunc_t                     mtrNotify;
 
 mtrIndexkeeperCreateFunc_t          mtrIndexkeeperCreate;

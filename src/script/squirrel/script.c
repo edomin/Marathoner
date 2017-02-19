@@ -62,6 +62,24 @@ void mtrScriptsInit(void)
     mtrScriptsRegisterFunction(mtrSF_ConfigfileWriteString,
      "ConfigfileWriteString");
 
+    mtrScriptsRegisterFunction(mtrSF_LogWrite, "LogWrite");
+    mtrScriptsRegisterFunction(mtrSF_LogWrite_s, "LogWrite_s");
+    mtrScriptsRegisterFunction(mtrSF_LogWrite_i, "LogWrite_i");
+    mtrScriptsRegisterFunction(mtrSF_LogWrite_d, "LogWrite_d");
+
+    mtrScriptsRegisterFunction(mtrSF_ShowSimpleMessageBox,
+     "ShowSimpleMessageBox");
+    mtrScriptsRegisterFunction(mtrSF_ShowYesNoMessageBox,
+     "ShowYesNoMessageBox");
+    mtrScriptsRegisterFunction(mtrSF_ShowOkCancelMessageBox,
+     "ShowOkCancelMessageBox");
+    mtrScriptsRegisterFunction(mtrSF_ShowInputDialog, "ShowInputDialog");
+    mtrScriptsRegisterFunction(mtrSF_ShowPasswordDialog, "ShowPasswordDialog");
+    mtrScriptsRegisterFunction(mtrSF_ShowSelectFolderDialog,
+     "ShowSelectFolderDialog");
+
+    mtrScriptsRegisterFunction(mtrSF_Notify, "Notify");
+
     mtrScriptsRegisterFunction(mtrSF_FileWriteLine, "FileWriteLine");
 
     mtrLogWrite("Script functions and constants of engine registered",

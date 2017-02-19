@@ -83,6 +83,46 @@ MTR_EXPORT void MTR_CALL mtrRequireLogWrite_d(mtrLogWrite_dFunc_t LogWrite_dFunc
     mtrLogWrite_d = LogWrite_dFunc;
 }
 
+MTR_EXPORT void MTR_CALL mtrRequireShowSimpleMessageBox(mtrShowSimpleMessageBoxFunc_t ShowSimpleMessageBoxFunc)
+{
+    mtrShowSimpleMessageBox = ShowSimpleMessageBoxFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireShowYesNoMessageBox(mtrShowYesNoMessageBoxFunc_t ShowYesNoMessageBoxFunc)
+{
+    mtrShowYesNoMessageBox = ShowYesNoMessageBoxFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireShowOkCancelMessageBox(mtrShowOkCancelMessageBoxFunc_t ShowOkCancelMessageBoxFunc)
+{
+    mtrShowOkCancelMessageBox = ShowOkCancelMessageBoxFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireShowInputDialog(mtrShowInputDialogFunc_t ShowInputDialogFunc)
+{
+    mtrShowInputDialog = ShowInputDialogFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireShowPasswordDialog(mtrShowPasswordDialogFunc_t ShowPasswordDialogFunc)
+{
+    mtrShowPasswordDialog = ShowPasswordDialogFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireShowSaveFileDialog(mtrShowSaveFileDialogFunc_t ShowSaveFileDialogFunc)
+{
+    mtrShowSaveFileDialog = ShowSaveFileDialogFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireShowOpenFileDialog(mtrShowOpenFileDialogFunc_t ShowOpenFileDialogFunc)
+{
+    mtrShowOpenFileDialog = ShowOpenFileDialogFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireShowSelectFolderDialog(mtrShowSelectFolderDialogFunc_t ShowSelectFolderDialogFunc)
+{
+    mtrShowSelectFolderDialog = ShowSelectFolderDialogFunc;
+}
+
 MTR_EXPORT void MTR_CALL mtrRequireNotify(mtrNotifyFunc_t NotifyFunc)
 {
     mtrNotify = NotifyFunc;
