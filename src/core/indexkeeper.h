@@ -1,5 +1,5 @@
-#ifndef MTR_ENGINE_INDEXKEEPER_H
-#define MTR_ENGINE_INDEXKEEPER_H
+#ifndef MTR_CORE_INDEXKEEPER_H
+#define MTR_CORE_INDEXKEEPER_H
 
 #include "marathoner/marathoner.h"
 

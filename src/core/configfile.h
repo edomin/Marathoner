@@ -1,5 +1,5 @@
-#ifndef MTR_ENGINE_CONFIGFILE_H
-#define MTR_ENGINE_CONFIGFILE_H
+#ifndef MTR_CORE_CONFIGFILE_H
+#define MTR_CORE_CONFIGFILE_H
 
 #include <stdlib.h>
 #include <string.h>

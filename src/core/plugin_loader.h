@@ -1,5 +1,5 @@
-#ifndef MTR_ENGINE_PLUGIN_LOADER_H
-#define MTR_ENGINE_PLUGIN_LOADER_H
+#ifndef MTR_CORE_PLUGIN_LOADER_H
+#define MTR_CORE_PLUGIN_LOADER_H
 
 #include "notification.h"
 #include "directory.h"

@@ -1,5 +1,5 @@
-#ifndef MTR_ENGINE_DIRECTORY_H
-#define MTR_ENGINE_DIRECTORY_H
+#ifndef MTR_CORE_DIRECTORY_H
+#define MTR_CORE_DIRECTORY_H
 
 #include "marathoner/engine.h"
 
