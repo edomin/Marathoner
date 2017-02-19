@@ -1,6 +1,6 @@
 #include "configfile.h"
 
-MTR_EXPORT char *MTR_CALL mtrConfigfileGetKeyName(const char* filename,
+char *MTR_CALL mtrConfigfileGetKeyName(const char* filename,
  const char *section, int index)
 {
     uint16_t valueLength;
@@ -26,8 +26,7 @@ MTR_EXPORT char *MTR_CALL mtrConfigfileGetKeyName(const char* filename,
         return NULL;
 }
 
-MTR_EXPORT char *MTR_CALL mtrConfigfileGetSectionName(const char* filename,
- int index)
+char *MTR_CALL mtrConfigfileGetSectionName(const char* filename, int index)
 {
     uint16_t valueLength;
     char    *result;
@@ -52,8 +51,8 @@ MTR_EXPORT char *MTR_CALL mtrConfigfileGetSectionName(const char* filename,
         return NULL;
 }
 
-MTR_EXPORT bool MTR_CALL mtrConfigfileDeleteKey(const char* filename,
- const char *section, const char *key)
+bool MTR_CALL mtrConfigfileDeleteKey(const char* filename, const char *section,
+ const char *key)
 {
     if ((key == NULL) || (filename == NULL))
         return false;
@@ -63,7 +62,7 @@ MTR_EXPORT bool MTR_CALL mtrConfigfileDeleteKey(const char* filename,
         return false;
 }
 
-MTR_EXPORT bool MTR_CALL mtrConfigfileDeleteSection(const char* filename,
+bool MTR_CALL mtrConfigfileDeleteSection(const char* filename,
  const char *section)
 {
     if ((section == NULL) || (filename == NULL))
@@ -74,8 +73,8 @@ MTR_EXPORT bool MTR_CALL mtrConfigfileDeleteSection(const char* filename,
         return false;
 }
 
-MTR_EXPORT bool MTR_CALL mtrConfigfileReadBool(const char* filename,
- const char *section, const char *key, bool defaultValue)
+bool MTR_CALL mtrConfigfileReadBool(const char* filename, const char *section,
+ const char *key, bool defaultValue)
 {
     if ((key != NULL) && (filename != NULL))
         return ini_getbool(section, key, defaultValue, filename);
@@ -83,8 +82,8 @@ MTR_EXPORT bool MTR_CALL mtrConfigfileReadBool(const char* filename,
         return defaultValue;
 }
 
-MTR_EXPORT int MTR_CALL mtrConfigfileReadInt(const char* filename,
- const char *section, const char *key, int defaultValue)
+int MTR_CALL mtrConfigfileReadInt(const char* filename, const char *section,
+ const char *key, int defaultValue)
 {
     if ((key != NULL) && (filename != NULL))
         return (int)ini_getl(section, key, (long)defaultValue, filename);
@@ -92,7 +91,7 @@ MTR_EXPORT int MTR_CALL mtrConfigfileReadInt(const char* filename,
         return defaultValue;
 }
 
-MTR_EXPORT float MTR_CALL mtrConfigfileReadSingle(const char* filename,
+float MTR_CALL mtrConfigfileReadSingle(const char* filename,
  const char *section, const char *key, float defaultValue)
 {
     if ((key != NULL) && (filename != NULL))
@@ -101,7 +100,7 @@ MTR_EXPORT float MTR_CALL mtrConfigfileReadSingle(const char* filename,
         return defaultValue;
 }
 
-MTR_EXPORT char *MTR_CALL mtrConfigfileReadString(const char* filename,
+char *MTR_CALL mtrConfigfileReadString(const char* filename,
  const char *section, const char *key, const char *defaultValue)
 {
     uint16_t valueLength;
@@ -126,8 +125,8 @@ MTR_EXPORT char *MTR_CALL mtrConfigfileReadString(const char* filename,
     }
 }
 
-MTR_EXPORT bool MTR_CALL mtrConfigfileWriteBool(const char* filename,
- const char *section, const char *key, bool value)
+bool MTR_CALL mtrConfigfileWriteBool(const char* filename, const char *section,
+ const char *key, bool value)
 {
     if ((key != NULL) && (filename != NULL))
         if (ini_putl(section, key, (long)(value == true), filename) == 1)
@@ -138,8 +137,8 @@ MTR_EXPORT bool MTR_CALL mtrConfigfileWriteBool(const char* filename,
         return false;
 }
 
-MTR_EXPORT bool MTR_CALL mtrConfigfileWriteInt(const char* filename,
- const char *section, const char *key, int value)
+bool MTR_CALL mtrConfigfileWriteInt(const char* filename, const char *section,
+ const char *key, int value)
 {
     if ((key != NULL) && (filename != NULL))
         if (ini_putl(section, key, (long)value, filename) == 1)
@@ -150,7 +149,7 @@ MTR_EXPORT bool MTR_CALL mtrConfigfileWriteInt(const char* filename,
         return false;
 }
 
-MTR_EXPORT bool MTR_CALL mtrConfigfileWriteSingle(const char* filename,
+bool MTR_CALL mtrConfigfileWriteSingle(const char* filename,
  const char *section, const char *key, float value)
 {
     if ((key != NULL) && (filename != NULL))
@@ -162,7 +161,7 @@ MTR_EXPORT bool MTR_CALL mtrConfigfileWriteSingle(const char* filename,
         return false;
 }
 
-MTR_EXPORT bool MTR_CALL mtrConfigfileWriteString(const char* filename,
+bool MTR_CALL mtrConfigfileWriteString(const char* filename,
  const char *section, const char *key, const char *value)
 {
     if ((key != NULL) && (filename != NULL))

@@ -1,7 +1,7 @@
 #include "messagebox.h"
 
-MTR_EXPORT void MTR_CALL mtrShowSimpleMessageBox(uint8_t type,
- const char *title, const char *message)
+void MTR_CALL mtrShowSimpleMessageBox(uint8_t type, const char *title,
+ const char *message)
 {
     switch (type)
     {
@@ -43,8 +43,7 @@ MTR_EXPORT void MTR_CALL mtrShowSimpleMessageBox(uint8_t type,
     }
 }
 
-MTR_EXPORT bool MTR_CALL mtrShowYesNoMessageBox(const char *title,
- const char *message)
+bool MTR_CALL mtrShowYesNoMessageBox(const char *title, const char *message)
 {
     #ifdef __MINGW32__
         return (bool)tinyfd_messageBox(title, message, "yesno", "question", 0);
@@ -73,15 +72,14 @@ MTR_EXPORT bool MTR_CALL mtrShowYesNoMessageBox(const char *title,
 }
 
 /* MinGW only */
-MTR_EXPORT bool MTR_CALL mtrShowOkCancelMessageBox(const char *title,
- const char *message)
+bool MTR_CALL mtrShowOkCancelMessageBox(const char *title, const char *message)
 {
     return (bool)tinyfd_messageBox(title, message, "okcancel", "info", 0);
 }
 
 /* MinGW only */
-MTR_EXPORT const char *MTR_CALL mtrShowInputDialog(const char *title,
- const char *message, const char *defaultInput)
+const char *MTR_CALL mtrShowInputDialog(const char *title, const char *message,
+ const char *defaultInput)
 {
     if (defaultInput == NULL)
         return tinyfd_inputBox(title, message, "");
@@ -90,25 +88,25 @@ MTR_EXPORT const char *MTR_CALL mtrShowInputDialog(const char *title,
 }
 
 /* MinGW only */
-MTR_EXPORT const char *MTR_CALL mtrShowPasswordDialog(const char *title,
+const char *MTR_CALL mtrShowPasswordDialog(const char *title,
  const char *message)
 {
     return tinyfd_inputBox(title, message, NULL);
 }
 
 /* MinGW only */
-MTR_EXPORT const char *MTR_CALL mtrShowSaveFileDialog(const char *title,
+const char *MTR_CALL mtrShowSaveFileDialog(const char *title,
  const char *defaultPathAndFile, int fpNum, const char **filterPatterns,
- const char **singleFilterDescription)
+ const char *singleFilterDescription)
 {
     return tinyfd_saveFileDialog(title, defaultPathAndFile, fpNum,
      filterPatterns, singleFilterDescription) ;
 }
 
 /* MinGW only */
-MTR_EXPORT const char *MTR_CALL mtrShowOpenFileDialog(const char *title,
+const char *MTR_CALL mtrShowOpenFileDialog(const char *title,
  const char *defaultPathAndFile, int fpNum, const char **filterPatterns,
- const char **singleFilterDescription)
+ const char *singleFilterDescription)
 {
     return tinyfd_openFileDialog(title, defaultPathAndFile, fpNum,
      filterPatterns, singleFilterDescription, 0);
@@ -117,7 +115,7 @@ MTR_EXPORT const char *MTR_CALL mtrShowOpenFileDialog(const char *title,
 /* TODO: Open Several files by selection */
 
 /* MinGW only */
-MTR_EXPORT const char *MTR_CALL mtrShowSelectFolderDialog(const char *title,
+const char *MTR_CALL mtrShowSelectFolderDialog(const char *title,
  const char *defaultPath)
 {
     if (defaultPath == NULL)
