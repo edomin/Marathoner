@@ -18,15 +18,189 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
+int mtrEnableController(int index)
+{
+    mtrGameController_t *gameController;
+    bool                 ok;
+    int                  i;
+    int                  freeIndex;
+
+    mtrLogWrite_s("Controller found:", 1, MTR_LMT_INFO,
+     SDL_JoystickNameForIndex(index));
+    freeIndex = mtrIndexkeeperGetFreeIndex(mtrGameControllerKeeper);
+    gameController = (mtrGameController_t *)(&((mtrGameController_t *)mtrGameControllerKeeper->data)[freeIndex]);
+    gameController->name = SDL_JoystickNameForIndex(index);
+
+    gameController->gameController = SDL_JoystickOpen(index);
+    if(gameController->gameController == NULL)
+    {
+        mtrLogWrite_s("Unable to open controller for use:", 1,
+         MTR_LMT_WARNING, gameController->name);
+        mtrIndexkeeperFreeIndex(mtrGameControllerKeeper, freeIndex);
+        return 0;
+    }
+    mtrLogWrite_s("Initialising controller:", 1, MTR_LMT_INFO, gameController->name);
+
+    gameController->buttonsCount = SDL_JoystickNumButtons(gameController->gameController);
+    gameController->axesCount = SDL_JoystickNumAxes(gameController->gameController);
+    gameController->trackballsCount = SDL_JoystickNumBalls(gameController->gameController);
+    gameController->povHatsCount = SDL_JoystickNumHats(gameController->gameController);
+
+    mtrLogWrite_i("Buttons found:", 2, MTR_LMT_INFO,
+     gameController->buttonsCount);
+    mtrLogWrite_i("Axes found:", 2, MTR_LMT_INFO,
+     gameController->axesCount);
+    mtrLogWrite_i("Trackballs found:", 2, MTR_LMT_INFO,
+     gameController->trackballsCount);
+    mtrLogWrite_i("POV hats found:", 2, MTR_LMT_INFO,
+     gameController->povHatsCount);
+
+    if (gameController->buttonsCount > 0)
+    {
+        ok = true;
+        gameController->currentButtonState = malloc(sizeof(bool *) * gameController->buttonsCount);
+        if (gameController->currentButtonState == NULL)
+        {
+            mtrLogWrite_i("Unable to allocate memory for current buttons' state of controller",
+             2, MTR_LMT_WARNING, index);
+            mtrLogWrite_i("Buttons of this controller will not processing",
+             2, MTR_LMT_NOTE, index);
+            ok = false;
+        }
+        if (ok)
+        {
+            gameController->previousButtonState = malloc(sizeof(bool *) * gameController->buttonsCount);
+            if (gameController->previousButtonState == NULL)
+            {
+                mtrLogWrite_i("Unable to allocate memory for previous buttons' state of controller",
+                 2, MTR_LMT_WARNING, index);
+                mtrLogWrite_i("Buttons of this controller will not processing",
+                 2, MTR_LMT_NOTE, index);
+                ok = false;
+                free(gameController->currentButtonState);
+            }
+        }
+
+        if (!ok)
+            gameController->buttonsCount = 0;
+    }
+
+    if (gameController->axesCount > 0)
+    {
+        ok = true;
+        gameController->currentAxis = malloc(sizeof(int16_t *) * gameController->axesCount);
+        if (gameController->currentAxis == NULL)
+        {
+            mtrLogWrite_i("Unable to allocate memory for current axes' state of controller",
+             2, MTR_LMT_WARNING, index);
+            mtrLogWrite_i("Axes of this controller will not processing",
+             2, MTR_LMT_NOTE, index);
+            ok = false;
+        }
+        if (ok)
+        {
+            gameController->previousAxis = malloc(sizeof(int16_t *) * gameController->axesCount);
+            if (gameController->previousAxis == NULL)
+            {
+                mtrLogWrite_i("Unable to allocate memory for previous axes' state of controller",
+                 2, MTR_LMT_WARNING, index);
+                mtrLogWrite_i("Axes of this controller will not processing",
+                 2, MTR_LMT_NOTE, index);
+                ok = false;
+                free(gameController->currentAxis);
+            }
+        }
+
+        if (!ok)
+            gameController->axesCount = 0;
+    }
+
+    if (gameController->trackballsCount > 0)
+    {
+        gameController->trackballDelta = malloc(sizeof(mtrTrackballDelta_t *) * gameController->trackballsCount);
+        if (gameController->trackballDelta == NULL)
+        {
+            mtrLogWrite_i("Unable to allocate memory for trackballs' state of controller",
+             2, MTR_LMT_WARNING, index);
+            mtrLogWrite_i("Trackballs of this controller will not processing",
+             2, MTR_LMT_NOTE, index);
+            gameController->trackballsCount = 0;
+        }
+    }
+
+    if (gameController->povHatsCount > 0)
+    {
+        gameController->povHat = malloc(sizeof(uint8_t *) * gameController->povHatsCount);
+        if (gameController->povHat == NULL)
+        {
+            mtrLogWrite_i("Unable to allocate memory for current POV hats' state of controller",
+             2, MTR_LMT_WARNING, index);
+            mtrLogWrite_i("POV hats of this controller will not processing",
+             2, MTR_LMT_NOTE, index);
+            gameController->povHatsCount = 0;
+        }
+    }
+
+    for (i = 0; i < gameController->buttonsCount; i++)
+    {
+        gameController->currentButtonState[i] = false;
+        gameController->previousButtonState[i] = false;
+    }
+    for (i = 0; i < gameController->axesCount; i++)
+    {
+        gameController->currentAxis[i] = 0;
+        gameController->previousAxis[i] = 0;
+    }
+    for (i = 0; i < gameController->trackballsCount; i++)
+    {
+        gameController->trackballDelta[i].dx = 0;
+        gameController->trackballDelta[i].dy = 0;
+    }
+    for (i = 0; i < gameController->povHatsCount; i++)
+        gameController->povHat[i] = MTR_POVHAT_CENTER;
+
+    mtrLogWrite("Controller initialised:", 1, MTR_LMT_INFO);
+
+    return freeIndex;
+}
+
+void mtrDisableController(int controllerNum)
+{
+    mtrGameController_t *gameController;
+
+    if (mtrIndexkeeperIndexIsEmpty(mtrGameControllerKeeper, controllerNum))
+        return;
+
+    gameController = (mtrGameController_t *)(&((mtrGameController_t *)mtrGameControllerKeeper->data)[controllerNum]);
+    SDL_JoystickClose(gameController->gameController);
+    if (gameController->buttonsCount > 0)
+    {
+        free(gameController->currentButtonState);
+        free(gameController->previousButtonState);
+    }
+    if (gameController->axesCount > 0)
+    {
+        free(gameController->currentAxis);
+        free(gameController->previousAxis);
+    }
+    if (gameController->trackballsCount > 0)
+    {
+        free(gameController->trackballDelta);
+    }
+    if (gameController->povHatsCount > 0)
+    {
+        free(gameController->povHat);
+    }
+    free(mtrGameController);
+
+    mtrIndexkeeperFreeIndex(mtrGameControllerKeeper, controllerNum);
+}
+
 MTR_EXPORT bool MTR_CALL mtrGameControllerInit(void)
 {
     SDL_version             compiled;
     SDL_version             linked;
     int                     i;
-    int                     j;
-    bool                    ok;
-    uint32_t                freeIndex;
-    mtrGameController_t    *gameController;
 
     mtrLogWrite("Initializing game controller support", 0, MTR_LMT_INFO);
 
@@ -88,141 +262,7 @@ MTR_EXPORT bool MTR_CALL mtrGameControllerInit(void)
 
     for (i = 0; i < mtrGameControllersCount; i++)
     {
-        mtrLogWrite_s("Controller found:", 1, MTR_LMT_INFO,
-         SDL_JoystickNameForIndex(i));
-        freeIndex = mtrIndexkeeperGetFreeIndex(mtrGameControllerKeeper);
-        gameController = (mtrGameController_t *)(&((mtrGameController_t *)mtrGameControllerKeeper->data)[freeIndex]);
-        gameController->name = SDL_JoystickNameForIndex(i);
-
-        gameController->gameController = SDL_JoystickOpen(i);
-        if(gameController->gameController == NULL)
-        {
-            mtrLogWrite_s("Unable to open controller for use:", 1,
-             MTR_LMT_WARNING, gameController->name);
-            mtrIndexkeeperFreeIndex(mtrGameControllerKeeper, freeIndex);
-            continue;
-        }
-        mtrLogWrite_s("Initialising controller:", 1, MTR_LMT_INFO, gameController->name);
-
-        gameController->buttonsCount = SDL_JoystickNumButtons(gameController->gameController);
-        gameController->axesCount = SDL_JoystickNumAxes(gameController->gameController);
-        gameController->trackballsCount = SDL_JoystickNumBalls(gameController->gameController);
-        gameController->povHatsCount = SDL_JoystickNumHats(gameController->gameController);
-
-        mtrLogWrite_i("Buttons found:", 2, MTR_LMT_INFO,
-         gameController->buttonsCount);
-        mtrLogWrite_i("Axes found:", 2, MTR_LMT_INFO,
-         gameController->axesCount);
-        mtrLogWrite_i("Trackballs found:", 2, MTR_LMT_INFO,
-         gameController->trackballsCount);
-        mtrLogWrite_i("POV hats found:", 2, MTR_LMT_INFO,
-         gameController->povHatsCount);
-
-        if (gameController->buttonsCount > 0)
-        {
-            ok = true;
-            gameController->currentButtonState = malloc(sizeof(bool *) * gameController->buttonsCount);
-            if (gameController->currentButtonState == NULL)
-            {
-                mtrLogWrite_i("Unable to allocate memory for current buttons' state of controller",
-                 2, MTR_LMT_WARNING, i);
-                mtrLogWrite_i("Buttons of this controller will not processing",
-                 2, MTR_LMT_NOTE, i);
-                ok = false;
-            }
-            if (ok)
-            {
-                gameController->previousButtonState = malloc(sizeof(bool *) * gameController->buttonsCount);
-                if (gameController->previousButtonState == NULL)
-                {
-                    mtrLogWrite_i("Unable to allocate memory for previous buttons' state of controller",
-                     2, MTR_LMT_WARNING, i);
-                    mtrLogWrite_i("Buttons of this controller will not processing",
-                     2, MTR_LMT_NOTE, i);
-                    ok = false;
-                    free(gameController->currentButtonState);
-                }
-            }
-
-            if (!ok)
-                gameController->buttonsCount = 0;
-        }
-
-        if (gameController->axesCount > 0)
-        {
-            ok = true;
-            gameController->currentAxis = malloc(sizeof(int16_t *) * gameController->axesCount);
-            if (gameController->currentAxis == NULL)
-            {
-                mtrLogWrite_i("Unable to allocate memory for current axes' state of controller",
-                 2, MTR_LMT_WARNING, i);
-                mtrLogWrite_i("Axes of this controller will not processing",
-                 2, MTR_LMT_NOTE, i);
-                ok = false;
-            }
-            if (ok)
-            {
-                gameController->previousAxis = malloc(sizeof(int16_t *) * gameController->axesCount);
-                if (gameController->previousAxis == NULL)
-                {
-                    mtrLogWrite_i("Unable to allocate memory for previous axes' state of controller",
-                     2, MTR_LMT_WARNING, i);
-                    mtrLogWrite_i("Axes of this controller will not processing",
-                     2, MTR_LMT_NOTE, i);
-                    ok = false;
-                    free(gameController->currentAxis);
-                }
-            }
-
-            if (!ok)
-                gameController->axesCount = 0;
-        }
-
-        if (gameController->trackballsCount > 0)
-        {
-            gameController->trackballDelta = malloc(sizeof(mtrTrackballDelta_t *) * gameController->trackballsCount);
-            if (gameController->trackballDelta == NULL)
-            {
-                mtrLogWrite_i("Unable to allocate memory for trackballs' state of controller",
-                 2, MTR_LMT_WARNING, i);
-                mtrLogWrite_i("Trackballs of this controller will not processing",
-                 2, MTR_LMT_NOTE, i);
-                gameController->trackballsCount = 0;
-            }
-        }
-
-        if (gameController->povHatsCount > 0)
-        {
-            gameController->povHat = malloc(sizeof(uint8_t *) * gameController->povHatsCount);
-            if (gameController->povHat == NULL)
-            {
-                mtrLogWrite_i("Unable to allocate memory for current POV hats' state of controller",
-                 2, MTR_LMT_WARNING, i);
-                mtrLogWrite_i("POV hats of this controller will not processing",
-                 2, MTR_LMT_NOTE, i);
-                gameController->povHatsCount = 0;
-            }
-        }
-
-        for (j = 0; j < gameController->buttonsCount; j++)
-        {
-            gameController->currentButtonState[j] = false;
-            gameController->previousButtonState[j] = false;
-        }
-        for (j = 0; j < mtrGameController[i].axesCount; j++)
-        {
-            gameController->currentAxis[j] = 0;
-            gameController->previousAxis[j] = 0;
-        }
-        for (j = 0; j < mtrGameController[i].trackballsCount; j++)
-        {
-            gameController->trackballDelta[j].dx = 0;
-            gameController->trackballDelta[j].dy = 0;
-        }
-        for (j = 0; j < gameController->povHatsCount; j++)
-            gameController->povHat[j] = MTR_POVHAT_CENTER;
-
-        mtrLogWrite("Controller initialised:", 1, MTR_LMT_INFO);
+        mtrEnableController(i);
     }
 
     mtrLogWrite("Game Controller support initialized", 0, MTR_LMT_INFO);
@@ -231,37 +271,14 @@ MTR_EXPORT bool MTR_CALL mtrGameControllerInit(void)
 
 MTR_EXPORT void MTR_CALL mtrGameControllerQuit(void)
 {
-    uint32_t             i;
-    mtrGameController_t *gameController;
+    uint32_t i;
 
     mtrLogWrite("Disabling game controller support", 0, MTR_LMT_INFO);
     for (i = 1; i <= mtrGameControllerKeeper->reservedData; i++)
     {
         if (!mtrIndexkeeperIndexIsEmpty(mtrGameControllerKeeper, i))
         {
-            gameController = (mtrGameController_t *)(&((mtrGameController_t *)mtrGameControllerKeeper->data)[i]);
-
-            SDL_JoystickClose(gameController->gameController);
-            if (gameController->buttonsCount > 0)
-            {
-                free(gameController->currentButtonState);
-                free(gameController->previousButtonState);
-            }
-            if (gameController->axesCount > 0)
-            {
-                free(gameController->currentAxis);
-                free(gameController->previousAxis);
-            }
-            if (gameController->trackballsCount > 0)
-            {
-                free(gameController->trackballDelta);
-            }
-            if (gameController->povHatsCount > 0)
-            {
-                free(gameController->povHat);
-            }
-            free(mtrGameController);
-            mtrIndexkeeperFreeIndex(mtrGameControllerKeeper, i);
+            mtrDisableController(i);
         }
     }
     mtrIndexkeeperDestroy(mtrGameControllerKeeper);
@@ -280,6 +297,15 @@ MTR_EXPORT void MTR_CALL mtrGameControllerRefresh(void)
         if (!mtrIndexkeeperIndexIsEmpty(mtrGameControllerKeeper, i))
         {
             gameController = (mtrGameController_t *)(&((mtrGameController_t *)mtrGameControllerKeeper->data)[i]);
+
+            /* Проверка, что контроллер всё ещё подключен */
+            if (!SDL_JoystickGetAttached(gameController->gameController))
+            {
+                mtrLogWrite_s("Missing controller:", 0, MTR_LMT_INFO, gameController->name);
+                mtrDisableController(i);
+                mtrGameControllersCount--;
+                continue;
+            }
 
             for (j = 0; j < gameController->buttonsCount; j++)
             {
@@ -307,6 +333,13 @@ MTR_EXPORT void MTR_CALL mtrGameControllerRefresh(void)
                 gameController->povHat[j] = SDL_JoystickGetHat(gameController->gameController, j);
             }
         }
+    }
+
+    /* Проверка, не подключили ли новых контроллеров */
+    if (SDL_NumJoysticks() > mtrGameControllersCount)
+    {
+        if (mtrEnableController(mtrGameControllersCount + 1) > 0)
+            mtrGameControllersCount++;
     }
 }
 
