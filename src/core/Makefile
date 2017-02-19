@@ -68,7 +68,7 @@ ifeq ($(MOD), static)
 endif
 ifeq ($(MOD), plugin)
   ifeq ($(PLATFORM), win32)
-	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) $(MTR_OBJS) -lminini -Wl,-Bstatic -lutf8
+	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) $(MTR_OBJS) -lminini -Wl,-Bstatic -lutf8 -Wl,-Bstatic -ltinyfiledialogs -lole32 -lshlwapi
   endif
   ifeq ($(PLATFORM), html5)
 	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) $(MTR_OBJS) -lminini -lutf8 --preload-file ../../plugin@/plugin --preload-file ../../Marathoner.cfg@/ --preload-file ../../autorun@/autorun -s TOTAL_MEMORY=134217728
