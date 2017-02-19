@@ -1,19 +1,36 @@
 void RegisterStringVariable(const char *varName, const char *value)
 void RegisterNumericVariable(const char *varName, double value)
 
-char *ConfigfileGetKeyName(const char *filename, const char *section, int index);
-char *ConfigfileGetSectionName(const char *filename, int index);
-bool ConfigfileDeleteKey(const char *filename, const char *section, const char *key);
-bool ConfigfileDeleteSection(const char *filename, const char *section);
-bool ConfigfileReadBool(const char *filename, const char *section, const char *key, bool defaultValue);
-int ConfigfileReadInt(const char *filename, const char *section, const char *key, int defaultValue);
-float ConfigfileReadSingle(const char *filename, const char *section, const char *key, float defaultValue);
-char *ConfigfileReadString(const char *filename, const char *section, const char *key, const char *defaultValue);
-bool ConfigfileWriteInt(const char *filename, const char *section, const char *key, int value);
-bool ConfigfileWriteSingle(const char *filename, const char *section, const char *key, float value);
-bool ConfigfileWriteString(const char *filename, const char *section, const char *key, const char *value);
+char *ConfigfileGetKeyName(const char *filename, const char *section, int index)
+char *ConfigfileGetSectionName(const char *filename, int index)
+bool ConfigfileDeleteKey(const char *filename, const char *section, const char *key)
+bool ConfigfileDeleteSection(const char *filename, const char *section)
+bool ConfigfileReadBool(const char *filename, const char *section, const char *key, bool defaultValue)
+int ConfigfileReadInt(const char *filename, const char *section, const char *key, int defaultValue)
+float ConfigfileReadSingle(const char *filename, const char *section, const char *key, float defaultValue)
+char *ConfigfileReadString(const char *filename, const char *section, const char *key, const char *defaultValue)
+bool ConfigfileWriteBool(const char *filename, const char *section, const char *key, bool value)
+bool ConfigfileWriteInt(const char *filename, const char *section, const char *key, int value)
+bool ConfigfileWriteSingle(const char *filename, const char *section, const char *key, float value)
+bool ConfigfileWriteString(const char *filename, const char *section, const char *key, const char *value)
 
-void FileWriteLine(const char* filename, const char *text, uint8_t mode);
+void LogWrite(const char *message, uint8_t level, uint8_t messageType)
+void LogWrite_s(const char *message, uint8_t level, uint8_t messageType, const char *argument)
+void LogWrite_i(const char *message, uint8_t level, uint8_t messageType, int32_t argument)
+void LogWrite_d(const char *message, uint8_t level, uint8_t messageType, double argument)
+
+void ShowSimpleMessageBox(uint8_t type, const char *title, const char *message)
+bool ShowYesNoMessageBox(const char *title, const char *message)
+bool ShowOkCancelMessageBox(const char *title, const char *message)
+const char *ShowInputDialog(const char *title, const char *message, const char *defaultInput)
+const char *ShowPasswordDialog(const char *title, const char *message)
+const char *ShowSaveFileDialog(const char *title, const char *defaultPathAndFile, int fpNum, const char **filterPatterns, const char *singleFilterDescription)
+const char *ShowOpenFileDialog(const char *title, const char *defaultPathAndFile, int fpNum, const char **filterPatterns, const char *singleFilterDescription)
+const char *ShowSelectFolderDialog(const char *title, const char *defaultPath)
+
+void Notify(const char *message, uint8_t level, uint8_t messageType)
+
+void FileWriteLine(const char* filename, const char *text, uint8_t mode)
 
 bool ScreenInit(int width, int height)
 void ScreenQuit()
