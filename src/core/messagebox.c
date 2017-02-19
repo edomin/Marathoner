@@ -3,50 +3,86 @@
 void MTR_CALL mtrShowSimpleMessageBox(uint8_t type, const char *title,
  const char *message)
 {
+    const char *emptyString = "";
+    const char *resultTitle;
+    const char *resultMessage;
+
+    if (title == NULL)
+        resultTitle = emptyString;
+    else
+        resultTitle = title;
+
+    if (message == NULL)
+        resultMessage = emptyString;
+    else
+        resultMessage = message;
+
     switch (type)
     {
         case MTR_DMT_INFO:
         case MTR_DMT_NOTE:
         case MTR_DMT_DEBUG:
             #ifdef __MINGW32__
-                tinyfd_messageBox(title, message, "ok", "info", 1);
+                tinyfd_messageBox(resultTitle, resultMessage, "ok", "info", 1);
             #else
                 EM_ASM_ARGS({
                     var msg = Pointer_stringify($0);
                     alert(msg);
-                }, message);
+                }, resultMessage);
             #endif
             break;
         case MTR_DMT_WARNING:
             #ifdef __MINGW32__
-                tinyfd_messageBox(title, message, "ok", "warning", 1);
+                tinyfd_messageBox(resultTitle, resultMessage, "ok", "warning", 1);
             #else
                 EM_ASM_ARGS({
                     var msg = Pointer_stringify($0);
                     alert(msg);
-                }, message);
+                }, resultMessage);
             #endif
             break;
         case MTR_DMT_ERROR:
         case MTR_DMT_FATAL:
             #ifdef __MINGW32__
-                tinyfd_messageBox(title, message, "ok", "error", 1);
+                tinyfd_messageBox(resultTitle, resultMessage, "ok", "error", 1);
             #else
                 EM_ASM_ARGS({
                     var msg = Pointer_stringify($0);
                     alert(msg);
-                }, message);
+                }, resultMessage);
             #endif
             break;
-        default:
+        default: /* Similar MTR_DMT_INFO */
+            #ifdef __MINGW32__
+                tinyfd_messageBox(resultTitle, resultMessage, "ok", "info", 1);
+            #else
+                EM_ASM_ARGS({
+                    var msg = Pointer_stringify($0);
+                    alert(msg);
+                }, resultMessage);
+            #endif
             break;
     }
 }
 
 bool MTR_CALL mtrShowYesNoMessageBox(const char *title, const char *message)
 {
+    const char *emptyString = "";
+    const char *resultTitle;
+    const char *resultMessage;
+
+    if (title == NULL)
+        resultTitle = emptyString;
+    else
+        resultTitle = title;
+
+    if (message == NULL)
+        resultMessage = emptyString;
+    else
+        resultMessage = message;
+
     #ifdef __MINGW32__
-        return (bool)tinyfd_messageBox(title, message, "yesno", "question", 0);
+        return (bool)tinyfd_messageBox(resultTitle, resultMessage, "yesno", "question", 0);
     #else
         int answer;
         answer = EM_ASM_ARGS({
@@ -54,7 +90,7 @@ bool MTR_CALL mtrShowYesNoMessageBox(const char *title, const char *message)
             var result = confirm(msg);
             alert(msg);
             return +result;
-        }, message);
+        }, resultMessage);
 
         switch (answer)
         {
@@ -74,24 +110,69 @@ bool MTR_CALL mtrShowYesNoMessageBox(const char *title, const char *message)
 /* MinGW only */
 bool MTR_CALL mtrShowOkCancelMessageBox(const char *title, const char *message)
 {
-    return (bool)tinyfd_messageBox(title, message, "okcancel", "info", 0);
+    const char *emptyString = "";
+    const char *resultTitle;
+    const char *resultMessage;
+
+    if (title == NULL)
+        resultTitle = emptyString;
+    else
+        resultTitle = title;
+
+    if (message == NULL)
+        resultMessage = emptyString;
+    else
+        resultMessage = message;
+
+    return (bool)tinyfd_messageBox(resultTitle, resultMessage, "okcancel", "info", 0);
 }
 
 /* MinGW only */
 const char *MTR_CALL mtrShowInputDialog(const char *title, const char *message,
  const char *defaultInput)
 {
-    if (defaultInput == NULL)
-        return tinyfd_inputBox(title, message, "");
+    const char *emptyString = "";
+    const char *resultTitle;
+    const char *resultMessage;
+    const char *resultDefaultInput;
+
+    if (title == NULL)
+        resultTitle = emptyString;
     else
-        return tinyfd_inputBox(title, message, defaultInput);
+        resultTitle = title;
+
+    if (message == NULL)
+        resultMessage = emptyString;
+    else
+        resultMessage = message;
+
+    if (defaultInput == NULL)
+        resultDefaultInput = emptyString;
+    else
+        resultDefaultInput = defaultInput;
+
+    return tinyfd_inputBox(resultTitle, resultMessage, resultDefaultInput);
 }
 
 /* MinGW only */
 const char *MTR_CALL mtrShowPasswordDialog(const char *title,
  const char *message)
 {
-    return tinyfd_inputBox(title, message, NULL);
+    const char *emptyString = "";
+    const char *resultTitle;
+    const char *resultMessage;
+
+    if (title == NULL)
+        resultTitle = emptyString;
+    else
+        resultTitle = title;
+
+    if (message == NULL)
+        resultMessage = emptyString;
+    else
+        resultMessage = message;
+
+    return tinyfd_inputBox(resultTitle, resultMessage, NULL);
 }
 
 /* MinGW only */
@@ -99,7 +180,21 @@ const char *MTR_CALL mtrShowSaveFileDialog(const char *title,
  const char *defaultPathAndFile, int fpNum, const char **filterPatterns,
  const char *singleFilterDescription)
 {
-    return tinyfd_saveFileDialog(title, defaultPathAndFile, fpNum,
+    const char *emptyString = "";
+    const char *resultTitle;
+    const char *resultDefaultPathAndFile;
+
+    if (title == NULL)
+        resultTitle = emptyString;
+    else
+        resultTitle = title;
+
+    if (defaultPathAndFile == NULL)
+        resultDefaultPathAndFile = emptyString;
+    else
+        resultDefaultPathAndFile = defaultPathAndFile;
+
+    return tinyfd_saveFileDialog(resultTitle, resultDefaultPathAndFile, fpNum,
      filterPatterns, singleFilterDescription) ;
 }
 
@@ -108,7 +203,21 @@ const char *MTR_CALL mtrShowOpenFileDialog(const char *title,
  const char *defaultPathAndFile, int fpNum, const char **filterPatterns,
  const char *singleFilterDescription)
 {
-    return tinyfd_openFileDialog(title, defaultPathAndFile, fpNum,
+    const char *emptyString = "";
+    const char *resultTitle;
+    const char *resultDefaultPathAndFile;
+
+    if (title == NULL)
+        resultTitle = emptyString;
+    else
+        resultTitle = title;
+
+    if (defaultPathAndFile == NULL)
+        resultDefaultPathAndFile = emptyString;
+    else
+        resultDefaultPathAndFile = defaultPathAndFile;
+
+    return tinyfd_openFileDialog(resultTitle, resultDefaultPathAndFile, fpNum,
      filterPatterns, singleFilterDescription, 0);
 }
 
@@ -118,8 +227,19 @@ const char *MTR_CALL mtrShowOpenFileDialog(const char *title,
 const char *MTR_CALL mtrShowSelectFolderDialog(const char *title,
  const char *defaultPath)
 {
-    if (defaultPath == NULL)
-        return tinyfd_selectFolderDialog(title, "");
+    const char *emptyString = "";
+    const char *resultTitle;
+    const char *resultDefaultPath;
+
+    if (title == NULL)
+        resultTitle = emptyString;
     else
-        return tinyfd_selectFolderDialog(title, defaultPath);
+        resultTitle = title;
+
+    if (defaultPath == NULL)
+        resultDefaultPath = emptyString;
+    else
+        resultDefaultPath = defaultPath;
+
+    return tinyfd_selectFolderDialog(resultTitle, resultDefaultPath);
 }
