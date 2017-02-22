@@ -217,3 +217,13 @@ void SpriteDrawScaled_f(uint32_t sprNum, int clipNum, float x, float y, float w,
 void SpriteDrawAngled_f(uint32_t sprNum, int clipNum, float x, float y, float angle)
 void SpriteDrawFlipped_f(uint32_t sprNum, int clipNum, float x, float y, int flip)
 void SpriteDrawGeneral_f(uint32_t sprNum, int clipNum, float x, float y, float w, float h, float angle, int flip)
+
+bool FontInit(uint32_t dmSize, uint32_t reservedCount)
+uint32_t FontLoadTtf(const char *filename, int size)
+void FontFree(uint32_t fontNum)
+void FontSetTtfStyle(uint32_t fontNum, int style)
+void FontSetTtfOutline(uint32_t fontNum, int outline)
+bool FontRenderTtfString(uint32_t fontNum, uint32_t texNum, uint8_t r, uint8_t g, uint8_t b, const char *string)
+uint32_t FontCreateMbf(const char *name, int reservedTables, int width, int height)
+bool FontAddMbfTextureTable(uint32_t fontNum, uint32_t texNum, int tableNum)
+bool FontDrawMbfString_f(uint32_t fontNum, float x, float y, const char *string)
