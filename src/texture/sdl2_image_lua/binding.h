@@ -8,7 +8,7 @@
 #include "marathoner/plugin.h"
 #include "../binding_common.h"
 
-#define MTR_SOURCE_MODULE "Texture_SDL2"
+#define MTR_SOURCE_MODULE "Texture_SDL2_image"
 
 /*
 #define MTR_BLEND_ZERO                  0
