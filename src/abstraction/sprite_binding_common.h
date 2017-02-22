@@ -8,7 +8,7 @@ typedef uint32_t (MTR_CALL * mtrSpriteLoadFunc)(const char *, int, int, int,
  int, int, int, int);
 mtrSpriteLoadFunc mtrSpriteLoad;
 
-typedef bool (MTR_CALL * mtrSpriteFreeFunc)(uint32_t);
+typedef void (MTR_CALL * mtrSpriteFreeFunc)(uint32_t);
 mtrSpriteFreeFunc mtrSpriteFree;
 
 typedef bool (MTR_CALL * mtrSpriteDraw_fFunc)(uint32_t, int, float, float);
