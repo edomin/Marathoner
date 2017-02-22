@@ -64,7 +64,7 @@ uint8_t mtrPluginsCount;
     }
 
 #define MTR_FIND_FUNCTION_IN_SUBSYSTEM(function, subsystem)             \
-    function = (function ## Func)mtrFindFunctionInSubsystem(#subsystem, \
+    function = (function ## Func)mtrFindFunctionInSubsystem(subsystem,  \
     #function);                                                         \
     if (function == NULL)                                               \
     {                                                                   \
