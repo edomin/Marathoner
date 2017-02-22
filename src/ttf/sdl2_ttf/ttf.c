@@ -20,7 +20,7 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 
 MTR_EXPORT bool MTR_CALL mtrTtfInit(uint32_t dmSize, uint32_t reservedCount)
 {
-    SDL_version compiled;
+    SDL_version        compiled;
     const SDL_version *linked;
 
     mtrLogWrite("Initializing TTF font manager", 0, MTR_LMT_INFO);
@@ -35,6 +35,9 @@ MTR_EXPORT bool MTR_CALL mtrTtfInit(uint32_t dmSize, uint32_t reservedCount)
     mtrLogWrite_i("Major:", 2, MTR_LMT_INFO, linked->major);
     mtrLogWrite_i("Minor:", 2, MTR_LMT_INFO, linked->minor);
     mtrLogWrite_i("Patch:", 2, MTR_LMT_INFO, linked->patch);
+
+    tempSurface = NULL;
+    tempPixels = NULL;
 
     if(TTF_Init() != 0)
     {
@@ -123,4 +126,54 @@ MTR_EXPORT void MTR_CALL mtrTtfFree(uint32_t fontNum)
         mtrIndexkeeperFreeIndex(mtrTtfKeeper, fontNum);
         mtrLogWrite("TTF font unloaded", 0, MTR_LMT_INFO);
     }
+}
+
+MTR_EXPORT mtrPixels_t *MTR_CALL mtrTtfRenderString(uint32_t fontNum, uint8_t r,
+ uint8_t g, uint8_t b, const char *string)
+{
+    mtrTtf_t        *font;
+    SDL_Color        textcolor;
+    SDL_Surface     *renderedSurface;
+    SDL_PixelFormat *pixelFormat;
+
+    if (tempSurface != NULL)
+    {
+        SDL_FreeSurface(tempSurface);
+        tempSurface = NULL;
+    }
+    if (tempPixels != NULL)
+        free(tempPixels);
+
+    if (fontNum != 0)
+    {
+        font = (mtrTtf_t *)(&((mtrTtf_t *)mtrTtfKeeper->data)[fontNum]);
+
+        textcolor.r = r;
+        textcolor.g = g;
+        textcolor.b = b;
+        renderedSurface = TTF_RenderUTF8_Blended(font->font, string, textcolor);
+        if (renderedSurface == NULL)
+            return NULL;
+
+        pixelFormat = SDL_AllocFormat(SDL_PIXELFORMAT_RGBA8888);
+
+        tempSurface = SDL_ConvertSurface(renderedSurface,
+         pixelFormat, 0);
+
+        SDL_FreeFormat(pixelFormat);
+
+        SDL_FreeSurface(renderedSurface);
+
+        if (tempSurface == NULL)
+            return NULL;
+
+        tempPixels = malloc(sizeof(mtrPixels_t));
+
+        tempPixels->data = tempSurface->pixels;
+        tempPixels->w = tempSurface->w;
+        tempPixels->h = tempSurface->h;
+        tempPixels->pitch = tempSurface->pitch;
+        tempPixels->pixelformat = MTR_PF_RGBA;
+    }
+    return tempPixels;
 }

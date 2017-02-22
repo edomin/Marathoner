@@ -13,4 +13,7 @@ typedef struct mtrTtf_t {
 
 mtrIndexkeeper_t *mtrTtfKeeper;
 
+SDL_Surface      *tempSurface;
+mtrPixels_t      *tempPixels;
+
 #endif
