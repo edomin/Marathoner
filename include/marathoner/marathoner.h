@@ -127,10 +127,4 @@ mtrPlugin *mtrPluginData;
 #define MTR_FM_WRITE        0
 #define MTR_FM_APPEND       1
 
-/* Texture flipping constants */
-#define MTR_FLIP_NONE       0
-#define MTR_FLIP_HORIZONTAL 1
-#define MTR_FLIP_VERTICAL   2
-#define MTR_FLIP_BOTH       (MTR_FLIP_HORIZONTAL | MTR_FLIP_VERTICAL)
-
 #endif
