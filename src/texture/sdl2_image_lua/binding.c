@@ -34,9 +34,9 @@ MTR_EXPORT void MTR_CALL mtrPluginInit(void)
     mtrLogWrite_s("Reporting Lua compile-time version:", 3, MTR_LMT_INFO,
      LUA_RELEASE);
 
-    MTR_FIND_FUNCTION(mtrScriptsRegisterFunction, "Script_Squirrel");
-    MTR_FIND_FUNCTION(mtrScriptsRegisterNumericVariable, "Script_Squirrel");
-    MTR_FIND_FUNCTION(mtrScriptsGetVm, "Script_Squirrel");
+    MTR_FIND_FUNCTION(mtrScriptsRegisterFunction, "Script_Lua");
+    MTR_FIND_FUNCTION(mtrScriptsRegisterNumericVariable, "Script_Lua");
+    MTR_FIND_FUNCTION(mtrScriptsGetVm, "Script_Lua");
 
     if (ok)
     {
