@@ -402,3 +402,43 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionGeneral_f(uint32_t texNum, float x,
          &outputRegion, -angle, pivotX, pivotY, actualFlip);
     }
 }
+
+MTR_EXPORT bool MTR_CALL mtrTextureReceivePixels(uint32_t texNum,
+ mtrPixels_t *pixels)
+{
+    mtrTexture_t *texture;
+    GPU_Rect      rect;
+    int           textureW;
+    int           textureH;
+
+    if (texNum == 0)
+        return false;
+
+    texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+
+    textureW = texture->texture->texture_w;
+    textureH = texture->texture->texture_h;
+
+    if (textureW != pixels->w || textureH != pixels->h)
+    {
+        GPU_FreeImage (texture->texture);
+        texture->texture = GPU_CreateImage(pixels->w, pixels->h,
+         GPU_FORMAT_RGBA);
+        if (texture->texture == NULL)
+        {
+            mtrIndexkeeperFreeIndex(mtrTextureKeeper, texNum);
+            return false;
+        }
+        GPU_SetAnchor(texture->texture, 0.0f, 0.0f);
+        GPU_LoadTarget(texture->texture);
+    }
+
+    rect.x = 0.0f;
+    rect.y = 0.0f;
+    rect.w = pixels->w;
+    rect.h = pixels->h;
+
+    GPU_UpdateImageBytes(texture->texture, &rect, pixels->data, pixels->pitch);
+
+    return true;
+}

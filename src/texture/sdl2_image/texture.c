@@ -425,3 +425,44 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionGeneral_f(uint32_t texNum, float x,
          -angle, &pivot, actualFlip);
     }
 }
+
+MTR_EXPORT bool MTR_CALL mtrTextureReceivePixels(uint32_t texNum,
+ mtrPixels_t *pixels)
+{
+    mtrTexture_t *texture;
+    SDL_Rect      rect;
+    uint32_t      textureFormat;
+    int           textureAccess; /* not using */
+    int           textureW;
+    int           textureH;
+
+    if (texNum != 0)
+    {
+        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+
+        if (SDL_QueryTexture(texture->texture, &textureFormat, &textureAccess, &textureW, &textureH) == -1)
+            return false;
+
+        if (textureW != pixels->w || textureH != pixels->h)
+        {
+            SDL_DestroyTexture(texture->texture);
+            texture->texture = SDL_CreateTexture(mtrScreen->renderer,
+             SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, pixels->w,
+             pixels->h);
+
+            if (texture->texture == NULL)
+            {
+                mtrIndexkeeperFreeIndex(mtrTextureKeeper, texNum);
+                return false;
+            }
+        }
+
+        rect.x = 0;
+        rect.y = 0;
+        rect.w = pixels->w;
+        rect.h = pixels->h;
+        if (SDL_UpdateTexture(texture->texture, &rect, pixels->data, pixels->pitch) == 0)
+            return true;
+    }
+    return false;
+}

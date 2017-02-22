@@ -12,6 +12,24 @@ typedef struct mtrIndexkeeper_t {
     uint32_t *dataMap;
 } mtrIndexkeeper_t;
 
+typedef struct mtrPixels_t {
+    void *data;
+    int   w;
+    int   h;
+    int   pitch;
+    int   pixelformat;
+} mtrPixels_t;
+
+/* Texture flipping constants */
+#define MTR_FLIP_NONE       0
+#define MTR_FLIP_HORIZONTAL 1
+#define MTR_FLIP_VERTICAL   2
+#define MTR_FLIP_BOTH       (MTR_FLIP_HORIZONTAL | MTR_FLIP_VERTICAL)
+
+/* Pixel format constants */
+#define MTR_PF_RGBA         1
+#define MTR_PF_ARGB         2
+
 mtrConfigfileGetKeyNameFunc_t       mtrConfigfileGetKeyName;
 mtrConfigfileGetSectionNameFunc_t   mtrConfigfileGetSectionName;
 mtrConfigfileDeleteKeyFunc_t        mtrConfigfileDeleteKey;
