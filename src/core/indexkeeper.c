@@ -94,7 +94,7 @@ uint32_t MTR_CALL mtrIndexkeeperGetFreeIndex(void *ik)
 {
     uint32_t            i;
     uint8_t             j;
-    uint16_t            dataNum;
+    uint64_t            dataNum;
     uint16_t            mapNumberNum;
     uint8_t             bitNum;
     mtrIndexkeeper_t   *indexkeeper;
