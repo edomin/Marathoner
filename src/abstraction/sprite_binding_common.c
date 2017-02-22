@@ -170,18 +170,18 @@ void mtrScriptsRegisterAll(void)
 
     if (ok)
     {
-        mtrScriptsRegisterFunction(mtrSF_SpriteInit, "mtrSpriteInit");
-        mtrScriptsRegisterFunction(mtrSF_SpriteLoad, "mtrSpriteLoad");
-        mtrScriptsRegisterFunction(mtrSF_SpriteFree, "mtrSpriteFree");
-        mtrScriptsRegisterFunction(mtrSF_SpriteDraw_f, "mtrSpriteDraw_f");
+        mtrScriptsRegisterFunction(mtrSF_SpriteInit, "SpriteInit");
+        mtrScriptsRegisterFunction(mtrSF_SpriteLoad, "SpriteLoad");
+        mtrScriptsRegisterFunction(mtrSF_SpriteFree, "SpriteFree");
+        mtrScriptsRegisterFunction(mtrSF_SpriteDraw_f, "SpriteDraw_f");
         mtrScriptsRegisterFunction(mtrSF_SpriteDrawScaled_f,
-         "mtrSpriteDrawScaled_f");
+         "SpriteDrawScaled_f");
         mtrScriptsRegisterFunction(mtrSF_SpriteDrawAngled_f,
-         "mtrSpriteDrawAngled_f");
+         "SpriteDrawAngled_f");
         mtrScriptsRegisterFunction(mtrSF_SpriteDrawFlipped_f,
-         "mtrSpriteDrawFlipped_f");
+         "SpriteDrawFlipped_f");
         mtrScriptsRegisterFunction(mtrSF_SpriteDrawGeneral_f,
-         "mtrSpriteDrawGeneral_f");
+         "SpriteDrawGeneral_f");
     }
     else
     {
