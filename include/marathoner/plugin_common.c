@@ -153,6 +153,11 @@ MTR_EXPORT void MTR_CALL mtrRequireIndexkeeperDestroy(mtrIndexkeeperDestroyFunc_
     mtrIndexkeeperDestroy = IndexkeeperDestroyFunc;
 }
 
+MTR_EXPORT void MTR_CALL mtrRequireEncodingUtf8ToUcs4(mtrEncodingUtf8ToUcs4Func_t EncodingUtf8ToUcs4Func)
+{
+    mtrEncodingUtf8ToUcs4 = EncodingUtf8ToUcs4Func;
+}
+
 MTR_EXPORT void MTR_CALL mtrRequireFileWriteLine(mtrFileWriteLineFunc_t FileWriteLineFunc)
 {
     mtrFileWriteLine = FileWriteLineFunc;

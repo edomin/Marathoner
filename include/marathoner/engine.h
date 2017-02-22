@@ -75,6 +75,9 @@ mtrRequireIndexkeeperDestroyFunc mtrRequireIndexkeeperDestroy;
 typedef void (MTR_CALL * mtrRequireFileWriteLineFunc)(mtrFileWriteLineFunc_t);
 mtrRequireFileWriteLineFunc mtrRequireFileWriteLine;
 
+typedef void (MTR_CALL * mtrRequireEncodingUtf8ToUcs4Func)(mtrEncodingUtf8ToUcs4Func_t);
+mtrRequireEncodingUtf8ToUcs4Func mtrRequireEncodingUtf8ToUcs4;
+
 /*  */
 typedef void (MTR_CALL * mtrRequirePluginDataFunc)(mtrPlugin *, uint8_t);
 mtrRequirePluginDataFunc mtrRequirePluginData;

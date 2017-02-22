@@ -5,6 +5,7 @@
 #include "indexkeeper.h"
 #include "file.h"
 #include "directory.h"
+#include "encoding.h"
 #include "plugin_loader.h"
 
 #include "marathoner/engine.h"

@@ -47,6 +47,8 @@ mtrIndexkeeperFreeIndexFunc_t       mtrIndexkeeperFreeIndex;
 mtrIndexkeeperIndexIsEmptyFunc_t    mtrIndexkeeperIndexIsEmpty;
 mtrIndexkeeperDestroyFunc_t         mtrIndexkeeperDestroy;
 
+mtrEncodingUtf8ToUcs4Func_t         mtrEncodingUtf8ToUcs4;
+
 mtrFileWriteLineFunc_t              mtrFileWriteLine;
 
 uint8_t mtrPluginsCount;
