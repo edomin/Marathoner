@@ -290,8 +290,8 @@ MTR_EXPORT void MTR_CALL mtrTextureSetAlphaBlending(uint32_t texNum,
 MTR_EXPORT void MTR_CALL mtrTextureBlit_f(uint32_t texNum, float x, float y)
 {
     mtrTexture_t *texture;
-    SDL_Rect offset;
-    SDL_Rect clip;
+    SDL_Rect      offset;
+    SDL_Rect      clip;
     if (texNum != 0)
     {
         texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
@@ -309,8 +309,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegion_f(uint32_t texNum, float x,
  float y, float rx, float ry, float rw, float rh)
 {
     mtrTexture_t *texture;
-    SDL_Rect offset;
-    SDL_Rect clip;
+    SDL_Rect      offset;
+    SDL_Rect      clip;
     if (texNum != 0)
     {
         texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
@@ -330,8 +330,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionScaled_f(uint32_t texNum, float x,
  float y, float w, float h, float rx, float ry, float rw, float rh)
 {
     mtrTexture_t *texture;
-    SDL_Rect offset;
-    SDL_Rect clip;
+    SDL_Rect      offset;
+    SDL_Rect      clip;
     if (texNum != 0)
     {
         texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
@@ -353,9 +353,9 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionAngled_f(uint32_t texNum, float x,
  float pivotY)
 {
     mtrTexture_t *texture;
-    SDL_Rect offset;
-    SDL_Rect clip;
-    SDL_Point pivot;
+    SDL_Rect      offset;
+    SDL_Rect      clip;
+    SDL_Point     pivot;
     if (texNum != 0)
     {
         texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
@@ -378,9 +378,9 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionFlipped_f(uint32_t texNum, float x,
  float y, float rx, float ry, float rw, float rh, int flip)
 {
     mtrTexture_t *texture;
-    SDL_Rect offset;
-    SDL_Rect clip;
-    int actualFlip;
+    SDL_Rect      offset;
+    SDL_Rect      clip;
+    int           actualFlip;
     if (texNum != 0)
     {
         texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
@@ -403,10 +403,10 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionGeneral_f(uint32_t texNum, float x,
  float pivotX, float pivotY, int flip)
 {
     mtrTexture_t *texture;
-    SDL_Rect offset;
-    SDL_Rect clip;
-    SDL_Point pivot;
-    int actualFlip;
+    SDL_Rect      offset;
+    SDL_Rect      clip;
+    SDL_Point     pivot;
+    int           actualFlip;
     if (texNum != 0)
     {
         texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
