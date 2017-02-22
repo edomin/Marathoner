@@ -11,93 +11,62 @@
 
 void RequireEngineFuncs(uint8_t plugin)
 {
-    mtrRequireLogWrite = (mtrRequireLogWriteFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
-     "mtrRequireLogWrite");
-    if (mtrRequireLogWrite != NULL)
-        mtrRequireLogWrite(mtrLogWrite);
-    else
-        mtrLogWrite("Module are not contain declaration for 'mtrLogWrite' function",
-         1, MTR_LMT_WARNING);
-
-    mtrRequireLogWrite_s = (mtrRequireLogWrite_sFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
-     "mtrRequireLogWrite_s");
-    if (mtrRequireLogWrite_s != NULL)
-        mtrRequireLogWrite_s(mtrLogWrite_s);
-    else
-        mtrLogWrite("Module are not contain declaration for 'mtrLogWrite_s' function",
-         1, MTR_LMT_WARNING);
-
-    mtrRequireLogWrite_i = (mtrRequireLogWrite_iFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
-     "mtrRequireLogWrite_i");
-    if (mtrRequireLogWrite_i != NULL)
-        mtrRequireLogWrite_i(mtrLogWrite_i);
-    else
-        mtrLogWrite("Module are not contain declaration for 'mtrLogWrite_i' function",
-         1, MTR_LMT_WARNING);
-
-    mtrRequireLogWrite_d = (mtrRequireLogWrite_dFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
-     "mtrRequireLogWrite_d");
-    if (mtrRequireLogWrite_d != NULL)
-        mtrRequireLogWrite_d(mtrLogWrite_d);
-    else
-        mtrLogWrite("Module are not contain declaration for 'mtrLogWrite_d' function",
-         1, MTR_LMT_WARNING);
-
-    mtrRequireNotify = (mtrRequireNotifyFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
-     "mtrRequireNotify");
-    if (mtrRequireNotify != NULL)
-        mtrRequireNotify(mtrNotify);
-    else
-        mtrLogWrite("Module are not contain declaration for 'mtrNotify' function",
-         1, MTR_LMT_WARNING);
-
-    mtrRequireIndexkeeperCreate = (mtrRequireIndexkeeperCreateFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
-     "mtrRequireIndexkeeperCreate");
-    if (mtrRequireIndexkeeperCreate != NULL)
-        mtrRequireIndexkeeperCreate(mtrIndexkeeperCreate);
-    else
-        mtrLogWrite("Module are not contain declaration for 'mtrIndexkeeperCreate' function",
-         1, MTR_LMT_WARNING);
-
-    mtrRequireIndexkeeperGetFreeIndex = (mtrRequireIndexkeeperGetFreeIndexFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
-     "mtrRequireIndexkeeperGetFreeIndex");
-    if (mtrRequireIndexkeeperGetFreeIndex != NULL)
-        mtrRequireIndexkeeperGetFreeIndex(mtrIndexkeeperGetFreeIndex);
-    else
-        mtrLogWrite("Module are not contain declaration for 'mtrIndexkeeperGetFreeIndex' function",
-         1, MTR_LMT_WARNING);
-
-    mtrRequireIndexkeeperFreeIndex = (mtrRequireIndexkeeperFreeIndexFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
-     "mtrRequireIndexkeeperFreeIndex");
-    if (mtrRequireIndexkeeperFreeIndex != NULL)
-        mtrRequireIndexkeeperFreeIndex(mtrIndexkeeperFreeIndex);
-    else
-        mtrLogWrite("Module are not contain declaration for 'mtrIndexkeeperFreeIndex' function",
-         1, MTR_LMT_WARNING);
-
-    mtrRequireIndexkeeperIndexIsEmpty = (mtrRequireIndexkeeperIndexIsEmptyFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
-     "mtrRequireIndexkeeperIndexIsEmpty");
-    if (mtrRequireIndexkeeperIndexIsEmpty != NULL)
-        mtrRequireIndexkeeperIndexIsEmpty(mtrIndexkeeperIndexIsEmpty);
-    else
-        mtrLogWrite("Module are not contain declaration for 'mtrIndexkeeperIndexIsEmpty' function",
-         1, MTR_LMT_WARNING);
-
-    mtrRequireIndexkeeperDestroy = (mtrRequireIndexkeeperDestroyFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
-     "mtrRequireIndexkeeperDestroy");
-    if (mtrRequireIndexkeeperDestroy != NULL)
-        mtrRequireIndexkeeperDestroy(mtrIndexkeeperDestroy);
-    else
-        mtrLogWrite("Module are not contain declaration for 'mtrIndexkeeperDestroy' function",
-         1, MTR_LMT_WARNING);
-
-    mtrRequireFileWriteLine = (mtrRequireFileWriteLineFunc)mtrLoadSymbolName(mtrPluginData[plugin].dll,
-     "mtrRequireFileWriteLine");
-    if (mtrRequireFileWriteLine != NULL)
-        mtrRequireFileWriteLine(mtrFileWriteLine);
-    else
-        mtrLogWrite("Module are not contain declaration for 'mtrFileWriteLine' function",
-         1, MTR_LMT_WARNING);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireConfigfileGetKeyName,
+     mtrConfigfileGetKeyName);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireConfigfileGetSectionName,
+     mtrConfigfileGetSectionName);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireConfigfileDeleteKey,
+     mtrConfigfileDeleteKey);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireConfigfileDeleteSection,
+     mtrConfigfileDeleteSection);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireConfigfileReadBool,
+     mtrConfigfileReadBool);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireConfigfileReadInt,
+     mtrConfigfileReadInt);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireConfigfileReadSingle,
+     mtrConfigfileReadSingle);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireConfigfileReadString,
+     mtrConfigfileReadString);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireConfigfileWriteBool,
+     mtrConfigfileWriteBool);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireConfigfileWriteInt,
+     mtrConfigfileWriteInt);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireConfigfileWriteSingle,
+     mtrConfigfileWriteSingle);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireConfigfileWriteString,
+     mtrConfigfileWriteString);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireLogWrite, mtrLogWrite);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireLogWrite_s, mtrLogWrite_s);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireLogWrite_i, mtrLogWrite_i);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireLogWrite_d, mtrLogWrite_d);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireShowSimpleMessageBox,
+     mtrShowSimpleMessageBox);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireShowYesNoMessageBox,
+     mtrShowYesNoMessageBox);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireShowOkCancelMessageBox,
+     mtrShowOkCancelMessageBox);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireShowInputDialog, mtrShowInputDialog);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireShowPasswordDialog,
+     mtrShowPasswordDialog);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireShowSaveFileDialog,
+     mtrShowSaveFileDialog);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireShowOpenFileDialog,
+     mtrShowOpenFileDialog);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireShowSelectFolderDialog,
+     mtrShowSelectFolderDialog);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireNotify, mtrNotify);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireIndexkeeperCreate, mtrIndexkeeperCreate);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireIndexkeeperGetFreeIndex,
+     mtrIndexkeeperGetFreeIndex);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireIndexkeeperFreeIndex,
+     mtrIndexkeeperFreeIndex);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireIndexkeeperIndexIsEmpty,
+     mtrIndexkeeperIndexIsEmpty);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireIndexkeeperDestroy,
+     mtrIndexkeeperDestroy);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireEncodingUtf8ToUcs4,
+     mtrEncodingUtf8ToUcs4);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireFileWriteLine, mtrFileWriteLine);
 }
 
 int main(int argc, char** argv)

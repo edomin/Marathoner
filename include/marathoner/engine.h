@@ -82,4 +82,13 @@ mtrRequirePluginDataFunc mtrRequirePluginData;
 typedef void (MTR_CALL * mtrScriptsAutorunFunc)(char *);
 mtrScriptsAutorunFunc mtrScriptsAutorun;
 
+#define MTR_REQUIRE_ENGINE_FUNC(require_funcname, funcname)                                   \
+    require_funcname = (require_funcname ## Func)mtrLoadSymbolName(mtrPluginData[plugin].dll, \
+     #require_funcname);                                                                      \
+    if (require_funcname != NULL)                                                             \
+        require_funcname(funcname);                                                           \
+    else                                                                                      \
+        mtrLogWrite("Module are not contain declaration for 'funcname' function",             \
+         1, MTR_LMT_WARNING);                                                                 \
+
 #endif
