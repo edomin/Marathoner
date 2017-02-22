@@ -164,7 +164,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCreate(const char *name, int width,
             return 0;
         }
         texture->name = strcpy(texture->name, name);
-        GPU_SetAnchor(texture->texture, 0.0, 0.0);
+        GPU_SetAnchor(texture->texture, 0.0f, 0.0f);
         mtrLogWrite_s("Texture created", 0, MTR_LMT_INFO, name);
         target = GPU_LoadTarget(texture->texture);
         if (target == NULL)
@@ -205,7 +205,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureLoad(const char *filename)
             return 0;
         }
         texture->name = strcpy(texture->name, filename);
-        GPU_SetAnchor(texture->texture, 0.0, 0.0);
+        GPU_SetAnchor(texture->texture, 0.0f, 0.0f);
         mtrLogWrite_s("Texture loaded", 0, MTR_LMT_INFO, filename);
         return freeIndex;
     }
