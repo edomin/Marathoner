@@ -43,6 +43,10 @@ typedef mtrPixels_t *(MTR_CALL * mtrTtfRenderStringFunc)(uint32_t fontNum,
  uint8_t r, uint8_t g, uint8_t b, const char *string);
 mtrTtfRenderStringFunc mtrTtfRenderString;
 
+typedef void (MTR_CALL * mtrTextureBlit_fFunc)(uint32_t texNum, float x,
+ float y);
+mtrTextureBlit_fFunc mtrTextureBlit_f;
+
 typedef void (MTR_CALL * mtrTextureBlitRegion_fFunc)(uint32_t texNum, float x,
  float y, float rx, float ry, float rw, float rh);
 mtrTextureBlitRegion_fFunc mtrTextureBlitRegion_f;
