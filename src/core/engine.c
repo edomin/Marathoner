@@ -68,6 +68,8 @@ void RequireEngineFuncs(uint8_t plugin)
      mtrIndexkeeperDestroy);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireEncodingUtf8ToUcs4,
      mtrEncodingUtf8ToUcs4);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireEncodingUtf8Codepoints,
+     mtrEncodingUtf8Codepoints);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireFileWriteLine, mtrFileWriteLine);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireClipboardPutText, mtrClipboardPutText);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireClipboardGetText, mtrClipboardGetText);

@@ -18,3 +18,13 @@ size_t MTR_CALL mtrEncodingUtf8ToUcs4(const char *utf8Text, uint32_t **ucs4Text)
     n = u8decode(utf8Text, (ucs4_t *)*ucs4Text, max, &illegal);
     return n;
 }
+
+size_t MTR_CALL mtrEncodingUtf8Codepoints(const char *utf8Text)
+{
+    size_t    result;
+    uint32_t *ucs4Text;
+    ucs4Text = NULL;
+    result = mtrEncodingUtf8ToUcs4(utf8Text, &ucs4Text);
+    free(ucs4Text);
+    return result;
+}

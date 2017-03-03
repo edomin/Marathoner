@@ -66,6 +66,7 @@ mtrIndexkeeperIndexIsEmptyFunc_t    mtrIndexkeeperIndexIsEmpty;
 mtrIndexkeeperDestroyFunc_t         mtrIndexkeeperDestroy;
 
 mtrEncodingUtf8ToUcs4Func_t         mtrEncodingUtf8ToUcs4;
+mtrEncodingUtf8CodepointsFunc_t     mtrEncodingUtf8Codepoints;
 
 mtrFileWriteLineFunc_t              mtrFileWriteLine;
 

@@ -82,6 +82,8 @@ mtrRequireClipboardGetTextFunc mtrRequireClipboardGetText;
 
 typedef void (MTR_CALL * mtrRequireEncodingUtf8ToUcs4Func)(mtrEncodingUtf8ToUcs4Func_t);
 mtrRequireEncodingUtf8ToUcs4Func mtrRequireEncodingUtf8ToUcs4;
+typedef void (MTR_CALL * mtrRequireEncodingUtf8CodepointsFunc)(mtrEncodingUtf8CodepointsFunc_t);
+mtrRequireEncodingUtf8CodepointsFunc mtrRequireEncodingUtf8Codepoints;
 
 /*  */
 typedef void (MTR_CALL * mtrRequirePluginDataFunc)(mtrPlugin *, uint8_t);

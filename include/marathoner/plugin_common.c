@@ -158,6 +158,11 @@ MTR_EXPORT void MTR_CALL mtrRequireEncodingUtf8ToUcs4(mtrEncodingUtf8ToUcs4Func_
     mtrEncodingUtf8ToUcs4 = EncodingUtf8ToUcs4Func;
 }
 
+MTR_EXPORT void MTR_CALL mtrRequireEncodingUtf8Codepoints(mtrEncodingUtf8CodepointsFunc_t EncodingUtf8CodepointsFunc)
+{
+    mtrEncodingUtf8Codepoints = EncodingUtf8CodepointsFunc;
+}
+
 MTR_EXPORT void MTR_CALL mtrRequireFileWriteLine(mtrFileWriteLineFunc_t FileWriteLineFunc)
 {
     mtrFileWriteLine = FileWriteLineFunc;
