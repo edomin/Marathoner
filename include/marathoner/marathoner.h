@@ -10,6 +10,8 @@
 #endif
 #include <stdlib.h> /* for malloc */
 
+#define UNUSED(expr) do { (void)(expr); } while (0)
+
 /* Report of loaded dll-plugin */
 typedef struct mtrReport{
     char    *moduleID;

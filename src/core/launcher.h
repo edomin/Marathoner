@@ -66,6 +66,4 @@ bool keysPrevious[256];
 
 bool *lchrPluginEnabled;
 
-#define UNUSED(expr) do { (void)(expr); } while (0)
-
 #endif
