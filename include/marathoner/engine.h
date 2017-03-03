@@ -75,6 +75,11 @@ mtrRequireIndexkeeperDestroyFunc mtrRequireIndexkeeperDestroy;
 typedef void (MTR_CALL * mtrRequireFileWriteLineFunc)(mtrFileWriteLineFunc_t);
 mtrRequireFileWriteLineFunc mtrRequireFileWriteLine;
 
+typedef void (MTR_CALL * mtrRequireClipboardPutTextFunc)(mtrClipboardPutTextFunc_t);
+mtrRequireClipboardPutTextFunc mtrRequireClipboardPutText;
+typedef void (MTR_CALL * mtrRequireClipboardGetTextFunc)(mtrClipboardGetTextFunc_t);
+mtrRequireClipboardGetTextFunc mtrRequireClipboardGetText;
+
 typedef void (MTR_CALL * mtrRequireEncodingUtf8ToUcs4Func)(mtrEncodingUtf8ToUcs4Func_t);
 mtrRequireEncodingUtf8ToUcs4Func mtrRequireEncodingUtf8ToUcs4;
 

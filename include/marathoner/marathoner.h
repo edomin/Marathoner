@@ -99,6 +99,9 @@ typedef size_t      (MTR_CALL * mtrEncodingUtf8ToUcs4Func_t)(const char *,
 typedef void        (MTR_CALL * mtrFileWriteLineFunc_t)(const char *,
  const char *, int);
 
+typedef bool        (MTR_CALL * mtrClipboardPutTextFunc_t)(const char *);
+typedef char *      (MTR_CALL * mtrClipboardGetTextFunc_t)(void);
+
 /* loaded dll-plugin data */
 mtrPlugin *mtrPluginData;
 

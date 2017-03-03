@@ -69,6 +69,9 @@ mtrEncodingUtf8ToUcs4Func_t         mtrEncodingUtf8ToUcs4;
 
 mtrFileWriteLineFunc_t              mtrFileWriteLine;
 
+mtrClipboardPutTextFunc_t           mtrClipboardPutText;
+mtrClipboardGetTextFunc_t           mtrClipboardGetText;
+
 uint8_t mtrPluginsCount;
 
 #define MTR_FIND_FUNCTION(function, module)                        \

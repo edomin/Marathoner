@@ -163,6 +163,16 @@ MTR_EXPORT void MTR_CALL mtrRequireFileWriteLine(mtrFileWriteLineFunc_t FileWrit
     mtrFileWriteLine = FileWriteLineFunc;
 }
 
+MTR_EXPORT void MTR_CALL mtrRequireClipboardPutText(mtrClipboardPutTextFunc_t ClipboardPutTextFunc)
+{
+    mtrClipboardPutText = ClipboardPutTextFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireClipboardGetText(mtrClipboardGetTextFunc_t ClipboardGetTextFunc)
+{
+    mtrClipboardGetText = ClipboardGetTextFunc;
+}
+
 MTR_EXPORT void MTR_CALL mtrRequirePluginData(mtrPlugin* pluginData,
  uint8_t pluginsCount)
 {

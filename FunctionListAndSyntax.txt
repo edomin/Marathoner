@@ -32,6 +32,9 @@ void Notify(const char *message, uint8_t level, uint8_t messageType)
 
 void FileWriteLine(const char* filename, const char *text, uint8_t mode)
 
+bool ClipboardPutText(const char* text)
+const char *ClipboardGetText()
+
 bool ScreenInit(int width, int height)
 void ScreenQuit()
 void ScreenFlip()

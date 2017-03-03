@@ -11,7 +11,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "lazy_winapi.h"
 #define NK_INCLUDE_FIXED_TYPES
 #define NK_INCLUDE_STANDARD_IO
 #define NK_INCLUDE_STANDARD_VARARGS
@@ -25,6 +24,7 @@
 #include "notification.h"
 #include "configfile.h"
 #include "messagebox.h"
+#include "clipboard.h"
 #include "plugin_loader.h"
 #include "marathoner/marathoner.h"
 

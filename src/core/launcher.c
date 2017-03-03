@@ -27,16 +27,9 @@ NK_API nkTigrFont *nk_tigr_font_create_from_file(const char *file_name)
 
 NK_INTERN void nk_tigr_clipboard_paste(nk_handle usr, struct nk_text_edit *edit)
 {
-    size_t      length;
-    char       *text;
-    const DWORD format = CF_TEXT;
+    char *text;
 
-    Clipboard_open();
-    length = Clipboard_get_size(CF_TEXT);
-    text = malloc(length + sizeof(char));
-
-    Clipboard_get(format, (uint8_t*)text, length);
-    Clipboard_close();
+    text = mtrClipboardGetText();
 
     if (text)
         nk_textedit_paste(edit, text, nk_strlen(text));
@@ -57,9 +50,9 @@ NK_INTERN void nk_tigr_clipboard_copy(nk_handle usr, const char *text, int len)
         return;
     memcpy(str, text, (size_t)len);
     str[len] = '\0';
-    Clipboard_open();
-    Clipboard_set_string(str);
-    Clipboard_close();
+
+    mtrClipboardPutText(str);
+
     free(str);
 }
 
@@ -1000,14 +993,6 @@ int main(int argc, char** argv)
 
         if (nk_begin(ctx, "Main", nk_rect(0, 25, screen->w, screen->h - 25), NK_WINDOW_BORDER))
         {
-            //enum {EASY, HARD};
-            //static int op = EASY;
-            //static int property = 20;
-
-            //nk_layout_row_static(ctx, 30, 80, 1);
-            //if (nk_button_label(ctx, "button"))
-            //    fprintf(stdout, "button pressed\n");
-
             nk_layout_row_dynamic(ctx, 16, 1);
             nk_label_colored(ctx, "Autorun:", NK_TEXT_LEFT, headerColor);
 

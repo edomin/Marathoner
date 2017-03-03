@@ -6,6 +6,7 @@
 #include "file.h"
 #include "directory.h"
 #include "encoding.h"
+#include "clipboard.h"
 #include "plugin_loader.h"
 
 #include "marathoner/engine.h"
@@ -68,6 +69,8 @@ void RequireEngineFuncs(uint8_t plugin)
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireEncodingUtf8ToUcs4,
      mtrEncodingUtf8ToUcs4);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireFileWriteLine, mtrFileWriteLine);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireClipboardPutText, mtrClipboardPutText);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireClipboardGetText, mtrClipboardGetText);
 }
 
 int main(int argc, char** argv)

@@ -20,6 +20,7 @@ MTR_OBJS = $(OBJSDIR)/engine.o \
 	$(OBJSDIR)/encoding.o \
 	$(OBJSDIR)/file.o \
 	$(OBJSDIR)/directory.o \
+	$(OBJSDIR)/clipboard.o \
 	$(OBJSDIR)/plugin_loader.o
 
 LCHR_OBJS = $(OBJSDIR)/launcher.o \
@@ -28,6 +29,7 @@ LCHR_OBJS = $(OBJSDIR)/launcher.o \
 	$(OBJSDIR)/notification.o \
 	$(OBJSDIR)/configfile.o \
 	$(OBJSDIR)/directory.o \
+	$(OBJSDIR)/clipboard.o \
 	$(OBJSDIR)/plugin_loader.o
 
 ifeq ($(PLATFORM), win32)
@@ -68,7 +70,7 @@ ifeq ($(MOD), static)
 endif
 ifeq ($(MOD), plugin)
   ifeq ($(PLATFORM), win32)
-	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) $(MTR_OBJS) -lminini -Wl,-Bstatic -lutf8 -Wl,-Bstatic -ltinyfiledialogs -lole32 -lshlwapi
+	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) $(MTR_OBJS) -lminini -Wl,-Bstatic -lutf8 -Wl,-Bstatic -ltinyfiledialogs -lole32 -lshlwapi -llazy_winapi
   endif
   ifeq ($(PLATFORM), html5)
 	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) $(MTR_OBJS) -lminini -lutf8 --preload-file ../../plugin@/plugin --preload-file ../../Marathoner.cfg@/ --preload-file ../../autorun@/autorun -s TOTAL_MEMORY=134217728
@@ -113,6 +115,9 @@ $(OBJSDIR)/file.o: file.c file.h
 
 $(OBJSDIR)/directory.o: directory.c directory.h
 	$(CC) $(CFLAGS) $(INCDIRS) -c directory.c -o $(OBJSDIR)/directory.o
+
+$(OBJSDIR)/clipboard.o: clipboard.c clipboard.h
+	$(CC) $(CFLAGS) $(INCDIRS) -c clipboard.c -o $(OBJSDIR)/clipboard.o
 
 $(OBJSDIR)/plugin_loader.o: plugin_loader.c plugin_loader.h
 	$(CC) $(CFLAGS) $(INCDIRS) -c plugin_loader.c -o $(OBJSDIR)/plugin_loader.o
