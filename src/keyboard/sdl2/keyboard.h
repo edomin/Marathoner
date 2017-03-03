@@ -4,7 +4,6 @@
 #include "SDL2/SDL.h"
 
 #include "marathoner/plugin.h"
-#include "../common.h"
 
 typedef struct mtrKeyboard_t{
     const uint8_t *currentKeystate;
