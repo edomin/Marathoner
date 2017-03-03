@@ -31,9 +31,12 @@ MTR_EXPORT bool MTR_CALL mtrFontInit(uint32_t dmSize, uint32_t reservedCount)
 
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTtfLoad, "ttf");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTtfFree, "ttf");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTtfGetFontHeight, "ttf");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTtfGetStringWidth, "ttf");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTtfSetFontStyle, "ttf");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTtfSetFontOutline, "ttf");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTtfRenderString, "ttf");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTextureBlit_f, "texture");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTextureBlitRegion_f, "texture");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTextureReceivePixels, "texture");
 
@@ -230,4 +233,35 @@ MTR_EXPORT bool MTR_CALL mtrFontDrawMbfString_f(uint32_t fontNum,
     free(ucs4Text);
 
     return true;
+}
+
+MTR_EXPORT int MTR_CALL mtrFontGetHeight(uint32_t fontNum)
+{
+    mtrFont_t *font;
+    font = (mtrFont_t *)(&((mtrFont_t *)mtrFontKeeper->data)[fontNum]);
+    if (font->ttfIndex > 0)
+        return mtrTtfGetFontHeight(font->ttfIndex);
+    if (font->mbf != NULL)
+        return font->mbf->height;
+    return 0;
+}
+
+MTR_EXPORT int MTR_CALL mtrFontGetStringWidth(uint32_t fontNum,
+ const char *string)
+{
+    mtrFont_t *font;
+
+    font = (mtrFont_t *)(&((mtrFont_t *)mtrFontKeeper->data)[fontNum]);
+    if (font->ttfIndex > 0)
+        return mtrTtfGetStringWidth(font->ttfIndex, string);
+    if (font->mbf != NULL)
+        return font->mbf->width * mtrEncodingUtf8Codepoints(string);
+    return 0;
+}
+
+MTR_EXPORT char *MTR_CALL mtrFontGetName(uint32_t fontNum)
+{
+    mtrFont_t *font;
+    font = (mtrFont_t *)(&((mtrFont_t *)mtrFontKeeper->data)[fontNum]);
+    return font->name;
 }

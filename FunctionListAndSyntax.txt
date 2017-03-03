@@ -234,3 +234,6 @@ bool FontRenderTtfString(uint32_t fontNum, uint32_t texNum, uint8_t r, uint8_t g
 uint32_t FontCreateMbf(const char *name, int reservedTables, int width, int height)
 bool FontAddMbfTextureTable(uint32_t fontNum, uint32_t texNum, int tableNum)
 bool FontDrawMbfString_f(uint32_t fontNum, float x, float y, const char *string)
+int FontGetHeight(uint32_t fontNum)
+int FontGetStringWidth(uint32_t fontNum, const char *string)
+const char *FontGetName(uint32_t fontNum)

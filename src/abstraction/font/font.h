@@ -25,6 +25,13 @@ mtrTtfLoadFunc mtrTtfLoad;
 typedef void (MTR_CALL * mtrTtfFreeFunc)(uint32_t fontNum);
 mtrTtfFreeFunc mtrTtfFree;
 
+typedef int (MTR_CALL * mtrTtfGetFontHeightFunc)(uint32_t fontNum);
+mtrTtfGetFontHeightFunc mtrTtfGetFontHeight;
+
+typedef int (MTR_CALL * mtrTtfGetStringWidthFunc)(uint32_t fontNum,
+ const char *string);
+mtrTtfGetStringWidthFunc mtrTtfGetStringWidth;
+
 typedef void (MTR_CALL * mtrTtfSetFontStyleFunc)(uint32_t fontNum, int style);
 mtrTtfSetFontStyleFunc mtrTtfSetFontStyle;
 
