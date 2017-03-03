@@ -19,6 +19,7 @@
     #define MTR_SF_PUSH_SINGLE(value)                lua_pushnumber(mtrVm, (double)value)
     #define MTR_SF_PUSH_DOUBLE(value)                lua_pushnumber(mtrVm, value)
     #define MTR_SF_PUSH_STRING(value)                lua_pushstring(mtrVm, value)
+    #define MTR_SF_PUSH_LSTRING(value, len)          lua_pushlstring(mtrVm, value, len)
     #define MTR_SF_PUSH_NIL()                        lua_pushnil(mtrVm)
 #endif
 #ifdef _SQUIRREL_H_
