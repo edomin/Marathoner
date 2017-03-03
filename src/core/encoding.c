@@ -5,7 +5,7 @@ size_t MTR_CALL mtrEncodingUtf8ToUcs4(const char *utf8Text, uint32_t **ucs4Text)
     size_t len;
     size_t max;
     size_t n;
-    int illegal;
+    int    illegal;
 
     if (utf8Text == NULL)
         return 0;
