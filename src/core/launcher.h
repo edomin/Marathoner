@@ -18,7 +18,6 @@
 #define NK_IMPLEMENTATION
 #include "nuklear.h"
 #include "tigr.h"
-#include "tinyfiledialogs.h"
 
 #include "log.h"
 #include "notification.h"
