@@ -13,7 +13,7 @@ typedef struct mtrMouse_t{
     int y;
     int previousX;
     int previousY;
-    int  relativeWheel;
+    int relativeWheel;
 } mtrMouse_t;
 
 mtrMouse_t mtrMouse;

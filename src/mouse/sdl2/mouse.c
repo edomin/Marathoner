@@ -128,10 +128,25 @@ MTR_EXPORT bool MTR_CALL mtrMousePressed(int button)
     }
 }
 
-/* Dummy function for future compatibility */
 MTR_EXPORT int MTR_CALL mtrMouseGetWheelRelative(void)
 {
-    return 0;
+    SDL_Event events[32];
+    int       numEvents;
+    int       i;
+    int       wheelRel;
+
+    numEvents = SDL_PeepEvents(events, 32, SDL_GETEVENT, SDL_MOUSEWHEEL,
+     SDL_MOUSEWHEEL);
+
+    if (numEvents == 0)
+        return 0;
+
+    wheelRel = 0;
+    for (i = 0; i < numEvents; i++)
+        if (events[i].wheel.which != SDL_TOUCH_MOUSEID)
+            wheelRel += events[i].wheel.y;
+
+    return -wheelRel;
 }
 
 MTR_EXPORT int MTR_CALL mtrMouseGetX(void)
