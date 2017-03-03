@@ -50,6 +50,54 @@ MTR_SCRIPT_FUNC(mtrSF_TtfFree)
     return 0;
 }
 
+MTR_SCRIPT_FUNC(mtrSF_TtfGetFontHeight)
+{
+    uint32_t fontNum;
+    int      height;
+
+    MTR_SF_GET_UINT32(fontNum, 1);
+    height = mtrTtfGetFontHeight(fontNum);
+
+    MTR_SF_PUSH_INT(height);
+
+    return 1;
+}
+
+#ifndef _SQUIRREL_H_
+MTR_SCRIPT_FUNC(mtrSF_TtfGetStringSizes)
+{
+    uint32_t    fontNum;
+    const char *string;
+    int         width;
+    int         height;
+
+    MTR_SF_GET_UINT32(fontNum, 1);
+    MTR_SF_GET_STRING(string, 2);
+    mtrTtfGetStringSizes(fontNum, string, &width, &height);
+
+    MTR_SF_PUSH_INT(width);
+    MTR_SF_PUSH_INT(height);
+
+    return 2;
+}
+#endif
+
+MTR_SCRIPT_FUNC(mtrSF_TtfGetStringWidth)
+{
+    uint32_t    fontNum;
+    const char *string;
+    int         width;
+    int         height;
+
+    MTR_SF_GET_UINT32(fontNum, 1);
+    MTR_SF_GET_STRING(string, 2);
+    mtrTtfGetStringSizes(fontNum, string, &width, &height);
+
+    MTR_SF_PUSH_INT(width);
+
+    return 1;
+}
+
 MTR_SCRIPT_FUNC(mtrSF_TtfSetFontStyle)
 {
     uint32_t fontNum;
@@ -85,6 +133,11 @@ void mtrScriptsRegisterAll(void)
     MTR_FIND_FUNCTION(mtrTtfQuit, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrTtfLoad, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrTtfFree, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrTtfGetFontHeight, MTR_SOURCE_MODULE);
+    #ifndef _SQUIRREL_H_
+    MTR_FIND_FUNCTION(mtrTtfGetStringSizes, MTR_SOURCE_MODULE);
+    #endif
+    MTR_FIND_FUNCTION(mtrTtfGetStringWidth, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrTtfSetFontStyle, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrTtfSetFontOutline, MTR_SOURCE_MODULE);
 
@@ -101,6 +154,13 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterFunction(mtrSF_TtfQuit, "TtfQuit");
         mtrScriptsRegisterFunction(mtrSF_TtfLoad, "TtfLoad");
         mtrScriptsRegisterFunction(mtrSF_TtfFree, "TtfFree");
+        mtrScriptsRegisterFunction(mtrSF_TtfGetFontHeight, "TtfGetFontHeight");
+        #ifndef _SQUIRREL_H_
+        mtrScriptsRegisterFunction(mtrSF_TtfGetStringSizes,
+         "TtfGetStringSizes");
+        #endif
+        mtrScriptsRegisterFunction(mtrSF_TtfGetStringWidth,
+         "TtfGetStringWidth");
         mtrScriptsRegisterFunction(mtrSF_TtfSetFontStyle,
          "TtfSetFontStyle");
         mtrScriptsRegisterFunction(mtrSF_TtfSetFontOutline,

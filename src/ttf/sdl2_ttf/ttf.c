@@ -100,6 +100,51 @@ MTR_EXPORT uint32_t MTR_CALL mtrTtfLoad(const char *filename, int size)
     return 0;
 }
 
+MTR_EXPORT int MTR_CALL mtrTtfGetFontHeight(uint32_t fontNum)
+{
+    mtrTtf_t *font;
+    font = (mtrTtf_t *)(&((mtrTtf_t *)mtrTtfKeeper->data)[fontNum]);
+    if (font->font != NULL)
+        return TTF_FontHeight(font->font);
+    else
+        return 0;
+}
+
+MTR_EXPORT bool MTR_CALL mtrTtfGetStringSizes(uint32_t fontNum,
+ const char *string, int *w, int *h)
+{
+    mtrTtf_t *font;
+    font = (mtrTtf_t *)(&((mtrTtf_t *)mtrTtfKeeper->data)[fontNum]);
+    if (font->font == NULL || string == NULL)
+    {
+        if (w != NULL)
+            *w = 0;
+        if (h != NULL)
+            *h = 0;
+        return false;
+    }
+    if (TTF_SizeUTF8(font->font, string, w, h) == 0)
+        return true;
+    else
+        return false;
+}
+
+MTR_EXPORT int MTR_CALL mtrTtfGetStringWidth(uint32_t fontNum,
+ const char *string)
+{
+    mtrTtf_t *font;
+    int       width;
+    font = (mtrTtf_t *)(&((mtrTtf_t *)mtrTtfKeeper->data)[fontNum]);
+    if (font->font == NULL || string == NULL)
+    {
+        return 0;
+    }
+    if (TTF_SizeUTF8(font->font, string, &width, NULL) == 0)
+        return width;
+    else
+        return 0;
+}
+
 MTR_EXPORT void MTR_CALL mtrTtfSetFontStyle(uint32_t fontNum, int style)
 {
     mtrTtf_t *font;
