@@ -179,7 +179,7 @@ MTR_EXPORT mtrPixels_t *MTR_CALL mtrTtfRenderString(uint32_t fontNum, uint8_t r,
     mtrTtf_t        *font;
     SDL_Color        textcolor;
     SDL_Surface     *renderedSurface;
-    SDL_PixelFormat *pixelFormat;
+    int              success;
 
     if (tempSurface != NULL)
     {
@@ -200,16 +200,20 @@ MTR_EXPORT mtrPixels_t *MTR_CALL mtrTtfRenderString(uint32_t fontNum, uint8_t r,
         if (renderedSurface == NULL)
             return NULL;
 
-        pixelFormat = SDL_AllocFormat(SDL_PIXELFORMAT_RGBA8888);
+        tempSurface = SDL_CreateRGBSurface(SDL_SWSURFACE, renderedSurface->w,
+         renderedSurface->h, 32, 0xFF000000, 0x00FF0000, 0x0000FF00,
+         0x000000FF);
+        if (tempSurface == NULL)
+        {
+            SDL_FreeSurface(renderedSurface);
+            return NULL;
+        }
 
-        tempSurface = SDL_ConvertSurface(renderedSurface,
-         pixelFormat, 0);
-
-        SDL_FreeFormat(pixelFormat);
+        success = SDL_UpperBlit(renderedSurface, NULL, tempSurface, NULL);
 
         SDL_FreeSurface(renderedSurface);
 
-        if (tempSurface == NULL)
+        if (success == -1)
             return NULL;
 
         tempPixels = malloc(sizeof(mtrPixels_t));
