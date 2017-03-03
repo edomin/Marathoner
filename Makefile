@@ -52,6 +52,9 @@ ABSTRACTION_SPRITE_SQUIRREL = abstraction/sprite_squirrel
 ABSTRACTION_FONT = abstraction/font
 ABSTRACTION_FONT_LUA = abstraction/font_lua
 ABSTRACTION_FONT_SQUIRREL = abstraction/font_squirrel
+ABSTRACTION_GUI = abstraction/gui
+ABSTRACTION_GUI_LUA = abstraction/gui_lua
+ABSTRACTION_GUI_SQUIRREL = abstraction/gui_squirrel
 
 all: $(PLATFORM)
 
@@ -107,6 +110,9 @@ win32: prebuild
 	make -C src/$(ABSTRACTION_FONT) PREFIX=$(PREFIX)
 	make -C src/$(ABSTRACTION_FONT_LUA) PREFIX=$(PREFIX)
 	make -C src/$(ABSTRACTION_FONT_SQUIRREL) PREFIX=$(PREFIX)
+	make -C src/$(ABSTRACTION_GUI) PREFIX=$(PREFIX)
+	make -C src/$(ABSTRACTION_GUI_LUA) PREFIX=$(PREFIX)
+	make -C src/$(ABSTRACTION_GUI_SQUIRREL) PREFIX=$(PREFIX)
 	make -C src/core PREFIX=$(PREFIX)
 
 html5: prebuild
