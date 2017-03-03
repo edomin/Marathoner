@@ -80,7 +80,13 @@ void mtrScriptsInit(void)
 
     mtrScriptsRegisterFunction(mtrSF_Notify, "Notify");
 
+    mtrScriptsRegisterFunction(mtrSF_EncodingUtf8Codepoints,
+     "EncodingUtf8Codepoints");
+
     mtrScriptsRegisterFunction(mtrSF_FileWriteLine, "FileWriteLine");
+
+    mtrScriptsRegisterFunction(mtrSF_ClipboardPutText, "ClipboardPutText");
+    mtrScriptsRegisterFunction(mtrSF_ClipboardGetText, "ClipboardGetText");
 
     mtrLogWrite("Script functions and constants of engine registered",
      1, MTR_LMT_INFO);

@@ -3,6 +3,12 @@
 
 #include "marathoner/script_func.h"
 
+/*
+TODO:
+ShowSaveFileDialog
+ShowOpenFileDialog
+*/
+
 MTR_SCRIPT_FUNC(mtrSF_ScriptsRegisterStringVariable)
 {
     const char *varName;
@@ -381,12 +387,6 @@ MTR_SCRIPT_FUNC(mtrSF_ShowPasswordDialog)
     return 1;
 }
 
-/*
-TODO:
-ShowSaveFileDialog
-ShowOpenFileDialog
-*/
-
 MTR_SCRIPT_FUNC(mtrSF_ShowSelectFolderDialog)
 {
     const char *title;
@@ -416,6 +416,19 @@ MTR_SCRIPT_FUNC(mtrSF_Notify)
     return 0;
 }
 
+MTR_SCRIPT_FUNC(mtrSF_EncodingUtf8Codepoints)
+{
+    const char *string;
+    uint32_t    codepoints;
+
+    MTR_SF_GET_STRING(string, 1);
+    codepoints = mtrEncodingUtf8Codepoints(string);
+
+    MTR_SF_PUSH_UINT32(codepoints);
+
+    return 1;
+}
+
 MTR_SCRIPT_FUNC(mtrSF_FileWriteLine)
 {
     const char *filename;
@@ -428,6 +441,30 @@ MTR_SCRIPT_FUNC(mtrSF_FileWriteLine)
     mtrFileWriteLine(filename, string, mode);
 
     return 0;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_ClipboardPutText)
+{
+    const char *text;
+    bool        success;
+
+    MTR_SF_GET_STRING(text, 1);
+    success = mtrClipboardPutText(text);
+
+    MTR_SF_PUSH_BOOL(success);
+
+    return 1;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_ClipboardGetText)
+{
+    char *text;
+
+    text = mtrClipboardGetText();
+
+    MTR_SF_PUSH_STRING(text);
+
+    return 1;
 }
 
 #endif
