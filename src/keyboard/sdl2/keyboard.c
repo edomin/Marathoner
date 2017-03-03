@@ -116,3 +116,18 @@ MTR_EXPORT bool MTR_CALL mtrKeyboardPressed(int key)
         return false;
     }
 }
+
+MTR_EXPORT char *MTR_CALL mtrKeyboardInputChar(void)
+{
+    SDL_Event  event;
+    int        numEvents;
+
+    numEvents = SDL_PeepEvents(&event, 1, SDL_GETEVENT, SDL_TEXTINPUT,
+     SDL_TEXTINPUT);
+
+    if (numEvents == 0)
+        return NULL;
+
+    return memcpy(mtrKeyboard.utf8char, event.text.text,
+     SDL_TEXTINPUTEVENT_TEXT_SIZE);
+}

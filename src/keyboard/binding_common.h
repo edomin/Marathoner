@@ -16,4 +16,7 @@ mtrKeyboardReleaseFunc mtrKeyboardRelease;
 typedef bool (MTR_CALL * mtrKeyboardPressedFunc)(int);
 mtrKeyboardPressedFunc mtrKeyboardPressed;
 
+typedef char *(MTR_CALL * mtrKeyboardInputCharFunc)(void);
+mtrKeyboardInputCharFunc mtrKeyboardInputChar;
+
 #endif

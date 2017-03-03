@@ -60,6 +60,19 @@ MTR_SCRIPT_FUNC(mtrSF_KeyboardPressed)
     return 1;
 }
 
+MTR_SCRIPT_FUNC(mtrSF_KeyboardInputChar)
+{
+    char *utf8char;
+
+    utf8char = mtrKeyboardInputChar();
+    if (utf8char == NULL)
+        MTR_SF_PUSH_NIL();
+    else
+        MTR_SF_PUSH_STRING(utf8char);
+
+    return 1;
+}
+
 void mtrScriptsRegisterAll(void)
 {
     bool ok;
@@ -72,6 +85,7 @@ void mtrScriptsRegisterAll(void)
     MTR_FIND_FUNCTION(mtrKeyboardPress, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrKeyboardRelease, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrKeyboardPressed, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrKeyboardInputChar, MTR_SOURCE_MODULE);
 
     if (ok)
     {
@@ -338,6 +352,7 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterFunction(mtrSF_KeyboardPress, "KeyboardPress");
         mtrScriptsRegisterFunction(mtrSF_KeyboardRelease, "KeyboardRelease");
         mtrScriptsRegisterFunction(mtrSF_KeyboardPressed, "KeyboardPressed");
+        mtrScriptsRegisterFunction(mtrSF_KeyboardInputChar, "KeyboardInputChar");
     }
     else
     {

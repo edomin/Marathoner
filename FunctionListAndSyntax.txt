@@ -173,6 +173,7 @@ void KeyboardRefresh()
 bool KeyboardPress(int key)
 bool KeyboardRelease(int key)
 bool KeyboardPressed(int key)
+const char *KeyboardInputChar()
 
 bool MouseInit()
 void MouseRefresh()
