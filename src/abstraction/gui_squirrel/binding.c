@@ -37,6 +37,7 @@ MTR_EXPORT void MTR_CALL mtrPluginInit(void)
      sq_getversion());
 
     MTR_FIND_FUNCTION(mtrScriptsRegisterFunction, "Script_Squirrel");
+    MTR_FIND_FUNCTION(mtrScriptsRegisterNumericVariable, "Script_Squirrel");
     MTR_FIND_FUNCTION(mtrScriptsGetVm, "Script_Squirrel");
 
     if (ok)

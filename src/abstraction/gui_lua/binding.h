@@ -16,4 +16,8 @@ mtrScriptsGetVmFunc mtrScriptsGetVm;
 typedef void (MTR_CALL * mtrScriptsRegisterFunctionFunc)(lua_CFunction, char *);
 mtrScriptsRegisterFunctionFunc mtrScriptsRegisterFunction;
 
+typedef void (MTR_CALL * mtrScriptsRegisterNumericVariableFunc)(
+ const char *name, double value);
+mtrScriptsRegisterNumericVariableFunc mtrScriptsRegisterNumericVariable;
+
 #endif

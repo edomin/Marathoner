@@ -35,6 +35,7 @@ MTR_EXPORT void MTR_CALL mtrPluginInit(void)
      LUA_RELEASE);
 
     MTR_FIND_FUNCTION(mtrScriptsRegisterFunction, "Script_Lua");
+    MTR_FIND_FUNCTION(mtrScriptsRegisterNumericVariable, "Script_Lua");
     MTR_FIND_FUNCTION(mtrScriptsGetVm, "Script_Lua");
 
     if (ok)

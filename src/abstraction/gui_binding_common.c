@@ -771,6 +771,66 @@ void mtrScriptsRegisterAll(void)
 
     if (ok)
     {
+        mtrScriptsRegisterNumericVariable("GUI_WINDOW_BORDER",
+         MTR_GUI_WINDOW_BORDER);
+        mtrScriptsRegisterNumericVariable("GUI_WINDOW_MOVABLE",
+         MTR_GUI_WINDOW_MOVABLE);
+        mtrScriptsRegisterNumericVariable("GUI_WINDOW_SCALABLE",
+         MTR_GUI_WINDOW_SCALABLE);
+        mtrScriptsRegisterNumericVariable("GUI_WINDOW_CLOSABLE",
+         MTR_GUI_WINDOW_CLOSABLE);
+        mtrScriptsRegisterNumericVariable("GUI_WINDOW_MINIMIZABLE",
+         MTR_GUI_WINDOW_MINIMIZABLE);
+        mtrScriptsRegisterNumericVariable("GUI_WINDOW_NO_SCROLLBAR",
+         MTR_GUI_WINDOW_NO_SCROLLBAR);
+        mtrScriptsRegisterNumericVariable("GUI_WINDOW_TITLE",
+         MTR_GUI_WINDOW_TITLE);
+        mtrScriptsRegisterNumericVariable("GUI_WINDOW_SCROLL_AUTO_HIDE",
+         MTR_GUI_WINDOW_SCROLL_AUTO_HIDE);
+        mtrScriptsRegisterNumericVariable("GUI_WINDOW_BACKGROUND",
+         MTR_GUI_WINDOW_BACKGROUND);
+        mtrScriptsRegisterNumericVariable("GUI_WINDOW_SCALE_LEFT",
+         MTR_GUI_WINDOW_SCALE_LEFT);
+
+        mtrScriptsRegisterNumericVariable("GUI_TEXT_ALIGN_LEFT",
+         MTR_GUI_TEXT_ALIGN_LEFT);
+        mtrScriptsRegisterNumericVariable("GUI_TEXT_ALIGN_CENTERED",
+         MTR_GUI_TEXT_ALIGN_CENTERED);
+        mtrScriptsRegisterNumericVariable("GUI_TEXT_ALIGN_RIGHT",
+         MTR_GUI_TEXT_ALIGN_RIGHT);
+        mtrScriptsRegisterNumericVariable("GUI_TEXT_ALIGN_TOP",
+         MTR_GUI_TEXT_ALIGN_TOP);
+        mtrScriptsRegisterNumericVariable("GUI_TEXT_ALIGN_MIDDLE",
+         MTR_GUI_TEXT_ALIGN_MIDDLE);
+        mtrScriptsRegisterNumericVariable("GUI_TEXT_ALIGN_BOTTOM",
+         MTR_GUI_TEXT_ALIGN_BOTTOM);
+
+        mtrScriptsRegisterNumericVariable("GUI_SYMBOL_NONE",
+         MTR_GUI_SYMBOL_NONE);
+        mtrScriptsRegisterNumericVariable("GUI_SYMBOL_X", MTR_GUI_SYMBOL_X);
+        mtrScriptsRegisterNumericVariable("GUI_SYMBOL_UNDERSCORE",
+         MTR_GUI_SYMBOL_UNDERSCORE);
+        mtrScriptsRegisterNumericVariable("GUI_SYMBOL_CIRCLE_SOLID",
+         MTR_GUI_SYMBOL_CIRCLE_SOLID);
+        mtrScriptsRegisterNumericVariable("GUI_SYMBOL_CIRCLE_OUTLINE",
+         MTR_GUI_SYMBOL_CIRCLE_OUTLINE);
+        mtrScriptsRegisterNumericVariable("GUI_SYMBOL_RECT_SOLID",
+         MTR_GUI_SYMBOL_RECT_SOLID);
+        mtrScriptsRegisterNumericVariable("GUI_SYMBOL_RECT_OUTLINE",
+         MTR_GUI_SYMBOL_RECT_OUTLINE);
+        mtrScriptsRegisterNumericVariable("GUI_SYMBOL_TRIANGLE_UP",
+         MTR_GUI_SYMBOL_TRIANGLE_UP);
+        mtrScriptsRegisterNumericVariable("GUI_SYMBOL_TRIANGLE_DOWN",
+         MTR_GUI_SYMBOL_TRIANGLE_DOWN);
+        mtrScriptsRegisterNumericVariable("GUI_SYMBOL_TRIANGLE_LEFT",
+         MTR_GUI_SYMBOL_TRIANGLE_LEFT);
+        mtrScriptsRegisterNumericVariable("GUI_SYMBOL_TRIANGLE_RIGHT",
+         MTR_GUI_SYMBOL_TRIANGLE_RIGHT);
+        mtrScriptsRegisterNumericVariable("GUI_SYMBOL_PLUS",
+         MTR_GUI_SYMBOL_PLUS);
+        mtrScriptsRegisterNumericVariable("GUI_SYMBOL_MINUS",
+         MTR_GUI_SYMBOL_MINUS);
+
         mtrScriptsRegisterFunction(mtrSF_GuiInit, "GuiInit");
         mtrScriptsRegisterFunction(mtrSF_GuiQuit, "GuiQuit");
         mtrScriptsRegisterFunction(mtrSF_GuiProcessEvents, "GuiProcessEvents");
