@@ -14,3 +14,7 @@ Marathoner/*
 *.rc
 *.exe
 README-SDL.txt
+autorun/*
+
+hello.nut
+Marathoner.cfg
