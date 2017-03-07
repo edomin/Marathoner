@@ -184,6 +184,36 @@ MTR_EXPORT void MTR_CALL mtrScreenFlip(void)
     SDL_RenderPresent(mtrScreen->renderer);
 }
 
+MTR_EXPORT void MTR_CALL mtrScreenGetSizes(int *w, int *h)
+{
+    int width;
+    int height;
+
+    SDL_GetRendererOutputSize(mtrScreen->renderer, &width, &height);
+    if (w != NULL)
+        *w = width;
+    if (h != NULL)
+        *h = height;
+}
+
+MTR_EXPORT int MTR_CALL mtrScreenGetWidth(void)
+{
+    int width;
+    int height;
+
+    SDL_GetRendererOutputSize(mtrScreen->renderer, &width, &height);
+    return width;
+}
+
+MTR_EXPORT int MTR_CALL mtrScreenGetHeight(void)
+{
+    int width;
+    int height;
+
+    SDL_GetRendererOutputSize(mtrScreen->renderer, &width, &height);
+    return height;
+}
+
 MTR_EXPORT mtrScreen_t *MTR_CALL mtrGetScreen(void)
 {
     return mtrScreen;

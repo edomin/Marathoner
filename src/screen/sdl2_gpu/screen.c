@@ -56,6 +56,36 @@ MTR_EXPORT void MTR_CALL mtrScreenFlip(void)
     GPU_Flip(mtrScreen->screen);
 }
 
+MTR_EXPORT void MTR_CALL mtrScreenGetSizes(int *w, int *h)
+{
+    uint16_t width;
+    uint16_t height;
+
+    GPU_GetVirtualResolution(mtrScreen->screen, &width, &height);
+    if (w != NULL)
+        *w = width;
+    if (h != NULL)
+        *h = height;
+}
+
+MTR_EXPORT int MTR_CALL mtrScreenGetWidth(void)
+{
+    uint16_t width;
+    uint16_t height;
+
+    GPU_GetVirtualResolution(mtrScreen->screen, &width, &height);
+    return width;
+}
+
+MTR_EXPORT int MTR_CALL mtrScreenGetHeight(void)
+{
+    uint16_t width;
+    uint16_t height;
+
+    GPU_GetVirtualResolution(mtrScreen->screen, &width, &height);
+    return height;
+}
+
 MTR_EXPORT mtrScreen_t *MTR_CALL mtrGetScreen(void)
 {
     return mtrScreen;
