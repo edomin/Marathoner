@@ -16,6 +16,18 @@ typedef struct mtrNkFont {
     uint32_t            font;
 } mtrNkFont;
 
+typedef struct mtrNkImage {
+    struct nk_image nk;
+    int             width;
+    int             height;
+    uint32_t        texture;
+} mtrNkImage;
+
+typedef struct mtrNkSb {
+    char *string;
+    int   maxlen;
+} mtrNkSb;
+
 static struct mtrNkGui {
 //    Tigr             *dsp;
 //    Tigr             *backdrop;
@@ -26,6 +38,10 @@ static struct mtrNkGui {
     struct nk_context ctx;
     struct nk_buffer  cmds;
 } mtrNkGui;
+
+mtrIndexkeeper_t *mtrGuiFontKeeper;
+mtrIndexkeeper_t *mtrGuiImageKeeper;
+mtrIndexkeeper_t *mtrGuiStringBufferKeeper;
 
 typedef bool (MTR_CALL * mtrFontDrawMbfString_fFunc)(uint32_t fontNum, float x,
  float y, const char *string);

@@ -5,11 +5,24 @@
 
 MTR_SCRIPT_FUNC(mtrSF_GuiInit)
 {
+    uint32_t fontDmSize;
+    uint32_t fontReservedCount;
+    uint32_t imageDmSize;
+    uint32_t imageReservedCount;
+    uint32_t sbDmSize;
+    uint32_t sbReservedCount;
     uint32_t fontnum;
     bool     success;
 
-    MTR_SF_GET_UINT32(fontnum, 1);
-    success = mtrGuiInit(fontnum);
+    MTR_SF_GET_UINT32(fontDmSize, 1);
+    MTR_SF_GET_UINT32(fontReservedCount, 2);
+    MTR_SF_GET_UINT32(imageDmSize, 3);
+    MTR_SF_GET_UINT32(imageReservedCount, 4);
+    MTR_SF_GET_UINT32(sbDmSize, 5);
+    MTR_SF_GET_UINT32(sbReservedCount, 6);
+    MTR_SF_GET_UINT32(fontnum, 7);
+    success = mtrGuiInit(fontDmSize, fontReservedCount, imageDmSize,
+     imageReservedCount, sbDmSize, sbReservedCount, fontnum);
 
     MTR_SF_PUSH_BOOL(success);
 

@@ -238,7 +238,7 @@ int FontGetHeight(uint32_t fontNum)
 int FontGetStringWidth(uint32_t fontNum, const char *string)
 const char *FontGetName(uint32_t fontNum)
 
-bool GuiInit(uint32_t fontnum)
+bool GuiInit(uint32_t fontDmSize, uint32_t fontReservedCount, uint32_t imageDmSize, uint32_t imageReservedCount, uint32_t sbDmSize, uint32_t sbReservedCount, uint32_t fontnum)
 void GuiQuit()
 void GuiProcessEvents()
 void GuiRender()

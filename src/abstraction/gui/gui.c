@@ -98,13 +98,14 @@ NK_INTERN void mtrNkClipboardCopy(nk_handle usr, const char *text, int len)
     free(str);
 }
 
-NK_API struct nk_context* mtrNkInit(mtrNkFont *nkFont, unsigned int width,
+NK_API struct nk_context* mtrNkInit(uint32_t fontnum, unsigned int width,
  unsigned int height)
 {
+    mtrNkFont           *nkFont;
     struct nk_user_font *font;
 
-    if (nkFont == NULL)
-        return NULL;
+    nkFont = (mtrNkFont *)(&((mtrNkFont *)mtrGuiFontKeeper->data)[fontnum]);
+
     font = &nkFont->nk;
     font->userdata = nk_handle_ptr(nkFont);
     font->height = nkFont->height;
@@ -115,7 +116,7 @@ NK_API struct nk_context* mtrNkInit(mtrNkFont *nkFont, unsigned int width,
     mtrNkGui.is_touch_down = 0;
     mtrNkGui.touch_down_id = -1;
 
-    nk_init_default(&mtrNkGui.ctx, font);
+    nk_init_default(&mtrNkGui.ctx, &nkFont->nk);
     mtrNkGui.ctx.clip.copy = mtrNkClipboardCopy;
     mtrNkGui.ctx.clip.paste = mtrNkClipboardPaste;
     mtrNkGui.ctx.clip.userdata = nk_handle_ptr(0);
@@ -225,9 +226,11 @@ void mtrNkHandleEvents(void)
     }
 }
 
-MTR_EXPORT bool MTR_CALL mtrGuiInit(uint32_t fontnum)
+MTR_EXPORT bool MTR_CALL mtrGuiInit(uint32_t fontDmSize,
+ uint32_t fontReservedCount, uint32_t imageDmSize, uint32_t imageReservedCount,
+ uint32_t sbDmSize, uint32_t sbReservedCount, uint32_t fontnum)
 {
-    mtrNkFont *font;
+    uint32_t nkFontNum;
     int screenWidth;
     int screenHeight;
     bool ok;
@@ -240,6 +243,8 @@ MTR_EXPORT bool MTR_CALL mtrGuiInit(uint32_t fontnum)
     MTR_FIND_FUNCTION(mtrFontGetStringWidth, "Abstraction_font");
     MTR_FIND_FUNCTION(mtrFontGetName, "Abstraction_font");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrScreenGetSizes, "screen");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTextureBlitRegionScaled_f, "texture");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTextureGetSizes, "texture");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrPrimitiveLine_rgba_f, "primitive");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrPrimitiveArc_rgba_f, "primitive");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrPrimitiveCircle_rgba_f, "primitive");
@@ -270,21 +275,46 @@ MTR_EXPORT bool MTR_CALL mtrGuiInit(uint32_t fontnum)
         return false;
     }
 
-    font = mtrNkAddFont(fontnum);
-    if (font != NULL)
+    mtrGuiFontKeeper = (mtrIndexkeeper_t *)mtrIndexkeeperCreate(fontDmSize,
+     fontReservedCount, sizeof(mtrNkFont));
+    if (mtrGuiFontKeeper == NULL)
     {
-//        mtrLogWrite_s("Font for GUI added", 1, MTR_LMT_INFO,
-//         mtrFontGetName(fontnum));
-        mtrLogWrite("Font for GUI added", 1, MTR_LMT_INFO);
-    }
-    else
-    {
-        mtrNotify("Unable to add font to GUI", 1, MTR_LMT_FATAL);
+        mtrNotify("Unable to create indexkeeper structure for gui fonts", 1,
+         MTR_LMT_FATAL);
         return false;
     }
+    else
+        mtrLogWrite("Indexkeeper structure for gui fonts created", 1,
+         MTR_LMT_INFO);
+
+    mtrGuiImageKeeper = (mtrIndexkeeper_t *)mtrIndexkeeperCreate(imageDmSize,
+     imageReservedCount, sizeof(mtrNkImage));
+    if (mtrGuiImageKeeper == NULL)
+    {
+        mtrNotify("Unable to create indexkeeper structure for gui images", 1,
+         MTR_LMT_FATAL);
+        return false;
+    }
+    else
+        mtrLogWrite("Indexkeeper structure for gui images created", 1,
+         MTR_LMT_INFO);
+
+    mtrGuiStringBufferKeeper = (mtrIndexkeeper_t *)mtrIndexkeeperCreate(sbDmSize,
+     sbReservedCount, sizeof(mtrNkSb));
+    if (mtrGuiStringBufferKeeper == NULL)
+    {
+        mtrNotify("Unable to create indexkeeper structure for gui's string "
+         "buffers", 1, MTR_LMT_FATAL);
+        return false;
+    }
+    else
+        mtrLogWrite("Indexkeeper structure for guis string buffers created", 1,
+         MTR_LMT_INFO);
+
+    nkFontNum = mtrGuiAddFont(fontnum);
 
     mtrScreenGetSizes(&screenWidth, &screenHeight);
-    if (mtrNkInit(font, screenWidth, screenHeight) == NULL)
+    if (mtrNkInit(nkFontNum, screenWidth, screenHeight) == NULL)
     {
         mtrNotify("Unable to create nuklear context", 1, MTR_LMT_FATAL);
         return false;

@@ -1,7 +1,8 @@
 #ifndef MTR_ABSTRACTION_GUI_BINDING_COMMON_H
 #define MTR_ABSTRACTION_GUI_BINDING_COMMON_H
 
-typedef bool (MTR_CALL * mtrGuiInitFunc)(uint32_t);
+typedef bool (MTR_CALL * mtrGuiInitFunc)(uint32_t, uint32_t, uint32_t, uint32_t,
+ uint32_t, uint32_t, uint32_t);
 mtrGuiInitFunc mtrGuiInit;
 
 typedef void (MTR_CALL * mtrGuiQuitFunc)(void);
