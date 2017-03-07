@@ -50,6 +50,85 @@ MTR_SCRIPT_FUNC(mtrSF_GuiRender)
     return 0;
 }
 
+MTR_SCRIPT_FUNC(mtrSF_GuiAddFont)
+{
+    uint32_t font;
+    uint32_t guiFont;
+
+    MTR_SF_GET_UINT32(font, 1);
+    guiFont = mtrGuiAddFont(font);
+
+    MTR_SF_PUSH_UINT32(guiFont);
+
+    return 1;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_GuiAddImage)
+{
+    uint32_t texnum;
+    int      x;
+    int      y;
+    int      w;
+    int      h;
+    uint32_t image;
+
+    MTR_SF_GET_UINT32(texnum, 1);
+    MTR_SF_GET_INT(x, 2);
+    MTR_SF_GET_INT(y, 3);
+    MTR_SF_GET_INT(w, 4);
+    MTR_SF_GET_INT(h, 5);
+    image = mtrGuiAddImage(texnum, x, y, w, h);
+
+    MTR_SF_PUSH_UINT32(image);
+
+    return 1;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_GuiAddStringBuffer)
+{
+    const char *initialString;
+    uint32_t    sb;
+    int         maxlen;
+
+    MTR_SF_GET_STRING(initialString, 1);
+    MTR_SF_GET_INT(maxlen, 2);
+    sb = mtrGuiAddStringBuffer(initialString, maxlen);
+
+    MTR_SF_PUSH_UINT32(sb);
+
+    return 1;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_GuiDeleteFont)
+{
+    uint32_t font;
+
+    MTR_SF_GET_UINT32(font, 1);
+    mtrGuiDeleteFont(font);
+
+    return 0;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_GuiDeleteImage)
+{
+    uint32_t image;
+
+    MTR_SF_GET_UINT32(image, 1);
+    mtrGuiDeleteImage(image);
+
+    return 0;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_GuiDeleteStringBuffer)
+{
+    uint32_t sb;
+
+    MTR_SF_GET_UINT32(sb, 1);
+    mtrGuiDeleteStringBuffer(sb);
+
+    return 0;
+}
+
 MTR_SCRIPT_FUNC(mtrSF_GuiBegin)
 {
     const char *title;
@@ -170,6 +249,104 @@ MTR_SCRIPT_FUNC(mtrSF_GuiButtonColor_rgba)
     return 1;
 }
 
+MTR_SCRIPT_FUNC(mtrSF_GuiButtonSymbol)
+{
+    int  symbol;
+    bool pressed;
+
+    MTR_SF_GET_INT(symbol, 1);
+    pressed = mtrGuiButtonSymbol(symbol);
+
+    MTR_SF_PUSH_BOOL(pressed);
+
+    return 1;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_GuiButtonSymbolLabel)
+{
+    int         symbol;
+    const char *string;
+    int         alignment;
+    bool        pressed;
+
+    MTR_SF_GET_INT(symbol, 1);
+    MTR_SF_GET_STRING(string, 2);
+    MTR_SF_GET_INT(alignment, 3);
+    pressed = mtrGuiButtonSymbolLabel(symbol, string, alignment);
+
+    MTR_SF_PUSH_BOOL(pressed);
+
+    return 1;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_GuiButtonSymbolText)
+{
+    int         symbol;
+    const char *string;
+    int         len;
+    int         alignment;
+    bool        pressed;
+
+    MTR_SF_GET_INT(symbol, 1);
+    MTR_SF_GET_STRING(string, 2);
+    MTR_SF_GET_INT(len, 3);
+    MTR_SF_GET_INT(alignment, 4);
+    pressed = mtrGuiButtonSymbolText(symbol, string, len, alignment);
+
+    MTR_SF_PUSH_BOOL(pressed);
+
+    return 1;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_GuiButtonImage)
+{
+    uint32_t imagenum;
+    bool     pressed;
+
+    MTR_SF_GET_UINT32(imagenum, 1);
+    pressed = mtrGuiButtonImage(imagenum);
+
+    MTR_SF_PUSH_BOOL(pressed);
+
+    return 1;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_GuiButtonImageLabel)
+{
+    uint32_t    imagenum;
+    const char *string;
+    int         alignment;
+    bool        pressed;
+
+    MTR_SF_GET_UINT32(imagenum, 1);
+    MTR_SF_GET_STRING(string, 2);
+    MTR_SF_GET_INT(alignment, 3);
+    pressed = mtrGuiButtonImageLabel(imagenum, string, alignment);
+
+    MTR_SF_PUSH_BOOL(pressed);
+
+    return 1;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_GuiButtonImageText)
+{
+    uint32_t    imagenum;
+    const char *string;
+    int         len;
+    int         alignment;
+    bool        pressed;
+
+    MTR_SF_GET_UINT32(imagenum, 1);
+    MTR_SF_GET_STRING(string, 2);
+    MTR_SF_GET_INT(len, 3);
+    MTR_SF_GET_INT(alignment, 4);
+    pressed = mtrGuiButtonImageText(imagenum, string, len, alignment);
+
+    MTR_SF_PUSH_BOOL(pressed);
+
+    return 1;
+}
+
 MTR_SCRIPT_FUNC(mtrSF_GuiCheckLabel)
 {
     const char *label;
@@ -200,6 +377,112 @@ MTR_SCRIPT_FUNC(mtrSF_GuiCheckText)
     MTR_SF_PUSH_BOOL(result);
 
     return 1;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_GuiSelectableLabel)
+{
+    const char *text;
+    int         alignment;
+    bool        selected;
+    bool        result;
+
+    MTR_SF_GET_STRING(text, 1);
+    MTR_SF_GET_INT(alignment, 2);
+    MTR_SF_GET_BOOL(selected, 3);
+    result = mtrGuiSelectableLabel(text, alignment, selected);
+
+    MTR_SF_PUSH_BOOL(result);
+
+    return 1;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_GuiSelectableText)
+{
+    const char *text;
+    int         len;
+    int         alignment;
+    bool        selected;
+    bool        result;
+
+    MTR_SF_GET_STRING(text, 1);
+    MTR_SF_GET_INT(len, 2);
+    MTR_SF_GET_INT(alignment, 3);
+    MTR_SF_GET_BOOL(selected, 4);
+    result = mtrGuiSelectableText(text, len, alignment, selected);
+
+    MTR_SF_PUSH_BOOL(result);
+
+    return 1;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_GuiSelectableImageLabel)
+{
+    uint32_t    imagenum;
+    const char *text;
+    int         alignment;
+    bool        selected;
+    bool        result;
+
+    MTR_SF_GET_UINT32(imagenum, 1);
+    MTR_SF_GET_STRING(text, 2);
+    MTR_SF_GET_INT(alignment, 3);
+    MTR_SF_GET_BOOL(selected, 4);
+    result = mtrGuiSelectableImageLabel(imagenum, text, alignment, selected);
+
+    MTR_SF_PUSH_BOOL(result);
+
+    return 1;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_GuiSelectableImageText)
+{
+    uint32_t imagenum;
+    const char *text;
+    int         len;
+    int         alignment;
+    bool        selected;
+    bool        result;
+
+    MTR_SF_GET_UINT32(imagenum, 1);
+    MTR_SF_GET_STRING(text, 2);
+    MTR_SF_GET_INT(len, 3);
+    MTR_SF_GET_INT(alignment, 4);
+    MTR_SF_GET_BOOL(selected, 5);
+    result = mtrGuiSelectableImageText(imagenum, text, len, alignment, selected);
+
+    MTR_SF_PUSH_BOOL(result);
+
+    return 1;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_GuiEditText)
+{
+    uint32_t sbnum;
+
+    MTR_SF_GET_UINT32(sbnum, 1);
+    mtrGuiEditText(sbnum);
+
+    return 0;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_GuiEditInteger)
+{
+    uint32_t sbnum;
+
+    MTR_SF_GET_UINT32(sbnum, 1);
+    mtrGuiEditInteger(sbnum);
+
+    return 0;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_GuiEditFloat)
+{
+    uint32_t sbnum;
+
+    MTR_SF_GET_UINT32(sbnum, 1);
+    mtrGuiEditFloat(sbnum);
+
+    return 0;
 }
 
 MTR_SCRIPT_FUNC(mtrSF_GuiLabel)
@@ -348,6 +631,28 @@ MTR_SCRIPT_FUNC(mtrSF_GuiLabelColoredWrap_rgba)
     return 0;
 }
 
+MTR_SCRIPT_FUNC(mtrSF_GuiTreeTabBegin)
+{
+    const char *title;
+    bool        maximized;
+    bool        result;
+
+    MTR_SF_GET_STRING(title, 1);
+    MTR_SF_GET_BOOL(maximized, 2);
+    result = mtrGuiTreeTabBegin(title, maximized);
+
+    MTR_SF_PUSH_BOOL(result);
+
+    return 1;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_GuiTreeTabEnd)
+{
+    mtrGuiTreeTabEnd();
+
+    return 0;
+}
+
 MTR_SCRIPT_FUNC(mtrSF_GuiLayoutRowDynamic)
 {
     float height;
@@ -417,6 +722,12 @@ void mtrScriptsRegisterAll(void)
     MTR_FIND_FUNCTION(mtrGuiQuit, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiProcessEvents, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiRender, "Abstraction_gui");
+    MTR_FIND_FUNCTION(mtrGuiAddFont, "Abstraction_gui");
+    MTR_FIND_FUNCTION(mtrGuiAddImage, "Abstraction_gui");
+    MTR_FIND_FUNCTION(mtrGuiAddStringBuffer, "Abstraction_gui");
+    MTR_FIND_FUNCTION(mtrGuiDeleteFont, "Abstraction_gui");
+    MTR_FIND_FUNCTION(mtrGuiDeleteImage, "Abstraction_gui");
+    MTR_FIND_FUNCTION(mtrGuiDeleteStringBuffer, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiBegin, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiEnd, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiButtonText, "Abstraction_gui");
@@ -425,8 +736,21 @@ void mtrScriptsRegisterAll(void)
     MTR_FIND_FUNCTION(mtrGuiButtonColor_ca, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiButtonColor_rgb, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiButtonColor_rgba, "Abstraction_gui");
+    MTR_FIND_FUNCTION(mtrGuiButtonSymbol, "Abstraction_gui");
+    MTR_FIND_FUNCTION(mtrGuiButtonSymbolLabel, "Abstraction_gui");
+    MTR_FIND_FUNCTION(mtrGuiButtonSymbolText, "Abstraction_gui");
+    MTR_FIND_FUNCTION(mtrGuiButtonImage, "Abstraction_gui");
+    MTR_FIND_FUNCTION(mtrGuiButtonImageLabel, "Abstraction_gui");
+    MTR_FIND_FUNCTION(mtrGuiButtonImageText, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiCheckLabel, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiCheckText, "Abstraction_gui");
+    MTR_FIND_FUNCTION(mtrGuiSelectableLabel, "Abstraction_gui");
+    MTR_FIND_FUNCTION(mtrGuiSelectableText, "Abstraction_gui");
+    MTR_FIND_FUNCTION(mtrGuiSelectableImageLabel, "Abstraction_gui");
+    MTR_FIND_FUNCTION(mtrGuiSelectableImageText, "Abstraction_gui");
+    MTR_FIND_FUNCTION(mtrGuiEditText, "Abstraction_gui");
+    MTR_FIND_FUNCTION(mtrGuiEditInteger, "Abstraction_gui");
+    MTR_FIND_FUNCTION(mtrGuiEditFloat, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiLabel, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiLabelColored_c, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiLabelColored_ca, "Abstraction_gui");
@@ -437,6 +761,8 @@ void mtrScriptsRegisterAll(void)
     MTR_FIND_FUNCTION(mtrGuiLabelColoredWrap_ca, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiLabelColoredWrap_rgb, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiLabelColoredWrap_rgba, "Abstraction_gui");
+    MTR_FIND_FUNCTION(mtrGuiTreeTabBegin, "Abstraction_gui");
+    MTR_FIND_FUNCTION(mtrGuiTreeTabEnd, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiLayoutRowDynamic, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiLayoutRowStatic, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiGroupBegin, "Abstraction_gui");
@@ -449,6 +775,13 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterFunction(mtrSF_GuiQuit, "GuiQuit");
         mtrScriptsRegisterFunction(mtrSF_GuiProcessEvents, "GuiProcessEvents");
         mtrScriptsRegisterFunction(mtrSF_GuiRender, "GuiRender");
+        mtrScriptsRegisterFunction(mtrSF_GuiAddFont, "GuiAddFont");
+        mtrScriptsRegisterFunction(mtrSF_GuiAddImage, "GuiAddImage");
+        mtrScriptsRegisterFunction(mtrSF_GuiAddStringBuffer, "GuiAddImage");
+        mtrScriptsRegisterFunction(mtrSF_GuiDeleteFont, "GuiAddFont");
+        mtrScriptsRegisterFunction(mtrSF_GuiDeleteImage, "GuiAddImage");
+        mtrScriptsRegisterFunction(mtrSF_GuiDeleteStringBuffer,
+         "DeleteStringBuffer");
         mtrScriptsRegisterFunction(mtrSF_GuiBegin, "GuiBegin");
         mtrScriptsRegisterFunction(mtrSF_GuiEnd, "GuiEnd");
         mtrScriptsRegisterFunction(mtrSF_GuiButtonText, "GuiButtonText");
@@ -460,8 +793,29 @@ void mtrScriptsRegisterAll(void)
          "GuiButtonColor_rgb");
         mtrScriptsRegisterFunction(mtrSF_GuiButtonColor_rgba,
          "GuiButtonColor_rgba");
+        mtrScriptsRegisterFunction(mtrSF_GuiButtonSymbol, "GuiButtonSymbol");
+        mtrScriptsRegisterFunction(mtrSF_GuiButtonSymbolLabel,
+         "GuiButtonSymbolLabel");
+        mtrScriptsRegisterFunction(mtrSF_GuiButtonSymbolText,
+         "GuiButtonSymbolText");
+        mtrScriptsRegisterFunction(mtrSF_GuiButtonImage, "GuiButtonImage");
+        mtrScriptsRegisterFunction(mtrSF_GuiButtonImageLabel,
+         "GuiButtonImageLabel");
+        mtrScriptsRegisterFunction(mtrSF_GuiButtonImageText,
+         "GuiButtonImageText");
         mtrScriptsRegisterFunction(mtrSF_GuiCheckLabel, "GuiCheckLabel");
         mtrScriptsRegisterFunction(mtrSF_GuiCheckText, "GuiCheckText");
+        mtrScriptsRegisterFunction(mtrSF_GuiSelectableLabel,
+         "GuiSelectableLabel");
+        mtrScriptsRegisterFunction(mtrSF_GuiSelectableText,
+         "GuiSelectableText");
+        mtrScriptsRegisterFunction(mtrSF_GuiSelectableImageLabel,
+         "GuiSelectableImageLabel");
+        mtrScriptsRegisterFunction(mtrSF_GuiSelectableImageText,
+         "GuiSelectableImageText");
+        mtrScriptsRegisterFunction(mtrSF_GuiEditText, "GuiEditText");
+        mtrScriptsRegisterFunction(mtrSF_GuiEditInteger, "GuiEditInteger");
+        mtrScriptsRegisterFunction(mtrSF_GuiEditFloat, "GuiEditFloat");
         mtrScriptsRegisterFunction(mtrSF_GuiLabel, "GuiLabel");
         mtrScriptsRegisterFunction(mtrSF_GuiLabelColored_c,
          "GuiLabelColored_c");
@@ -480,6 +834,8 @@ void mtrScriptsRegisterAll(void)
          "GuiLabelColoredWrap_rgb");
         mtrScriptsRegisterFunction(mtrSF_GuiLabelColoredWrap_rgba,
          "GuiLabelColoredWrap_rgba");
+        mtrScriptsRegisterFunction(mtrSF_GuiTreeTabBegin, "GuiTreeTabBegin");
+        mtrScriptsRegisterFunction(mtrSF_GuiTreeTabEnd, "GuiTreeTabEnd");
         mtrScriptsRegisterFunction(mtrSF_GuiLayoutRowDynamic,
          "GuiLayoutRowDynamic");
         mtrScriptsRegisterFunction(mtrSF_GuiLayoutRowStatic,

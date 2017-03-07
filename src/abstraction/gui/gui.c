@@ -37,19 +37,6 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
-NK_API mtrNkFont *mtrNkAddFont(uint32_t fontnum)
-{
-    mtrNkFont *font;
-    font = malloc(sizeof(mtrNkFont));
-    if (font != NULL)
-    {
-        font->font = fontnum;
-        font->height = mtrFontGetHeight(fontnum);
-    }
-
-    return font;
-}
-
 static float mtrNkGetTextWidth(nk_handle handle, float height,
  const char *text, int len)
 {
@@ -65,6 +52,107 @@ static float mtrNkGetTextWidth(nk_handle handle, float height,
     strcpy[len] = '\0';
 
     return mtrFontGetStringWidth(font->font, strcpy);
+}
+
+/* Берёт номер шрифта менеджера шрифтов и возвращает внутренний индекс шрифта.
+ * Подсистема GUI работает только с внутренними ресурсами (индекасми), т. е.
+ * перед использованием их нужно непосредственно добавить
+ */
+MTR_EXPORT uint32_t MTR_CALL mtrGuiAddFont(uint32_t fontnum)
+{
+    mtrNkFont           *nkFont;
+    uint32_t             freeIndex;
+    struct nk_user_font *font;
+
+    freeIndex = mtrIndexkeeperGetFreeIndex(mtrGuiFontKeeper);
+    nkFont = (mtrNkFont *)(&((mtrNkFont *)mtrGuiFontKeeper->data)[freeIndex]);
+
+    nkFont->font = fontnum;
+    nkFont->height = mtrFontGetHeight(fontnum);
+
+    font = &nkFont->nk;
+    font->userdata = nk_handle_ptr(nkFont);
+    font->height = nkFont->height;
+    font->width = mtrNkGetTextWidth;
+
+    return freeIndex;
+}
+
+MTR_EXPORT uint32_t MTR_CALL mtrGuiAddImage(uint32_t texnum, int x, int y,
+ int w, int h)
+{
+    mtrNkImage      *nkImage;
+    uint32_t         freeIndex;
+    struct nk_image *image;
+
+    freeIndex = mtrIndexkeeperGetFreeIndex(mtrGuiImageKeeper);
+    nkImage = (mtrNkImage *)(&((mtrNkImage *)mtrGuiImageKeeper->data)[freeIndex]);
+
+    nkImage->texture = texnum;
+    mtrTextureGetSizes(texnum, &nkImage->width, &nkImage->height);
+    image = &nkImage->nk;
+    image->handle = nk_handle_ptr(nkImage);
+    image->w = nkImage->width;
+    image->h = nkImage->height;
+    image->region[0] = x;
+    image->region[1] = y;
+    image->region[2] = x + w;
+    image->region[3] = y + h;
+
+    return freeIndex;
+}
+
+MTR_EXPORT uint32_t MTR_CALL mtrGuiAddStringBuffer(const char *initialString,
+ int maxlen)
+{
+    uint32_t freeIndex;
+    mtrNkSb *buffer;
+    int      len;
+
+    freeIndex = mtrIndexkeeperGetFreeIndex(mtrGuiStringBufferKeeper);
+    buffer = (mtrNkSb *)(&((mtrNkSb *)mtrGuiStringBufferKeeper->data)[freeIndex]);
+
+    if (initialString == NULL)
+    {
+        buffer->string = malloc(sizeof(char) * maxlen);
+        buffer->string[0] = '\0';
+    }
+    else
+    {
+        len = strlen(initialString);
+        if (len > maxlen)
+            len = maxlen;
+        buffer->string = malloc(sizeof(char) * (maxlen + 1));
+        strncpy(buffer->string, initialString, maxlen);
+        buffer->string[len] = '\0';
+    }
+    buffer->maxlen = maxlen;
+
+    return freeIndex;
+}
+
+MTR_EXPORT void MTR_CALL mtrGuiDeleteFont(uint32_t fontnum)
+{
+    if (fontnum != 0)
+        mtrIndexkeeperFreeIndex(mtrGuiFontKeeper, fontnum);
+}
+
+MTR_EXPORT void MTR_CALL mtrGuiDeleteImage(uint32_t imagenum)
+{
+    if (imagenum != 0)
+        mtrIndexkeeperFreeIndex(mtrGuiImageKeeper, imagenum);
+}
+
+MTR_EXPORT void MTR_CALL mtrGuiDeleteStringBuffer(uint32_t sbnum)
+{
+    mtrNkSb *buffer;
+
+    if (sbnum != 0)
+    {
+        buffer = (mtrNkSb *)(&((mtrNkSb *)mtrGuiStringBufferKeeper->data)[sbnum]);
+        free(buffer->string)
+        mtrIndexkeeperFreeIndex(mtrGuiStringBufferKeeper, sbnum);
+    }
 }
 
 NK_INTERN void mtrNkClipboardPaste(nk_handle usr, struct nk_text_edit *edit)
@@ -160,19 +248,19 @@ void mtrNkHandleEvents(void)
     if (mouseRelWheel != 0)
         nk_input_scroll(ctx, (float)mouseRelWheel);
 
-    if (mtrMousePress(0))
+    if (mtrMousePress(MTR_MOUSE_LEFT))
         nk_input_button(ctx, NK_BUTTON_LEFT, mouseX, mouseY, 1);
-    if (mtrMousePress(1))
-        nk_input_button(ctx, NK_BUTTON_MIDDLE, mouseX, mouseY, 1);
-    if (mtrMousePress(2))
+    if (mtrMousePress(MTR_MOUSE_RIGHT))
         nk_input_button(ctx, NK_BUTTON_RIGHT, mouseX, mouseY, 1);
+    if (mtrMousePress(MTR_MOUSE_MIDDLE))
+        nk_input_button(ctx, NK_BUTTON_MIDDLE, mouseX, mouseY, 1);
 
-    if (mtrMouseRelease(0))
+    if (mtrMouseRelease(MTR_MOUSE_LEFT))
         nk_input_button(ctx, NK_BUTTON_LEFT, mouseX, mouseY, 0);
-    if (mtrMouseRelease(1))
-        nk_input_button(ctx, NK_BUTTON_MIDDLE, mouseX, mouseY, 0);
-    if (mtrMouseRelease(2))
+    if (mtrMouseRelease(MTR_MOUSE_RIGHT))
         nk_input_button(ctx, NK_BUTTON_RIGHT, mouseX, mouseY, 0);
+    if (mtrMouseRelease(MTR_MOUSE_MIDDLE))
+        nk_input_button(ctx, NK_BUTTON_MIDDLE, mouseX, mouseY, 0);
 
     if (mtrKeyboardPress(MTR_KEY_LSHIFT) || mtrKeyboardPress(MTR_KEY_RSHIFT))
         nk_input_key(ctx, NK_KEY_SHIFT, 1);
@@ -475,6 +563,14 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
                 break;
             case NK_COMMAND_RECT_MULTI_COLOR:
             case NK_COMMAND_IMAGE:
+                {
+                    const struct nk_command_image *i = (const struct nk_command_image *)cmd;
+                    mtrNkImage *image = (mtrNkImage *)i->img.handle.ptr;
+                    mtrTextureBlitRegionScaled_f(image->texture, i->x, i->y,
+                     i->w, i->h, image->nk.region[0], image->nk.region[1],
+                     image->nk.region[2] - image->nk.region[0],
+                     image->nk.region[3] - image->nk.region[1]);
+                }
                 break;
             case NK_COMMAND_ARC_FILLED:
                 {
@@ -537,6 +633,53 @@ MTR_EXPORT bool MTR_CALL mtrGuiButtonColor_rgba(uint8_t r, uint8_t g, uint8_t b,
     return nk_button_color(&mtrNkGui.ctx, nk_rgba(r, g, b, a));
 }
 
+MTR_EXPORT bool MTR_CALL mtrGuiButtonSymbol(int symbol)
+{
+    return nk_button_symbol(&mtrNkGui.ctx, symbol);
+}
+
+MTR_EXPORT bool MTR_CALL mtrGuiButtonSymbolLabel(int symbol, const char *string,
+ int alignment)
+{
+    return nk_button_symbol_label(&mtrNkGui.ctx, symbol, string, alignment);
+}
+
+MTR_EXPORT bool MTR_CALL mtrGuiButtonSymbolText(int symbol, const char *string,
+ int len, int alignment)
+{
+    return nk_button_symbol_text(&mtrNkGui.ctx, symbol, string, len, alignment);
+}
+
+MTR_EXPORT bool MTR_CALL mtrGuiButtonImage(uint32_t imagenum)
+{
+    mtrNkImage *nkImage;
+
+    nkImage = (mtrNkImage *)(&((mtrNkImage *)mtrGuiImageKeeper->data)[imagenum]);
+
+    return nk_button_image(&mtrNkGui.ctx, nkImage->nk);
+}
+
+MTR_EXPORT bool MTR_CALL mtrGuiButtonImageLabel(uint32_t imagenum,
+ const char *string, int alignment)
+{
+    mtrNkImage *nkImage;
+
+    nkImage = (mtrNkImage *)(&((mtrNkImage *)mtrGuiImageKeeper->data)[imagenum]);
+
+    return nk_button_image_label(&mtrNkGui.ctx, nkImage->nk, string, alignment);
+}
+
+MTR_EXPORT bool MTR_CALL mtrGuiButtonImageText(uint32_t imagenum,
+ const char *string, int len, int alignment)
+{
+    mtrNkImage *nkImage;
+
+    nkImage = (mtrNkImage *)(&((mtrNkImage *)mtrGuiImageKeeper->data)[imagenum]);
+
+    return nk_button_image_text(&mtrNkGui.ctx, nkImage->nk, string, len,
+     alignment);
+}
+
 MTR_EXPORT bool MTR_CALL mtrGuiCheckLabel(const char *label, bool active)
 {
     return nk_check_label(&mtrNkGui.ctx, label, active);
@@ -547,11 +690,69 @@ MTR_EXPORT bool MTR_CALL mtrGuiCheckText(const char *text, int len, bool active)
     return nk_check_text(&mtrNkGui.ctx, text, len, active);
 }
 
-/* TODO
-nk_button_image(struct nk_context*, struct nk_image img);
-nk_button_image_label(struct nk_context*, struct nk_image img, const char*, nk_flags text_alignment);
-nk_button_image_text(struct nk_context*, struct nk_image img, const char*, int, nk_flags alignment);
-*/
+MTR_EXPORT bool MTR_CALL mtrGuiSelectableLabel(const char *text, int alignment,
+ bool selected)
+{
+    return nk_select_label(&mtrNkGui.ctx, text, alignment, selected);
+}
+
+MTR_EXPORT bool MTR_CALL mtrGuiSelectableText(const char *text, int len,
+ int alignment, bool selected)
+{
+    return nk_select_text(&mtrNkGui.ctx, text, len, alignment, selected);
+}
+
+MTR_EXPORT bool MTR_CALL mtrGuiSelectableImageLabel(uint32_t imagenum,
+ const char *text, int alignment, bool selected)
+{
+    mtrNkImage *nkImage;
+
+    nkImage = (mtrNkImage *)(&((mtrNkImage *)mtrGuiImageKeeper->data)[imagenum]);
+
+    return nk_select_image_label(&mtrNkGui.ctx, nkImage->nk, text, alignment,
+     selected);
+}
+
+MTR_EXPORT bool MTR_CALL mtrGuiSelectableImageText(uint32_t imagenum,
+ const char *text, int len, int alignment, bool selected)
+{
+    mtrNkImage *nkImage;
+
+    nkImage = (mtrNkImage *)(&((mtrNkImage *)mtrGuiImageKeeper->data)[imagenum]);
+
+    return nk_select_image_text(&mtrNkGui.ctx, nkImage->nk, text, len,
+     alignment, selected);
+}
+
+MTR_EXPORT void MTR_CALL mtrGuiEditText(uint32_t sbnum)
+{
+    mtrNkSb *nkSb;
+
+    nkSb = (mtrNkSb *)(&((mtrNkSb *)mtrGuiStringBufferKeeper->data)[sbnum]);
+
+    nk_edit_string_zero_terminated(&mtrNkGui.ctx, NK_EDIT_FIELD, nkSb->string,
+     nkSb->maxlen, nk_filter_default);
+}
+
+MTR_EXPORT void MTR_CALL mtrGuiEditInteger(uint32_t sbnum)
+{
+    mtrNkSb *nkSb;
+
+    nkSb = (mtrNkSb *)(&((mtrNkSb *)mtrGuiStringBufferKeeper->data)[sbnum]);
+
+    nk_edit_string_zero_terminated(&mtrNkGui.ctx, NK_EDIT_FIELD, nkSb->string,
+     nkSb->maxlen, nk_filter_decimal);
+}
+
+MTR_EXPORT void MTR_CALL mtrGuiEditFloat(uint32_t sbnum)
+{
+    mtrNkSb *nkSb;
+
+    nkSb = (mtrNkSb *)(&((mtrNkSb *)mtrGuiStringBufferKeeper->data)[sbnum]);
+
+    nk_edit_string_zero_terminated(&mtrNkGui.ctx, NK_EDIT_FIELD, nkSb->string,
+     nkSb->maxlen, nk_filter_float);
+}
 
 MTR_EXPORT void MTR_CALL mtrGuiLabel(const char *string, int alignment)
 {
@@ -615,6 +816,16 @@ MTR_EXPORT void MTR_CALL mtrGuiLabelColoredWrap_rgba(const char *string,
  uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
     nk_label_colored_wrap(&mtrNkGui.ctx, string, nk_rgba(r, g, b, a));
+}
+
+MTR_EXPORT bool MTR_CALL mtrGuiTreeTabBegin(const char *title, bool maximized)
+{
+    return nk_tree_push(&mtrNkGui.ctx, NK_TREE_TAB, title, maximized);
+}
+
+MTR_EXPORT void MTR_CALL mtrGuiTreeTabEnd(void)
+{
+    nk_tree_pop(&mtrNkGui.ctx);
 }
 
 MTR_EXPORT void MTR_CALL mtrGuiLayoutRowDynamic(float height, int cols)

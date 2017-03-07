@@ -60,6 +60,14 @@ mtrFontGetNameFunc mtrFontGetName;
 typedef void (MTR_CALL * mtrScreenGetSizesFunc)(int *w, int *h);
 mtrScreenGetSizesFunc mtrScreenGetSizes;
 
+typedef void (MTR_CALL * mtrTextureBlitRegionScaled_fFunc)(uint32_t texNum,
+ float x, float y, float w, float h, float rx, float ry, float rw, float rh);
+mtrTextureBlitRegionScaled_fFunc mtrTextureBlitRegionScaled_f;
+
+typedef void (MTR_CALL * mtrTextureGetSizesFunc)(uint32_t texNum, int *width,
+ int *height);
+mtrTextureGetSizesFunc mtrTextureGetSizes;
+
 typedef void (MTR_CALL * mtrPrimitiveLine_rgba_fFunc)(float x1, float y1,
  float x2, float y2, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 mtrPrimitiveLine_rgba_fFunc mtrPrimitiveLine_rgba_f;
