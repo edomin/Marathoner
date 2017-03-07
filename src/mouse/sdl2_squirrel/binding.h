@@ -7,7 +7,6 @@
 
 #include "marathoner/plugin.h"
 #include "../binding_common.h"
-#include "../common.h"
 
 #define MTR_SOURCE_MODULE "Mouse_SDL2"
 

@@ -392,6 +392,12 @@ mtrPlugin *mtrPluginData;
 #define MTR_KEY_APP1                283
 #define MTR_KEY_APP2                284
 
+#define MTR_MOUSE_LEFT   1
+#define MTR_MOUSE_RIGHT  2
+#define MTR_MOUSE_MIDDLE 3
+#define MTR_MOUSE_X1     4
+#define MTR_MOUSE_X2     5
+
 #define MTR_GUI_WINDOW_BORDER           0x0001
 #define MTR_GUI_WINDOW_MOVABLE          0x0002
 #define MTR_GUI_WINDOW_SCALABLE         0x0004

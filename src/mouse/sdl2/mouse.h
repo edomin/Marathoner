@@ -4,7 +4,6 @@
 #include "SDL2/SDL.h"
 
 #include "marathoner/plugin.h"
-#include "../common.h"
 
 typedef struct mtrMouse_t{
     int currentMousestate[5];
