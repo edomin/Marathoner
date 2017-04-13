@@ -74,7 +74,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrTtfLoad(const char *filename, int size)
     mtrLogWrite_s("Loading TTF font", 0, MTR_LMT_INFO, filename);
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrTtfKeeper);
     mtrLogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
-    font = (mtrTtf_t *)(&((mtrTtf_t *)mtrTtfKeeper->data)[freeIndex]);
+    font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, freeIndex);
     font->font = TTF_OpenFont(filename, size);
     if (font->font != NULL)
     {
@@ -103,7 +103,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrTtfLoad(const char *filename, int size)
 MTR_EXPORT int MTR_CALL mtrTtfGetFontHeight(uint32_t fontNum)
 {
     mtrTtf_t *font;
-    font = (mtrTtf_t *)(&((mtrTtf_t *)mtrTtfKeeper->data)[fontNum]);
+    font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
     if (font->font != NULL)
         return TTF_FontHeight(font->font);
     else
@@ -114,7 +114,7 @@ MTR_EXPORT bool MTR_CALL mtrTtfGetStringSizes(uint32_t fontNum,
  const char *string, int *w, int *h)
 {
     mtrTtf_t *font;
-    font = (mtrTtf_t *)(&((mtrTtf_t *)mtrTtfKeeper->data)[fontNum]);
+    font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
     if (font->font == NULL || string == NULL)
     {
         if (w != NULL)
@@ -134,7 +134,7 @@ MTR_EXPORT int MTR_CALL mtrTtfGetStringWidth(uint32_t fontNum,
 {
     mtrTtf_t *font;
     int       width;
-    font = (mtrTtf_t *)(&((mtrTtf_t *)mtrTtfKeeper->data)[fontNum]);
+    font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
     if (font->font == NULL || string == NULL)
     {
         return 0;
@@ -148,14 +148,14 @@ MTR_EXPORT int MTR_CALL mtrTtfGetStringWidth(uint32_t fontNum,
 MTR_EXPORT void MTR_CALL mtrTtfSetFontStyle(uint32_t fontNum, int style)
 {
     mtrTtf_t *font;
-    font = (mtrTtf_t *)(&((mtrTtf_t *)mtrTtfKeeper->data)[fontNum]);
+    font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
     TTF_SetFontStyle(font->font, style);
 }
 
 MTR_EXPORT void MTR_CALL mtrTtfSetFontOutline(uint32_t fontNum, int outline)
 {
     mtrTtf_t *font;
-    font = (mtrTtf_t *)(&((mtrTtf_t *)mtrTtfKeeper->data)[fontNum]);
+    font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
     TTF_SetFontOutline(font->font, outline);
 }
 
@@ -164,7 +164,7 @@ MTR_EXPORT void MTR_CALL mtrTtfFree(uint32_t fontNum)
     mtrTtf_t *font;
     if (fontNum != 0)
     {
-        font = (mtrTtf_t *)(&((mtrTtf_t *)mtrTtfKeeper->data)[fontNum]);
+        font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
         mtrLogWrite_s("Unloading TTF font", 0, MTR_LMT_INFO, font->name);
         free(font->name);
         TTF_CloseFont(font->font);
@@ -191,7 +191,7 @@ MTR_EXPORT mtrPixels_t *MTR_CALL mtrTtfRenderString(uint32_t fontNum, uint8_t r,
 
     if (fontNum != 0)
     {
-        font = (mtrTtf_t *)(&((mtrTtf_t *)mtrTtfKeeper->data)[fontNum]);
+        font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
 
         textcolor.r = r;
         textcolor.g = g;
