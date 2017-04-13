@@ -23,6 +23,9 @@ PRIMITIVE_SDL2_SQUIRREL = primitive/sdl2_squirrel
 PRIMITIVE_SDL2_GPU = primitive/sdl2_gpu
 PRIMITIVE_SDL2_GPU_LUA = primitive/sdl2_gpu_lua
 PRIMITIVE_SDL2_GPU_SQUIRREL = primitive/sdl2_gpu_squirrel
+PRIMITIVE_SDL2_GFX = primitive/sdl2_gfx
+PRIMITIVE_SDL2_GFX_LUA = primitive/sdl2_gfx_lua
+PRIMITIVE_SDL2_GFX_SQUIRREL = primitive/sdl2_gfx_squirrel
 TTF_SDL2_TTF = ttf/sdl2_ttf
 TTF_SDL2_TTF_LUA = ttf/sdl2_ttf_lua
 TTF_SDL2_TTF_SQUIRREL = ttf/sdl2_ttf_squirrel
@@ -80,6 +83,9 @@ win32: prebuild
 	make -C src/$(PRIMITIVE_SDL2) PREFIX=$(PREFIX)
 	make -C src/$(PRIMITIVE_SDL2_LUA) PREFIX=$(PREFIX)
 	make -C src/$(PRIMITIVE_SDL2_SQUIRREL) PREFIX=$(PREFIX)
+	make -C src/$(PRIMITIVE_SDL2_GFX) PREFIX=$(PREFIX)
+	make -C src/$(PRIMITIVE_SDL2_GFX_LUA) PREFIX=$(PREFIX)
+	make -C src/$(PRIMITIVE_SDL2_GFX_SQUIRREL) PREFIX=$(PREFIX)
 
 	make -C src/$(TTF_SDL2_TTF) PREFIX=$(PREFIX)
 	make -C src/$(TTF_SDL2_TTF_LUA) PREFIX=$(PREFIX)
