@@ -122,8 +122,8 @@ mtrKeyboardPressedFunc mtrKeyboardPressed;
 typedef char *(MTR_CALL * mtrKeyboardInputCharFunc)(void);
 mtrKeyboardInputCharFunc mtrKeyboardInputChar;
 
-typedef void (MTR_CALL * mtrMouseGetDeltaXYFunc)(int *deltaX, int *deltaY);
-mtrMouseGetDeltaXYFunc mtrMouseGetDeltaXY;
+typedef bool (MTR_CALL * mtrMouseMovingFunc)(void);
+mtrMouseMovingFunc mtrMouseMoving;
 
 typedef void (MTR_CALL * mtrMouseGetXYFunc)(int *mouseX, int *mouseY);
 mtrMouseGetXYFunc mtrMouseGetXY;

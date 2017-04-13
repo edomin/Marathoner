@@ -379,7 +379,7 @@ MTR_EXPORT bool MTR_CALL mtrGuiInit(uint32_t fontDmSize,
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrKeyboardRelease, "keyboard");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrKeyboardPressed, "keyboard");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrKeyboardInputChar, "keyboard");
-    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrMouseGetDeltaXY, "mouse");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrMouseMoving, "mouse");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrMouseGetXY, "mouse");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrMousePress, "mouse");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrMouseRelease, "mouse");
