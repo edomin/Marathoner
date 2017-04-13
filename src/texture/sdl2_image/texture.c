@@ -435,6 +435,7 @@ MTR_EXPORT bool MTR_CALL mtrTextureReceivePixels(uint32_t texNum,
     int           textureAccess; /* not using */
     int           textureW;
     int           textureH;
+    //SDL_Surface * tempSurface;
 
     if (texNum != 0)
     {
