@@ -867,9 +867,10 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterFunction(mtrSF_GuiRender, "GuiRender");
         mtrScriptsRegisterFunction(mtrSF_GuiAddFont, "GuiAddFont");
         mtrScriptsRegisterFunction(mtrSF_GuiAddImage, "GuiAddImage");
-        mtrScriptsRegisterFunction(mtrSF_GuiAddStringBuffer, "GuiAddImage");
-        mtrScriptsRegisterFunction(mtrSF_GuiDeleteFont, "GuiAddFont");
-        mtrScriptsRegisterFunction(mtrSF_GuiDeleteImage, "GuiAddImage");
+        mtrScriptsRegisterFunction(mtrSF_GuiAddStringBuffer,
+         "GuiAddStringBuffer");
+        mtrScriptsRegisterFunction(mtrSF_GuiDeleteFont, "GuiDeleteFont");
+        mtrScriptsRegisterFunction(mtrSF_GuiDeleteImage, "GuiDeleteImage");
         mtrScriptsRegisterFunction(mtrSF_GuiDeleteStringBuffer,
          "GuiDeleteStringBuffer");
         mtrScriptsRegisterFunction(mtrSF_GuiSetStringBuffer,
