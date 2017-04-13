@@ -198,6 +198,9 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureLoad(const char *filename)
     texture->texture = GPU_LoadImage(filename);
     if (texture->texture != NULL)
     {
+//        GPU_SetImageFilter(texture->texture, GPU_FILTER_NEAREST);
+//        GPU_SetSnapMode(texture->texture, GPU_SNAP_POSITION_AND_DIMENSIONS);
+
         texture->name = malloc(sizeof(char) * (strlen(filename) + 1));
         if (texture->name == NULL)
         {
