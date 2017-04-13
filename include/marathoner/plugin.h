@@ -95,4 +95,6 @@ uint8_t mtrPluginsCount;
         return false;                                                   \
     }
 
+#define IK_GET_DATA(type, ik, num) (type)(&((type)ik->data)[num])
+
 #endif
