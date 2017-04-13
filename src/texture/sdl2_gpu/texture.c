@@ -89,7 +89,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBeginTarget(uint32_t texNum)
     mtrTexture_t *texture;
     if (texNum != 0)
     {
-        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         mtrScreen->target = texture->texture->target;
     }
 }
@@ -104,7 +104,7 @@ MTR_EXPORT int MTR_CALL mtrTextureGetWidth(uint32_t texNum)
     mtrTexture_t *texture;
     if (texNum != 0)
     {
-        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         return texture->texture->w;
     }
     else
@@ -116,8 +116,8 @@ MTR_EXPORT int MTR_CALL mtrTextureGetHeight(uint32_t texNum)
     mtrTexture_t *texture;
     if (texNum != 0)
     {
-    texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
-    return texture->texture->h;
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
+        return texture->texture->h;
     }
     else
         return 0;
@@ -129,7 +129,7 @@ MTR_EXPORT void MTR_CALL mtrTextureGetSizes(uint32_t texNum, int *width,
     mtrTexture_t *texture;
     if (texNum != 0)
     {
-        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         *width = texture->texture->w;
         *height = texture->texture->h;
     }
@@ -150,10 +150,13 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCreate(const char *name, int width,
     mtrLogWrite_s("Creating texture", 0, MTR_LMT_INFO, name);
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrTextureKeeper);
     mtrLogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
-    texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[freeIndex]);
+    texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, freeIndex);
     texture->texture = GPU_CreateImage(width, height, GPU_FORMAT_RGBA);
     if (texture->texture != NULL)
     {
+//        GPU_SetImageFilter(texture->texture, GPU_FILTER_NEAREST);
+//        GPU_SetSnapMode(texture->texture, GPU_SNAP_POSITION_AND_DIMENSIONS);
+
         texture->name = malloc(sizeof(char) * (strlen(name) + 1));
         if (texture->name == NULL)
         {
@@ -191,7 +194,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureLoad(const char *filename)
     mtrLogWrite_s("Loading texture", 0, MTR_LMT_INFO, filename);
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrTextureKeeper);
     mtrLogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
-    texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[freeIndex]);
+    texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, freeIndex);
     texture->texture = GPU_LoadImage(filename);
     if (texture->texture != NULL)
     {
@@ -227,8 +230,8 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCreateAlias(uint32_t texNum)
     mtrLogWrite("Creating texture alias", 0, MTR_LMT_INFO);
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrTextureKeeper);
     mtrLogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
-    texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[freeIndex]);
-    oldTexture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+    texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, freeIndex);
+    oldTexture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
     texture->texture = GPU_CreateAliasImage(oldTexture->texture);
     if (texture->texture != NULL)
     {
@@ -252,7 +255,7 @@ MTR_EXPORT void MTR_CALL mtrTextureFree(uint32_t texNum)
     mtrTexture_t *texture;
     if (texNum != 0)
     {
-        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         mtrLogWrite_s("Unloading texture", 0, MTR_LMT_INFO, texture->name);
         free(texture->name);
         GPU_FreeImage (texture->texture);
@@ -267,7 +270,7 @@ MTR_EXPORT void MTR_CALL mtrTextureSetBlendFunction(uint32_t texNum,
     mtrTexture_t *texture;
     if (texNum != 0)
     {
-        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         GPU_SetBlendFunction(texture->texture, srcColor, destColor, srcAlpha,
          dstAlpha);
     }
@@ -279,7 +282,7 @@ MTR_EXPORT void MTR_CALL mtrTextureSetAlphaBlending(uint32_t texNum,
     mtrTexture_t *texture;
     if (texNum != 0)
     {
-        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         GPU_SetBlending(texture->texture, blending);
     }
 }
@@ -289,7 +292,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlit_f(uint32_t texNum, float x, float y)
     mtrTexture_t *texture;
     if (texNum != 0)
     {
-        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         GPU_Blit(texture->texture, NULL, mtrScreen->target, x, y);
     }
 }
@@ -305,7 +308,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegion_f(uint32_t texNum, float x,
         region.y = ry;
         region.w = rw;
         region.h = rh;
-        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         GPU_Blit(texture->texture, &region, mtrScreen->target, x, y);
     }
 }
@@ -326,7 +329,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionScaled_f(uint32_t texNum, float x,
         outputRegion.y = y;
         outputRegion.w = w;
         outputRegion.h = h;
-        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         GPU_BlitRect(texture->texture, &region, mtrScreen->target, &outputRegion);
     }
 }
@@ -348,7 +351,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionAngled_f(uint32_t texNum, float x,
         outputRegion.y = y;
         outputRegion.w = rw;
         outputRegion.h = rh;
-        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         GPU_BlitRectX(texture->texture, &region, mtrScreen->target,
          &outputRegion, -angle, pivotX, pivotY, GPU_FLIP_NONE);
     }
@@ -372,7 +375,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionFlipped_f(uint32_t texNum, float x,
         outputRegion.y = y;
         outputRegion.w = rw;
         outputRegion.h = rh;
-        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         GPU_BlitRectX(texture->texture, &region, mtrScreen->target,
          &outputRegion, 0.0f, rx, ry, actualFlip);
     }
@@ -397,7 +400,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionGeneral_f(uint32_t texNum, float x,
         outputRegion.y = y;
         outputRegion.w = w;
         outputRegion.h = h;
-        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         GPU_BlitRectX(texture->texture, &region, mtrScreen->target,
          &outputRegion, -angle, pivotX, pivotY, actualFlip);
     }
@@ -414,7 +417,7 @@ MTR_EXPORT bool MTR_CALL mtrTextureReceivePixels(uint32_t texNum,
     if (texNum == 0)
         return false;
 
-    texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+    texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
 
     textureW = texture->texture->texture_w;
     textureH = texture->texture->texture_h;

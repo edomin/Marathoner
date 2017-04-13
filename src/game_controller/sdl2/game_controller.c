@@ -28,7 +28,7 @@ int mtrEnableController(int index)
     mtrLogWrite_s("Controller found:", 1, MTR_LMT_INFO,
      SDL_JoystickNameForIndex(index));
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrGameControllerKeeper);
-    gameController = (mtrGameController_t *)(&((mtrGameController_t *)mtrGameControllerKeeper->data)[freeIndex]);
+    gameController = IK_GET_DATA(mtrGameController_t *, mtrGameControllerKeeper, freeIndex);
     gameController->name = SDL_JoystickNameForIndex(index);
 
     gameController->gameController = SDL_JoystickOpen(index);
@@ -171,7 +171,7 @@ void mtrDisableController(int controllerNum)
     if (mtrIndexkeeperIndexIsEmpty(mtrGameControllerKeeper, controllerNum))
         return;
 
-    gameController = (mtrGameController_t *)(&((mtrGameController_t *)mtrGameControllerKeeper->data)[controllerNum]);
+    gameController = IK_GET_DATA(mtrGameController_t *, mtrGameControllerKeeper, controllerNum);
     SDL_JoystickClose(gameController->gameController);
     if (gameController->buttonsCount > 0)
     {
@@ -296,7 +296,7 @@ MTR_EXPORT void MTR_CALL mtrGameControllerRefresh(void)
     {
         if (!mtrIndexkeeperIndexIsEmpty(mtrGameControllerKeeper, i))
         {
-            gameController = (mtrGameController_t *)(&((mtrGameController_t *)mtrGameControllerKeeper->data)[i]);
+            gameController = IK_GET_DATA(mtrGameController_t *, mtrGameControllerKeeper, i);
 
             /* Проверка, что контроллер всё ещё подключен */
             if (!SDL_JoystickGetAttached(gameController->gameController))
@@ -348,7 +348,7 @@ MTR_EXPORT bool MTR_CALL mtrGameControllerButtonPress(int controllerNum,
 {
     mtrGameController_t *gameController;
 
-    gameController = (mtrGameController_t *)(&((mtrGameController_t *)mtrGameControllerKeeper->data)[controllerNum]);
+    gameController = IK_GET_DATA(mtrGameController_t *, mtrGameControllerKeeper, controllerNum);
     if (!mtrIndexkeeperIndexIsEmpty(mtrGameControllerKeeper, controllerNum))
         if (button < gameController->buttonsCount)
             if ((gameController->currentButtonState[button]) &&
@@ -367,7 +367,7 @@ MTR_EXPORT bool MTR_CALL mtrGameControllerButtonRelease(int controllerNum,
 {
     mtrGameController_t *gameController;
 
-    gameController = (mtrGameController_t *)(&((mtrGameController_t *)mtrGameControllerKeeper->data)[controllerNum]);
+    gameController = IK_GET_DATA(mtrGameController_t *, mtrGameControllerKeeper, controllerNum);
     if (!mtrIndexkeeperIndexIsEmpty(mtrGameControllerKeeper, controllerNum))
         if (button < gameController->buttonsCount)
             if (!(gameController->currentButtonState[button]) &&
@@ -386,7 +386,7 @@ MTR_EXPORT bool MTR_CALL mtrGameControllerButtonPressed(int controllerNum,
 {
     mtrGameController_t *gameController;
 
-    gameController = (mtrGameController_t *)(&((mtrGameController_t *)mtrGameControllerKeeper->data)[controllerNum]);
+    gameController = IK_GET_DATA(mtrGameController_t *, mtrGameControllerKeeper, controllerNum);
     if (!mtrIndexkeeperIndexIsEmpty(mtrGameControllerKeeper, controllerNum))
         if (button < gameController->buttonsCount)
             return gameController->currentButtonState[button];
@@ -401,7 +401,7 @@ MTR_EXPORT int16_t MTR_CALL mtrGameControllerGetAxis(int controllerNum,
 {
     mtrGameController_t *gameController;
 
-    gameController = (mtrGameController_t *)(&((mtrGameController_t *)mtrGameControllerKeeper->data)[controllerNum]);
+    gameController = IK_GET_DATA(mtrGameController_t *, mtrGameControllerKeeper, controllerNum);
     if (!mtrIndexkeeperIndexIsEmpty(mtrGameControllerKeeper, controllerNum))
         if (axisNum < gameController->axesCount)
             return gameController->currentAxis[axisNum];
@@ -416,7 +416,7 @@ MTR_EXPORT float MTR_CALL mtrGameControllerGetAxis_f(int controllerNum,
 {
     mtrGameController_t *gameController;
 
-    gameController = (mtrGameController_t *)(&((mtrGameController_t *)mtrGameControllerKeeper->data)[controllerNum]);
+    gameController = IK_GET_DATA(mtrGameController_t *, mtrGameControllerKeeper, controllerNum);
     if (!mtrIndexkeeperIndexIsEmpty(mtrGameControllerKeeper, controllerNum))
         if (axisNum < gameController->axesCount)
             if (gameController->currentAxis[axisNum] > 0)
@@ -434,7 +434,7 @@ MTR_EXPORT int MTR_CALL mtrGameControllerGetAxisDelta(int controllerNum,
 {
     mtrGameController_t *gameController;
 
-    gameController = (mtrGameController_t *)(&((mtrGameController_t *)mtrGameControllerKeeper->data)[controllerNum]);
+    gameController = IK_GET_DATA(mtrGameController_t *, mtrGameControllerKeeper, controllerNum);
     if (!mtrIndexkeeperIndexIsEmpty(mtrGameControllerKeeper, controllerNum))
         if (axisNum < gameController->axesCount)
             return gameController->currentAxis[axisNum] -
@@ -450,7 +450,7 @@ MTR_EXPORT float MTR_CALL mtrGameControllerGetAxisDelta_f(int controllerNum,
 {
     mtrGameController_t *gameController;
 
-    gameController = (mtrGameController_t *)(&((mtrGameController_t *)mtrGameControllerKeeper->data)[controllerNum]);
+    gameController = IK_GET_DATA(mtrGameController_t *, mtrGameControllerKeeper, controllerNum);
     if (!mtrIndexkeeperIndexIsEmpty(mtrGameControllerKeeper, controllerNum))
         if (axisNum < gameController->axesCount)
             return (float)(gameController->currentAxis[axisNum] -
@@ -466,7 +466,7 @@ MTR_EXPORT int MTR_CALL mtrGameControllerGetTrackballDeltaX(int controllerNum,
 {
     mtrGameController_t *gameController;
 
-    gameController = (mtrGameController_t *)(&((mtrGameController_t *)mtrGameControllerKeeper->data)[controllerNum]);
+    gameController = IK_GET_DATA(mtrGameController_t *, mtrGameControllerKeeper, controllerNum);
     if (!mtrIndexkeeperIndexIsEmpty(mtrGameControllerKeeper, controllerNum))
         if (trackballNum < gameController->trackballsCount)
             return gameController->trackballDelta[trackballNum].dx;
@@ -481,7 +481,7 @@ MTR_EXPORT int MTR_CALL mtrGameControllerGetTrackballDeltaY(int controllerNum,
 {
     mtrGameController_t *gameController;
 
-    gameController = (mtrGameController_t *)(&((mtrGameController_t *)mtrGameControllerKeeper->data)[controllerNum]);
+    gameController = IK_GET_DATA(mtrGameController_t *, mtrGameControllerKeeper, controllerNum);
     if (!mtrIndexkeeperIndexIsEmpty(mtrGameControllerKeeper, controllerNum))
         if (trackballNum < gameController->trackballsCount)
             return gameController->trackballDelta[trackballNum].dy;
@@ -496,7 +496,7 @@ MTR_EXPORT void MTR_CALL mtrGameControllerGetTrackballDeltaXY(int controllerNum,
 {
     mtrGameController_t *gameController;
 
-    gameController = (mtrGameController_t *)(&((mtrGameController_t *)mtrGameControllerKeeper->data)[controllerNum]);
+    gameController = IK_GET_DATA(mtrGameController_t *, mtrGameControllerKeeper, controllerNum);
     if (!mtrIndexkeeperIndexIsEmpty(mtrGameControllerKeeper, controllerNum))
         if (trackballNum < gameController->trackballsCount)
         {
@@ -520,7 +520,7 @@ MTR_EXPORT uint8_t MTR_CALL mtrGameControllerGetPovHat(int controllerNum,
 {
     mtrGameController_t *gameController;
 
-    gameController = (mtrGameController_t *)(&((mtrGameController_t *)mtrGameControllerKeeper->data)[controllerNum]);
+    gameController = IK_GET_DATA(mtrGameController_t *, mtrGameControllerKeeper, controllerNum);
     if (!mtrIndexkeeperIndexIsEmpty(mtrGameControllerKeeper, controllerNum))
         if (povHatNum < gameController->povHatsCount)
             return gameController->povHat[povHatNum];

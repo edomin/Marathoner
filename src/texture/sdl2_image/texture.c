@@ -115,7 +115,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBeginTarget(uint32_t texNum)
     mtrTexture_t *texture;
     if (texNum != 0)
     {
-        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         SDL_SetRenderTarget(mtrScreen->renderer, texture->texture);
     }
 }
@@ -131,7 +131,7 @@ MTR_EXPORT int MTR_CALL mtrTextureGetWidth(uint32_t texNum)
     int w;
     if (texNum != 0)
     {
-        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         SDL_QueryTexture(texture->texture, NULL, NULL, &w, NULL);
         return w;
     }
@@ -145,7 +145,7 @@ MTR_EXPORT int MTR_CALL mtrTextureGetHeight(uint32_t texNum)
     int h;
     if (texNum != 0)
     {
-        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         SDL_QueryTexture(texture->texture, NULL, NULL, NULL, &h);
         return h;
     }
@@ -159,7 +159,7 @@ MTR_EXPORT void MTR_CALL mtrTextureGetSizes(uint32_t texNum, int *width,
     mtrTexture_t *texture;
     if (texNum != 0)
     {
-        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         SDL_QueryTexture(texture->texture, NULL, NULL, width, height);
     }
     else
@@ -178,7 +178,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCreate(const char *name, int width,
     mtrLogWrite_s("Creating texture", 0, MTR_LMT_INFO, name);
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrTextureKeeper);
     mtrLogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
-    texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[freeIndex]);
+    texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, freeIndex);
 
     texture->texture = SDL_CreateTexture(mtrScreen->renderer,
      SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, width, height);
@@ -217,7 +217,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureLoad(const char *filename)
     mtrLogWrite_s("Loading texture", 0, MTR_LMT_INFO, filename);
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrTextureKeeper);
     mtrLogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
-    texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[freeIndex]);
+    texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, freeIndex);
     loadedImage = IMG_Load(filename);
     if (loadedImage != NULL)
         mtrLogWrite("Image loaded", 1, MTR_LMT_INFO);
@@ -266,7 +266,7 @@ MTR_EXPORT void MTR_CALL mtrTextureFree(uint32_t texNum)
     mtrTexture_t *texture;
     if (texNum != 0)
     {
-        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         mtrLogWrite_s("Unloading texture", 0, MTR_LMT_INFO, texture->name);
         free(texture->name);
         SDL_DestroyTexture(texture->texture);
@@ -294,7 +294,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlit_f(uint32_t texNum, float x, float y)
     SDL_Rect      clip;
     if (texNum != 0)
     {
-        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         offset.x = x;
         offset.y = y;
         SDL_QueryTexture(texture->texture, NULL, NULL, &offset.w, &offset.h);
@@ -313,7 +313,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegion_f(uint32_t texNum, float x,
     SDL_Rect      clip;
     if (texNum != 0)
     {
-        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         offset.x = x;
         offset.y = y;
         offset.w = rw;
@@ -334,7 +334,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionScaled_f(uint32_t texNum, float x,
     SDL_Rect      clip;
     if (texNum != 0)
     {
-        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         offset.x = x;
         offset.y = y;
         offset.w = w;
@@ -358,7 +358,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionAngled_f(uint32_t texNum, float x,
     SDL_Point     pivot;
     if (texNum != 0)
     {
-        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         offset.x = x;
         offset.y = y;
         offset.w = rw;
@@ -383,7 +383,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionFlipped_f(uint32_t texNum, float x,
     int           actualFlip;
     if (texNum != 0)
     {
-        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         actualFlip = mtrFlipToActualFlip(flip);
         offset.x = x;
         offset.y = y;
@@ -409,7 +409,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionGeneral_f(uint32_t texNum, float x,
     int           actualFlip;
     if (texNum != 0)
     {
-        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         actualFlip = mtrFlipToActualFlip(flip);
         offset.x = x;
         offset.y = y;
@@ -438,7 +438,7 @@ MTR_EXPORT bool MTR_CALL mtrTextureReceivePixels(uint32_t texNum,
 
     if (texNum != 0)
     {
-        texture = (mtrTexture_t *)(&((mtrTexture_t *)mtrTextureKeeper->data)[texNum]);
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
 
         if (SDL_QueryTexture(texture->texture, &textureFormat, &textureAccess, &textureW, &textureH) == -1)
             return false;
