@@ -145,6 +145,47 @@ MTR_SCRIPT_FUNC(mtrSF_FontDrawMbfString_f)
     return 1;
 }
 
+MTR_SCRIPT_FUNC(mtrSF_FontGetHeight)
+{
+    uint32_t fontNum;
+    int      height;
+
+    MTR_SF_GET_UINT32(fontNum, 1);
+    height = mtrFontGetHeight(fontNum);
+
+    MTR_SF_PUSH_INT(height);
+
+    return 1;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_FontGetStringWidth)
+{
+    uint32_t    fontNum;
+    const char *string;
+    int         width;
+
+    MTR_SF_GET_UINT32(fontNum, 1);
+    MTR_SF_GET_STRING(string, 2);
+    width = mtrFontGetStringWidth(fontNum, string);
+
+    MTR_SF_PUSH_INT(width);
+
+    return 1;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_FontGetName)
+{
+    uint32_t fontNum;
+    char    *name;
+
+    MTR_SF_GET_UINT32(fontNum, 1);
+    name = mtrFontGetName(fontNum);
+
+    MTR_SF_PUSH_STRING(name);
+
+    return 1;
+}
+
 void mtrScriptsRegisterAll(void)
 {
     bool ok;
@@ -161,6 +202,9 @@ void mtrScriptsRegisterAll(void)
     MTR_FIND_FUNCTION(mtrFontCreateMbf, "Abstraction_font");
     MTR_FIND_FUNCTION(mtrFontAddMbfTextureTable, "Abstraction_font");
     MTR_FIND_FUNCTION(mtrFontDrawMbfString_f, "Abstraction_font");
+    MTR_FIND_FUNCTION(mtrFontGetHeight, "Abstraction_font");
+    MTR_FIND_FUNCTION(mtrFontGetStringWidth, "Abstraction_font");
+    MTR_FIND_FUNCTION(mtrFontGetName, "Abstraction_font");
 
     if (ok)
     {
@@ -177,6 +221,10 @@ void mtrScriptsRegisterAll(void)
          "FontAddMbfTextureTable");
         mtrScriptsRegisterFunction(mtrSF_FontDrawMbfString_f,
          "FontDrawMbfString_f");
+        mtrScriptsRegisterFunction(mtrSF_FontGetHeight, "FontGetHeight");
+        mtrScriptsRegisterFunction(mtrSF_FontGetStringWidth,
+         "FontGetStringWidth");
+        mtrScriptsRegisterFunction(mtrSF_FontGetName, "FontGetName");
     }
     else
     {

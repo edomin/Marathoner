@@ -31,4 +31,13 @@ typedef bool (MTR_CALL * mtrFontDrawMbfString_fFunc)(uint32_t, float, float,
  const char *);
 mtrFontDrawMbfString_fFunc mtrFontDrawMbfString_f;
 
+typedef int (MTR_CALL * mtrFontGetHeightFunc)(uint32_t);
+mtrFontGetHeightFunc mtrFontGetHeight;
+
+typedef int (MTR_CALL * mtrFontGetStringWidthFunc)(uint32_t, const char *);
+mtrFontGetStringWidthFunc mtrFontGetStringWidth;
+
+typedef char *(MTR_CALL * mtrFontGetNameFunc)(uint32_t);
+mtrFontGetNameFunc mtrFontGetName;
+
 #endif
