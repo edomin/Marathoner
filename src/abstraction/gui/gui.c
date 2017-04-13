@@ -738,6 +738,9 @@ MTR_EXPORT bool MTR_CALL mtrGuiSelectableImageLabel(uint32_t imagenum,
     mtrNkImage *nkImage;
 
     nkImage = (mtrNkImage *)(&((mtrNkImage *)mtrGuiImageKeeper->data)[imagenum]);
+    if (text == NULL)
+        return nk_select_image_label(&mtrNkGui.ctx, nkImage->nk, " ",
+         alignment, selected);
 
     return nk_select_image_label(&mtrNkGui.ctx, nkImage->nk, text, alignment,
      selected);
