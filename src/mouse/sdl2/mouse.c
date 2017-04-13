@@ -64,17 +64,34 @@ MTR_EXPORT bool MTR_CALL mtrMouseInit(void)
 
 MTR_EXPORT void MTR_CALL mtrMouseRefresh(void)
 {
-    int mouseState;
-    int i;
-    int mouseX;
-    int mouseY;
+    int       mouseState;
+    int       i;
+    int       mouseX;
+    int       mouseY;
+    SDL_Event events[32];
+    int       numEvents;
 
     mtrMouse.relativeWheel = 0;
+    mtrMouse.mouseMotion = false;
+    mtrMouse.deltaX = 0;
+    mtrMouse.deltaY = 0;
+
+    numEvents = SDL_PeepEvents(events, 32, SDL_GETEVENT, SDL_MOUSEMOTION,
+     SDL_MOUSEMOTION);
+
+    if (numEvents != 0)
+    {
+        for (i = 0; i < numEvents; i++)
+            if (events[i].motion.which != SDL_TOUCH_MOUSEID)
+            {
+                mtrMouse.mouseMotion = true;
+                mtrMouse.deltaX += events[i].motion.xrel;
+                mtrMouse.deltaY += events[i].motion.yrel;
+            }
+    }
 
     SDL_PumpEvents();
     mouseState = SDL_GetMouseState(&mouseX, &mouseY);
-    mtrMouse.previousX = mtrMouse.x;
-    mtrMouse.previousY = mtrMouse.y;
     mtrMouse.x = mouseX;
     mtrMouse.y = mouseY;
     for (i = 0; i < 5; i++)
@@ -149,6 +166,11 @@ MTR_EXPORT int MTR_CALL mtrMouseGetWheelRelative(void)
     return -wheelRel;
 }
 
+MTR_EXPORT bool MTR_CALL mtrMouseMoving(void)
+{
+    return mtrMouse.mouseMotion;
+}
+
 MTR_EXPORT int MTR_CALL mtrMouseGetX(void)
 {
     return mtrMouse.x;
@@ -167,16 +189,16 @@ MTR_EXPORT void MTR_CALL mtrMouseGetXY(int *mouseX, int *mouseY)
 
 MTR_EXPORT int MTR_CALL mtrMouseGetDeltaX(void)
 {
-    return mtrMouse.x - mtrMouse.previousX;
+    return mtrMouse.deltaX;
 }
 
 MTR_EXPORT int MTR_CALL mtrMouseGetDeltaY(void)
 {
-    return mtrMouse.y - mtrMouse.previousY;
+    return mtrMouse.deltaY;
 }
 
 MTR_EXPORT void MTR_CALL mtrMouseGetDeltaXY(int *deltaX, int *deltaY)
 {
-    *deltaX = mtrMouse.x - mtrMouse.previousX;
-    *deltaY = mtrMouse.y - mtrMouse.previousY;
+    *deltaX = mtrMouse.deltaX;
+    *deltaY = mtrMouse.deltaY;
 }

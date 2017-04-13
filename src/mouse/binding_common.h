@@ -19,6 +19,9 @@ mtrMousePressedFunc mtrMousePressed;
 typedef int (MTR_CALL * mtrMouseGetWheelRelativeFunc)(void);
 mtrMouseGetWheelRelativeFunc mtrMouseGetWheelRelative;
 
+typedef bool (MTR_CALL * mtrMouseMovingFunc)(void);
+mtrMouseMovingFunc mtrMouseMoving;
+
 typedef int (MTR_CALL * mtrMouseGetXFunc)(void);
 mtrMouseGetXFunc mtrMouseGetX;
 

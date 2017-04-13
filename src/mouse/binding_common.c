@@ -71,6 +71,17 @@ MTR_SCRIPT_FUNC(mtrSF_MouseGetWheelRelative)
     return 1;
 }
 
+MTR_SCRIPT_FUNC(mtrSF_MouseMoving)
+{
+    bool moving;
+
+    moving = mtrMouseMoving();
+
+    MTR_SF_PUSH_BOOL(moving);
+
+    return 1;
+}
+
 MTR_SCRIPT_FUNC(mtrSF_MouseGetX)
 {
     int x;
@@ -158,6 +169,7 @@ void mtrScriptsRegisterAll(void)
     MTR_FIND_FUNCTION(mtrMouseRelease, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrMousePressed, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrMouseGetWheelRelative, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrMouseMoving, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrMouseGetX, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrMouseGetY, MTR_SOURCE_MODULE);
     #ifndef _SQUIRREL_H_
@@ -184,6 +196,7 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterFunction(mtrSF_MousePressed, "MousePressed");
         mtrScriptsRegisterFunction(mtrSF_MouseGetWheelRelative,
          "MouseGetWheelRelative");
+        mtrScriptsRegisterFunction(mtrSF_MouseMoving, "MouseMoving");
         mtrScriptsRegisterFunction(mtrSF_MouseGetX, "MouseGetX");
         mtrScriptsRegisterFunction(mtrSF_MouseGetY, "MouseGetY");
         #ifndef _SQUIRREL_H_
