@@ -106,13 +106,13 @@ typedef bool (MTR_CALL * mtrGuiSelectableImageTextFunc)(uint32_t, const char *,
  int, int, bool);
 mtrGuiSelectableImageTextFunc mtrGuiSelectableImageText;
 
-MTR_EXPORT void MTR_CALL mtrGuiEditTextFunc(uint32_t);
+typedef void (MTR_CALL * mtrGuiEditTextFunc)(uint32_t);
 mtrGuiEditTextFunc mtrGuiEditText;
 
-MTR_EXPORT void MTR_CALL mtrGuiEditIntegerFunc(uint32_t);
+typedef void (MTR_CALL * mtrGuiEditIntegerFunc)(uint32_t);
 mtrGuiEditIntegerFunc mtrGuiEditInteger;
 
-MTR_EXPORT void MTR_CALL mtrGuiEditFloatFunc(uint32_t);
+typedef void (MTR_CALL * mtrGuiEditFloatFunc)(uint32_t);
 mtrGuiEditFloatFunc mtrGuiEditFloat;
 
 typedef void (MTR_CALL * mtrGuiLabelFunc)(const char *, int);
