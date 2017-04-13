@@ -52,6 +52,7 @@ MTR_EXPORT bool MTR_CALL mtrPrimitiveInit(void)
     }
     mtrScreen = mtrGetScreen();
     mtrLineDrawing = false;
+    SDL_SetRenderDrawBlendMode(mtrScreen->renderer, SDL_BLENDMODE_BLEND);
 
     mtrLogWrite("Primitive drawing subsystem initialized", 0, MTR_LMT_INFO);
     return true;
