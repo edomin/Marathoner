@@ -252,6 +252,8 @@ uint32_t GuiAddStringBuffer(const char *initialString)
 void GuiDeleteFont(uint32_t fontnum)
 void GuiDeleteImage(uint32_t imagenum)
 void GuiDeleteStringBuffer(uint32_t sbnum)
+void GuiSetStringBuffer(uint32_t sbnum, const char* string);
+char *GuiGetStringBuffer(uint32_t sbnum);
 bool GuiBegin(const char *title, float boundsX, float boundsY, float boundsW, float bountsH, int flags)
 void GuiEnd()
 bool GuiButtonText(const char *title, int len)

@@ -155,6 +155,37 @@ MTR_EXPORT void MTR_CALL mtrGuiDeleteStringBuffer(uint32_t sbnum)
     }
 }
 
+MTR_EXPORT void MTR_CALL mtrGuiSetStringBuffer(uint32_t sbnum,
+ const char* string)
+{
+    mtrNkSb *buffer;
+    int      len;
+
+    if (sbnum != 0)
+    {
+        buffer = (mtrNkSb *)(
+         &((mtrNkSb *)mtrGuiStringBufferKeeper->data)[sbnum]);
+        len = strlen(string);
+        if (len > buffer->maxlen)
+            len = buffer->maxlen;
+        strncpy(buffer->string, string, buffer->maxlen);
+        buffer->string[len] = '\0';
+    }
+}
+
+MTR_EXPORT char *MTR_CALL mtrGuiGetStringBuffer(uint32_t sbnum)
+{
+    mtrNkSb *buffer;
+
+    if (sbnum != 0)
+    {
+        buffer = (mtrNkSb *)(
+         &((mtrNkSb *)mtrGuiStringBufferKeeper->data)[sbnum]);
+        return buffer->string;
+    }
+    return NULL;
+}
+
 NK_INTERN void mtrNkClipboardPaste(nk_handle usr, struct nk_text_edit *edit)
 {
     char *text;

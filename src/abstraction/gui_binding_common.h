@@ -32,6 +32,12 @@ mtrGuiDeleteImageFunc mtrGuiDeleteImage;
 typedef void (MTR_CALL * mtrGuiDeleteStringBufferFunc)(uint32_t);
 mtrGuiDeleteStringBufferFunc mtrGuiDeleteStringBuffer;
 
+typedef void (MTR_CALL * mtrGuiSetStringBufferFunc)(uint32_t, const char*);
+mtrGuiSetStringBufferFunc mtrGuiSetStringBuffer;
+
+typedef char *(MTR_CALL * mtrGuiGetStringBufferFunc)(uint32_t);
+mtrGuiGetStringBufferFunc mtrGuiGetStringBuffer;
+
 typedef bool (MTR_CALL * mtrGuiBeginFunc)(const char *, float, float, float,
  float, int);
 mtrGuiBeginFunc mtrGuiBegin;

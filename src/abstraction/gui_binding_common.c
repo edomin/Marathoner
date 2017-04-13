@@ -129,6 +129,34 @@ MTR_SCRIPT_FUNC(mtrSF_GuiDeleteStringBuffer)
     return 0;
 }
 
+MTR_SCRIPT_FUNC(mtrSF_GuiSetStringBuffer)
+{
+    uint32_t    sb;
+    const char *string;
+
+    MTR_SF_GET_UINT32(sb, 1);
+    MTR_SF_GET_STRING(string, 2);
+    mtrGuiSetStringBuffer(sb, string);
+
+    return 0;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_GuiGetStringBuffer)
+{
+    uint32_t sb;
+    char    *string;
+
+    MTR_SF_GET_UINT32(sb, 1);
+    string = mtrGuiGetStringBuffer(sb);
+
+    if (string != NULL)
+        MTR_SF_PUSH_STRING(string);
+    else
+        MTR_SF_PUSH_NIL();
+
+    return 1;
+}
+
 MTR_SCRIPT_FUNC(mtrSF_GuiBegin)
 {
     const char *title;
@@ -728,6 +756,8 @@ void mtrScriptsRegisterAll(void)
     MTR_FIND_FUNCTION(mtrGuiDeleteFont, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiDeleteImage, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiDeleteStringBuffer, "Abstraction_gui");
+    MTR_FIND_FUNCTION(mtrGuiSetStringBuffer, "Abstraction_gui");
+    MTR_FIND_FUNCTION(mtrGuiGetStringBuffer, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiBegin, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiEnd, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiButtonText, "Abstraction_gui");
@@ -842,6 +872,10 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterFunction(mtrSF_GuiDeleteImage, "GuiAddImage");
         mtrScriptsRegisterFunction(mtrSF_GuiDeleteStringBuffer,
          "DeleteStringBuffer");
+        mtrScriptsRegisterFunction(mtrSF_GuiSetStringBuffer,
+         "GuiSetStringBuffer");
+        mtrScriptsRegisterFunction(mtrSF_GuiGetStringBuffer,
+         "GuiGetStringBuffer");
         mtrScriptsRegisterFunction(mtrSF_GuiBegin, "GuiBegin");
         mtrScriptsRegisterFunction(mtrSF_GuiEnd, "GuiEnd");
         mtrScriptsRegisterFunction(mtrSF_GuiButtonText, "GuiButtonText");
