@@ -22,7 +22,8 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     report->prereqs[0] = "Abstraction_font";
 
     report->prereqSubsystemsCount = 5;
-    report->prereqSubsystems = malloc(sizeof(char *) * report->prereqSubsystemsCount);
+    report->prereqSubsystems = malloc(sizeof(char *)
+     * report->prereqSubsystemsCount);
     if (report->prereqSubsystems == NULL)
     {
         free(report);
@@ -86,7 +87,8 @@ MTR_EXPORT uint32_t MTR_CALL mtrGuiAddImage(uint32_t texnum, int x, int y,
     struct nk_image *image;
 
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrGuiImageKeeper);
-    nkImage = (mtrNkImage *)(&((mtrNkImage *)mtrGuiImageKeeper->data)[freeIndex]);
+    nkImage = (mtrNkImage *)(
+     &((mtrNkImage *)mtrGuiImageKeeper->data)[freeIndex]);
 
     nkImage->texture = texnum;
     mtrTextureGetSizes(texnum, &nkImage->width, &nkImage->height);
@@ -110,7 +112,8 @@ MTR_EXPORT uint32_t MTR_CALL mtrGuiAddStringBuffer(const char *initialString,
     int      len;
 
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrGuiStringBufferKeeper);
-    buffer = (mtrNkSb *)(&((mtrNkSb *)mtrGuiStringBufferKeeper->data)[freeIndex]);
+    buffer = (mtrNkSb *)(
+     &((mtrNkSb *)mtrGuiStringBufferKeeper->data)[freeIndex]);
 
     if (initialString == NULL)
     {
@@ -149,8 +152,9 @@ MTR_EXPORT void MTR_CALL mtrGuiDeleteStringBuffer(uint32_t sbnum)
 
     if (sbnum != 0)
     {
-        buffer = (mtrNkSb *)(&((mtrNkSb *)mtrGuiStringBufferKeeper->data)[sbnum]);
-        free(buffer->string)
+        buffer = (mtrNkSb *)(
+         &((mtrNkSb *)mtrGuiStringBufferKeeper->data)[sbnum]);
+        free(buffer->string);
         mtrIndexkeeperFreeIndex(mtrGuiStringBufferKeeper, sbnum);
     }
 }
@@ -294,7 +298,8 @@ void mtrNkHandleEvents(void)
 
     if (mtrKeyboardPress(MTR_KEY_LSHIFT) || mtrKeyboardPress(MTR_KEY_RSHIFT))
         nk_input_key(ctx, NK_KEY_SHIFT, 1);
-    if (mtrKeyboardRelease(MTR_KEY_LSHIFT) || mtrKeyboardRelease(MTR_KEY_RSHIFT))
+    if (mtrKeyboardRelease(
+     MTR_KEY_LSHIFT) || mtrKeyboardRelease(MTR_KEY_RSHIFT))
         nk_input_key(ctx, NK_KEY_SHIFT, 0);
 
     mtrNkUpdateKey(ctx, MTR_KEY_DELETE, NK_KEY_DEL);
@@ -417,8 +422,8 @@ MTR_EXPORT bool MTR_CALL mtrGuiInit(uint32_t fontDmSize,
         mtrLogWrite("Indexkeeper structure for gui images created", 1,
          MTR_LMT_INFO);
 
-    mtrGuiStringBufferKeeper = (mtrIndexkeeper_t *)mtrIndexkeeperCreate(sbDmSize,
-     sbReservedCount, sizeof(mtrNkSb));
+    mtrGuiStringBufferKeeper = (mtrIndexkeeper_t *)mtrIndexkeeperCreate(
+     sbDmSize, sbReservedCount, sizeof(mtrNkSb));
     if (mtrGuiStringBufferKeeper == NULL)
     {
         mtrNotify("Unable to create indexkeeper structure for gui's string "
@@ -478,14 +483,16 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
                 break;
             case NK_COMMAND_LINE:
                 {
-                    const struct nk_command_line *l = (const struct nk_command_line *)cmd;
+                    const struct nk_command_line *l = (
+                     const struct nk_command_line *)cmd;
                     mtrPrimitiveLine_rgba_f(l->begin.x, l->begin.y, l->end.x,
                      l->end.y, l->color.r, l->color.g, l->color.b, l->color.a);
                 }
                 break;
             case NK_COMMAND_RECT:
                 {
-                    const struct nk_command_rect *r = (const struct nk_command_rect *)cmd;
+                    const struct nk_command_rect *r = (
+                     const struct nk_command_rect *)cmd;
                     mtrPrimitiveRoundedRectangle_rgba_f(r->x, r->y, r->x + r->w,
                      r->y + r->h, r->rounding, r->color.r, r->color.g,
                      r->color.b, r->color.a);
@@ -493,7 +500,8 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
                 break;
             case NK_COMMAND_RECT_FILLED:
                 {
-                    const struct nk_command_rect_filled *r = (const struct nk_command_rect_filled *)cmd;
+                    const struct nk_command_rect_filled *r = (
+                     const struct nk_command_rect_filled *)cmd;
                     mtrPrimitiveRoundedRectangleFilled_rgba_f(r->x, r->y,
                      r->x + r->w, r->y + r->h, r->rounding, r->color.r,
                      r->color.g, r->color.b, r->color.a);
@@ -501,7 +509,8 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
                 break;
             case NK_COMMAND_CIRCLE:
                 {
-                    const struct nk_command_circle *c = (const struct nk_command_circle *)cmd;
+                    const struct nk_command_circle *c = (
+                     const struct nk_command_circle *)cmd;
                     mtrPrimitiveCircle_rgba_f(c->x + (c->w >> 1),
                      c->y + (c->h >> 1), (c->w > c->h) ? c->w : c->h,
                      c->color.r, c->color.g, c->color.b, c->color.a);
@@ -509,7 +518,8 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
                 break;
             case NK_COMMAND_CIRCLE_FILLED:
                 {
-                    const struct nk_command_circle_filled *c = (const struct nk_command_circle_filled *)cmd;
+                    const struct nk_command_circle_filled *c = (
+                     const struct nk_command_circle_filled *)cmd;
                     mtrPrimitiveCircleFilled_rgba_f(c->x + (c->w >> 1),
                      c->y + (c->h >> 1), (c->w > c->h) ? c->w : c->h,
                      c->color.r, c->color.g, c->color.b, c->color.a);
@@ -517,7 +527,8 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
                 break;
             case NK_COMMAND_TRIANGLE:
                 {
-                    const struct nk_command_triangle*t = (const struct nk_command_triangle*)cmd;
+                    const struct nk_command_triangle*t = (
+                     const struct nk_command_triangle*)cmd;
                     mtrPrimitiveTriangle_rgba_f(t->a.x, t->a.y, t->b.x, t->b.y,
                      t->c.x, t->c.y, t->color.r, t->color.g, t->color.b,
                      t->color.a);
@@ -525,7 +536,8 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
                 break;
             case NK_COMMAND_TRIANGLE_FILLED:
                 {
-                    const struct nk_command_triangle_filled *t = (const struct nk_command_triangle_filled *)cmd;
+                    const struct nk_command_triangle_filled *t = (
+                     const struct nk_command_triangle_filled *)cmd;
                     mtrPrimitiveTriangleFilled_rgba_f(t->a.x, t->a.y, t->b.x,
                      t->b.y, t->c.x, t->c.y, t->color.r, t->color.g, t->color.b,
                      t->color.a);
@@ -533,7 +545,8 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
                 break;
             case NK_COMMAND_POLYGON:
                 {
-                    const struct nk_command_polygon *p = (const struct nk_command_polygon*)cmd;
+                    const struct nk_command_polygon *p = (
+                     const struct nk_command_polygon*)cmd;
                     for (i = 0; i < p->point_count; i++)
                     {
                         if (i == p->point_count - 1)
@@ -550,7 +563,8 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
                 break;
             case NK_COMMAND_POLYGON_FILLED:
                 {
-                    const struct nk_command_polygon_filled *p = (const struct nk_command_polygon_filled *)cmd;
+                    const struct nk_command_polygon_filled *p = (
+                     const struct nk_command_polygon_filled *)cmd;
                     for (i = 0; i < p->point_count; i++)
                     {
                         if (i == p->point_count - 1)
@@ -567,7 +581,8 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
                 break;
             case NK_COMMAND_POLYLINE:
                 {
-                    const struct nk_command_polyline *p = (const struct nk_command_polyline *)cmd;
+                    const struct nk_command_polyline *p = (
+                     const struct nk_command_polyline *)cmd;
                     for (i = 0; i < p->point_count - 1; i++)
                         mtrPrimitiveLine_rgba_f(p->points[i].x,
                          p->points[i].y, p->points[i + 1].x,
@@ -577,7 +592,8 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
                 break;
             case NK_COMMAND_TEXT:
                 {
-                    const struct nk_command_text *t = (const struct nk_command_text*)cmd;
+                    const struct nk_command_text *t = (
+                     const struct nk_command_text*)cmd;
                     mtrNkFont *font = (mtrNkFont*)t->font->userdata.ptr;
                     mtrFontDrawMbfString_f(font->font, t->x, t->y, t->string);
                 }
@@ -586,7 +602,8 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
                 break;
             case NK_COMMAND_ARC:
                 {
-                    const struct nk_command_arc *a = (const struct nk_command_arc *)cmd;
+                    const struct nk_command_arc *a = (
+                     const struct nk_command_arc *)cmd;
                     mtrPrimitiveArc_rgba_f(a->cx, a->cy, a->r, a->a[0], a->a[1],
                      a->color.r, a->color.g, a->color.b, a->color.a);
                 }
@@ -594,7 +611,8 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
             case NK_COMMAND_RECT_MULTI_COLOR:
             case NK_COMMAND_IMAGE:
                 {
-                    const struct nk_command_image *i = (const struct nk_command_image *)cmd;
+                    const struct nk_command_image *i = (
+                     const struct nk_command_image *)cmd;
                     mtrNkImage *image = (mtrNkImage *)i->img.handle.ptr;
                     mtrTextureBlitRegionScaled_f(image->texture, i->x, i->y,
                      i->w, i->h, image->nk.region[0], image->nk.region[1],
@@ -604,7 +622,8 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
                 break;
             case NK_COMMAND_ARC_FILLED:
                 {
-                    const struct nk_command_arc_filled *a = (const struct nk_command_arc_filled *)cmd;
+                    const struct nk_command_arc_filled *a = (
+                     const struct nk_command_arc_filled *)cmd;
                     mtrPrimitiveSegmentFilled_rgba_f(a->cx, a->cy, a->r,
                      a->a[0], a->a[1], a->color.r, a->color.g, a->color.b,
                      a->color.a);
@@ -620,8 +639,9 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
 MTR_EXPORT bool MTR_CALL mtrGuiBegin(const char *title, float boundsX,
  float boundsY, float boundsW, float bountsH, int flags)
 {
-    return nk_begin(&mtrNkGui.ctx, title, nk_rect(boundsX, boundsY, boundsW, bountsH),
-     flags);
+    struct nk_rect bounds = nk_rect(boundsX, boundsY, boundsW, bountsH);
+
+    return nk_begin(&mtrNkGui.ctx, title, bounds, flags);
 }
 
 MTR_EXPORT void MTR_CALL mtrGuiEnd(void)
@@ -684,7 +704,8 @@ MTR_EXPORT bool MTR_CALL mtrGuiButtonImage(uint32_t imagenum)
 {
     mtrNkImage *nkImage;
 
-    nkImage = (mtrNkImage *)(&((mtrNkImage *)mtrGuiImageKeeper->data)[imagenum]);
+    nkImage = (mtrNkImage *)(
+     &((mtrNkImage *)mtrGuiImageKeeper->data)[imagenum]);
 
     return nk_button_image(&mtrNkGui.ctx, nkImage->nk);
 }
@@ -694,7 +715,8 @@ MTR_EXPORT bool MTR_CALL mtrGuiButtonImageLabel(uint32_t imagenum,
 {
     mtrNkImage *nkImage;
 
-    nkImage = (mtrNkImage *)(&((mtrNkImage *)mtrGuiImageKeeper->data)[imagenum]);
+    nkImage = (mtrNkImage *)(
+     &((mtrNkImage *)mtrGuiImageKeeper->data)[imagenum]);
 
     return nk_button_image_label(&mtrNkGui.ctx, nkImage->nk, string, alignment);
 }
@@ -704,7 +726,8 @@ MTR_EXPORT bool MTR_CALL mtrGuiButtonImageText(uint32_t imagenum,
 {
     mtrNkImage *nkImage;
 
-    nkImage = (mtrNkImage *)(&((mtrNkImage *)mtrGuiImageKeeper->data)[imagenum]);
+    nkImage = (mtrNkImage *)(
+     &((mtrNkImage *)mtrGuiImageKeeper->data)[imagenum]);
 
     return nk_button_image_text(&mtrNkGui.ctx, nkImage->nk, string, len,
      alignment);
@@ -737,7 +760,9 @@ MTR_EXPORT bool MTR_CALL mtrGuiSelectableImageLabel(uint32_t imagenum,
 {
     mtrNkImage *nkImage;
 
-    nkImage = (mtrNkImage *)(&((mtrNkImage *)mtrGuiImageKeeper->data)[imagenum]);
+    nkImage = (mtrNkImage *)(
+     &((mtrNkImage *)mtrGuiImageKeeper->data)[imagenum]);
+
     if (text == NULL)
         return nk_select_image_label(&mtrNkGui.ctx, nkImage->nk, " ",
          alignment, selected);
@@ -750,8 +775,8 @@ MTR_EXPORT bool MTR_CALL mtrGuiSelectableImageText(uint32_t imagenum,
  const char *text, int len, int alignment, bool selected)
 {
     mtrNkImage *nkImage;
-
-    nkImage = (mtrNkImage *)(&((mtrNkImage *)mtrGuiImageKeeper->data)[imagenum]);
+    nkImage = (mtrNkImage *)(
+     &((mtrNkImage *)mtrGuiImageKeeper->data)[imagenum]);
 
     return nk_select_image_text(&mtrNkGui.ctx, nkImage->nk, text, len,
      alignment, selected);
