@@ -253,13 +253,12 @@ void mtrNkUpdateKey(struct nk_context *ctx, int key, enum nk_keys nk_key)
 void mtrNkHandleEvents(void)
 {
     struct nk_context *ctx;
-    int mouseRelX;
-    int mouseRelY;
-    int mouseRelWheel;
-    int mouseX;
-    int mouseY;
-    bool controlPressed;
-    char *utf8char;
+    bool               mouseMotion;
+    int                mouseRelWheel;
+    int                mouseX;
+    int                mouseY;
+    bool               controlPressed;
+    char              *utf8char;
 
     UNUSED(utf8char);
 
@@ -270,9 +269,9 @@ void mtrNkHandleEvents(void)
 //        al_acknowledge_resize(ev->display.source);
 //    } break;
 
-    mtrMouseGetDeltaXY(&mouseRelX, &mouseRelY);
+    mouseMotion = mtrMouseMoving();
     mtrMouseGetXY(&mouseX, &mouseY);
-    if (mouseRelX != 0 && mouseRelY != 0)
+    if (mouseMotion)
         nk_input_motion(ctx, mouseX, mouseY);
 
     mouseRelWheel = mtrMouseGetWheelRelative();
