@@ -6,7 +6,11 @@
 #define NK_INCLUDE_STANDARD_VARARGS
 #define NK_INCLUDE_DEFAULT_ALLOCATOR
 #define NK_IMPLEMENTATION
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wcast-qual"
+#pragma GCC diagnostic ignored "-Wfloat-equal"
 #include "nuklear.h"
+#pragma GCC diagnostic pop
 
 #include "marathoner/plugin.h"
 
@@ -29,8 +33,6 @@ typedef struct mtrNkSb {
 } mtrNkSb;
 
 static struct mtrNkGui {
-//    Tigr             *dsp;
-//    Tigr             *backdrop;
     unsigned int      width;
     unsigned int      height;
     int               is_touch_down;
@@ -42,6 +44,9 @@ static struct mtrNkGui {
 mtrIndexkeeper_t *mtrGuiFontKeeper;
 mtrIndexkeeper_t *mtrGuiImageKeeper;
 mtrIndexkeeper_t *mtrGuiStringBufferKeeper;
+
+/* Buffer used by function mtrNkGetTextWidth */
+char getTextWidthBuffer[0x10000];
 
 typedef bool (MTR_CALL * mtrFontDrawMbfString_fFunc)(uint32_t fontNum, float x,
  float y, const char *string);
