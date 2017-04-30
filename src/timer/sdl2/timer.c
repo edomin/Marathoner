@@ -71,7 +71,7 @@ MTR_EXPORT int MTR_CALL mtrTimerDelay(int ms)
 MTR_EXPORT int MTR_CALL mtrTimerDelayForFPS(int fps)
 {
     if (fps > 0)
-        if(mtrTimerGetTicks() < 1000 / fps)
+        if(mtrTimerGetTicks() < 1000U / fps)
         {
             /* Sleep the remaining frame time */
             SDL_Delay((1000 / fps) - mtrTimerGetTicks());

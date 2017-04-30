@@ -12,4 +12,3 @@ typedef struct mtrTimer_t{
 mtrTimer_t mtrTimer;
 
 #endif
-
