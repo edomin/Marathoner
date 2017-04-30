@@ -1,15 +1,15 @@
 #ifndef MTR_VERSION_H
 #define MTR_VERSION_H
 
-#define MTR_VERSION_MARATHONER                      0x000100
+#define MTR_VERSION_MARATHONER                      0x000101 /* inc patch */
 
-#define MTR_VERSION_LAUNCHER                        0x000000
+#define MTR_VERSION_LAUNCHER                        0x000001 /* inc patch */
 
 #define MTR_VERSION_AUDIO_SDL2_MIXER                0x000100
 #define MTR_VERSION_AUDIO_SDL2_MIXER_LUA            0x000100
 #define MTR_VERSION_AUDIO_SDL2_MIXER_SQUIRREL       0x000000
 
-#define MTR_VERSION_GAME_CONTROLLER_SDL2            0x000100
+#define MTR_VERSION_GAME_CONTROLLER_SDL2            0x000101 /* inc patch */
 #define MTR_VERSION_GAME_CONTROLLER_SDL2_LUA        0x000100
 #define MTR_VERSION_GAME_CONTROLLER_SDL2_SQUIRREL   0x000000
 
@@ -38,7 +38,7 @@
 #define MTR_VERSION_SCREEN_SDL2_GPU_LUA             0x000100
 #define MTR_VERSION_SCREEN_SDL2_GPU_SQUIRREL        0x000000
 
-#define MTR_VERSION_SCRIPT_LUA                      0x000100
+#define MTR_VERSION_SCRIPT_LUA                      0x000101 /* inc patch */
 #define MTR_VERSION_SCRIPT_SQUIRREL                 0x000000
 
 #define MTR_VERSION_TEXTURE_SDL2_IMAGE              0x000100
@@ -48,7 +48,7 @@
 #define MTR_VERSION_TEXTURE_SDL2_GPU_LUA            0x000100
 #define MTR_VERSION_TEXTURE_SDL2_GPU_SQUIRREL       0x000000
 
-#define MTR_VERSION_TIMER_SDL2                      0x000100
+#define MTR_VERSION_TIMER_SDL2                      0x000101 /* inc patch */
 #define MTR_VERSION_TIMER_SDL2_LUA                  0x000100
 #define MTR_VERSION_TIMER_SDL2_SQUIRREL             0x000000
 
@@ -60,15 +60,15 @@
 #define MTR_VERSION_UTILS_COLOR_LUA                 0x000100
 #define MTR_VERSION_UTILS_COLOR_SQUIRREL            0x000000
 
-#define MTR_VERSION_ABSTRACTION_SPRITE              0x000000
+#define MTR_VERSION_ABSTRACTION_SPRITE              0x000001 /* inc patch */
 #define MTR_VERSION_ABSTRACTION_SPRITE_LUA          0x000000
 #define MTR_VERSION_ABSTRACTION_SPRITE_SQUIRREL     0x000000
 
-#define MTR_VERSION_ABSTRACTION_FONT                0x000000
-#define MTR_VERSION_ABSTRACTION_FONT_LUA            0x000000
-#define MTR_VERSION_ABSTRACTION_FONT_SQUIRREL       0x000000
+#define MTR_VERSION_ABSTRACTION_FONT                0x000100 /* inc minor */
+#define MTR_VERSION_ABSTRACTION_FONT_LUA            0x000100 /* inc minor */
+#define MTR_VERSION_ABSTRACTION_FONT_SQUIRREL       0x000100 /* inc minor */
 
-#define MTR_VERSION_ABSTRACTION_GUI                 0x000000
+#define MTR_VERSION_ABSTRACTION_GUI                 0x000001 /* inc patch */
 #define MTR_VERSION_ABSTRACTION_GUI_LUA             0x000000
 #define MTR_VERSION_ABSTRACTION_GUI_SQUIRREL        0x000000
 
