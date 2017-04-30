@@ -16,7 +16,11 @@
 #define NK_INCLUDE_STANDARD_VARARGS
 #define NK_INCLUDE_DEFAULT_ALLOCATOR
 #define NK_IMPLEMENTATION
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wcast-qual"
+#pragma GCC diagnostic ignored "-Wfloat-equal"
 #include "nuklear.h"
+#pragma GCC diagnostic pop
 #include "tigr.h"
 
 #include "log.h"
@@ -64,5 +68,7 @@ bool keysCurrent[256];
 bool keysPrevious[256];
 
 bool *lchrPluginEnabled;
+
+char getTextWidthBuffer[0x10000];
 
 #endif

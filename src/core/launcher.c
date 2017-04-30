@@ -12,18 +12,6 @@ NK_API nkTigrFont *nk_tigr_font_create_from_default(void)
 
     return font;
 }
-/*
-NK_API nkTigrFont *nk_tigr_font_create_from_file(const char *file_name)
-{
-    nkTigrFont *font;
-    Tigr       *bitmap;
-    font = malloc(sizeof(struct nkTigrFont));
-    bitmap = tigrLoadImage(file_name);
-    font->font = tigrLoadFont(bitmap, 0);
-    font->height = 12;
-
-    return font;
-} */
 
 NK_INTERN void nk_tigr_clipboard_paste(nk_handle usr, struct nk_text_edit *edit)
 {
@@ -66,11 +54,10 @@ static float nk_tigr_font_get_text_width(nk_handle handle, float height,
     if (!font || !text)
         return 0;
 
-    char strcpy[len + 1];
-    strncpy((char*)&strcpy, text, len);
-    strcpy[len] = '\0';
+    strncpy((char*)&getTextWidthBuffer, text, len);
+    getTextWidthBuffer[len] = '\0';
 
-    return tigrTextWidth(font->font, strcpy);
+    return tigrTextWidth(font->font, getTextWidthBuffer);
 }
 
 NK_API struct nk_context* nk_tigr_init(nkTigrFont *tigrfont, Tigr *dsp,
@@ -388,7 +375,8 @@ NK_API void nk_tigr_render()
                 break;
             case NK_COMMAND_LINE:
                 {
-                    const struct nk_command_line *l = (const struct nk_command_line *)cmd;
+                    const struct nk_command_line *l = (
+                     const struct nk_command_line *)cmd;
                     color = tigrRGBA(l->color.r, l->color.g, l->color.b,
                      l->color.a);
                     tigrLine(tigr.backdrop, l->begin.x, l->begin.y, l->end.x,
@@ -397,7 +385,8 @@ NK_API void nk_tigr_render()
                 break;
             case NK_COMMAND_RECT:
                 {
-                    const struct nk_command_rect *r = (const struct nk_command_rect *)cmd;
+                    const struct nk_command_rect *r = (
+                     const struct nk_command_rect *)cmd;
                     color = tigrRGBA(r->color.r, r->color.g, r->color.b,
                      r->color.a);
                     tigrRect(tigr.backdrop, r->x, r->y, r->w, r->h, color);
@@ -405,7 +394,8 @@ NK_API void nk_tigr_render()
                 break;
             case NK_COMMAND_RECT_FILLED:
                 {
-                    const struct nk_command_rect_filled *r = (const struct nk_command_rect_filled *)cmd;
+                    const struct nk_command_rect_filled *r = (
+                     const struct nk_command_rect_filled *)cmd;
                     color = tigrRGBA(r->color.r, r->color.g, r->color.b,
                      r->color.a);
                     tigrFill(tigr.backdrop, r->x, r->y, r->w, r->h, color);
@@ -413,7 +403,8 @@ NK_API void nk_tigr_render()
                 break;
             case NK_COMMAND_CIRCLE:
                 {
-                    const struct nk_command_circle *c = (const struct nk_command_circle *)cmd;
+                    const struct nk_command_circle *c = (
+                     const struct nk_command_circle *)cmd;
                     color = tigrRGBA(c->color.r, c->color.g, c->color.b,
                      c->color.a);
                     tigrRect(tigr.backdrop, c->x, c->y, c->w, c->h, color);
@@ -421,7 +412,8 @@ NK_API void nk_tigr_render()
                 break;
             case NK_COMMAND_CIRCLE_FILLED:
                 {
-                    const struct nk_command_circle_filled *c = (const struct nk_command_circle_filled *)cmd;
+                    const struct nk_command_circle_filled *c = (
+                     const struct nk_command_circle_filled *)cmd;
                     color = tigrRGBA(c->color.r, c->color.g, c->color.b,
                      c->color.a);
                     tigrFill(tigr.backdrop, c->x, c->y, c->w, c->h, color);
@@ -429,7 +421,8 @@ NK_API void nk_tigr_render()
                 break;
             case NK_COMMAND_TRIANGLE:
                 {
-                    const struct nk_command_triangle*t = (const struct nk_command_triangle*)cmd;
+                    const struct nk_command_triangle*t = (
+                     const struct nk_command_triangle*)cmd;
                     color = tigrRGBA(t->color.r, t->color.g, t->color.b,
                      t->color.a);
                     tigrLine(tigr.backdrop, t->a.x, t->a.y, t->b.x, t->b.y,
@@ -442,7 +435,8 @@ NK_API void nk_tigr_render()
                 break;
             case NK_COMMAND_TRIANGLE_FILLED:
                 {
-                    const struct nk_command_triangle_filled *t = (const struct nk_command_triangle_filled *)cmd;
+                    const struct nk_command_triangle_filled *t = (
+                     const struct nk_command_triangle_filled *)cmd;
                     color = tigrRGBA(t->color.r, t->color.g, t->color.b,
                      t->color.a);
                     tigrLine(tigr.backdrop, t->a.x, t->a.y, t->b.x, t->b.y,
@@ -455,7 +449,8 @@ NK_API void nk_tigr_render()
                 break;
             case NK_COMMAND_POLYGON:
                 {
-                    const struct nk_command_polygon *p = (const struct nk_command_polygon*)cmd;
+                    const struct nk_command_polygon *p = (
+                     const struct nk_command_polygon*)cmd;
                     color = tigrRGBA(p->color.r, p->color.g, p->color.b,
                      p->color.a);
                     for (i = 0; i < p->point_count; i++)
@@ -473,7 +468,8 @@ NK_API void nk_tigr_render()
                 break;
             case NK_COMMAND_POLYGON_FILLED:
                 {
-                    const struct nk_command_polygon_filled *p = (const struct nk_command_polygon_filled *)cmd;
+                    const struct nk_command_polygon_filled *p = (
+                     const struct nk_command_polygon_filled *)cmd;
                     color = tigrRGBA(p->color.r, p->color.g, p->color.b,
                      p->color.a);
                     for (i = 0; i < p->point_count; i++)
@@ -491,7 +487,8 @@ NK_API void nk_tigr_render()
                 break;
             case NK_COMMAND_POLYLINE:
                 {
-                    const struct nk_command_polyline *p = (const struct nk_command_polyline *)cmd;
+                    const struct nk_command_polyline *p = (
+                     const struct nk_command_polyline *)cmd;
                     color = tigrRGBA(p->color.r, p->color.g, p->color.b,
                      p->color.a);
                     for (i = 0; i < p->point_count - 1; i++)
@@ -501,10 +498,11 @@ NK_API void nk_tigr_render()
                 break;
             case NK_COMMAND_TEXT:
                 {
-                    const struct nk_command_text *t = (const struct nk_command_text*)cmd;
+                    const struct nk_command_text *t = (
+                     const struct nk_command_text*)cmd;
+                    nkTigrFont *font = (nkTigrFont*)t->font->userdata.ptr;
                     color = tigrRGBA(t->foreground.r, t->foreground.g,
                      t->foreground.b, t->foreground.a);
-                    nkTigrFont *font = (nkTigrFont*)t->font->userdata.ptr;
                     tigrPrint(tigr.backdrop, font->font, t->x, t->y, color,
                      (const char*)t->string);
                     //al_draw_text(font->font,
@@ -514,7 +512,8 @@ NK_API void nk_tigr_render()
                 break;
             case NK_COMMAND_CURVE:
                 {
-                    const struct nk_command_curve *q = (const struct nk_command_curve *)cmd;
+                    const struct nk_command_curve *q = (
+                     const struct nk_command_curve *)cmd;
                     color = tigrRGBA(q->color.r, q->color.g, q->color.b,
                      q->color.a);
 
@@ -583,7 +582,8 @@ int CountSubsystems(int pluginsFound, mtrPlugin *pluginData)
                  && strcmp(pluginData[j].report->subsystem, "utils") != 0
                  && strcmp(pluginData[j].report->subsystem, "abstraction") != 0)
                 {
-                    if (strcmp(pluginData[j].report->subsystem, pluginData[i].report->subsystem) == 0)
+                    if (strcmp(pluginData[j].report->subsystem,
+                     pluginData[i].report->subsystem) == 0)
                     {
                         newSubsystem = false;
                         break;
@@ -619,10 +619,12 @@ char **GetSubsystemList(int pluginsFound, mtrPlugin *pluginData, int ssCount)
         {
             if (i == 0)
             {
-                ssList[currentSubsystem] = malloc(sizeof(char) * (strlen(pluginData[i].report->subsystem) + 1));
+                ssList[currentSubsystem] = malloc(
+                 sizeof(char) * (strlen(pluginData[i].report->subsystem) + 1));
                 if (ssList[currentSubsystem] == NULL)
                     return NULL;
-                strcpy(ssList[currentSubsystem], pluginData[i].report->subsystem);
+                strcpy(ssList[currentSubsystem],
+                 pluginData[i].report->subsystem);
                 currentSubsystem++;
                 continue;
             }
@@ -633,7 +635,8 @@ char **GetSubsystemList(int pluginsFound, mtrPlugin *pluginData, int ssCount)
                  && strcmp(pluginData[j].report->subsystem, "utils") != 0
                  && strcmp(pluginData[j].report->subsystem, "abstraction") != 0)
                 {
-                    if (strcmp(pluginData[j].report->subsystem, pluginData[i].report->subsystem) == 0)
+                    if (strcmp(pluginData[j].report->subsystem,
+                     pluginData[i].report->subsystem) == 0)
                     {
                         newSubsystem = false;
                         break;
@@ -642,10 +645,12 @@ char **GetSubsystemList(int pluginsFound, mtrPlugin *pluginData, int ssCount)
             }
             if (newSubsystem)
             {
-                ssList[currentSubsystem] = malloc(sizeof(char) * (strlen(pluginData[i].report->subsystem) + 1));
+                ssList[currentSubsystem] = malloc(
+                 sizeof(char) * (strlen(pluginData[i].report->subsystem) + 1));
                 if (ssList[currentSubsystem] == NULL)
                     return NULL;
-                strcpy(ssList[currentSubsystem], pluginData[i].report->subsystem);
+                strcpy(ssList[currentSubsystem],
+                 pluginData[i].report->subsystem);
                 currentSubsystem++;
             }
         }
@@ -653,8 +658,9 @@ char **GetSubsystemList(int pluginsFound, mtrPlugin *pluginData, int ssCount)
     return ssList;
 }
 
-bool ConfigSave(mtrSubsystem *ssScript, char scriptName[64], int pluginsCount, mtrPlugin *pluginData,
- int subsystemsCount, char **ssList, mtrSubsystem **subsystem)
+bool ConfigSave(mtrSubsystem *ssScript, char scriptName[64], int pluginsCount,
+ mtrPlugin *pluginData, int subsystemsCount, char **ssList,
+ mtrSubsystem **subsystem)
 {
     bool success;
     int i;
@@ -741,8 +747,8 @@ int main(int argc, char** argv)
         subsystem = malloc(sizeof(mtrSubsystem *) * subsystemsCount);
         if (subsystem == NULL)
         {
-            mtrNotify("Unable to allocate memory for subsystem's data structures",
-             0, MTR_LMT_FATAL);
+            mtrNotify("Unable to allocate memory for subsystem's data "
+             "structures", 0, MTR_LMT_FATAL);
             return 5;
         }
     }
@@ -789,7 +795,8 @@ int main(int argc, char** argv)
 
     for (i = 0; i < subsystemsCount; i++)
     {
-        subsystem[i]->plugin = malloc(sizeof(char *) * (subsystem[i]->pluginsCount + 1));
+        subsystem[i]->plugin = malloc(
+         sizeof(char *) * (subsystem[i]->pluginsCount + 1));
         if (subsystem[i]->plugin == NULL)
         {
             mtrNotify("Unable to allocate memory for names subsystem's plugins",
@@ -813,7 +820,9 @@ int main(int argc, char** argv)
         {
             if (strcmp(mtrPluginData[i].report->subsystem, ssList[j]) == 0)
             {
-                subsystem[j]->plugin[subsystem[j]->pluginsCount] = mtrPluginData[i].report->moduleID;
+                int pluginsCount = subsystem[j]->pluginsCount;
+                char *moduleID = mtrPluginData[i].report->moduleID;
+                subsystem[j]->plugin[pluginsCount] = moduleID;
                 subsystem[j]->pluginsCount++;
                 break;
             }
@@ -888,7 +897,8 @@ int main(int argc, char** argv)
     if (strcmp(temp, "runScript") != 0)
     {
         mtrNotify("Invalid autorun action command", 1, MTR_LMT_WARNING);
-        if (mtrConfigfileWriteString("Marathoner.cfg", "Autorun", "action", "runScript"))
+        if (mtrConfigfileWriteString("Marathoner.cfg", "Autorun", "action",
+         "runScript"))
             mtrNotify("Autorun action command changed to 'runScript'", 1,
              MTR_LMT_NOTE);
         else
@@ -946,14 +956,15 @@ int main(int argc, char** argv)
         nk_input_end(ctx);
 
         /* GUI */
-        if (nk_begin(ctx, "Menu", nk_rect(0, 0, screen->w, 24), NK_WINDOW_BORDER | NK_WINDOW_NO_SCROLLBAR))
+        if (nk_begin(ctx, "Menu", nk_rect(0, 0, screen->w, 24),
+         NK_WINDOW_BORDER | NK_WINDOW_NO_SCROLLBAR))
         {
             nk_layout_row_dynamic(ctx, 16, 5);
             if (nk_button_label(ctx, "Save"))
             {
                 scriptName[scriptNameLen] = '\0';
-                ok = ConfigSave(ssScript, scriptName, mtrPluginsFound, mtrPluginData,
-                 subsystemsCount, ssList, subsystem);
+                ok = ConfigSave(ssScript, scriptName, mtrPluginsFound,
+                 mtrPluginData, subsystemsCount, ssList, subsystem);
                 if (!ok)
                     mtrNotify("Unable to save preferences to configfile", 0,
                      MTR_LMT_ERROR);
@@ -961,8 +972,8 @@ int main(int argc, char** argv)
             if (nk_button_label(ctx, "Save and Exit"))
             {
                 scriptName[scriptNameLen] = '\0';
-                ok = ConfigSave(ssScript, scriptName, mtrPluginsFound, mtrPluginData,
-                 subsystemsCount, ssList, subsystem);
+                ok = ConfigSave(ssScript, scriptName, mtrPluginsFound,
+                 mtrPluginData, subsystemsCount, ssList, subsystem);
                 if (!ok)
                     mtrNotify("Unable to save preferences to configfile", 0,
                      MTR_LMT_ERROR);
@@ -976,8 +987,8 @@ int main(int argc, char** argv)
             if (nk_button_label(ctx, "Save and Run"))
             {
                 scriptName[scriptNameLen] = '\0';
-                ok = ConfigSave(ssScript, scriptName, mtrPluginsFound, mtrPluginData,
-                 subsystemsCount, ssList, subsystem);
+                ok = ConfigSave(ssScript, scriptName, mtrPluginsFound,
+                 mtrPluginData, subsystemsCount, ssList, subsystem);
                 if (!ok)
                     mtrNotify("Unable to save preferences to configfile", 0,
                      MTR_LMT_ERROR);
@@ -991,7 +1002,8 @@ int main(int argc, char** argv)
         }
         nk_end(ctx);
 
-        if (nk_begin(ctx, "Main", nk_rect(0, 25, screen->w, screen->h - 25), NK_WINDOW_BORDER))
+        if (nk_begin(ctx, "Main", nk_rect(0, 25, screen->w, screen->h - 25),
+         NK_WINDOW_BORDER))
         {
             nk_layout_row_dynamic(ctx, 16, 1);
             nk_label_colored(ctx, "Autorun:", NK_TEXT_LEFT, headerColor);
@@ -1036,19 +1048,22 @@ int main(int argc, char** argv)
                     if (temp == NULL)
                     {
                         temp = realloc(temp,
-                         sizeof(char) * (strlen(temp) + strlen("Launcher.exe") + 2));
+                         sizeof(char) * (
+                         strlen(temp) + strlen("Launcher.exe") + 2));
                         strcat(temp, "./");
                         strcat(temp, "Launcher.exe");
                     }
                     else
                     {
                         temp = realloc(temp,
-                         sizeof(char) * (strlen(temp) + strlen("Launcher.exe") + 2));
+                         sizeof(char) * (
+                         strlen(temp) + strlen("Launcher.exe") + 2));
                         strcat(temp, "\\");
                         strcat(temp, "Launcher.exe");
                     }
 
-                    if (PathRelativePathTo(mtemp, temp, FILE_ATTRIBUTE_NORMAL, ctemp, FILE_ATTRIBUTE_NORMAL))
+                    if (PathRelativePathTo(mtemp, temp, FILE_ATTRIBUTE_NORMAL,
+                     ctemp, FILE_ATTRIBUTE_NORMAL))
                     {
                         if (mtemp[0] == '.' && mtemp[1] == '\\')
                         {
@@ -1091,13 +1106,15 @@ int main(int argc, char** argv)
             if (nk_group_begin(ctx, "left", NK_WINDOW_NO_SCROLLBAR)) {
                 nk_layout_row_dynamic(ctx, 25, 1);
                 for (i = 0; i < mtrPluginsFound / 2; i++)
-                    lchrPluginEnabled[i] = nk_check_label(ctx, mtrPluginData[i].report->moduleID, lchrPluginEnabled[i]);
+                    lchrPluginEnabled[i] = nk_check_label(ctx,
+                     mtrPluginData[i].report->moduleID, lchrPluginEnabled[i]);
                 nk_group_end(ctx);
             }
             if (nk_group_begin(ctx, "right", NK_WINDOW_NO_SCROLLBAR)) {
                 nk_layout_row_dynamic(ctx, 25, 1);
                 for (i = mtrPluginsFound / 2 + 1; i < mtrPluginsFound; i++)
-                    lchrPluginEnabled[i] = nk_check_label(ctx, mtrPluginData[i].report->moduleID, lchrPluginEnabled[i]);
+                    lchrPluginEnabled[i] = nk_check_label(ctx,
+                     mtrPluginData[i].report->moduleID, lchrPluginEnabled[i]);
                 nk_group_end(ctx);
             }
             //if (nk_option_label(ctx, "easy", op == EASY)) op = EASY;
