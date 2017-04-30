@@ -4,6 +4,8 @@ PLATFORM = win32
 MOD = plugin
 # yes, no
 DEBUG = yes
+# yes, no
+MORE_WARNINGS = yes
 
 ifeq ($(PLATFORM), win32)
 	PREFIX = /usr/local/mingw32
@@ -11,16 +13,24 @@ ifeq ($(PLATFORM), win32)
 	LD = mingw32-gcc
 	AR = ar
 	RC = windres
+	CFLAGS = -Wall -Wextra -Wno-unused-parameter -Wshadow -Werror -msse2 \
+     -mfpmath=sse
+	ifeq ($(MORE_WARNINGS), yes)
+        CFLAGS += -Wdouble-promotion -Wformat-security -Wformat-signedness \
+         -Wswitch-default -Wuninitialized -Wsuggest-attribute=const \
+         -Wfloat-equal -Wdeclaration-after-statement -Wundef \
+         -Wbad-function-cast -Wcast-qual -Wlogical-op -Wredundant-decls -Wvla
+	endif
+	LDFLAGS = -mwindows
 	ifeq ($(DEBUG), no)
-        CFLAGS = -Wall -Werror -O2
-        LDFLAGS = -s -mwindows
+        CFLAGS += -O2 -Wdisabled-optimization
+        LDFLAGS += -s
 	endif
 	ifeq ($(DEBUG), yes)
-        CFLAGS = -Wall -Werror -g
-        LDFLAGS = -mwindows
+        CFLAGS += -ggdb3 -fvar-tracking
 	endif
 	ARFLAGS = rcs
-	RCFLAGS = -O coff -v
+	RCFLAGS = -O coff
 	SO_PR =
 	SO_EXT = .dll
 	A_PR = lib
