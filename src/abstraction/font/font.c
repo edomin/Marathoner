@@ -183,14 +183,14 @@ MTR_EXPORT uint32_t MTR_CALL mtrFontCreateMbf(const char *name,
 }
 
 MTR_EXPORT bool MTR_CALL mtrFontAddMbfTextureTable(uint32_t fontNum,
- uint32_t texNum, int tableNum)
+ uint32_t texNum, unsigned int tableNum)
 {
     mtrFont_t *font;
     font = (mtrFont_t *)(&((mtrFont_t *)mtrFontKeeper->data)[fontNum]);
 
-    if (font->mbf == NULL || texNum == 0 || tableNum < 0)
-        return false;
-    if (tableNum >= font->mbf->reservedTables)
+    if (font->mbf == NULL ||
+     texNum == 0 ||
+     tableNum >= font->mbf->reservedTables)
         return false;
 
     font->mbf->texTable[tableNum] = texNum;
@@ -204,7 +204,7 @@ MTR_EXPORT bool MTR_CALL mtrFontDrawMbfString_f(uint32_t fontNum,
     mtrFont_t   *font;
     uint32_t    *ucs4Text;
     size_t       ucs4Length;
-    int          i;
+    unsigned int i;
     uint32_t     symbolTable;
     int          symbolNum;
     int          symbolCol;

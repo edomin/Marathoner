@@ -5,10 +5,10 @@
 
 /* Monospace bitmap font */
 typedef struct mtrMbf_t {
-    int       reservedTables; /* 1 table = 256 bytes */
-    uint32_t *texTable; /* array of textures with tables of symbols */
-    int       width;
-    int       height;
+    unsigned int reservedTables; /* 1 table = 256 bytes */
+    uint32_t    *texTable; /* array of textures with tables of symbols */
+    int          width;
+    int          height;
 } mtrMbf_t;
 
 typedef struct mtrFont_t {
