@@ -15,6 +15,7 @@
 #define DO_PRAGMA(x) _Pragma (#x)
 #define TODO(x) DO_PRAGMA(message ("TODO - " #x))
 
+/* Hack for disabling warning about unused variable */
 #define UNUSED(expr) do { (void)(expr); } while (0)
 
 /* Get valid pointer fiven type from indexkeeper data array */
@@ -139,9 +140,11 @@ mtrPlugin *mtrPluginData;
 #define MTR_IKDM_MEDIUM     2048
 #define MTR_IKDM_LARGE      134217728
 
-/* Indexkeeper datamap size */
-#define MTR_FM_WRITE        0
-#define MTR_FM_APPEND       1
+/* File opening modes */
+#define MTR_FM_READ   0
+#define MTR_FM_WRITE  1
+#define MTR_FM_APPEND 2
+#define MTR_FM_MAX    3
 
 /* Marathoner Keykodes */
 #define MTR_KEY_A                   4
