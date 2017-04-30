@@ -1,9 +1,12 @@
 include ../../../Build.mk
 
-all: rcgen
+BINDIR = ../../..
+OBJSDIR = ../../../obj
 
-rcgen: ../../../obj/rcgen.o
-	$(LD) $(LDEXFLAGS) -o ../../../rcgen$(EXE_EXT) ../../../obj/rcgen.o
+all: $(BINDIR)/rcgen
 
-../../../obj/rcgen.o: rcgen.c
-	$(CC) $(CFLAGS) $(INCDIRS) -c rcgen.c -o ../../../obj/rcgen.o
+$(BINDIR)/rcgen: $(OBJSDIR)/rcgen.o
+	$(LD) $(LDEXFLAGS) -o $(BINDIR)/rcgen$(EXE_EXT) $(OBJSDIR)/rcgen.o
+
+$(OBJSDIR)/rcgen.o: rcgen.c
+	$(CC) $(CFLAGS) $(INCDIRS) -c rcgen.c -o $(OBJSDIR)/rcgen.o

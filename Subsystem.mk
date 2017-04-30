@@ -16,13 +16,20 @@ INCDIRS = -I$(PREFIX)/include -I../../../include $(XINCDIRS)
 STATIC_NAME = $(A_PR)mtr_$(MODULE_NAME)$(A_EXT)
 PLUGIN_NAME = $(SO_PR)mtr_$(MODULE_NAME)$(SO_EXT)
 
-CONST = $(shell echo $(MODULE_NAME) | tr a-z A-Z)
-CONST_VER = MTR_VERSION_$(CONST)
+OBJ = $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).o
+RES =
 
 ifeq ($(PLATFORM), win32)
-  OBJS = $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).o \
-    $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).res
+  RCGEN = ../../../rcgen
+  VERSION_H = ../../../include/marathoner/version.h
+  RCFILE = $(RCDIR)/$(MODULE_NAME).rc
+  RES = $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).res
+  OBJS = $(OBJ) $(RES)
+  PLUGIN_DESCRIPTION = "$(MODULE_NAME) plugin for Marathoner Engine"
 endif
+
+CONST = $(shell echo $(MODULE_NAME) | tr a-z A-Z)
+CONST_VER = MTR_VERSION_$(CONST)
 
 ifeq ($(MOD), static)
 all: $(LIBDIR)/$(STATIC_NAME)
@@ -31,21 +38,22 @@ ifeq ($(MOD), plugin)
 all: $(BINDIR)/$(PLUGIN_NAME)
 endif
 
-$(LIBDIR)/$(STATIC_NAME): $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).o
-	$(AR) $(ARFLAGS) $(LIBDIR)/$(STATIC_NAME) $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).o
+$(LIBDIR)/$(STATIC_NAME): $(OBJ)
+	$(AR) $(ARFLAGS) $(LIBDIR)/$(STATIC_NAME) $(OBJ)
 
 $(BINDIR)/$(PLUGIN_NAME): $(OBJS)
 	$(LD) $(LDFLAGS) -o $(BINDIR)/$(PLUGIN_NAME) $(OBJS) $(LIBS)
 
-$(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).o: $(SUBSYSTEM).c $(SUBSYSTEM).h
+$(OBJ): $(SUBSYSTEM).c $(SUBSYSTEM).h
 	-mkdir $(OBJSDIR)/$(SUBSYSTEM)
-	$(CC) $(CFLAGS) $(INCDIRS) -c $(SUBSYSTEM).c -o $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).o
+	$(CC) $(CFLAGS) $(INCDIRS) -c $(SUBSYSTEM).c -o $(OBJ)
 
-$(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).res: $(RCDIR)/$(MODULE_NAME).rc
-	$(RC) $(RCFLAGS) -i $(RCDIR)/$(MODULE_NAME).rc -o $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).res
+$(RES): $(RCFILE)
+	$(RC) $(RCFLAGS) -i $(RCFILE) -o $(RES)
 
-$(RCDIR)/$(MODULE_NAME).rc:
-	../../../rcgen ../../../include/marathoner/version.h $(RCDIR)/$(MODULE_NAME).rc $(CONST_VER) $(MODULE_NAME) "$(MODULE_NAME) plugin for Marathoner Engine" mtr_$(MODULE_NAME).dll
+$(RCFILE):
+	$(RCGEN) $(VERSION_H) $(RCFILE) $(CONST_VER) $(MODULE_NAME) \
+	 $(PLUGIN_DESCRIPTION) $(PLUGIN_NAME)
 
 $(SUBSYSTEM).c:
 
