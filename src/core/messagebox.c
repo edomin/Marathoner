@@ -82,7 +82,8 @@ bool MTR_CALL mtrShowYesNoMessageBox(const char *title, const char *message)
         resultMessage = message;
 
     #ifdef __MINGW32__
-        return (bool)tinyfd_messageBox(resultTitle, resultMessage, "yesno", "question", 0);
+        return tinyfd_messageBox(resultTitle, resultMessage, "yesno",
+         "question", 0);
     #else
         int answer;
         answer = EM_ASM_ARGS({
@@ -102,9 +103,10 @@ bool MTR_CALL mtrShowYesNoMessageBox(const char *title, const char *message)
                 break;
             default:
                 return false;
+                break;
         }
+        return false;
     #endif
-    return false;
 }
 
 /* MinGW only */
@@ -124,7 +126,7 @@ bool MTR_CALL mtrShowOkCancelMessageBox(const char *title, const char *message)
     else
         resultMessage = message;
 
-    return (bool)tinyfd_messageBox(resultTitle, resultMessage, "okcancel", "info", 0);
+    return tinyfd_messageBox(resultTitle, resultMessage, "okcancel", "info", 0);
 }
 
 /* MinGW only */
