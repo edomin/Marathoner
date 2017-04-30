@@ -111,14 +111,14 @@ MTR_SCRIPT_FUNC(mtrSF_FontCreateMbf)
 
 MTR_SCRIPT_FUNC(mtrSF_FontAddMbfTextureTable)
 {
-    uint32_t fontNum;
-    uint32_t texNum;
-    int      tableNum;
-    bool     result;
+    uint32_t     fontNum;
+    uint32_t     texNum;
+    unsigned int tableNum;
+    bool         result;
 
     MTR_SF_GET_UINT32(fontNum, 1);
     MTR_SF_GET_UINT32(texNum, 2);
-    MTR_SF_GET_INT(tableNum, 3);
+    MTR_SF_GET_UINT(tableNum, 3);
     result = mtrFontAddMbfTextureTable(fontNum, texNum, tableNum);
 
     MTR_SF_PUSH_BOOL(result);
