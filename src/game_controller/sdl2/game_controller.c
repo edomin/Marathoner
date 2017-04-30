@@ -287,7 +287,7 @@ MTR_EXPORT void MTR_CALL mtrGameControllerQuit(void)
 
 MTR_EXPORT void MTR_CALL mtrGameControllerRefresh(void)
 {
-    int                  i;
+    unsigned int         i;
     int                  j;
     mtrGameController_t *gameController;
 
