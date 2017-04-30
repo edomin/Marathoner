@@ -29,6 +29,7 @@ void MTR_CALL mtrLogWriteMeta(uint8_t messageType, uint8_t level)
                 fprintf(mtrLogFile, "%s", "  Fatal: ");
                 break;
             case MTR_LMT_DEBUG:
+            default:
                 fprintf(mtrLogFile, "%s", "  Debug: ");
                 break;
         }
