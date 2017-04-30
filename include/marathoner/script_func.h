@@ -6,9 +6,10 @@
 
     #define MTR_SF_GET_BOOL(varname, stackpos)       varname = lua_toboolean(mtrVm, stackpos)
     #define MTR_SF_GET_INT(varname, stackpos)        varname = lua_tointeger(mtrVm, stackpos)
+    #define MTR_SF_GET_UINT(varname, stackpos)       varname = lua_tonumber(mtrVm, stackpos)
     #define MTR_SF_GET_UINT8(varname, stackpos)      varname = lua_tointeger(mtrVm, stackpos)
-    #define MTR_SF_GET_UINT32(varname, stackpos)     varname = (uint32_t)lua_tonumber(mtrVm, stackpos)
-    #define MTR_SF_GET_SINGLE(varname, stackpos)     varname = (float)lua_tonumber(mtrVm, stackpos)
+    #define MTR_SF_GET_UINT32(varname, stackpos)     varname = lua_tonumber(mtrVm, stackpos)
+    #define MTR_SF_GET_SINGLE(varname, stackpos)     varname = lua_tonumber(mtrVm, stackpos)
     #define MTR_SF_GET_DOUBLE(varname, stackpos)     varname = lua_tonumber(mtrVm, stackpos)
     #define MTR_SF_GET_STRING(varname, stackpos)     varname = lua_tostring(mtrVm, stackpos)
 
@@ -38,29 +39,33 @@
     #define MTR_SCRIPT_FUNC(funcname)                SQInteger funcname(HSQUIRRELVM v)
 
     #define MTR_SF_GET_BOOL(varname, stackpos)       sq_getbool(mtrVm, stackpos + 1, &mtrSfBoolTemp); \
-                                                     varname = (bool)mtrSfBoolTemp;
+                                                     varname = mtrSfBoolTemp;
     #if ((defined (_SQ64)) && (LLONG_MAX == INT64_MAX))
         #define MTR_SF_GET_INT(varname, stackpos)    sq_getinteger(mtrVm, stackpos + 1, &mtrSFInt64Temp); \
-                                                     varname = (int)mtrSfIntTemp;
+                                                     varname = mtrSfIntTemp;
+        #define MTR_SF_GET_UINT(varname, stackpos)   sq_getinteger(mtrVm, stackpos + 1, &mtrSFInt64Temp); \
+                                                     varname = mtrSFInt64Temp;
         #define MTR_SF_GET_UINT8(varname, stackpos)  sq_getinteger(mtrVm, stackpos + 1, &mtrSFInt64Temp); \
                                                      varname = mtrSfIntTemp;
         #define MTR_SF_GET_UINT32(varname, stackpos) sq_getinteger(mtrVm, stackpos + 1, &mtrSFInt64Temp); \
                                                      varname = mtrSFInt64Temp;
     #else
         #define MTR_SF_GET_INT(varname, stackpos)    sq_getinteger(mtrVm, stackpos + 1, &varname)
+        #define MTR_SF_GET_UINT(varname, stackpos)   sq_getfloat(mtrVm, stackpos + 1, &mtrSfFloatTemp); \
+                                                     varname = mtrSfFloatTemp;
         #define MTR_SF_GET_UINT8(varname, stackpos)  sq_getinteger(mtrVm, stackpos + 1, &mtrSfIntTemp); \
                                                      varname = mtrSfIntTemp;
         #define MTR_SF_GET_UINT32(varname, stackpos) sq_getfloat(mtrVm, stackpos + 1, &mtrSfFloatTemp); \
-                                                     varname = (uint32_t)mtrSfFloatTemp;
+                                                     varname = mtrSfFloatTemp;
     #endif
     #if defined (SQUSEDOUBLE)
         #define MTR_SF_GET_SINGLE(varname, stackpos) sq_getfloat(mtrVm, stackpos + 1, &mtrSfFloatTemp); \
-                                                     varname = (float)mtrSfFloatTemp;
+                                                     varname = mtrSfFloatTemp;
         #define MTR_SF_GET_DOUBLE(varname, stackpos) sq_getfloat(mtrVm, stackpos + 1, &varname)
     #else
         #define MTR_SF_GET_SINGLE(varname, stackpos) sq_getfloat(mtrVm, stackpos + 1, &varname)
         #define MTR_SF_GET_DOUBLE(varname, stackpos) sq_getfloat(mtrVm, stackpos + 1, &mtrSfFloatTemp); \
-                                                     varname = (double)mtrSfFloatTemp;
+                                                     varname = mtrSfFloatTemp;
     #endif
     #define MTR_SF_GET_STRING(varname, stackpos)     sq_getstring(mtrVm, stackpos + 1, &varname)
 
