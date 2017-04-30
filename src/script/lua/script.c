@@ -159,7 +159,7 @@ void mtrScriptsDoFile(const char * filename)
     {
         mtrNotify("Error in the script or script file not found.", 0,
          MTR_DMT_ERROR);
-        mtrLogWrite((char *)(lua_tostring(mtrVm, -1)), 0, MTR_LMT_ERROR);
+        mtrLogWrite(lua_tostring(mtrVm, -1), 0, MTR_LMT_ERROR);
     }
 }
 
