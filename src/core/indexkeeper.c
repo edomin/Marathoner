@@ -13,7 +13,8 @@ void *MTR_CALL mtrIndexkeeperCreate(uint32_t dmSize, uint32_t reservedCount,
     indexkeeper = malloc(sizeof(mtrIndexkeeper_t));
     if (indexkeeper == NULL)
     {
-        mtrNotify("Unable to allocate memory for indexkeeper", 1, MTR_LMT_ERROR);
+        mtrNotify("Unable to allocate memory for indexkeeper", 1,
+         MTR_LMT_ERROR);
         return (void *)(NULL);
     }
     indexkeeper->dataSize = datasize;
@@ -25,7 +26,9 @@ void *MTR_CALL mtrIndexkeeperCreate(uint32_t dmSize, uint32_t reservedCount,
         {
             if (reservedCount < 32)
             {
-                mtrLogWrite("Reserved data places count are too few for correct working indexkeeper. Reserved data places count will be set to 32.", 0, MTR_LMT_WARNING);
+                mtrLogWrite("Reserved data places count are too few for "
+                 "correct working indexkeeper. Reserved data places count "
+                 "will be set to 32.", 0, MTR_LMT_WARNING);
                 indexkeeper->reservedData = 32;
             }
             else
@@ -33,13 +36,16 @@ void *MTR_CALL mtrIndexkeeperCreate(uint32_t dmSize, uint32_t reservedCount,
         }
         else
         {
-            mtrLogWrite("Invalid data map size value. Value set on default - MTR_IKDM_SMALL", 0, MTR_LMT_WARNING);
+            mtrLogWrite("Invalid data map size value. Value set on default - "
+             "MTR_IKDM_SMALL", 0, MTR_LMT_WARNING);
             newDmSize = MTR_IKDM_SMALL;
         }
     }
     else
     {
-        mtrLogWrite("Reserved data places count are larger than data map size. Reserved data places count will be lowed to max data map size.", 0, MTR_LMT_WARNING);
+        mtrLogWrite("Reserved data places count are larger than data map "
+         "size. Reserved data places count will be lowed to max data map size.",
+         0, MTR_LMT_WARNING);
         indexkeeper->reservedData = dmSize * 32;
     }
     /* flooring to nearest power of 2 */
@@ -85,8 +91,8 @@ void *MTR_CALL mtrIndexkeeperCreate(uint32_t dmSize, uint32_t reservedCount,
         return (void *)(NULL);
     }
     else
-        mtrLogWrite_i("Memory for indexkeeper data allocated. Reserved places: ",
-         0, MTR_LMT_INFO, indexkeeper->reservedData);
+        mtrLogWrite_i("Memory for indexkeeper data allocated. Reserved "
+         "places: ", 0, MTR_LMT_INFO, indexkeeper->reservedData);
     return (void *)indexkeeper;
 }
 
@@ -105,8 +111,8 @@ uint32_t MTR_CALL mtrIndexkeeperGetFreeIndex(void *ik)
     dataNum = indexkeeper->reservedData;
     mapNumberNum = (indexkeeper->reservedData >> 5);
     bitNum = 0;
-    for (i = 0; i < (indexkeeper->reservedData >> 5); i++) /* indexkeeper->reservedData >> 5 = */
-    {                                                      /* indexkeeper->reservedData / 32   */
+    for (i = 0; i < (indexkeeper->reservedData >> 5); i++) /* bitshifted */
+    {                                                      /* division */
         if (indexkeeper->dataMap[i] < UINT32_MAX)
         {
             for (j = 0; j < 32; j++)
@@ -126,21 +132,25 @@ uint32_t MTR_CALL mtrIndexkeeperGetFreeIndex(void *ik)
      * array with length larger than old in 2 times */
     if (dataNum >= indexkeeper->reservedData)
     {
-        mtrLogWrite("Indeces count exceeded reserved for indeces space. Reserved space will be doubled if possible",
+        mtrLogWrite("Indeces count exceeded reserved for indeces space. "
+         "Reserved space will be doubled if possible",
          0, MTR_LMT_WARNING);
         if (indexkeeper->reservedData != indexkeeper->dmSize << 5)
         {
-            indexkeeper->data = realloc(indexkeeper->data, indexkeeper->dataSize *
-             indexkeeper->reservedData * 2);
+            indexkeeper->data = realloc(indexkeeper->data,
+             indexkeeper->dataSize * indexkeeper->reservedData * 2);
             indexkeeper->reservedData = indexkeeper->reservedData * 2;
-            mtrLogWrite_i("Memory for indeces reallocated. Current places for indeces (half of this is left empty for new indeces): ",
-             0, MTR_LMT_NOTE, indexkeeper->reservedData);
+            mtrLogWrite_i("Memory for indeces reallocated. Current places for "
+             "indeces (half of this is left empty for new indeces): ", 0,
+             MTR_LMT_NOTE, indexkeeper->reservedData);
         }
         else
-            mtrNotify("Unable to allocate memory for data indeces larger than data map size. Please, initialize indexkeeper with larger datamap size.", 1,
-             MTR_LMT_FATAL);
+            mtrNotify("Unable to allocate memory for data indeces larger than "
+             "data map size. Please, initialize indexkeeper with larger "
+             "datamap size.", 1, MTR_LMT_FATAL);
     }
-    indexkeeper->dataMap[mapNumberNum] = indexkeeper->dataMap[mapNumberNum] | (1 << bitNum);
+    indexkeeper->dataMap[mapNumberNum] = indexkeeper->dataMap[mapNumberNum] |
+     (1 << bitNum);
     return dataNum;
 }
 
@@ -150,10 +160,14 @@ void MTR_CALL mtrIndexkeeperFreeIndex(void *ik, uint32_t index)
     uint8_t           bitNum;
     mtrIndexkeeper_t *indexkeeper;
 
+    if ((index == 0) || (ik == NULL))
+        return;
+
     indexkeeper = (mtrIndexkeeper_t *)ik;
     mapNumberNum = index >> 5; /* = index / 32 */
     bitNum = index - (mapNumberNum << 5);
-    indexkeeper->dataMap[mapNumberNum] = indexkeeper->dataMap[mapNumberNum] - (1 << bitNum);
+    indexkeeper->dataMap[mapNumberNum] = indexkeeper->dataMap[mapNumberNum] -
+     (1 << bitNum);
 }
 
 bool MTR_CALL mtrIndexkeeperIndexIsEmpty(void *ik, uint32_t index)
