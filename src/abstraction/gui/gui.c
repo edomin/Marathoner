@@ -48,11 +48,10 @@ static float mtrNkGetTextWidth(nk_handle handle, float height,
     if (!font || !text)
         return 0;
 
-    char strcpy[len + 1];
-    strncpy((char*)&strcpy, text, len);
-    strcpy[len] = '\0';
+    strncpy((char*)&getTextWidthBuffer, text, len);
+    getTextWidthBuffer[len] = '\0';
 
-    return mtrFontGetStringWidth(font->font, strcpy);
+    return mtrFontGetStringWidth(font->font, getTextWidthBuffer);
 }
 
 /* Берёт номер шрифта менеджера шрифтов и возвращает внутренний индекс шрифта.
@@ -611,11 +610,11 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
             case NK_COMMAND_RECT_MULTI_COLOR:
             case NK_COMMAND_IMAGE:
                 {
-                    const struct nk_command_image *i = (
+                    const struct nk_command_image *img = (
                      const struct nk_command_image *)cmd;
-                    mtrNkImage *image = (mtrNkImage *)i->img.handle.ptr;
-                    mtrTextureBlitRegionScaled_f(image->texture, i->x, i->y,
-                     i->w, i->h, image->nk.region[0], image->nk.region[1],
+                    mtrNkImage *image = (mtrNkImage *)img->img.handle.ptr;
+                    mtrTextureBlitRegionScaled_f(image->texture, img->x, img->y,
+                     img->w, img->h, image->nk.region[0], image->nk.region[1],
                      image->nk.region[2] - image->nk.region[0],
                      image->nk.region[3] - image->nk.region[1]);
                 }
