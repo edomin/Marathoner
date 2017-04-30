@@ -2,23 +2,23 @@
 
 int CountPlugins(char *directoryName)
 {
-    mtrDirectory_t *pluginDirectory;
-    int mtrPluginsFound;
+    mtrDirectory_t *directory;
+    int pluginsFound;
 
-    mtrPluginsFound = 0;
-    pluginDirectory = mtrDirectoryOpen(directoryName);
-    if (pluginDirectory == NULL)
+    pluginsFound = 0;
+    directory = mtrDirectoryOpen(directoryName);
+    if (directory == NULL)
         return -1;
     else
     {
-        while (mtrDirectoryNextFile(pluginDirectory))
+        while (mtrDirectoryNextFile(directory))
         {
-            if (!mtrDirectoryFileIsDir(pluginDirectory))
-                mtrPluginsFound++;
+            if (!mtrDirectoryFileIsDir(directory))
+                pluginsFound++;
         }
-        mtrDirectoryClose(pluginDirectory);
+        mtrDirectoryClose(directory);
     }
-    return mtrPluginsFound;
+    return pluginsFound;
 }
 
 int mtrLoadAllPlugins(RequireEngineFuncsFunc RequireEngineFuncs)
