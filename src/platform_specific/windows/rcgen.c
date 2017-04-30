@@ -13,11 +13,11 @@ int main(int argc, char **argv)
     int fileChar;
     char *constPos;
     char *valuePos;
-    int version;
+    unsigned int version;
     int digit;
-    int verMajor;
-    int verMinor;
-    int verPatch;
+    unsigned int verMajor;
+    unsigned int verMinor;
+    unsigned int verPatch;
 
     char *inputPath = argv[1];
     char *outputPath = argv[2];
@@ -106,7 +106,7 @@ int main(int argc, char **argv)
                 case '9':
                 {
                     version = version + (valuePos[i] - 0x30) *
-                     (int)pow(16, 5 - digit);
+                     (16 << (4 * (4 - digit))); /* pow(16, 5 - digit) */
                     break;
                 }
                 case 'A':
@@ -117,7 +117,7 @@ int main(int argc, char **argv)
                 case 'F':
                 {
                     version = version + (valuePos[i] - 0x41) *
-                     (int)pow(16, 5 - digit);
+                     (16 << (4 * (4 - digit))); /* pow(16, 5 - digit) */
                     break;
                 }
                 default:
@@ -141,9 +141,9 @@ int main(int argc, char **argv)
 
         fprintf(outputFile, "%s\n", "#include <winver.h>");
         fprintf(outputFile, "%s\n", "VS_VERSION_INFO VERSIONINFO");
-        fprintf(outputFile, "FILEVERSION %i,%i,%i,0\n", verMajor, verMinor,
+        fprintf(outputFile, "FILEVERSION %u,%u,%u,0\n", verMajor, verMinor,
          verPatch);
-        fprintf(outputFile, "PRODUCTVERSION %i,%i,%i,0\n", verMajor, verMinor,
+        fprintf(outputFile, "PRODUCTVERSION %u,%u,%u,0\n", verMajor, verMinor,
          verPatch);
         fprintf(outputFile, "%s\n", "FILEFLAGSMASK  	VS_FFI_FILEFLAGSMASK");
         fprintf(outputFile, "%s\n", "FILEFLAGS      	VS_FF_PRERELEASE");
@@ -165,7 +165,7 @@ int main(int argc, char **argv)
                     fprintf(outputFile, "VALUE \"FileDescription\", \"%s\"\n",
                      description);
                     fprintf(outputFile,
-                     "VALUE \"FileVersion\", \"%i,%i,%i,0\"\n", verMajor,
+                     "VALUE \"FileVersion\", \"%u,%u,%u,0\"\n", verMajor,
                      verMinor, verPatch);
                     fprintf(outputFile, "VALUE \"InternalName\", \"%s\"\n",
                      name);
@@ -176,7 +176,7 @@ int main(int argc, char **argv)
                     fprintf(outputFile, "VALUE \"ProductName\", \"%s\"\n",
                      name);
                     fprintf(outputFile,
-                     "VALUE \"ProductVersion\", \"%i,%i,%i,0\"\n", verMajor,
+                     "VALUE \"ProductVersion\", \"%u,%u,%u,0\"\n", verMajor,
                      verMinor, verPatch);
                 fprintf(outputFile, "%s\n", "END");
             fprintf(outputFile, "%s\n", "END");
