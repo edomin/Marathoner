@@ -63,6 +63,7 @@ mtrIndexkeeperCreateFunc_t          mtrIndexkeeperCreate;
 mtrIndexkeeperGetFreeIndexFunc_t    mtrIndexkeeperGetFreeIndex;
 mtrIndexkeeperFreeIndexFunc_t       mtrIndexkeeperFreeIndex;
 mtrIndexkeeperIndexIsEmptyFunc_t    mtrIndexkeeperIndexIsEmpty;
+mtrIndexkeeperGetReservedDataCountFunc_t    mtrIndexkeeperGetReservedDataCount;
 mtrIndexkeeperDestroyFunc_t         mtrIndexkeeperDestroy;
 
 mtrEncodingUtf8ToUcs4Func_t         mtrEncodingUtf8ToUcs4;

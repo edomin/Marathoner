@@ -64,6 +64,8 @@ void RequireEngineFuncs(uint8_t plugin)
      mtrIndexkeeperFreeIndex);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireIndexkeeperIndexIsEmpty,
      mtrIndexkeeperIndexIsEmpty);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireIndexkeeperGetReservedDataCount,
+     mtrIndexkeeperGetReservedDataCount);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireIndexkeeperDestroy,
      mtrIndexkeeperDestroy);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireEncodingUtf8ToUcs4,

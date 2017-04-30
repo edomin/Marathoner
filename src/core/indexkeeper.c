@@ -175,6 +175,18 @@ bool MTR_CALL mtrIndexkeeperIndexIsEmpty(void *ik, uint32_t index)
         return false;
 }
 
+uint32_t MTR_CALL mtrIndexkeeperGetReservedDataCount(void *ik)
+{
+    mtrIndexkeeper_t *indexkeeper;
+
+    if (ik == NULL)
+        return 0;
+
+    indexkeeper = (mtrIndexkeeper_t *)ik;
+
+    return indexkeeper->reservedData;
+}
+
 void MTR_CALL mtrIndexkeeperDestroy(void *ik)
 {
     mtrIndexkeeper_t *indexkeeper;

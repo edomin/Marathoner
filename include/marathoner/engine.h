@@ -69,6 +69,8 @@ typedef void (MTR_CALL * mtrRequireIndexkeeperFreeIndexFunc)(mtrIndexkeeperFreeI
 mtrRequireIndexkeeperFreeIndexFunc mtrRequireIndexkeeperFreeIndex;
 typedef void (MTR_CALL * mtrRequireIndexkeeperIndexIsEmptyFunc)(mtrIndexkeeperIndexIsEmptyFunc_t);
 mtrRequireIndexkeeperIndexIsEmptyFunc mtrRequireIndexkeeperIndexIsEmpty;
+typedef void (MTR_CALL * mtrRequireIndexkeeperGetReservedDataCountFunc)(mtrIndexkeeperGetReservedDataCountFunc_t);
+mtrRequireIndexkeeperGetReservedDataCountFunc mtrRequireIndexkeeperGetReservedDataCount;
 typedef void (MTR_CALL * mtrRequireIndexkeeperDestroyFunc)(mtrIndexkeeperDestroyFunc_t);
 mtrRequireIndexkeeperDestroyFunc mtrRequireIndexkeeperDestroy;
 

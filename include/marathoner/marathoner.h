@@ -93,6 +93,8 @@ typedef void        (MTR_CALL * mtrIndexkeeperFreeIndexFunc_t)(void *,
  uint32_t);
 typedef bool        (MTR_CALL * mtrIndexkeeperIndexIsEmptyFunc_t)(void *,
  uint32_t);
+typedef uint32_t    (MTR_CALL * mtrIndexkeeperGetReservedDataCountFunc_t)(
+ void *);
 typedef void        (MTR_CALL * mtrIndexkeeperDestroyFunc_t)(void *);
 
 typedef size_t      (MTR_CALL * mtrEncodingUtf8ToUcs4Func_t)(const char *,

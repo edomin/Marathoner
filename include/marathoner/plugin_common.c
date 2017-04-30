@@ -148,6 +148,11 @@ MTR_EXPORT void MTR_CALL mtrRequireIndexkeeperIndexIsEmpty(mtrIndexkeeperIndexIs
     mtrIndexkeeperIndexIsEmpty = IndexkeeperIndexIsEmptyFunc;
 }
 
+MTR_EXPORT void MTR_CALL mtrRequireIndexkeeperGetReservedDataCount(mtrIndexkeeperGetReservedDataCountFunc_t IndexkeeperGetReservedDataCountFunc)
+{
+    mtrIndexkeeperGetReservedDataCount = IndexkeeperGetReservedDataCountFunc;
+}
+
 MTR_EXPORT void MTR_CALL mtrRequireIndexkeeperDestroy(mtrIndexkeeperDestroyFunc_t IndexkeeperDestroyFunc)
 {
     mtrIndexkeeperDestroy = IndexkeeperDestroyFunc;
