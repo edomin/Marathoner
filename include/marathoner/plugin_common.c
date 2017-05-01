@@ -168,7 +168,28 @@ MTR_EXPORT void MTR_CALL mtrRequireEncodingUtf8Codepoints(mtrEncodingUtf8Codepoi
     mtrEncodingUtf8Codepoints = EncodingUtf8CodepointsFunc;
 }
 
-MTR_EXPORT void MTR_CALL mtrRequireFileWriteLine(mtrFileWriteLineFunc_t FileWriteLineFunc)
+MTR_EXPORT void MTR_CALL mtrRequireFileOpen(mtrFileOpenFunc_t FileOpenFunc)
+{
+    mtrFileOpen = FileOpenFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireFileClose(mtrFileCloseFunc_t FileCloseFunc)
+{
+    mtrFileClose = FileCloseFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireFileRead(mtrFileReadFunc_t FileReadFunc)
+{
+    mtrFileRead = FileReadFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireFileWrite(mtrFileWriteFunc_t FileWriteFunc)
+{
+    mtrFileWrite = FileWriteFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireFileWriteLine(
+ mtrFileWriteLineFunc_t FileWriteLineFunc)
 {
     mtrFileWriteLine = FileWriteLineFunc;
 }

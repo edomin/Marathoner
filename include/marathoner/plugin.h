@@ -69,7 +69,13 @@ mtrIndexkeeperDestroyFunc_t         mtrIndexkeeperDestroy;
 mtrEncodingUtf8ToUcs4Func_t         mtrEncodingUtf8ToUcs4;
 mtrEncodingUtf8CodepointsFunc_t     mtrEncodingUtf8Codepoints;
 
-mtrFileWriteLineFunc_t              mtrFileWriteLine;
+mtrFileOpenFunc_t                           mtrFileOpen;
+mtrFileCloseFunc_t                          mtrFileClose;
+mtrFileReadFunc_t                           mtrFileRead;
+mtrFileWriteFunc_t                          mtrFileWrite;
+mtrFileWriteLineFunc_t                      mtrFileWriteLine;
+mtrFileWriteFastFunc_t                      mtrFileWriteFast;
+mtrFileWriteLineFastFunc_t                  mtrFileWriteLineFast;
 
 mtrClipboardPutTextFunc_t           mtrClipboardPutText;
 mtrClipboardGetTextFunc_t           mtrClipboardGetText;

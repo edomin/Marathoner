@@ -429,7 +429,89 @@ MTR_SCRIPT_FUNC(mtrSF_EncodingUtf8Codepoints)
     return 1;
 }
 
+MTR_SCRIPT_FUNC(mtrSF_FileOpen)
+{
+    const char *filename;
+    int         mode;
+    uint32_t    index;
+
+    MTR_SF_GET_STRING(filename, 1);
+    MTR_SF_GET_INT(mode, 2);
+    index = mtrFileOpen(filename, mode);
+
+    MTR_SF_PUSH_UINT32(index);
+
+    return 1;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_FileClose)
+{
+    uint32_t index;
+    bool     success;
+
+    MTR_SF_GET_UINT32(index, 1);
+    success = mtrFileClose(index);
+
+    MTR_SF_PUSH_BOOL(success);
+
+    return 1;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_FileRead)
+{
+    uint32_t   index;
+    char      *text;
+    #ifdef lua_h
+        size_t size;
+    #endif /* lua_h */
+
+    MTR_SF_GET_UINT32(index, 1);
+    #ifdef lua_h
+        size = mtrFileRead(index, &text);
+    #else /* lua_h */
+        mtrFileRead(index, &text);
+    #endif /* lua_h */
+
+    MTR_SF_PUSH_STRING(text);
+    #ifdef lua_h
+        MTR_SF_PUSH_SIZE(size);
+        return 2;
+    #else /* lua_h */
+        return 1;
+    #endif /* lua_h */
+}
+
+MTR_SCRIPT_FUNC(mtrSF_FileWrite)
+{
+    uint32_t    index;
+    const char *string;
+    bool        success;
+
+    MTR_SF_GET_UINT32(index, 1);
+    MTR_SF_GET_STRING(string, 2);
+    success = mtrFileWrite(index, string);
+
+    MTR_SF_PUSH_BOOL(success);
+
+    return 1;
+}
+
 MTR_SCRIPT_FUNC(mtrSF_FileWriteLine)
+{
+    uint32_t    index;
+    const char *string;
+    bool        success;
+
+    MTR_SF_GET_UINT32(index, 1);
+    MTR_SF_GET_STRING(string, 2);
+    success = mtrFileWriteLine(index, string);
+
+    MTR_SF_PUSH_BOOL(success);
+
+    return 1;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_FileWriteFast)
 {
     const char *filename;
     const char *string;
@@ -438,7 +520,21 @@ MTR_SCRIPT_FUNC(mtrSF_FileWriteLine)
     MTR_SF_GET_STRING(filename, 1);
     MTR_SF_GET_STRING(string, 2);
     MTR_SF_GET_INT(mode, 3);
-    mtrFileWriteLine(filename, string, mode);
+    mtrFileWriteFast(filename, string, mode);
+
+    return 0;
+}
+
+MTR_SCRIPT_FUNC(mtrSF_FileWriteLineFast)
+{
+    const char *filename;
+    const char *string;
+    int         mode;
+
+    MTR_SF_GET_STRING(filename, 1);
+    MTR_SF_GET_STRING(string, 2);
+    MTR_SF_GET_INT(mode, 3);
+    mtrFileWriteLineFast(filename, string, mode);
 
     return 0;
 }

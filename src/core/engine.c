@@ -72,7 +72,13 @@ void RequireEngineFuncs(uint8_t plugin)
      mtrEncodingUtf8ToUcs4);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireEncodingUtf8Codepoints,
      mtrEncodingUtf8Codepoints);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireFileOpen, mtrFileOpen);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireFileClose, mtrFileClose);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireFileRead, mtrFileRead);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireFileWrite, mtrFileWrite);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireFileWriteLine, mtrFileWriteLine);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireFileWriteFast, mtrFileWriteFast);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireFileWriteLineFast, mtrFileWriteLineFast);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireClipboardPutText, mtrClipboardPutText);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireClipboardGetText, mtrClipboardGetText);
 }
@@ -264,6 +270,16 @@ int main(int argc, char** argv)
     }
 
     mtrLogWrite("Modules' reports processed", 0, MTR_LMT_INFO);
+
+    mtrLogWrite("Initializing file I/O subsystem", 0, MTR_LMT_INFO);
+    if (mtrFileInit(MTR_IKDM_SMALL, 32))
+        mtrLogWrite("File I/O subsystem initialized", 0, MTR_LMT_INFO);
+    else
+    {
+        mtrNotify("Unable to initialize file I/O subsystem", 0, MTR_LMT_ERROR);
+        return 4;
+    }
+
     mtrLogWrite("Reading 'Marathoner.cfg' for autorun options", 0,
      MTR_LMT_INFO);
     ok = false;

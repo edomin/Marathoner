@@ -90,7 +90,13 @@ void mtrScriptsInit(void)
     mtrScriptsRegisterFunction(mtrSF_EncodingUtf8Codepoints,
      "EncodingUtf8Codepoints");
 
+    mtrScriptsRegisterFunction(mtrSF_FileOpen, "FileOpen");
+    mtrScriptsRegisterFunction(mtrSF_FileClose, "FileClose");
+    mtrScriptsRegisterFunction(mtrSF_FileRead, "FileRead");
+    mtrScriptsRegisterFunction(mtrSF_FileWrite, "FileWrite");
     mtrScriptsRegisterFunction(mtrSF_FileWriteLine, "FileWriteLine");
+    mtrScriptsRegisterFunction(mtrSF_FileWriteFast, "FileWriteFast");
+    mtrScriptsRegisterFunction(mtrSF_FileWriteLineFast, "FileWriteLineFast");
 
     mtrScriptsRegisterFunction(mtrSF_ClipboardPutText, "ClipboardPutText");
     mtrScriptsRegisterFunction(mtrSF_ClipboardGetText, "ClipboardGetText");

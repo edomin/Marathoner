@@ -110,7 +110,14 @@ typedef size_t      (MTR_CALL * mtrEncodingUtf8ToUcs4Func_t)(const char *,
  uint32_t **);
 typedef size_t      (MTR_CALL * mtrEncodingUtf8CodepointsFunc_t)(const char *);
 
-typedef void        (MTR_CALL * mtrFileWriteLineFunc_t)(const char *,
+typedef uint32_t    (MTR_CALL * mtrFileOpenFunc_t)(const char *, int);
+typedef bool        (MTR_CALL * mtrFileCloseFunc_t)(uint32_t);
+typedef size_t      (MTR_CALL * mtrFileReadFunc_t)(uint32_t, char **);
+typedef bool        (MTR_CALL * mtrFileWriteFunc_t)(uint32_t, const char *);
+typedef bool        (MTR_CALL * mtrFileWriteLineFunc_t)(uint32_t, const char *);
+typedef void        (MTR_CALL * mtrFileWriteFastFunc_t)(const char *,
+ const char *, int);
+typedef void        (MTR_CALL * mtrFileWriteLineFastFunc_t)(const char *,
  const char *, int);
 
 typedef bool        (MTR_CALL * mtrClipboardPutTextFunc_t)(const char *);

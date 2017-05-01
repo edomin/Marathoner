@@ -30,7 +30,13 @@ const char *ShowSelectFolderDialog(const char *title, const char *defaultPath)
 
 void Notify(const char *message, uint8_t level, uint8_t messageType)
 
-void FileWriteLine(const char* filename, const char *text, uint8_t mode)
+uint32_t mtrFileOpen(const char *filename, int mode)
+bool mtrFileClose(uint32_t fileNum)
+size_t mtrFileRead(uint32_t fileNum, char **buffer)
+bool mtrFileWrite(uint32_t fileNum, const char *string)
+bool mtrFileWriteLine(uint32_t fileNum, const char *string)
+void FileWriteFast(const char* filename, const char *text, uint8_t mode)
+void FileWriteLineFast(const char* filename, const char *text, uint8_t mode)
 
 bool ClipboardPutText(const char* text)
 const char *ClipboardGetText()

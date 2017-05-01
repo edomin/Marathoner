@@ -74,8 +74,21 @@ mtrRequireIndexkeeperGetReservedDataCountFunc mtrRequireIndexkeeperGetReservedDa
 typedef void (MTR_CALL * mtrRequireIndexkeeperDestroyFunc)(mtrIndexkeeperDestroyFunc_t);
 mtrRequireIndexkeeperDestroyFunc mtrRequireIndexkeeperDestroy;
 
-typedef void (MTR_CALL * mtrRequireFileWriteLineFunc)(mtrFileWriteLineFunc_t);
+typedef void (MTR_CALL * mtrRequireFileOpenFunc)(mtrFileOpenFunc_t);
+mtrRequireFileOpenFunc mtrRequireFileOpen;
+typedef void (MTR_CALL * mtrRequireFileCloseFunc)(mtrFileCloseFunc_t);
+mtrRequireFileCloseFunc mtrRequireFileClose;
+typedef void (MTR_CALL * mtrRequireFileReadFunc)(mtrFileReadFunc_t);
+mtrRequireFileReadFunc mtrRequireFileRead;
+typedef bool (MTR_CALL * mtrRequireFileWriteFunc)(mtrFileWriteFunc_t);
+mtrRequireFileWriteFunc mtrRequireFileWrite;
+typedef bool (MTR_CALL * mtrRequireFileWriteLineFunc)(mtrFileWriteLineFunc_t);
 mtrRequireFileWriteLineFunc mtrRequireFileWriteLine;
+typedef void (MTR_CALL * mtrRequireFileWriteFastFunc)(mtrFileWriteFastFunc_t);
+mtrRequireFileWriteFastFunc mtrRequireFileWriteFast;
+typedef void (MTR_CALL * mtrRequireFileWriteLineFastFunc)(
+ mtrFileWriteLineFastFunc_t);
+mtrRequireFileWriteLineFastFunc mtrRequireFileWriteLineFast;
 
 typedef void (MTR_CALL * mtrRequireClipboardPutTextFunc)(mtrClipboardPutTextFunc_t);
 mtrRequireClipboardPutTextFunc mtrRequireClipboardPutText;
