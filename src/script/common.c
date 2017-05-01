@@ -3,11 +3,8 @@
 
 #include "marathoner/script_func.h"
 
-/*
-TODO:
-ShowSaveFileDialog
-ShowOpenFileDialog
-*/
+TODO(ShowSaveFileDialog)
+TODO(ShowOpenFileDialog)
 
 MTR_SCRIPT_FUNC(mtrSF_ScriptsRegisterStringVariable)
 {
