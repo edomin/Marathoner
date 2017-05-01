@@ -7,29 +7,41 @@ typedef mtrReport* (MTR_CALL * mtrReportFunc)(void);
 mtrReportFunc mtrCreateReport;
 
 /* Engine funcs exported to every plugin */
-typedef void (MTR_CALL * mtrRequireConfigfileGetKeyNameFunc)(mtrConfigfileGetKeyNameFunc_t);
+typedef void (MTR_CALL * mtrRequireConfigfileGetKeyNameFunc)(
+ mtrConfigfileGetKeyNameFunc_t);
 mtrRequireConfigfileGetKeyNameFunc mtrRequireConfigfileGetKeyName;
-typedef void (MTR_CALL * mtrRequireConfigfileGetSectionNameFunc)(mtrConfigfileGetSectionNameFunc_t);
+typedef void (MTR_CALL * mtrRequireConfigfileGetSectionNameFunc)(
+ mtrConfigfileGetSectionNameFunc_t);
 mtrRequireConfigfileGetSectionNameFunc mtrRequireConfigfileGetSectionName;
-typedef void (MTR_CALL * mtrRequireConfigfileDeleteKeyFunc)(mtrConfigfileDeleteKeyFunc_t);
+typedef void (MTR_CALL * mtrRequireConfigfileDeleteKeyFunc)(
+ mtrConfigfileDeleteKeyFunc_t);
 mtrRequireConfigfileDeleteKeyFunc mtrRequireConfigfileDeleteKey;
-typedef void (MTR_CALL * mtrRequireConfigfileDeleteSectionFunc)(mtrConfigfileDeleteSectionFunc_t);
+typedef void (MTR_CALL * mtrRequireConfigfileDeleteSectionFunc)(
+ mtrConfigfileDeleteSectionFunc_t);
 mtrRequireConfigfileDeleteSectionFunc mtrRequireConfigfileDeleteSection;
-typedef void (MTR_CALL * mtrRequireConfigfileReadBoolFunc)(mtrConfigfileReadBoolFunc_t);
+typedef void (MTR_CALL * mtrRequireConfigfileReadBoolFunc)(
+ mtrConfigfileReadBoolFunc_t);
 mtrRequireConfigfileReadBoolFunc mtrRequireConfigfileReadBool;
-typedef void (MTR_CALL * mtrRequireConfigfileReadIntFunc)(mtrConfigfileReadIntFunc_t);
+typedef void (MTR_CALL * mtrRequireConfigfileReadIntFunc)(
+ mtrConfigfileReadIntFunc_t);
 mtrRequireConfigfileReadIntFunc mtrRequireConfigfileReadInt;
-typedef void (MTR_CALL * mtrRequireConfigfileReadSingleFunc)(mtrConfigfileReadSingleFunc_t);
+typedef void (MTR_CALL * mtrRequireConfigfileReadSingleFunc)(
+ mtrConfigfileReadSingleFunc_t);
 mtrRequireConfigfileReadSingleFunc mtrRequireConfigfileReadSingle;
-typedef void (MTR_CALL * mtrRequireConfigfileReadStringFunc)(mtrConfigfileReadStringFunc_t);
+typedef void (MTR_CALL * mtrRequireConfigfileReadStringFunc)(
+ mtrConfigfileReadStringFunc_t);
 mtrRequireConfigfileReadStringFunc mtrRequireConfigfileReadString;
-typedef void (MTR_CALL * mtrRequireConfigfileWriteBoolFunc)(mtrConfigfileWriteBoolFunc_t);
+typedef void (MTR_CALL * mtrRequireConfigfileWriteBoolFunc)(
+ mtrConfigfileWriteBoolFunc_t);
 mtrRequireConfigfileWriteBoolFunc mtrRequireConfigfileWriteBool;
-typedef void (MTR_CALL * mtrRequireConfigfileWriteIntFunc)(mtrConfigfileWriteIntFunc_t);
+typedef void (MTR_CALL * mtrRequireConfigfileWriteIntFunc)(
+ mtrConfigfileWriteIntFunc_t);
 mtrRequireConfigfileWriteIntFunc mtrRequireConfigfileWriteInt;
-typedef void (MTR_CALL * mtrRequireConfigfileWriteSingleFunc)(mtrConfigfileWriteSingleFunc_t);
+typedef void (MTR_CALL * mtrRequireConfigfileWriteSingleFunc)(
+ mtrConfigfileWriteSingleFunc_t);
 mtrRequireConfigfileWriteSingleFunc mtrRequireConfigfileWriteSingle;
-typedef void (MTR_CALL * mtrRequireConfigfileWriteStringFunc)(mtrConfigfileWriteStringFunc_t);
+typedef void (MTR_CALL * mtrRequireConfigfileWriteStringFunc)(
+ mtrConfigfileWriteStringFunc_t);
 mtrRequireConfigfileWriteStringFunc mtrRequireConfigfileWriteString;
 
 typedef void (MTR_CALL * mtrRequireLogWriteFunc)(mtrLogWriteFunc_t);
@@ -41,37 +53,51 @@ mtrRequireLogWrite_iFunc mtrRequireLogWrite_i;
 typedef void (MTR_CALL * mtrRequireLogWrite_dFunc)(mtrLogWrite_dFunc_t);
 mtrRequireLogWrite_dFunc mtrRequireLogWrite_d;
 
-typedef void (MTR_CALL * mtrRequireShowSimpleMessageBoxFunc)(mtrShowSimpleMessageBoxFunc_t);
+typedef void (MTR_CALL * mtrRequireShowSimpleMessageBoxFunc)(
+ mtrShowSimpleMessageBoxFunc_t);
 mtrRequireShowSimpleMessageBoxFunc mtrRequireShowSimpleMessageBox;
-typedef void (MTR_CALL * mtrRequireShowYesNoMessageBoxFunc)(mtrShowYesNoMessageBoxFunc_t);
+typedef void (MTR_CALL * mtrRequireShowYesNoMessageBoxFunc)(
+ mtrShowYesNoMessageBoxFunc_t);
 mtrRequireShowYesNoMessageBoxFunc mtrRequireShowYesNoMessageBox;
-typedef void (MTR_CALL * mtrRequireShowOkCancelMessageBoxFunc)(mtrShowOkCancelMessageBoxFunc_t);
+typedef void (MTR_CALL * mtrRequireShowOkCancelMessageBoxFunc)(
+ mtrShowOkCancelMessageBoxFunc_t);
 mtrRequireShowOkCancelMessageBoxFunc mtrRequireShowOkCancelMessageBox;
-typedef void (MTR_CALL * mtrRequireShowInputDialogFunc)(mtrShowInputDialogFunc_t);
+typedef void (MTR_CALL * mtrRequireShowInputDialogFunc)(
+ mtrShowInputDialogFunc_t);
 mtrRequireShowInputDialogFunc mtrRequireShowInputDialog;
-typedef void (MTR_CALL * mtrRequireShowPasswordDialogFunc)(mtrShowPasswordDialogFunc_t);
+typedef void (MTR_CALL * mtrRequireShowPasswordDialogFunc)(
+ mtrShowPasswordDialogFunc_t);
 mtrRequireShowPasswordDialogFunc mtrRequireShowPasswordDialog;
-typedef void (MTR_CALL * mtrRequireShowSaveFileDialogFunc)(mtrShowSaveFileDialogFunc_t);
+typedef void (MTR_CALL * mtrRequireShowSaveFileDialogFunc)(
+ mtrShowSaveFileDialogFunc_t);
 mtrRequireShowSaveFileDialogFunc mtrRequireShowSaveFileDialog;
-typedef void (MTR_CALL * mtrRequireShowOpenFileDialogFunc)(mtrShowOpenFileDialogFunc_t);
+typedef void (MTR_CALL * mtrRequireShowOpenFileDialogFunc)(
+ mtrShowOpenFileDialogFunc_t);
 mtrRequireShowOpenFileDialogFunc mtrRequireShowOpenFileDialog;
-typedef void (MTR_CALL * mtrRequireShowSelectFolderDialogFunc)(mtrShowSelectFolderDialogFunc_t);
+typedef void (MTR_CALL * mtrRequireShowSelectFolderDialogFunc)(
+ mtrShowSelectFolderDialogFunc_t);
 mtrRequireShowSelectFolderDialogFunc mtrRequireShowSelectFolderDialog;
 
 typedef void (MTR_CALL * mtrRequireNotifyFunc)(mtrNotifyFunc_t);
 mtrRequireNotifyFunc mtrRequireNotify;
 
-typedef void (MTR_CALL * mtrRequireIndexkeeperCreateFunc)(mtrIndexkeeperCreateFunc_t);
+typedef void (MTR_CALL * mtrRequireIndexkeeperCreateFunc)(
+ mtrIndexkeeperCreateFunc_t);
 mtrRequireIndexkeeperCreateFunc mtrRequireIndexkeeperCreate;
-typedef void (MTR_CALL * mtrRequireIndexkeeperGetFreeIndexFunc)(mtrIndexkeeperGetFreeIndexFunc_t);
+typedef void (MTR_CALL * mtrRequireIndexkeeperGetFreeIndexFunc)(
+ mtrIndexkeeperGetFreeIndexFunc_t);
 mtrRequireIndexkeeperGetFreeIndexFunc mtrRequireIndexkeeperGetFreeIndex;
-typedef void (MTR_CALL * mtrRequireIndexkeeperFreeIndexFunc)(mtrIndexkeeperFreeIndexFunc_t);
+typedef void (MTR_CALL * mtrRequireIndexkeeperFreeIndexFunc)(
+ mtrIndexkeeperFreeIndexFunc_t);
 mtrRequireIndexkeeperFreeIndexFunc mtrRequireIndexkeeperFreeIndex;
-typedef void (MTR_CALL * mtrRequireIndexkeeperIndexIsEmptyFunc)(mtrIndexkeeperIndexIsEmptyFunc_t);
+typedef void (MTR_CALL * mtrRequireIndexkeeperIndexIsEmptyFunc)(
+ mtrIndexkeeperIndexIsEmptyFunc_t);
 mtrRequireIndexkeeperIndexIsEmptyFunc mtrRequireIndexkeeperIndexIsEmpty;
-typedef void (MTR_CALL * mtrRequireIndexkeeperGetReservedDataCountFunc)(mtrIndexkeeperGetReservedDataCountFunc_t);
+typedef void (MTR_CALL * mtrRequireIndexkeeperGetReservedDataCountFunc)(
+ mtrIndexkeeperGetReservedDataCountFunc_t);
 mtrRequireIndexkeeperGetReservedDataCountFunc mtrRequireIndexkeeperGetReservedDataCount;
-typedef void (MTR_CALL * mtrRequireIndexkeeperDestroyFunc)(mtrIndexkeeperDestroyFunc_t);
+typedef void (MTR_CALL * mtrRequireIndexkeeperDestroyFunc)(
+ mtrIndexkeeperDestroyFunc_t);
 mtrRequireIndexkeeperDestroyFunc mtrRequireIndexkeeperDestroy;
 
 typedef void (MTR_CALL * mtrRequireFileOpenFunc)(mtrFileOpenFunc_t);
@@ -90,14 +116,18 @@ typedef void (MTR_CALL * mtrRequireFileWriteLineFastFunc)(
  mtrFileWriteLineFastFunc_t);
 mtrRequireFileWriteLineFastFunc mtrRequireFileWriteLineFast;
 
-typedef void (MTR_CALL * mtrRequireClipboardPutTextFunc)(mtrClipboardPutTextFunc_t);
+typedef void (MTR_CALL * mtrRequireClipboardPutTextFunc)(
+ mtrClipboardPutTextFunc_t);
 mtrRequireClipboardPutTextFunc mtrRequireClipboardPutText;
-typedef void (MTR_CALL * mtrRequireClipboardGetTextFunc)(mtrClipboardGetTextFunc_t);
+typedef void (MTR_CALL * mtrRequireClipboardGetTextFunc)(
+ mtrClipboardGetTextFunc_t);
 mtrRequireClipboardGetTextFunc mtrRequireClipboardGetText;
 
-typedef void (MTR_CALL * mtrRequireEncodingUtf8ToUcs4Func)(mtrEncodingUtf8ToUcs4Func_t);
+typedef void (MTR_CALL * mtrRequireEncodingUtf8ToUcs4Func)(
+ mtrEncodingUtf8ToUcs4Func_t);
 mtrRequireEncodingUtf8ToUcs4Func mtrRequireEncodingUtf8ToUcs4;
-typedef void (MTR_CALL * mtrRequireEncodingUtf8CodepointsFunc)(mtrEncodingUtf8CodepointsFunc_t);
+typedef void (MTR_CALL * mtrRequireEncodingUtf8CodepointsFunc)(
+ mtrEncodingUtf8CodepointsFunc_t);
 mtrRequireEncodingUtf8CodepointsFunc mtrRequireEncodingUtf8Codepoints;
 
 /*  */

@@ -30,44 +30,44 @@ typedef struct mtrPixels_t {
 #define MTR_PF_RGBA         1
 #define MTR_PF_ARGB         2
 
-mtrConfigfileGetKeyNameFunc_t       mtrConfigfileGetKeyName;
-mtrConfigfileGetSectionNameFunc_t   mtrConfigfileGetSectionName;
-mtrConfigfileDeleteKeyFunc_t        mtrConfigfileDeleteKey;
-mtrConfigfileDeleteSectionFunc_t    mtrConfigfileDeleteSection;
-mtrConfigfileReadBoolFunc_t         mtrConfigfileReadBool;
-mtrConfigfileReadIntFunc_t          mtrConfigfileReadInt;
-mtrConfigfileReadSingleFunc_t       mtrConfigfileReadSingle;
-mtrConfigfileReadStringFunc_t       mtrConfigfileReadString;
-mtrConfigfileWriteBoolFunc_t        mtrConfigfileWriteBool;
-mtrConfigfileWriteIntFunc_t         mtrConfigfileWriteInt;
-mtrConfigfileWriteSingleFunc_t      mtrConfigfileWriteSingle;
-mtrConfigfileWriteStringFunc_t      mtrConfigfileWriteString;
+mtrConfigfileGetKeyNameFunc_t               mtrConfigfileGetKeyName;
+mtrConfigfileGetSectionNameFunc_t           mtrConfigfileGetSectionName;
+mtrConfigfileDeleteKeyFunc_t                mtrConfigfileDeleteKey;
+mtrConfigfileDeleteSectionFunc_t            mtrConfigfileDeleteSection;
+mtrConfigfileReadBoolFunc_t                 mtrConfigfileReadBool;
+mtrConfigfileReadIntFunc_t                  mtrConfigfileReadInt;
+mtrConfigfileReadSingleFunc_t               mtrConfigfileReadSingle;
+mtrConfigfileReadStringFunc_t               mtrConfigfileReadString;
+mtrConfigfileWriteBoolFunc_t                mtrConfigfileWriteBool;
+mtrConfigfileWriteIntFunc_t                 mtrConfigfileWriteInt;
+mtrConfigfileWriteSingleFunc_t              mtrConfigfileWriteSingle;
+mtrConfigfileWriteStringFunc_t              mtrConfigfileWriteString;
 
-mtrLogWriteFunc_t                   mtrLogWrite;
-mtrLogWrite_sFunc_t                 mtrLogWrite_s;
-mtrLogWrite_iFunc_t                 mtrLogWrite_i;
-mtrLogWrite_dFunc_t                 mtrLogWrite_d;
+mtrLogWriteFunc_t                           mtrLogWrite;
+mtrLogWrite_sFunc_t                         mtrLogWrite_s;
+mtrLogWrite_iFunc_t                         mtrLogWrite_i;
+mtrLogWrite_dFunc_t                         mtrLogWrite_d;
 
-mtrShowSimpleMessageBoxFunc_t       mtrShowSimpleMessageBox;
-mtrShowYesNoMessageBoxFunc_t        mtrShowYesNoMessageBox;
-mtrShowOkCancelMessageBoxFunc_t     mtrShowOkCancelMessageBox;
-mtrShowInputDialogFunc_t            mtrShowInputDialog;
-mtrShowPasswordDialogFunc_t         mtrShowPasswordDialog;
-mtrShowSaveFileDialogFunc_t         mtrShowSaveFileDialog;
-mtrShowOpenFileDialogFunc_t         mtrShowOpenFileDialog;
-mtrShowSelectFolderDialogFunc_t     mtrShowSelectFolderDialog;
+mtrShowSimpleMessageBoxFunc_t               mtrShowSimpleMessageBox;
+mtrShowYesNoMessageBoxFunc_t                mtrShowYesNoMessageBox;
+mtrShowOkCancelMessageBoxFunc_t             mtrShowOkCancelMessageBox;
+mtrShowInputDialogFunc_t                    mtrShowInputDialog;
+mtrShowPasswordDialogFunc_t                 mtrShowPasswordDialog;
+mtrShowSaveFileDialogFunc_t                 mtrShowSaveFileDialog;
+mtrShowOpenFileDialogFunc_t                 mtrShowOpenFileDialog;
+mtrShowSelectFolderDialogFunc_t             mtrShowSelectFolderDialog;
 
-mtrNotifyFunc_t                     mtrNotify;
+mtrNotifyFunc_t                             mtrNotify;
 
-mtrIndexkeeperCreateFunc_t          mtrIndexkeeperCreate;
-mtrIndexkeeperGetFreeIndexFunc_t    mtrIndexkeeperGetFreeIndex;
-mtrIndexkeeperFreeIndexFunc_t       mtrIndexkeeperFreeIndex;
-mtrIndexkeeperIndexIsEmptyFunc_t    mtrIndexkeeperIndexIsEmpty;
+mtrIndexkeeperCreateFunc_t                  mtrIndexkeeperCreate;
+mtrIndexkeeperGetFreeIndexFunc_t            mtrIndexkeeperGetFreeIndex;
+mtrIndexkeeperFreeIndexFunc_t               mtrIndexkeeperFreeIndex;
+mtrIndexkeeperIndexIsEmptyFunc_t            mtrIndexkeeperIndexIsEmpty;
 mtrIndexkeeperGetReservedDataCountFunc_t    mtrIndexkeeperGetReservedDataCount;
-mtrIndexkeeperDestroyFunc_t         mtrIndexkeeperDestroy;
+mtrIndexkeeperDestroyFunc_t                 mtrIndexkeeperDestroy;
 
-mtrEncodingUtf8ToUcs4Func_t         mtrEncodingUtf8ToUcs4;
-mtrEncodingUtf8CodepointsFunc_t     mtrEncodingUtf8Codepoints;
+mtrEncodingUtf8ToUcs4Func_t                 mtrEncodingUtf8ToUcs4;
+mtrEncodingUtf8CodepointsFunc_t             mtrEncodingUtf8Codepoints;
 
 mtrFileOpenFunc_t                           mtrFileOpen;
 mtrFileCloseFunc_t                          mtrFileClose;
@@ -77,8 +77,8 @@ mtrFileWriteLineFunc_t                      mtrFileWriteLine;
 mtrFileWriteFastFunc_t                      mtrFileWriteFast;
 mtrFileWriteLineFastFunc_t                  mtrFileWriteLineFast;
 
-mtrClipboardPutTextFunc_t           mtrClipboardPutText;
-mtrClipboardGetTextFunc_t           mtrClipboardGetText;
+mtrClipboardPutTextFunc_t                   mtrClipboardPutText;
+mtrClipboardGetTextFunc_t                   mtrClipboardGetText;
 
 uint8_t mtrPluginsCount;
 
