@@ -194,7 +194,20 @@ MTR_EXPORT void MTR_CALL mtrRequireFileWriteLine(
     mtrFileWriteLine = FileWriteLineFunc;
 }
 
-MTR_EXPORT void MTR_CALL mtrRequireClipboardPutText(mtrClipboardPutTextFunc_t ClipboardPutTextFunc)
+MTR_EXPORT void MTR_CALL mtrRequireFileWriteFast(
+ mtrFileWriteFastFunc_t FileWriteFastFunc)
+{
+    mtrFileWriteFast = FileWriteFastFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireFileWriteLineFast(
+ mtrFileWriteLineFastFunc_t FileWriteLineFastFunc)
+{
+    mtrFileWriteLineFast = FileWriteLineFastFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireClipboardPutText(
+ mtrClipboardPutTextFunc_t ClipboardPutTextFunc)
 {
     mtrClipboardPutText = ClipboardPutTextFunc;
 }
