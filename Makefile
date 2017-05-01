@@ -44,6 +44,9 @@ GAME_CONTROLLER_SDL2_SQUIRREL = game_controller/sdl2_squirrel
 TIMER_SDL2 = timer/sdl2
 TIMER_SDL2_LUA = timer/sdl2_lua
 TIMER_SDL2_SQUIRREL = timer/sdl2_squirrel
+JSON_CJSON = json/cjson
+JSON_CJSON_LUA = json/cjson_lua
+JSON_CJSON_SQUIRREL = json/cjson_squirrel
 UTILS_COLOR = utils/color
 UTILS_COLOR_LUA = utils/color_lua
 UTILS_COLOR_SQUIRREL = utils/color_squirrel
@@ -111,6 +114,10 @@ win32: prebuild
 	make -C src/$(TIMER_SDL2) PREFIX=$(PREFIX)
 	make -C src/$(TIMER_SDL2_LUA) PREFIX=$(PREFIX)
 	make -C src/$(TIMER_SDL2_SQUIRREL) PREFIX=$(PREFIX)
+
+	make -C src/$(JSON_CJSON) PREFIX=$(PREFIX)
+	make -C src/$(JSON_CJSON_LUA) PREFIX=$(PREFIX)
+	make -C src/$(JSON_CJSON_SQUIRREL) PREFIX=$(PREFIX)
 
 	make -C src/$(UTILS_COLOR) PREFIX=$(PREFIX)
 	make -C src/$(UTILS_COLOR_LUA) PREFIX=$(PREFIX)

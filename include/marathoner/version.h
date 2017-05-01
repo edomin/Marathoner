@@ -13,6 +13,10 @@
 #define MTR_VERSION_GAME_CONTROLLER_SDL2_LUA        0x000100
 #define MTR_VERSION_GAME_CONTROLLER_SDL2_SQUIRREL   0x000000
 
+#define MTR_VERSION_JSON_CJSON                      0x000000 /* initial */
+#define MTR_VERSION_JSON_CJSON_LUA                  0x000000 /* initial */
+#define MTR_VERSION_JSON_CJSON_SQUIRREL             0x000000 /* initial */
+
 #define MTR_VERSION_KEYBOARD_SDL2                   0x000100
 #define MTR_VERSION_KEYBOARD_SDL2_LUA               0x000100
 #define MTR_VERSION_KEYBOARD_SDL2_SQUIRREL          0x000000
