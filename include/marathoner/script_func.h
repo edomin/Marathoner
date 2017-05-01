@@ -17,6 +17,7 @@
     #define MTR_SF_PUSH_INT(value)                   lua_pushinteger(mtrVm, value)
     #define MTR_SF_PUSH_UINT8(value)                 lua_pushinteger(mtrVm, value)
     #define MTR_SF_PUSH_UINT32(value)                lua_pushnumber(mtrVm, (double)value)
+    #define MTR_SF_PUSH_SIZE(value)                  lua_pushnumber(mtrVm, (double)value)
     #define MTR_SF_PUSH_SINGLE(value)                lua_pushnumber(mtrVm, (double)value)
     #define MTR_SF_PUSH_DOUBLE(value)                lua_pushnumber(mtrVm, value)
     #define MTR_SF_PUSH_STRING(value)                lua_pushstring(mtrVm, value)
@@ -75,11 +76,22 @@
     #define MTR_SF_PUSH_UINT8(value)                 sq_pushinteger(mtrVm, (int)value)
     #if ((defined (_SQ64)) && (LLONG_MAX == INT64_MAX))
         #define MTR_SF_PUSH_UINT32(value)            sq_pushinteger(mtrVm, value)
+        #if (SSIZE_MAX == LLONG_MAX)
+            #define MTR_SF_PUSH_SIZE(value)          sq_pushinteger(mtrVm, value)
+        #else
+            #if defined (SQUSEDOUBLE)
+                #define MTR_SF_PUSH_SIZE(value)      sq_pushfloat(mtrVm, (double)value)
+            #else
+                #define MTR_SF_PUSH_SIZE(value)      sq_pushfloat(mtrVm, (float)value)
+            #endif
+        #endif
     #else
         #if defined (SQUSEDOUBLE)
             #define MTR_SF_PUSH_UINT32(value)        sq_pushfloat(mtrVm, (double)value)
+            #define MTR_SF_PUSH_SIZE(value)          sq_pushfloat(mtrVm, (double)value)
         #else
             #define MTR_SF_PUSH_UINT32(value)        sq_pushfloat(mtrVm, (float)value)
+            #define MTR_SF_PUSH_SIZE(value)          sq_pushfloat(mtrVm, (float)value)
         #endif
     #endif
     #if defined (SQUSEDOUBLE)
