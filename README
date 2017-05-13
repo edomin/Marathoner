@@ -8,7 +8,7 @@ TODO
 General usage:
 TODO
 
-Configfile usage (Deprecated. Read Launcher usage):
+Configfile usage (Not recommended for use. Read Launcher usage):
 "Autorun" section - game starting settings
     "action" key - running way. Valid values: "runScript"
     "plugin" key (if "action = runScript") - ID of plugin that will be run VM
