@@ -58,15 +58,16 @@ MTR_EXPORT uint32_t MTR_CALL mtrColorRGBAtoRGB(uint32_t rgba)
     return rgba >> 8;
 }
 
+/* Candidate to deprecated */
 /* For COLORREF colors builded with RGB macro */
-uint32_t mtrColorBGRtoRGB(uint32_t bgr)
-{
-    uint8_t r;
-    uint8_t g;
-    uint8_t b;
-    b = (uint8_t)(bgr >> 16);
-    g = (uint8_t)((bgr >> 8) - ((uint32_t)b << 8));
-    r = (uint8_t)(bgr - ((uint32_t)b << 16) - ((uint32_t)g << 8));
-
-    return ((uint32_t)r << 16) + ((uint32_t)g << 8) + b;
-}
+//uint32_t mtrColorBGRtoRGB(uint32_t bgr)
+//{
+//    uint8_t r;
+//    uint8_t g;
+//    uint8_t b;
+//    b = (uint8_t)(bgr >> 16);
+//    g = (uint8_t)((bgr >> 8) - ((uint32_t)b << 8));
+//    r = (uint8_t)(bgr - ((uint32_t)b << 16) - ((uint32_t)g << 8));
+//
+//    return ((uint32_t)r << 16) + ((uint32_t)g << 8) + b;
+//}
