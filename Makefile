@@ -50,6 +50,9 @@ JSON_CJSON_SQUIRREL = json/cjson_squirrel
 UTILS_COLOR = utils/color
 UTILS_COLOR_LUA = utils/color_lua
 UTILS_COLOR_SQUIRREL = utils/color_squirrel
+UTILS_MATH = utils/math
+UTILS_MATH_LUA = utils/math_lua
+UTILS_MATH_SQUIRREL = utils/math_squirrel
 SCRIPT_LUA = script/lua
 SCRIPT_SQUIRREL = script/squirrel
 ABSTRACTION_SPRITE = abstraction/sprite
@@ -122,6 +125,9 @@ win32: prebuild
 	make -C src/$(UTILS_COLOR) PREFIX=$(PREFIX)
 	make -C src/$(UTILS_COLOR_LUA) PREFIX=$(PREFIX)
 	make -C src/$(UTILS_COLOR_SQUIRREL) PREFIX=$(PREFIX)
+	make -C src/$(UTILS_MATH) PREFIX=$(PREFIX)
+	make -C src/$(UTILS_MATH_LUA) PREFIX=$(PREFIX)
+	make -C src/$(UTILS_MATH_SQUIRREL) PREFIX=$(PREFIX)
 
 	make -C src/$(SCRIPT_LUA) PREFIX=$(PREFIX)
 	make -C src/$(SCRIPT_SQUIRREL) PREFIX=$(PREFIX)
