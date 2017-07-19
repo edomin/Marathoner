@@ -27,6 +27,7 @@
     #define MTR_SF_PUSH_INT(value)                   lua_pushinteger(mtrVm, value)
     #define MTR_SF_PUSH_LINT(value)                  lua_pushinteger(mtrVm, value)
     #define MTR_SF_PUSH_LLINT(value)                 lua_pushinteger(mtrVm, value)
+    #define MTR_SF_PUSH_INT16(value)                 lua_pushinteger(mtrVm, value)
     #define MTR_SF_PUSH_UINT8(value)                 lua_pushinteger(mtrVm, value)
     #if (UINT32_MAX <= PTRDIFF_MAX)
         #define MTR_SF_PUSH_UINT32(value)            lua_pushinteger(mtrVm, (double)value)
@@ -39,7 +40,7 @@
     #define MTR_SF_PUSH_STRING(value)                lua_pushstring(mtrVm, value)
     #define MTR_SF_PUSH_LSTRING(value, len)          lua_pushlstring(mtrVm, value, len)
     #define MTR_SF_PUSH_NIL()                        lua_pushnil(mtrVm)
-#endif
+#endif /* lua_h */
 #ifdef _SQUIRREL_H_
     #include <limits.h>
     #if defined (SQUSEDOUBLE)
@@ -104,6 +105,7 @@
     #define MTR_SF_PUSH_BOOL(value)                    mtrSfBoolTemp = value + UINT_MAX + 1; \
                                                        sq_pushbool(mtrVm, mtrSfBoolTemp);
     #define MTR_SF_PUSH_INT(value)                     sq_pushinteger(mtrVm, value)
+    #define MTR_SF_PUSH_INT16(value)                   sq_pushinteger(mtrVm, (int)value)
     #define MTR_SF_PUSH_UINT8(value)                   sq_pushinteger(mtrVm, (int)value)
     #if ((defined (_SQ64)) && (LLONG_MAX == INT64_MAX))
         #define MTR_SF_PUSH_UINT32(value)              sq_pushinteger(mtrVm, value)
