@@ -60,9 +60,9 @@
 #define MTR_VERSION_TTF_SDL2_TTF_LUA                0x000100
 #define MTR_VERSION_TTF_SDL2_TTF_SQUIRREL           0x000000
 
-#define MTR_VERSION_UTILS_COLOR                     0x000100
-#define MTR_VERSION_UTILS_COLOR_LUA                 0x000100
-#define MTR_VERSION_UTILS_COLOR_SQUIRREL            0x000000
+#define MTR_VERSION_UTILS_COLOR                     0x000101 /* inc patch */
+#define MTR_VERSION_UTILS_COLOR_LUA                 0x000101 /* inc patch */
+#define MTR_VERSION_UTILS_COLOR_SQUIRREL            0x000001 /* inc patch */
 
 #define MTR_VERSION_UTILS_MATH                      0x000000 /* initial */
 #define MTR_VERSION_UTILS_MATH_LUA                  0x000000 /* initial */
