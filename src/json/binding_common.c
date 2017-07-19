@@ -3,396 +3,44 @@
 
 #include "marathoner/script_func.h"
 
-MTR_SCRIPT_FUNC(mtrSF_JsonInit)
-{
-    uint32_t  dmSize;
-    uint32_t  reservedCount;
-    bool      success;
-
-    MTR_SF_GET_UINT32(dmSize, 1);
-    MTR_SF_GET_UINT32(reservedCount, 2);
-    success = mtrJsonInit(dmSize, reservedCount);
-
-    MTR_SF_PUSH_BOOL(success);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_JsonCreateObject)
-{
-    uint32_t json;
-
-    json = mtrJsonCreateObject();
-
-    MTR_SF_PUSH_UINT32(json);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_JsonCreateArray)
-{
-    uint32_t json;
-
-    json = mtrJsonCreateArray();
-
-    MTR_SF_PUSH_UINT32(json);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_JsonParseString)
-{
-    const char *string;
-    uint32_t    json;
-
-    MTR_SF_GET_STRING(string, 1);
-    json = mtrJsonParseString(string);
-
-    MTR_SF_PUSH_UINT32(json);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_JsonParseFile)
-{
-    const char *filename;
-    uint32_t    json;
-
-    MTR_SF_GET_STRING(filename, 1);
-    json = mtrJsonParseFile(filename);
-
-    MTR_SF_PUSH_UINT32(json);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_JsonAddItemToObject)
-{
-    uint32_t    object;
-    const char *itemname;
-    uint32_t    item;
-    uint32_t    returnedItem;
-
-    MTR_SF_GET_UINT32(object, 1);
-    MTR_SF_GET_STRING(itemname, 2);
-    MTR_SF_GET_UINT32(item, 3);
-    returnedItem = mtrJsonAddItemToObject(object, itemname, item);
-
-    MTR_SF_PUSH_UINT32(returnedItem);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_JsonAddStringToObject)
-{
-    uint32_t    object;
-    const char *itemname;
-    const char *string;
-    uint32_t    returnedItem;
-
-    MTR_SF_GET_UINT32(object, 1);
-    MTR_SF_GET_STRING(itemname, 2);
-    MTR_SF_GET_STRING(string, 3);
-    returnedItem = mtrJsonAddStringToObject(object, itemname, string);
-
-    MTR_SF_PUSH_UINT32(returnedItem);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_JsonAddDoubleToObject)
-{
-    uint32_t    object;
-    const char *itemname;
-    double      num;
-    uint32_t    returnedItem;
-
-    MTR_SF_GET_UINT32(object, 1);
-    MTR_SF_GET_STRING(itemname, 2);
-    MTR_SF_GET_DOUBLE(num, 3);
-    returnedItem = mtrJsonAddDoubleToObject(object, itemname, num);
-
-    MTR_SF_PUSH_UINT32(returnedItem);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_JsonAddBoolToObject)
-{
-    uint32_t    object;
-    const char *itemname;
-    bool        value;
-    uint32_t    returnedItem;
-
-    MTR_SF_GET_UINT32(object, 1);
-    MTR_SF_GET_STRING(itemname, 2);
-    MTR_SF_GET_BOOL(value, 3);
-    returnedItem = mtrJsonAddBoolToObject(object, itemname, value);
-
-    MTR_SF_PUSH_UINT32(returnedItem);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_JsonAddNullToObject)
-{
-    uint32_t    object;
-    const char *itemname;
-    uint32_t    returnedItem;
-
-    MTR_SF_GET_UINT32(object, 1);
-    MTR_SF_GET_STRING(itemname, 2);
-    returnedItem = mtrJsonAddNullToObject(object, itemname);
-
-    MTR_SF_PUSH_UINT32(returnedItem);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_JsonAddItemToArray)
-{
-    uint32_t array;
-    uint32_t item;
-    uint32_t returnedItem;
-
-    MTR_SF_GET_UINT32(array, 1);
-    MTR_SF_GET_UINT32(item, 2);
-    returnedItem = mtrJsonAddItemToArray(array, item);
-
-    MTR_SF_PUSH_UINT32(returnedItem);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_JsonAddStringToArray)
-{
-    uint32_t    array;
-    const char *string;
-    uint32_t    returnedItem;
-
-    MTR_SF_GET_UINT32(array, 1);
-    MTR_SF_GET_STRING(string, 2);
-    returnedItem = mtrJsonAddStringToArray(array, string);
-
-    MTR_SF_PUSH_UINT32(returnedItem);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_JsonAddDoubleToArray)
-{
-    uint32_t array;
-    double   num;
-    uint32_t returnedItem;
-
-    MTR_SF_GET_UINT32(array, 1);
-    MTR_SF_GET_DOUBLE(num, 2);
-    returnedItem = mtrJsonAddDoubleToArray(array, num);
-
-    MTR_SF_PUSH_UINT32(returnedItem);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_JsonAddBoolToArray)
-{
-    uint32_t array;
-    bool     value;
-    uint32_t returnedItem;
-
-    MTR_SF_GET_UINT32(array, 1);
-    MTR_SF_GET_BOOL(value, 2);
-    returnedItem = mtrJsonAddBoolToArray(array, value);
-
-    MTR_SF_PUSH_UINT32(returnedItem);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_JsonAddNullToArray)
-{
-    uint32_t array;
-    uint32_t returnedItem;
-
-    MTR_SF_GET_UINT32(array, 1);
-    returnedItem = mtrJsonAddNullToArray(array);
-
-    MTR_SF_PUSH_UINT32(returnedItem);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_JsonGetObjectItem)
-{
-    uint32_t    object;
-    const char *itemName;
-    uint32_t    returnedItem;
-
-    MTR_SF_GET_UINT32(object, 1);
-    MTR_SF_GET_STRING(itemName, 2);
-    returnedItem = mtrJsonGetObjectItem(object, itemName);
-
-    MTR_SF_PUSH_UINT32(returnedItem);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_JsonGetArrayItem)
-{
-    uint32_t array;
-    int      itemNum;
-    uint32_t returnedItem;
-
-    MTR_SF_GET_UINT32(array, 1);
-    MTR_SF_GET_INT(itemNum, 2);
-    returnedItem = mtrJsonGetArrayItem(array, itemNum);
-
-    MTR_SF_PUSH_UINT32(returnedItem);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_JsonToString)
-{
-    uint32_t    entity;
-    const char *string;
-
-    MTR_SF_GET_UINT32(entity, 1);
-    string = mtrJsonToString(entity);
-
-    MTR_SF_PUSH_STRING(string);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_JsonToStringFormatted)
-{
-    uint32_t    entity;
-    const char *string;
-
-    MTR_SF_GET_UINT32(entity, 1);
-    string = mtrJsonToStringFormatted(entity);
-
-    MTR_SF_PUSH_STRING(string);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_JsonToFile)
-{
-    uint32_t    entity;
-    const char *filename;
-    bool        success;
-
-    MTR_SF_GET_UINT32(entity, 1);
-    MTR_SF_GET_STRING(filename, 2);
-    success = mtrJsonToFile(entity, filename);
-
-    MTR_SF_PUSH_BOOL(success);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_JsonToFileFormatted)
-{
-    uint32_t    entity;
-    const char *filename;
-    bool        success;
-
-    MTR_SF_GET_UINT32(entity, 1);
-    MTR_SF_GET_STRING(filename, 2);
-    success = mtrJsonToFileFormatted(entity, filename);
-
-    MTR_SF_PUSH_BOOL(success);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_JsonDelete)
-{
-    uint32_t entity;
-
-    MTR_SF_GET_UINT32(entity, 1);
-    mtrJsonDelete(entity);
-
-    return 0;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_JsonDeleteItemFromObject)
-{
-    uint32_t    object;
-    const char *itemName;
-
-    MTR_SF_GET_UINT32(object, 1);
-    MTR_SF_GET_STRING(itemName, 2);
-    mtrJsonDeleteItemFromObject(object, itemName);
-
-    return 0;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_JsonDeleteItemFromArray)
-{
-    uint32_t object;
-    int      itemNum;
-
-    MTR_SF_GET_UINT32(object, 1);
-    MTR_SF_GET_INT(itemNum, 2);
-    mtrJsonDeleteItemFromArray(object, itemNum);
-
-    return 0;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_JsonDetachItemFromObject)
-{
-    uint32_t object;
-    uint32_t item;
-
-    MTR_SF_GET_UINT32(object, 1);
-    MTR_SF_GET_UINT32(item, 2);
-    mtrJsonDetachItemFromObject(object, item);
-
-    return 0;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_JsonDetachItemFromArray)
-{
-    uint32_t array;
-    uint32_t item;
-
-    MTR_SF_GET_UINT32(array, 1);
-    MTR_SF_GET_UINT32(item, 2);
-    mtrJsonDetachItemFromArray(array, item);
-
-    return 0;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_JsonObjectHasItem)
-{
-    uint32_t    object;
-    const char *itemName;
-    bool        hasItem;
-
-    MTR_SF_GET_UINT32(object, 1);
-    MTR_SF_GET_STRING(itemName, 2);
-    hasItem = mtrJsonObjectHasItem(object, itemName);
-
-    MTR_SF_PUSH_BOOL(hasItem);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_JsonLength)
-{
-    uint32_t entity;
-    int      length;
-
-    MTR_SF_GET_UINT32(entity, 1);
-    length = mtrJsonLength(entity);
-
-    MTR_SF_PUSH_INT(length);
-
-    return 1;
-}
+MTR_SCRIPT_FUNC_B_U32t2(mtrSF_JsonInit, mtrJsonInit)
+MTR_SCRIPT_FUNC_U32t_V(mtrSF_JsonCreateObject, mtrJsonCreateObject)
+MTR_SCRIPT_FUNC_U32t_V(mtrSF_JsonCreateArray, mtrJsonCreateArray)
+MTR_SCRIPT_FUNC_U32t_S1(mtrSF_JsonParseString, mtrJsonParseString)
+MTR_SCRIPT_FUNC_U32t_S1(mtrSF_JsonParseFile, mtrJsonParseFile)
+MTR_SCRIPT_FUNC_U32t_U32t1S1U32t1(mtrSF_JsonAddItemToObject,
+ mtrJsonAddItemToObject)
+MTR_SCRIPT_FUNC_U32t_U32t1S2(mtrSF_JsonAddStringToObject,
+ mtrJsonAddStringToObject)
+MTR_SCRIPT_FUNC_U32t_U32t1S1D1(mtrSF_JsonAddDoubleToObject,
+ mtrJsonAddDoubleToObject)
+MTR_SCRIPT_FUNC_U32t_U32t1S1B1(mtrSF_JsonAddBoolToObject,
+ mtrJsonAddBoolToObject)
+MTR_SCRIPT_FUNC_U32t_U32t1S1(mtrSF_JsonAddNullToObject, mtrJsonAddNullToObject)
+MTR_SCRIPT_FUNC_U32t_U32t2(mtrSF_JsonAddItemToArray, mtrJsonAddItemToArray)
+MTR_SCRIPT_FUNC_U32t_U32t1S1(mtrSF_JsonAddStringToArray,
+ mtrJsonAddStringToArray)
+MTR_SCRIPT_FUNC_U32t_U32t1D1(mtrSF_JsonAddDoubleToArray,
+ mtrJsonAddDoubleToArray)
+MTR_SCRIPT_FUNC_U32t_U32t1B1(mtrSF_JsonAddBoolToArray, mtrJsonAddBoolToArray)
+MTR_SCRIPT_FUNC_U32t_U32t1(mtrSF_JsonAddNullToArray, mtrJsonAddNullToArray)
+MTR_SCRIPT_FUNC_U32t_U32t1S1(mtrSF_JsonGetObjectItem, mtrJsonGetObjectItem)
+MTR_SCRIPT_FUNC_U32t_U32t1I1(mtrSF_JsonGetArrayItem, mtrJsonGetArrayItem)
+MTR_SCRIPT_FUNC_S_U32t1(mtrSF_JsonToString, mtrJsonToString)
+MTR_SCRIPT_FUNC_S_U32t1(mtrSF_JsonToStringFormatted, mtrJsonToStringFormatted)
+MTR_SCRIPT_FUNC_B_U32t1S1(mtrSF_JsonToFile, mtrJsonToFile)
+MTR_SCRIPT_FUNC_B_U32t1S1(mtrSF_JsonToFileFormatted, mtrJsonToFileFormatted)
+MTR_SCRIPT_FUNC_V_U32t1(mtrSF_JsonDelete, mtrJsonDelete)
+MTR_SCRIPT_FUNC_V_U32t1S1(mtrSF_JsonDeleteItemFromObject,
+ mtrJsonDeleteItemFromObject)
+MTR_SCRIPT_FUNC_V_U32t1I1(mtrSF_JsonDeleteItemFromArray,
+ mtrJsonDeleteItemFromArray)
+MTR_SCRIPT_FUNC_V_U32t2(mtrSF_JsonDetachItemFromObject,
+ mtrJsonDetachItemFromObject)
+MTR_SCRIPT_FUNC_V_U32t2(mtrSF_JsonDetachItemFromArray,
+ mtrJsonDetachItemFromArray)
+MTR_SCRIPT_FUNC_B_U32t1S1(mtrSF_JsonObjectHasItem, mtrJsonObjectHasItem)
+MTR_SCRIPT_FUNC_I_U32t1(mtrSF_JsonLength, mtrJsonLength)
 
 void mtrScriptsRegisterAll(void)
 {

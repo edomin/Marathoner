@@ -3,106 +3,15 @@
 
 #include "marathoner/script_func.h"
 
-MTR_SCRIPT_FUNC(mtrSF_MouseInit)
-{
-    bool success;
-
-    success = mtrMouseInit();
-
-    MTR_SF_PUSH_BOOL(success);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_MouseRefresh)
-{
-    mtrMouseRefresh();
-
-    return 0;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_MousePress)
-{
-    int  button;
-    bool result;
-
-    MTR_SF_GET_INT(button, 1);
-    result = mtrMousePress(button);
-
-    MTR_SF_PUSH_BOOL(result);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_MouseRelease)
-{
-    int  button;
-    bool result;
-
-    MTR_SF_GET_INT(button, 1);
-    result = mtrMouseRelease(button);
-
-    MTR_SF_PUSH_BOOL(result);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_MousePressed)
-{
-    int  button;
-    bool result;
-
-    MTR_SF_GET_INT(button, 1);
-    result = mtrMousePressed(button);
-
-    MTR_SF_PUSH_BOOL(result);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_MouseGetWheelRelative)
-{
-    int result;
-
-    result = mtrMouseGetWheelRelative();
-
-    MTR_SF_PUSH_INT(result);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_MouseMoving)
-{
-    bool moving;
-
-    moving = mtrMouseMoving();
-
-    MTR_SF_PUSH_BOOL(moving);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_MouseGetX)
-{
-    int x;
-
-    x = mtrMouseGetX();
-
-    MTR_SF_PUSH_INT(x);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_MouseGetY)
-{
-    int y;
-
-    y = mtrMouseGetY();
-
-    MTR_SF_PUSH_INT(y);
-
-    return 1;
-}
+MTR_SCRIPT_FUNC_B_V(mtrSF_MouseInit, mtrMouseInit)
+MTR_SCRIPT_FUNC_V_V(mtrSF_MouseRefresh, mtrMouseRefresh)
+MTR_SCRIPT_FUNC_B_I1(mtrSF_MousePress, mtrMousePress)
+MTR_SCRIPT_FUNC_B_I1(mtrSF_MouseRelease, mtrMouseRelease)
+MTR_SCRIPT_FUNC_B_I1(mtrSF_MousePressed, mtrMousePressed)
+MTR_SCRIPT_FUNC_I_V(mtrSF_MouseGetWheelRelative, mtrMouseGetWheelRelative)
+MTR_SCRIPT_FUNC_B_V(mtrSF_MouseMoving, mtrMouseMoving)
+MTR_SCRIPT_FUNC_I_V(mtrSF_MouseGetX, mtrMouseGetX)
+MTR_SCRIPT_FUNC_I_V(mtrSF_MouseGetY, mtrMouseGetY)
 
 #ifndef _SQUIRREL_H_
 MTR_SCRIPT_FUNC(mtrSF_MouseGetXY)
@@ -119,27 +28,8 @@ MTR_SCRIPT_FUNC(mtrSF_MouseGetXY)
 }
 #endif
 
-MTR_SCRIPT_FUNC(mtrSF_MouseGetDeltaX)
-{
-    int deltaX;
-
-    deltaX = mtrMouseGetDeltaX();
-
-    MTR_SF_PUSH_INT(deltaX);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_MouseGetDeltaY)
-{
-    int deltaY;
-
-    deltaY = mtrMouseGetDeltaY();
-
-    MTR_SF_PUSH_INT(deltaY);
-
-    return 1;
-}
+MTR_SCRIPT_FUNC_I_V(mtrSF_MouseGetDeltaX, mtrMouseGetDeltaX)
+MTR_SCRIPT_FUNC_I_V(mtrSF_MouseGetDeltaY, mtrMouseGetDeltaY)
 
 #ifndef _SQUIRREL_H_
 MTR_SCRIPT_FUNC(mtrSF_MouseGetDeltaXY)

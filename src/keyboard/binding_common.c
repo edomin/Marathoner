@@ -3,62 +3,11 @@
 
 #include "marathoner/script_func.h"
 
-MTR_SCRIPT_FUNC(mtrSF_KeyboardInit)
-{
-    bool success;
-
-    success = mtrKeyboardInit();
-
-    MTR_SF_PUSH_BOOL(success);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_KeyboardRefresh)
-{
-    mtrKeyboardRefresh();
-
-    return 0;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_KeyboardPress)
-{
-    int  key;
-    bool result;
-
-    MTR_SF_GET_INT(key, 1);
-    result = mtrKeyboardPress(key);
-
-    MTR_SF_PUSH_BOOL(result);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_KeyboardRelease)
-{
-    int  key;
-    bool result;
-
-    MTR_SF_GET_INT(key, 1);
-    result = mtrKeyboardRelease(key);
-
-    MTR_SF_PUSH_BOOL(result);
-
-    return 1;
-}
-
-MTR_SCRIPT_FUNC(mtrSF_KeyboardPressed)
-{
-    int  key;
-    bool result;
-
-    MTR_SF_GET_INT(key, 1);
-    result = mtrKeyboardPressed(key);
-
-    MTR_SF_PUSH_BOOL(result);
-
-    return 1;
-}
+MTR_SCRIPT_FUNC_B_V(mtrSF_KeyboardInit, mtrKeyboardInit)
+MTR_SCRIPT_FUNC_V_V(mtrSF_KeyboardRefresh, mtrKeyboardRefresh)
+MTR_SCRIPT_FUNC_B_I1(mtrSF_KeyboardPress, mtrKeyboardPress)
+MTR_SCRIPT_FUNC_B_I1(mtrSF_KeyboardRelease, mtrKeyboardRelease)
+MTR_SCRIPT_FUNC_B_I1(mtrSF_KeyboardPressed, mtrKeyboardPressed)
 
 MTR_SCRIPT_FUNC(mtrSF_KeyboardInputChar)
 {
