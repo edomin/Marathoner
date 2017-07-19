@@ -1,10 +1,15 @@
 include ../../../Build.mk
 
 ifeq ($(PLATFORM), win32)
-  LDFLAGS = -s -shared -Wl,--kill-at -L$(PREFIX)/lib
+  ifeq ($(DEBUG), no)
+    LDFLAGS = -s -shared -Wl,--kill-at -L$(PREFIX)/lib
+  endif
+  ifeq ($(DEBUG), yes)
+    LDFLAGS = -shared -Wl,--kill-at -L$(PREFIX)/lib
+  endif
 endif
 ifeq ($(PLATFORM), html5)
-  LDFLAGS = -shared -Wl,--kill-at -L$(PREFIX)/lib -s SIDE_MODULE=1 -O2
+  LDFLAGS += -shared -Wl,--kill-at -L$(PREFIX)/lib -s SIDE_MODULE=1 -O2
 endif
 OBJSDIR = ../../../obj
 LIBDIR = ../../../lib
