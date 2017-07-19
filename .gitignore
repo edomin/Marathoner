@@ -15,6 +15,7 @@ Marathoner/*
 *.exe
 README-SDL.txt
 autorun/*
+GDG/*
 
 hello.nut
 Marathoner.cfg
