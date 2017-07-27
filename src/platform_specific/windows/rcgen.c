@@ -8,13 +8,14 @@ int main(int argc, char **argv)
     FILE *inputFile;
     FILE *outputFile;
     char *inputBuf;
-    int bufLength;
-    int i;
+    unsigned int bufLength;
+    unsigned int i;
     int fileChar;
     char *constPos;
     char *valuePos;
+    unsigned int uValuePos;
     unsigned int version;
-    int digit;
+    unsigned int digit;
     unsigned int verMajor;
     unsigned int verMinor;
     unsigned int verPatch;
@@ -38,7 +39,7 @@ int main(int argc, char **argv)
             printf("Unable to open input file: %s\n", inputPath);
             return 1;
         }
-        bufLength = 0;
+        bufLength = 0U;
         while (fgetc(inputFile) != EOF)
         {
             bufLength++;
@@ -55,8 +56,8 @@ int main(int argc, char **argv)
             printf("Unable to open input file: %s\n", inputPath);
             return 3;
         }
-        inputBuf = malloc(sizeof(char* ) * (bufLength + 1));
-        for (i = 0; i < bufLength; i++)
+        inputBuf = malloc(sizeof(char* ) * (bufLength + 1U));
+        for (i = 0U; i < bufLength; i++)
         {
             fileChar = fgetc(inputFile);
             if (fileChar == EOF)
@@ -88,10 +89,10 @@ int main(int argc, char **argv)
             return 7;
         }
 
-        version = 0;
-        for (i = 2; i <= 7; i++)
+        version = 0U;
+        for (i = 2U; i <= 7U; i++)
         {
-            digit = i - 2;
+            digit = i - 2U;
             switch (valuePos[i])
             {
                 case '0':
@@ -105,8 +106,9 @@ int main(int argc, char **argv)
                 case '8':
                 case '9':
                 {
-                    version = version + (valuePos[i] - 0x30) *
-                     (16 << (4 * (4 - digit))); /* pow(16, 5 - digit) */
+                    uValuePos = valuePos[i];
+                    version = version + (uValuePos - 0x30U) *
+                     (0x1U << (4U * (5U - digit)));
                     break;
                 }
                 case 'A':
@@ -116,8 +118,8 @@ int main(int argc, char **argv)
                 case 'E':
                 case 'F':
                 {
-                    version = version + (valuePos[i] - 0x41) *
-                     (16 << (4 * (4 - digit))); /* pow(16, 5 - digit) */
+                    version = version + (uValuePos - 0x41U) *
+                     (0x1U << (4U * (5U - digit)));
                     break;
                 }
                 default:
@@ -128,9 +130,9 @@ int main(int argc, char **argv)
             }
         }
 
-        verMajor = version >> 24;
-        verMinor = (version >> 16) - (verMajor << 8);
-        verPatch = (version >> 8) - (verMajor << 16) - (verMinor << 8);
+        verMajor = version >> 16;
+        verMinor = (version >> 8) - (verMajor << 8);
+        verPatch = version - (verMajor << 16) - (verMinor << 8);
 
         outputFile = fopen(outputPath, "w");
         if (outputFile == NULL)
