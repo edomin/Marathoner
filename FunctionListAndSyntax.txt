@@ -41,7 +41,7 @@ void FileWriteLineFast(const char* filename, const char *text, uint8_t mode)
 bool ClipboardPutText(const char* text)
 const char *ClipboardGetText()
 
-bool ScreenInit(int width, int height)
+bool ScreenInit(int width, int height, bool fullscreen, const char *title)
 void ScreenQuit()
 void ScreenFlip()
 int, int ScreenGetSizes()

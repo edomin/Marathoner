@@ -18,8 +18,8 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
-MTR_EXPORT bool MTR_CALL mtrScreenInit(int width,
- int height)
+MTR_EXPORT bool MTR_CALL mtrScreenInit(int width, int height, bool fullscreen,
+ const char *title)
 {
     SDL_version         compiled;
     SDL_version         sdlLinked;
@@ -27,6 +27,9 @@ MTR_EXPORT bool MTR_CALL mtrScreenInit(int width,
     int                 i;
     SDL_DisplayMode     mode;
     SDL_RendererInfo    rendererInfo;
+    const char         *actualTitle;
+    const char          defaultTitle[] = "Marathoner";
+    int                 fullscreenFlag;
 
     mtrLogWrite("Creating Screen", 0, MTR_LMT_INFO);
 
@@ -85,7 +88,8 @@ MTR_EXPORT bool MTR_CALL mtrScreenInit(int width,
                 mtrLogWrite_i("Height:", 2, MTR_LMT_INFO, mode.h);
                 mtrLogWrite_s("Pixel Format:", 2, MTR_LMT_INFO,
                  SDL_GetPixelFormatName(mode.format));
-                mtrLogWrite_i("Refresh Rate (Hz):", 2, MTR_LMT_INFO, mode.refresh_rate);
+                mtrLogWrite_i("Refresh Rate (Hz):", 2, MTR_LMT_INFO,
+                 mode.refresh_rate);
             }
             else
             {
@@ -102,9 +106,17 @@ MTR_EXPORT bool MTR_CALL mtrScreenInit(int width,
                                          SDL_WINDOWPOS_UNDEFINED, w, h,
                                          SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN);
     */
-    mtrScreen->screen = SDL_CreateWindow("Marathoner", SDL_WINDOWPOS_UNDEFINED,
+    if (title == NULL)
+        actualTitle = defaultTitle;
+    else
+        actualTitle = title;
+    if (fullscreen)
+        fullscreenFlag = SDL_WINDOW_FULLSCREEN;
+    else
+        fullscreenFlag = 0;
+    mtrScreen->screen = SDL_CreateWindow(actualTitle, SDL_WINDOWPOS_UNDEFINED,
      SDL_WINDOWPOS_UNDEFINED, width, height,
-     SDL_WINDOW_OPENGL);
+     SDL_WINDOW_OPENGL | fullscreenFlag);
 
     if (mtrScreen->screen != NULL)
         mtrLogWrite("Window created", 1, MTR_LMT_INFO);

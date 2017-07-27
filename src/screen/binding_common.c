@@ -3,7 +3,7 @@
 
 #include "marathoner/script_func.h"
 
-MTR_SCRIPT_FUNC_B_I2(mtrSF_ScreenInit, mtrScreenInit)
+MTR_SCRIPT_FUNC_B_I2B1S1(mtrSF_ScreenInit, mtrScreenInit)
 MTR_SCRIPT_FUNC_V_V(mtrSF_ScreenQuit, mtrScreenQuit)
 MTR_SCRIPT_FUNC_V_V(mtrSF_ScreenFlip, mtrScreenFlip)
 

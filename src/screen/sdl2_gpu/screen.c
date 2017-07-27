@@ -18,8 +18,13 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
-MTR_EXPORT bool MTR_CALL mtrScreenInit(int width, int height)
+MTR_EXPORT bool MTR_CALL mtrScreenInit(int width, int height, bool fullscreen,
+ const char *title)
 {
+    TODO(Window title in SDL2_GPU screen module)
+//    const char *actualTitle;
+//    const char  defaultTitle[] = "Marathoner";
+
     mtrLogWrite("Creating Window", 0, MTR_LMT_INFO);
     mtrScreen = malloc(sizeof(mtrScreen_t));
     if (mtrScreen == NULL)
@@ -30,7 +35,7 @@ MTR_EXPORT bool MTR_CALL mtrScreenInit(int width, int height)
     }
     mtrScreen->screen = GPU_Init(width, height, GPU_DEFAULT_INIT_FLAGS);
 //    mtrScreen->screen = GPU_Init(width, height, GPU_INIT_ENABLE_VSYNC);
-//    GPU_SetFullscreen(true, false);
+    GPU_SetFullscreen(fullscreen, false);
     if (mtrScreen->screen != NULL)
         mtrLogWrite("Window created", 1, MTR_LMT_INFO);
     else
