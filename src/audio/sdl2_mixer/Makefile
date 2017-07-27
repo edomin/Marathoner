@@ -9,6 +9,7 @@ endif
 ifeq ($(PLATFORM), html5)
   LIBS = -lSDL2_mixer -s USE_SDL=2
 endif
+PREREQS = ../common.h
 
 include ../../../Subsystem.mk
 

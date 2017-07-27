@@ -95,11 +95,13 @@ ifeq ($(MOD), plugin)
   endif
 endif
 
-$(OBJSDIR)/launcher.o: launcher.c
+$(OBJSDIR)/launcher.o: launcher.c launcher.h
 	$(CC) $(CFLAGS) -Wno-unused-function $(INCDIRS) -c launcher.c \
 	 -o $(OBJSDIR)/launcher.o
 
-$(OBJSDIR)/engine.o: engine.c
+$(OBJSDIR)/engine.o: engine.c log.h notification.h configfile.h messagebox.h \
+ indexkeeper.h file.h directory.h encoding.h clipboard.h plugin_loader.h \
+ ../../include/marathoner/engine.h
 	$(CC) $(CFLAGS) $(INCDIRS) -c engine.c -o $(OBJSDIR)/engine.o
 
 $(OBJSDIR)/log.o: log.c log.h
@@ -138,11 +140,44 @@ $(OBJSDIR)/engine.res: $(RCDIR)/engine.rc
 $(OBJSDIR)/launcher.res: $(RCDIR)/launcher.rc
 	$(RC) $(RCFLAGS) -i $(RCDIR)/launcher.rc -o $(OBJSDIR)/launcher.res
 
-$(RCDIR)/engine.rc:
+$(RCDIR)/engine.rc: ../../include/marathoner/version.h
 	$(BINDIR)/rcgen ../../include/marathoner/version.h $(RCDIR)/engine.rc \
 	 MTR_VERSION_MARATHONER Marathoner \
 	 "Marathoner Game Engine core application" Marathoner.exe
 
-$(RCDIR)/launcher.rc:
+$(RCDIR)/launcher.rc: ../../include/marathoner/version.h
 	$(BINDIR)/rcgen ../../include/marathoner/version.h $(RCDIR)/launcher.rc \
 	MTR_VERSION_LAUNCHER Launcher "Marathoner launcher" Launcher.exe
+
+launcher.h: log.h notification.h configfile.h messagebox.h clipboard.h \
+ plugin_loader.h ../../include/marathoner/marathoner.h
+
+log.h: ../../include/marathoner/engine.h
+
+messagebox.h: ../../include/marathoner/marathoner.h \
+ ../../include/marathoner/engine.h
+
+notification.h: log.h messagebox.h ../../include/marathoner/marathoner.h \
+ ../../include/marathoner/engine.h
+
+configfile.h: ../../include/marathoner/engine.h
+
+indexkeeper.h: log.h notification.h ../../include/marathoner/marathoner.h \
+ ../../include/marathoner/engine.h
+
+encoding.h: ../../include/marathoner/engine.h
+
+file.h: indexkeeper.h ../../include/marathoner/marathoner.h \
+ ../../include/marathoner/engine.h
+
+directory.h: ../../include/marathoner/engine.h
+
+clipboard.h: ../../include/marathoner/engine.h
+
+plugin_loader.h: notification.h directory.h log.h \
+ ../../include/marathoner/engine.h
+
+../../include/marathoner/engine.h: ../../include/marathoner/marathoner.h
+
+../../include/marathoner/marathoner.h: ../../include/marathoner/version.h \
+ ../../include/marathoner/types.h

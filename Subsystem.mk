@@ -49,7 +49,8 @@ $(LIBDIR)/$(STATIC_NAME): $(OBJ)
 $(BINDIR)/$(PLUGIN_NAME): $(OBJS)
 	$(LD) $(LDFLAGS) -o $(BINDIR)/$(PLUGIN_NAME) $(OBJS) $(LIBS)
 
-$(OBJ): $(SUBSYSTEM).c $(SUBSYSTEM).h
+$(OBJ): $(SUBSYSTEM).c $(SUBSYSTEM).h $(PREREQS) \
+ ../../../include/marathoner/version.h
 	-mkdir $(OBJSDIR)/$(SUBSYSTEM)
 	$(CC) $(CFLAGS) $(INCDIRS) -c $(SUBSYSTEM).c -o $(OBJ)
 
@@ -60,6 +61,8 @@ $(RCFILE):
 	$(RCGEN) $(VERSION_H) $(RCFILE) $(CONST_VER) $(MODULE_NAME) \
 	 $(PLUGIN_DESCRIPTION) $(PLUGIN_NAME)
 
-$(SUBSYSTEM).c:
+$(SUBSYSTEM).c: ../../../include/marathoner/plugin_common.c
 
-$(SUBSYSTEM).h:
+$(SUBSYSTEM).h: ../../../include/marathoner/plugin.h
+
+../../../include/marathoner/plugin.h: ../../../include/marathoner/marathoner.h

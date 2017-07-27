@@ -49,17 +49,20 @@ $(LIBDIR)/$(STATIC_NAME): $(OBJ)
 $(BINDIR)/$(PLUGIN_NAME): $(OBJS)
 	$(LD) $(LDFLAGS) -o $(BINDIR)/$(PLUGIN_NAME) $(OBJS) $(LIBS)
 
-$(OBJ): binding.c binding.h
+$(OBJ): binding.c binding.h $(PREREQS) \
+ ../../../include/marathoner/script_func.h ../../../include/marathoner/version.h
 	-mkdir $(OBJSDIR)/$(SUBSYSTEM)
 	$(CC) $(CFLAGS) $(INCDIRS) -c binding.c -o $(OBJ)
 
 $(RES): $(RCFILE)
 	$(RC) $(RCFLAGS) -i $(RCFILE) -o $(RES)
 
-$(RCFILE):
+$(RCFILE): ../../../include/marathoner/version.h
 	$(RCGEN) $(VERSION_H) $(RCFILE) $(CONST_VER) $(MODULE_NAME) \
 	 $(PLUGIN_DESCRIPTION) $(PLUGIN_NAME)
 
-binding.c:
+binding.c: ../../../include/marathoner/plugin_common.c
 
-binding.h:
+binding.h: ../../../include/marathoner/plugin.h
+
+../../../include/marathoner/plugin.h: ../../../include/marathoner/marathoner.h

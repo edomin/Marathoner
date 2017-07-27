@@ -184,6 +184,7 @@ clean:
 	-rm -f -r marathoner.js
 ifeq ($(PLATFORM), win32)
 	-rm -f -r rcgen.exe
+	-rm -f -r Launcher.exe
 endif
 
 remake: clean all
