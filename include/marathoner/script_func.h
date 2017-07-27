@@ -1116,6 +1116,23 @@
         return 1;                         \
     }
 
+#define MTR_SCRIPT_FUNC_B_I2B1S1(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)                    \
+    {                                         \
+        int i1;                               \
+        int i2;                               \
+        bool b1;                              \
+        const char *s1;                       \
+        bool result;                          \
+        MTR_SF_GET_INT(i1, 1);                \
+        MTR_SF_GET_INT(i2, 2);                \
+        MTR_SF_GET_BOOL(b1, 3);               \
+        MTR_SF_GET_STRING(s1, 4);             \
+        result = func(i1, i2, b1, s1);        \
+        MTR_SF_PUSH_BOOL(result);             \
+        return 1;                             \
+    }
+
 #define MTR_SCRIPT_FUNC_B_I1S1I1(sfunc, func) \
     MTR_SCRIPT_FUNC(sfunc)                    \
     {                                         \
