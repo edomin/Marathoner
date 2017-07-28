@@ -693,6 +693,92 @@ bool ConfigSave(mtrSubsystem *ssScript, char scriptName[64], int pluginsCount,
     return true;
 }
 
+char *WinErrorCodeToText(uint32_t error)
+{
+    LPTSTR lpMsgBuf;
+    #ifdef UNICODE
+    int textLen;
+    char *result;
+    #endif
+
+    FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM |
+     FORMAT_MESSAGE_IGNORE_INSERTS, NULL, error,
+     MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPTSTR) &lpMsgBuf, 0, NULL);
+
+    #ifdef UNICODE
+    textLen = wcslen(lpMsgBuf);
+    result = malloc(sizeof(char) * (textLen + 1));
+    WideCharToMultiByte(CP_ACP, WC_COMPOSITECHECK | WC_NO_BEST_FIT_CHARS,
+     lpMsgBuf, textLen, result, textLen, NULL, NULL);
+    result[textLen] = '/0';
+    free(lpMsgBuf);
+    return result;
+    #else
+    return lpMsgBuf;
+    #endif
+}
+
+bool RunEngine()
+{
+    #ifdef UNICODE
+    const wchar_t *appName;
+    int appNameLen;
+    int convResultLen;
+    #else
+    const char appName[] = "Marathoner.exe";
+    #endif
+    STARTUPINFO sti;
+    PROCESS_INFORMATION pi;
+    bool success;
+    uint32_t error;
+    char *errorText;
+
+    #ifdef UNICODE
+    appNameLen = strlen("Marathoner.exe");
+    appName = malloc(sizeof(wchar_t) * (appNameLen + 1));
+    if (appName == NULL)
+    {
+        mtrNotify("Unable to allocate memory for Application name.", 0,
+         MTR_LMT_ERROR);
+        return false;
+    }
+    convResultLen = MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED,
+     "Marathoner.exe", -1, appName, appNameLen);
+    if (convResultLen == 0)
+    {
+        error = GetLastError();
+        free(appName);
+        mtrNotify("Unable to convert Application name to wide char.", 0,
+         MTR_LMT_ERROR);
+        errorText = WinErrorCodeToText(error);
+        mtrNotify(errorText, 0, MTR_LMT_ERROR);
+        return false;
+    }
+    appName[appNameLen] = '/0';
+    #endif
+
+    ZeroMemory(&sti, sizeof(STARTUPINFO));
+    sti.cb=sizeof(STARTUPINFO);
+    success = CreateProcess(appName, NULL, NULL, NULL, false,
+     CREATE_DEFAULT_ERROR_MODE | CREATE_NEW_PROCESS_GROUP |
+     DETACHED_PROCESS | NORMAL_PRIORITY_CLASS, NULL, NULL, &sti, &pi);
+    if (success == false) /* Error occured */
+    {
+        error = GetLastError();
+        errorText = WinErrorCodeToText(error);
+        mtrNotify(errorText, 0, MTR_LMT_ERROR);
+    }
+    else
+    {
+        CloseHandle(pi.hThread);
+        CloseHandle(pi.hProcess);
+    }
+    #ifdef UNICODE
+    free(appName);
+    #endif
+    return success;
+}
+
 int main(int argc, char** argv)
 {
     int                error;
@@ -993,11 +1079,19 @@ int main(int argc, char** argv)
                     mtrNotify("Unable to save preferences to configfile", 0,
                      MTR_LMT_ERROR);
                 else
-                    quit = true;
+                {
+                    if (!RunEngine())
+                        mtrNotify("Unable to run Engine", 0, MTR_LMT_ERROR);
+                    else
+                        quit = true;
+                }
             }
             if (nk_button_label(ctx, "Discard and Run"))
             {
-                quit = true;
+                if (!RunEngine())
+                    mtrNotify("Unable to run Engine", 0, MTR_LMT_ERROR);
+                else
+                    quit = true;
             }
         }
         nk_end(ctx);
