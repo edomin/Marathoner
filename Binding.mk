@@ -50,7 +50,9 @@ $(BINDIR)/$(PLUGIN_NAME): $(OBJS)
 	$(LD) $(LDFLAGS) -o $(BINDIR)/$(PLUGIN_NAME) $(OBJS) $(LIBS)
 
 $(OBJ): binding.c binding.h $(PREREQS) \
- ../../../include/marathoner/script_func.h ../../../include/marathoner/version.h
+ ../../../include/marathoner/script_func.h \
+ ../../../include/marathoner/version.h \
+ ../../../include/marathoner/binding_common.h
 	-mkdir $(OBJSDIR)/$(SUBSYSTEM)
 	$(CC) $(CFLAGS) $(INCDIRS) -c binding.c -o $(OBJ)
 
