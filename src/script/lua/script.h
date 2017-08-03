@@ -20,4 +20,3 @@ MTR_EXPORT void MTR_CALL mtrScriptsRegisterNumericVariable(const char *name,
  double value);
 
 #endif
-
