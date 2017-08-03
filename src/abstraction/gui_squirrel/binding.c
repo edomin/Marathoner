@@ -3,46 +3,5 @@
 #include "marathoner/plugin_common.c"
 #include "../gui_binding_common.c"
 
-MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
-{
-    mtrReport *report;
-    report = malloc(sizeof(mtrReport));
-    if (report == NULL)
-        return NULL;
-    report->moduleID = "Abstraction_gui_Squirrel";
-    report->version = MTR_VERSION_ABSTRACTION_GUI_SQUIRREL;
-    report->subsystem = "binding";
-    report->prereqsCount = 2;
-    report->prereqs = malloc(sizeof(char *) * report->prereqsCount);
-    if (report->prereqs == NULL)
-    {
-        free(report);
-        return NULL;
-    }
-    report->prereqs[0] = "Abstraction_gui";
-    report->prereqs[1] = "Script_Squirrel";
-    report->prereqSubsystemsCount = 0;
-    report->prereqSubsystems = NULL;
-    return report;
-}
-
-MTR_EXPORT void MTR_CALL mtrPluginInit(void)
-{
-    bool ok;
-    ok = true;
-
-    mtrLogWrite_s("Reporting Squirrel compile-time version:", 1, MTR_LMT_INFO,
-     SQUIRREL_VERSION);
-    mtrLogWrite_i("Reporting Squirrel linked version:", 1, MTR_LMT_INFO,
-     sq_getversion());
-
-    MTR_FIND_FUNCTION(mtrScriptsRegisterFunction, "Script_Squirrel");
-    MTR_FIND_FUNCTION(mtrScriptsRegisterNumericVariable, "Script_Squirrel");
-    MTR_FIND_FUNCTION(mtrScriptsGetVm, "Script_Squirrel");
-
-    if (ok)
-    {
-        mtrScriptsRegisterAll();
-    }
-}
-
+MTR_BINDING_COMMON_CODE("Abstraction_gui_Squirrel",
+ MTR_VERSION_ABSTRACTION_GUI_SQUIRREL, "Abstraction_gui")

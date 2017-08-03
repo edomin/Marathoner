@@ -3,43 +3,5 @@
 #include "marathoner/plugin_common.c"
 #include "../binding_common.c"
 
-MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
-{
-    mtrReport *report;
-    report = malloc(sizeof(mtrReport));
-    if (report == NULL)
-        return NULL;
-    report->moduleID = "Audio_SDL2_mixer_Lua";
-    report->version = MTR_VERSION_AUDIO_SDL2_MIXER_LUA;
-    report->subsystem = "binding";
-    report->prereqsCount = 2;
-    report->prereqs = malloc(sizeof(char *) * report->prereqsCount);
-    if (report->prereqs == NULL)
-    {
-        free(report);
-        return NULL;
-    }
-    report->prereqs[0] = "Audio_SDL2_mixer";
-    report->prereqs[1] = "Script_Lua";
-    report->prereqSubsystemsCount = 0;
-    report->prereqSubsystems = NULL;
-    return report;
-}
-
-MTR_EXPORT void MTR_CALL mtrPluginInit(void)
-{
-    bool ok;
-    ok = true;
-
-    mtrLogWrite_s("Reporting Lua compile-time version:", 3, MTR_LMT_INFO,
-     LUA_RELEASE);
-
-    MTR_FIND_FUNCTION(mtrScriptsRegisterFunction, "Script_Lua");
-    MTR_FIND_FUNCTION(mtrScriptsRegisterNumericVariable, "Script_Lua");
-    MTR_FIND_FUNCTION(mtrScriptsGetVm, "Script_Lua");
-
-    if (ok)
-    {
-        mtrScriptsRegisterAll();
-    }
-}
+MTR_BINDING_COMMON_CODE("Audio_SDL2_mixer_Lua",
+ MTR_VERSION_AUDIO_SDL2_MIXER_LUA, "Audio_SDL2_mixer")

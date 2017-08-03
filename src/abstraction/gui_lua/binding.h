@@ -7,17 +7,8 @@
 
 #include "marathoner/plugin.h"
 #include "../gui_binding_common.h"
+#include "marathoner/binding_common.h"
 
-lua_State *mtrVm;
-
-typedef lua_State* (MTR_CALL * mtrScriptsGetVmFunc)(void);
-mtrScriptsGetVmFunc mtrScriptsGetVm;
-
-typedef void (MTR_CALL * mtrScriptsRegisterFunctionFunc)(lua_CFunction, char *);
-mtrScriptsRegisterFunctionFunc mtrScriptsRegisterFunction;
-
-typedef void (MTR_CALL * mtrScriptsRegisterNumericVariableFunc)(
- const char *name, double value);
-mtrScriptsRegisterNumericVariableFunc mtrScriptsRegisterNumericVariable;
+MTR_BINDING_COMMON_HEADER()
 
 #endif

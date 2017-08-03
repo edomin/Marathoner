@@ -8,18 +8,8 @@
 #include "../common.h"
 
 #define MTR_SOURCE_MODULE "Audio_SDL2_mixer"
+#include "marathoner/binding_common.h"
 
-HSQUIRRELVM mtrVm;
-
-typedef HSQUIRRELVM (MTR_CALL * mtrScriptsGetVmFunc)(void);
-mtrScriptsGetVmFunc mtrScriptsGetVm;
-
-typedef void (MTR_CALL * mtrScriptsRegisterFunctionFunc)(SQFUNCTION,
- char *);
-mtrScriptsRegisterFunctionFunc mtrScriptsRegisterFunction;
-
-typedef void (MTR_CALL * mtrScriptsRegisterNumericVariableFunc)(char *,
- double);
-mtrScriptsRegisterNumericVariableFunc mtrScriptsRegisterNumericVariable;
+MTR_BINDING_COMMON_HEADER()
 
 #endif

@@ -19,15 +19,8 @@
 #define MTR_BLEND_ONE_MINUS_SRC_ALPHA   8
 #define MTR_BLEND_ONE_MINUS_DST_ALPHA   9
 
-HSQUIRRELVM mtrVm;
+#include "marathoner/binding_common.h"
 
-typedef HSQUIRRELVM (MTR_CALL * mtrScriptsGetVmFunc)(void);
-mtrScriptsGetVmFunc mtrScriptsGetVm;
-
-typedef void (MTR_CALL * mtrScriptsRegisterFunctionFunc)(SQFUNCTION, char *);
-mtrScriptsRegisterFunctionFunc mtrScriptsRegisterFunction;
-
-typedef void (MTR_CALL * mtrScriptsRegisterNumericVariableFunc)(char *, double);
-mtrScriptsRegisterNumericVariableFunc mtrScriptsRegisterNumericVariable;
+MTR_BINDING_COMMON_HEADER()
 
 #endif

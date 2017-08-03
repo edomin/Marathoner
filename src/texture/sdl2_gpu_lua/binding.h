@@ -21,15 +21,8 @@
 #define MTR_BLEND_ONE_MINUS_SRC_ALPHA   8
 #define MTR_BLEND_ONE_MINUS_DST_ALPHA   9
 
-lua_State *mtrVm;
+#include "marathoner/binding_common.h"
 
-typedef lua_State* (MTR_CALL * mtrScriptsGetVmFunc)(void);
-mtrScriptsGetVmFunc mtrScriptsGetVm;
-
-typedef void (MTR_CALL * mtrScriptsRegisterFunctionFunc)(lua_CFunction, char *);
-mtrScriptsRegisterFunctionFunc mtrScriptsRegisterFunction;
-
-typedef void (MTR_CALL * mtrScriptsRegisterNumericVariableFunc)(char *, double);
-mtrScriptsRegisterNumericVariableFunc mtrScriptsRegisterNumericVariable;
+MTR_BINDING_COMMON_HEADER()
 
 #endif

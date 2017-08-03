@@ -9,13 +9,8 @@
 #include "../binding_common.h"
 
 #define MTR_SOURCE_MODULE "Primitive_SDL2_gfx"
+#include "marathoner/binding_common.h"
 
-lua_State *mtrVm;
-
-typedef lua_State* (MTR_CALL * mtrScriptsGetVmFunc)(void);
-mtrScriptsGetVmFunc mtrScriptsGetVm;
-
-typedef void (MTR_CALL * mtrScriptsRegisterFunctionFunc)(lua_CFunction, char *);
-mtrScriptsRegisterFunctionFunc mtrScriptsRegisterFunction;
+MTR_BINDING_COMMON_HEADER()
 
 #endif

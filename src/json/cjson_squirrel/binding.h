@@ -7,13 +7,8 @@
 #include "../binding_common.h"
 
 #define MTR_SOURCE_MODULE "JSON_cJSON"
+#include "marathoner/binding_common.h"
 
-HSQUIRRELVM mtrVm;
-
-typedef HSQUIRRELVM (MTR_CALL * mtrScriptsGetVmFunc)(void);
-mtrScriptsGetVmFunc mtrScriptsGetVm;
-
-typedef void (MTR_CALL * mtrScriptsRegisterFunctionFunc)(SQFUNCTION, char *);
-mtrScriptsRegisterFunctionFunc mtrScriptsRegisterFunction;
+MTR_BINDING_COMMON_HEADER()
 
 #endif
