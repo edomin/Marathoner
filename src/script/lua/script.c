@@ -112,14 +112,15 @@ void mtrScriptsInit(void)
         {
             if (strcmp(mtrPluginData[i].report->prereqs[j], "Script_Lua") == 0)
             {
-                 mtrLogWrite_s("Binding found:", 2, MTR_LMT_INFO,
-                  mtrPluginData[i].report->moduleID);
-                 mtrPluginInit = (mtrPluginInitFunc)mtrFindFunction(mtrPluginData[i].report->moduleID, "mtrPluginInit");
-                 if (mtrPluginInit != NULL)
+                mtrLogWrite_s("Binding found:", 2, MTR_LMT_INFO,
+                 mtrPluginData[i].report->moduleID);
+                mtrPluginInit = (mtrPluginInitFunc)mtrFindFunction(
+                 mtrPluginData[i].report->moduleID, "mtrPluginInit");
+                if (mtrPluginInit != NULL)
                     mtrPluginInit();
-                 else
+                else
                     mtrNotify("Library not contain mtrPluginInit function", 1,
-                      MTR_LMT_ERROR);
+                     MTR_LMT_ERROR);
             }
         }
     }
