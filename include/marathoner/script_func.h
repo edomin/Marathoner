@@ -148,6 +148,47 @@
     #define MTR_SF_PUSH_STRING(value)                  sq_pushstring(mtrVm, value, -1)
     #define MTR_SF_PUSH_NIL()                          sq_pushnull(mtrVm)
 #endif /* _SQUIRREL_H_ */
+#ifdef DUKTAPE_H_INCLUDED
+    #define MTR_SCRIPT_FUNC(funcname)                duk_ret_t funcname(duk_context *ctx)
+
+    #define MTR_SF_GET_BOOL(varname, stackpos)       varname = duk_to_boolean(mtrVm, stackpos - 1)
+    #define MTR_SF_GET_INT(varname, stackpos)        varname = duk_to_int(mtrVm, stackpos - 1)
+    #if (INT_MAX == LONG_MAX)
+        #define MTR_SF_GET_LINT(varname, stackpos)   varname = duk_to_int(mtrVm, stackpos - 1)
+    #else
+        #define MTR_SF_GET_LINT(varname, stackpos)   varname = duk_to_number(mtrVm, stackpos - 1)
+    #endif
+    #define MTR_SF_GET_LLINT(varname, stackpos)      varname = duk_to_number(mtrVm, stackpos - 1)
+    #define MTR_SF_GET_UINT(varname, stackpos)       varname = duk_to_uint(mtrVm, stackpos - 1)
+    #define MTR_SF_GET_UINT8(varname, stackpos)      varname = duk_to_int(mtrVm, stackpos - 1)
+    #define MTR_SF_GET_UINT32(varname, stackpos)     varname = duk_to_uint32(mtrVm, stackpos - 1)
+    #define MTR_SF_GET_SINGLE(varname, stackpos)     varname = duk_to_number(mtrVm, stackpos - 1)
+    #define MTR_SF_GET_DOUBLE(varname, stackpos)     varname = duk_to_number(mtrVm, stackpos - 1)
+    #define MTR_SF_GET_STRING(varname, stackpos)     varname = duk_to_string(mtrVm, stackpos - 1)
+
+    #define MTR_SF_PUSH_BOOL(value)                  duk_push_boolean(mtrVm, value)
+    #define MTR_SF_PUSH_INT(value)                   duk_push_int(mtrVm, value)
+    #if (INT_MAX == LONG_MAX)
+        #define MTR_SF_PUSH_LINT(value)              duk_push_int(mtrVm, value)
+    #else
+        #define MTR_SF_PUSH_LINT(value)              duk_push_number(mtrVm, value)
+    #endif
+    #define MTR_SF_PUSH_LLINT(value)                 duk_push_number(mtrVm, value)
+    #define MTR_SF_PUSH_INT16(value)                 duk_push_int(mtrVm, value)
+    #define MTR_SF_PUSH_UINT8(value)                 duk_push_uint(mtrVm, value)
+    #if (UINT32_MAX == UINT_MAX)
+        #define MTR_SF_PUSH_UINT32(value)            duk_push_uint(mtrVm, value)
+    #else
+        #define MTR_SF_PUSH_UINT32(value)            duk_push_number(mtrVm, value)
+    #endif
+    #define MTR_SF_PUSH_SIZE(value)                  duk_push_number(mtrVm, value)
+    #define MTR_SF_PUSH_SINGLE(value)                duk_push_number(mtrVm, value)
+    #define MTR_SF_PUSH_DOUBLE(value)                duk_push_number(mtrVm, value)
+    #define MTR_SF_PUSH_STRING(value)                duk_push_string(mtrVm, value)
+    #define MTR_SF_PUSH_LSTRING(value, len)          duk_push_lstring(mtrVm, value, len)
+    #define MTR_SF_PUSH_NIL()                        duk_push_null(mtrVm)
+#endif /* DUKTAPE_H_INCLUDED */
+
 
 #define MTR_SCRIPT_FUNC_V_V(sfunc, func) \
     MTR_SCRIPT_FUNC(sfunc)               \
