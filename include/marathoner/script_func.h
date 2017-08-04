@@ -406,6 +406,49 @@
         return 0;                                  \
     }
 
+#define MTR_SCRIPT_FUNC_V_U32t1U8t1(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)                       \
+    {                                            \
+        uint32_t u32_1;                          \
+        uint8_t u8_1;                            \
+        MTR_SF_GET_UINT32(u32_1, 1);             \
+        MTR_SF_GET_UINT8(u8_1, 2);               \
+        func(u32_1, u8_1);                       \
+        return 0;                                \
+    }
+
+#define MTR_SCRIPT_FUNC_V_U32t1U8t3(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)                       \
+    {                                            \
+        uint32_t u32_1;                          \
+        uint8_t u8_1;                            \
+        uint8_t u8_2;                            \
+        uint8_t u8_3;                            \
+        MTR_SF_GET_UINT32(u32_1, 1);             \
+        MTR_SF_GET_UINT8(u8_1, 2);               \
+        MTR_SF_GET_UINT8(u8_2, 3);               \
+        MTR_SF_GET_UINT8(u8_3, 4);               \
+        func(u32_1, u8_1, u8_2, u8_3);           \
+        return 0;                                \
+    }
+
+#define MTR_SCRIPT_FUNC_V_U32t1U8t4(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)                       \
+    {                                            \
+        uint32_t u32_1;                          \
+        uint8_t u8_1;                            \
+        uint8_t u8_2;                            \
+        uint8_t u8_3;                            \
+        uint8_t u8_4;                            \
+        MTR_SF_GET_UINT32(u32_1, 1);             \
+        MTR_SF_GET_UINT8(u8_1, 2);               \
+        MTR_SF_GET_UINT8(u8_2, 3);               \
+        MTR_SF_GET_UINT8(u8_3, 4);               \
+        MTR_SF_GET_UINT8(u8_4, 5);               \
+        func(u32_1, u8_1, u8_2, u8_3, u8_4);     \
+        return 0;                                \
+    }
+
 #define MTR_SCRIPT_FUNC_V_U32t1F1(sfunc, func) \
     MTR_SCRIPT_FUNC(sfunc)                     \
     {                                          \
