@@ -27,8 +27,34 @@ mtrTextureCreateFunc mtrTextureCreate;
 typedef uint32_t (MTR_CALL * mtrTextureLoadFunc)(const char *);
 mtrTextureLoadFunc mtrTextureLoad;
 
+typedef uint32_t (MTR_CALL * mtrTextureCopyFunc)(uint32_t);
+mtrTextureCopyFunc mtrTextureCopy;
+
+typedef bool (MTR_CALL * mtrTextureSaveFunc)(uint32_t, const char *);
+mtrTextureSaveFunc mtrTextureSave;
+
 typedef void (MTR_CALL * mtrTextureFreeFunc)(uint32_t);
 mtrTextureFreeFunc mtrTextureFree;
+
+typedef void (MTR_CALL * mtrTextureSetModulation_cFunc)(uint32_t, uint32_t);
+mtrTextureSetModulation_cFunc mtrTextureSetModulation_c;
+
+typedef void (MTR_CALL * mtrTextureSetModulation_caFunc)(uint32_t, uint32_t);
+mtrTextureSetModulation_caFunc mtrTextureSetModulation_ca;
+
+typedef void (MTR_CALL * mtrTextureSetModulation_rgbFunc)(uint32_t, uint8_t,
+ uint8_t, uint8_t);
+mtrTextureSetModulation_rgbFunc mtrTextureSetModulation_rgb;
+
+typedef void (MTR_CALL * mtrTextureSetModulation_rgbaFunc)(uint32_t, uint8_t,
+ uint8_t, uint8_t, uint8_t);
+mtrTextureSetModulation_rgbaFunc mtrTextureSetModulation_rgba;
+
+typedef void (MTR_CALL * mtrTextureSetModulationAlphaFunc)(uint32_t, uint8_t);
+mtrTextureSetModulationAlphaFunc mtrTextureSetModulationAlpha;
+
+typedef void (MTR_CALL * mtrTextureSetModulationAlpha_fFunc)(uint32_t, float);
+mtrTextureSetModulationAlpha_fFunc mtrTextureSetModulationAlpha_f;
 
 typedef void (MTR_CALL * mtrTextureSetBlendFunctionFunc)(uint32_t, int, int,
  int, int);

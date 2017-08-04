@@ -256,6 +256,18 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureLoad(const char *filename)
     return 0;
 }
 
+MTR_EXPORT uint32_t MTR_CALL mtrTextureCopy(uint32_t texNum)
+{
+    mtrLogWrite("Copying texture not supported", 0, MTR_LMT_ERROR);
+    return 0;
+}
+
+MTR_EXPORT bool MTR_CALL mtrTextureSave(uint32_t texNum, const char *filename)
+{
+    mtrLogWrite("Saving texture not supported", 0, MTR_LMT_ERROR);
+    return false;
+}
+
 MTR_EXPORT uint32_t MTR_CALL mtrTextureCreateAlias(uint32_t texNum)
 {
     return 0;
@@ -272,6 +284,92 @@ MTR_EXPORT void MTR_CALL mtrTextureFree(uint32_t texNum)
         SDL_DestroyTexture(texture->texture);
         mtrIndexkeeperFreeIndex(mtrTextureKeeper, texNum);
         mtrLogWrite("Texture unloaded", 0, MTR_LMT_INFO);
+    }
+}
+
+MTR_EXPORT void MTR_CALL mtrTextureSetModulation_c(uint32_t texNum,
+ uint32_t color)
+{
+    mtrTexture_t *texture;
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
+    r = (uint8_t)(color >> 16);
+    g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
+    b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
+    if (texNum != 0)
+    {
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
+        SDL_SetTextureColorMod(texture->texture, r, g, b);
+    }
+}
+
+MTR_EXPORT void MTR_CALL mtrTextureSetModulation_ca(uint32_t texNum,
+ uint32_t color)
+{
+    mtrTexture_t *texture;
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
+    uint8_t a;
+    r = (uint8_t)(color >> 24);
+    g = (uint8_t)((color >> 16) - ((uint32_t)r << 8));
+    b = (uint8_t)((color >> 8) - ((uint32_t)r << 16) - ((uint32_t)g << 8));
+    a = (uint8_t)(color  - ((uint32_t)r << 24) - ((uint32_t)g << 16) -
+     ((uint32_t)b << 8));
+    if (texNum != 0)
+    {
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
+        SDL_SetTextureColorMod(texture->texture, r, g, b);
+        SDL_SetTextureAlphaMod(texture->texture, a);
+    }
+}
+
+MTR_EXPORT void MTR_CALL mtrTextureSetModulation_rgb(uint32_t texNum,
+ uint8_t r, uint8_t g, uint8_t b)
+{
+    mtrTexture_t *texture;
+    if (texNum != 0)
+    {
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
+        SDL_SetTextureColorMod(texture->texture, r, g, b);
+    }
+}
+
+MTR_EXPORT void MTR_CALL mtrTextureSetModulation_rgba(uint32_t texNum,
+ uint8_t r, uint8_t g, uint8_t b, uint8_t a)
+{
+    mtrTexture_t *texture;
+    if (texNum != 0)
+    {
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
+        SDL_SetTextureColorMod(texture->texture, r, g, b);
+        SDL_SetTextureAlphaMod(texture->texture, a);
+    }
+}
+
+MTR_EXPORT void MTR_CALL mtrTextureSetModulationAlpha(uint32_t texNum,
+ uint8_t alpha)
+{
+    mtrTexture_t *texture;
+    if (texNum != 0)
+    {
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
+        SDL_SetTextureAlphaMod(texture->texture, alpha);
+    }
+}
+
+MTR_EXPORT void MTR_CALL mtrTextureSetModulationAlpha_f(uint32_t texNum,
+ float alpha)
+{
+    mtrTexture_t *texture;
+    uint8_t alpha8;
+    if (texNum != 0)
+    {
+        alpha8 = (alpha * 255);
+        alpha8 %= 256;
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
+        SDL_SetTextureAlphaMod(texture->texture, alpha8);
     }
 }
 

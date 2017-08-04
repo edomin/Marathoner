@@ -56,14 +56,14 @@
 #define MTR_VERSION_SCRIPT_SQUIRREL                 0x000001 /* inc patch */
 #define MTR_VERSION_SCRIPT_DUKTAPE                  0x000000 /* initial */
 
-#define MTR_VERSION_TEXTURE_SDL2_IMAGE              0x000100
+#define MTR_VERSION_TEXTURE_SDL2_IMAGE              0x000200 /* inc minor */
 #define MTR_VERSION_TEXTURE_SDL2_IMAGE_LUA          0x000101 /* inc patch */
 #define MTR_VERSION_TEXTURE_SDL2_IMAGE_SQUIRREL     0x000001 /* inc patch */
 #define MTR_VERSION_TEXTURE_SDL2_IMAGE_DUKTAPE      0x000000 /* initial */
-#define MTR_VERSION_TEXTURE_SDL2_GPU                0x000100
+#define MTR_VERSION_TEXTURE_SDL2_GPU                0x000200 /* inc minor */
 #define MTR_VERSION_TEXTURE_SDL2_GPU_LUA            0x000101 /* inc patch */
 #define MTR_VERSION_TEXTURE_SDL2_GPU_SQUIRREL       0x000001 /* inc patch */
-#define MTR_VERSION_TEXTURE_SDL2_GPU_DUKTAPE        0x000001 /* initial */
+#define MTR_VERSION_TEXTURE_SDL2_GPU_DUKTAPE        0x000000 /* initial */
 
 #define MTR_VERSION_TIMER_SDL2                      0x000101 /* inc patch */
 #define MTR_VERSION_TIMER_SDL2_LUA                  0x000101 /* inc patch */

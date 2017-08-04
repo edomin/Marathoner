@@ -224,6 +224,88 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureLoad(const char *filename)
     return 0;
 }
 
+MTR_EXPORT uint32_t MTR_CALL mtrTextureCopy(uint32_t texNum)
+{
+    uint32_t      freeIndex;
+    mtrTexture_t *texture;
+    mtrTexture_t *newTexture;
+
+    if (texNum != 0)
+    {
+        freeIndex = mtrIndexkeeperGetFreeIndex(mtrTextureKeeper);
+        mtrLogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
+        newTexture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, freeIndex);
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
+        newTexture->texture = GPU_CopyImage(texture->texture);
+        if (newTexture->texture != NULL)
+        {
+            mtrLogWrite_s("Copying texture", 0, MTR_LMT_INFO, texture->name);
+            newTexture->name = malloc(sizeof(char) * (strlen(texture->name) + 1));
+            if (newTexture->name == NULL)
+            {
+                mtrNotify("Unable to allocate memory for texture's name", 1,
+                 MTR_LMT_ERROR);
+                GPU_FreeImage(newTexture->texture);
+                mtrIndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
+                return 0;
+            }
+            newTexture->name = strcpy(newTexture->name, texture->name);
+            GPU_SetAnchor(newTexture->texture, 0.0f, 0.0f);
+            GPU_SetBlending(newTexture->texture, true);
+            mtrLogWrite_s("Texture copyed", 0, MTR_LMT_INFO, newTexture->name);
+            return freeIndex;
+        }
+        else
+        {
+            mtrNotify("Unable to copy texture", 1, MTR_LMT_ERROR);
+            mtrIndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
+            return 0;
+        }
+    }
+    else
+    {
+        mtrNotify("Unable to copy texture. Incorrect texture for copy", 1,
+         MTR_LMT_ERROR);
+        return 0;
+    }
+    return 0;
+}
+
+MTR_EXPORT bool MTR_CALL mtrTextureSave(uint32_t texNum, const char *filename)
+{
+    mtrTexture_t *texture;
+    if (texNum != 0)
+    {
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
+        mtrLogWrite_s("Saving texture", 0, MTR_LMT_INFO, texture->name);
+
+        if (GPU_SaveImage(texture->texture, filename, GPU_FILE_AUTO))
+        {
+            mtrLogWrite("Texture saved", 0, MTR_LMT_INFO);
+            return true;
+        }
+        else
+        {
+            mtrLogWrite("Unable to save to format autodetected by extension. "
+             "Saving to PNG", 0, MTR_LMT_WARNING);
+            if (GPU_SaveImage(texture->texture, filename, GPU_FILE_PNG))
+            {
+                mtrLogWrite("Texture saved", 0, MTR_LMT_INFO);
+                return true;
+            }
+            else
+            {
+                mtrLogWrite("Unable to save texture", 0, MTR_LMT_ERROR);
+                return false;
+            }
+        }
+    }
+    else
+        mtrLogWrite("Unable to save texture. Incorrect texture index", 0,
+         MTR_LMT_ERROR);
+    return false;
+}
+
 MTR_EXPORT uint32_t MTR_CALL mtrTextureCreateAlias(uint32_t texNum)
 {
     uint32_t      freeIndex;
@@ -264,6 +346,90 @@ MTR_EXPORT void MTR_CALL mtrTextureFree(uint32_t texNum)
         GPU_FreeImage (texture->texture);
         mtrIndexkeeperFreeIndex(mtrTextureKeeper, texNum);
         mtrLogWrite("Texture unloaded", 0, MTR_LMT_INFO);
+    }
+}
+
+MTR_EXPORT void MTR_CALL mtrTextureSetModulation_c(uint32_t texNum,
+ uint32_t color)
+{
+    mtrTexture_t *texture;
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
+    r = (uint8_t)(color >> 16);
+    g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
+    b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
+    if (texNum != 0)
+    {
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
+        GPU_SetRGB(texture->texture, r, g, b);
+    }
+}
+
+MTR_EXPORT void MTR_CALL mtrTextureSetModulation_ca(uint32_t texNum,
+ uint32_t color)
+{
+    mtrTexture_t *texture;
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
+    uint8_t a;
+    r = (uint8_t)(color >> 24);
+    g = (uint8_t)((color >> 16) - ((uint32_t)r << 8));
+    b = (uint8_t)((color >> 8) - ((uint32_t)r << 16) - ((uint32_t)g << 8));
+    a = (uint8_t)(color  - ((uint32_t)r << 24) - ((uint32_t)g << 16) -
+     ((uint32_t)b << 8));
+    if (texNum != 0)
+    {
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
+        GPU_SetRGBA(texture->texture, r, g, b, a);
+    }
+}
+
+MTR_EXPORT void MTR_CALL mtrTextureSetModulation_rgb(uint32_t texNum,
+ uint8_t r, uint8_t g, uint8_t b)
+{
+    mtrTexture_t *texture;
+    if (texNum != 0)
+    {
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
+        GPU_SetRGB(texture->texture, r, g, b);
+    }
+}
+
+MTR_EXPORT void MTR_CALL mtrTextureSetModulation_rgba(uint32_t texNum,
+ uint8_t r, uint8_t g, uint8_t b, uint8_t a)
+{
+    mtrTexture_t *texture;
+    if (texNum != 0)
+    {
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
+        GPU_SetRGBA(texture->texture, r, g, b, a);
+    }
+}
+
+MTR_EXPORT void MTR_CALL mtrTextureSetModulationAlpha(uint32_t texNum,
+ uint8_t alpha)
+{
+    mtrTexture_t *texture;
+    if (texNum != 0)
+    {
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
+        GPU_SetRGBA(texture->texture, 0xFF, 0xFF, 0xFF, alpha);
+    }
+}
+
+MTR_EXPORT void MTR_CALL mtrTextureSetModulationAlpha_f(uint32_t texNum,
+ float alpha)
+{
+    mtrTexture_t *texture;
+    uint8_t alpha8;
+    if (texNum != 0)
+    {
+        alpha8 = (alpha * 255);
+        alpha8 %= 256;
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
+        GPU_SetRGBA(texture->texture, 0xFF, 0xFF, 0xFF, alpha8);
     }
 }
 
