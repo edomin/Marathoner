@@ -329,7 +329,7 @@ MTR_EXPORT void MTR_CALL mtrTextureFree(uint32_t texNum)
     {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         mtrLogWrite_s("Unloading texture", 0, MTR_LMT_INFO, texture->name);
-        if (newTexture->name != mtrDefaultTextureName)
+        if (texture->name != mtrDefaultTextureName)
             free(texture->name);
         GPU_FreeImage (texture->texture);
         mtrIndexkeeperFreeIndex(mtrTextureKeeper, texNum);
