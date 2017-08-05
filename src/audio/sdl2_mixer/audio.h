@@ -17,6 +17,9 @@ typedef struct mtrMusic_t {
     char      *name;
 } mtrMusic_t;
 
+char mtrDefaultSoundName[] = "Unnamed_Sound";
+char mtrDefaultMusicName[] = "Unnamed_Music";
+
 mtrIndexkeeper_t *mtrSoundKeeper;
 mtrIndexkeeper_t *mtrMusicKeeper;
 

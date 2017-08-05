@@ -17,6 +17,8 @@ typedef struct mtrFont_t {
     char      *name;
 } mtrFont_t;
 
+char mtrDefaultFontName[] = "Unnamed_Font";
+
 mtrIndexkeeper_t *mtrFontKeeper;
 
 typedef uint32_t (MTR_CALL * mtrTtfLoadFunc)(const char *filename, int size);

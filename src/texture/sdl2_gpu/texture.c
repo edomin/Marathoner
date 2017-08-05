@@ -159,14 +159,9 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCreate(const char *name, int width,
 
         texture->name = malloc(sizeof(char) * (strlen(name) + 1));
         if (texture->name == NULL)
-        {
-            mtrNotify("Unable to allocate memory for texture's name", 1,
-             MTR_LMT_ERROR);
-            GPU_FreeImage(texture->texture);
-            mtrIndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
-            return 0;
-        }
-        texture->name = strcpy(texture->name, name);
+            texture->name = mtrDefaultTextureName;
+        else
+            texture->name = strcpy(texture->name, name);
         GPU_SetAnchor(texture->texture, 0.0f, 0.0f);
         GPU_SetBlending(texture->texture, true);
         mtrLogWrite_s("Texture created", 0, MTR_LMT_INFO, name);
@@ -204,14 +199,9 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureLoad(const char *filename)
 
         texture->name = malloc(sizeof(char) * (strlen(filename) + 1));
         if (texture->name == NULL)
-        {
-            mtrNotify("Unable to allocate memory for texture's name", 1,
-             MTR_LMT_ERROR);
-            GPU_FreeImage(texture->texture);
-            mtrIndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
-            return 0;
-        }
-        texture->name = strcpy(texture->name, filename);
+            texture->name = mtrDefaultTextureName;
+        else
+            texture->name = strcpy(texture->name, filename);
         GPU_SetAnchor(texture->texture, 0.0f, 0.0f);
         GPU_SetBlending(texture->texture, true);
         mtrLogWrite_s("Texture loaded", 0, MTR_LMT_INFO, filename);
@@ -244,14 +234,9 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCopy(uint32_t texNum)
             mtrLogWrite_s("Copying texture", 0, MTR_LMT_INFO, texture->name);
             newTexture->name = malloc(sizeof(char) * (strlen(texture->name) + 1));
             if (newTexture->name == NULL)
-            {
-                mtrNotify("Unable to allocate memory for texture's name", 1,
-                 MTR_LMT_ERROR);
-                GPU_FreeImage(newTexture->texture);
-                mtrIndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
-                return 0;
-            }
-            newTexture->name = strcpy(newTexture->name, texture->name);
+                newTexture->name = mtrDefaultTextureName;
+            else
+                newTexture->name = strcpy(newTexture->name, texture->name);
             GPU_SetAnchor(newTexture->texture, 0.0f, 0.0f);
             GPU_SetBlending(newTexture->texture, true);
             mtrLogWrite_s("Texture copyed", 0, MTR_LMT_INFO, newTexture->name);
@@ -344,7 +329,8 @@ MTR_EXPORT void MTR_CALL mtrTextureFree(uint32_t texNum)
     {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         mtrLogWrite_s("Unloading texture", 0, MTR_LMT_INFO, texture->name);
-        free(texture->name);
+        if (newTexture->name != mtrDefaultTextureName)
+            free(texture->name);
         GPU_FreeImage (texture->texture);
         mtrIndexkeeperFreeIndex(mtrTextureKeeper, texNum);
         mtrLogWrite("Texture unloaded", 0, MTR_LMT_INFO);

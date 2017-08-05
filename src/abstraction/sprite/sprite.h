@@ -25,6 +25,8 @@ typedef struct mtrSprite_t {
     char      *name;
 } mtrSprite_t;
 
+char mtrDefaultSpriteName[] = "Unnamed_Sprite";
+
 mtrIndexkeeper_t *mtrSpriteKeeper;
 
 typedef uint32_t (MTR_CALL * mtrTextureLoadFunc)(const char *);

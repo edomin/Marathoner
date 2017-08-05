@@ -5,7 +5,7 @@
 
 #define MTR_VERSION_LAUNCHER                        0x000001 /* inc patch */
 
-#define MTR_VERSION_AUDIO_SDL2_MIXER                0x000100
+#define MTR_VERSION_AUDIO_SDL2_MIXER                0x000101 /* inc patch */
 #define MTR_VERSION_AUDIO_SDL2_MIXER_LUA            0x000101 /* inc patch */
 #define MTR_VERSION_AUDIO_SDL2_MIXER_SQUIRREL       0x000001 /* inc patch */
 #define MTR_VERSION_AUDIO_SDL2_MIXER_DUKTAPE        0x000000 /* initial */
@@ -70,7 +70,7 @@
 #define MTR_VERSION_TIMER_SDL2_SQUIRREL             0x000001 /* inc patch */
 #define MTR_VERSION_TIMER_SDL2_DUKTAPE              0x000000 /* initial */
 
-#define MTR_VERSION_TTF_SDL2_TTF                    0x000100
+#define MTR_VERSION_TTF_SDL2_TTF                    0x000101 /* inc patch */
 #define MTR_VERSION_TTF_SDL2_TTF_LUA                0x000101 /* inc patch */
 #define MTR_VERSION_TTF_SDL2_TTF_SQUIRREL           0x000001 /* inc patch */
 #define MTR_VERSION_TTF_SDL2_TTF_DUKTAPE            0x000000 /* initial */

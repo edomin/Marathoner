@@ -248,14 +248,9 @@ MTR_EXPORT uint32_t MTR_CALL mtrAudioSoundLoad(const char *filename)
     {
         sound->name = malloc(sizeof(char) * (strlen(filename) + 1));
         if (sound->name == NULL)
-        {
-            mtrNotify("Unable to allocate memory for sound's name", 1,
-             MTR_LMT_ERROR);
-            Mix_FreeChunk(sound->sound);
-            mtrIndexkeeperFreeIndex(mtrSoundKeeper, freeIndex);
-            return 0;
-        }
-        sound->name = strcpy(sound->name, filename);
+            sound->name = mtrDefaultSoundName;
+        else
+            sound->name = strcpy(sound->name, filename);
         mtrLogWrite_s("Sound loaded", 0, MTR_LMT_INFO, filename);
         return freeIndex;
     }
@@ -283,14 +278,9 @@ MTR_EXPORT uint32_t MTR_CALL mtrAudioMusicLoad(const char *filename)
     {
         music->name = malloc(sizeof(char) * (strlen(filename) + 1));
         if (music->name == NULL)
-        {
-            mtrNotify("Unable to allocate memory for music's name", 1,
-             MTR_LMT_ERROR);
-            Mix_FreeMusic(music->music);
-            mtrIndexkeeperFreeIndex(mtrMusicKeeper, freeIndex);
-            return 0;
-        }
-        music->name = strcpy(music->name, filename);
+            music->name = mtrDefaultMusicName;
+        else
+            music->name = strcpy(music->name, filename);
         mtrLogWrite_s("Music file loaded", 0, MTR_LMT_INFO, filename);
         musicType = Mix_GetMusicType(music->music);
         switch(musicType)
@@ -493,7 +483,8 @@ MTR_EXPORT void MTR_CALL mtrAudioSoundFree(uint32_t soundNum)
     {
         sound = (mtrSound_t *)(&((mtrSound_t *)mtrSoundKeeper->data)[soundNum]);
         mtrLogWrite_s("Unloading sound", 0, MTR_LMT_INFO, sound->name);
-        free(sound->name);
+        if (sound->name == mtrDefaultSoundName)
+            free(sound->name);
         Mix_FreeChunk(sound->sound);
         mtrIndexkeeperFreeIndex(mtrSoundKeeper, soundNum);
         mtrLogWrite("Sound unloaded", 0, MTR_LMT_INFO);
@@ -507,7 +498,8 @@ MTR_EXPORT void MTR_CALL mtrAudioMusicFree(uint32_t musicNum)
     {
         music = (mtrMusic_t *)(&((mtrMusic_t *)mtrMusicKeeper->data)[musicNum]);
         mtrLogWrite_s("Unloading music", 0, MTR_LMT_INFO, music->name);
-        free(music->name);
+        if (music->name == mtrDefaultMusicName)
+            free(music->name);
         Mix_FreeMusic(music->music);
         mtrIndexkeeperFreeIndex(mtrMusicKeeper, musicNum);
         mtrLogWrite("Music unloaded", 0, MTR_LMT_INFO);

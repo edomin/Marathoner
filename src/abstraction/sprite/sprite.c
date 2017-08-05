@@ -74,13 +74,9 @@ MTR_EXPORT uint32_t MTR_CALL mtrSpriteLoad(const char *filename, int clipWidth,
     {
         sprite->name = malloc(sizeof(char) * (strlen(filename) + 1));
         if (sprite->name == NULL)
-        {
-            mtrNotify("Unable to allocate memory for sprite's name", 1,
-             MTR_LMT_ERROR);
-            mtrIndexkeeperFreeIndex(mtrSpriteKeeper, freeIndex);
-            return 0;
-        }
-        sprite->name = strcpy(sprite->name, filename);
+            sprite->name = mtrDefaultSpriteName;
+        else
+            sprite->name = strcpy(sprite->name, filename);
         /* TODO: Write actual values in log */
         mtrTextureGetSizes(sprite->textureIndex, &textureWidth, &textureHeight);
         mtrLogWrite_i("Texture width:", 1, MTR_LMT_INFO, textureWidth);
@@ -123,7 +119,8 @@ MTR_EXPORT uint32_t MTR_CALL mtrSpriteLoad(const char *filename, int clipWidth,
             mtrNotify("Unable to allocate memory for clips' coords array", 1,
              MTR_LMT_ERROR);
             mtrIndexkeeperFreeIndex(mtrSpriteKeeper, freeIndex);
-            free(sprite->name);
+            if (sprite->name != mtrDefaultSpriteName)
+                free(sprite->name);
             return 0;
         }
 
@@ -156,7 +153,8 @@ MTR_EXPORT void MTR_CALL mtrSpriteFree(uint32_t sprNum)
     {
         sprite = (mtrSprite_t *)(&((mtrSprite_t *)mtrSpriteKeeper->data)[sprNum]);
         mtrLogWrite_s("Unloading sprite", 0, MTR_LMT_INFO, sprite->name);
-        free(sprite->name);
+        if (sprite->name != mtrDefaultSpriteName)
+            free(sprite->name);
         mtrTextureFree(sprite->textureIndex);
         mtrIndexkeeperFreeIndex(mtrSpriteKeeper, sprNum);
         mtrLogWrite("Sprite unloaded", 0, MTR_LMT_INFO);

@@ -28,6 +28,8 @@ typedef struct mtrTexture_t {
     char        *name;
 } mtrTexture_t;
 
+char mtrDefaultTextureName[] = "Unnamed_Texture";
+
 mtrScreen_t *mtrScreen; /* this will imported from screen plugin */
 mtrIndexkeeper_t *mtrTextureKeeper;
 

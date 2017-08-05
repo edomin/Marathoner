@@ -80,14 +80,9 @@ MTR_EXPORT uint32_t MTR_CALL mtrTtfLoad(const char *filename, int size)
     {
         font->name = malloc(sizeof(char) * (strlen(filename) + 1));
         if (font->name == NULL)
-        {
-            mtrNotify("Unable to allocate memory fot TTF font's name", 1,
-             MTR_LMT_ERROR);
-            TTF_CloseFont(font->font);
-            mtrIndexkeeperFreeIndex(mtrTtfKeeper, freeIndex);
-            return 0;
-        }
-        font->name = strcpy(font->name, filename);
+            font->name = mtrDefaultTTFName;
+        else
+            font->name = strcpy(font->name, filename);
         mtrLogWrite_s("TTF font loaded", 0, MTR_LMT_INFO, filename);
         return freeIndex;
     }
@@ -166,7 +161,8 @@ MTR_EXPORT void MTR_CALL mtrTtfFree(uint32_t fontNum)
     {
         font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
         mtrLogWrite_s("Unloading TTF font", 0, MTR_LMT_INFO, font->name);
-        free(font->name);
+        if (font->name != mtrDefaultTTFName)
+            free(font->name);
         TTF_CloseFont(font->font);
         mtrIndexkeeperFreeIndex(mtrTtfKeeper, fontNum);
         mtrLogWrite("TTF font unloaded", 0, MTR_LMT_INFO);

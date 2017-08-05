@@ -187,14 +187,9 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCreate(const char *name, int width,
     {
         texture->name = malloc(sizeof(char) * (strlen(name) + 1));
         if (texture->name == NULL)
-        {
-            mtrNotify("Unable to allocate memory for texture's name", 1,
-             MTR_LMT_ERROR);
-            SDL_DestroyTexture(texture->texture);
-            mtrIndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
-            return 0;
-        }
-        texture->name = strcpy(texture->name, name);
+            texture->name = mtrDefaultTextureName;
+        else
+            texture->name = strcpy(texture->name, name);
         SDL_SetTextureBlendMode(texture->texture,
          SDL_BLENDMODE_BLEND | SDL_BLENDMODE_MOD);
         SDL_SetTextureColorMod(texture->texture, 0xFF, 0xFF, 0xFF);
@@ -239,14 +234,9 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureLoad(const char *filename)
     {
         texture->name = malloc(sizeof(char) * (strlen(filename) + 1));
         if (texture->name == NULL)
-        {
-            mtrNotify("Unable to allocate memory for texture's name", 1,
-             MTR_LMT_ERROR);
-            SDL_DestroyTexture(texture->texture);
-            mtrIndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
-            return 0;
-        }
-        texture->name = strcpy(texture->name, filename);
+            texture->name = mtrDefaultTextureName;
+        else
+            texture->name = strcpy(texture->name, filename);
         SDL_SetTextureBlendMode(texture->texture,
          SDL_BLENDMODE_BLEND | SDL_BLENDMODE_MOD);
         SDL_SetTextureColorMod(texture->texture, 0xFF, 0xFF, 0xFF);
@@ -288,7 +278,8 @@ MTR_EXPORT void MTR_CALL mtrTextureFree(uint32_t texNum)
     {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         mtrLogWrite_s("Unloading texture", 0, MTR_LMT_INFO, texture->name);
-        free(texture->name);
+        if (texture->name != mtrDefaultTextureName)
+            free(texture->name);
         SDL_DestroyTexture(texture->texture);
         mtrIndexkeeperFreeIndex(mtrTextureKeeper, texNum);
         mtrLogWrite("Texture unloaded", 0, MTR_LMT_INFO);

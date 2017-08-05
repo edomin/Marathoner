@@ -78,13 +78,9 @@ MTR_EXPORT uint32_t MTR_CALL mtrFontLoadTtf(const char *filename, int size)
 
     font->name = malloc(sizeof(char) * (strlen(filename) + 1));
     if (font->name == NULL)
-    {
-        mtrNotify("Unable to allocate memory for font's name", 1,
-         MTR_LMT_ERROR);
-        mtrIndexkeeperFreeIndex(mtrFontKeeper, freeIndex);
-        return 0;
-    }
-    font->name = strcpy(font->name, filename);
+        font->name = mtrDefaultFontName;
+    else
+        font->name = strcpy(font->name, filename);
 
     return freeIndex;
 }
@@ -96,7 +92,8 @@ MTR_EXPORT void MTR_CALL mtrFontFree(uint32_t fontNum)
     {
         font = (mtrFont_t *)(&((mtrFont_t *)mtrFontKeeper->data)[fontNum]);
         mtrLogWrite_s("Unloading font", 0, MTR_LMT_INFO, font->name);
-        free(font->name);
+        if (font->name != mtrDefaultFontName)
+            free(font->name);
         mtrTtfFree(font->ttfIndex);
         mtrIndexkeeperFreeIndex(mtrFontKeeper, fontNum);
         mtrLogWrite("Font unloaded", 0, MTR_LMT_INFO);
@@ -138,6 +135,9 @@ MTR_EXPORT uint32_t MTR_CALL mtrFontCreateMbf(const char *name,
     uint32_t   freeIndex;
     mtrFont_t *font;
 
+    if (name == NULL)
+        name = mtrDefaultFontName;
+
     mtrLogWrite_s("Creating font", 0, MTR_LMT_INFO, name);
 
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrFontKeeper);
@@ -156,14 +156,9 @@ MTR_EXPORT uint32_t MTR_CALL mtrFontCreateMbf(const char *name,
 
     font->name = malloc(sizeof(char) * (strlen(name) + 1));
     if (font->name == NULL)
-    {
-        mtrNotify("Unable to allocate memory for font's name", 1,
-         MTR_LMT_ERROR);
-        mtrIndexkeeperFreeIndex(mtrFontKeeper, freeIndex);
-        free(font->mbf);
-        return 0;
-    }
-    font->name = strcpy(font->name, name);
+        font->name = mtrDefaultFontName;
+    else
+        font->name = strcpy(font->name, name);
 
     font->mbf->width = width;
     font->mbf->height = height;
