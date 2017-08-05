@@ -268,6 +268,7 @@ MTR_EXPORT bool MTR_CALL mtrTextureSave(uint32_t texNum, const char *filename)
 
 MTR_EXPORT uint32_t MTR_CALL mtrTextureCreateAlias(uint32_t texNum)
 {
+    mtrLogWrite("Creating texture alias not supported", 0, MTR_LMT_ERROR);
     return 0;
 }
 
