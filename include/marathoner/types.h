@@ -4,14 +4,14 @@
 /*
  * Types:
  * mtr_lhandler         - shared library handle
- * Macro (functions):
+ * Macros (functions):
  * mtrLoadLibrary       - load shared library
  * mtrLoadSymbolName    - load function from shared library
  * mtrCloseLibrary      - close shared library
- * Macro (other):
+ * Macros (other):
  * MTR_CALL             - calling convention
  * MTR_EXPORT           - function's attribute for exporting it from shared
-                          library
+ *                        library
  */
 
 #include <stdint.h>
