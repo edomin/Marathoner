@@ -9,7 +9,6 @@
 #endif
 
 #include "marathoner/engine.h"
-
 #include "indexkeeper.h"
 
 typedef struct mtrFile_t {
