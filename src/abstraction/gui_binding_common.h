@@ -2,7 +2,7 @@
 #define MTR_ABSTRACTION_GUI_BINDING_COMMON_H
 
 typedef bool (MTR_CALL * mtrGuiInitFunc)(uint32_t, uint32_t, uint32_t, uint32_t,
- uint32_t, uint32_t, uint32_t);
+ uint32_t);
 mtrGuiInitFunc mtrGuiInit;
 
 typedef void (MTR_CALL * mtrGuiQuitFunc)(void);
@@ -20,23 +20,11 @@ mtrGuiAddFontFunc mtrGuiAddFont;
 typedef uint32_t (MTR_CALL * mtrGuiAddImageFunc)(uint32_t, int, int, int, int);
 mtrGuiAddImageFunc mtrGuiAddImage;
 
-typedef uint32_t (MTR_CALL * mtrGuiAddStringBufferFunc)(const char *, int);
-mtrGuiAddStringBufferFunc mtrGuiAddStringBuffer;
-
 typedef void (MTR_CALL * mtrGuiDeleteFontFunc)(uint32_t);
 mtrGuiDeleteFontFunc mtrGuiDeleteFont;
 
 typedef void (MTR_CALL * mtrGuiDeleteImageFunc)(uint32_t);
 mtrGuiDeleteImageFunc mtrGuiDeleteImage;
-
-typedef void (MTR_CALL * mtrGuiDeleteStringBufferFunc)(uint32_t);
-mtrGuiDeleteStringBufferFunc mtrGuiDeleteStringBuffer;
-
-typedef void (MTR_CALL * mtrGuiSetStringBufferFunc)(uint32_t, const char*);
-mtrGuiSetStringBufferFunc mtrGuiSetStringBuffer;
-
-typedef char *(MTR_CALL * mtrGuiGetStringBufferFunc)(uint32_t);
-mtrGuiGetStringBufferFunc mtrGuiGetStringBuffer;
 
 typedef bool (MTR_CALL * mtrGuiBeginFunc)(const char *, float, float, float,
  float, int);

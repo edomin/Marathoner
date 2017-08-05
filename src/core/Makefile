@@ -21,6 +21,7 @@ MTR_OBJS = $(OBJSDIR)/engine.o \
  $(OBJSDIR)/file.o \
  $(OBJSDIR)/directory.o \
  $(OBJSDIR)/clipboard.o \
+ $(OBJSDIR)/string_buffer.o \
  $(OBJSDIR)/plugin_loader.o
 
 LCHR_OBJS = $(OBJSDIR)/launcher.o \
@@ -100,8 +101,8 @@ $(OBJSDIR)/launcher.o: launcher.c launcher.h
 	 -o $(OBJSDIR)/launcher.o
 
 $(OBJSDIR)/engine.o: engine.c log.h notification.h configfile.h messagebox.h \
- indexkeeper.h file.h directory.h encoding.h clipboard.h plugin_loader.h \
- ../../include/marathoner/engine.h
+ indexkeeper.h file.h directory.h encoding.h clipboard.h string_buffer.h \
+ plugin_loader.h ../../include/marathoner/engine.h
 	$(CC) $(CFLAGS) $(INCDIRS) -c engine.c -o $(OBJSDIR)/engine.o
 
 $(OBJSDIR)/log.o: log.c log.h
@@ -130,6 +131,9 @@ $(OBJSDIR)/directory.o: directory.c directory.h
 
 $(OBJSDIR)/clipboard.o: clipboard.c clipboard.h
 	$(CC) $(CFLAGS) $(INCDIRS) -c clipboard.c -o $(OBJSDIR)/clipboard.o
+
+$(OBJSDIR)/string_buffer.o: string_buffer.c string_buffer.h
+	$(CC) $(CFLAGS) $(INCDIRS) -c string_buffer.c -o $(OBJSDIR)/string_buffer.o
 
 $(OBJSDIR)/plugin_loader.o: plugin_loader.c plugin_loader.h
 	$(CC) $(CFLAGS) $(INCDIRS) -c plugin_loader.c -o $(OBJSDIR)/plugin_loader.o
@@ -173,6 +177,8 @@ file.h: indexkeeper.h ../../include/marathoner/marathoner.h \
 directory.h: ../../include/marathoner/engine.h
 
 clipboard.h: ../../include/marathoner/engine.h
+
+string_buffer.h: indexkeeper.h ../../include/marathoner/engine.h
 
 plugin_loader.h: notification.h directory.h log.h \
  ../../include/marathoner/engine.h

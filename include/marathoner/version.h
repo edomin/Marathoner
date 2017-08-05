@@ -95,7 +95,7 @@
 #define MTR_VERSION_ABSTRACTION_FONT_SQUIRREL       0x000100 /* inc minor */
 #define MTR_VERSION_ABSTRACTION_FONT_DUKTAPE        0x000000 /* initial */
 
-#define MTR_VERSION_ABSTRACTION_GUI                 0x000001 /* inc patch */
+#define MTR_VERSION_ABSTRACTION_GUI                 0x000100 /* inc minor */
 #define MTR_VERSION_ABSTRACTION_GUI_LUA             0x000001 /* inc patch */
 #define MTR_VERSION_ABSTRACTION_GUI_SQUIRREL        0x000001 /* inc patch */
 #define MTR_VERSION_ABSTRACTION_GUI_DUKTAPE         0x000000 /* initial */

@@ -94,6 +94,15 @@ void mtrScriptsInit(void)
     mtrScriptsRegisterFunction(mtrSF_ClipboardPutText, "ClipboardPutText");
     mtrScriptsRegisterFunction(mtrSF_ClipboardGetText, "ClipboardGetText");
 
+    mtrScriptsRegisterFunction(mtrSF_StringBufferAdd, "StringBufferAdd");
+    mtrScriptsRegisterFunction(mtrSF_StringBufferDelete, "StringBufferDelete");
+    mtrScriptsRegisterFunction(mtrSF_StringBufferSetString,
+     "StringBufferSetString");
+    mtrScriptsRegisterFunction(mtrSF_StringBufferGetString,
+     "StringBufferGetString");
+    mtrScriptsRegisterFunction(mtrSF_StringBufferGetMaxLen,
+     "StringBufferGetMaxLen");
+
     mtrLogWrite("Script functions and constants of engine registered",
      1, MTR_LMT_INFO);
     /* Registering functions and constants from all binding plugins */

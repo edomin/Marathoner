@@ -130,6 +130,22 @@ typedef void (MTR_CALL * mtrRequireEncodingUtf8CodepointsFunc)(
  mtrEncodingUtf8CodepointsFunc_t);
 mtrRequireEncodingUtf8CodepointsFunc mtrRequireEncodingUtf8Codepoints;
 
+typedef void (MTR_CALL * mtrRequireStringBufferAddFunc)(
+ mtrStringBufferAddFunc_t);
+mtrRequireStringBufferAddFunc mtrRequireStringBufferAdd;
+typedef void (MTR_CALL * mtrRequireStringBufferDeleteFunc)(
+ mtrStringBufferDeleteFunc_t);
+mtrRequireStringBufferDeleteFunc mtrRequireStringBufferDelete;
+typedef void (MTR_CALL * mtrRequireStringBufferSetStringFunc)(
+ mtrStringBufferSetStringFunc_t);
+mtrRequireStringBufferSetStringFunc mtrRequireStringBufferSetString;
+typedef void (MTR_CALL * mtrRequireStringBufferGetStringFunc)(
+ mtrStringBufferGetStringFunc_t);
+mtrRequireStringBufferGetStringFunc mtrRequireStringBufferGetString;
+typedef void (MTR_CALL * mtrRequireStringBufferGetMaxLenFunc)(
+ mtrStringBufferGetMaxLenFunc_t);
+mtrRequireStringBufferGetMaxLenFunc mtrRequireStringBufferGetMaxLen;
+
 /*  */
 typedef void (MTR_CALL * mtrRequirePluginDataFunc)(mtrPlugin *, uint8_t);
 mtrRequirePluginDataFunc mtrRequirePluginData;

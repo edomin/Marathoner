@@ -7,6 +7,7 @@
 #include "directory.h"
 #include "encoding.h"
 #include "clipboard.h"
+#include "string_buffer.h"
 #include "plugin_loader.h"
 
 #include "marathoner/engine.h"
@@ -81,6 +82,15 @@ void RequireEngineFuncs(uint8_t plugin)
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireFileWriteLineFast, mtrFileWriteLineFast);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireClipboardPutText, mtrClipboardPutText);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireClipboardGetText, mtrClipboardGetText);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireStringBufferAdd, mtrStringBufferAdd);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireStringBufferDelete,
+     mtrStringBufferDelete);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireStringBufferSetString,
+     mtrStringBufferSetString);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireStringBufferGetString,
+     mtrStringBufferGetString);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireStringBufferGetMaxLen,
+     mtrStringBufferGetMaxLen);
 }
 
 int main(int argc, char** argv)
@@ -279,6 +289,9 @@ int main(int argc, char** argv)
         mtrNotify("Unable to initialize file I/O subsystem", 0, MTR_LMT_ERROR);
         return 4;
     }
+
+    if (!mtrStringBufferInit(MTR_IKDM_MEDIUM, 32))
+        return 5;
 
     mtrLogWrite("Reading 'Marathoner.cfg' for autorun options", 0,
      MTR_LMT_INFO);

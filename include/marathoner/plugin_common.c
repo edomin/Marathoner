@@ -249,6 +249,36 @@ MTR_EXPORT void MTR_CALL mtrRequireClipboardGetText(
     mtrClipboardGetText = ClipboardGetTextFunc;
 }
 
+MTR_EXPORT void MTR_CALL mtrRequireStringBufferAdd(
+ mtrStringBufferAddFunc_t StringBufferAddFunc)
+{
+    mtrStringBufferAdd = StringBufferAddFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireStringBufferDelete(
+ mtrStringBufferDeleteFunc_t StringBufferDeleteFunc)
+{
+    mtrStringBufferDelete = StringBufferDeleteFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireStringBufferSetString(
+ mtrStringBufferSetStringFunc_t StringBufferSetStringFunc)
+{
+    mtrStringBufferSetString = StringBufferSetStringFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireStringBufferGetString(
+ mtrStringBufferGetStringFunc_t StringBufferGetStringFunc)
+{
+    mtrStringBufferGetString = StringBufferGetStringFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireStringBufferGetMaxLen(
+ mtrStringBufferGetMaxLenFunc_t StringBufferGetMaxLenFunc)
+{
+    mtrStringBufferGetMaxLen = StringBufferGetMaxLenFunc;
+}
+
 MTR_EXPORT void MTR_CALL mtrRequirePluginData(mtrPlugin* pluginData,
  uint8_t pluginsCount)
 {

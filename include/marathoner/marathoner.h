@@ -123,6 +123,13 @@ typedef void        (MTR_CALL * mtrFileWriteLineFastFunc_t)(const char *,
 typedef bool        (MTR_CALL * mtrClipboardPutTextFunc_t)(const char *);
 typedef char *      (MTR_CALL * mtrClipboardGetTextFunc_t)(void);
 
+typedef uint32_t    (MTR_CALL * mtrStringBufferAddFunc_t)(const char *, int);
+typedef void        (MTR_CALL * mtrStringBufferDeleteFunc_t)(uint32_t);
+typedef void        (MTR_CALL * mtrStringBufferSetStringFunc_t)(uint32_t,
+ const char *);
+typedef char *      (MTR_CALL * mtrStringBufferGetStringFunc_t)(uint32_t);
+typedef int         (MTR_CALL * mtrStringBufferGetMaxLenFunc_t)(uint32_t);
+
 /* loaded dll-plugin data */
 mtrPlugin *mtrPluginData;
 

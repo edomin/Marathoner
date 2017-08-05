@@ -27,11 +27,6 @@ typedef struct mtrNkImage {
     uint32_t        texture;
 } mtrNkImage;
 
-typedef struct mtrNkSb {
-    char *string;
-    int   maxlen;
-} mtrNkSb;
-
 static struct mtrNkGui {
     unsigned int      width;
     unsigned int      height;
@@ -43,7 +38,6 @@ static struct mtrNkGui {
 
 mtrIndexkeeper_t *mtrGuiFontKeeper;
 mtrIndexkeeper_t *mtrGuiImageKeeper;
-mtrIndexkeeper_t *mtrGuiStringBufferKeeper;
 
 /* Buffer used by function mtrNkGetTextWidth */
 char getTextWidthBuffer[0x10000];

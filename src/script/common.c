@@ -68,5 +68,10 @@ MTR_SCRIPT_FUNC_V_S2I1(mtrSF_FileWriteFast, mtrFileWriteFast)
 MTR_SCRIPT_FUNC_V_S2I1(mtrSF_FileWriteLineFast, mtrFileWriteLineFast)
 MTR_SCRIPT_FUNC_B_S1(mtrSF_ClipboardPutText, mtrClipboardPutText)
 MTR_SCRIPT_FUNC_S_V(mtrSF_ClipboardGetText, mtrClipboardGetText)
+MTR_SCRIPT_FUNC_U32t_S1I1(mtrSF_StringBufferAdd, mtrStringBufferAdd)
+MTR_SCRIPT_FUNC_V_U32t1(mtrSF_StringBufferDelete, mtrStringBufferDelete)
+MTR_SCRIPT_FUNC_V_U32t1S1(mtrSF_StringBufferSetString, mtrStringBufferSetString)
+MTR_SCRIPT_FUNC_S_U32t1(mtrSF_StringBufferGetString, mtrStringBufferGetString)
+MTR_SCRIPT_FUNC_I_U32t1(mtrSF_StringBufferGetMaxLen, mtrStringBufferGetMaxLen)
 
 #endif

@@ -41,6 +41,12 @@ void FileWriteLineFast(const char* filename, const char *text, uint8_t mode)
 bool ClipboardPutText(const char* text)
 const char *ClipboardGetText()
 
+uint32_t StringBufferAdd(const char *initialString, int maxlen);
+void StringBufferDelete(uint32_t sbnum);
+void StringBufferSetString(uint32_t sbnum, const char *string);
+char *StringBufferGetString(uint32_t sbnum);
+int StringBufferGetMaxLen(uint32_t sbnum);
+
 bool ScreenInit(int width, int height, bool fullscreen, const char *title)
 void ScreenQuit()
 void ScreenFlip()
@@ -389,18 +395,14 @@ int FontGetHeight(uint32_t fontNum)
 int FontGetStringWidth(uint32_t fontNum, const char *string)
 const char *FontGetName(uint32_t fontNum)
 
-bool GuiInit(uint32_t fontDmSize, uint32_t fontReservedCount, uint32_t imageDmSize, uint32_t imageReservedCount, uint32_t sbDmSize, uint32_t sbReservedCount, uint32_t fontnum)
+bool GuiInit(uint32_t fontDmSize, uint32_t fontReservedCount, uint32_t imageDmSize, uint32_t imageReservedCount, uint32_t fontnum)
 void GuiQuit()
 void GuiProcessEvents()
 void GuiRender()
 uint32_t GuiAddFont(uint32_t fontnum)
 uint32_t GuiAddImage(uint32_t texnum, int x, int y, int w, int h)
-uint32_t GuiAddStringBuffer(const char *initialString, int maxlen)
 void GuiDeleteFont(uint32_t fontnum)
 void GuiDeleteImage(uint32_t imagenum)
-void GuiDeleteStringBuffer(uint32_t sbnum)
-void GuiSetStringBuffer(uint32_t sbnum, const char* string);
-char *GuiGetStringBuffer(uint32_t sbnum);
 bool GuiBegin(const char *title, float boundsX, float boundsY, float boundsW, float bountsH, int flags)
 void GuiEnd()
 bool GuiButtonText(const char *title, int len)

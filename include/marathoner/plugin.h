@@ -80,6 +80,12 @@ mtrFileWriteLineFastFunc_t                  mtrFileWriteLineFast;
 mtrClipboardPutTextFunc_t                   mtrClipboardPutText;
 mtrClipboardGetTextFunc_t                   mtrClipboardGetText;
 
+mtrStringBufferAddFunc_t                    mtrStringBufferAdd;
+mtrStringBufferDeleteFunc_t                 mtrStringBufferDelete;
+mtrStringBufferSetStringFunc_t              mtrStringBufferSetString;
+mtrStringBufferGetStringFunc_t              mtrStringBufferGetString;
+mtrStringBufferGetMaxLenFunc_t              mtrStringBufferGetMaxLen;
+
 uint8_t mtrPluginsCount;
 
 #define MTR_FIND_FUNCTION(function, module)                        \

@@ -3,18 +3,14 @@
 
 #include "marathoner/script_func.h"
 
-MTR_SCRIPT_FUNC_B_U32t7(mtrSF_GuiInit, mtrGuiInit)
+MTR_SCRIPT_FUNC_B_U32t5(mtrSF_GuiInit, mtrGuiInit)
 MTR_SCRIPT_FUNC_V_V(mtrSF_GuiQuit, mtrGuiQuit)
 MTR_SCRIPT_FUNC_V_V(mtrSF_GuiProcessEvents, mtrGuiProcessEvents)
 MTR_SCRIPT_FUNC_V_V(mtrSF_GuiRender, mtrGuiRender)
 MTR_SCRIPT_FUNC_U32t_U32t1(mtrSF_GuiAddFont, mtrGuiAddFont)
 MTR_SCRIPT_FUNC_U32t_U32t1I4(mtrSF_GuiAddImage, mtrGuiAddImage)
-MTR_SCRIPT_FUNC_U32t_S1I1(mtrSF_GuiAddStringBuffer, mtrGuiAddStringBuffer)
 MTR_SCRIPT_FUNC_V_U32t1(mtrSF_GuiDeleteFont, mtrGuiDeleteFont)
 MTR_SCRIPT_FUNC_V_U32t1(mtrSF_GuiDeleteImage, mtrGuiDeleteImage)
-MTR_SCRIPT_FUNC_V_U32t1(mtrSF_GuiDeleteStringBuffer, mtrGuiDeleteStringBuffer)
-MTR_SCRIPT_FUNC_V_U32t1S1(mtrSF_GuiSetStringBuffer, mtrGuiSetStringBuffer)
-MTR_SCRIPT_FUNC_S_U32t1(mtrSF_GuiGetStringBuffer, mtrGuiGetStringBuffer)
 MTR_SCRIPT_FUNC_B_S1F4I1(mtrSF_GuiBegin, mtrGuiBegin)
 MTR_SCRIPT_FUNC_V_V(mtrSF_GuiEnd, mtrGuiEnd)
 MTR_SCRIPT_FUNC_B_S1I1(mtrSF_GuiButtonText, mtrGuiButtonText)
@@ -74,12 +70,8 @@ void mtrScriptsRegisterAll(void)
     MTR_FIND_FUNCTION(mtrGuiRender, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiAddFont, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiAddImage, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiAddStringBuffer, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiDeleteFont, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiDeleteImage, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiDeleteStringBuffer, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiSetStringBuffer, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiGetStringBuffer, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiBegin, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiEnd, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiButtonText, "Abstraction_gui");
@@ -189,16 +181,8 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterFunction(mtrSF_GuiRender, "GuiRender");
         mtrScriptsRegisterFunction(mtrSF_GuiAddFont, "GuiAddFont");
         mtrScriptsRegisterFunction(mtrSF_GuiAddImage, "GuiAddImage");
-        mtrScriptsRegisterFunction(mtrSF_GuiAddStringBuffer,
-         "GuiAddStringBuffer");
         mtrScriptsRegisterFunction(mtrSF_GuiDeleteFont, "GuiDeleteFont");
         mtrScriptsRegisterFunction(mtrSF_GuiDeleteImage, "GuiDeleteImage");
-        mtrScriptsRegisterFunction(mtrSF_GuiDeleteStringBuffer,
-         "GuiDeleteStringBuffer");
-        mtrScriptsRegisterFunction(mtrSF_GuiSetStringBuffer,
-         "GuiSetStringBuffer");
-        mtrScriptsRegisterFunction(mtrSF_GuiGetStringBuffer,
-         "GuiGetStringBuffer");
         mtrScriptsRegisterFunction(mtrSF_GuiBegin, "GuiBegin");
         mtrScriptsRegisterFunction(mtrSF_GuiEnd, "GuiEnd");
         mtrScriptsRegisterFunction(mtrSF_GuiButtonText, "GuiButtonText");

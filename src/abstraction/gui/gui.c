@@ -103,36 +103,6 @@ MTR_EXPORT uint32_t MTR_CALL mtrGuiAddImage(uint32_t texnum, int x, int y,
     return freeIndex;
 }
 
-MTR_EXPORT uint32_t MTR_CALL mtrGuiAddStringBuffer(const char *initialString,
- int maxlen)
-{
-    uint32_t freeIndex;
-    mtrNkSb *buffer;
-    int      len;
-
-    freeIndex = mtrIndexkeeperGetFreeIndex(mtrGuiStringBufferKeeper);
-    buffer = (mtrNkSb *)(
-     &((mtrNkSb *)mtrGuiStringBufferKeeper->data)[freeIndex]);
-
-    if (initialString == NULL)
-    {
-        buffer->string = malloc(sizeof(char) * maxlen);
-        buffer->string[0] = '\0';
-    }
-    else
-    {
-        len = strlen(initialString);
-        if (len > maxlen)
-            len = maxlen;
-        buffer->string = malloc(sizeof(char) * (maxlen + 1));
-        strncpy(buffer->string, initialString, maxlen);
-        buffer->string[len] = '\0';
-    }
-    buffer->maxlen = maxlen;
-
-    return freeIndex;
-}
-
 MTR_EXPORT void MTR_CALL mtrGuiDeleteFont(uint32_t fontnum)
 {
     if (fontnum != 0)
@@ -143,50 +113,6 @@ MTR_EXPORT void MTR_CALL mtrGuiDeleteImage(uint32_t imagenum)
 {
     if (imagenum != 0)
         mtrIndexkeeperFreeIndex(mtrGuiImageKeeper, imagenum);
-}
-
-MTR_EXPORT void MTR_CALL mtrGuiDeleteStringBuffer(uint32_t sbnum)
-{
-    mtrNkSb *buffer;
-
-    if (sbnum != 0)
-    {
-        buffer = (mtrNkSb *)(
-         &((mtrNkSb *)mtrGuiStringBufferKeeper->data)[sbnum]);
-        free(buffer->string);
-        mtrIndexkeeperFreeIndex(mtrGuiStringBufferKeeper, sbnum);
-    }
-}
-
-MTR_EXPORT void MTR_CALL mtrGuiSetStringBuffer(uint32_t sbnum,
- const char* string)
-{
-    mtrNkSb *buffer;
-    int      len;
-
-    if (sbnum != 0)
-    {
-        buffer = (mtrNkSb *)(
-         &((mtrNkSb *)mtrGuiStringBufferKeeper->data)[sbnum]);
-        len = strlen(string);
-        if (len > buffer->maxlen)
-            len = buffer->maxlen;
-        strncpy(buffer->string, string, buffer->maxlen);
-        buffer->string[len] = '\0';
-    }
-}
-
-MTR_EXPORT char *MTR_CALL mtrGuiGetStringBuffer(uint32_t sbnum)
-{
-    mtrNkSb *buffer;
-
-    if (sbnum != 0)
-    {
-        buffer = (mtrNkSb *)(
-         &((mtrNkSb *)mtrGuiStringBufferKeeper->data)[sbnum]);
-        return buffer->string;
-    }
-    return NULL;
 }
 
 NK_INTERN void mtrNkClipboardPaste(nk_handle usr, struct nk_text_edit *edit)
@@ -350,7 +276,7 @@ void mtrNkHandleEvents(void)
 
 MTR_EXPORT bool MTR_CALL mtrGuiInit(uint32_t fontDmSize,
  uint32_t fontReservedCount, uint32_t imageDmSize, uint32_t imageReservedCount,
- uint32_t sbDmSize, uint32_t sbReservedCount, uint32_t fontnum)
+ uint32_t fontnum)
 {
     uint32_t nkFontNum;
     int screenWidth;
@@ -419,18 +345,6 @@ MTR_EXPORT bool MTR_CALL mtrGuiInit(uint32_t fontDmSize,
     }
     else
         mtrLogWrite("Indexkeeper structure for gui images created", 1,
-         MTR_LMT_INFO);
-
-    mtrGuiStringBufferKeeper = (mtrIndexkeeper_t *)mtrIndexkeeperCreate(
-     sbDmSize, sbReservedCount, sizeof(mtrNkSb));
-    if (mtrGuiStringBufferKeeper == NULL)
-    {
-        mtrNotify("Unable to create indexkeeper structure for gui's string "
-         "buffers", 1, MTR_LMT_FATAL);
-        return false;
-    }
-    else
-        mtrLogWrite("Indexkeeper structure for guis string buffers created", 1,
          MTR_LMT_INFO);
 
     nkFontNum = mtrGuiAddFont(fontnum);
@@ -783,32 +697,23 @@ MTR_EXPORT bool MTR_CALL mtrGuiSelectableImageText(uint32_t imagenum,
 
 MTR_EXPORT void MTR_CALL mtrGuiEditText(uint32_t sbnum)
 {
-    mtrNkSb *nkSb;
-
-    nkSb = (mtrNkSb *)(&((mtrNkSb *)mtrGuiStringBufferKeeper->data)[sbnum]);
-
-    nk_edit_string_zero_terminated(&mtrNkGui.ctx, NK_EDIT_FIELD, nkSb->string,
-     nkSb->maxlen, nk_filter_default);
+    nk_edit_string_zero_terminated(&mtrNkGui.ctx, NK_EDIT_FIELD,
+     mtrStringBufferGetString(sbnum), mtrStringBufferGetMaxLen(sbnum),
+     nk_filter_default);
 }
 
 MTR_EXPORT void MTR_CALL mtrGuiEditInteger(uint32_t sbnum)
 {
-    mtrNkSb *nkSb;
-
-    nkSb = (mtrNkSb *)(&((mtrNkSb *)mtrGuiStringBufferKeeper->data)[sbnum]);
-
-    nk_edit_string_zero_terminated(&mtrNkGui.ctx, NK_EDIT_FIELD, nkSb->string,
-     nkSb->maxlen, nk_filter_decimal);
+    nk_edit_string_zero_terminated(&mtrNkGui.ctx, NK_EDIT_FIELD,
+     mtrStringBufferGetString(sbnum), mtrStringBufferGetMaxLen(sbnum),
+     nk_filter_decimal);
 }
 
 MTR_EXPORT void MTR_CALL mtrGuiEditFloat(uint32_t sbnum)
 {
-    mtrNkSb *nkSb;
-
-    nkSb = (mtrNkSb *)(&((mtrNkSb *)mtrGuiStringBufferKeeper->data)[sbnum]);
-
-    nk_edit_string_zero_terminated(&mtrNkGui.ctx, NK_EDIT_FIELD, nkSb->string,
-     nkSb->maxlen, nk_filter_float);
+    nk_edit_string_zero_terminated(&mtrNkGui.ctx, NK_EDIT_FIELD,
+     mtrStringBufferGetString(sbnum), mtrStringBufferGetMaxLen(sbnum),
+     nk_filter_float);
 }
 
 MTR_EXPORT void MTR_CALL mtrGuiLabel(const char *string, int alignment)
