@@ -111,8 +111,8 @@ MTR_EXPORT bool MTR_CALL mtrAudioInit(uint32_t sndDmSize,
     else if (freq < 11025)
     {
         frequency = 11025;
-        mtrLogWrite_i("Choosed sampling frequency not supported. Using minimal supported sampling frequency (Hz): ",
-         2, MTR_LMT_WARNING, 11025);
+        mtrLogWrite_i("Choosed sampling frequency not supported. Using minimal "
+         "supported sampling frequency (Hz): ", 2, MTR_LMT_WARNING, 11025);
     }
     else
     {
@@ -132,8 +132,8 @@ MTR_EXPORT bool MTR_CALL mtrAudioInit(uint32_t sndDmSize,
     else if (channels > 2)
     {
         channelsCount = 2;
-        mtrLogWrite_s("Choosed channels count are not supported. Using max supported channels count: ",
-         2, MTR_LMT_WARNING, channelsConf[2 - 1]);
+        mtrLogWrite_s("Choosed channels count are not supported. Using max "
+         "supported channels count: ", 2, MTR_LMT_WARNING, channelsConf[2 - 1]);
     }
     else
     {
@@ -153,14 +153,14 @@ MTR_EXPORT bool MTR_CALL mtrAudioInit(uint32_t sndDmSize,
     else if (chunkSize > 8192)
     {
         finalChunkSize = 8192;
-        mtrLogWrite_i("Choosed chunk size not supported. Using max supported chunk size (bytes): ",
-         2, MTR_LMT_WARNING, 8192);
+        mtrLogWrite_i("Choosed chunk size not supported. Using max supported "
+         "chunk size (bytes): ", 2, MTR_LMT_WARNING, 8192);
     }
     else if (chunkSize < 512)
     {
         finalChunkSize = 512;
-        mtrLogWrite_i("Choosed chunk size not supported. Using minimal supported chunk size (bytes): ",
-         2, MTR_LMT_WARNING, 512);
+        mtrLogWrite_i("Choosed chunk size not supported. Using minimal "
+         "supported chunk size (bytes): ", 2, MTR_LMT_WARNING, 512);
     }
     else
     {
@@ -170,7 +170,8 @@ MTR_EXPORT bool MTR_CALL mtrAudioInit(uint32_t sndDmSize,
     }
     /* */
 
-    if (Mix_OpenAudio(frequency, MIX_DEFAULT_FORMAT, channelsCount, finalChunkSize) == 0)
+    if (Mix_OpenAudio(frequency, MIX_DEFAULT_FORMAT, channelsCount,
+     finalChunkSize) == 0)
     {
         mtrLogWrite("SDL_mixer initialized", 1, MTR_LMT_INFO);
 
@@ -289,7 +290,8 @@ MTR_EXPORT uint32_t MTR_CALL mtrAudioMusicLoad(const char *filename)
                 mtrLogWrite_s("Music type:", 2, MTR_LMT_INFO, "unknown");
                 break;
             case MUS_CMD:
-                mtrLogWrite_s("Music type:", 2, MTR_LMT_INFO, "music playing via external music player");
+                mtrLogWrite_s("Music type:", 2, MTR_LMT_INFO,
+                 "music playing via external music player");
                 break;
             case MUS_WAV:
                 mtrLogWrite_s("Music type:", 2, MTR_LMT_INFO, "WAV");
@@ -307,7 +309,8 @@ MTR_EXPORT uint32_t MTR_CALL mtrAudioMusicLoad(const char *filename)
                 mtrLogWrite_s("Music type:", 2, MTR_LMT_INFO, "MP3");
                 break;
             case MUS_MP3_MAD:
-                mtrLogWrite_s("Music type:", 2, MTR_LMT_INFO, "MP3 playing via MAD audio decoder");
+                mtrLogWrite_s("Music type:", 2, MTR_LMT_INFO,
+                 "MP3 playing via MAD audio decoder");
                 break;
             case MUS_FLAC:
                 mtrLogWrite_s("Music type:", 2, MTR_LMT_INFO, "FLAC");

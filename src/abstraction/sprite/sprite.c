@@ -126,7 +126,8 @@ MTR_EXPORT uint32_t MTR_CALL mtrSpriteLoad(const char *filename, int clipWidth,
 
         for (i = 0; i < sprite->clipsCount; i++)
         {
-            sprite->clip[i].x = sprite->clipWidth * (fmodl(i, sprite->colsCount));
+            sprite->clip[i].x = sprite->clipWidth *
+             (fmodl(i, sprite->colsCount));
             sprite->clip[i].y = sprite->clipHeight * (i / sprite->colsCount);
             sprite->clip[i].w = sprite->clipWidth;
             sprite->clip[i].h = sprite->clipHeight;
