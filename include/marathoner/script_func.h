@@ -1305,6 +1305,25 @@
         return 1;                            \
     }
 
+#define MTR_SCRIPT_FUNC_B_U32t5(sfunc, func)              \
+    MTR_SCRIPT_FUNC(sfunc)                                \
+    {                                                     \
+        uint32_t u32_1;                                   \
+        uint32_t u32_2;                                   \
+        uint32_t u32_3;                                   \
+        uint32_t u32_4;                                   \
+        uint32_t u32_5;                                   \
+        bool result;                                      \
+        MTR_SF_GET_UINT32(u32_1, 1);                      \
+        MTR_SF_GET_UINT32(u32_2, 2);                      \
+        MTR_SF_GET_UINT32(u32_3, 3);                      \
+        MTR_SF_GET_UINT32(u32_4, 4);                      \
+        MTR_SF_GET_UINT32(u32_5, 5);                      \
+        result = func(u32_1, u32_2, u32_3, u32_4, u32_5); \
+        MTR_SF_PUSH_BOOL(result);                         \
+        return 1;                                         \
+    }
+
 #define MTR_SCRIPT_FUNC_B_U32t7(sfunc, func)                            \
     MTR_SCRIPT_FUNC(sfunc)                                              \
     {                                                                   \
