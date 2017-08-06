@@ -47,6 +47,11 @@ MTR_SCRIPT_FUNC_V_U32t1I4(mtrSF_TextureSetBlendFunction,
 MTR_SCRIPT_FUNC_V_U32t1B1(mtrSF_TextureSetAlphaBlending,
  mtrTextureSetAlphaBlending)
 MTR_SCRIPT_FUNC_V_U32t1F2(mtrSF_TextureBlit_f, mtrTextureBlit_f)
+MTR_SCRIPT_FUNC_V_U32t1F4(mtrSF_TextureBlitScaled_f, mtrTextureBlitScaled_f)
+MTR_SCRIPT_FUNC_V_U32t1F5(mtrSF_TextureBlitAngled_f, mtrTextureBlitAngled_f)
+MTR_SCRIPT_FUNC_V_U32t1F2I1(mtrSF_TextureBlitFlipped_f, mtrTextureBlitFlipped_f)
+MTR_SCRIPT_FUNC_V_U32t1F7I1(mtrSF_TextureBlitGeneral_f,
+ mtrTextureBlitGeneral_f)
 MTR_SCRIPT_FUNC_V_U32t1F6(mtrSF_TextureBlitRegion_f, mtrTextureBlitRegion_f)
 MTR_SCRIPT_FUNC_V_U32t1F8(mtrSF_TextureBlitRegionScaled_f,
  mtrTextureBlitRegionScaled_f)
@@ -151,6 +156,14 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterFunction(mtrSF_TextureSetAlphaBlending,
          "TextureSetBlending");
         mtrScriptsRegisterFunction(mtrSF_TextureBlit_f, "TextureBlit_f");
+        mtrScriptsRegisterFunction(mtrSF_TextureBlitScaled_f,
+         "TextureBlitScaled_f");
+        mtrScriptsRegisterFunction(mtrSF_TextureBlitAngled_f,
+         "TextureBlitAngled_f");
+        mtrScriptsRegisterFunction(mtrSF_TextureBlitFlipped_f,
+         "TextureBlitFlipped_f");
+        mtrScriptsRegisterFunction(mtrSF_TextureBlitGeneral_f,
+         "TextureBlitGeneral_f");
         mtrScriptsRegisterFunction(mtrSF_TextureBlitRegion_f,
          "TextureBlitRegion_f");
         mtrScriptsRegisterFunction(mtrSF_TextureBlitRegionScaled_f,

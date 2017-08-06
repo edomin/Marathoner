@@ -403,6 +403,81 @@ MTR_EXPORT void MTR_CALL mtrTextureBlit_f(uint32_t texNum, float x, float y)
     }
 }
 
+MTR_EXPORT void MTR_CALL mtrTextureBlitScaled_f(uint32_t texNum, float x,
+ float y, float w, float h)
+{
+    mtrTexture_t *texture;
+    SDL_Rect      offset;
+    if (texNum != 0)
+    {
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
+        offset.x = x;
+        offset.y = y;
+        offset.w = w;
+        offset.h = h;
+        SDL_RenderCopy(mtrScreen->renderer, texture->texture, NULL, &offset);
+    }
+}
+
+MTR_EXPORT void MTR_CALL mtrTextureBlitAngled_f(uint32_t texNum, float x,
+ float y, float angle, float pivotX, float pivotY)
+{
+    mtrTexture_t *texture;
+    SDL_Rect      offset;
+    SDL_Point     pivot;
+    if (texNum != 0)
+    {
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
+        offset.x = x;
+        offset.y = y;
+        SDL_QueryTexture(texture->texture, NULL, NULL, &offset.w, &offset.h);
+        pivot.x = pivotX;
+        pivot.y = pivotY;
+        SDL_RenderCopyEx(mtrScreen->renderer, texture->texture, NULL, &offset,
+         -angle, &pivot, MTR_FLIP_NONE);
+    }
+}
+
+MTR_EXPORT void MTR_CALL mtrTextureBlitFlipped_f(uint32_t texNum, float x,
+ float y, int flip)
+{
+    mtrTexture_t *texture;
+    SDL_Rect      offset;
+    int           actualFlip;
+    if (texNum != 0)
+    {
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
+        actualFlip = mtrFlipToActualFlip(flip);
+        offset.x = x;
+        offset.y = y;
+        SDL_QueryTexture(texture->texture, NULL, NULL, &offset.w, &offset.h);
+        SDL_RenderCopyEx(mtrScreen->renderer, texture->texture, NULL, &offset,
+         0, NULL, actualFlip);
+    }
+}
+
+MTR_EXPORT void MTR_CALL mtrTextureBlitGeneral_f(uint32_t texNum, float x,
+ float y, float w, float h, float angle, float pivotX, float pivotY, int flip)
+{
+    mtrTexture_t *texture;
+    SDL_Rect      offset;
+    SDL_Point     pivot;
+    int           actualFlip;
+    if (texNum != 0)
+    {
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
+        actualFlip = mtrFlipToActualFlip(flip);
+        offset.x = x;
+        offset.y = y;
+        offset.w = w;
+        offset.h = h;
+        pivot.x = pivotX;
+        pivot.y = pivotY;
+        SDL_RenderCopyEx(mtrScreen->renderer, texture->texture, NULL, &offset,
+         -angle, &pivot, actualFlip);
+    }
+}
+
 MTR_EXPORT void MTR_CALL mtrTextureBlitRegion_f(uint32_t texNum, float x,
  float y, float rx, float ry, float rw, float rh)
 {
@@ -441,8 +516,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionScaled_f(uint32_t texNum, float x,
         clip.y = ry;
         clip.w = rw;
         clip.h = rh;
-        SDL_RenderCopyEx(mtrScreen->renderer, texture->texture, &clip, &offset,
-         0, NULL, MTR_FLIP_NONE);
+        SDL_RenderCopy(mtrScreen->renderer, texture->texture, &clip, &offset);
     }
 }
 
