@@ -38,6 +38,26 @@ mtrTextureFreeFunc mtrTextureFree;
 typedef void (MTR_CALL * mtrTextureGetSizesFunc)(uint32_t, int *, int *);
 mtrTextureGetSizesFunc mtrTextureGetSizes;
 
+typedef void (MTR_CALL * mtrTextureSetModulation_cFunc)(uint32_t, uint32_t);
+mtrTextureSetModulation_cFunc mtrTextureSetModulation_c;
+
+typedef void (MTR_CALL * mtrTextureSetModulation_caFunc)(uint32_t, uint32_t);
+mtrTextureSetModulation_caFunc mtrTextureSetModulation_ca;
+
+typedef void (MTR_CALL * mtrTextureSetModulation_rgbFunc)(uint32_t, uint8_t,
+ uint8_t, uint8_t);
+mtrTextureSetModulation_rgbFunc mtrTextureSetModulation_rgb;
+
+typedef void (MTR_CALL * mtrTextureSetModulation_rgbaFunc)(uint32_t, uint8_t,
+ uint8_t, uint8_t, uint8_t);
+mtrTextureSetModulation_rgbaFunc mtrTextureSetModulation_rgba;
+
+typedef void (MTR_CALL * mtrTextureSetModulationAlphaFunc)(uint32_t, uint8_t);
+mtrTextureSetModulationAlphaFunc mtrTextureSetModulationAlpha;
+
+typedef void (MTR_CALL * mtrTextureSetModulationAlpha_fFunc)(uint32_t, float);
+mtrTextureSetModulationAlpha_fFunc mtrTextureSetModulationAlpha_f;
+
 typedef void (MTR_CALL * mtrTextureBlitRegion_fFunc)(uint32_t, float, float,
  float, float, float, float);
 mtrTextureBlitRegion_fFunc mtrTextureBlitRegion_f;
