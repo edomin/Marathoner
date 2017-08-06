@@ -73,7 +73,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrSpriteLoad(const char *filename, int clipWidth,
 
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrSpriteKeeper);
     mtrLogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
-    sprite = (mtrSprite_t *)(&((mtrSprite_t *)mtrSpriteKeeper->data)[freeIndex]);
+    sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, freeIndex);
 
     sprite->textureIndex = mtrTextureLoad(filename);
     if (sprite->textureIndex != 0)
@@ -220,7 +220,7 @@ MTR_EXPORT void MTR_CALL mtrSpriteFree(uint32_t sprNum)
     mtrSprite_t *sprite;
     if (sprNum != 0)
     {
-        sprite = (mtrSprite_t *)(&((mtrSprite_t *)mtrSpriteKeeper->data)[sprNum]);
+        sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
         mtrLogWrite_s("Unloading sprite", 0, MTR_LMT_INFO, sprite->name);
         if (sprite->name != mtrDefaultSpriteName)
             free(sprite->name);
@@ -302,7 +302,7 @@ MTR_EXPORT void MTR_CALL mtrSpriteDraw_f(uint32_t sprNum, int clipNum, float x,
     mtrSprite_t *sprite;
     if (sprNum != 0)
     {
-        sprite = (mtrSprite_t *)(&((mtrSprite_t *)mtrSpriteKeeper->data)[sprNum]);
+        sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
         mtrTextureBlitRegion_f(sprite->textureIndex, x - sprite->anchorX,
          y - sprite->anchorY, sprite->clip[clipNum].x,
          sprite->clip[clipNum].y, sprite->clip[clipNum].w,
@@ -316,7 +316,7 @@ MTR_EXPORT void MTR_CALL mtrSpriteDrawScaled_f(uint32_t sprNum, int clipNum,
     mtrSprite_t *sprite;
     if (sprNum != 0)
     {
-        sprite = (mtrSprite_t *)(&((mtrSprite_t *)mtrSpriteKeeper->data)[sprNum]);
+        sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
         mtrTextureBlitRegionScaled_f(sprite->textureIndex, x - sprite->anchorX,
          y - sprite->anchorY, w, h, sprite->clip[clipNum].x,
          sprite->clip[clipNum].y, sprite->clip[clipNum].w,
@@ -330,7 +330,7 @@ MTR_EXPORT void MTR_CALL mtrSpriteDrawAngled_f(uint32_t sprNum, int clipNum,
     mtrSprite_t *sprite;
     if (sprNum != 0)
     {
-        sprite = (mtrSprite_t *)(&((mtrSprite_t *)mtrSpriteKeeper->data)[sprNum]);
+        sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
         mtrTextureBlitRegionAngled_f(sprite->textureIndex, x - sprite->anchorX,
          y - sprite->anchorY, sprite->clip[clipNum].x,
          sprite->clip[clipNum].y, sprite->clip[clipNum].w,
@@ -344,7 +344,7 @@ MTR_EXPORT void MTR_CALL mtrSpriteDrawFlipped_f(uint32_t sprNum, int clipNum,
     mtrSprite_t *sprite;
     if (sprNum != 0)
     {
-        sprite = (mtrSprite_t *)(&((mtrSprite_t *)mtrSpriteKeeper->data)[sprNum]);
+        sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
         mtrTextureBlitRegionFlipped_f(sprite->textureIndex, x - sprite->anchorX,
          y - sprite->anchorY, sprite->clip[clipNum].x,
          sprite->clip[clipNum].y, sprite->clip[clipNum].w,
@@ -358,7 +358,7 @@ MTR_EXPORT void MTR_CALL mtrSpriteDrawGeneral_f(uint32_t sprNum, int clipNum,
     mtrSprite_t *sprite;
     if (sprNum != 0)
     {
-        sprite = (mtrSprite_t *)(&((mtrSprite_t *)mtrSpriteKeeper->data)[sprNum]);
+        sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
         mtrTextureBlitRegionGeneral_f(sprite->textureIndex, x - sprite->anchorX,
          y - sprite->anchorY, w, h, sprite->clip[clipNum].x,
          sprite->clip[clipNum].y, sprite->clip[clipNum].w,
