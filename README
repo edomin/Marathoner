@@ -9,6 +9,16 @@ General usage:
 TODO more detailed
 See function syntax without description in file "FunctionListAndSyntax.txt"
 
+Commandline API (See first Configfile usage and Launcher usage):
+You can setup launch options with commandline arguments.
+"Marathoner [<option> <value>] [...]"
+Autorun options. This options have priority higher than configfile options:
+"--autorun-action <action>" - running way. Valid values: "runScript"
+"--autorun-plugin <pluginname>" - ID of plugin that will be run VM
+"--autorun-script <filename>" - autorun script filename
+Choose module of subsystem:
+"--<subsystem> <module>" - Example "--script Script_Lua"
+Force disable modules via commandline not implemented now.
 Configfile usage (Not recommended for use. Read Launcher usage):
 "Autorun" section - game starting settings
     "action" key - running way. Valid values: "runScript"

@@ -12,6 +12,11 @@
 
 #include "marathoner/engine.h"
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wold-style-declaration"
+#include "saneopt.h"
+#pragma GCC diagnostic pop
+
 void RequireEngineFuncs(uint8_t plugin)
 {
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireConfigfileGetKeyName,
@@ -101,6 +106,12 @@ int main(int argc, char** argv)
     char   *temp; /* Read config result */
     bool    ok;
     int     error;
+    char *autorunAction = NULL;
+    char *autorunPlugin = NULL;
+    char *autorunScript = NULL;
+    char *currentArgument = NULL;
+    saneopt_t* arguments;
+
     mtrLogInit("Marathoner.log");
 
     mtrLogWrite("Reporting Marathoner version:", 0, MTR_LMT_INFO);
@@ -111,6 +122,27 @@ int main(int argc, char** argv)
     mtrLogWrite_i("Patch:", 1, MTR_LMT_INFO,
      MTR_VERSION_MARATHONER & 0x0000FF);
     mtrLogWrite("Searching available plugins", 0, MTR_LMT_INFO);
+
+    arguments = saneopt_init(argc, argv);
+    saneopt_alias(arguments, "help", "h");
+    if (strcmp(saneopt_get(arguments, "help"), "") == 0)
+    {
+        /* Print help to log */
+    }
+
+    autorunAction = saneopt_get(arguments, "autorun-action");
+    autorunPlugin = saneopt_get(arguments, "autorun-plugin");
+    autorunScript = saneopt_get(arguments, "autorun-script");
+
+    if (autorunAction == NULL)
+        autorunAction = mtrConfigfileReadString("Marathoner.cfg", "Autorun",
+         "action", "none");
+    if (autorunPlugin == NULL)
+        autorunPlugin = mtrConfigfileReadString("Marathoner.cfg", "Autorun",
+         "plugin", "none");
+    if (autorunScript == NULL)
+        autorunScript = mtrConfigfileReadString("Marathoner.cfg", "Autorun",
+         "script", "none");
 
     error = mtrLoadAllPlugins(RequireEngineFuncs);
     if (error != 0)
@@ -141,9 +173,13 @@ int main(int argc, char** argv)
         {
             for (j = 0; j < mtrPluginsFound; j++)
             {
-                temp = mtrConfigfileReadString("Marathoner.cfg",
-                 "Subsystem", mtrPluginData[i].report->subsystem,
-                "none");
+                currentArgument = saneopt_get(arguments,
+                 mtrPluginData[i].report->subsystem);
+                if (currentArgument == NULL)
+                    temp = mtrConfigfileReadString("Marathoner.cfg",
+                     "Subsystem", mtrPluginData[i].report->subsystem, "none");
+                else
+                    temp = currentArgument;
                 if (strcmp(temp, "none") == 0)
                 {
                     mtrLogWrite_s("Subsystem of module are disabled by "
@@ -151,7 +187,9 @@ int main(int argc, char** argv)
                      mtrPluginData[i].report->moduleID);
                     mtrCloseLibrary(mtrPluginData[i].dll);
                     free(mtrPluginData[i].filename);
-                    free(temp);
+                    if (temp != currentArgument)
+                        free(temp);
+                    currentArgument = NULL;
                     ok = false;
                     break;
                 }
@@ -163,9 +201,14 @@ int main(int argc, char** argv)
                    )
                 {
                     ok = false;
-                    temp = mtrConfigfileReadString("Marathoner.cfg",
-                     "Subsystem", mtrPluginData[i].report->subsystem,
-                    "none");
+
+                    currentArgument = saneopt_get(arguments,
+                     mtrPluginData[i].report->subsystem);
+                    if (currentArgument == NULL)
+                        temp = mtrConfigfileReadString("Marathoner.cfg",
+                         "Subsystem", mtrPluginData[i].report->subsystem, "none");
+                    else
+                        temp = currentArgument;
 
                     if (strcmp(temp, mtrPluginData[i].report->moduleID) == 0)
                     {
@@ -174,7 +217,9 @@ int main(int argc, char** argv)
                         mtrCloseLibrary(mtrPluginData[j].dll);
                         free(mtrPluginData[j].filename);
                         i = j;
-                        free(temp);
+                        if (temp != currentArgument)
+                            free(temp);
+                        currentArgument = NULL;
                         break;
                     }
                     if (strcmp(temp, mtrPluginData[j].report->moduleID) == 0)
@@ -183,7 +228,9 @@ int main(int argc, char** argv)
                          MTR_LMT_NOTE, mtrPluginData[i].report->moduleID);
                         mtrCloseLibrary(mtrPluginData[i].dll);
                         free(mtrPluginData[i].filename);
-                        free(temp);
+                        if (temp != currentArgument)
+                            free(temp);
+                        currentArgument = NULL;
                         break;
                     }
 
@@ -198,7 +245,9 @@ int main(int argc, char** argv)
                     mtrCloseLibrary(mtrPluginData[i].dll);
                     free(mtrPluginData[i].filename);
 
-                    free(temp);
+                    if (temp != currentArgument)
+                        free(temp);
+                    currentArgument = NULL;
                     break;
                 }
             }
@@ -297,16 +346,11 @@ int main(int argc, char** argv)
     mtrLogWrite("Reading 'Marathoner.cfg' for autorun options", 0,
      MTR_LMT_INFO);
     ok = false;
-    temp = mtrConfigfileReadString("Marathoner.cfg", "Autorun", "action",
-     "none");
-    if (strcmp(temp, "runScript") == 0)
+    if (strcmp(autorunAction, "runScript") == 0)
     {
-        free(temp);
-        temp = mtrConfigfileReadString("Marathoner.cfg", "Autorun", "plugin",
-         "none");
         for (i = 0; i < mtrPluginsFound; i++)
         {
-            if (strcmp(mtrPluginData[i].report->moduleID, temp) == 0)
+            if (strcmp(mtrPluginData[i].report->moduleID, autorunPlugin) == 0)
             {
                 ok = true;
                 currentPlugin = i;
@@ -315,10 +359,7 @@ int main(int argc, char** argv)
         }
         if (ok)
         {
-            free(temp);
-            temp = mtrConfigfileReadString("Marathoner.cfg", "Autorun",
-             "script", "none");
-            if (strcmp(temp, "none") != 0)
+            if (strcmp(autorunScript, "none") != 0)
             {
                 mtrScriptsAutorun = (mtrScriptsAutorunFunc)mtrLoadSymbolName(
                  mtrPluginData[currentPlugin].dll, "mtrScriptsAutorun");
@@ -328,28 +369,24 @@ int main(int argc, char** argv)
                 else
                 {
                     mtrLogWrite_s("Running autorun function with file:", 0,
-                     MTR_LMT_INFO, temp);
-                    mtrScriptsAutorun(temp);
+                     MTR_LMT_INFO, autorunScript);
+                    mtrScriptsAutorun(autorunScript);
                 }
-                free(temp);
             }
             else
             {
                 mtrNotify("Unable to read autorun script filename", 1,
                  MTR_LMT_ERROR);
-                free(temp);
             }
         }
         else
         {
             mtrNotify("Ivalid autorun plugin", 1, MTR_LMT_ERROR);
-            free(temp);
         }
     }
     else
     {
         mtrNotify("Invalid autorun action command", 1, MTR_LMT_ERROR);
-        free(temp);
     }
 
     mtrLogWrite("Quiting Engine", 0, MTR_LMT_INFO);

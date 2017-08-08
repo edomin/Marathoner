@@ -77,7 +77,7 @@ ifeq ($(MOD), plugin)
   ifeq ($(PLATFORM), win32)
 	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) \
 	 $(MTR_OBJS) -lminini -Wl,-Bstatic -lutf8 -Wl,-Bstatic -ltinyfiledialogs \
-	 -lole32 -lshlwapi -llazy_winapi
+	 -lole32 -lshlwapi -llazy_winapi -lsaneopt
   endif
   ifeq ($(PLATFORM), html5)
 	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) \
