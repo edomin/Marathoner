@@ -19,6 +19,8 @@ Autorun options. This options have priority higher than configfile options:
 Choose module of subsystem:
 "--<subsystem> <module>" - Example "--script Script_Lua"
 Force disable modules via commandline not implemented now.
+More examples in tests' bat-files. See "test" directory.
+
 Configfile usage (Not recommended for use. Read Launcher usage):
 "Autorun" section - game starting settings
     "action" key - running way. Valid values: "runScript"
