@@ -98,6 +98,35 @@ void RequireEngineFuncs(uint8_t plugin)
      mtrStringBufferGetMaxLen);
 }
 
+/* Check if module disabled and process it */
+bool mtrProcessModuleDisabled(int moduleNum)
+{
+    int i;
+
+    if (!mtrConfigfileReadBool("Marathoner.cfg", "Module",
+     mtrPluginData[moduleNum].report->moduleID, true))
+    {
+        mtrLogWrite_s("Module are disabled by configfile:", 1,
+         MTR_LMT_NOTE, mtrPluginData[moduleNum].report->moduleID);
+        free(mtrPluginData[moduleNum].filename);
+        for (i = moduleNum; i < mtrPluginsFound - 1; i++)
+            mtrPluginData[i] = mtrPluginData[i + 1];
+        mtrPluginsFound--;
+        return true;
+    }
+    return false;
+}
+
+bool mtrIsSubsystem(int moduleNum)
+{
+    if ((strcmp(mtrPluginData[moduleNum].report->subsystem, "binding") != 0) &&
+     (strcmp(mtrPluginData[moduleNum].report->subsystem, "utils") != 0) &&
+     (strcmp(mtrPluginData[moduleNum].report->subsystem, "abstraction") != 0))
+        return true;
+    else
+        return false;
+}
+
 int main(int argc, char** argv)
 {
     uint8_t i;
@@ -153,23 +182,14 @@ int main(int argc, char** argv)
     i = 0;
     while (i < mtrPluginsFound)
     {
-        if (!mtrConfigfileReadBool("Marathoner.cfg", "Module",
-         mtrPluginData[i].report->moduleID, true))
+        if (mtrProcessModuleDisabled(i))
         {
-            mtrLogWrite_s("Module are disabled by configfile:", 1,
-             MTR_LMT_NOTE, mtrPluginData[i].report->moduleID);
-            free(mtrPluginData[i].filename);
-            for (j = i; j < mtrPluginsFound - 1; j++)
-                mtrPluginData[j] = mtrPluginData[j + 1];
-            mtrPluginsFound--;
             i = 0;
             continue;
         }
         ok = true;
         /* searching conflicting subsystems */
-        if ((strcmp(mtrPluginData[i].report->subsystem, "binding") != 0) &&
-         (strcmp(mtrPluginData[i].report->subsystem, "utils") != 0) &&
-         (strcmp(mtrPluginData[i].report->subsystem, "abstraction") != 0))
+        if (mtrIsSubsystem(i))
         {
             for (j = 0; j < mtrPluginsFound; j++)
             {
