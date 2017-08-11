@@ -5,7 +5,6 @@ Marathoner.cbp
 *.log
 include/deprecated/*
 lib/*
-*.png
 TODO
 emsdk_set_env.bat
 .project
@@ -16,6 +15,6 @@ Marathoner/*
 README-SDL.txt
 autorun/*
 GDG/*
-
 hello.nut
 Marathoner.cfg
+test/output.txt
