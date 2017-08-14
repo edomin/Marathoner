@@ -75,6 +75,12 @@ MTR_EXPORT void MTR_CALL mtrRequireConfigfileWriteString(
     mtrConfigfileWriteString = ConfigfileWriteStringFunc;
 }
 
+MTR_EXPORT void MTR_CALL mtrRequireConfigfileCreateSection(
+ mtrConfigfileCreateSectionFunc_t ConfigfileCreateSectionFunc)
+{
+    mtrConfigfileCreateSection = ConfigfileCreateSectionFunc;
+}
+
 MTR_EXPORT void MTR_CALL mtrRequireLogWrite(mtrLogWriteFunc_t LogWriteFunc)
 {
     mtrLogWrite = LogWriteFunc;

@@ -38,5 +38,7 @@ bool MTR_CALL mtrConfigfileWriteSingle(const char *filename,
  const char *section, const char *key, float value);
 bool MTR_CALL mtrConfigfileWriteString(const char *filename,
  const char *section, const char *key, const char *value);
+bool MTR_CALL mtrConfigfileCreateSection(const char* filename,
+ const char *section)
 
 #endif

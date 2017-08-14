@@ -52,7 +52,16 @@ FileWriteLineFast("test/output.txt",
 FileWriteLineFast("test/output.txt",
  "someString after deleting key: " .. someString, FM_APPEND);
 
---bool ConfigfileDeleteSection(const char *filename, const char *section);
+ConfigfileCreateSection("test/core/test_cfg.ini", "new_section");
+ConfigfileWriteString("test/core/test_cfg.ini", "new_section", "newString",
+ "Hello");
+local newString = ConfigfileReadString("test/core/test_cfg.ini", "new_section",
+ "newString", "default_string");
+FileWriteLineFast("test/output.txt", "newString: " .. newString, FM_APPEND);
+ConfigfileDeleteSection("test/core/test_cfg.ini", "new_section");
+newString = ConfigfileReadString("test/core/test_cfg.ini", "new_section",
+ "newString", "default_string");
+FileWriteLineFast("test/output.txt", "newString: " .. newString, FM_APPEND);
 
 -- Negative
 -- TODO

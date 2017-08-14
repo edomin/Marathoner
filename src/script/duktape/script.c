@@ -75,6 +75,8 @@ void mtrScriptsInit(void)
      "ConfigfileWriteSingle");
     mtrScriptsRegisterFunction(mtrSF_ConfigfileWriteString,
      "ConfigfileWriteString");
+    mtrScriptsRegisterFunction(mtrSF_ConfigfileCreateSection,
+     "ConfigfileCreateSection");
 
     mtrScriptsRegisterFunction(mtrSF_LogWrite, "LogWrite");
     mtrScriptsRegisterFunction(mtrSF_LogWrite_s, "LogWrite_s");

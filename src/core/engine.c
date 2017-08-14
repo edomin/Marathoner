@@ -43,6 +43,8 @@ void RequireEngineFuncs(uint8_t plugin)
      mtrConfigfileWriteSingle);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireConfigfileWriteString,
      mtrConfigfileWriteString);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireConfigfileCreateSection,
+     mtrConfigfileCreateSection);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireLogWrite, mtrLogWrite);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireLogWrite_s, mtrLogWrite_s);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireLogWrite_i, mtrLogWrite_i);

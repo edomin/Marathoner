@@ -42,6 +42,7 @@ mtrConfigfileWriteBoolFunc_t                mtrConfigfileWriteBool;
 mtrConfigfileWriteIntFunc_t                 mtrConfigfileWriteInt;
 mtrConfigfileWriteSingleFunc_t              mtrConfigfileWriteSingle;
 mtrConfigfileWriteStringFunc_t              mtrConfigfileWriteString;
+mtrConfigfileCreateSectionFunc_t            mtrConfigfileCreateSection;
 
 mtrLogWriteFunc_t                           mtrLogWrite;
 mtrLogWrite_sFunc_t                         mtrLogWrite_s;

@@ -172,3 +172,15 @@ bool MTR_CALL mtrConfigfileWriteString(const char* filename,
     else
         return false;
 }
+
+bool MTR_CALL mtrConfigfileCreateSection(const char* filename,
+ const char *section)
+{
+    if ((section != NULL) && (filename != NULL))
+        if (ini_puts(section, NULL, NULL, filename) == 1)
+            return true;
+        else
+            return false;
+    else
+        return false;
+}
