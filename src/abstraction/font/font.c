@@ -134,6 +134,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrFontCreateMbf(const char *name,
 {
     uint32_t   freeIndex;
     mtrFont_t *font;
+    int        i;
 
     if (name == NULL)
         name = mtrDefaultFontName;
@@ -172,6 +173,10 @@ MTR_EXPORT uint32_t MTR_CALL mtrFontCreateMbf(const char *name,
         free(font->mbf);
         free(font->name);
         return 0;
+    }
+    for (i = 0; i < reservedTables; i++)
+    {
+        font->mbf->texTable[i] = 0;
     }
 
     return freeIndex;
@@ -220,9 +225,12 @@ MTR_EXPORT bool MTR_CALL mtrFontDrawMbfString_f(uint32_t fontNum,
         symbolNum = ucs4Text[i] - (symbolTable << 8);
         symbolRow = (symbolNum >> 4);
         symbolCol = (symbolNum - (symbolRow << 4));
-        mtrTextureBlitRegion_f(font->mbf->texTable[symbolTable],
-         x + i * font->mbf->width, y, symbolCol * font->mbf->width,
-         symbolRow * font->mbf->height, font->mbf->width, font->mbf->height);
+        if (font->mbf->texTable[symbolTable] != 0)
+        {
+            mtrTextureBlitRegion_f(font->mbf->texTable[symbolTable],
+             x + i * font->mbf->width, y, symbolCol * font->mbf->width,
+             symbolRow * font->mbf->height, font->mbf->width, font->mbf->height);
+        }
     }
 
     free(ucs4Text);
