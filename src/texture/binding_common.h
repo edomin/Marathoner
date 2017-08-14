@@ -102,4 +102,13 @@ typedef void (MTR_CALL * mtrTextureBlitRegionGeneral_fFunc)(uint32_t, float,
  float, float, float, float, float, float, float, float, float, float, int);
 mtrTextureBlitRegionGeneral_fFunc mtrTextureBlitRegionGeneral_f;
 
+typedef int (MTR_CALL * mtrTextureGetWidthFunc)(uint32_t);
+mtrTextureGetWidthFunc mtrTextureGetWidth;
+
+typedef int (MTR_CALL * mtrTextureGetHeightFunc)(uint32_t);
+mtrTextureGetHeightFunc mtrTextureGetHeight;
+
+typedef void (MTR_CALL * mtrTextureGetSizesFunc)(uint32_t, int *, int *);
+mtrTextureGetSizesFunc mtrTextureGetSizes;
+
 #endif

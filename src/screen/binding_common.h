@@ -10,4 +10,13 @@ mtrScreenQuitFunc mtrScreenQuit;
 typedef void (MTR_CALL * mtrScreenFlipFunc)(void);
 mtrScreenFlipFunc mtrScreenFlip;
 
+typedef void (MTR_CALL * mtrScreenGetSizesFunc)(int *, int *);
+mtrScreenGetSizesFunc mtrScreenGetSizes;
+
+typedef int (MTR_CALL * mtrScreenGetWidthFunc)(void);
+mtrScreenGetWidthFunc mtrScreenGetWidth;
+
+typedef int (MTR_CALL * mtrScreenGetHeightFunc)(void);
+mtrScreenGetHeightFunc mtrScreenGetHeight;
+
 #endif
