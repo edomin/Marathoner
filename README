@@ -57,7 +57,12 @@ Upper panel's buttons:
 
 Copying:
 Source code are under zlib license (for this moment. Read LICENSE).
-Images "test/media/helicopter.png" and "test/media/helicopter_anim.png" are
-under CC0 license (Public Domain). Author - me.
+Images made by me are under CC0 license (Public Domain):
+    "test/media/helicopter.png"
+    "test/media/helicopter_anim.png"
+    "test/media/mbf_big_00.png"
+    "test/media/mbf_big_04.png"
+License text for font "test/media/Vera.ttf" can be found in file
+"test/media/COPYRIGHT-Vera.TXT". Author - Bitstream, Inc.
 
 And I am sorry for my bad english.
