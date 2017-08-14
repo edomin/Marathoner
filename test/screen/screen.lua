@@ -20,5 +20,6 @@ for i = 0, 150, 1 do
     x = x + 1;
     PrimitiveFill_c(0x000000);
     PrimitiveRectangleFilled_c_f(x, 128, x + 32, 160, 0xFF0000);
+    ScreenFlip();
     TimerDelayForFPS(30);
 end;
