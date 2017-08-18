@@ -68,7 +68,7 @@ MTR_SCRIPT_FUNC_D_D2(mtrSF_Vecy_d, mtrVecy_d)
 MTR_SCRIPT_FUNC_F_F2(mtrSF_VecyFast_f, mtrVecyFast_f)
 MTR_SCRIPT_FUNC_D_D2(mtrSF_VecyFast_d, mtrVecyFast_d)
 
-#ifndef _SQUIRREL_H_
+#ifdef lua_h
 MTR_SCRIPT_FUNC(mtrSF_Vecxy_f)
 {
     float length;
@@ -245,7 +245,7 @@ void mtrScriptsRegisterAll(void)
     MTR_FIND_FUNCTION(mtrVecy_d, "Utils_math");
     MTR_FIND_FUNCTION(mtrVecyFast_f, "Utils_math");
     MTR_FIND_FUNCTION(mtrVecyFast_d, "Utils_math");
-    #ifndef _SQUIRREL_H_
+    #ifdef lua_h
     MTR_FIND_FUNCTION(mtrVecxy_f, "Utils_math");
     MTR_FIND_FUNCTION(mtrVecxy_d, "Utils_math");
     MTR_FIND_FUNCTION(mtrVecxyFast_f, "Utils_math");
@@ -353,7 +353,7 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterFunction(mtrSF_Vecy_d, "Vecy_d");
         mtrScriptsRegisterFunction(mtrSF_VecyFast_f, "VecyFast_f");
         mtrScriptsRegisterFunction(mtrSF_VecyFast_d, "VecyFast_d");
-        #ifndef _SQUIRREL_H_
+        #ifdef lua_h
         mtrScriptsRegisterFunction(mtrSF_Vecxy_f, "Vecxy_f");
         mtrScriptsRegisterFunction(mtrSF_Vecxy_d, "Vecxy_d");
         mtrScriptsRegisterFunction(mtrSF_VecxyFast_f, "VecxyFast_f");

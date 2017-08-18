@@ -9,7 +9,7 @@ MTR_SCRIPT_FUNC_V_V(mtrSF_TextureEndTarget, mtrTextureEndTarget)
 MTR_SCRIPT_FUNC_I_U32t1(mtrSF_TextureGetWidth, mtrTextureGetWidth)
 MTR_SCRIPT_FUNC_I_U32t1(mtrSF_TextureGetHeight, mtrTextureGetHeight)
 
-#ifndef _SQUIRREL_H_
+#ifdef lua_h
 MTR_SCRIPT_FUNC(mtrSF_TextureGetSizes)
 {
     uint32_t texNum;
@@ -61,19 +61,6 @@ MTR_SCRIPT_FUNC_V_U32t1F6I1(mtrSF_TextureBlitRegionFlipped_f,
  mtrTextureBlitRegionFlipped_f)
 MTR_SCRIPT_FUNC_V_U32t1F11I1(mtrSF_TextureBlitRegionGeneral_f,
  mtrTextureBlitRegionGeneral_f)
-MTR_SCRIPT_FUNC_I_U32t1(mtrSF_TextureGetWidth, mtrTextureGetWidth)
-MTR_SCRIPT_FUNC_I_U32t1(mtrSF_TextureGetHeight, mtrTextureGetHeight)
-
-MTR_SCRIPT_FUNC(mtrSF_TextureGetSizes)
-{
-    uint32_t texNum;
-    int width;
-    int height;
-    MTR_SF_GET_UINT32(texNum, 1);
-    mtrTextureGetSizes(texNum, &width, &height);
-    MTR_SF_PUSH_INT(width, height);
-    return 2;
-}
 
 void mtrScriptsRegisterAll(void)
 {
@@ -87,7 +74,7 @@ void mtrScriptsRegisterAll(void)
     MTR_FIND_FUNCTION(mtrTextureEndTarget, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrTextureGetWidth, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrTextureGetHeight, MTR_SOURCE_MODULE);
-    #ifndef _SQUIRREL_H_
+    #ifdef lua_h
     MTR_FIND_FUNCTION(mtrTextureGetSizes, MTR_SOURCE_MODULE);
     #endif
     MTR_FIND_FUNCTION(mtrTextureCreate, MTR_SOURCE_MODULE);
@@ -109,9 +96,6 @@ void mtrScriptsRegisterAll(void)
     MTR_FIND_FUNCTION(mtrTextureBlitRegionAngled_f, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrTextureBlitRegionFlipped_f, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrTextureBlitRegionGeneral_f, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTextureGetWidth, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTextureGetHeight, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTextureGetSizes, MTR_SOURCE_MODULE);
 
     if (ok)
     {
@@ -146,7 +130,7 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterFunction(mtrSF_TextureGetWidth, "TextureGetWidth");
         mtrScriptsRegisterFunction(mtrSF_TextureGetHeight,
          "mtrSF_TextureGetHeight");
-        #ifndef _SQUIRREL_H_
+        #ifdef lua_h
         mtrScriptsRegisterFunction(mtrSF_TextureGetSizes,
          "mtrSF_TextureGetSizes");
         #endif
@@ -190,9 +174,6 @@ void mtrScriptsRegisterAll(void)
          "TextureBlitRegionFlipped_f");
         mtrScriptsRegisterFunction(mtrSF_TextureBlitRegionGeneral_f,
          "TextureBlitRegionGeneral_f");
-        mtrScriptsRegisterFunction(mtrSF_TextureGetWidth, "TextureGetWidth");
-        mtrScriptsRegisterFunction(mtrSF_TextureGetHeight, "TextureGetHeight");
-        mtrScriptsRegisterFunction(mtrSF_TextureGetSizes, "TextureGetSizes");
     }
     else
     {

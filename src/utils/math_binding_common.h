@@ -193,6 +193,7 @@ mtrVecyFast_fFunc mtrVecyFast_f;
 typedef double (MTR_CALL * mtrVecyFast_dFunc)(double, double);
 mtrVecyFast_dFunc mtrVecyFast_d;
 
+#ifdef lua_h
 typedef void (MTR_CALL * mtrVecxy_fFunc)(float, float, float *, float *);
 mtrVecxy_fFunc mtrVecxy_f;
 
@@ -205,6 +206,7 @@ mtrVecxyFast_fFunc mtrVecxyFast_f;
 typedef void (MTR_CALL * mtrVecxyFast_dFunc)(double, double, double *,
  double *);
 mtrVecxyFast_dFunc mtrVecxyFast_d;
+#endif
 
 typedef int (MTR_CALL * mtrRandFunc)(int);
 mtrRandFunc mtrRand;

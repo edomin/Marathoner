@@ -10,8 +10,10 @@ mtrScreenQuitFunc mtrScreenQuit;
 typedef void (MTR_CALL * mtrScreenFlipFunc)(void);
 mtrScreenFlipFunc mtrScreenFlip;
 
+#ifdef lua_h
 typedef void (MTR_CALL * mtrScreenGetSizesFunc)(int *, int *);
 mtrScreenGetSizesFunc mtrScreenGetSizes;
+#endif
 
 typedef int (MTR_CALL * mtrScreenGetWidthFunc)(void);
 mtrScreenGetWidthFunc mtrScreenGetWidth;

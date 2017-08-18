@@ -13,7 +13,7 @@ MTR_SCRIPT_FUNC_B_V(mtrSF_MouseMoving, mtrMouseMoving)
 MTR_SCRIPT_FUNC_I_V(mtrSF_MouseGetX, mtrMouseGetX)
 MTR_SCRIPT_FUNC_I_V(mtrSF_MouseGetY, mtrMouseGetY)
 
-#ifndef _SQUIRREL_H_
+#ifdef lua_h
 MTR_SCRIPT_FUNC(mtrSF_MouseGetXY)
 {
     int x;
@@ -31,7 +31,7 @@ MTR_SCRIPT_FUNC(mtrSF_MouseGetXY)
 MTR_SCRIPT_FUNC_I_V(mtrSF_MouseGetDeltaX, mtrMouseGetDeltaX)
 MTR_SCRIPT_FUNC_I_V(mtrSF_MouseGetDeltaY, mtrMouseGetDeltaY)
 
-#ifndef _SQUIRREL_H_
+#ifdef lua_h
 MTR_SCRIPT_FUNC(mtrSF_MouseGetDeltaXY)
 {
     int deltaX;
@@ -62,12 +62,12 @@ void mtrScriptsRegisterAll(void)
     MTR_FIND_FUNCTION(mtrMouseMoving, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrMouseGetX, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrMouseGetY, MTR_SOURCE_MODULE);
-    #ifndef _SQUIRREL_H_
+    #ifdef lua_h
     MTR_FIND_FUNCTION(mtrMouseGetXY, MTR_SOURCE_MODULE);
     #endif
     MTR_FIND_FUNCTION(mtrMouseGetDeltaX, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrMouseGetDeltaY, MTR_SOURCE_MODULE);
-    #ifndef _SQUIRREL_H_
+    #ifdef lua_h
     MTR_FIND_FUNCTION(mtrMouseGetDeltaXY, MTR_SOURCE_MODULE);
     #endif
 
@@ -89,12 +89,12 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterFunction(mtrSF_MouseMoving, "MouseMoving");
         mtrScriptsRegisterFunction(mtrSF_MouseGetX, "MouseGetX");
         mtrScriptsRegisterFunction(mtrSF_MouseGetY, "MouseGetY");
-        #ifndef _SQUIRREL_H_
+        #ifdef lua_h
         mtrScriptsRegisterFunction(mtrSF_MouseGetXY, "MouseGetXY");
         #endif
         mtrScriptsRegisterFunction(mtrSF_MouseGetDeltaX, "MouseGetDeltaX");
         mtrScriptsRegisterFunction(mtrSF_MouseGetDeltaY, "MouseGetDeltaY");
-        #ifndef _SQUIRREL_H_
+        #ifdef lua_h
         mtrScriptsRegisterFunction(mtrSF_MouseGetDeltaXY,
          "MouseGetDeltaXY");
         #endif

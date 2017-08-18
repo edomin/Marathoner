@@ -9,7 +9,7 @@ MTR_SCRIPT_FUNC_U32t_S1I1(mtrSF_TtfLoad, mtrTtfLoad)
 MTR_SCRIPT_FUNC_V_U32t1(mtrSF_TtfFree, mtrTtfFree)
 MTR_SCRIPT_FUNC_I_U32t1(mtrSF_TtfGetFontHeight, mtrTtfGetFontHeight)
 
-#ifndef _SQUIRREL_H_
+#ifdef lua_h
 MTR_SCRIPT_FUNC(mtrSF_TtfGetStringSizes)
 {
     uint32_t    fontNum;
@@ -59,7 +59,7 @@ void mtrScriptsRegisterAll(void)
     MTR_FIND_FUNCTION(mtrTtfLoad, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrTtfFree, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrTtfGetFontHeight, MTR_SOURCE_MODULE);
-    #ifndef _SQUIRREL_H_
+    #ifdef lua_h
     MTR_FIND_FUNCTION(mtrTtfGetStringSizes, MTR_SOURCE_MODULE);
     #endif
     MTR_FIND_FUNCTION(mtrTtfGetStringWidth, MTR_SOURCE_MODULE);
@@ -80,7 +80,7 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterFunction(mtrSF_TtfLoad, "TtfLoad");
         mtrScriptsRegisterFunction(mtrSF_TtfFree, "TtfFree");
         mtrScriptsRegisterFunction(mtrSF_TtfGetFontHeight, "TtfGetFontHeight");
-        #ifndef _SQUIRREL_H_
+        #ifdef lua_h
         mtrScriptsRegisterFunction(mtrSF_TtfGetStringSizes,
          "TtfGetStringSizes");
         #endif

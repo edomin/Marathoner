@@ -6,7 +6,7 @@
 MTR_SCRIPT_FUNC_U32t_U8t3(mtrSF_ColorAssembleRGB, mtrColorAssembleRGB)
 MTR_SCRIPT_FUNC_U32t_U8t4(mtrSF_ColorAssembleRGBA, mtrColorAssembleRGBA)
 
-#ifndef _SQUIRREL_H_
+#ifdef lua_h
 MTR_SCRIPT_FUNC(mtrSF_ColorSplitRGB)
 {
     uint8_t r;
@@ -70,7 +70,7 @@ void mtrScriptsRegisterAll(void)
 
     MTR_FIND_FUNCTION(mtrColorAssembleRGB, "Utils_color");
     MTR_FIND_FUNCTION(mtrColorAssembleRGBA, "Utils_color");
-    #ifndef _SQUIRREL_H_
+    #ifdef lua_h
     MTR_FIND_FUNCTION(mtrColorSplitRGB, "Utils_color");
     MTR_FIND_FUNCTION(mtrColorSplitRGBA, "Utils_color");
     #endif
@@ -1525,24 +1525,23 @@ void mtrScriptsRegisterAll(void)
          "ColorAssembleRGB");
         mtrScriptsRegisterFunction(mtrSF_ColorAssembleRGBA,
          "ColorAssembleRGBA");
-        #ifndef _SQUIRREL_H_
+        #ifdef lua_h
         mtrScriptsRegisterFunction(mtrSF_ColorSplitRGB, "ColorSplitRGB");
         mtrScriptsRegisterFunction(mtrSF_ColorSplitRGBA, "ColorSplitRGBA");
         #endif
-        mtrScriptsRegisterFunction(mtrSF_ColorRGBGetR, "ColorRGBGetR")
-        mtrScriptsRegisterFunction(mtrSF_ColorRGBGetG, "ColorRGBGetG")
-        mtrScriptsRegisterFunction(mtrSF_ColorRGBGetB, "ColorRGBGetB")
-        mtrScriptsRegisterFunction(mtrSF_ColorRGBSetR, "ColorRGBSetR")
-        mtrScriptsRegisterFunction(mtrSF_ColorRGBSetG, "ColorRGBSetG")
-        mtrScriptsRegisterFunction(mtrSF_ColorRGBSetB, "ColorRGBSetB")
-        mtrScriptsRegisterFunction(mtrSF_ColorRGBAGetR, "ColorRGBAGetR")
-        mtrScriptsRegisterFunction(mtrSF_ColorRGBAGetG, "ColorRGBAGetG")
-        mtrScriptsRegisterFunction(mtrSF_ColorRGBAGetB, "ColorRGBAGetB")
-        mtrScriptsRegisterFunction(mtrSF_ColorRGBAGetA, "ColorRGBAGetA")
-        mtrScriptsRegisterFunction(mtrSF_ColorRGBASetR, "ColorRGBASetR")
-        mtrScriptsRegisterFunction(mtrSF_ColorRGBASetG, "ColorRGBASetG")
-        mtrScriptsRegisterFunction(mtrSF_ColorRGBASetB, "ColorRGBASetB")
-        mtrScriptsRegisterFunction(mtrSF_ColorRGBASetA, "ColorRGBASetA")
+        mtrScriptsRegisterFunction(mtrSF_ColorRGBGetR, "ColorRGBGetR");
+        mtrScriptsRegisterFunction(mtrSF_ColorRGBGetG, "ColorRGBGetG");
+        mtrScriptsRegisterFunction(mtrSF_ColorRGBGetB, "ColorRGBGetB");
+        mtrScriptsRegisterFunction(mtrSF_ColorRGBSetR, "ColorRGBSetR");
+        mtrScriptsRegisterFunction(mtrSF_ColorRGBSetG, "ColorRGBSetG");
+        mtrScriptsRegisterFunction(mtrSF_ColorRGBSetB, "ColorRGBSetB");
+        mtrScriptsRegisterFunction(mtrSF_ColorRGBAGetR, "ColorRGBAGetR");
+        mtrScriptsRegisterFunction(mtrSF_ColorRGBAGetG, "ColorRGBAGetG");
+        mtrScriptsRegisterFunction(mtrSF_ColorRGBAGetB, "ColorRGBAGetB");
+        mtrScriptsRegisterFunction(mtrSF_ColorRGBAGetA, "ColorRGBAGetA");
+        mtrScriptsRegisterFunction(mtrSF_ColorRGBASetR, "ColorRGBASetR");
+        mtrScriptsRegisterFunction(mtrSF_ColorRGBASetB, "ColorRGBASetB");
+        mtrScriptsRegisterFunction(mtrSF_ColorRGBASetA, "ColorRGBASetA");
         mtrScriptsRegisterFunction(mtrSF_ColorRGBtoRGBA, "ColorRGBtoRGBA");
         mtrScriptsRegisterFunction(mtrSF_ColorRGBAtoRGB, "ColorRGBAtoRGB");
     }

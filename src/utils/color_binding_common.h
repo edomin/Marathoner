@@ -9,9 +9,11 @@ typedef uint32_t (MTR_CALL * mtrColorAssembleRGBAFunc)(uint8_t, uint8_t,
  uint8_t, uint8_t);
 mtrColorAssembleRGBAFunc mtrColorAssembleRGBA;
 
+#ifdef lua_h
 typedef void (MTR_CALL * mtrColorSplitRGBFunc)(uint32_t, uint8_t *, uint8_t *,
  uint8_t *);
 mtrColorSplitRGBFunc mtrColorSplitRGB;
+#endif
 
 typedef uint8_t (MTR_CALL * mtrColorRGBGetRFunc)(uint32_t);
 mtrColorRGBGetRFunc mtrColorRGBGetR;
@@ -31,9 +33,11 @@ mtrColorRGBSetGFunc mtrColorRGBSetG;
 typedef uint32_t (MTR_CALL * mtrColorRGBSetBFunc)(uint32_t, uint8_t);
 mtrColorRGBSetBFunc mtrColorRGBSetB;
 
+#ifdef lua_h
 typedef void (MTR_CALL * mtrColorSplitRGBAFunc)(uint32_t, uint8_t *, uint8_t *,
  uint8_t *, uint8_t *);
 mtrColorSplitRGBAFunc mtrColorSplitRGBA;
+#endif
 
 typedef uint8_t (MTR_CALL * mtrColorRGBAGetRFunc)(uint32_t);
 mtrColorRGBAGetRFunc mtrColorRGBAGetR;
