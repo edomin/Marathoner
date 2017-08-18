@@ -7,9 +7,10 @@ local mouse_dy;
 -- Positive
 FileWriteLineFast("test/output.txt", "Positive test", FM_WRITE);
 
-ScreenInit(640, 480, false, "Keyboard Test");
+ScreenInit(640, 480, false, "Mouse Test");
 PrimitiveInit();
 KeyboardInit();
+MouseInit();
 TimerInit();
 
 local cube1_y = 64;
