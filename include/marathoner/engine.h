@@ -44,7 +44,7 @@ typedef void (MTR_CALL * mtrRequireConfigfileWriteStringFunc)(
  mtrConfigfileWriteStringFunc_t);
 mtrRequireConfigfileWriteStringFunc mtrRequireConfigfileWriteString;
 typedef bool (MTR_CALL * mtrRequireConfigfileCreateSectionFunc)(
- mtrConfigfileCreateSection_t);
+ mtrConfigfileCreateSectionFunc_t);
 mtrRequireConfigfileCreateSectionFunc mtrRequireConfigfileCreateSection;
 
 typedef void (MTR_CALL * mtrRequireLogWriteFunc)(mtrLogWriteFunc_t);

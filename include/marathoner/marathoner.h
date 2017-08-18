@@ -65,7 +65,7 @@ typedef bool        (MTR_CALL * mtrConfigfileWriteSingleFunc_t)(const char *,
  const char *, const char *, float);
 typedef bool        (MTR_CALL * mtrConfigfileWriteStringFunc_t)(const char *,
  const char *, const char *, const char *);
-typedef bool        (MTR_CALL * mtrConfigfileCreateSection)(const char *,
+typedef bool        (MTR_CALL * mtrConfigfileCreateSectionFunc_t)(const char *,
  const char *);
 
 typedef void        (MTR_CALL * mtrLogWriteFunc_t)(const char *, uint8_t,
