@@ -1914,6 +1914,17 @@
         return 1;                           \
     }
 
+#define MTR_SCRIPT_FUNC_U8t_U32t1(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)                     \
+    {                                          \
+        uint32_t u32_1;                        \
+        uint8_t result;                        \
+        MTR_SF_GET_UINT32(u32_1, 1);           \
+        result = func(u32_1);                  \
+        MTR_SF_PUSH_UINT8(result);             \
+        return 1;                              \
+    }
+
 #define MTR_SCRIPT_FUNC_U32t_V(sfunc, func) \
     MTR_SCRIPT_FUNC(sfunc)                  \
     {                                       \
@@ -1977,6 +1988,19 @@
         result = func(u32_1, u32_2);            \
         MTR_SF_PUSH_UINT32(result);             \
         return 1;                               \
+    }
+
+#define MTR_SCRIPT_FUNC_U32t_U32t1U8t1(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)                          \
+    {                                               \
+        uint32_t u32_1;                             \
+        uint8_t u8_1;                               \
+        uint32_t result;                            \
+        MTR_SF_GET_UINT32(u32_1, 1);                \
+        MTR_SF_GET_UINT8(u8_1, 2);                  \
+        result = func(u32_1, u8_1);                 \
+        MTR_SF_PUSH_UINT32(result);                 \
+        return 1;                                   \
     }
 
 #define MTR_SCRIPT_FUNC_U32t_U32t1B1(sfunc, func) \
