@@ -560,3 +560,51 @@ MTR_EXPORT uint8_t MTR_CALL mtrGameControllerGetPovHat(int controllerNum,
     else
         return 0;
 }
+
+MTR_EXPORT int MTR_CALL mtrGameControllerGetButtonsCount(int controllerNum)
+{
+    mtrGameController_t *gameController;
+
+    gameController = IK_GET_DATA(mtrGameController_t *,
+     mtrGameControllerKeeper, controllerNum);
+    if (!mtrIndexkeeperIndexIsEmpty(mtrGameControllerKeeper, controllerNum))
+        return gameController->buttonsCount;
+    else
+        return 0;
+}
+
+MTR_EXPORT int MTR_CALL mtrGameControllerGetAxesCount(int controllerNum)
+{
+    mtrGameController_t *gameController;
+
+    gameController = IK_GET_DATA(mtrGameController_t *,
+     mtrGameControllerKeeper, controllerNum);
+    if (!mtrIndexkeeperIndexIsEmpty(mtrGameControllerKeeper, controllerNum))
+        return gameController->axesCount;
+    else
+        return 0;
+}
+
+MTR_EXPORT int MTR_CALL mtrGameControllerGetTrackballsCount(int controllerNum)
+{
+    mtrGameController_t *gameController;
+
+    gameController = IK_GET_DATA(mtrGameController_t *,
+     mtrGameControllerKeeper, controllerNum);
+    if (!mtrIndexkeeperIndexIsEmpty(mtrGameControllerKeeper, controllerNum))
+        return gameController->trackballsCount;
+    else
+        return 0;
+}
+
+MTR_EXPORT int MTR_CALL mtrGameControllerGetPowHatsCount(int controllerNum)
+{
+    mtrGameController_t *gameController;
+
+    gameController = IK_GET_DATA(mtrGameController_t *,
+     mtrGameControllerKeeper, controllerNum);
+    if (!mtrIndexkeeperIndexIsEmpty(mtrGameControllerKeeper, controllerNum))
+        return gameController->povHatsCount;
+    else
+        return 0;
+}

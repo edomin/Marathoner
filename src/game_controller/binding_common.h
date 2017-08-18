@@ -37,11 +37,25 @@ mtrGameControllerGetTrackballDeltaXFunc mtrGameControllerGetTrackballDeltaX;
 typedef int (MTR_CALL * mtrGameControllerGetTrackballDeltaYFunc)(int, int);
 mtrGameControllerGetTrackballDeltaYFunc mtrGameControllerGetTrackballDeltaY;
 
+#ifdef lua_h
 typedef void (MTR_CALL * mtrGameControllerGetTrackballDeltaXYFunc)(int, int,
  int *, int *);
 mtrGameControllerGetTrackballDeltaXYFunc mtrGameControllerGetTrackballDeltaXY;
+#endif
 
 typedef uint8_t (MTR_CALL * mtrGameControllerGetPovHatFunc)(int, int);
 mtrGameControllerGetPovHatFunc mtrGameControllerGetPovHat;
+
+typedef int (MTR_CALL * mtrGameControllerGetButtonsCountFunc)(int);
+mtrGameControllerGetButtonsCountFunc mtrGameControllerGetButtonsCount;
+
+typedef int (MTR_CALL * mtrGameControllerGetAxesCountFunc)(int);
+mtrGameControllerGetAxesCountFunc mtrGameControllerGetAxesCount;
+
+typedef int (MTR_CALL * mtrGameControllerGetTrackballsCountFunc)(int);
+mtrGameControllerGetTrackballsCountFunc mtrGameControllerGetTrackballsCount;
+
+typedef int (MTR_CALL * mtrGameControllerGetPowHatsCountFunc)(int);
+mtrGameControllerGetPowHatsCountFunc mtrGameControllerGetPowHatsCount;
 
 #endif

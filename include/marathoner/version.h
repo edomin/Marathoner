@@ -10,7 +10,7 @@
 #define MTR_VERSION_AUDIO_SDL2_MIXER_SQUIRREL       0x000001 /* inc patch */
 #define MTR_VERSION_AUDIO_SDL2_MIXER_DUKTAPE        0x000000 /* initial */
 
-#define MTR_VERSION_GAME_CONTROLLER_SDL2            0x000101 /* inc patch */
+#define MTR_VERSION_GAME_CONTROLLER_SDL2            0x000200 /* inc minor */
 #define MTR_VERSION_GAME_CONTROLLER_SDL2_LUA        0x000101 /* inc patch */
 #define MTR_VERSION_GAME_CONTROLLER_SDL2_SQUIRREL   0x000001 /* inc patch */
 #define MTR_VERSION_GAME_CONTROLLER_SDL2_DUKTAPE    0x000000 /* initial */

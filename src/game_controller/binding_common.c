@@ -23,6 +23,7 @@ MTR_SCRIPT_FUNC_I_I2(mtrSF_GameControllerGetTrackballDeltaX,
 MTR_SCRIPT_FUNC_I_I2(mtrSF_GameControllerGetTrackballDeltaY,
  mtrGameControllerGetTrackballDeltaY)
 
+#ifdef lua_h
 MTR_SCRIPT_FUNC(mtrSF_GameControllerGetTrackballDeltaXY)
 {
     int controllerNum;
@@ -40,9 +41,18 @@ MTR_SCRIPT_FUNC(mtrSF_GameControllerGetTrackballDeltaXY)
 
     return 2;
 }
+#endif
 
 MTR_SCRIPT_FUNC_U8t_I2(mtrSF_GameControllerGetPovHat,
  mtrGameControllerGetPovHat)
+MTR_SCRIPT_FUNC_I_I1(mtrSF_GameControllerGetButtonsCount,
+ mtrGameControllerGetButtonsCount)
+MTR_SCRIPT_FUNC_I_I1(mtrSF_GameControllerGetAxesCount,
+ mtrGameControllerGetAxesCount)
+MTR_SCRIPT_FUNC_I_I1(mtrSF_GameControllerGetTrackballsCount,
+ mtrGameControllerGetTrackballsCount)
+MTR_SCRIPT_FUNC_I_I1(mtrSF_GameControllerGetPowHatsCount,
+ mtrGameControllerGetPowHatsCount)
 
 void mtrScriptsRegisterAll(void)
 {
@@ -63,8 +73,14 @@ void mtrScriptsRegisterAll(void)
     MTR_FIND_FUNCTION(mtrGameControllerGetAxisDelta_f, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrGameControllerGetTrackballDeltaX, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrGameControllerGetTrackballDeltaY, MTR_SOURCE_MODULE);
+    #ifdef lua_h
     MTR_FIND_FUNCTION(mtrGameControllerGetTrackballDeltaXY, MTR_SOURCE_MODULE);
+    #endif
     MTR_FIND_FUNCTION(mtrGameControllerGetPovHat, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrGameControllerGetButtonsCount, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrGameControllerGetAxesCount, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrGameControllerGetTrackballsCount, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrGameControllerGetPowHatsCount, MTR_SOURCE_MODULE);
 
     if (ok)
     {
@@ -106,10 +122,20 @@ void mtrScriptsRegisterAll(void)
          "GameControllerGetTrackballDeltaX");
         mtrScriptsRegisterFunction(mtrSF_GameControllerGetTrackballDeltaY,
          "GameControllerGetTrackballDeltaY");
+        #ifdef lua_h
         mtrScriptsRegisterFunction(mtrSF_GameControllerGetTrackballDeltaXY,
          "GameControllerGetTrackballDeltaXY");
+        #endif
         mtrScriptsRegisterFunction(mtrSF_GameControllerGetPovHat,
          "GameControllerGetPovHat");
+        mtrScriptsRegisterFunction(mtrSF_GameControllerGetButtonsCount,
+         "GameControllerGetButtonsCount");
+        mtrScriptsRegisterFunction(mtrSF_GameControllerGetAxesCount,
+         "GameControllerGetAxesCount");
+        mtrScriptsRegisterFunction(mtrSF_GameControllerGetTrackballsCount,
+         "GameControllerGetTrackballsCount");
+        mtrScriptsRegisterFunction(mtrSF_GameControllerGetPowHatsCount,
+         "GameControllerGetPowHatsCount");
     }
     else
     {
