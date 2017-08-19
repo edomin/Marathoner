@@ -190,8 +190,8 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCreate(const char *name, int width,
             texture->name = mtrDefaultTextureName;
         else
             texture->name = strcpy(texture->name, name);
-        SDL_SetTextureBlendMode(texture->texture,
-         SDL_BLENDMODE_BLEND | SDL_BLENDMODE_MOD);
+//        SDL_SetTextureBlendMode(texture->texture,
+//         SDL_BLENDMODE_BLEND | SDL_BLENDMODE_MOD);
         SDL_SetTextureColorMod(texture->texture, 0xFF, 0xFF, 0xFF);
         SDL_SetTextureAlphaMod(texture->texture, 0xFF);
         mtrLogWrite_s("Texture created", 0, MTR_LMT_INFO, name);
@@ -237,8 +237,8 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureLoad(const char *filename)
             texture->name = mtrDefaultTextureName;
         else
             texture->name = strcpy(texture->name, filename);
-        SDL_SetTextureBlendMode(texture->texture,
-         SDL_BLENDMODE_BLEND | SDL_BLENDMODE_MOD);
+//        SDL_SetTextureBlendMode(texture->texture,
+//         SDL_BLENDMODE_BLEND | SDL_BLENDMODE_MOD);
         SDL_SetTextureColorMod(texture->texture, 0xFF, 0xFF, 0xFF);
         SDL_SetTextureAlphaMod(texture->texture, 0xFF);
         mtrLogWrite_s("Texture loaded", 0, MTR_LMT_INFO, filename);
