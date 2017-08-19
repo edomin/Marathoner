@@ -40,8 +40,21 @@ void mtrScriptsInit(void)
     mtrScriptsRegisterNumericVariable("IKDM_SMALL", MTR_IKDM_SMALL);
     mtrScriptsRegisterNumericVariable("IKDM_MEDIUM", MTR_IKDM_MEDIUM);
     mtrScriptsRegisterNumericVariable("IKDM_LARGE", MTR_IKDM_LARGE);
+    mtrScriptsRegisterNumericVariable("FM_READ", MTR_FM_READ);
     mtrScriptsRegisterNumericVariable("FM_WRITE", MTR_FM_WRITE);
     mtrScriptsRegisterNumericVariable("FM_APPEND", MTR_FM_APPEND);
+    mtrScriptsRegisterNumericVariable("LMT_INFO", MTR_LMT_INFO);
+    mtrScriptsRegisterNumericVariable("LMT_NOTE", MTR_LMT_NOTE);
+    mtrScriptsRegisterNumericVariable("LMT_WARNING", MTR_LMT_WARNING);
+    mtrScriptsRegisterNumericVariable("LMT_ERROR", MTR_LMT_ERROR);
+    mtrScriptsRegisterNumericVariable("LMT_FATAL", MTR_LMT_FATAL);
+    mtrScriptsRegisterNumericVariable("LMT_DEBUG", MTR_LMT_DEBUG);
+    mtrScriptsRegisterNumericVariable("DMT_INFO", MTR_DMT_INFO);
+    mtrScriptsRegisterNumericVariable("DMT_NOTE", MTR_DMT_NOTE);
+    mtrScriptsRegisterNumericVariable("DMT_WARNING", MTR_DMT_WARNING);
+    mtrScriptsRegisterNumericVariable("DMT_ERROR", MTR_DMT_ERROR);
+    mtrScriptsRegisterNumericVariable("DMT_FATAL", MTR_DMT_FATAL);
+    mtrScriptsRegisterNumericVariable("DMT_DEBUG", MTR_DMT_DEBUG);
 
     mtrScriptsRegisterFunction(mtrSF_ConfigfileGetKeyName,
      "ConfigfileGetKeyName");
