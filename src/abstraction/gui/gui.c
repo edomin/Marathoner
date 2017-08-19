@@ -550,9 +550,9 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
 }
 
 MTR_EXPORT bool MTR_CALL mtrGuiBegin(const char *title, float boundsX,
- float boundsY, float boundsW, float bountsH, int flags)
+ float boundsY, float boundsW, float boundsH, int flags)
 {
-    struct nk_rect bounds = nk_rect(boundsX, boundsY, boundsW, bountsH);
+    struct nk_rect bounds = nk_rect(boundsX, boundsY, boundsW, boundsH);
 
     return nk_begin(&mtrNkGui.ctx, title, bounds, flags);
 }
