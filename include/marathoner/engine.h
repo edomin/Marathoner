@@ -71,6 +71,12 @@ mtrRequireShowInputDialogFunc mtrRequireShowInputDialog;
 typedef void (MTR_CALL * mtrRequireShowPasswordDialogFunc)(
  mtrShowPasswordDialogFunc_t);
 mtrRequireShowPasswordDialogFunc mtrRequireShowPasswordDialog;
+typedef void (MTR_CALL * mtrRequireAddFileFilterFunc)(
+ mtrAddFileFilterFunc_t);
+mtrRequireAddFileFilterFunc mtrRequireAddFileFilter;
+typedef void (MTR_CALL * mtrRequireClearFileFiltersFunc)(
+ mtrClearFileFiltersFunc_t);
+mtrRequireClearFileFiltersFunc mtrRequireClearFileFilters;
 typedef void (MTR_CALL * mtrRequireShowSaveFileDialogFunc)(
  mtrShowSaveFileDialogFunc_t);
 mtrRequireShowSaveFileDialogFunc mtrRequireShowSaveFileDialog;

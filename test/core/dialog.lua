@@ -19,7 +19,16 @@ local okCancel = ShowOkCancelMessageBox("Ok_Cancel", "Ok or Cancel?");
 local input = ShowInputDialog("input", "Input something:", "something");
 local password = ShowPasswordDialog("password", "Enter password:");
 
+ClearFileFilters();
+AddFileFilter("*.txt");
+AddFileFilter("*.ini");
+AddFileFilter("*.json");
+local savedFile = ShowSaveFileDialog("Save...", nil, "text files");
+local loadedFile = ShowOpenFileDialog("Open...", nil, "text files");
+
 FileWriteLineFast("test/output.txt", "yesNo: " .. yesNo, FM_APPEND);
 FileWriteLineFast("test/output.txt", "okCancel: " .. okCancel, FM_APPEND);
 FileWriteLineFast("test/output.txt", "input: " .. input, FM_APPEND);
 FileWriteLineFast("test/output.txt", "password: " .. password, FM_APPEND);
+FileWriteLineFast("test/output.txt", "savedFile: " .. savedFile, FM_APPEND);
+FileWriteLineFast("test/output.txt", "loadedFile: " .. loadedFile, FM_APPEND);

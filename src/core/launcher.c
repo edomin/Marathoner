@@ -821,6 +821,8 @@ int main(int argc, char** argv)
      MTR_VERSION_LAUNCHER & 0x0000FF);
     mtrLogWrite("Searching available plugins", 0, MTR_LMT_INFO);
 
+    mtrClearFileFilters();
+
     error = mtrLoadAllPlugins(NULL);
     if (error != 0)
         return error;
@@ -1134,7 +1136,7 @@ int main(int argc, char** argv)
                     strcat(temp, scriptName);
                 }
                 ctemp = mtrShowOpenFileDialog("Choose autorun script...", temp,
-                 0, NULL, NULL);
+                 NULL);
                 if (ctemp != NULL)
                 {
                     free(temp);

@@ -54,6 +54,8 @@ mtrShowYesNoMessageBoxFunc_t                mtrShowYesNoMessageBox;
 mtrShowOkCancelMessageBoxFunc_t             mtrShowOkCancelMessageBox;
 mtrShowInputDialogFunc_t                    mtrShowInputDialog;
 mtrShowPasswordDialogFunc_t                 mtrShowPasswordDialog;
+mtrAddFileFilterFunc_t                      mtrAddFileFilter;
+mtrClearFileFiltersFunc_t                   mtrClearFileFilters;
 mtrShowSaveFileDialogFunc_t                 mtrShowSaveFileDialog;
 mtrShowOpenFileDialogFunc_t                 mtrShowOpenFileDialog;
 mtrShowSelectFolderDialogFunc_t             mtrShowSelectFolderDialog;

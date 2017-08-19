@@ -84,6 +84,10 @@ void mtrScriptsInit(void)
      "ShowOkCancelMessageBox");
     mtrScriptsRegisterFunction(mtrSF_ShowInputDialog, "ShowInputDialog");
     mtrScriptsRegisterFunction(mtrSF_ShowPasswordDialog, "ShowPasswordDialog");
+    mtrScriptsRegisterFunction(mtrSF_AddFileFilter, "AddFileFilter");
+    mtrScriptsRegisterFunction(mtrSF_ClearFileFilters, "ClearFileFilters");
+    mtrScriptsRegisterFunction(mtrSF_ShowSaveFileDialog, "ShowSaveFileDialog");
+    mtrScriptsRegisterFunction(mtrSF_ShowOpenFileDialog, "ShowOpenFileDialog");
     mtrScriptsRegisterFunction(mtrSF_ShowSelectFolderDialog,
      "ShowSelectFolderDialog");
 

@@ -58,6 +58,10 @@ void RequireEngineFuncs(uint8_t plugin)
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireShowInputDialog, mtrShowInputDialog);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireShowPasswordDialog,
      mtrShowPasswordDialog);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireAddFileFilter,
+     mtrAddFileFilter);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireClearFileFilters,
+     mtrClearFileFilters);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireShowSaveFileDialog,
      mtrShowSaveFileDialog);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireShowOpenFileDialog,

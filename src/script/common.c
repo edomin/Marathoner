@@ -3,9 +3,6 @@
 
 #include "marathoner/script_func.h"
 
-TODO(ShowSaveFileDialog)
-TODO(ShowOpenFileDialog)
-
 MTR_SCRIPT_FUNC_V_S2(mtrSF_ScriptsRegisterStringVariable,
  mtrScriptsRegisterStringVariable)
 MTR_SCRIPT_FUNC_V_S1D1(mtrSF_ScriptsRegisterNumericVariable,
@@ -33,6 +30,10 @@ MTR_SCRIPT_FUNC_B_S2(mtrSF_ShowYesNoMessageBox, mtrShowYesNoMessageBox)
 MTR_SCRIPT_FUNC_B_S2(mtrSF_ShowOkCancelMessageBox, mtrShowOkCancelMessageBox)
 MTR_SCRIPT_FUNC_S_S3(mtrSF_ShowInputDialog, mtrShowInputDialog)
 MTR_SCRIPT_FUNC_S_S2(mtrSF_ShowPasswordDialog, mtrShowPasswordDialog)
+MTR_SCRIPT_FUNC_V_S1(mtrSF_AddFileFilter, mtrAddFileFilter)
+MTR_SCRIPT_FUNC_V_V(mtrSF_ClearFileFilters, mtrClearFileFilters)
+MTR_SCRIPT_FUNC_S_S3(mtrSF_ShowSaveFileDialog, mtrShowSaveFileDialog)
+MTR_SCRIPT_FUNC_S_S3(mtrSF_ShowOpenFileDialog, mtrShowOpenFileDialog)
 MTR_SCRIPT_FUNC_S_S2(mtrSF_ShowSelectFolderDialog, mtrShowSelectFolderDialog)
 MTR_SCRIPT_FUNC_V_S1U8t2(mtrSF_Notify, mtrNotify)
 MTR_SCRIPT_FUNC_U32t_S1(mtrSF_EncodingUtf8Codepoints, mtrEncodingUtf8Codepoints)

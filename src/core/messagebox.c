@@ -177,10 +177,38 @@ const char *MTR_CALL mtrShowPasswordDialog(const char *title,
     return tinyfd_inputBox(resultTitle, resultMessage, NULL);
 }
 
+void MTR_CALL mtrAddFileFilter(char *filter)
+{
+    int len;
+    len = strlen(filter);
+    mtrFileFilter[mtrFileFiltersCount] = filter;
+    mtrFileFilter[mtrFileFiltersCount] = malloc(sizeof(char) * (len + 1));
+    mtrFileFilter[mtrFileFiltersCount] = strcpy(
+     mtrFileFilter[mtrFileFiltersCount], filter);
+    mtrFileFilter[mtrFileFiltersCount][len] = '\0';
+    mtrFileFiltersCount++;
+}
+
+void MTR_CALL mtrClearFileFilters(void)
+{
+    int i;
+
+    for (i = 0; i < 255; i++)
+    {
+        if (mtrFileFilter[i] != NULL)
+        {
+            if (i < mtrFileFiltersCount)
+                free(mtrFileFilter[i]);
+            mtrFileFilter[i] = NULL;
+        }
+    }
+
+    mtrFileFiltersCount = 0;
+}
+
 /* MinGW only */
 const char *MTR_CALL mtrShowSaveFileDialog(const char *title,
- const char *defaultPathAndFile, int fpNum, const char **filterPatterns,
- const char *singleFilterDescription)
+ const char *defaultPathAndFile, const char *singleFilterDescription)
 {
     const char *emptyString = "";
     const char *resultTitle;
@@ -196,14 +224,13 @@ const char *MTR_CALL mtrShowSaveFileDialog(const char *title,
     else
         resultDefaultPathAndFile = defaultPathAndFile;
 
-    return tinyfd_saveFileDialog(resultTitle, resultDefaultPathAndFile, fpNum,
-     filterPatterns, singleFilterDescription) ;
+    return tinyfd_saveFileDialog(resultTitle, resultDefaultPathAndFile,
+     mtrFileFiltersCount, (const char * const * const)mtrFileFilter, singleFilterDescription) ;
 }
 
 /* MinGW only */
 const char *MTR_CALL mtrShowOpenFileDialog(const char *title,
- const char *defaultPathAndFile, int fpNum, const char **filterPatterns,
- const char *singleFilterDescription)
+ const char *defaultPathAndFile, const char *singleFilterDescription)
 {
     const char *emptyString = "";
     const char *resultTitle;
@@ -219,8 +246,8 @@ const char *MTR_CALL mtrShowOpenFileDialog(const char *title,
     else
         resultDefaultPathAndFile = defaultPathAndFile;
 
-    return tinyfd_openFileDialog(resultTitle, resultDefaultPathAndFile, fpNum,
-     filterPatterns, singleFilterDescription, 0);
+    return tinyfd_openFileDialog(resultTitle, resultDefaultPathAndFile,
+     mtrFileFiltersCount, (const char * const * const)mtrFileFilter, singleFilterDescription, 0);
 }
 
 /* TODO: Open Several files by selection */

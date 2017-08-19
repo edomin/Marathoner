@@ -134,6 +134,18 @@ MTR_EXPORT void MTR_CALL mtrRequireShowPasswordDialog(
     mtrShowPasswordDialog = ShowPasswordDialogFunc;
 }
 
+MTR_EXPORT void MTR_CALL mtrRequireAddFileFilter(
+ mtrAddFileFilterFunc_t AddFileFilterFunc)
+{
+    mtrAddFileFilter = AddFileFilterFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireClearFileFilters(
+ mtrClearFileFiltersFunc_t ClearFileFiltersFunc)
+{
+    mtrClearFileFilters = ClearFileFiltersFunc;
+}
+
 MTR_EXPORT void MTR_CALL mtrRequireShowSaveFileDialog(
  mtrShowSaveFileDialogFunc_t ShowSaveFileDialogFunc)
 {
