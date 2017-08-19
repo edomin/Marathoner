@@ -211,7 +211,7 @@ MTR_EXPORT bool MTR_CALL mtrFontDrawMbfString_f(uint32_t fontNum,
     int          symbolRow;
     font = (mtrFont_t *)(&((mtrFont_t *)mtrFontKeeper->data)[fontNum]);
 
-    if (font->mbf == NULL)
+    if (font->mbf == NULL || string == NULL)
         return false;
 
     ucs4Text = NULL;
@@ -229,7 +229,8 @@ MTR_EXPORT bool MTR_CALL mtrFontDrawMbfString_f(uint32_t fontNum,
         {
             mtrTextureBlitRegion_f(font->mbf->texTable[symbolTable],
              x + i * font->mbf->width, y, symbolCol * font->mbf->width,
-             symbolRow * font->mbf->height, font->mbf->width, font->mbf->height);
+             symbolRow * font->mbf->height, font->mbf->width,
+             font->mbf->height);
         }
     }
 
