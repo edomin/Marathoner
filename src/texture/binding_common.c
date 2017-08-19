@@ -22,7 +22,7 @@ MTR_SCRIPT_FUNC(mtrSF_TextureGetSizes)
     MTR_SF_PUSH_INT(width);
     MTR_SF_PUSH_INT(height);
 
-    return 0;
+    return 2;
 }
 #endif
 
@@ -91,6 +91,10 @@ void mtrScriptsRegisterAll(void)
     MTR_FIND_FUNCTION(mtrTextureSetBlendFunction, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrTextureSetAlphaBlending, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrTextureBlit_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrTextureBlitScaled_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrTextureBlitAngled_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrTextureBlitFlipped_f, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrTextureBlitGeneral_f, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrTextureBlitRegion_f, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrTextureBlitRegionScaled_f, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrTextureBlitRegionAngled_f, MTR_SOURCE_MODULE);
@@ -129,10 +133,10 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterFunction(mtrSF_TextureEndTarget, "TextureEndTarget");
         mtrScriptsRegisterFunction(mtrSF_TextureGetWidth, "TextureGetWidth");
         mtrScriptsRegisterFunction(mtrSF_TextureGetHeight,
-         "mtrSF_TextureGetHeight");
+         "TextureGetHeight");
         #ifdef lua_h
         mtrScriptsRegisterFunction(mtrSF_TextureGetSizes,
-         "mtrSF_TextureGetSizes");
+         "TextureGetSizes");
         #endif
         mtrScriptsRegisterFunction(mtrSF_TextureCreate, "TextureCreate");
         mtrScriptsRegisterFunction(mtrSF_TextureLoad, "TextureLoad");
