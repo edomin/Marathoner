@@ -57,11 +57,16 @@ Upper panel's buttons:
 
 Copying:
 Source code are under zlib license (for this moment. Read LICENSE).
-Images made by me are under CC0 license (Public Domain):
+Images made by me and generated sounds/music are under CC0 license (Public
+Domain):
     "test/media/helicopter.png"
     "test/media/helicopter_anim.png"
     "test/media/mbf_big_00.png"
     "test/media/mbf_big_04.png"
+    "test/media/bu-a-ninja-and-shields.ogg"
+    "test/media/pickup.wav"
+    "test/media/punch.wav"
+    "test/media/explosion.wav"
 License text for font "test/media/Vera.ttf" can be found in file
 "test/media/COPYRIGHT-Vera.TXT". Author - Bitstream, Inc.
 
