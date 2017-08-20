@@ -9,13 +9,9 @@
 #include "clipboard.h"
 #include "string_buffer.h"
 #include "plugin_loader.h"
+#include "options.h"
 
 #include "marathoner/engine.h"
-
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wold-style-declaration"
-#include "saneopt.h"
-#pragma GCC diagnostic pop
 
 void RequireEngineFuncs(uint8_t plugin)
 {
@@ -145,7 +141,6 @@ int main(int argc, char** argv)
     char *autorunPlugin = NULL;
     char *autorunScript = NULL;
     char *currentArgument = NULL;
-    saneopt_t* arguments;
 
     mtrLogInit("Marathoner.log");
 
@@ -158,16 +153,16 @@ int main(int argc, char** argv)
      MTR_VERSION_MARATHONER & 0x0000FF);
     mtrLogWrite("Searching available plugins", 0, MTR_LMT_INFO);
 
-    arguments = saneopt_init(argc, argv);
-    saneopt_alias(arguments, "help", "h");
-    if (strcmp(saneopt_get(arguments, "help"), "") == 0)
+    mtrOptionsProcess(argc, argv);
+    mtrOptionsAlias("help", "h");
+    if (strcmp(mtrOptionsGet("help"), "") == 0)
     {
         /* Print help to log */
     }
 
-    autorunAction = saneopt_get(arguments, "autorun-action");
-    autorunPlugin = saneopt_get(arguments, "autorun-plugin");
-    autorunScript = saneopt_get(arguments, "autorun-script");
+    autorunAction = mtrOptionsGet("autorun-action");
+    autorunPlugin = mtrOptionsGet("autorun-plugin");
+    autorunScript = mtrOptionsGet("autorun-script");
 
     if (autorunAction == NULL)
         autorunAction = mtrConfigfileReadString("Marathoner.cfg", "Autorun",
@@ -199,7 +194,7 @@ int main(int argc, char** argv)
         {
             for (j = 0; j < mtrPluginsFound; j++)
             {
-                currentArgument = saneopt_get(arguments,
+                currentArgument = mtrOptionsGet(
                  mtrPluginData[i].report->subsystem);
                 if (currentArgument == NULL)
                     temp = mtrConfigfileReadString("Marathoner.cfg",
@@ -228,7 +223,7 @@ int main(int argc, char** argv)
                 {
                     ok = false;
 
-                    currentArgument = saneopt_get(arguments,
+                    currentArgument = mtrOptionsGet(
                      mtrPluginData[i].report->subsystem);
                     if (currentArgument == NULL)
                         temp = mtrConfigfileReadString("Marathoner.cfg",

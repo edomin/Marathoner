@@ -22,7 +22,8 @@ MTR_OBJS = $(OBJSDIR)/engine.o \
  $(OBJSDIR)/directory.o \
  $(OBJSDIR)/clipboard.o \
  $(OBJSDIR)/string_buffer.o \
- $(OBJSDIR)/plugin_loader.o
+ $(OBJSDIR)/plugin_loader.o \
+ $(OBJSDIR)/options.o
 
 LCHR_OBJS = $(OBJSDIR)/launcher.o \
  $(OBJSDIR)/log.o \
@@ -138,6 +139,9 @@ $(OBJSDIR)/string_buffer.o: string_buffer.c string_buffer.h
 $(OBJSDIR)/plugin_loader.o: plugin_loader.c plugin_loader.h
 	$(CC) $(CFLAGS) $(INCDIRS) -c plugin_loader.c -o $(OBJSDIR)/plugin_loader.o
 
+$(OBJSDIR)/options.o: options.c options.h
+	$(CC) $(CFLAGS) $(INCDIRS) -c options.c -o $(OBJSDIR)/options.o
+
 $(OBJSDIR)/engine.res: $(RCDIR)/engine.rc
 	$(RC) $(RCFLAGS) -i $(RCDIR)/engine.rc -o $(OBJSDIR)/engine.res
 
@@ -182,6 +186,8 @@ string_buffer.h: indexkeeper.h ../../include/marathoner/engine.h
 
 plugin_loader.h: notification.h directory.h log.h \
  ../../include/marathoner/engine.h
+
+options.h: ../../include/marathoner/engine.h
 
 ../../include/marathoner/engine.h: ../../include/marathoner/marathoner.h
 
