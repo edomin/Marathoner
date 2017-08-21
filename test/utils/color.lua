@@ -19,7 +19,7 @@ b = ColorRGBGetB(c);
 FileWriteLineFast("test/output.txt", "r: " .. r, FM_APPEND);
 FileWriteLineFast("test/output.txt", "g: " .. g, FM_APPEND);
 FileWriteLineFast("test/output.txt", "b: " .. b, FM_APPEND);
-r, g, b, a = ColorSplitRGB(ca);
+r, g, b, a = ColorSplitRGBA(ca);
 FileWriteLineFast("test/output.txt", "r: " .. r, FM_APPEND);
 FileWriteLineFast("test/output.txt", "g: " .. g, FM_APPEND);
 FileWriteLineFast("test/output.txt", "b: " .. b, FM_APPEND);
