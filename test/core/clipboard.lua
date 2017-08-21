@@ -1,7 +1,7 @@
 -- Positive
 FileWriteLineFast("test/output.txt", "Positive test", FM_WRITE);
 
-local success ClipboardPutText("some text");
+local success = ClipboardPutText("some text");
 if success then
     FileWriteLineFast("test/output.txt", "success", FM_APPEND);
 else
