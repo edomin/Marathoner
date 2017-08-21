@@ -17,8 +17,13 @@ ConfigfileWriteSingle("test/core/test_cfg.ini", "section_1", "someSingle",
 ConfigfileWriteString("test/core/test_cfg.ini", "section_1", "someString",
  "test string");
 
-local someBool = ConfigfileReadBool("test/core/test_cfg.ini", "section_1",
- "someBool", false);
+local someBool;
+if ConfigfileReadBool("test/core/test_cfg.ini", "section_1", "someBool", false)
+then
+    someBool = "true";
+else
+    someBool = "false";
+end;
 local someInt = ConfigfileReadInt("test/core/test_cfg.ini", "section_1",
  "someInt", 24);
 local someSingle = ConfigfileReadSingle("test/core/test_cfg.ini", "section_1",
@@ -35,8 +40,12 @@ ConfigfileDeleteKey("test/core/test_cfg.ini", "section_1", "someInt");
 ConfigfileDeleteKey("test/core/test_cfg.ini", "section_1", "someSingle");
 ConfigfileDeleteKey("test/core/test_cfg.ini", "section_1", "someString");
 
-someBool = ConfigfileReadBool("test/core/test_cfg.ini", "section_1", "someBool",
- false);
+if ConfigfileReadBool("test/core/test_cfg.ini", "section_1", "someBool", false)
+then
+    someBool = "true";
+else
+    someBool = "false";
+end;
 someInt = ConfigfileReadInt("test/core/test_cfg.ini", "section_1", "someInt",
  24);
 someSingle = ConfigfileReadSingle("test/core/test_cfg.ini", "section_1",
