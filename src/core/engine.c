@@ -98,6 +98,8 @@ void RequireEngineFuncs(uint8_t plugin)
      mtrStringBufferGetString);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireStringBufferGetMaxLen,
      mtrStringBufferGetMaxLen);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireOptionsAlias, mtrOptionsAlias);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireOptionsGet, mtrOptionsGet);
 }
 
 /* Check if module disabled and process it */

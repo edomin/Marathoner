@@ -89,6 +89,9 @@ mtrStringBufferSetStringFunc_t              mtrStringBufferSetString;
 mtrStringBufferGetStringFunc_t              mtrStringBufferGetString;
 mtrStringBufferGetMaxLenFunc_t              mtrStringBufferGetMaxLen;
 
+mtrOptionsAliasFunc_t                       mtrOptionsAlias;
+mtrOptionsGetFunc_t                         mtrOptionsGet;
+
 uint8_t mtrPluginsCount;
 
 #define MTR_FIND_FUNCTION(function, module)                        \

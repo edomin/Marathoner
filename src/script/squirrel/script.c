@@ -122,6 +122,9 @@ void mtrScriptsInit(void)
     mtrScriptsRegisterFunction(mtrSF_StringBufferGetMaxLen,
      "StringBufferGetMaxLen");
 
+    mtrScriptsRegisterFunction(mtrSF_OptionsAlias, "OptionsAlias");
+    mtrScriptsRegisterFunction(mtrSF_OptionsGet, "OptionsGet");
+
     mtrLogWrite("Script functions and constants of engine registered",
      1, MTR_LMT_INFO);
     /* Registering functions and constants from all binding plugins */

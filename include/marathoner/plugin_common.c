@@ -297,6 +297,18 @@ MTR_EXPORT void MTR_CALL mtrRequireStringBufferGetMaxLen(
     mtrStringBufferGetMaxLen = StringBufferGetMaxLenFunc;
 }
 
+MTR_EXPORT void MTR_CALL mtrRequireOptionsAlias(
+ mtrOptionsAliasFunc_t OptionsAliasFunc)
+{
+    mtrOptionsAlias = OptionsAliasFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireOptionsGet(
+ mtrOptionsGetFunc_t OptionsGetFunc)
+{
+    mtrOptionsGet = OptionsGetFunc;
+}
+
 MTR_EXPORT void MTR_CALL mtrRequirePluginData(mtrPlugin* pluginData,
  uint8_t pluginsCount)
 {

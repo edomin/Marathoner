@@ -155,6 +155,11 @@ typedef void (MTR_CALL * mtrRequireStringBufferGetMaxLenFunc)(
  mtrStringBufferGetMaxLenFunc_t);
 mtrRequireStringBufferGetMaxLenFunc mtrRequireStringBufferGetMaxLen;
 
+typedef void (MTR_CALL * mtrRequireOptionsAliasFunc)(mtrOptionsAliasFunc_t);
+mtrRequireOptionsAliasFunc mtrRequireOptionsAlias;
+typedef void (MTR_CALL * mtrRequireOptionsGetFunc)(mtrOptionsGetFunc_t);
+mtrRequireOptionsGetFunc mtrRequireOptionsGet;
+
 /*  */
 typedef void (MTR_CALL * mtrRequirePluginDataFunc)(mtrPlugin *, uint8_t);
 mtrRequirePluginDataFunc mtrRequirePluginData;

@@ -50,6 +50,9 @@ void StringBufferSetString(uint32_t sbnum, const char *string)
 char *StringBufferGetString(uint32_t sbnum)
 int StringBufferGetMaxLen(uint32_t sbnum)
 
+bool OptionsAlias(char *option, char *alias)
+char *OptionsGet(char *option)
+
 bool ScreenInit(int width, int height, bool fullscreen, const char *title)
 void ScreenQuit()
 void ScreenFlip()

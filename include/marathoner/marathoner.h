@@ -134,6 +134,10 @@ typedef void        (MTR_CALL * mtrStringBufferSetStringFunc_t)(uint32_t,
 typedef char *      (MTR_CALL * mtrStringBufferGetStringFunc_t)(uint32_t);
 typedef int         (MTR_CALL * mtrStringBufferGetMaxLenFunc_t)(uint32_t);
 
+typedef bool        (MTR_CALL * mtrOptionsAliasFunc_t)(const char *,
+ const char *);
+typedef char *      (MTR_CALL * mtrOptionsGetFunc_t)(const char *);
+
 /* loaded dll-plugin data */
 mtrPlugin *mtrPluginData;
 
