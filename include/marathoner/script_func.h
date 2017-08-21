@@ -2371,6 +2371,20 @@
         return 1;                            \
     }
 
+#define MTR_SCRIPT_FUNC_S_S1(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)                \
+    {                                     \
+        const char *s1;                   \
+        const char *result;               \
+        MTR_SF_GET_STRING(s1, 1);         \
+        result = func(s1);                \
+        if (result != NULL)               \
+            MTR_SF_PUSH_STRING(result);   \
+        else                              \
+            MTR_SF_PUSH_NIL();            \
+        return 1;                         \
+    }
+
 #define MTR_SCRIPT_FUNC_S_S2(sfunc, func) \
     MTR_SCRIPT_FUNC(sfunc)                \
     {                                     \
@@ -2398,6 +2412,26 @@
         MTR_SF_GET_STRING(s2, 2);         \
         MTR_SF_GET_STRING(s3, 3);         \
         result = func(s1, s2, s3);        \
+        if (result != NULL)               \
+            MTR_SF_PUSH_STRING(result);   \
+        else                              \
+            MTR_SF_PUSH_NIL();            \
+        return 1;                         \
+    }
+
+#define MTR_SCRIPT_FUNC_S_S4(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)                \
+    {                                     \
+        const char *s1;                   \
+        const char *s2;                   \
+        const char *s3;                   \
+        const char *s4;                   \
+        const char *result;               \
+        MTR_SF_GET_STRING(s1, 1);         \
+        MTR_SF_GET_STRING(s2, 2);         \
+        MTR_SF_GET_STRING(s3, 3);         \
+        MTR_SF_GET_STRING(s4, 4);         \
+        result = func(s1, s2, s3, s4);    \
         if (result != NULL)               \
             MTR_SF_PUSH_STRING(result);   \
         else                              \
