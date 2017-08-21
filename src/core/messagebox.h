@@ -11,7 +11,7 @@
 
 #include "marathoner/engine.h"
 
-char *mtrFileFilter[256];
+const char *mtrFileFilter[256];
 static int mtrFileFiltersCount __attribute__((used)) = 0;
 
 void MTR_CALL mtrShowSimpleMessageBox(uint8_t type, const char *title,
@@ -22,7 +22,7 @@ const char *MTR_CALL mtrShowInputDialog(const char *title, const char *message,
  const char *defaultInput);
 const char *MTR_CALL mtrShowPasswordDialog(const char *title,
  const char *message);
-void MTR_CALL mtrAddFileFilter(char *filter);
+void MTR_CALL mtrAddFileFilter(const char *filter);
 void MTR_CALL mtrClearFileFilters(void);
 const char *MTR_CALL mtrShowSaveFileDialog(const char *title,
  const char *defaultPathAndFile, const char *singleFilterDescription);

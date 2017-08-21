@@ -177,15 +177,15 @@ const char *MTR_CALL mtrShowPasswordDialog(const char *title,
     return tinyfd_inputBox(resultTitle, resultMessage, NULL);
 }
 
-void MTR_CALL mtrAddFileFilter(char *filter)
+void MTR_CALL mtrAddFileFilter(const char *filter)
 {
-    int len;
-    len = strlen(filter);
+//    int len;
+//    len = strlen(filter);
     mtrFileFilter[mtrFileFiltersCount] = filter;
-    mtrFileFilter[mtrFileFiltersCount] = malloc(sizeof(char) * (len + 1));
-    mtrFileFilter[mtrFileFiltersCount] = strcpy(
-     mtrFileFilter[mtrFileFiltersCount], filter);
-    mtrFileFilter[mtrFileFiltersCount][len] = '\0';
+//    mtrFileFilter[mtrFileFiltersCount] = malloc(sizeof(char) * (len + 1));
+//    mtrFileFilter[mtrFileFiltersCount] = strcpy(
+//     mtrFileFilter[mtrFileFiltersCount], filter);
+//    mtrFileFilter[mtrFileFiltersCount][len] = '\0';
     mtrFileFiltersCount++;
 }
 
@@ -195,12 +195,12 @@ void MTR_CALL mtrClearFileFilters(void)
 
     for (i = 0; i < 255; i++)
     {
-        if (mtrFileFilter[i] != NULL)
-        {
-            if (i < mtrFileFiltersCount)
-                free(mtrFileFilter[i]);
+//        if (mtrFileFilter[i] != NULL)
+//        {
+//            if (i < mtrFileFiltersCount)
+//                free(mtrFileFilter[i]);
             mtrFileFilter[i] = NULL;
-        }
+//        }
     }
 
     mtrFileFiltersCount = 0;
@@ -225,7 +225,7 @@ const char *MTR_CALL mtrShowSaveFileDialog(const char *title,
         resultDefaultPathAndFile = defaultPathAndFile;
 
     return tinyfd_saveFileDialog(resultTitle, resultDefaultPathAndFile,
-     mtrFileFiltersCount, (const char * const * const)mtrFileFilter, singleFilterDescription) ;
+     mtrFileFiltersCount, mtrFileFilter, singleFilterDescription) ;
 }
 
 /* MinGW only */

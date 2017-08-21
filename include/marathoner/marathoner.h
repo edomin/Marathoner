@@ -87,7 +87,7 @@ typedef const char *(MTR_CALL * mtrShowInputDialogFunc_t)(const char *,
  const char *, const char *);
 typedef const char *(MTR_CALL * mtrShowPasswordDialogFunc_t)(const char *,
  const char *);
-typedef void        (MTR_CALL * mtrAddFileFilterFunc_t)(char *);
+typedef void        (MTR_CALL * mtrAddFileFilterFunc_t)(const char *);
 typedef void        (MTR_CALL * mtrClearFileFiltersFunc_t)(void);
 typedef const char *(MTR_CALL * mtrShowSaveFileDialogFunc_t)(const char *,
  const char *, const char *);
