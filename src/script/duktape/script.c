@@ -76,7 +76,10 @@ void mtrScriptsInit(void)
      "ConfigfileGetSectionName");
     mtrScriptsRegisterFunction(mtrSF_ConfigfileDeleteKey,
      "ConfigfileDeleteKey");
+    mtrScriptsRegisterFunction(mtrSF_ConfigfileDeleteSection,
+     "ConfigfileDeleteSection");
     mtrScriptsRegisterFunction(mtrSF_ConfigfileReadBool, "ConfigfileReadBool");
+    mtrScriptsRegisterFunction(mtrSF_ConfigfileReadInt, "ConfigfileReadInt");
     mtrScriptsRegisterFunction(mtrSF_ConfigfileReadSingle,
      "ConfigfileReadSingle");
     mtrScriptsRegisterFunction(mtrSF_ConfigfileReadString,
