@@ -33,8 +33,8 @@ MTR_EXPORT uint32_t MTR_CALL mtrColorAssembleRGBA(uint8_t r, uint8_t g,
 MTR_EXPORT void MTR_CALL mtrColorSplitRGB(uint32_t rgb, uint8_t *r, uint8_t *g,
  uint8_t *b)
 {
-    *r = (uint8_t)((rgb & 0xFF0000) > 16);
-    *g = (uint8_t)((rgb & 0x00FF00) > 8);
+    *r = (uint8_t)((rgb & 0xFF0000) >> 16);
+    *g = (uint8_t)((rgb & 0x00FF00) >> 8);
     *b = (uint8_t)(rgb & 0x0000FF);
 }
 
