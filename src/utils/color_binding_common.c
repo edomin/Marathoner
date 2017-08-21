@@ -1540,6 +1540,7 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterFunction(mtrSF_ColorRGBAGetB, "ColorRGBAGetB");
         mtrScriptsRegisterFunction(mtrSF_ColorRGBAGetA, "ColorRGBAGetA");
         mtrScriptsRegisterFunction(mtrSF_ColorRGBASetR, "ColorRGBASetR");
+        mtrScriptsRegisterFunction(mtrSF_ColorRGBASetG, "ColorRGBASetG");
         mtrScriptsRegisterFunction(mtrSF_ColorRGBASetB, "ColorRGBASetB");
         mtrScriptsRegisterFunction(mtrSF_ColorRGBASetA, "ColorRGBASetA");
         mtrScriptsRegisterFunction(mtrSF_ColorRGBtoRGBA, "ColorRGBtoRGBA");
