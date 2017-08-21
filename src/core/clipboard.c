@@ -23,13 +23,13 @@ char *MTR_CALL mtrClipboardGetText(void)
     success = true;
     if (Clipboard_is_format_avail(CF_TEXT))
     {
+        if (!Clipboard_open())
+            return NULL;
         size = Clipboard_get_size(CF_TEXT);
         text = malloc(sizeof(char) * (size + 1));
-        if (!Clipboard_open())
-        {
-            free(text);
+        if (text == NULL)
             return NULL;
-        }
+
         if (!Clipboard_get(CF_TEXT, (uint8_t*)text, size))
             success = false;
         if (!Clipboard_close())
