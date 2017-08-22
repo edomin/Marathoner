@@ -23,6 +23,7 @@ bool MTR_CALL mtrFileInit(uint32_t dmSize, uint32_t reservedCount)
     {
         file = IK_GET_DATA(mtrFile_t *, mtrFileKeeper, i);
         file->buffer = NULL;
+        file->bufLength = 0;
     }
 
     return true;
@@ -93,37 +94,43 @@ size_t MTR_CALL mtrFileRead(uint32_t fileNum, char **buffer)
     if (file->buffer != NULL)
     {
         free(file->buffer);
+        file->buffer = NULL;
         file->bufLength = 0;
     }
 
     #ifndef __MINGW32__
     if (__freadable(file->file) == 0)
+    {
+        *buffer = NULL;
         return 0;
+    }
     #endif
 
     if (fseek(file->file, 0, SEEK_END) != 0)
+    {
+        *buffer = NULL;
         return 0;
+    }
 
     fileSizeResult = ftell(file->file);
     rewind(file->file);
     if (fileSizeResult == -1L)
-        return 0;
-    fileSize = fileSizeResult;
-
-    file->buffer = malloc(sizeof(char) * fileSize);
-    if (file->buffer == NULL)
-        return 0;
-
-    readedSize = fread(file->buffer, 1, fileSize, file->file);
-    if (readedSize != fileSize)
     {
-        free(file->buffer);
-        file->buffer = NULL;
-        rewind(file->file);
+        *buffer = NULL;
         return 0;
     }
 
-    file->bufLength = fileSize;
+    fileSize = fileSizeResult;
+    file->buffer = malloc(sizeof(char) * (fileSize + 1));
+    if (file->buffer == NULL)
+    {
+        *buffer = NULL;
+        return 0;
+    }
+
+    readedSize = fread(file->buffer, 1, fileSize, file->file);
+    file->buffer[readedSize] = '\0';
+    file->bufLength = readedSize;
     *buffer = file->buffer;
     return file->bufLength;
 }

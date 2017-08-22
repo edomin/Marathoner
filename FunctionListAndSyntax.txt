@@ -35,7 +35,7 @@ void Notify(const char *message, uint8_t level, uint8_t messageType)
 
 uint32_t FileOpen(const char *filename, int mode)
 bool FileClose(uint32_t fileNum)
-size_t FileRead(uint32_t fileNum, char **buffer)
+char *, size_t FileRead(uint32_t fileNum)
 bool FileWrite(uint32_t fileNum, const char *string)
 bool FileWriteLine(uint32_t fileNum, const char *string)
 void FileWriteFast(const char* filename, const char *text, uint8_t mode)
