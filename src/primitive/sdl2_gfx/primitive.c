@@ -37,8 +37,8 @@ MTR_EXPORT bool MTR_CALL mtrPrimitiveInit(void)
      "mtrGetScreen");
     if (mtrGetScreen == NULL)
     {
-        mtrNotify("Unable to load 'mtrGetScreen' function from 'Screen_SDL2' module",
-         1, MTR_LMT_FATAL);
+        mtrNotify("Unable to load 'mtrGetScreen' function from 'Screen_SDL2' "
+         "module", 1, MTR_LMT_FATAL);
         return false;
     }
     mtrScreen = mtrGetScreen();
@@ -175,14 +175,14 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveLine_ca_f(float x1, float y1, float x2,
 MTR_EXPORT void MTR_CALL mtrPrimitiveArc_rgb_f(float x, float y, float radius,
  float startAngle, float endAngle, uint8_t r, uint8_t g, uint8_t b)
 {
-    arcRGBA(mtrScreen->renderer, x, y, radius, startAngle, endAngle, r, g, b,
+    arcRGBA(mtrScreen->renderer, x, y, radius, -endAngle, -startAngle, r, g, b,
      0xFF);
 }
 
 MTR_EXPORT void MTR_CALL mtrPrimitiveArc_rgba_f(float x, float y, float radius,
  float startAngle, float endAngle, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
-    arcRGBA(mtrScreen->renderer, x, y, radius, startAngle, endAngle, r, g, b,
+    arcRGBA(mtrScreen->renderer, x, y, radius, -endAngle, -startAngle, r, g, b,
      a);
 }
 
@@ -196,7 +196,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveArc_c_f(float x, float y, float radius,
     g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
     b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
 
-    arcRGBA(mtrScreen->renderer, x, y, radius, startAngle, endAngle, r, g, b,
+    arcRGBA(mtrScreen->renderer, x, y, radius, -endAngle, -startAngle, r, g, b,
      0xFF);
 }
 
@@ -213,7 +213,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveArc_ca_f(float x, float y, float radius,
     a = (uint8_t)(color  - ((uint32_t)r << 24) - ((uint32_t)g << 16) -
      ((uint32_t)b << 8));
 
-    arcRGBA(mtrScreen->renderer, x, y, radius, startAngle, endAngle, r, g, b,
+    arcRGBA(mtrScreen->renderer, x, y, radius, -endAngle, -startAngle, r, g, b,
      a);
 }
 
@@ -221,16 +221,16 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveSegmentFilled_rgb_f(float x, float y,
  float radius, float startAngle, float endAngle, uint8_t r, uint8_t g,
  uint8_t b)
 {
-    filledPieRGBA(mtrScreen->renderer, x, y, radius, startAngle, endAngle, r, g,
-     b, 0xFF);
+    filledPieRGBA(mtrScreen->renderer, x, y, radius, -endAngle, -startAngle, r,
+     g, b, 0xFF);
 }
 
 MTR_EXPORT void MTR_CALL mtrPrimitiveSegmentFilled_rgba_f(float x, float y,
  float radius, float startAngle, float endAngle, uint8_t r, uint8_t g,
  uint8_t b, uint8_t a)
 {
-    filledPieRGBA(mtrScreen->renderer, x, y, radius, startAngle, endAngle, r, g,
-     b, a);
+    filledPieRGBA(mtrScreen->renderer, x, y, radius, -endAngle, -startAngle, r,
+     g, b, a);
 }
 
 MTR_EXPORT void MTR_CALL mtrPrimitiveSegmentFilled_c_f(float x, float y,
@@ -243,8 +243,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveSegmentFilled_c_f(float x, float y,
     g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
     b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
 
-    filledPieRGBA(mtrScreen->renderer, x, y, radius, startAngle, endAngle, r, g,
-     b, 0xFF);
+    filledPieRGBA(mtrScreen->renderer, x, y, radius, -endAngle, -startAngle, r,
+     g, b, 0xFF);
 }
 
 MTR_EXPORT void MTR_CALL mtrPrimitiveSegmentFilled_ca_f(float x, float y,
@@ -260,8 +260,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveSegmentFilled_ca_f(float x, float y,
     a = (uint8_t)(color  - ((uint32_t)r << 24) - ((uint32_t)g << 16) -
      ((uint32_t)b << 8));
 
-    filledPieRGBA(mtrScreen->renderer, x, y, radius, startAngle, endAngle, r, g,
-     b, a);
+    filledPieRGBA(mtrScreen->renderer, x, y, radius, -endAngle, -startAngle, r,
+     g, b, a);
 }
 
 MTR_EXPORT void MTR_CALL mtrPrimitiveCircle_rgb_f(float x, float y,
