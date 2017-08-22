@@ -1766,6 +1766,19 @@
         return 1;                              \
     }
 
+#define MTR_SCRIPT_FUNC_B_S1D1(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)                  \
+    {                                       \
+        const char *s1;                     \
+        double d1;                          \
+        bool result;                        \
+        MTR_SF_GET_STRING(s1, 1);           \
+        MTR_SF_GET_DOUBLE(d1, 2);           \
+        result = func(s1, d1);              \
+        MTR_SF_PUSH_BOOL(result);           \
+        return 1;                           \
+    }
+
 #define MTR_SCRIPT_FUNC_I_V(sfunc, func) \
     MTR_SCRIPT_FUNC(sfunc)               \
     {                                    \
