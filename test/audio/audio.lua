@@ -171,9 +171,9 @@ end;
 
 AudioChannelsStop();
 AudioMusicStop();
-void AudioSoundFree(pickup);
-void AudioSoundFree(punch);
-void AudioSoundFree(explosion);
-void AudioMusicFree(music);
+AudioSoundFree(pickup);
+AudioSoundFree(punch);
+AudioSoundFree(explosion);
+AudioMusicFree(music);
 AudioQuit();
 ScreenQuit();
