@@ -55,7 +55,10 @@ MTR_SCRIPT_FUNC(mtrSF_FileRead)
         mtrFileRead(index, &text);
     #endif /* lua_h */
 
-    MTR_SF_PUSH_STRING(text);
+    if (text != NULL)
+        MTR_SF_PUSH_STRING(text);
+    else
+        MTR_SF_PUSH_NIL();
     #ifdef lua_h
         MTR_SF_PUSH_SIZE(size);
         return 2;
