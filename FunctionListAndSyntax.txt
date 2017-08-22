@@ -59,6 +59,7 @@ void ScreenFlip()
 int, int ScreenGetSizes()
 int ScreenGetWidth()
 int ScreenGetHeight()
+bool ScreenXed()
 
 bool TextureInit(uint32_t dmSize, uint32_t reservedCount)
 void TextureBeginTarget(uint32_t texNum)

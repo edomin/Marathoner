@@ -21,4 +21,7 @@ mtrScreenGetWidthFunc mtrScreenGetWidth;
 typedef int (MTR_CALL * mtrScreenGetHeightFunc)(void);
 mtrScreenGetHeightFunc mtrScreenGetHeight;
 
+typedef bool (MTR_CALL * mtrScreenXedFunc)(void);
+mtrScreenXedFunc mtrScreenXed;
+
 #endif

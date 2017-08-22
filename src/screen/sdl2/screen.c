@@ -226,6 +226,19 @@ MTR_EXPORT int MTR_CALL mtrScreenGetHeight(void)
     return height;
 }
 
+MTR_EXPORT bool MTR_CALL mtrScreenXed(void)
+{
+    SDL_Event events[32];
+    int       numEvents;
+
+    numEvents = SDL_PeepEvents(events, 32, SDL_GETEVENT, SDL_QUIT, SDL_QUIT);
+
+    if (numEvents == 0)
+        return false;
+
+    return true;
+}
+
 MTR_EXPORT mtrScreen_t *MTR_CALL mtrGetScreen(void)
 {
     return mtrScreen;

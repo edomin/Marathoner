@@ -5,6 +5,7 @@ local x = 32;
 FileWriteLineFast("test/output.txt", "Positive test", FM_WRITE);
 
 ScreenInit(640, 480, false, "Screen Test");
+MouseInit();
 local w = ScreenGetWidth();
 local h = ScreenGetHeight();
 FileWriteLineFast("test/output.txt", "width: " .. w , FM_APPEND);
@@ -16,6 +17,10 @@ FileWriteLineFast("test/output.txt", "height: " .. h , FM_APPEND);
 TimerInit();
 PrimitiveInit();
 for i = 0, 150, 1 do
+    MouseRefresh();
+    if ScreenXed() then
+        goto exit;
+    end;
     TimerStart();
     x = x + 1;
     PrimitiveFill_c(0x000000);
@@ -23,3 +28,4 @@ for i = 0, 150, 1 do
     ScreenFlip();
     TimerDelayForFPS(30);
 end;
+::exit::

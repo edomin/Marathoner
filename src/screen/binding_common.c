@@ -21,6 +21,7 @@ MTR_SCRIPT_FUNC(mtrSF_ScreenGetSizes)
 
 MTR_SCRIPT_FUNC_I_V(mtrSF_ScreenGetWidth, mtrScreenGetWidth)
 MTR_SCRIPT_FUNC_I_V(mtrSF_ScreenGetHeight, mtrScreenGetHeight)
+MTR_SCRIPT_FUNC_B_V(mtrSF_ScreenXed, mtrScreenXed)
 
 void mtrScriptsRegisterAll(void)
 {
@@ -37,6 +38,7 @@ void mtrScriptsRegisterAll(void)
     #endif
     MTR_FIND_FUNCTION(mtrScreenGetWidth, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrScreenGetHeight, MTR_SOURCE_MODULE);
+    MTR_FIND_FUNCTION(mtrScreenXed, MTR_SOURCE_MODULE);
 
     if (ok)
     {
@@ -48,6 +50,7 @@ void mtrScriptsRegisterAll(void)
         #endif
         mtrScriptsRegisterFunction(mtrSF_ScreenGetWidth, "ScreenGetWidth");
         mtrScriptsRegisterFunction(mtrSF_ScreenGetHeight, "ScreenGetHeight");
+        mtrScriptsRegisterFunction(mtrSF_ScreenXed, "ScreenXed");
     }
     else
     {
