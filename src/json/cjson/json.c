@@ -97,13 +97,23 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonParseFile(const char *filename)
     mtrJson_t *json;
     uint32_t   file;
     char      *buffer;
+    size_t     size;
 
     file = mtrFileOpen(filename, MTR_FM_READ);
     if (file == 0)
+    {
+        mtrLogWrite("Unable to open JSON file", 0, MTR_LMT_ERROR);
         return 0;
+    }
 
-    mtrFileRead(file, &buffer);
+    size = mtrFileRead(file, &buffer);
     mtrFileClose(file);
+
+    if (size == 0)
+    {
+        mtrLogWrite("Unable to read JSON file", 0, MTR_LMT_ERROR);
+        return 0;
+    }
 
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrJsonKeeper);
     json = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, freeIndex);
