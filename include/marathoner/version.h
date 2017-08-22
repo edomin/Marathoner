@@ -52,8 +52,8 @@
 #define MTR_VERSION_SCREEN_SDL2_GPU_SQUIRREL        0x000001 /* inc patch */
 #define MTR_VERSION_SCREEN_SDL2_GPU_DUKTAPE         0x000000 /* initial */
 
-#define MTR_VERSION_SCRIPT_LUA                      0x000101 /* inc patch */
-#define MTR_VERSION_SCRIPT_SQUIRREL                 0x000001 /* inc patch */
+#define MTR_VERSION_SCRIPT_LUA                      0x000200 /* inc minor */
+#define MTR_VERSION_SCRIPT_SQUIRREL                 0x000100 /* inc minor */
 #define MTR_VERSION_SCRIPT_DUKTAPE                  0x000000 /* initial */
 
 #define MTR_VERSION_TEXTURE_SDL2_IMAGE              0x000200 /* inc minor */

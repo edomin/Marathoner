@@ -14,9 +14,9 @@ lua_State *mtrVm;
 
 MTR_EXPORT void MTR_CALL mtrScriptsRegisterFunction(lua_CFunction func,
  const char * funcname);
-MTR_EXPORT void MTR_CALL mtrScriptsRegisterStringVariable(const char *name,
+MTR_EXPORT bool MTR_CALL mtrScriptsRegisterStringVariable(const char *name,
  const char *value);
-MTR_EXPORT void MTR_CALL mtrScriptsRegisterNumericVariable(const char *name,
+MTR_EXPORT bool MTR_CALL mtrScriptsRegisterNumericVariable(const char *name,
  double value);
 
 #endif

@@ -3,9 +3,9 @@
 
 #include "marathoner/script_func.h"
 
-MTR_SCRIPT_FUNC_V_S2(mtrSF_ScriptsRegisterStringVariable,
+MTR_SCRIPT_FUNC_B_S2(mtrSF_ScriptsRegisterStringVariable,
  mtrScriptsRegisterStringVariable)
-MTR_SCRIPT_FUNC_V_S1D1(mtrSF_ScriptsRegisterNumericVariable,
+MTR_SCRIPT_FUNC_B_S1D1(mtrSF_ScriptsRegisterNumericVariable,
  mtrScriptsRegisterNumericVariable)
 MTR_SCRIPT_FUNC_S_S2I1(mtrSF_ConfigfileGetKeyName, mtrConfigfileGetKeyName)
 MTR_SCRIPT_FUNC_S_S1I1(mtrSF_ConfigfileGetSectionName,

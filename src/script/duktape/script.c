@@ -185,20 +185,36 @@ MTR_EXPORT void MTR_CALL mtrScriptsRegisterFunction(duk_c_function func,
     mtrLogWrite_s("Script function added:", 3, MTR_LMT_INFO, funcname);
 }
 
-MTR_EXPORT void MTR_CALL mtrScriptsRegisterStringVariable(const char *name,
+MTR_EXPORT bool MTR_CALL mtrScriptsRegisterStringVariable(const char *name,
  const char *value)
 {
-    duk_push_string(mtrVm, value);
-    duk_put_global_string(mtrVm, name);
-    mtrLogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
+    if ((name != NULL) && (strcmp(name, "") != 0))
+    {
+        duk_push_string(mtrVm, value);
+        duk_put_global_string(mtrVm, name);
+        mtrLogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
+        return true;
+    } else {
+        mtrLogWrite("Script const not added. Incorrect const name:", 3,
+         MTR_LMT_ERROR);
+    }
+    return false;
 }
 
-MTR_EXPORT void MTR_CALL mtrScriptsRegisterNumericVariable(const char *name,
+MTR_EXPORT bool MTR_CALL mtrScriptsRegisterNumericVariable(const char *name,
  double value)
 {
-    duk_push_number(mtrVm, value);
-    duk_put_global_string(mtrVm, name);
-    mtrLogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
+    if ((name != NULL) && (strcmp(name, "") != 0))
+    {
+        duk_push_number(mtrVm, value);
+        duk_put_global_string(mtrVm, name);
+        mtrLogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
+        return true;
+    } else {
+        mtrLogWrite("Script const not added. Incorrect const name:", 3,
+         MTR_LMT_ERROR);
+    }
+    return false;
 }
 
 static void push_file_as_string(const char *filename)

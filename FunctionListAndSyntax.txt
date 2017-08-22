@@ -1,5 +1,5 @@
-void RegisterStringVariable(const char *varName, const char *value)
-void RegisterNumericVariable(const char *varName, double value)
+bool RegisterStringVariable(const char *varName, const char *value)
+bool RegisterNumericVariable(const char *varName, double value)
 
 char *ConfigfileGetKeyName(const char *filename, const char *section, int index)
 char *ConfigfileGetSectionName(const char *filename, int index)

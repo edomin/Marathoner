@@ -173,24 +173,40 @@ MTR_EXPORT void MTR_CALL mtrScriptsRegisterFunction(SQFUNCTION func,
     return;
 }
 
-MTR_EXPORT void MTR_CALL mtrScriptsRegisterStringVariable(const char *name,
+MTR_EXPORT bool MTR_CALL mtrScriptsRegisterStringVariable(const char *name,
  const char *value)
 {
-    sq_pushconsttable(mtrVm);
-    sq_pushstring(mtrVm, name, -1);
-    sq_pushstring(mtrVm, value, -1);
-    sq_rawset(mtrVm, -3);
-    mtrLogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
+    if ((name != NULL) && (strcmp(name, "") != 0))
+    {
+        sq_pushconsttable(mtrVm);
+        sq_pushstring(mtrVm, name, -1);
+        sq_pushstring(mtrVm, value, -1);
+        sq_rawset(mtrVm, -3);
+        mtrLogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
+        return true;
+    } else {
+        mtrLogWrite("Script const not added. Incorrect const name:", 3,
+         MTR_LMT_ERROR);
+    }
+    return false;
 }
 
-MTR_EXPORT void MTR_CALL mtrScriptsRegisterNumericVariable(const char *name,
+MTR_EXPORT bool MTR_CALL mtrScriptsRegisterNumericVariable(const char *name,
  double value)
 {
-    sq_pushconsttable(mtrVm);
-    sq_pushstring(mtrVm, name, -1);
-    sq_pushfloat(mtrVm, value);
-    sq_rawset(mtrVm, -3);
-    mtrLogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
+    if ((name != NULL) && (strcmp(name, "") != 0))
+    {
+        sq_pushconsttable(mtrVm);
+        sq_pushstring(mtrVm, name, -1);
+        sq_pushfloat(mtrVm, value);
+        sq_rawset(mtrVm, -3);
+        mtrLogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
+        return true;
+    } else {
+        mtrLogWrite("Script const not added. Incorrect const name:", 3,
+         MTR_LMT_ERROR);
+    }
+    return false;
 }
 
 void mtrScriptPrintFunc(HSQUIRRELVM v,const SQChar *s,...)

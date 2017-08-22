@@ -176,20 +176,35 @@ MTR_EXPORT void MTR_CALL mtrScriptsRegisterFunction(lua_CFunction func,
     mtrLogWrite_s("Script function added:", 3, MTR_LMT_INFO, funcname);
 }
 
-MTR_EXPORT void MTR_CALL mtrScriptsRegisterStringVariable(const char *name,
+MTR_EXPORT bool MTR_CALL mtrScriptsRegisterStringVariable(const char *name,
  const char *value)
 {
-    lua_pushstring(mtrVm, value);
-    lua_setglobal(mtrVm, name);
-    mtrLogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
+    if ((name != NULL) && (strcmp(name, "") != 0)) {
+        lua_pushstring(mtrVm, value);
+        lua_setglobal(mtrVm, name);
+        mtrLogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
+        return true;
+    } else {
+        mtrLogWrite("Script const not added. Incorrect const name:", 3,
+         MTR_LMT_ERROR);
+    }
+    return false;
 }
 
-MTR_EXPORT void MTR_CALL mtrScriptsRegisterNumericVariable(const char *name,
+MTR_EXPORT bool MTR_CALL mtrScriptsRegisterNumericVariable(const char *name,
  double value)
 {
-    lua_pushnumber(mtrVm, value);
-    lua_setglobal(mtrVm, name);
-    mtrLogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
+    if ((name != NULL) && (strcmp(name, "") != 0))
+    {
+        lua_pushnumber(mtrVm, value);
+        lua_setglobal(mtrVm, name);
+        mtrLogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
+        return true;
+    } else {
+        mtrLogWrite("Script const not added. Incorrect const name:", 3,
+         MTR_LMT_ERROR);
+    }
+    return false;
 }
 
 void mtrScriptsDoFile(const char * filename)
