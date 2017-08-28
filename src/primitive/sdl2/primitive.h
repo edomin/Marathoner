@@ -5,7 +5,7 @@
 
 #include "marathoner/plugin.h"
 
-#define MTR_ARC_SEGMENTS_COUNT 64
+#define MTR_ARC_SEGMENTS_COUNT 32
 #define MTR_PI_180_F 0.01745329f
 
 typedef struct mtrScreen_t {

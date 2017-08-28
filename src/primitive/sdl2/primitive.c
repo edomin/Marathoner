@@ -191,13 +191,16 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveArc_rgb_f(float x, float y, float radius,
     float resultX;
     float resultY;
     float currentAngle;
+    int segmentsCount;
+
+    segmentsCount = fabs(endAngle - startAngle) / 360 * MTR_ARC_SEGMENTS_COUNT;
 
     currentAngle = (startAngle * MTR_PI_180_F);
-    for (i = 0; i < MTR_ARC_SEGMENTS_COUNT; i++)
+    for (i = 0; i < segmentsCount; i++)
     {
         if (i != 0)
             currentAngle = (startAngle + (endAngle - startAngle) /
-             MTR_ARC_SEGMENTS_COUNT * i) * MTR_PI_180_F;
+             segmentsCount * i) * MTR_PI_180_F;
         else
             currentAngle = startAngle * MTR_PI_180_F;
         resultX = radius * cosf(currentAngle);
@@ -220,13 +223,16 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveArc_rgba_f(float x, float y, float radius,
     float resultX;
     float resultY;
     float currentAngle;
+    int segmentsCount;
+
+    segmentsCount = fabs(endAngle - startAngle) / 360 * MTR_ARC_SEGMENTS_COUNT;
 
     currentAngle = (startAngle * MTR_PI_180_F);
-    for (i = 0; i < MTR_ARC_SEGMENTS_COUNT; i++)
+    for (i = 0; i < segmentsCount; i++)
     {
         if (i != 0)
             currentAngle = (startAngle + (endAngle - startAngle) /
-             MTR_ARC_SEGMENTS_COUNT * i) * MTR_PI_180_F;
+             segmentsCount * i) * MTR_PI_180_F;
         else
             currentAngle = startAngle * MTR_PI_180_F;
         resultX = radius * cosf(currentAngle);
@@ -249,13 +255,16 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveArc_c_f(float x, float y, float radius,
     float resultX;
     float resultY;
     float currentAngle;
+    int segmentsCount;
+
+    segmentsCount = fabs(endAngle - startAngle) / 360 * MTR_ARC_SEGMENTS_COUNT;
 
     currentAngle = (startAngle * MTR_PI_180_F);
-    for (i = 0; i < MTR_ARC_SEGMENTS_COUNT; i++)
+    for (i = 0; i < segmentsCount; i++)
     {
         if (i != 0)
             currentAngle = (startAngle + (endAngle - startAngle) /
-             MTR_ARC_SEGMENTS_COUNT * i) * MTR_PI_180_F;
+             segmentsCount * i) * MTR_PI_180_F;
         else
             currentAngle = startAngle * MTR_PI_180_F;
         resultX = radius * cosf(currentAngle);
@@ -278,13 +287,16 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveArc_ca_f(float x, float y, float radius,
     float resultX;
     float resultY;
     float currentAngle;
+    int segmentsCount;
+
+    segmentsCount = fabs(endAngle - startAngle) / 360 * MTR_ARC_SEGMENTS_COUNT;
 
     currentAngle = (startAngle * MTR_PI_180_F);
-    for (i = 0; i < MTR_ARC_SEGMENTS_COUNT; i++)
+    for (i = 0; i < segmentsCount; i++)
     {
         if (i != 0)
             currentAngle = (startAngle + (endAngle - startAngle) /
-             MTR_ARC_SEGMENTS_COUNT * i) * MTR_PI_180_F;
+             segmentsCount * i) * MTR_PI_180_F;
         else
             currentAngle = startAngle * MTR_PI_180_F;
         resultX = radius * cosf(currentAngle);
