@@ -118,6 +118,7 @@ int main(int argc, char **argv)
                 case 'E':
                 case 'F':
                 {
+                    uValuePos = valuePos[i];
                     version = version + (uValuePos - 0x41U) *
                      (0x1U << (4U * (5U - digit)));
                     break;
