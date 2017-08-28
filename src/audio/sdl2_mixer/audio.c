@@ -486,7 +486,7 @@ MTR_EXPORT void MTR_CALL mtrAudioSoundFree(uint32_t soundNum)
     {
         sound = (mtrSound_t *)(&((mtrSound_t *)mtrSoundKeeper->data)[soundNum]);
         mtrLogWrite_s("Unloading sound", 0, MTR_LMT_INFO, sound->name);
-        if (sound->name == mtrDefaultSoundName)
+        if (sound->name != mtrDefaultSoundName)
             free(sound->name);
         Mix_FreeChunk(sound->sound);
         mtrIndexkeeperFreeIndex(mtrSoundKeeper, soundNum);
@@ -501,7 +501,7 @@ MTR_EXPORT void MTR_CALL mtrAudioMusicFree(uint32_t musicNum)
     {
         music = (mtrMusic_t *)(&((mtrMusic_t *)mtrMusicKeeper->data)[musicNum]);
         mtrLogWrite_s("Unloading music", 0, MTR_LMT_INFO, music->name);
-        if (music->name == mtrDefaultMusicName)
+        if (music->name != mtrDefaultMusicName)
             free(music->name);
         Mix_FreeMusic(music->music);
         mtrIndexkeeperFreeIndex(mtrMusicKeeper, musicNum);
