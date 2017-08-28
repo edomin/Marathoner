@@ -17,9 +17,9 @@ ifeq ($(PLATFORM), win32)
 	 -mfpmath=387
 	ifeq ($(MORE_WARNINGS), yes)
         CFLAGS += -Wdouble-promotion -Wformat-security -Wformat-signedness \
-         -Wswitch-default -Wuninitialized -Wsuggest-attribute=const \
-         -Wfloat-equal -Wdeclaration-after-statement -Wundef \
-         -Wbad-function-cast -Wcast-qual -Wlogical-op -Wredundant-decls -Wvla
+         -Wswitch-default -Wuninitialized -Wfloat-equal \
+         -Wdeclaration-after-statement -Wundef -Wbad-function-cast -Wcast-qual \
+         -Wlogical-op -Wredundant-decls -Wvla
 	endif
 	LDFLAGS = -mwindows
 	ifeq ($(DEBUG), no)
