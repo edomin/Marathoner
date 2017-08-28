@@ -96,8 +96,8 @@ for i = 0, 60, 1 do
     PrimitiveFill_c(0x000000);
     PrimitiveCircle_rgb_f(32, 32, i, 0xFF, 0x00, 0x00);
     PrimitiveCircle_rgba_f(32, 64, i, 0xFF, 0x00, 0x00, 0xFF);
-    PrimitiveCircle_c_f(32, 32, i, 0xFF0000);
-    PrimitiveCircle_ca_f(32, 32, i, 0xFF0000FF);
+    PrimitiveCircle_c_f(32, 96, i, 0xFF0000);
+    PrimitiveCircle_ca_f(32, 128, i, 0xFF0000FF);
     ScreenFlip();
     TimerDelayForFPS(30);
 end;
@@ -108,8 +108,8 @@ for i = 0, 60, 1 do
     PrimitiveFill_c(0x000000);
     PrimitiveCircleFilled_rgb_f(32, 32, i, 0xFF, 0x00, 0x00);
     PrimitiveCircleFilled_rgba_f(32, 64, i, 0xFF, 0x00, 0x00, 0xFF);
-    PrimitiveCircleFilled_c_f(32, 32, i, 0xFF0000);
-    PrimitiveCircleFilled_ca_f(32, 32, i, 0xFF0000FF);
+    PrimitiveCircleFilled_c_f(32, 96, i, 0xFF0000);
+    PrimitiveCircleFilled_ca_f(32, 128, i, 0xFF0000FF);
     ScreenFlip();
     TimerDelayForFPS(30);
 end;

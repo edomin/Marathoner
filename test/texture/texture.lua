@@ -9,6 +9,7 @@ ScreenInit(640, 480, false, "Texture Test");
 TimerInit();
 PrimitiveInit();
 TextureInit(IKDM_SMALL, 32);
+MouseInit();
 helicopter = TextureLoad("test/media/helicopter.png");
 helicopterAnim = TextureLoad("test/media/helicopter_anim.png");
 local w = TextureGetWidth(helicopter);
@@ -22,6 +23,7 @@ FileWriteLineFast("test/output.txt", "height: " .. h , FM_APPEND);
 -- Prepare to watch
 for i = 0, 60, 1 do
     TimerStart();
+    MouseRefresh();
     PrimitiveFill_c(0x000000);
     ScreenFlip();
     TimerDelayForFPS(30);
@@ -31,9 +33,11 @@ end;
 x = 32;
 for i = 0, 60, 1 do
     TimerStart();
+    MouseRefresh();
     x = x + 2;
     PrimitiveFill_c(0x000000);
     TextureBlit_f(helicopter, x, 128);
+    PrimitiveRectangle_c_f(x, 128, x + 96, 160, 0xFF0000);
     ScreenFlip();
     TimerDelayForFPS(30);
 end;
@@ -41,6 +45,7 @@ end;
 x = 32;
 for i = 0, 60, 1 do
     TimerStart();
+    MouseRefresh();
     x = x + 2;
     PrimitiveFill_c(0x000000);
     TextureBlitScaled_f(helicopter, x, 128, (162 - x) / 162 * 96,
@@ -52,6 +57,7 @@ end;
 x = 32;
 for i = 0, 60, 1 do
     TimerStart();
+    MouseRefresh();
     x = x + 2;
     PrimitiveFill_c(0x000000);
     TextureBlitAngled_f(helicopter, x, 128, -x, 48, 16);
@@ -62,12 +68,17 @@ end;
 x = 32;
 for i = 0, 60, 1 do
     TimerStart();
+    MouseRefresh();
     x = x + 2;
     PrimitiveFill_c(0x000000);
     TextureBlitFlipped_f(helicopter, x, 128, FLIP_NONE);
+    PrimitiveRectangle_c_f(x, 128, x + 96, 160, 0xFF0000);
     TextureBlitFlipped_f(helicopter, x, 160, FLIP_HORIZONTAL);
+    PrimitiveRectangle_c_f(x, 160, x + 96, 192, 0xFF0000);
     TextureBlitFlipped_f(helicopter, x, 192, FLIP_VERTICAL);
+    PrimitiveRectangle_c_f(x, 192, x + 96, 224, 0xFF0000);
     TextureBlitFlipped_f(helicopter, x, 224, FLIP_BOTH);
+    PrimitiveRectangle_c_f(x, 224, x + 96, 256, 0xFF0000);
     ScreenFlip();
     TimerDelayForFPS(30);
 end;
@@ -75,6 +86,7 @@ end;
 x = 32;
 for i = 0, 60, 1 do
     TimerStart();
+    MouseRefresh();
     x = x + 2;
     PrimitiveFill_c(0x000000);
     TextureBlitGeneral_f(helicopter, x, 128, (162 - x) / 162 * 96,
@@ -93,6 +105,7 @@ end;
 x = 32;
 for i = 0, 60, 1 do
     TimerStart();
+    MouseRefresh();
     x = x + 2;
     PrimitiveFill_c(0x000000);
     TextureBlitRegion_f(helicopterAnim, x, 128, (Floor_f(i / 4) % 8) * 96, 0,
@@ -104,6 +117,7 @@ end;
 x = 32;
 for i = 0, 60, 1 do
     TimerStart();
+    MouseRefresh();
     x = x + 2;
     PrimitiveFill_c(0x000000);
     TextureBlitRegionScaled_f(helicopterAnim, x, 128, (162 - x) / 162 * 96,
@@ -115,6 +129,7 @@ end;
 x = 32;
 for i = 0, 60, 1 do
     TimerStart();
+    MouseRefresh();
     x = x + 2;
     PrimitiveFill_c(0x000000);
     TextureBlitRegionAngled_f(helicopterAnim, x, 128,
@@ -126,6 +141,7 @@ end;
 x = 32;
 for i = 0, 60, 1 do
     TimerStart();
+    MouseRefresh();
     x = x + 2;
     PrimitiveFill_c(0x000000);
     TextureBlitRegionFlipped_f(helicopterAnim, x, 128,
@@ -143,6 +159,7 @@ end;
 x = 32;
 for i = 0, 60, 1 do
     TimerStart();
+    MouseRefresh();
     x = x + 2;
     PrimitiveFill_c(0x000000);
     TextureBlitRegionGeneral_f(helicopterAnim, x, 128, (162 - x) / 162 * 96,
@@ -165,6 +182,7 @@ end;
 x = 32;
 for i = 0, 60, 1 do
     TimerStart();
+    MouseRefresh();
     x = x + 2;
     PrimitiveFill_c(0x000000);
     TextureSetModulation_c(helicopter, 0x010101 * i * 4);
@@ -177,6 +195,7 @@ TextureSetModulation_c(helicopter, 0xFFFFFF);
 x = 32;
 for i = 0, 60, 1 do
     TimerStart();
+    MouseRefresh();
     x = x + 2;
     PrimitiveFill_c(0x000000);
     TextureSetModulation_ca(helicopter, 0x01010101 * i * 4);
@@ -189,6 +208,7 @@ TextureSetModulation_ca(helicopter, 0xFFFFFFFF);
 x = 32;
 for i = 0, 60, 1 do
     TimerStart();
+    MouseRefresh();
     x = x + 2;
     PrimitiveFill_c(0x000000);
     TextureSetModulation_rgb(helicopter, 0x01 * i * 4, 0x01 * i * 4,
@@ -202,6 +222,7 @@ TextureSetModulation_rgb(helicopter, 0xFF, 0xFF, 0xFF);
 x = 32;
 for i = 0, 60, 1 do
     TimerStart();
+    MouseRefresh();
     x = x + 2;
     PrimitiveFill_c(0x000000);
     TextureSetModulation_rgba(helicopter, 0x01 * i * 4, 0x01 * i * 4,
@@ -215,6 +236,7 @@ TextureSetModulation_rgba(helicopter, 0xFF, 0xFF, 0xFF, 0xFF);
 x = 32;
 for i = 0, 60, 1 do
     TimerStart();
+    MouseRefresh();
     x = x + 2;
     PrimitiveFill_c(0x000000);
     TextureSetModulationAlpha(helicopter, 0x01 * i * 4);
@@ -227,6 +249,7 @@ TextureSetModulationAlpha(helicopter, 0xFF);
 x = 32;
 for i = 0, 60, 1 do
     TimerStart();
+    MouseRefresh();
     x = x + 2;
     PrimitiveFill_c(0x000000);
     TextureSetModulationAlpha_f(helicopter, 1 / 240 * i * 4);
@@ -241,6 +264,7 @@ helicopterCopy = TextureCopy(helicopter);
 x = 32;
 for i = 0, 60, 1 do
     TimerStart();
+    MouseRefresh();
     x = x + 2;
     PrimitiveFill_c(0x000000);
     TextureBlit_f(helicopterCopy, x, 128);
