@@ -56,6 +56,11 @@ void mtrScriptsInit(void)
     mtrScriptsRegisterNumericVariable("DMT_FATAL", MTR_DMT_FATAL);
     mtrScriptsRegisterNumericVariable("DMT_DEBUG", MTR_DMT_DEBUG);
 
+    mtrScriptsRegisterFunction(mtrSF_ScriptsRegisterStringVariable,
+     "RegisterStringVariable");
+    mtrScriptsRegisterFunction(mtrSF_ScriptsRegisterNumericVariable,
+     "RegisterNumericVariable");
+
     mtrScriptsRegisterFunction(mtrSF_ConfigfileGetKeyName,
      "ConfigfileGetKeyName");
     mtrScriptsRegisterFunction(mtrSF_ConfigfileGetSectionName,
@@ -182,6 +187,7 @@ MTR_EXPORT bool MTR_CALL mtrScriptsRegisterStringVariable(const char *name,
         sq_pushstring(mtrVm, name, -1);
         sq_pushstring(mtrVm, value, -1);
         sq_rawset(mtrVm, -3);
+        sq_poptop(mtrVm);
         mtrLogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
         return true;
     } else {
@@ -200,6 +206,7 @@ MTR_EXPORT bool MTR_CALL mtrScriptsRegisterNumericVariable(const char *name,
         sq_pushstring(mtrVm, name, -1);
         sq_pushfloat(mtrVm, value);
         sq_rawset(mtrVm, -3);
+        sq_poptop(mtrVm);
         mtrLogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
         return true;
     } else {

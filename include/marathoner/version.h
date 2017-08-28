@@ -30,7 +30,7 @@
 #define MTR_VERSION_MOUSE_SDL2_SQUIRREL             0x000001
 #define MTR_VERSION_MOUSE_SDL2_DUKTAPE              0x000000
 
-#define MTR_VERSION_PRIMITIVE_SDL2                  0x000100
+#define MTR_VERSION_PRIMITIVE_SDL2                  0x000101 /* inc patch */
 #define MTR_VERSION_PRIMITIVE_SDL2_LUA              0x000101
 #define MTR_VERSION_PRIMITIVE_SDL2_SQUIRREL         0x000001
 #define MTR_VERSION_PRIMITIVE_SDL2_DUKTAPE          0x000000
@@ -53,7 +53,7 @@
 #define MTR_VERSION_SCREEN_SDL2_GPU_DUKTAPE         0x000000
 
 #define MTR_VERSION_SCRIPT_LUA                      0x000200
-#define MTR_VERSION_SCRIPT_SQUIRREL                 0x000100
+#define MTR_VERSION_SCRIPT_SQUIRREL                 0x000200 /* inc minor */
 #define MTR_VERSION_SCRIPT_DUKTAPE                  0x000000
 
 #define MTR_VERSION_TEXTURE_SDL2_IMAGE              0x000200
