@@ -501,6 +501,10 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitFlipped_f(uint32_t texNum, float x,
         outputRegion.y = y;
         outputRegion.w = texture->texture->w;
         outputRegion.h = texture->texture->h;
+        if ((actualFlip & GPU_FLIP_VERTICAL) == GPU_FLIP_VERTICAL)
+            outputRegion.y += outputRegion.h;
+        if ((actualFlip & GPU_FLIP_HORIZONTAL) == GPU_FLIP_HORIZONTAL)
+            outputRegion.x += outputRegion.w;
         GPU_BlitRectX(texture->texture, NULL, mtrScreen->target,
          &outputRegion, 0.0f, 0, 0, actualFlip);
     }
@@ -520,6 +524,10 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitGeneral_f(uint32_t texNum, float x,
         outputRegion.y = y;
         outputRegion.w = texture->texture->w;
         outputRegion.h = texture->texture->h;
+        if ((actualFlip & GPU_FLIP_VERTICAL) == GPU_FLIP_VERTICAL)
+            outputRegion.y += outputRegion.h;
+        if ((actualFlip & GPU_FLIP_HORIZONTAL) == GPU_FLIP_HORIZONTAL)
+            outputRegion.x += outputRegion.w;
         GPU_BlitRectX(texture->texture, NULL, mtrScreen->target,
          &outputRegion, -angle, pivotX, pivotY, actualFlip);
     }
@@ -603,6 +611,10 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionFlipped_f(uint32_t texNum, float x,
         outputRegion.y = y;
         outputRegion.w = rw;
         outputRegion.h = rh;
+        if ((actualFlip & GPU_FLIP_VERTICAL) == GPU_FLIP_VERTICAL)
+            outputRegion.y += outputRegion.h;
+        if ((actualFlip & GPU_FLIP_HORIZONTAL) == GPU_FLIP_HORIZONTAL)
+            outputRegion.x += outputRegion.w;
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         GPU_BlitRectX(texture->texture, &region, mtrScreen->target,
          &outputRegion, 0.0f, rx, ry, actualFlip);
@@ -628,6 +640,10 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionGeneral_f(uint32_t texNum, float x,
         outputRegion.y = y;
         outputRegion.w = w;
         outputRegion.h = h;
+        if ((actualFlip & GPU_FLIP_VERTICAL) == GPU_FLIP_VERTICAL)
+            outputRegion.y += outputRegion.h;
+        if ((actualFlip & GPU_FLIP_HORIZONTAL) == GPU_FLIP_HORIZONTAL)
+            outputRegion.x += outputRegion.w;
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         GPU_BlitRectX(texture->texture, &region, mtrScreen->target,
          &outputRegion, -angle, pivotX, pivotY, actualFlip);
