@@ -21,8 +21,10 @@
     #endif
     #define MTR_SF_GET_SINGLE(varname, stackpos)     varname = lua_tonumber(mtrVm, stackpos)
     #define MTR_SF_GET_DOUBLE(varname, stackpos)     varname = lua_tonumber(mtrVm, stackpos)
-    #define MTR_SF_GET_STRING(varname, stackpos)     varname = lua_tostring(mtrVm, stackpos)
-
+    #define MTR_SF_GET_STRING(varname, stackpos)     if (!lua_istable(mtrVm, stackpos)) \
+                                                         varname = lua_tostring(mtrVm, stackpos); \
+                                                     else \
+                                                         varname = NULL;
     #define MTR_SF_PUSH_BOOL(value)                  lua_pushboolean(mtrVm, value)
     #define MTR_SF_PUSH_INT(value)                   lua_pushinteger(mtrVm, value)
     #define MTR_SF_PUSH_LINT(value)                  lua_pushinteger(mtrVm, value)
@@ -100,8 +102,11 @@
         #define MTR_SF_GET_DOUBLE(varname, stackpos)   sq_getfloat(mtrVm, stackpos + 1, &mtrSfFloatTemp); \
                                                        varname = mtrSfFloatTemp;
     #endif
-    #define MTR_SF_GET_STRING(varname, stackpos)       sq_getstring(mtrVm, stackpos + 1, &varname)
-
+    #define MTR_SF_GET_STRING(varname, stackpos)       if ((sq_gettype(mtrVm, stackpos + 1) != OT_TABLE) && \
+                                                        (sq_gettype(mtrVm, stackpos + 1) != OT_ARRAY)) \
+                                                           sq_getstring(mtrVm, stackpos + 1, &varname); \
+                                                       else \
+                                                           varname = NULL;
     #define MTR_SF_PUSH_BOOL(value)                    mtrSfBoolTemp = value + UINT_MAX + 1; \
                                                        sq_pushbool(mtrVm, mtrSfBoolTemp);
     #define MTR_SF_PUSH_INT(value)                     sq_pushinteger(mtrVm, value)
@@ -164,8 +169,11 @@
     #define MTR_SF_GET_UINT32(varname, stackpos)     varname = duk_to_uint32(mtrVm, stackpos - 1)
     #define MTR_SF_GET_SINGLE(varname, stackpos)     varname = duk_to_number(mtrVm, stackpos - 1)
     #define MTR_SF_GET_DOUBLE(varname, stackpos)     varname = duk_to_number(mtrVm, stackpos - 1)
-    #define MTR_SF_GET_STRING(varname, stackpos)     varname = duk_to_string(mtrVm, stackpos - 1)
-
+    #define MTR_SF_GET_STRING(varname, stackpos)     if ((!duk_is_array(mtrVm, stackpos - 1)) && \
+                                                      (!duk_is_object(mtrVm, stackpos - 1))) \
+                                                         varname = duk_to_string(mtrVm, stackpos - 1); \
+                                                     else \
+                                                         varname = NULL;
     #define MTR_SF_PUSH_BOOL(value)                  duk_push_boolean(mtrVm, value)
     #define MTR_SF_PUSH_INT(value)                   duk_push_int(mtrVm, value)
     #if (INT_MAX == LONG_MAX)
