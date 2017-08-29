@@ -2,14 +2,14 @@ Marathoner - game engine for Game Jams.
 Work in progress.
 TODO: more detailed description.
 
-###Building
+### Building
 TODO
 
-###General usage
+### General usage
 TODO more detailed
 See function syntax without description in file "FunctionListAndSyntax.txt"
 
-###Commandline API (See first Configfile usage and Launcher usage)
+### Commandline API (See first Configfile usage and Launcher usage)
 You can setup launch options with commandline arguments.
 "Marathoner [\<option\> \<value\>] [...]"
 Autorun options. This options have priority higher than configfile options:
@@ -23,20 +23,20 @@ Choose module of subsystem:
 Force disable modules via commandline not implemented now.
 More examples in tests' bat-files. See "test" directory.
 
-###Configfile usage (Not recommended for use. Read Launcher usage)
-#####"Autorun" section
+### Configfile usage (Not recommended for use. Read Launcher usage)
+##### "Autorun" section
 Game starting settings
 
 * "action" key - running way. Valid values: "runScript"
 * "plugin" key (if "action = runScript") - ID of plugin that will be run VM
 * "script" key (if "action = runScript") - autorun script filename
 
-#####"Module" section
+##### "Module" section
 Mark modules for forced disable.
 key-value format: "<plugin_ID> = 0|1"
 0 - disabled
 1 - enabled (default)
-#####"Subsystem" section
+##### "Subsystem" section
 Specify plugin ID of each subsystem for solve conflicts
   of several plugins responsible for one subsystem or completely disable
   subsystem
@@ -44,7 +44,7 @@ Specify plugin ID of each subsystem for solve conflicts
     <plugin_ID> for assign plufin
     "none" for disable subsystem
 
-###Launcher usage
+### Launcher usage
 Launcher - program for edit configuration of the engine and launching needed
 autorun script file.
 
@@ -63,7 +63,7 @@ the various standard modules (I need to do documentation for it).
 * "Enabled Modules":
 check and uncheck modules for force disable (default - all enabled).
 
-###Copying:
+### Copying:
 * Source code are under zlib license (for this moment. Read LICENSE).
 * Images made by me and generated sounds/music are under CC0 license (Public
 Domain):
