@@ -254,6 +254,26 @@ MTR_EXPORT double MTR_CALL mtrLog2Fast_d(double num)
     return log2(num);
 }
 
+MTR_EXPORT float MTR_CALL mtrLog_f(float num, float base)
+{
+    return log2f(num) / log2f(base);
+}
+
+MTR_EXPORT double MTR_CALL mtrLog_d(double num, double base)
+{
+    return log2(num) / log2(base);
+}
+
+MTR_EXPORT float MTR_CALL mtrLogFast_f(float num, float base)
+{
+    return log2f(num) / log2f(base);
+}
+
+MTR_EXPORT double MTR_CALL mtrLogFast_d(double num, double base)
+{
+    return log2(num) / log2(base);
+}
+
 MTR_EXPORT float MTR_CALL mtrPow_f(float base, float power)
 {
     return powf(base, power);

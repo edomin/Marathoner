@@ -109,6 +109,18 @@ mtrLog2Fast_fFunc mtrLog2Fast_f;
 typedef double (MTR_CALL * mtrLog2Fast_dFunc)(double);
 mtrLog2Fast_dFunc mtrLog2Fast_d;
 
+typedef float (MTR_CALL * mtrLog_fFunc)(float, float);
+mtrLog_fFunc mtrLog_f;
+
+typedef double (MTR_CALL * mtrLog_dFunc)(double, double);
+mtrLog_dFunc mtrLog_d;
+
+typedef float (MTR_CALL * mtrLogFast_fFunc)(float, float);
+mtrLogFast_fFunc mtrLogFast_f;
+
+typedef double (MTR_CALL * mtrLogFast_dFunc)(double, double);
+mtrLogFast_dFunc mtrLogFast_d;
+
 typedef float (MTR_CALL * mtrPow_fFunc)(float, float);
 mtrPow_fFunc mtrPow_f;
 

@@ -80,7 +80,7 @@
 #define MTR_VERSION_UTILS_COLOR_SQUIRREL            0x000001
 #define MTR_VERSION_UTILS_COLOR_DUKTAPE             0x000000
 
-#define MTR_VERSION_UTILS_MATH                      0x000000
+#define MTR_VERSION_UTILS_MATH                      0x000100 /* inc minor */
 #define MTR_VERSION_UTILS_MATH_LUA                  0x000000
 #define MTR_VERSION_UTILS_MATH_SQUIRREL             0x000000
 #define MTR_VERSION_UTILS_MATH_DUKTAPE              0x000000

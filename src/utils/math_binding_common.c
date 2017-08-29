@@ -39,6 +39,10 @@ MTR_SCRIPT_FUNC_F_F1(mtrSF_Log2_f, mtrLog2_f)
 MTR_SCRIPT_FUNC_D_D1(mtrSF_Log2_d, mtrLog2_d)
 MTR_SCRIPT_FUNC_F_F1(mtrSF_Log2Fast_f, mtrLog2Fast_f)
 MTR_SCRIPT_FUNC_D_D1(mtrSF_Log2Fast_d, mtrLog2Fast_d)
+MTR_SCRIPT_FUNC_F_F2(mtrSF_Log_f, mtrLog_f)
+MTR_SCRIPT_FUNC_D_D2(mtrSF_Log_d, mtrLog_d)
+MTR_SCRIPT_FUNC_F_F2(mtrSF_LogFast_f, mtrLogFast_f)
+MTR_SCRIPT_FUNC_D_D2(mtrSF_LogFast_d, mtrLogFast_d)
 MTR_SCRIPT_FUNC_F_F2(mtrSF_Pow_f, mtrPow_f)
 MTR_SCRIPT_FUNC_D_D2(mtrSF_Pow_d, mtrPow_d)
 MTR_SCRIPT_FUNC_F_F2(mtrSF_PowFast_f, mtrPowFast_f)
@@ -217,6 +221,10 @@ void mtrScriptsRegisterAll(void)
     MTR_FIND_FUNCTION(mtrLog2_d, "Utils_math");
     MTR_FIND_FUNCTION(mtrLog2Fast_f, "Utils_math");
     MTR_FIND_FUNCTION(mtrLog2Fast_d, "Utils_math");
+    MTR_FIND_FUNCTION(mtrLog_f, "Utils_math");
+    MTR_FIND_FUNCTION(mtrLog_d, "Utils_math");
+    MTR_FIND_FUNCTION(mtrLogFast_f, "Utils_math");
+    MTR_FIND_FUNCTION(mtrLogFast_d, "Utils_math");
     MTR_FIND_FUNCTION(mtrPow_f, "Utils_math");
     MTR_FIND_FUNCTION(mtrPow_d, "Utils_math");
     MTR_FIND_FUNCTION(mtrPowFast_f, "Utils_math");
@@ -325,6 +333,10 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterFunction(mtrSF_Log2_d, "Log2_d");
         mtrScriptsRegisterFunction(mtrSF_Log2Fast_f, "Log2Fast_f");
         mtrScriptsRegisterFunction(mtrSF_Log2Fast_d, "Log2Fast_d");
+        mtrScriptsRegisterFunction(mtrSF_Log_f, "Log_f");
+        mtrScriptsRegisterFunction(mtrSF_Log_d, "Log_d");
+        mtrScriptsRegisterFunction(mtrSF_LogFast_f, "LogFast_f");
+        mtrScriptsRegisterFunction(mtrSF_LogFast_d, "LogFast_d");
         mtrScriptsRegisterFunction(mtrSF_Pow_f, "Pow_f");
         mtrScriptsRegisterFunction(mtrSF_Pow_d, "Pow_d");
         mtrScriptsRegisterFunction(mtrSF_PowFast_f, "PowFast_f");
