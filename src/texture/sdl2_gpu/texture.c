@@ -221,6 +221,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCopy(uint32_t texNum)
     uint32_t      freeIndex;
     mtrTexture_t *texture;
     mtrTexture_t *newTexture;
+    SDL_Surface* surface;
 
     if (texNum != 0)
     {
@@ -228,7 +229,14 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCopy(uint32_t texNum)
         mtrLogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
         newTexture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, freeIndex);
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
-        newTexture->texture = GPU_CopyImage(texture->texture);
+        surface = GPU_CopySurfaceFromImage(texture->texture);
+        if (surface == NULL)
+        {
+            mtrNotify("Unable to copy texture", 1, MTR_LMT_ERROR);
+            mtrIndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
+            return 0;
+        }
+        newTexture->texture = GPU_CopyImageFromSurface(surface);
         if (newTexture->texture != NULL)
         {
             mtrLogWrite_s("Copying texture", 0, MTR_LMT_INFO, texture->name);
@@ -239,6 +247,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCopy(uint32_t texNum)
                 newTexture->name = strcpy(newTexture->name, texture->name);
             GPU_SetAnchor(newTexture->texture, 0.0f, 0.0f);
             GPU_SetBlending(newTexture->texture, true);
+            SDL_FreeSurface(surface);
             mtrLogWrite_s("Texture copyed", 0, MTR_LMT_INFO, newTexture->name);
             return freeIndex;
         }
