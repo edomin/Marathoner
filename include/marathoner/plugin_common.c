@@ -309,6 +309,30 @@ MTR_EXPORT void MTR_CALL mtrRequireOptionsGet(
     mtrOptionsGet = OptionsGetFunc;
 }
 
+MTR_EXPORT void MTR_CALL mtrRequireOptionsGet_i(
+ mtrOptionsGet_iFunc_t OptionsGet_iFunc)
+{
+    mtrOptionsGet_i = OptionsGet_iFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireOptionsGet_l(
+ mtrOptionsGet_lFunc_t OptionsGet_lFunc)
+{
+    mtrOptionsGet_l = OptionsGet_lFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireOptionsGet_f(
+ mtrOptionsGet_fFunc_t OptionsGet_fFunc)
+{
+    mtrOptionsGet_f = OptionsGet_fFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireOptionsGet_d(
+ mtrOptionsGet_dFunc_t OptionsGet_dFunc)
+{
+    mtrOptionsGet_d = OptionsGet_dFunc;
+}
+
 MTR_EXPORT void MTR_CALL mtrRequirePluginData(mtrPlugin* pluginData,
  uint8_t pluginsCount)
 {

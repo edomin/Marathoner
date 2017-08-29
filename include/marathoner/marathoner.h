@@ -137,6 +137,10 @@ typedef int         (MTR_CALL * mtrStringBufferGetMaxLenFunc_t)(uint32_t);
 typedef bool        (MTR_CALL * mtrOptionsAliasFunc_t)(const char *,
  const char *);
 typedef char *      (MTR_CALL * mtrOptionsGetFunc_t)(const char *);
+typedef int         (MTR_CALL * mtrOptionsGet_iFunc_t)(const char *);
+typedef long int    (MTR_CALL * mtrOptionsGet_lFunc_t)(const char *);
+typedef float       (MTR_CALL * mtrOptionsGet_fFunc_t)(const char *);
+typedef double      (MTR_CALL * mtrOptionsGet_dFunc_t)(const char *);
 
 /* loaded dll-plugin data */
 mtrPlugin *mtrPluginData;

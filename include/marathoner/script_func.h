@@ -1836,6 +1836,17 @@
         return 1;                              \
     }
 
+#define MTR_SCRIPT_FUNC_I_S1(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)                \
+    {                                     \
+        const char *s1;                   \
+        int result;                       \
+        MTR_SF_GET_STRING(s1, 1);         \
+        result = func(s1);                \
+        MTR_SF_PUSH_INT(result);          \
+        return 1;                         \
+    }
+
 #define MTR_SCRIPT_FUNC_I_S3I1(sfunc, func) \
     MTR_SCRIPT_FUNC(sfunc)                \
     {                                     \
@@ -1873,6 +1884,17 @@
         MTR_SF_GET_LINT(l1, 1);           \
         MTR_SF_GET_LINT(l2, 2);           \
         result = func(l1, l2);            \
+        MTR_SF_PUSH_LINT(result);         \
+        return 1;                         \
+    }
+
+#define MTR_SCRIPT_FUNC_L_S1(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)                \
+    {                                     \
+        const char *s1;                   \
+        long int result;                  \
+        MTR_SF_GET_STRING(s1, 1);         \
+        result = func(s1);                \
         MTR_SF_PUSH_LINT(result);         \
         return 1;                         \
     }
@@ -2317,6 +2339,17 @@
         return 1;                         \
     }
 
+#define MTR_SCRIPT_FUNC_F_S1(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)                \
+    {                                     \
+        const char *s1;                   \
+        float result;                     \
+        MTR_SF_GET_STRING(s1, 1);         \
+        result = func(s1);                \
+        MTR_SF_PUSH_SINGLE(result);       \
+        return 1;                         \
+    }
+
 #define MTR_SCRIPT_FUNC_F_S3F1(sfunc, func) \
     MTR_SCRIPT_FUNC(sfunc)                  \
     {                                       \
@@ -2354,6 +2387,17 @@
         MTR_SF_GET_DOUBLE(d1, 1);         \
         MTR_SF_GET_DOUBLE(d2, 2);         \
         result = func(d1, d2);            \
+        MTR_SF_PUSH_DOUBLE(result);       \
+        return 1;                         \
+    }
+
+#define MTR_SCRIPT_FUNC_D_S1(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)                \
+    {                                     \
+        const char *s1;                   \
+        double result;                    \
+        MTR_SF_GET_STRING(s1, 1);         \
+        result = func(s1);                \
         MTR_SF_PUSH_DOUBLE(result);       \
         return 1;                         \
     }

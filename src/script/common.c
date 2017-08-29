@@ -80,5 +80,9 @@ MTR_SCRIPT_FUNC_S_U32t1(mtrSF_StringBufferGetString, mtrStringBufferGetString)
 MTR_SCRIPT_FUNC_I_U32t1(mtrSF_StringBufferGetMaxLen, mtrStringBufferGetMaxLen)
 MTR_SCRIPT_FUNC_B_S2(mtrSF_OptionsAlias, mtrOptionsAlias)
 MTR_SCRIPT_FUNC_S_S1(mtrSF_OptionsGet, mtrOptionsGet)
+MTR_SCRIPT_FUNC_I_S1(mtrSF_OptionsGet_i, mtrOptionsGet_i)
+MTR_SCRIPT_FUNC_L_S1(mtrSF_OptionsGet_l, mtrOptionsGet_l)
+MTR_SCRIPT_FUNC_F_S1(mtrSF_OptionsGet_f, mtrOptionsGet_f)
+MTR_SCRIPT_FUNC_D_S1(mtrSF_OptionsGet_d, mtrOptionsGet_d)
 
 #endif

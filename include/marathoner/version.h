@@ -1,7 +1,7 @@
 #ifndef MTR_VERSION_H
 #define MTR_VERSION_H
 
-#define MTR_VERSION_MARATHONER                      0x000200
+#define MTR_VERSION_MARATHONER                      0x000300 /* inc minor */
 
 #define MTR_VERSION_LAUNCHER                        0x000001
 
@@ -52,9 +52,9 @@
 #define MTR_VERSION_SCREEN_SDL2_GPU_SQUIRREL        0x000001
 #define MTR_VERSION_SCREEN_SDL2_GPU_DUKTAPE         0x000000
 
-#define MTR_VERSION_SCRIPT_LUA                      0x000200
+#define MTR_VERSION_SCRIPT_LUA                      0x000300 /* inc minor */
 #define MTR_VERSION_SCRIPT_SQUIRREL                 0x000200 /* inc minor */
-#define MTR_VERSION_SCRIPT_DUKTAPE                  0x000000
+#define MTR_VERSION_SCRIPT_DUKTAPE                  0x000100 /* inc minor */
 
 #define MTR_VERSION_TEXTURE_SDL2_IMAGE              0x000200
 #define MTR_VERSION_TEXTURE_SDL2_IMAGE_LUA          0x000101

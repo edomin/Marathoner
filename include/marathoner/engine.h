@@ -159,6 +159,14 @@ typedef void (MTR_CALL * mtrRequireOptionsAliasFunc)(mtrOptionsAliasFunc_t);
 mtrRequireOptionsAliasFunc mtrRequireOptionsAlias;
 typedef void (MTR_CALL * mtrRequireOptionsGetFunc)(mtrOptionsGetFunc_t);
 mtrRequireOptionsGetFunc mtrRequireOptionsGet;
+typedef void (MTR_CALL * mtrRequireOptionsGet_iFunc)(mtrOptionsGet_iFunc_t);
+mtrRequireOptionsGet_iFunc mtrRequireOptionsGet_i;
+typedef void (MTR_CALL * mtrRequireOptionsGet_lFunc)(mtrOptionsGet_lFunc_t);
+mtrRequireOptionsGet_lFunc mtrRequireOptionsGet_l;
+typedef void (MTR_CALL * mtrRequireOptionsGet_fFunc)(mtrOptionsGet_fFunc_t);
+mtrRequireOptionsGet_fFunc mtrRequireOptionsGet_f;
+typedef void (MTR_CALL * mtrRequireOptionsGet_dFunc)(mtrOptionsGet_dFunc_t);
+mtrRequireOptionsGet_dFunc mtrRequireOptionsGet_d;
 
 /*  */
 typedef void (MTR_CALL * mtrRequirePluginDataFunc)(mtrPlugin *, uint8_t);

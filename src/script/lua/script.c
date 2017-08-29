@@ -134,6 +134,10 @@ void mtrScriptsInit(void)
 
     mtrScriptsRegisterFunction(mtrSF_OptionsAlias, "OptionsAlias");
     mtrScriptsRegisterFunction(mtrSF_OptionsGet, "OptionsGet");
+    mtrScriptsRegisterFunction(mtrSF_OptionsGet_i, "OptionsGet_i");
+    mtrScriptsRegisterFunction(mtrSF_OptionsGet_l, "OptionsGet_l");
+    mtrScriptsRegisterFunction(mtrSF_OptionsGet_f, "OptionsGet_f");
+    mtrScriptsRegisterFunction(mtrSF_OptionsGet_d, "OptionsGet_d");
 
     mtrLogWrite("Script functions and constants of engine registered",
      1, MTR_LMT_INFO);

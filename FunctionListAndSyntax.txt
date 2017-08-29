@@ -52,6 +52,10 @@ int StringBufferGetMaxLen(uint32_t sbnum)
 
 bool OptionsAlias(char *option, char *alias)
 char *OptionsGet(char *option)
+int OptionsGet_i(char *option)
+long int OptionsGet_l(char *option)
+float OptionsGet_f(char *option)
+double OptionsGet_d(char *option)
 
 bool ScreenInit(int width, int height, bool fullscreen, const char *title)
 void ScreenQuit()
