@@ -13,8 +13,15 @@
 
 #include "marathoner/engine.h"
 
+uint32_t mtrMarathonerGetVersion(void)
+{
+    return MTR_VERSION_MARATHONER;
+}
+
 void RequireEngineFuncs(uint8_t plugin)
 {
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireMarathonerGetVersion,
+     mtrMarathonerGetVersion);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireConfigfileGetKeyName,
      mtrConfigfileGetKeyName);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireConfigfileGetSectionName,

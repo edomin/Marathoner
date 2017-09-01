@@ -1,6 +1,8 @@
 bool RegisterStringVariable(const char *varName, const char *value)
 bool RegisterNumericVariable(const char *varName, double value)
 
+uint32_t MarathonerGetVersion()
+
 char *ConfigfileGetKeyName(const char *filename, const char *section, int index)
 char *ConfigfileGetSectionName(const char *filename, int index)
 bool ConfigfileDeleteKey(const char *filename, const char *section, const char *key)

@@ -7,6 +7,7 @@ MTR_SCRIPT_FUNC_B_S2(mtrSF_ScriptsRegisterStringVariable,
  mtrScriptsRegisterStringVariable)
 MTR_SCRIPT_FUNC_B_S1D1(mtrSF_ScriptsRegisterNumericVariable,
  mtrScriptsRegisterNumericVariable)
+MTR_SCRIPT_FUNC_U32t_V(mtrSF_MarathonerGetVersion, mtrMarathonerGetVersion)
 MTR_SCRIPT_FUNC_S_S2I1(mtrSF_ConfigfileGetKeyName, mtrConfigfileGetKeyName)
 MTR_SCRIPT_FUNC_S_S1I1(mtrSF_ConfigfileGetSectionName,
  mtrConfigfileGetSectionName)

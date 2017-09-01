@@ -61,6 +61,8 @@ void mtrScriptsInit(void)
     mtrScriptsRegisterFunction(mtrSF_ScriptsRegisterNumericVariable,
      "RegisterNumericVariable");
 
+    mtrScriptsRegisterFunction(mtrSF_MarathonerGetVersion,
+     "MarathonerGetVersion");
     mtrScriptsRegisterFunction(mtrSF_ConfigfileGetKeyName,
      "ConfigfileGetKeyName");
     mtrScriptsRegisterFunction(mtrSF_ConfigfileGetSectionName,

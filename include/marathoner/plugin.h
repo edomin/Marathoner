@@ -30,6 +30,7 @@ typedef struct mtrPixels_t {
 #define MTR_PF_RGBA         1
 #define MTR_PF_ARGB         2
 
+mtrMarathonerGetVersionFunc_t               mtrMarathonerGetVersion;
 mtrConfigfileGetKeyNameFunc_t               mtrConfigfileGetKeyName;
 mtrConfigfileGetSectionNameFunc_t           mtrConfigfileGetSectionName;
 mtrConfigfileDeleteKeyFunc_t                mtrConfigfileDeleteKey;

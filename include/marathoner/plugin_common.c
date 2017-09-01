@@ -3,6 +3,12 @@
 
 #include <string.h>
 
+MTR_EXPORT void MTR_CALL mtrRequireMarathonerGetVersion(
+ mtrMarathonerGetVersionFunc_t MarathonerGetVersionFunc)
+{
+    mtrMarathonerGetVersion = MarathonerGetVersionFunc;
+}
+
 MTR_EXPORT void MTR_CALL mtrRequireConfigfileGetKeyName(
  mtrConfigfileGetKeyNameFunc_t ConfigfileGetKeyNameFunc)
 {
