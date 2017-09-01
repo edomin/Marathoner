@@ -1,26 +1,26 @@
-Marathoner - game engine for Game Jams.
-Work in progress.
+Marathoner - game engine for Game Jams.  
+Work in progress.  
 TODO: more detailed description.
 
 ### Building
 TODO
 
 ### General usage
-TODO more detailed
+TODO more detailed  
 See function syntax without description in file "FunctionListAndSyntax.txt"
 
 ### Commandline API (See first Configfile usage and Launcher usage)
-You can setup launch options with commandline arguments.
-"Marathoner [\<option\> \<value\>] [...]"
+You can setup launch options with commandline arguments.  
+"Marathoner [\<option\> \<value\>] [...]"  
 Autorun options. This options have priority higher than configfile options:
 
 * "--autorun-action \<action\>" - running way. Valid values: "runScript"
 * "--autorun-plugin \<pluginname\>" - ID of plugin that will be run VM
 * "--autorun-script \<filename\>" - autorun script filename
 
-Choose module of subsystem:
-"--\<subsystem\> \<module\>" - Example "--script Script_Lua"
-Force disable modules via commandline not implemented now.
+Choose module of subsystem:  
+"--\<subsystem\> \<module\>" - Example "--script Script_Lua"  
+Force disable modules via commandline not implemented now.  
 More examples in tests' bat-files. See "test" directory.
 
 ### Configfile usage (Not recommended for use. Read Launcher usage)
@@ -32,17 +32,18 @@ Game starting settings
 * "script" key (if "action = runScript") - autorun script filename
 
 ##### "Module" section
-Mark modules for forced disable.
-key-value format: "<plugin_ID> = 0|1"
-0 - disabled
+Mark modules for forced disable.  
+key-value format: "<plugin_ID> = 0|1"  
+0 - disabled  
 1 - enabled (default)
 ##### "Subsystem" section
 Specify plugin ID of each subsystem for solve conflicts
-  of several plugins responsible for one subsystem or completely disable
-  subsystem
-    key-value format: "<subsystem_name> = <plugin_ID> | none"
-    <plugin_ID> for assign plufin
-    "none" for disable subsystem
+of several plugins responsible for one subsystem or completely disable
+subsystem:  
+key-value format: "\<subsystem_name\> = \<plugin_ID\> | none"  
+
+* \<plugin_ID\> for assign plugin  
+* "none" for disable subsystem  
 
 ### Launcher usage
 Launcher - program for edit configuration of the engine and launching needed
@@ -57,10 +58,10 @@ autorun script file.
 * "Autorun" section:
   * Plugin - choose Script plugin
   * Script - choose Autorun script
-* "Subsystem":
+* "Subsystem":  
 Choose module for every subsystem. You need to know about compatibility of
 the various standard modules (I need to do documentation for it).
-* "Enabled Modules":
+* "Enabled Modules":  
 check and uncheck modules for force disable (default - all enabled).
 
 ### Copying:
