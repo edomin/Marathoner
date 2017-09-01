@@ -25,6 +25,11 @@ typedef struct mtrScreen_t {
 
 typedef struct mtrTexture_t {
     SDL_Texture *texture;
+    SDL_Surface *surface; /* pixel data of loaded images can be get from surface
+                           * pixel data of images created/copyed in runtime
+                           * can be get from texture pixels. It is limitation of
+                           * SDL2 API
+                           */
     char        *name;
 } mtrTexture_t;
 
@@ -35,6 +40,8 @@ mtrIndexkeeper_t *mtrTextureKeeper;
 
 typedef mtrScreen_t *(MTR_CALL * mtrGetScreenFunc)(void);
 mtrGetScreenFunc mtrGetScreen;
+
+MTR_EXPORT void MTR_CALL mtrTextureFree(uint32_t texNum);
 
 #endif
 
