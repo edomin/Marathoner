@@ -272,11 +272,26 @@ for i = 0, 60, 1 do
     TimerDelayForFPS(30);
 end;
 
+TextureSave(helicopter, "test/output_1.png");
+TextureSave(helicopterCopy, "test/output_2.png");
+
 output = TextureCreate("Output texture", 96, 32);
 TextureBeginTarget(output);
     TextureBlit_f(helicopterCopy, 0, 0);
 TextureEndTarget();
-TextureSave(output, "test/output.png");
+
+x = 32;
+for i = 0, 60, 1 do
+    TimerStart();
+    MouseRefresh();
+    x = x + 2;
+    PrimitiveFill_c(0x000000);
+    TextureBlit_f(output, x, 128);
+    ScreenFlip();
+    TimerDelayForFPS(30);
+end;
+
+TextureSave(output, "test/output_3.png");
 TextureFree(output);
 TextureFree(helicopterCopy);
 TextureFree(helicopterAnim);
