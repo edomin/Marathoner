@@ -38,9 +38,9 @@ typedef struct mtrPlugin{
     char        *filename;
     mtr_lhandler dll;
 } mtrPlugin;
-typedef uint32_t    (MTR_CALL * mtrMarathonerGetVersionFunc_t)(void);
-/* Pointers to engine functions */
 
+/* Pointers to engine functions */
+typedef uint32_t    (MTR_CALL * mtrMarathonerGetVersionFunc_t)(void);
 typedef char *      (MTR_CALL * mtrConfigfileGetKeyNameFunc_t)(const char *,
  const char *, int);
 typedef char *      (MTR_CALL * mtrConfigfileGetSectionNameFunc_t)(const char*,
