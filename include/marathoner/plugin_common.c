@@ -9,6 +9,12 @@ MTR_EXPORT void MTR_CALL mtrRequireMarathonerGetVersion(
     mtrMarathonerGetVersion = MarathonerGetVersionFunc;
 }
 
+MTR_EXPORT void MTR_CALL mtrRequireMarathonerGetModuleVersion(
+ mtrMarathonerGetModuleVersionFunc_t MarathonerGetModuleVersionFunc)
+{
+    mtrMarathonerGetModuleVersion = MarathonerGetModuleVersionFunc;
+}
+
 MTR_EXPORT void MTR_CALL mtrRequireConfigfileGetKeyName(
  mtrConfigfileGetKeyNameFunc_t ConfigfileGetKeyNameFunc)
 {
