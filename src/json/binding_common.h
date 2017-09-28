@@ -1,6 +1,9 @@
 #ifndef MTR_JSON_BINDING_COMMON_H
 #define MTR_JSON_BINDING_COMMON_H
 
+typedef int (MTR_CALL * mtrJsonFunctionSupportedFunc)(const char *);
+mtrJsonFunctionSupportedFunc mtrJsonFunctionSupported;
+
 typedef bool (MTR_CALL * mtrJsonInitFunc)(uint32_t, uint32_t);
 mtrJsonInitFunc mtrJsonInit;
 

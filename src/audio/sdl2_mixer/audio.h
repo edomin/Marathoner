@@ -4,6 +4,7 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_mixer.h"
 
+#include "fa/Audio_SDL2_mixer.h"
 #include "marathoner/plugin.h"
 #include "../common.h"
 

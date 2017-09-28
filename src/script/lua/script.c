@@ -3,6 +3,8 @@
 #include "marathoner/plugin_common.c"
 #include "../common.c"
 
+MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Script, FA_FUNCTIONS_COUNT)
+
 MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
     mtrReport *report;
@@ -57,7 +59,14 @@ void mtrScriptsInit(void)
     mtrScriptsRegisterNumericVariable("DMT_ERROR", MTR_DMT_ERROR);
     mtrScriptsRegisterNumericVariable("DMT_FATAL", MTR_DMT_FATAL);
     mtrScriptsRegisterNumericVariable("DMT_DEBUG", MTR_DMT_DEBUG);
+    mtrScriptsRegisterNumericVariable("FA_NO", MTR_FA_NO);
+    mtrScriptsRegisterNumericVariable("FA_DUMMY", MTR_FA_DUMMY);
+    mtrScriptsRegisterNumericVariable("FA_BUGGY", MTR_FA_BUGGY);
+    mtrScriptsRegisterNumericVariable("FA_PARTIAL", MTR_FA_PARTIAL);
+    mtrScriptsRegisterNumericVariable("FA_YES", MTR_FA_YES);
 
+    mtrScriptsRegisterFunction(mtrSF_ScriptsFunctionSupported,
+     "ScriptsFunctionSupported");
     mtrScriptsRegisterFunction(mtrSF_ScriptsRegisterStringVariable,
      "RegisterStringVariable");
     mtrScriptsRegisterFunction(mtrSF_ScriptsRegisterNumericVariable,
@@ -182,6 +191,7 @@ MTR_EXPORT void MTR_CALL mtrScriptsRegisterFunction(lua_CFunction func,
     mtrLogWrite_s("Script function added:", 3, MTR_LMT_INFO, funcname);
 }
 
+/*fa mtrScriptsRegisterStringVariable yes */
 MTR_EXPORT bool MTR_CALL mtrScriptsRegisterStringVariable(const char *name,
  const char *value)
 {
@@ -197,6 +207,7 @@ MTR_EXPORT bool MTR_CALL mtrScriptsRegisterStringVariable(const char *name,
     return false;
 }
 
+/*fa mtrScriptsRegisterNumericVariable yes */
 MTR_EXPORT bool MTR_CALL mtrScriptsRegisterNumericVariable(const char *name,
  double value)
 {

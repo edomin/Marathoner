@@ -1,6 +1,9 @@
 #ifndef MTR_ABSTRACTION_SPRITE_BINDING_COMMON_H
 #define MTR_ABSTRACTION_SPRITE_BINDING_COMMON_H
 
+typedef int (MTR_CALL * mtrSpriteFunctionSupportedFunc)(const char *);
+mtrSpriteFunctionSupportedFunc mtrSpriteFunctionSupported;
+
 typedef bool (MTR_CALL * mtrSpriteInitFunc)(uint32_t, uint32_t);
 mtrSpriteInitFunc mtrSpriteInit;
 

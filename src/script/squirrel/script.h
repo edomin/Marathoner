@@ -7,12 +7,16 @@
 #include "sqstdio.h"
 #include "sqstdaux.h"
 
+#include "fa/Script_Squirrel.h"
 #include "marathoner/plugin.h"
 
 typedef void (MTR_CALL * mtrPluginInitFunc)(void);
 mtrPluginInitFunc mtrPluginInit;
 
 HSQUIRRELVM mtrVm;
+
+typedef int (MTR_CALL * mtrScriptsFunctionSupportedFunc)(const char *);
+mtrScriptsFunctionSupportedFunc mtrScriptsFunctionSupported;
 
 MTR_EXPORT void MTR_CALL mtrScriptsRegisterFunction(SQFUNCTION func,
  const char * funcname);

@@ -1,6 +1,7 @@
 #ifndef MTR_ABSTRACTION_FONT_H
 #define MTR_ABSTRACTION_FONT_H
 
+#include "fa/Abstraction_font.h"
 #include "marathoner/plugin.h"
 
 /* Monospace bitmap font */

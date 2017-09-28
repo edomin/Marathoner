@@ -1,6 +1,9 @@
 #ifndef MTR_GAME_CONTROLLER_BINDING_COMMON_H
 #define MTR_GAME_CONTROLLER_BINDING_COMMON_H
 
+typedef int (MTR_CALL * mtrGameControllerFunctionSupportedFunc)(const char *);
+mtrGameControllerFunctionSupportedFunc mtrGameControllerFunctionSupported;
+
 typedef bool (MTR_CALL * mtrGameControllerInitFunc)(void);
 mtrGameControllerInitFunc mtrGameControllerInit;
 

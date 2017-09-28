@@ -2,6 +2,8 @@
 
 #include "marathoner/plugin_common.c"
 
+MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Keyboard, FA_FUNCTIONS_COUNT)
+
 MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
     mtrReport *report;
@@ -18,6 +20,7 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
+/*fa mtrKeyboardInit yes */
 MTR_EXPORT bool MTR_CALL mtrKeyboardInit(void)
 {
     SDL_version compiled;
@@ -63,6 +66,7 @@ MTR_EXPORT bool MTR_CALL mtrKeyboardInit(void)
     return true;
 }
 
+/*fa mtrKeyboardRefresh yes */
 MTR_EXPORT void MTR_CALL mtrKeyboardRefresh(void)
 {
     int i;
@@ -73,6 +77,7 @@ MTR_EXPORT void MTR_CALL mtrKeyboardRefresh(void)
     SDL_PumpEvents();
 }
 
+/*fa mtrKeyboardPress yes */
 MTR_EXPORT bool MTR_CALL mtrKeyboardPress(int key)
 {
     if (key >= SDL_NUM_SCANCODES)
@@ -88,6 +93,7 @@ MTR_EXPORT bool MTR_CALL mtrKeyboardPress(int key)
     }
 }
 
+/*fa mtrKeyboardRelease yes */
 MTR_EXPORT bool MTR_CALL mtrKeyboardRelease(int key)
 {
     if (key >= SDL_NUM_SCANCODES)
@@ -103,6 +109,7 @@ MTR_EXPORT bool MTR_CALL mtrKeyboardRelease(int key)
     }
 }
 
+/*fa mtrKeyboardPressed yes */
 MTR_EXPORT bool MTR_CALL mtrKeyboardPressed(int key)
 {
     if (key >= SDL_NUM_SCANCODES)
@@ -117,6 +124,7 @@ MTR_EXPORT bool MTR_CALL mtrKeyboardPressed(int key)
     }
 }
 
+/*fa mtrKeyboardInputChar yes */
 MTR_EXPORT char *MTR_CALL mtrKeyboardInputChar(void)
 {
     SDL_Event  event;

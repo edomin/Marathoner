@@ -4,6 +4,7 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL2_gfxPrimitives.h"
 
+#include "fa/Primitive_SDL2_gfx.h"
 #include "marathoner/plugin.h"
 
 //#define MTR_ARC_SEGMENTS_COUNT 64

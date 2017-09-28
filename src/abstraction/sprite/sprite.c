@@ -2,6 +2,8 @@
 
 #include "marathoner/plugin_common.c"
 
+MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Sprite, FA_FUNCTIONS_COUNT)
+
 MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
     mtrReport *report;
@@ -24,6 +26,7 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
+/*fa mtrSpriteInit yes */
 MTR_EXPORT bool MTR_CALL mtrSpriteInit(uint32_t dmSize, uint32_t reservedCount)
 {
     mtrLogWrite("Initializing sprite abstraction manager", 0, MTR_LMT_INFO);
@@ -59,6 +62,7 @@ MTR_EXPORT bool MTR_CALL mtrSpriteInit(uint32_t dmSize, uint32_t reservedCount)
     return true;
 }
 
+/*fa mtrSpriteLoad yes */
 MTR_EXPORT uint32_t MTR_CALL mtrSpriteLoad(const char *filename, int clipWidth,
  int clipHeight, int rowsCount, int colsCount, int clipsCount, int anchorX,
  int anchorY)
@@ -153,6 +157,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrSpriteLoad(const char *filename, int clipWidth,
     return 0;
 }
 
+/*fa mtrSpriteLoadSimple yes */
 MTR_EXPORT uint32_t MTR_CALL mtrSpriteLoadSimple(const char *filename,
  int anchorX, int anchorY)
 {
@@ -215,6 +220,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrSpriteLoadSimple(const char *filename,
     return 0;
 }
 
+/*fa mtrSpriteFree yes */
 MTR_EXPORT void MTR_CALL mtrSpriteFree(uint32_t sprNum)
 {
     mtrSprite_t *sprite;
@@ -230,6 +236,7 @@ MTR_EXPORT void MTR_CALL mtrSpriteFree(uint32_t sprNum)
     }
 }
 
+/*fa mtrSpriteSetModulation_c yes */
 MTR_EXPORT void MTR_CALL mtrSpriteSetModulation_c(uint32_t sprNum,
  uint32_t color)
 {
@@ -241,6 +248,7 @@ MTR_EXPORT void MTR_CALL mtrSpriteSetModulation_c(uint32_t sprNum,
     }
 }
 
+/*fa mtrSpriteSetModulation_ca yes */
 MTR_EXPORT void MTR_CALL mtrSpriteSetModulation_ca(uint32_t sprNum,
  uint32_t color)
 {
@@ -252,6 +260,7 @@ MTR_EXPORT void MTR_CALL mtrSpriteSetModulation_ca(uint32_t sprNum,
     }
 }
 
+/*fa mtrSpriteSetModulation_rgb yes */
 MTR_EXPORT void MTR_CALL mtrSpriteSetModulation_rgb(uint32_t sprNum,
  uint8_t r, uint8_t g, uint8_t b)
 {
@@ -263,6 +272,7 @@ MTR_EXPORT void MTR_CALL mtrSpriteSetModulation_rgb(uint32_t sprNum,
     }
 }
 
+/*fa mtrSpriteSetModulation_rgba yes */
 MTR_EXPORT void MTR_CALL mtrSpriteSetModulation_rgba(uint32_t sprNum,
  uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
@@ -274,6 +284,7 @@ MTR_EXPORT void MTR_CALL mtrSpriteSetModulation_rgba(uint32_t sprNum,
     }
 }
 
+/*fa mtrSpriteSetModulationAlpha yes */
 MTR_EXPORT void MTR_CALL mtrSpriteSetModulationAlpha(uint32_t sprNum,
  uint8_t alpha)
 {
@@ -285,6 +296,7 @@ MTR_EXPORT void MTR_CALL mtrSpriteSetModulationAlpha(uint32_t sprNum,
     }
 }
 
+/*fa mtrSpriteSetModulationAlpha_f yes */
 MTR_EXPORT void MTR_CALL mtrSpriteSetModulationAlpha_f(uint32_t sprNum,
  float alpha)
 {
@@ -296,6 +308,7 @@ MTR_EXPORT void MTR_CALL mtrSpriteSetModulationAlpha_f(uint32_t sprNum,
     }
 }
 
+/*fa mtrSpriteDraw_f yes */
 MTR_EXPORT void MTR_CALL mtrSpriteDraw_f(uint32_t sprNum, int clipNum, float x,
  float y)
 {
@@ -310,6 +323,7 @@ MTR_EXPORT void MTR_CALL mtrSpriteDraw_f(uint32_t sprNum, int clipNum, float x,
     }
 }
 
+/*fa mtrSpriteDrawScaled_f yes */
 MTR_EXPORT void MTR_CALL mtrSpriteDrawScaled_f(uint32_t sprNum, int clipNum,
  float x, float y, float w, float h)
 {
@@ -324,6 +338,7 @@ MTR_EXPORT void MTR_CALL mtrSpriteDrawScaled_f(uint32_t sprNum, int clipNum,
     }
 }
 
+/*fa mtrSpriteDrawAngled_f yes */
 MTR_EXPORT void MTR_CALL mtrSpriteDrawAngled_f(uint32_t sprNum, int clipNum,
  float x, float y, float angle)
 {
@@ -338,6 +353,7 @@ MTR_EXPORT void MTR_CALL mtrSpriteDrawAngled_f(uint32_t sprNum, int clipNum,
     }
 }
 
+/*fa mtrSpriteDrawFlipped_f yes */
 MTR_EXPORT void MTR_CALL mtrSpriteDrawFlipped_f(uint32_t sprNum, int clipNum,
  float x, float y, int flip)
 {
@@ -352,6 +368,7 @@ MTR_EXPORT void MTR_CALL mtrSpriteDrawFlipped_f(uint32_t sprNum, int clipNum,
     }
 }
 
+/*fa mtrSpriteDrawGeneral_f yes */
 MTR_EXPORT void MTR_CALL mtrSpriteDrawGeneral_f(uint32_t sprNum, int clipNum,
  float x, float y, float w, float h, float angle, int flip)
 {

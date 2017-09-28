@@ -3,6 +3,7 @@
 
 #include "marathoner/script_func.h"
 
+MTR_SCRIPT_FUNC_I_S1(mtrSF_MouseFunctionSupported, mtrMouseFunctionSupported)
 MTR_SCRIPT_FUNC_B_V(mtrSF_MouseInit, mtrMouseInit)
 MTR_SCRIPT_FUNC_V_V(mtrSF_MouseRefresh, mtrMouseRefresh)
 MTR_SCRIPT_FUNC_B_I1(mtrSF_MousePress, mtrMousePress)
@@ -53,6 +54,7 @@ void mtrScriptsRegisterAll(void)
 
     mtrVm = mtrScriptsGetVm();
 
+    MTR_FIND_FUNCTION(mtrMouseFunctionSupported, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrMouseInit, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrMouseRefresh, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrMousePress, MTR_SOURCE_MODULE);
@@ -79,6 +81,8 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterNumericVariable("MOUSE_X1", MTR_MOUSE_X1);
         mtrScriptsRegisterNumericVariable("MOUSE_X2", MTR_MOUSE_X2);
 
+        mtrScriptsRegisterFunction(mtrSF_MouseFunctionSupported,
+         "MouseFunctionSupported");
         mtrScriptsRegisterFunction(mtrSF_MouseInit, "MouseInit");
         mtrScriptsRegisterFunction(mtrSF_MouseRefresh, "MouseRefresh");
         mtrScriptsRegisterFunction(mtrSF_MousePress, "MousePress");

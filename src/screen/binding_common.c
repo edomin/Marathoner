@@ -3,6 +3,7 @@
 
 #include "marathoner/script_func.h"
 
+MTR_SCRIPT_FUNC_I_S1(mtrSF_ScreenFunctionSupported, mtrScreenFunctionSupported)
 MTR_SCRIPT_FUNC_B_I2B1S1(mtrSF_ScreenInit, mtrScreenInit)
 MTR_SCRIPT_FUNC_V_V(mtrSF_ScreenQuit, mtrScreenQuit)
 MTR_SCRIPT_FUNC_V_V(mtrSF_ScreenFlip, mtrScreenFlip)
@@ -30,6 +31,7 @@ void mtrScriptsRegisterAll(void)
 
     mtrVm = mtrScriptsGetVm();
 
+    MTR_FIND_FUNCTION(mtrScreenFunctionSupported, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrScreenInit, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrScreenQuit, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrScreenFlip, MTR_SOURCE_MODULE);
@@ -42,6 +44,8 @@ void mtrScriptsRegisterAll(void)
 
     if (ok)
     {
+        mtrScriptsRegisterFunction(mtrSF_ScreenFunctionSupported,
+         "ScreenFunctionSupported");
         mtrScriptsRegisterFunction(mtrSF_ScreenInit, "ScreenInit");
         mtrScriptsRegisterFunction(mtrSF_ScreenQuit, "ScreenQuit");
         mtrScriptsRegisterFunction(mtrSF_ScreenFlip, "ScreenFlip");

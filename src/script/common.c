@@ -3,6 +3,8 @@
 
 #include "marathoner/script_func.h"
 
+MTR_SCRIPT_FUNC_I_S1(mtrSF_ScriptsFunctionSupported,
+ mtrScriptsFunctionSupported)
 MTR_SCRIPT_FUNC_B_S2(mtrSF_ScriptsRegisterStringVariable,
  mtrScriptsRegisterStringVariable)
 MTR_SCRIPT_FUNC_B_S1D1(mtrSF_ScriptsRegisterNumericVariable,

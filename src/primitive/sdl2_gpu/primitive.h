@@ -3,6 +3,7 @@
 
 #include "SDL2/SDL_gpu.h"
 
+#include "fa/Primitive_SDL2_gpu.h"
 #include "marathoner/plugin.h"
 
 #define MTR_RGB_TO_SDL_COLOR(sdl_color, ar, ag, ab) \

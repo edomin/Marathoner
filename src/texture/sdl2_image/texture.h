@@ -4,6 +4,7 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 
+#include "fa/Texture_SDL2_image.h"
 #include "marathoner/plugin.h"
 
 /*

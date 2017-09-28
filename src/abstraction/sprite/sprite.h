@@ -1,6 +1,7 @@
 #ifndef MTR_ABSTRACTION_SPRITE_H
 #define MTR_ABSTRACTION_SPRITE_H
 
+#include "fa/Abstraction_sprite.h"
 #include "marathoner/plugin.h"
 
 #include <math.h>

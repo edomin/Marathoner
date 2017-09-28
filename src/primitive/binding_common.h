@@ -1,6 +1,9 @@
 #ifndef MTR_PRIMITIVE_BINDING_COMMON_H
 #define MTR_PRIMITIVE_BINDING_COMMON_H
 
+typedef int (MTR_CALL * mtrPrimitiveFunctionSupportedFunc)(const char *);
+mtrPrimitiveFunctionSupportedFunc mtrPrimitiveFunctionSupported;
+
 typedef bool (MTR_CALL * mtrPrimitiveInitFunc)(void);
 mtrPrimitiveInitFunc mtrPrimitiveInit;
 

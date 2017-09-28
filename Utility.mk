@@ -11,12 +11,16 @@ endif
 ifeq ($(PLATFORM), html5)
   LDFLAGS += -shared -Wl,--kill-at -L$(PREFIX)/lib -s SIDE_MODULE=1 -O2
 endif
-OBJSDIR = ../../../obj
-LIBDIR = ../../../lib
-BINDIR = ../../../plugin
-SRCDIR = ../../../src
-RCDIR = ../../../rc
-INCDIRS = -I$(PREFIX)/include -I../../../include $(XINCDIRS)
+ROOTDIR = ../../..
+OBJSDIR = $(ROOTDIR)/obj
+LIBDIR = $(ROOTDIR)/lib
+BINDIR = $(ROOTDIR)/plugin
+SRCDIR = $(ROOTDIR)/src
+FADIR = $(ROOTDIR)/fa
+RCDIR = $(ROOTDIR)/rc
+INCDIRS = -I$(PREFIX)/include -I$(ROOTDIR)/include -I$(ROOTDIR) $(XINCDIRS)
+
+FAGEN = $(ROOTDIR)/fagen
 
 STATIC_NAME = $(A_PR)mtr_$(MODULE_NAME)$(A_EXT)
 PLUGIN_NAME = $(SO_PR)mtr_$(MODULE_NAME)$(SO_EXT)
@@ -25,8 +29,8 @@ OBJ = $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).o
 RES =
 
 ifeq ($(PLATFORM), win32)
-  RCGEN = ../../../rcgen
-  VERSION_H = ../../../include/marathoner/version.h
+  RCGEN = $(ROOTDIR)/rcgen
+  VERSION_H = $(ROOTDIR)/include/marathoner/version.h
   RCFILE = $(RCDIR)/$(MODULE_NAME).rc
   RES = $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).res
   OBJS = $(OBJ) $(RES)
@@ -49,7 +53,8 @@ $(LIBDIR)/$(STATIC_NAME): $(OBJ)
 $(BINDIR)/$(PLUGIN_NAME): $(OBJS)
 	$(LD) $(LDFLAGS) -o $(BINDIR)/$(PLUGIN_NAME) $(OBJS) $(LIBS)
 
-$(OBJ): $(MODULE).c $(MODULE).h $(PREREQS) ../../../include/marathoner/version.h
+$(OBJ): $(MODULE).c $(MODULE).h $(PREREQS) \
+ $(ROOTDIR)/include/marathoner/version.h $(FADIR)/$(MODULE_NAME).h
 	-mkdir $(OBJSDIR)/$(SUBSYSTEM)
 	$(CC) $(CFLAGS) $(INCDIRS) -c $(MODULE).c -o $(OBJ)
 
@@ -60,8 +65,11 @@ $(RCFILE):
 	$(RCGEN) $(VERSION_H) $(RCFILE) $(CONST_VER) $(MODULE_NAME) \
 	 $(PLUGIN_DESCRIPTION) $(PLUGIN_NAME)
 
-$(MODULE).c: ../../../include/marathoner/plugin_common.c
+$(MODULE).c: $(ROOTDIR)/include/marathoner/plugin_common.c
 
-$(MODULE).h: ../../../include/marathoner/plugin.h
+$(MODULE).h: $(ROOTDIR)/include/marathoner/plugin.h
 
-../../../include/marathoner/plugin.h: ../../../include/marathoner/marathoner.h
+$(ROOTDIR)/include/marathoner/plugin.h: $(ROOTDIR)/include/marathoner/marathoner.h
+
+$(FADIR)/$(MODULE_NAME).h: $(FAGEN)$(EXE_EXT) $(MODULE).c
+	$(FAGEN) $(MODULE).c $(FADIR)/$(MODULE_NAME).h $(PLATFORM)

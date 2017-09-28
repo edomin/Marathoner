@@ -3,6 +3,7 @@
 
 #include "marathoner/script_func.h"
 
+MTR_SCRIPT_FUNC_I_S1(mtrSF_TimerFunctionSupported, mtrTimerFunctionSupported)
 MTR_SCRIPT_FUNC_B_V(mtrSF_TimerInit, mtrTimerInit)
 MTR_SCRIPT_FUNC_V_V(mtrSF_TimerStart, mtrTimerStart)
 MTR_SCRIPT_FUNC_I_I1(mtrSF_TimerDelay, mtrTimerDelay)
@@ -16,6 +17,7 @@ void mtrScriptsRegisterAll(void)
 
     mtrVm = mtrScriptsGetVm();
 
+    MTR_FIND_FUNCTION(mtrTimerFunctionSupported, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrTimerInit, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrTimerStart, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrTimerDelay, MTR_SOURCE_MODULE);
@@ -24,6 +26,8 @@ void mtrScriptsRegisterAll(void)
 
     if (ok)
     {
+        mtrScriptsRegisterFunction(mtrSF_TimerFunctionSupported,
+         "TimerFunctionSupported");
         mtrScriptsRegisterFunction(mtrSF_TimerInit, "TimerInit");
         mtrScriptsRegisterFunction(mtrSF_TimerStart, "TimerStart");
         mtrScriptsRegisterFunction(mtrSF_TimerDelay, "TimerDelay");

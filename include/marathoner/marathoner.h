@@ -3,6 +3,7 @@
 
 #include "marathoner/version.h"
 #include "marathoner/types.h"
+#include "marathoner/common.h"
 
 #ifdef __EMSCRIPTEN__
     #include <dlfcn.h>
@@ -14,9 +15,6 @@
 /* Source: gcc.pdf - 6.62.12 Diagnostic Pragmas */
 #define DO_PRAGMA(x) _Pragma (#x)
 #define TODO(x) DO_PRAGMA(message ("TODO - " #x))
-
-/* Hack for disabling warning about unused variable */
-#define UNUSED(expr) do { (void)(expr); } while (0)
 
 /* Get valid pointer fiven type from indexkeeper data array */
 #define IK_GET_DATA(type, ik, num) (type)(&((type)ik->data)[num])

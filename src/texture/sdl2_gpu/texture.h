@@ -4,6 +4,7 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_gpu.h"
 
+#include "fa/Texture_SDL2_gpu.h"
 #include "marathoner/plugin.h"
 
 #define MTR_BLEND_ZERO                  GPU_FUNC_ZERO

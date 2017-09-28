@@ -3,6 +3,7 @@
 
 #include "marathoner/script_func.h"
 
+MTR_SCRIPT_FUNC_I_S1(mtrSF_GuiFunctionSupported, mtrGuiFunctionSupported)
 MTR_SCRIPT_FUNC_B_U32t5(mtrSF_GuiInit, mtrGuiInit)
 MTR_SCRIPT_FUNC_V_V(mtrSF_GuiQuit, mtrGuiQuit)
 MTR_SCRIPT_FUNC_V_V(mtrSF_GuiProcessEvents, mtrGuiProcessEvents)
@@ -64,6 +65,7 @@ void mtrScriptsRegisterAll(void)
 
     mtrVm = mtrScriptsGetVm();
 
+    MTR_FIND_FUNCTION(mtrGuiFunctionSupported, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiInit, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiQuit, "Abstraction_gui");
     MTR_FIND_FUNCTION(mtrGuiProcessEvents, "Abstraction_gui");
@@ -175,6 +177,8 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterNumericVariable("GUI_SYMBOL_MINUS",
          MTR_GUI_SYMBOL_MINUS);
 
+        mtrScriptsRegisterFunction(mtrSF_GuiFunctionSupported,
+         "GuiFunctionSupported");
         mtrScriptsRegisterFunction(mtrSF_GuiInit, "GuiInit");
         mtrScriptsRegisterFunction(mtrSF_GuiQuit, "GuiQuit");
         mtrScriptsRegisterFunction(mtrSF_GuiProcessEvents, "GuiProcessEvents");

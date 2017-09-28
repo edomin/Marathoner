@@ -3,6 +3,8 @@
 
 #include "marathoner/script_func.h"
 
+MTR_SCRIPT_FUNC_I_S1(mtrSF_GameControllerFunctionSupported,
+ mtrGameControllerFunctionSupported)
 MTR_SCRIPT_FUNC_B_V(mtrSF_GameControllerInit, mtrGameControllerInit)
 MTR_SCRIPT_FUNC_V_V(mtrSF_GameControllerQuit, mtrGameControllerQuit)
 MTR_SCRIPT_FUNC_V_V(mtrSF_GameControllerRefresh, mtrGameControllerRefresh)
@@ -61,6 +63,7 @@ void mtrScriptsRegisterAll(void)
 
     mtrVm = mtrScriptsGetVm();
 
+    MTR_FIND_FUNCTION(mtrGameControllerFunctionSupported, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrGameControllerInit, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrGameControllerQuit, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrGameControllerRefresh, MTR_SOURCE_MODULE);
@@ -98,6 +101,8 @@ void mtrScriptsRegisterAll(void)
          MTR_POVHAT_DOWN_LEFT);
         mtrScriptsRegisterNumericVariable("POVHAT_DOWN_RIGHT",
          MTR_POVHAT_DOWN_RIGHT);
+        mtrScriptsRegisterFunction(mtrSF_GameControllerFunctionSupported,
+         "GameControllerFunctionSupported");
         mtrScriptsRegisterFunction(mtrSF_GameControllerInit,
          "GameControllerInit");
         mtrScriptsRegisterFunction(mtrSF_GameControllerQuit,

@@ -3,6 +3,7 @@
 
 #include "marathoner/script_func.h"
 
+MTR_SCRIPT_FUNC_I_S1(mtrSF_ColorFunctionSupported, mtrColorFunctionSupported)
 MTR_SCRIPT_FUNC_U32t_U8t3(mtrSF_ColorAssembleRGB, mtrColorAssembleRGB)
 MTR_SCRIPT_FUNC_U32t_U8t4(mtrSF_ColorAssembleRGBA, mtrColorAssembleRGBA)
 
@@ -68,6 +69,7 @@ void mtrScriptsRegisterAll(void)
 
     mtrVm = mtrScriptsGetVm();
 
+    MTR_FIND_FUNCTION(mtrColorFunctionSupported, "Utils_color");
     MTR_FIND_FUNCTION(mtrColorAssembleRGB, "Utils_color");
     MTR_FIND_FUNCTION(mtrColorAssembleRGBA, "Utils_color");
     #ifdef lua_h
@@ -1523,6 +1525,8 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterNumericVariable("X11_CRIMSON", MTR_CLR_X11_CRIMSON);
         mtrScriptsRegisterFunction(mtrSF_ColorAssembleRGB,
          "ColorAssembleRGB");
+        mtrScriptsRegisterFunction(mtrSF_ColorFunctionSupported,
+         "ColorFunctionSupported");
         mtrScriptsRegisterFunction(mtrSF_ColorAssembleRGBA,
          "ColorAssembleRGBA");
         #ifdef lua_h

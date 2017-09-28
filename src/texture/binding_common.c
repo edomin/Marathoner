@@ -3,6 +3,8 @@
 
 #include "marathoner/script_func.h"
 
+MTR_SCRIPT_FUNC_I_S1(mtrSF_TextureFunctionSupported,
+ mtrTextureFunctionSupported)
 MTR_SCRIPT_FUNC_B_U32t2(mtrSF_TextureInit, mtrTextureInit)
 MTR_SCRIPT_FUNC_V_U32t1(mtrSF_TextureBeginTarget, mtrTextureBeginTarget)
 MTR_SCRIPT_FUNC_V_V(mtrSF_TextureEndTarget, mtrTextureEndTarget)
@@ -69,6 +71,7 @@ void mtrScriptsRegisterAll(void)
 
     mtrVm = mtrScriptsGetVm();
 
+    MTR_FIND_FUNCTION(mtrTextureFunctionSupported, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrTextureInit, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrTextureBeginTarget, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrTextureEndTarget, MTR_SOURCE_MODULE);
@@ -127,6 +130,8 @@ void mtrScriptsRegisterAll(void)
 //         MTR_BLEND_ONE_MINUS_SRC_ALPHA);
 //        mtrScriptsRegisterNumericVariable("BLEND_ONE_MINUS_DST_ALPHA",
 //         MTR_BLEND_ONE_MINUS_DST_ALPHA);
+        mtrScriptsRegisterFunction(mtrSF_TextureFunctionSupported,
+         "TextureFunctionSupported");
         mtrScriptsRegisterFunction(mtrSF_TextureInit, "TextureInit");
         mtrScriptsRegisterFunction(mtrSF_TextureBeginTarget,
          "TextureBeginTarget");

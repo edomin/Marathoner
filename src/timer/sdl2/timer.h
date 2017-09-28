@@ -3,6 +3,7 @@
 
 #include "SDL2/SDL.h"
 
+#include "fa/Timer_SDL2.h"
 #include "marathoner/plugin.h"
 
 typedef struct mtrTimer_t{

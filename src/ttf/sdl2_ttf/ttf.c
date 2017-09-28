@@ -2,6 +2,8 @@
 
 #include "marathoner/plugin_common.c"
 
+MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Ttf, FA_FUNCTIONS_COUNT)
+
 MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
     mtrReport *report;
@@ -18,6 +20,7 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
+/*fa mtrTtfInit yes */
 MTR_EXPORT bool MTR_CALL mtrTtfInit(uint32_t dmSize, uint32_t reservedCount)
 {
     SDL_version        compiled;
@@ -59,6 +62,7 @@ MTR_EXPORT bool MTR_CALL mtrTtfInit(uint32_t dmSize, uint32_t reservedCount)
     return true;
 }
 
+/*fa mtrTtfQuit yes */
 MTR_EXPORT void MTR_CALL mtrTtfQuit(void)
 {
     mtrLogWrite("Destroying TTF font manager", 0, MTR_LMT_INFO);
@@ -66,6 +70,7 @@ MTR_EXPORT void MTR_CALL mtrTtfQuit(void)
     mtrLogWrite("TTF font manager destroyed", 0, MTR_LMT_INFO);
 }
 
+/*fa mtrTtfLoad yes */
 MTR_EXPORT uint32_t MTR_CALL mtrTtfLoad(const char *filename, int size)
 {
     uint32_t    freeIndex;
@@ -95,6 +100,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrTtfLoad(const char *filename, int size)
     return 0;
 }
 
+/*fa mtrTtfGetFontHeight yes */
 MTR_EXPORT int MTR_CALL mtrTtfGetFontHeight(uint32_t fontNum)
 {
     mtrTtf_t *font;
@@ -105,6 +111,7 @@ MTR_EXPORT int MTR_CALL mtrTtfGetFontHeight(uint32_t fontNum)
         return 0;
 }
 
+/*fa mtrTtfGetStringSizes yes */
 MTR_EXPORT bool MTR_CALL mtrTtfGetStringSizes(uint32_t fontNum,
  const char *string, int *w, int *h)
 {
@@ -124,6 +131,7 @@ MTR_EXPORT bool MTR_CALL mtrTtfGetStringSizes(uint32_t fontNum,
         return false;
 }
 
+/*fa mtrTtfGetStringWidth yes */
 MTR_EXPORT int MTR_CALL mtrTtfGetStringWidth(uint32_t fontNum,
  const char *string)
 {
@@ -140,6 +148,7 @@ MTR_EXPORT int MTR_CALL mtrTtfGetStringWidth(uint32_t fontNum,
         return 0;
 }
 
+/*fa mtrTtfSetFontStyle yes */
 MTR_EXPORT void MTR_CALL mtrTtfSetFontStyle(uint32_t fontNum, int style)
 {
     mtrTtf_t *font;
@@ -147,6 +156,7 @@ MTR_EXPORT void MTR_CALL mtrTtfSetFontStyle(uint32_t fontNum, int style)
     TTF_SetFontStyle(font->font, style);
 }
 
+/*fa mtrTtfSetFontOutline yes */
 MTR_EXPORT void MTR_CALL mtrTtfSetFontOutline(uint32_t fontNum, int outline)
 {
     mtrTtf_t *font;
@@ -154,6 +164,7 @@ MTR_EXPORT void MTR_CALL mtrTtfSetFontOutline(uint32_t fontNum, int outline)
     TTF_SetFontOutline(font->font, outline);
 }
 
+/*fa mtrTtfFree yes */
 MTR_EXPORT void MTR_CALL mtrTtfFree(uint32_t fontNum)
 {
     mtrTtf_t *font;

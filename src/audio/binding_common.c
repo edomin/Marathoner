@@ -3,6 +3,7 @@
 
 #include "marathoner/script_func.h"
 
+MTR_SCRIPT_FUNC_I_S1(mtrSF_AudioFunctionSupported, mtrAudioFunctionSupported)
 MTR_SCRIPT_FUNC_B_U32t4I3(mtrSF_AudioInit, mtrAudioInit)
 MTR_SCRIPT_FUNC_V_V(mtrSF_AudioQuit, mtrAudioQuit)
 MTR_SCRIPT_FUNC_U32t_S1(mtrSF_AudioSoundLoad, mtrAudioSoundLoad)
@@ -39,6 +40,7 @@ void mtrScriptsRegisterAll(void)
 
     mtrVm = mtrScriptsGetVm();
 
+    MTR_FIND_FUNCTION(mtrAudioFunctionSupported, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrAudioInit, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrAudioQuit, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrAudioSoundLoad, MTR_SOURCE_MODULE);
@@ -76,6 +78,8 @@ void mtrScriptsRegisterAll(void)
          MTR_AU_CHUNK_SIZE_DEFAULT);
         mtrScriptsRegisterNumericVariable("AU_DEFAULT", MTR_AU_DEFAULT);
 
+        mtrScriptsRegisterFunction(mtrSF_AudioFunctionSupported,
+         "AudioFunctionSupported");
         mtrScriptsRegisterFunction(mtrSF_AudioInit, "AudioInit");
         mtrScriptsRegisterFunction(mtrSF_AudioQuit, "AudioQuit");
         mtrScriptsRegisterFunction(mtrSF_AudioSoundLoad, "AudioSoundLoad");

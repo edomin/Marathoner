@@ -3,6 +3,7 @@
 
 #include "SDL2/SDL.h"
 
+#include "fa/Mouse_SDL2.h"
 #include "marathoner/plugin.h"
 
 typedef struct mtrMouse_t{

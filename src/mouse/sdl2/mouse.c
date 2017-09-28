@@ -2,6 +2,8 @@
 
 #include "marathoner/plugin_common.c"
 
+MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Mouse, FA_FUNCTIONS_COUNT)
+
 MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
     mtrReport *report;
@@ -18,6 +20,7 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
+/*fa mtrMouseInit yes */
 MTR_EXPORT bool MTR_CALL mtrMouseInit(void)
 {
     SDL_version compiled;
@@ -62,6 +65,7 @@ MTR_EXPORT bool MTR_CALL mtrMouseInit(void)
     return true;
 }
 
+/*fa mtrMouseRefresh yes */
 MTR_EXPORT void MTR_CALL mtrMouseRefresh(void)
 {
     int       mouseState;
@@ -101,6 +105,7 @@ MTR_EXPORT void MTR_CALL mtrMouseRefresh(void)
     }
 }
 
+/*fa mtrMousePress yes */
 MTR_EXPORT bool MTR_CALL mtrMousePress(int button)
 {
     if (button > 5)
@@ -116,6 +121,7 @@ MTR_EXPORT bool MTR_CALL mtrMousePress(int button)
     }
 }
 
+/*fa mtrMouseRelease yes */
 MTR_EXPORT bool MTR_CALL mtrMouseRelease(int button)
 {
     if (button > 5)
@@ -131,6 +137,7 @@ MTR_EXPORT bool MTR_CALL mtrMouseRelease(int button)
     }
 }
 
+/*fa mtrMousePressed yes */
 MTR_EXPORT bool MTR_CALL mtrMousePressed(int button)
 {
     if (button > 5)
@@ -145,6 +152,7 @@ MTR_EXPORT bool MTR_CALL mtrMousePressed(int button)
     }
 }
 
+/*fa mtrMouseGetWheelRelative yes */
 MTR_EXPORT int MTR_CALL mtrMouseGetWheelRelative(void)
 {
     SDL_Event events[32];
@@ -166,37 +174,44 @@ MTR_EXPORT int MTR_CALL mtrMouseGetWheelRelative(void)
     return -wheelRel;
 }
 
+/*fa mtrMouseMoving yes */
 MTR_EXPORT bool MTR_CALL mtrMouseMoving(void)
 {
     return mtrMouse.mouseMotion;
 }
 
+/*fa mtrMouseGetX yes */
 MTR_EXPORT int MTR_CALL mtrMouseGetX(void)
 {
     return mtrMouse.x;
 }
 
+/*fa mtrMouseGetY yes */
 MTR_EXPORT int MTR_CALL mtrMouseGetY(void)
 {
     return mtrMouse.y;
 }
 
+/*fa mtrMouseGetXY yes */
 MTR_EXPORT void MTR_CALL mtrMouseGetXY(int *mouseX, int *mouseY)
 {
     *mouseX = mtrMouse.x;
     *mouseY = mtrMouse.y;
 }
 
+/*fa mtrMouseGetDeltaX yes */
 MTR_EXPORT int MTR_CALL mtrMouseGetDeltaX(void)
 {
     return mtrMouse.deltaX;
 }
 
+/*fa mtrMouseGetDeltaY yes */
 MTR_EXPORT int MTR_CALL mtrMouseGetDeltaY(void)
 {
     return mtrMouse.deltaY;
 }
 
+/*fa mtrMouseGetDeltaXY yes */
 MTR_EXPORT void MTR_CALL mtrMouseGetDeltaXY(int *deltaX, int *deltaY)
 {
     *deltaX = mtrMouse.deltaX;

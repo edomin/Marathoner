@@ -1,6 +1,7 @@
 #ifndef MTR_UTILS_MATH_H
 #define MTR_UTILS_MATH_H
 
+#include "fa/Utils_math.h"
 #include "marathoner/plugin.h"
 
 #include <math.h>

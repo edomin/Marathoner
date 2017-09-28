@@ -3,6 +3,7 @@
 
 #include "SDL2/SDL.h"
 
+#include "fa/Screen_SDL2.h"
 #include "marathoner/plugin.h"
 
 typedef struct mtrScreen_t {

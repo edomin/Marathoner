@@ -3,6 +3,7 @@
 
 #include "marathoner/script_func.h"
 
+MTR_SCRIPT_FUNC_I_S1(mtrSF_MathFunctionSupported, mtrMathFunctionSupported)
 MTR_SCRIPT_FUNC_F_F1(mtrSF_Sin_f, mtrSin_f)
 MTR_SCRIPT_FUNC_D_D1(mtrSF_Sin_d, mtrSin_d)
 MTR_SCRIPT_FUNC_F_F1(mtrSF_SinFast_f, mtrSinFast_f)
@@ -185,6 +186,7 @@ void mtrScriptsRegisterAll(void)
 
     mtrVm = mtrScriptsGetVm();
 
+    MTR_FIND_FUNCTION(mtrMathFunctionSupported, "Utils_math");
     MTR_FIND_FUNCTION(mtrSin_f, "Utils_math");
     MTR_FIND_FUNCTION(mtrSin_d, "Utils_math");
     MTR_FIND_FUNCTION(mtrSinFast_f, "Utils_math");
@@ -297,6 +299,8 @@ void mtrScriptsRegisterAll(void)
 
     if (ok)
     {
+        mtrScriptsRegisterFunction(mtrSF_MathFunctionSupported,
+         "MathFunctionSupported");
         mtrScriptsRegisterFunction(mtrSF_Sin_f, "Sin_f");
         mtrScriptsRegisterFunction(mtrSF_Sin_d, "Sin_d");
         mtrScriptsRegisterFunction(mtrSF_SinFast_f, "SinFast_f");

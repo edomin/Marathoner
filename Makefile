@@ -3,6 +3,7 @@ include Build.mk
 OBJSDIR = obj
 LIBDIR = lib
 BINDIR = plugin
+FADIR = fa
 RCDIR = rc
 
 SCREEN_SDL2 = screen/sdl2
@@ -210,6 +211,7 @@ prebuild:
 	-mkdir $(OBJSDIR)
 	-mkdir $(LIBDIR)
 	-mkdir $(BINDIR)
+	-mkdir $(FADIR)
 ifeq ($(PLATFORM), win32)
 	-mkdir $(RCDIR)
 endif
@@ -218,7 +220,9 @@ clean:
 	-rm -f -r $(OBJSDIR)
 	-rm -f -r $(LIBDIR)
 	-rm -f -r $(BINDIR)
+	-rm -f -r $(FADIR)
 	-rm -f -r $(RCDIR)
+	-rm -f -r fagen.exe
 	-rm -f -r marathoner.exe
 	-rm -f -r marathoner.html
 	-rm -f -r marathoner.js

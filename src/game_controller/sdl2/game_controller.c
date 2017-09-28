@@ -2,6 +2,8 @@
 
 #include "marathoner/plugin_common.c"
 
+MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(GameController, FA_FUNCTIONS_COUNT)
+
 MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
     mtrReport *report;
@@ -209,6 +211,7 @@ void mtrDisableController(int controllerNum)
     mtrIndexkeeperFreeIndex(mtrGameControllerKeeper, controllerNum);
 }
 
+/*fa mtrGameControllerInit yes */
 MTR_EXPORT bool MTR_CALL mtrGameControllerInit(void)
 {
     SDL_version             compiled;
@@ -282,6 +285,7 @@ MTR_EXPORT bool MTR_CALL mtrGameControllerInit(void)
     return true;
 }
 
+/*fa mtrGameControllerQuit yes */
 MTR_EXPORT void MTR_CALL mtrGameControllerQuit(void)
 {
     uint32_t i;
@@ -298,6 +302,7 @@ MTR_EXPORT void MTR_CALL mtrGameControllerQuit(void)
     mtrLogWrite("Game controller support disabled", 0, MTR_LMT_INFO);
 }
 
+/*fa mtrGameControllerRefresh yes */
 MTR_EXPORT void MTR_CALL mtrGameControllerRefresh(void)
 {
     unsigned int         i;
@@ -361,6 +366,7 @@ MTR_EXPORT void MTR_CALL mtrGameControllerRefresh(void)
     }
 }
 
+/*fa mtrGameControllerButtonPress yes */
 MTR_EXPORT bool MTR_CALL mtrGameControllerButtonPress(int controllerNum,
  int button)
 {
@@ -381,6 +387,7 @@ MTR_EXPORT bool MTR_CALL mtrGameControllerButtonPress(int controllerNum,
         return false;
 }
 
+/*fa mtrGameControllerButtonRelease yes */
 MTR_EXPORT bool MTR_CALL mtrGameControllerButtonRelease(int controllerNum,
  int button)
 {
@@ -401,6 +408,7 @@ MTR_EXPORT bool MTR_CALL mtrGameControllerButtonRelease(int controllerNum,
         return false;
 }
 
+/*fa mtrGameControllerButtonPressed yes */
 MTR_EXPORT bool MTR_CALL mtrGameControllerButtonPressed(int controllerNum,
  int button)
 {
@@ -417,6 +425,7 @@ MTR_EXPORT bool MTR_CALL mtrGameControllerButtonPressed(int controllerNum,
         return false;
 }
 
+/*fa mtrGameControllerGetAxis yes */
 MTR_EXPORT int16_t MTR_CALL mtrGameControllerGetAxis(int controllerNum,
  int axisNum)
 {
@@ -433,6 +442,7 @@ MTR_EXPORT int16_t MTR_CALL mtrGameControllerGetAxis(int controllerNum,
         return 0;
 }
 
+/*fa mtrGameControllerGetAxis_f yes */
 MTR_EXPORT float MTR_CALL mtrGameControllerGetAxis_f(int controllerNum,
  int axisNum)
 {
@@ -454,6 +464,7 @@ MTR_EXPORT float MTR_CALL mtrGameControllerGetAxis_f(int controllerNum,
         return 0.0f;
 }
 
+/*fa mtrGameControllerGetAxisDelta yes */
 MTR_EXPORT int MTR_CALL mtrGameControllerGetAxisDelta(int controllerNum,
  int axisNum)
 {
@@ -471,6 +482,7 @@ MTR_EXPORT int MTR_CALL mtrGameControllerGetAxisDelta(int controllerNum,
         return 0;
 }
 
+/*fa mtrGameControllerGetAxisDelta_f yes */
 MTR_EXPORT float MTR_CALL mtrGameControllerGetAxisDelta_f(int controllerNum,
  int axisNum)
 {
@@ -488,6 +500,7 @@ MTR_EXPORT float MTR_CALL mtrGameControllerGetAxisDelta_f(int controllerNum,
         return 0.0f;
 }
 
+/*fa mtrGameControllerGetTrackballDeltaX yes */
 MTR_EXPORT int MTR_CALL mtrGameControllerGetTrackballDeltaX(int controllerNum,
  int trackballNum)
 {
@@ -504,6 +517,7 @@ MTR_EXPORT int MTR_CALL mtrGameControllerGetTrackballDeltaX(int controllerNum,
         return 0;
 }
 
+/*fa mtrGameControllerGetTrackballDeltaY yes */
 MTR_EXPORT int MTR_CALL mtrGameControllerGetTrackballDeltaY(int controllerNum,
  int trackballNum)
 {
@@ -520,6 +534,7 @@ MTR_EXPORT int MTR_CALL mtrGameControllerGetTrackballDeltaY(int controllerNum,
         return 0;
 }
 
+/*fa mtrGameControllerGetTrackballDeltaXY yes */
 MTR_EXPORT void MTR_CALL mtrGameControllerGetTrackballDeltaXY(int controllerNum,
  int trackballNum, int *deltaX, int *deltaY)
 {
@@ -545,6 +560,7 @@ MTR_EXPORT void MTR_CALL mtrGameControllerGetTrackballDeltaXY(int controllerNum,
     }
 }
 
+/*fa mtrGameControllerGetPovHat yes */
 MTR_EXPORT uint8_t MTR_CALL mtrGameControllerGetPovHat(int controllerNum,
  int povHatNum)
 {
@@ -561,6 +577,7 @@ MTR_EXPORT uint8_t MTR_CALL mtrGameControllerGetPovHat(int controllerNum,
         return 0;
 }
 
+/*fa mtrGameControllerGetButtonsCount yes */
 MTR_EXPORT int MTR_CALL mtrGameControllerGetButtonsCount(int controllerNum)
 {
     mtrGameController_t *gameController;
@@ -573,6 +590,7 @@ MTR_EXPORT int MTR_CALL mtrGameControllerGetButtonsCount(int controllerNum)
         return 0;
 }
 
+/*fa mtrGameControllerGetAxesCount yes */
 MTR_EXPORT int MTR_CALL mtrGameControllerGetAxesCount(int controllerNum)
 {
     mtrGameController_t *gameController;
@@ -585,6 +603,7 @@ MTR_EXPORT int MTR_CALL mtrGameControllerGetAxesCount(int controllerNum)
         return 0;
 }
 
+/*fa mtrGameControllerGetTrackballsCount yes */
 MTR_EXPORT int MTR_CALL mtrGameControllerGetTrackballsCount(int controllerNum)
 {
     mtrGameController_t *gameController;
@@ -597,6 +616,7 @@ MTR_EXPORT int MTR_CALL mtrGameControllerGetTrackballsCount(int controllerNum)
         return 0;
 }
 
+/*fa mtrGameControllerGetPowHatsCount yes */
 MTR_EXPORT int MTR_CALL mtrGameControllerGetPowHatsCount(int controllerNum)
 {
     mtrGameController_t *gameController;

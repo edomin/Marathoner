@@ -3,6 +3,7 @@
 
 #include "marathoner/script_func.h"
 
+MTR_SCRIPT_FUNC_I_S1(mtrSF_FontFunctionSupported, mtrFontFunctionSupported)
 MTR_SCRIPT_FUNC_B_U32t2(mtrSF_FontInit, mtrFontInit)
 MTR_SCRIPT_FUNC_U32t_S1I1(mtrSF_FontLoadTtf, mtrFontLoadTtf)
 MTR_SCRIPT_FUNC_V_U32t1(mtrSF_FontFree, mtrFontFree)
@@ -23,6 +24,7 @@ void mtrScriptsRegisterAll(void)
 
     mtrVm = mtrScriptsGetVm();
 
+    MTR_FIND_FUNCTION(mtrFontFunctionSupported, "Abstraction_font");
     MTR_FIND_FUNCTION(mtrFontInit, "Abstraction_font");
     MTR_FIND_FUNCTION(mtrFontLoadTtf, "Abstraction_font");
     MTR_FIND_FUNCTION(mtrFontFree, "Abstraction_font");
@@ -38,6 +40,8 @@ void mtrScriptsRegisterAll(void)
 
     if (ok)
     {
+        mtrScriptsRegisterFunction(mtrSF_FontFunctionSupported,
+         "FontFunctionSupported");
         mtrScriptsRegisterFunction(mtrSF_FontInit, "FontInit");
         mtrScriptsRegisterFunction(mtrSF_FontLoadTtf, "FontLoadTtf");
         mtrScriptsRegisterFunction(mtrSF_FontFree, "FontFree");

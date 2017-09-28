@@ -2,6 +2,8 @@
 
 #include "marathoner/plugin_common.c"
 
+MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Font, FA_FUNCTIONS_COUNT)
+
 MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
     mtrReport *report;
@@ -25,6 +27,7 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
+/*fa mtrFontInit yes */
 MTR_EXPORT bool MTR_CALL mtrFontInit(uint32_t dmSize, uint32_t reservedCount)
 {
     mtrLogWrite("Initializing font abstraction manager", 0, MTR_LMT_INFO);
@@ -56,6 +59,7 @@ MTR_EXPORT bool MTR_CALL mtrFontInit(uint32_t dmSize, uint32_t reservedCount)
     return true;
 }
 
+/*fa mtrFontLoadTtf yes */
 MTR_EXPORT uint32_t MTR_CALL mtrFontLoadTtf(const char *filename, int size)
 {
     uint32_t   freeIndex;
@@ -85,6 +89,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrFontLoadTtf(const char *filename, int size)
     return freeIndex;
 }
 
+/*fa mtrFontFree yes */
 MTR_EXPORT void MTR_CALL mtrFontFree(uint32_t fontNum)
 {
     mtrFont_t *font;
@@ -100,6 +105,7 @@ MTR_EXPORT void MTR_CALL mtrFontFree(uint32_t fontNum)
     }
 }
 
+/*fa mtrFontSetTtfStyle yes */
 MTR_EXPORT void MTR_CALL mtrFontSetTtfStyle(uint32_t fontNum, int style)
 {
     mtrFont_t *font;
@@ -107,6 +113,7 @@ MTR_EXPORT void MTR_CALL mtrFontSetTtfStyle(uint32_t fontNum, int style)
     mtrTtfSetFontStyle(font->ttfIndex, style);
 }
 
+/*fa mtrFontSetTtfOutline yes */
 MTR_EXPORT void MTR_CALL mtrFontSetTtfOutline(uint32_t fontNum, int outline)
 {
     mtrFont_t *font;
@@ -114,6 +121,7 @@ MTR_EXPORT void MTR_CALL mtrFontSetTtfOutline(uint32_t fontNum, int outline)
     mtrTtfSetFontOutline(font->ttfIndex, outline);
 }
 
+/*fa mtrFontRenderTtfString yes */
 MTR_EXPORT bool MTR_CALL mtrFontRenderTtfString(uint32_t fontNum,
  uint32_t texNum, uint8_t r, uint8_t g, uint8_t b, const char *string)
 {
@@ -129,6 +137,7 @@ MTR_EXPORT bool MTR_CALL mtrFontRenderTtfString(uint32_t fontNum,
 }
 
 /* Create monospace bitmap font */
+/*fa mtrFontCreateMbf yes */
 MTR_EXPORT uint32_t MTR_CALL mtrFontCreateMbf(const char *name,
  int reservedTables, int width, int height)
 {
@@ -182,6 +191,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrFontCreateMbf(const char *name,
     return freeIndex;
 }
 
+/*fa mtrFontAddMbfTextureTable yes */
 MTR_EXPORT bool MTR_CALL mtrFontAddMbfTextureTable(uint32_t fontNum,
  uint32_t texNum, unsigned int tableNum)
 {
@@ -198,6 +208,7 @@ MTR_EXPORT bool MTR_CALL mtrFontAddMbfTextureTable(uint32_t fontNum,
     return true;
 }
 
+/*fa mtrFontDrawMbfString_f yes */
 MTR_EXPORT bool MTR_CALL mtrFontDrawMbfString_f(uint32_t fontNum,
  float x, float y, const char *string)
 {
@@ -239,6 +250,7 @@ MTR_EXPORT bool MTR_CALL mtrFontDrawMbfString_f(uint32_t fontNum,
     return true;
 }
 
+/*fa mtrFontGetHeight yes */
 MTR_EXPORT int MTR_CALL mtrFontGetHeight(uint32_t fontNum)
 {
     mtrFont_t *font;
@@ -250,6 +262,7 @@ MTR_EXPORT int MTR_CALL mtrFontGetHeight(uint32_t fontNum)
     return 0;
 }
 
+/*fa mtrFontGetStringWidth yes */
 MTR_EXPORT int MTR_CALL mtrFontGetStringWidth(uint32_t fontNum,
  const char *string)
 {
@@ -263,6 +276,7 @@ MTR_EXPORT int MTR_CALL mtrFontGetStringWidth(uint32_t fontNum,
     return 0;
 }
 
+/*fa mtrFontGetName yes */
 MTR_EXPORT char *MTR_CALL mtrFontGetName(uint32_t fontNum)
 {
     mtrFont_t *font;

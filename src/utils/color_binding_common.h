@@ -1,6 +1,9 @@
 #ifndef MTR_UTILS_COLOR_BINDING_COMMON_H
 #define MTR_UTILS_COLOR_BINDING_COMMON_H
 
+typedef int (MTR_CALL * mtrColorFunctionSupportedFunc)(const char *);
+mtrColorFunctionSupportedFunc mtrColorFunctionSupported;
+
 typedef uint32_t (MTR_CALL * mtrColorAssembleRGBFunc)(uint8_t, uint8_t,
  uint8_t);
 mtrColorAssembleRGBFunc mtrColorAssembleRGB;

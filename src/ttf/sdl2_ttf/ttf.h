@@ -3,6 +3,7 @@
 
 #include "SDL2/SDL_ttf.h"
 
+#include "fa/TTF_SDL2_ttf.h"
 #include "marathoner/plugin.h"
 #include "../common.h"
 

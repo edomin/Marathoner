@@ -1,6 +1,9 @@
 #ifndef MTR_UTILS_MATH_BINDING_COMMON_H
 #define MTR_UTILS_MATH_BINDING_COMMON_H
 
+typedef int (MTR_CALL * mtrMathFunctionSupportedFunc)(const char *);
+mtrMathFunctionSupportedFunc mtrMathFunctionSupported;
+
 typedef float (MTR_CALL * mtrSin_fFunc)(float);
 mtrSin_fFunc mtrSin_f;
 

@@ -3,6 +3,8 @@
 
 #include "marathoner/script_func.h"
 
+MTR_SCRIPT_FUNC_I_S1(mtrSF_PrimitiveFunctionSupported,
+ mtrPrimitiveFunctionSupported)
 MTR_SCRIPT_FUNC_B_V(mtrSF_PrimitiveInit, mtrPrimitiveInit)
 MTR_SCRIPT_FUNC_V_U8t3(mtrSF_PrimitiveFill_rgb, mtrPrimitiveFill_rgb)
 MTR_SCRIPT_FUNC_V_U8t4(mtrSF_PrimitiveFill_rgba, mtrPrimitiveFill_rgba)
@@ -133,6 +135,7 @@ void mtrScriptsRegisterAll(void)
 
     mtrVm = mtrScriptsGetVm();
 
+    MTR_FIND_FUNCTION(mtrPrimitiveFunctionSupported, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrPrimitiveInit, MTR_SOURCE_MODULE);
 
     /* Fill */
@@ -253,6 +256,8 @@ void mtrScriptsRegisterAll(void)
 
     if (ok)
     {
+        mtrScriptsRegisterFunction(mtrSF_PrimitiveFunctionSupported,
+         "PrimitiveFunctionSupported");
         mtrScriptsRegisterFunction(mtrSF_PrimitiveInit, "PrimitiveInit");
 
         mtrScriptsRegisterFunction(mtrSF_PrimitiveFill_rgb,

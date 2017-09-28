@@ -3,6 +3,7 @@
 
 #include "marathoner/script_func.h"
 
+MTR_SCRIPT_FUNC_I_S1(mtrSF_TtfFunctionSupported, mtrTtfFunctionSupported)
 MTR_SCRIPT_FUNC_B_U32t2(mtrSF_TtfInit, mtrTtfInit)
 MTR_SCRIPT_FUNC_V_V(mtrSF_TtfQuit, mtrTtfQuit)
 MTR_SCRIPT_FUNC_U32t_S1I1(mtrSF_TtfLoad, mtrTtfLoad)
@@ -54,6 +55,7 @@ void mtrScriptsRegisterAll(void)
 
     mtrVm = mtrScriptsGetVm();
 
+    MTR_FIND_FUNCTION(mtrTtfFunctionSupported, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrTtfInit, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrTtfQuit, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrTtfLoad, MTR_SOURCE_MODULE);
@@ -75,6 +77,8 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterNumericVariable("FS_STRIKETHROUGH",
          MTR_FS_STRIKETHROUGH);
 
+        mtrScriptsRegisterFunction(mtrSF_TtfFunctionSupported,
+         "TtfFunctionSupported");
         mtrScriptsRegisterFunction(mtrSF_TtfInit, "TtfInit");
         mtrScriptsRegisterFunction(mtrSF_TtfQuit, "TtfQuit");
         mtrScriptsRegisterFunction(mtrSF_TtfLoad, "TtfLoad");

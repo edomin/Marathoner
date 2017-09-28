@@ -3,6 +3,7 @@
 
 #include "SDL2/SDL.h"
 
+#include "fa/Primitive_SDL2.h"
 #include "marathoner/plugin.h"
 
 #define MTR_ARC_SEGMENTS_COUNT 32

@@ -1,6 +1,9 @@
 #ifndef MTR_MOUSE_BINDING_COMMON_H
 #define MTR_MOUSE_BINDING_COMMON_H
 
+typedef int (MTR_CALL * mtrMouseFunctionSupportedFunc)(const char *);
+mtrMouseFunctionSupportedFunc mtrMouseFunctionSupported;
+
 typedef bool (MTR_CALL * mtrMouseInitFunc)(void);
 mtrMouseInitFunc mtrMouseInit;
 

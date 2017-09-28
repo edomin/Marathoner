@@ -5,12 +5,16 @@
 #include "lualib.h"
 #include "lauxlib.h"
 
+#include "fa/Script_Lua.h"
 #include "marathoner/plugin.h"
 
 typedef void (MTR_CALL * mtrPluginInitFunc)(void);
 mtrPluginInitFunc mtrPluginInit;
 
 lua_State *mtrVm;
+
+typedef int (MTR_CALL * mtrScriptsFunctionSupportedFunc)(const char *);
+mtrScriptsFunctionSupportedFunc mtrScriptsFunctionSupported;
 
 MTR_EXPORT void MTR_CALL mtrScriptsRegisterFunction(lua_CFunction func,
  const char * funcname);

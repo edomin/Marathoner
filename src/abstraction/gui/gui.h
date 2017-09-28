@@ -12,6 +12,7 @@
 #include "nuklear.h"
 #pragma GCC diagnostic pop
 
+#include "fa/Abstraction_gui.h"
 #include "marathoner/plugin.h"
 
 typedef struct mtrNkFont {

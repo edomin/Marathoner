@@ -119,4 +119,17 @@ uint8_t mtrPluginsCount;
         return false;                                                   \
     }
 
+#define MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(subsystemPrefix, functionsCount) \
+    MTR_EXPORT int MTR_CALL mtr ## subsystemPrefix ## FunctionSupported(       \
+     const char *functionName)                                                 \
+    {                                                                          \
+        int i;                                                                 \
+        for (i = 0; i < functionsCount; i++)                                   \
+        {                                                                      \
+            if (strcmp(functionName, faName[i]) == 0)                          \
+                return faAvailability[i];                                      \
+        }                                                                      \
+        return MTR_FA_NO;                                                      \
+    }
+
 #endif

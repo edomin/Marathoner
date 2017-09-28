@@ -1,6 +1,9 @@
 #ifndef MTR_TIMER_BINDING_COMMON_H
 #define MTR_TIMER_BINDING_COMMON_H
 
+typedef int (MTR_CALL * mtrTimerFunctionSupportedFunc)(const char *);
+mtrTimerFunctionSupportedFunc mtrTimerFunctionSupported;
+
 typedef bool (MTR_CALL * mtrTimerInitFunc)(void);
 mtrTimerInitFunc mtrTimerInit;
 

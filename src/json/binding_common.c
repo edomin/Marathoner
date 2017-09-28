@@ -3,6 +3,7 @@
 
 #include "marathoner/script_func.h"
 
+MTR_SCRIPT_FUNC_I_S1(mtrSF_JsonFunctionSupported, mtrJsonFunctionSupported)
 MTR_SCRIPT_FUNC_B_U32t2(mtrSF_JsonInit, mtrJsonInit)
 MTR_SCRIPT_FUNC_U32t_V(mtrSF_JsonCreateObject, mtrJsonCreateObject)
 MTR_SCRIPT_FUNC_U32t_V(mtrSF_JsonCreateArray, mtrJsonCreateArray)
@@ -49,6 +50,7 @@ void mtrScriptsRegisterAll(void)
 
     mtrVm = mtrScriptsGetVm();
 
+    MTR_FIND_FUNCTION(mtrJsonFunctionSupported, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrJsonInit, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrJsonCreateObject, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrJsonCreateArray, MTR_SOURCE_MODULE);
@@ -80,6 +82,8 @@ void mtrScriptsRegisterAll(void)
 
     if (ok)
     {
+        mtrScriptsRegisterFunction(mtrSF_JsonFunctionSupported,
+         "JsonFunctionSupported");
         mtrScriptsRegisterFunction(mtrSF_JsonInit, "JsonInit");
         mtrScriptsRegisterFunction(mtrSF_JsonCreateObject, "JsonCreateObject");
         mtrScriptsRegisterFunction(mtrSF_JsonCreateArray, "JsonCreateArray");

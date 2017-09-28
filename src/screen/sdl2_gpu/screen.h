@@ -4,6 +4,7 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_gpu.h"
 
+#include "fa/Screen_SDL2_gpu.h"
 #include "marathoner/plugin.h"
 
 typedef struct mtrScreen_t {

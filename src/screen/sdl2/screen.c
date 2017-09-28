@@ -2,6 +2,8 @@
 
 #include "marathoner/plugin_common.c"
 
+MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Screen, FA_FUNCTIONS_COUNT)
+
 MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
     mtrReport *report;
@@ -18,6 +20,7 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
+/*fa mtrScreenInit yes */
 MTR_EXPORT bool MTR_CALL mtrScreenInit(int width, int height, bool fullscreen,
  const char *title)
 {
@@ -183,6 +186,7 @@ MTR_EXPORT bool MTR_CALL mtrScreenInit(int width, int height, bool fullscreen,
     return true;
 }
 
+/*fa mtrScreenQuit yes */
 MTR_EXPORT void MTR_CALL mtrScreenQuit(void)
 {
     SDL_DestroyRenderer(mtrScreen->renderer);
@@ -191,11 +195,13 @@ MTR_EXPORT void MTR_CALL mtrScreenQuit(void)
     mtrLogWrite("Screen destroyed", 0, MTR_LMT_INFO);
 }
 
+/*fa mtrScreenFlip yes */
 MTR_EXPORT void MTR_CALL mtrScreenFlip(void)
 {
     SDL_RenderPresent(mtrScreen->renderer);
 }
 
+/*fa mtrScreenGetSizes yes */
 MTR_EXPORT void MTR_CALL mtrScreenGetSizes(int *w, int *h)
 {
     int width;
@@ -208,6 +214,7 @@ MTR_EXPORT void MTR_CALL mtrScreenGetSizes(int *w, int *h)
         *h = height;
 }
 
+/*fa mtrScreenGetWidth yes */
 MTR_EXPORT int MTR_CALL mtrScreenGetWidth(void)
 {
     int width;
@@ -217,6 +224,7 @@ MTR_EXPORT int MTR_CALL mtrScreenGetWidth(void)
     return width;
 }
 
+/*fa mtrScreenGetHeight yes */
 MTR_EXPORT int MTR_CALL mtrScreenGetHeight(void)
 {
     int width;
@@ -226,6 +234,7 @@ MTR_EXPORT int MTR_CALL mtrScreenGetHeight(void)
     return height;
 }
 
+/*fa mtrScreenXed yes */
 MTR_EXPORT bool MTR_CALL mtrScreenXed(void)
 {
     SDL_Event events[32];

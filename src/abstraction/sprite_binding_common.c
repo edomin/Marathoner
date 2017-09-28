@@ -3,6 +3,7 @@
 
 #include "marathoner/script_func.h"
 
+MTR_SCRIPT_FUNC_I_S1(mtrSF_SpriteFunctionSupported, mtrSpriteFunctionSupported)
 MTR_SCRIPT_FUNC_B_U32t2(mtrSF_SpriteInit, mtrSpriteInit)
 MTR_SCRIPT_FUNC_U32t_S1I7(mtrSF_SpriteLoad, mtrSpriteLoad)
 MTR_SCRIPT_FUNC_U32t_S1I2(mtrSF_SpriteLoadSimple, mtrSpriteLoadSimple)
@@ -30,6 +31,7 @@ void mtrScriptsRegisterAll(void)
 
     mtrVm = mtrScriptsGetVm();
 
+    MTR_FIND_FUNCTION(mtrSpriteFunctionSupported, "Abstraction_sprite");
     MTR_FIND_FUNCTION(mtrSpriteInit, "Abstraction_sprite");
     MTR_FIND_FUNCTION(mtrSpriteLoad, "Abstraction_sprite");
     MTR_FIND_FUNCTION(mtrSpriteLoadSimple, "Abstraction_sprite");
@@ -48,6 +50,8 @@ void mtrScriptsRegisterAll(void)
 
     if (ok)
     {
+        mtrScriptsRegisterFunction(mtrSF_SpriteFunctionSupported,
+         "SpriteFunctionSupported");
         mtrScriptsRegisterFunction(mtrSF_SpriteInit, "SpriteInit");
         mtrScriptsRegisterFunction(mtrSF_SpriteLoad, "SpriteLoad");
         mtrScriptsRegisterFunction(mtrSF_SpriteLoadSimple, "SpriteLoadSimple");

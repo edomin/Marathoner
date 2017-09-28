@@ -1,6 +1,9 @@
 #ifndef MTR_ABSTRACTION_FONT_BINDING_COMMON_H
 #define MTR_ABSTRACTION_FONT_BINDING_COMMON_H
 
+typedef int (MTR_CALL * mtrFontFunctionSupportedFunc)(const char *);
+mtrFontFunctionSupportedFunc mtrFontFunctionSupported;
+
 typedef bool (MTR_CALL * mtrFontInitFunc)(uint32_t, uint32_t);
 mtrFontInitFunc mtrFontInit;
 

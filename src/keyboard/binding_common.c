@@ -3,6 +3,8 @@
 
 #include "marathoner/script_func.h"
 
+MTR_SCRIPT_FUNC_I_S1(mtrSF_KeyboardFunctionSupported,
+ mtrKeyboardFunctionSupported)
 MTR_SCRIPT_FUNC_B_V(mtrSF_KeyboardInit, mtrKeyboardInit)
 MTR_SCRIPT_FUNC_V_V(mtrSF_KeyboardRefresh, mtrKeyboardRefresh)
 MTR_SCRIPT_FUNC_B_I1(mtrSF_KeyboardPress, mtrKeyboardPress)
@@ -29,6 +31,7 @@ void mtrScriptsRegisterAll(void)
 
     mtrVm = mtrScriptsGetVm();
 
+    MTR_FIND_FUNCTION(mtrKeyboardFunctionSupported, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrKeyboardInit, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrKeyboardRefresh, MTR_SOURCE_MODULE);
     MTR_FIND_FUNCTION(mtrKeyboardPress, MTR_SOURCE_MODULE);
@@ -296,6 +299,8 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterNumericVariable("KEY_APP1", MTR_KEY_APP1);
         mtrScriptsRegisterNumericVariable("KEY_APP2", MTR_KEY_APP2);
 
+        mtrScriptsRegisterFunction(mtrSF_KeyboardFunctionSupported,
+         "KeyboardFunctionSupported");
         mtrScriptsRegisterFunction(mtrSF_KeyboardInit, "KeyboardInit");
         mtrScriptsRegisterFunction(mtrSF_KeyboardRefresh, "KeyboardRefresh");
         mtrScriptsRegisterFunction(mtrSF_KeyboardPress, "KeyboardPress");
