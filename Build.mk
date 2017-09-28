@@ -7,6 +7,12 @@ DEBUG = yes
 # yes, no
 MORE_WARNINGS = yes
 
+ifneq ($(NUMBER_OF_PROCESSORS),)
+  CORES = $(NUMBER_OF_PROCESSORS)
+else
+  CORES = 1
+endif
+
 ifeq ($(PLATFORM), win32)
 	PREFIX = /usr/local/mingw32
 	CC = mingw32-gcc
