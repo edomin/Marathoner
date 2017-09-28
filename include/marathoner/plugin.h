@@ -4,8 +4,8 @@
 #include "marathoner/marathoner.h"
 
 typedef struct mtrIndexkeeper_t {
-    void *data;
-    size_t dataSize;
+    void    *data;
+    size_t   dataSize;
     uint32_t reservedData;
     uint32_t dataCount;
     uint32_t dmSize;
@@ -99,6 +99,7 @@ mtrOptionsGet_fFunc_t                       mtrOptionsGet_f;
 mtrOptionsGet_dFunc_t                       mtrOptionsGet_d;
 
 uint8_t mtrPluginsCount;
+
 
 #define MTR_FIND_FUNCTION(function, module)                        \
     function = (function ## Func)mtrFindFunction(module,           \

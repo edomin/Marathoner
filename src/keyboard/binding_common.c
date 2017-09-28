@@ -87,8 +87,10 @@ void mtrScriptsRegisterAll(void)
 
         mtrScriptsRegisterNumericVariable("KEY_MINUS", MTR_KEY_MINUS);
         mtrScriptsRegisterNumericVariable("KEY_EQUALS", MTR_KEY_EQUALS);
-        mtrScriptsRegisterNumericVariable("KEY_LEFTBRACKET", MTR_KEY_LEFTBRACKET);
-        mtrScriptsRegisterNumericVariable("KEY_RIGHTBRACKET", MTR_KEY_RIGHTBRACKET);
+        mtrScriptsRegisterNumericVariable("KEY_LEFTBRACKET",
+         MTR_KEY_LEFTBRACKET);
+        mtrScriptsRegisterNumericVariable("KEY_RIGHTBRACKET",
+         MTR_KEY_RIGHTBRACKET);
         mtrScriptsRegisterNumericVariable("KEY_BACKSLASH", MTR_KEY_BACKSLASH);
         mtrScriptsRegisterNumericVariable("KEY_NONUSHASH", MTR_KEY_NONUSHASH);
         mtrScriptsRegisterNumericVariable("KEY_SEMICOLON", MTR_KEY_SEMICOLON);
@@ -113,7 +115,8 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterNumericVariable("KEY_F11", MTR_KEY_F11);
         mtrScriptsRegisterNumericVariable("KEY_F12", MTR_KEY_F12);
 
-        mtrScriptsRegisterNumericVariable("KEY_PRINTSCREEN", MTR_KEY_PRINTSCREEN);
+        mtrScriptsRegisterNumericVariable("KEY_PRINTSCREEN",
+         MTR_KEY_PRINTSCREEN);
         mtrScriptsRegisterNumericVariable("KEY_SCROLLLOCK", MTR_KEY_SCROLLLOCK);
         mtrScriptsRegisterNumericVariable("KEY_PAUSE", MTR_KEY_PAUSE);
         mtrScriptsRegisterNumericVariable("KEY_INSERT", MTR_KEY_INSERT);
@@ -127,9 +130,11 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterNumericVariable("KEY_DOWN", MTR_KEY_DOWN);
         mtrScriptsRegisterNumericVariable("KEY_UP", MTR_KEY_UP);
 
-        mtrScriptsRegisterNumericVariable("KEY_NUMLOCKCLEAR", MTR_KEY_NUMLOCKCLEAR);
+        mtrScriptsRegisterNumericVariable("KEY_NUMLOCKCLEAR",
+         MTR_KEY_NUMLOCKCLEAR);
         mtrScriptsRegisterNumericVariable("KEY_KP_DIVIDE", MTR_KEY_KP_DIVIDE);
-        mtrScriptsRegisterNumericVariable("KEY_KP_MULTIPLY", MTR_KEY_KP_MULTIPLY);
+        mtrScriptsRegisterNumericVariable("KEY_KP_MULTIPLY",
+         MTR_KEY_KP_MULTIPLY);
         mtrScriptsRegisterNumericVariable("KEY_KP_MINUS", MTR_KEY_KP_MINUS);
         mtrScriptsRegisterNumericVariable("KEY_KP_PLUS", MTR_KEY_KP_PLUS);
         mtrScriptsRegisterNumericVariable("KEY_KP_ENTER", MTR_KEY_KP_ENTER);
@@ -145,8 +150,10 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterNumericVariable("KEY_KP_0", MTR_KEY_KP_0);
         mtrScriptsRegisterNumericVariable("KEY_KP_PERIOD", MTR_KEY_KP_PERIOD);
 
-        mtrScriptsRegisterNumericVariable("KEY_NONUSBACKSLASH", MTR_KEY_NONUSBACKSLASH);
-        mtrScriptsRegisterNumericVariable("KEY_APPLICATION", MTR_KEY_APPLICATION);
+        mtrScriptsRegisterNumericVariable("KEY_NONUSBACKSLASH",
+         MTR_KEY_NONUSBACKSLASH);
+        mtrScriptsRegisterNumericVariable("KEY_APPLICATION",
+         MTR_KEY_APPLICATION);
         mtrScriptsRegisterNumericVariable("KEY_POWER", MTR_KEY_POWER);
         mtrScriptsRegisterNumericVariable("KEY_KP_EQUALS", MTR_KEY_KP_EQUALS);
         mtrScriptsRegisterNumericVariable("KEY_F13", MTR_KEY_F13);
@@ -177,17 +184,27 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterNumericVariable("KEY_VOLUMEDOWN", MTR_KEY_VOLUMEDOWN);
 
         mtrScriptsRegisterNumericVariable("KEY_KP_COMMA", MTR_KEY_KP_COMMA);
-        mtrScriptsRegisterNumericVariable("KEY_KP_EQUALSAS400", MTR_KEY_KP_EQUALSAS400);
+        mtrScriptsRegisterNumericVariable("KEY_KP_EQUALSAS400",
+         MTR_KEY_KP_EQUALSAS400);
 
-        mtrScriptsRegisterNumericVariable("KEY_INTERNATIONAL1", MTR_KEY_INTERNATIONAL1);
-        mtrScriptsRegisterNumericVariable("KEY_INTERNATIONAL2", MTR_KEY_INTERNATIONAL2);
-        mtrScriptsRegisterNumericVariable("KEY_INTERNATIONAL3", MTR_KEY_INTERNATIONAL3);
-        mtrScriptsRegisterNumericVariable("KEY_INTERNATIONAL4", MTR_KEY_INTERNATIONAL4);
-        mtrScriptsRegisterNumericVariable("KEY_INTERNATIONAL5", MTR_KEY_INTERNATIONAL5);
-        mtrScriptsRegisterNumericVariable("KEY_INTERNATIONAL6", MTR_KEY_INTERNATIONAL6);
-        mtrScriptsRegisterNumericVariable("KEY_INTERNATIONAL7", MTR_KEY_INTERNATIONAL7);
-        mtrScriptsRegisterNumericVariable("KEY_INTERNATIONAL8", MTR_KEY_INTERNATIONAL8);
-        mtrScriptsRegisterNumericVariable("KEY_INTERNATIONAL9", MTR_KEY_INTERNATIONAL9);
+        mtrScriptsRegisterNumericVariable("KEY_INTERNATIONAL1",
+         MTR_KEY_INTERNATIONAL1);
+        mtrScriptsRegisterNumericVariable("KEY_INTERNATIONAL2",
+         MTR_KEY_INTERNATIONAL2);
+        mtrScriptsRegisterNumericVariable("KEY_INTERNATIONAL3",
+         MTR_KEY_INTERNATIONAL3);
+        mtrScriptsRegisterNumericVariable("KEY_INTERNATIONAL4",
+         MTR_KEY_INTERNATIONAL4);
+        mtrScriptsRegisterNumericVariable("KEY_INTERNATIONAL5",
+         MTR_KEY_INTERNATIONAL5);
+        mtrScriptsRegisterNumericVariable("KEY_INTERNATIONAL6",
+         MTR_KEY_INTERNATIONAL6);
+        mtrScriptsRegisterNumericVariable("KEY_INTERNATIONAL7",
+         MTR_KEY_INTERNATIONAL7);
+        mtrScriptsRegisterNumericVariable("KEY_INTERNATIONAL8",
+         MTR_KEY_INTERNATIONAL8);
+        mtrScriptsRegisterNumericVariable("KEY_INTERNATIONAL9",
+         MTR_KEY_INTERNATIONAL9);
         mtrScriptsRegisterNumericVariable("KEY_LANG1", MTR_KEY_LANG1);
         mtrScriptsRegisterNumericVariable("KEY_LANG2", MTR_KEY_LANG2);
         mtrScriptsRegisterNumericVariable("KEY_LANG3", MTR_KEY_LANG3);
@@ -213,16 +230,25 @@ void mtrScriptsRegisterAll(void)
 
         mtrScriptsRegisterNumericVariable("KEY_KP_00", MTR_KEY_KP_00);
         mtrScriptsRegisterNumericVariable("KEY_KP_000", MTR_KEY_KP_000);
-        mtrScriptsRegisterNumericVariable("KEY_THOUSANDSSEPARATOR", MTR_KEY_THOUSANDSSEPARATOR);
-        mtrScriptsRegisterNumericVariable("KEY_DECIMALSEPARATOR", MTR_KEY_DECIMALSEPARATOR);
-        mtrScriptsRegisterNumericVariable("KEY_CURRENCYUNIT", MTR_KEY_CURRENCYUNIT);
-        mtrScriptsRegisterNumericVariable("KEY_CURRENCYSUBUNIT", MTR_KEY_CURRENCYSUBUNIT);
-        mtrScriptsRegisterNumericVariable("KEY_KP_LEFTPAREN", MTR_KEY_KP_LEFTPAREN);
-        mtrScriptsRegisterNumericVariable("KEY_KP_RIGHTPAREN", MTR_KEY_KP_RIGHTPAREN);
-        mtrScriptsRegisterNumericVariable("KEY_KP_LEFTBRACE", MTR_KEY_KP_LEFTBRACE);
-        mtrScriptsRegisterNumericVariable("KEY_KP_RIGHTBRACE", MTR_KEY_KP_RIGHTBRACE);
+        mtrScriptsRegisterNumericVariable("KEY_THOUSANDSSEPARATOR",
+         MTR_KEY_THOUSANDSSEPARATOR);
+        mtrScriptsRegisterNumericVariable("KEY_DECIMALSEPARATOR",
+         MTR_KEY_DECIMALSEPARATOR);
+        mtrScriptsRegisterNumericVariable("KEY_CURRENCYUNIT",
+         MTR_KEY_CURRENCYUNIT);
+        mtrScriptsRegisterNumericVariable("KEY_CURRENCYSUBUNIT",
+         MTR_KEY_CURRENCYSUBUNIT);
+        mtrScriptsRegisterNumericVariable("KEY_KP_LEFTPAREN",
+         MTR_KEY_KP_LEFTPAREN);
+        mtrScriptsRegisterNumericVariable("KEY_KP_RIGHTPAREN",
+         MTR_KEY_KP_RIGHTPAREN);
+        mtrScriptsRegisterNumericVariable("KEY_KP_LEFTBRACE",
+         MTR_KEY_KP_LEFTBRACE);
+        mtrScriptsRegisterNumericVariable("KEY_KP_RIGHTBRACE",
+         MTR_KEY_KP_RIGHTBRACE);
         mtrScriptsRegisterNumericVariable("KEY_KP_TAB", MTR_KEY_KP_TAB);
-        mtrScriptsRegisterNumericVariable("KEY_KP_BACKSPACE", MTR_KEY_KP_BACKSPACE);
+        mtrScriptsRegisterNumericVariable("KEY_KP_BACKSPACE",
+         MTR_KEY_KP_BACKSPACE);
         mtrScriptsRegisterNumericVariable("KEY_KP_A", MTR_KEY_KP_A);
         mtrScriptsRegisterNumericVariable("KEY_KP_B", MTR_KEY_KP_B);
         mtrScriptsRegisterNumericVariable("KEY_KP_C", MTR_KEY_KP_C);
@@ -234,29 +260,42 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterNumericVariable("KEY_KP_PERCENT", MTR_KEY_KP_PERCENT);
         mtrScriptsRegisterNumericVariable("KEY_KP_LESS", MTR_KEY_KP_LESS);
         mtrScriptsRegisterNumericVariable("KEY_KP_GREATER", MTR_KEY_KP_GREATER);
-        mtrScriptsRegisterNumericVariable("KEY_KP_AMPERSAND", MTR_KEY_KP_AMPERSAND);
-        mtrScriptsRegisterNumericVariable("KEY_KP_DBLAMPERSAND", MTR_KEY_KP_DBLAMPERSAND);
-        mtrScriptsRegisterNumericVariable("KEY_KP_VERTICALBAR", MTR_KEY_KP_VERTICALBAR);
-        mtrScriptsRegisterNumericVariable("KEY_KP_DBLVERTICALBAR", MTR_KEY_KP_DBLVERTICALBAR);
+        mtrScriptsRegisterNumericVariable("KEY_KP_AMPERSAND",
+         MTR_KEY_KP_AMPERSAND);
+        mtrScriptsRegisterNumericVariable("KEY_KP_DBLAMPERSAND",
+         MTR_KEY_KP_DBLAMPERSAND);
+        mtrScriptsRegisterNumericVariable("KEY_KP_VERTICALBAR",
+         MTR_KEY_KP_VERTICALBAR);
+        mtrScriptsRegisterNumericVariable("KEY_KP_DBLVERTICALBAR",
+         MTR_KEY_KP_DBLVERTICALBAR);
         mtrScriptsRegisterNumericVariable("KEY_KP_COLON", MTR_KEY_KP_COLON);
         mtrScriptsRegisterNumericVariable("KEY_KP_HASH", MTR_KEY_KP_HASH);
         mtrScriptsRegisterNumericVariable("KEY_KP_SPACE", MTR_KEY_KP_SPACE);
         mtrScriptsRegisterNumericVariable("KEY_KP_AT", MTR_KEY_KP_AT);
         mtrScriptsRegisterNumericVariable("KEY_KP_EXCLAM", MTR_KEY_KP_EXCLAM);
-        mtrScriptsRegisterNumericVariable("KEY_KP_MEMSTORE", MTR_KEY_KP_MEMSTORE);
-        mtrScriptsRegisterNumericVariable("KEY_KP_MEMRECALL", MTR_KEY_KP_MEMRECALL);
-        mtrScriptsRegisterNumericVariable("KEY_KP_MEMCLEAR", MTR_KEY_KP_MEMCLEAR);
+        mtrScriptsRegisterNumericVariable("KEY_KP_MEMSTORE",
+         MTR_KEY_KP_MEMSTORE);
+        mtrScriptsRegisterNumericVariable("KEY_KP_MEMRECALL",
+         MTR_KEY_KP_MEMRECALL);
+        mtrScriptsRegisterNumericVariable("KEY_KP_MEMCLEAR",
+         MTR_KEY_KP_MEMCLEAR);
         mtrScriptsRegisterNumericVariable("KEY_KP_MEMADD", MTR_KEY_KP_MEMADD);
-        mtrScriptsRegisterNumericVariable("KEY_KP_MEMSUBTRACT", MTR_KEY_KP_MEMSUBTRACT);
-        mtrScriptsRegisterNumericVariable("KEY_KP_MEMMULTIPLY", MTR_KEY_KP_MEMMULTIPLY);
-        mtrScriptsRegisterNumericVariable("KEY_KP_MEMDIVIDE", MTR_KEY_KP_MEMDIVIDE);
-        mtrScriptsRegisterNumericVariable("KEY_KP_PLUSMINUS", MTR_KEY_KP_PLUSMINUS);
+        mtrScriptsRegisterNumericVariable("KEY_KP_MEMSUBTRACT",
+         MTR_KEY_KP_MEMSUBTRACT);
+        mtrScriptsRegisterNumericVariable("KEY_KP_MEMMULTIPLY",
+         MTR_KEY_KP_MEMMULTIPLY);
+        mtrScriptsRegisterNumericVariable("KEY_KP_MEMDIVIDE",
+         MTR_KEY_KP_MEMDIVIDE);
+        mtrScriptsRegisterNumericVariable("KEY_KP_PLUSMINUS",
+         MTR_KEY_KP_PLUSMINUS);
         mtrScriptsRegisterNumericVariable("KEY_KP_CLEAR", MTR_KEY_KP_CLEAR);
-        mtrScriptsRegisterNumericVariable("KEY_KP_CLEARENTRY", MTR_KEY_KP_CLEARENTRY);
+        mtrScriptsRegisterNumericVariable("KEY_KP_CLEARENTRY",
+         MTR_KEY_KP_CLEARENTRY);
         mtrScriptsRegisterNumericVariable("KEY_KP_BINARY", MTR_KEY_KP_BINARY);
         mtrScriptsRegisterNumericVariable("KEY_KP_OCTAL", MTR_KEY_KP_OCTAL);
         mtrScriptsRegisterNumericVariable("KEY_KP_DECIMAL", MTR_KEY_KP_DECIMAL);
-        mtrScriptsRegisterNumericVariable("KEY_KP_HEXADECIMAL", MTR_KEY_KP_HEXADECIMAL);
+        mtrScriptsRegisterNumericVariable("KEY_KP_HEXADECIMAL",
+         MTR_KEY_KP_HEXADECIMAL);
 
         mtrScriptsRegisterNumericVariable("KEY_LCTRL", MTR_KEY_LCTRL);
         mtrScriptsRegisterNumericVariable("KEY_LSHIFT", MTR_KEY_LSHIFT);
@@ -274,7 +313,8 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterNumericVariable("KEY_AUDIOSTOP", MTR_KEY_AUDIOSTOP);
         mtrScriptsRegisterNumericVariable("KEY_AUDIOPLAY", MTR_KEY_AUDIOPLAY);
         mtrScriptsRegisterNumericVariable("KEY_AUDIOMUTE", MTR_KEY_AUDIOMUTE);
-        mtrScriptsRegisterNumericVariable("KEY_MEDIASELECT", MTR_KEY_MEDIASELECT);
+        mtrScriptsRegisterNumericVariable("KEY_MEDIASELECT",
+         MTR_KEY_MEDIASELECT);
         mtrScriptsRegisterNumericVariable("KEY_WWW", MTR_KEY_WWW);
         mtrScriptsRegisterNumericVariable("KEY_MAIL", MTR_KEY_MAIL);
         mtrScriptsRegisterNumericVariable("KEY_CALCULATOR", MTR_KEY_CALCULATOR);
@@ -285,13 +325,19 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterNumericVariable("KEY_AC_FORWARD", MTR_KEY_AC_FORWARD);
         mtrScriptsRegisterNumericVariable("KEY_AC_STOP", MTR_KEY_AC_STOP);
         mtrScriptsRegisterNumericVariable("KEY_AC_REFRESH", MTR_KEY_AC_REFRESH);
-        mtrScriptsRegisterNumericVariable("KEY_AC_BOOKMARKS", MTR_KEY_AC_BOOKMARKS);
+        mtrScriptsRegisterNumericVariable("KEY_AC_BOOKMARKS",
+         MTR_KEY_AC_BOOKMARKS);
 
-        mtrScriptsRegisterNumericVariable("KEY_BRIGHTNESSDOWN", MTR_KEY_BRIGHTNESSDOWN);
-        mtrScriptsRegisterNumericVariable("KEY_BRIGHTNESSUP", MTR_KEY_BRIGHTNESSUP);
-        mtrScriptsRegisterNumericVariable("KEY_DISPLAYSWITCH", MTR_KEY_DISPLAYSWITCH);
-        mtrScriptsRegisterNumericVariable("KEY_KBDILLUMTOGGLE", MTR_KEY_KBDILLUMTOGGLE);
-        mtrScriptsRegisterNumericVariable("KEY_KBDILLUMDOWN", MTR_KEY_KBDILLUMDOWN);
+        mtrScriptsRegisterNumericVariable("KEY_BRIGHTNESSDOWN",
+         MTR_KEY_BRIGHTNESSDOWN);
+        mtrScriptsRegisterNumericVariable("KEY_BRIGHTNESSUP",
+         MTR_KEY_BRIGHTNESSUP);
+        mtrScriptsRegisterNumericVariable("KEY_DISPLAYSWITCH",
+         MTR_KEY_DISPLAYSWITCH);
+        mtrScriptsRegisterNumericVariable("KEY_KBDILLUMTOGGLE",
+         MTR_KEY_KBDILLUMTOGGLE);
+        mtrScriptsRegisterNumericVariable("KEY_KBDILLUMDOWN",
+         MTR_KEY_KBDILLUMDOWN);
         mtrScriptsRegisterNumericVariable("KEY_KBDILLUMUP", MTR_KEY_KBDILLUMUP);
         mtrScriptsRegisterNumericVariable("KEY_EJECT", MTR_KEY_EJECT);
         mtrScriptsRegisterNumericVariable("KEY_SLEEP", MTR_KEY_SLEEP);
@@ -306,7 +352,8 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterFunction(mtrSF_KeyboardPress, "KeyboardPress");
         mtrScriptsRegisterFunction(mtrSF_KeyboardRelease, "KeyboardRelease");
         mtrScriptsRegisterFunction(mtrSF_KeyboardPressed, "KeyboardPressed");
-        mtrScriptsRegisterFunction(mtrSF_KeyboardInputChar, "KeyboardInputChar");
+        mtrScriptsRegisterFunction(mtrSF_KeyboardInputChar,
+         "KeyboardInputChar");
     }
     else
     {

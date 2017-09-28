@@ -247,7 +247,7 @@ void mtrScriptPrintFunc(HSQUIRRELVM v,const SQChar *s,...)
     va_end(vl);
 }
 
-void mtrScriptErrorFunc(HSQUIRRELVM v,const SQChar *s,...)
+void mtrScriptErrorFunc(HSQUIRRELVM v, const SQChar *s,...)
 {
     char buf[80];
     va_list vl;

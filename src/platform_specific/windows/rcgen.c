@@ -5,14 +5,14 @@
 
 int main(int argc, char **argv)
 {
-    FILE *inputFile;
-    FILE *outputFile;
-    char *inputBuf;
+    FILE        *inputFile;
+    FILE        *outputFile;
+    char        *inputBuf;
     unsigned int bufLength;
     unsigned int i;
-    int fileChar;
-    char *constPos;
-    char *valuePos;
+    int          fileChar;
+    char        *constPos;
+    char        *valuePos;
     unsigned int uValuePos;
     unsigned int version;
     unsigned int digit;
@@ -20,12 +20,12 @@ int main(int argc, char **argv)
     unsigned int verMinor;
     unsigned int verPatch;
 
-    char *inputPath = argv[1];
-    char *outputPath = argv[2];
-    char *versionConst = argv[3];
-    char *name = argv[4];
-    char *description = argv[5];
-    char *filename = argv[6];
+    char        *inputPath = argv[1];
+    char        *outputPath = argv[2];
+    char        *versionConst = argv[3];
+    char        *name = argv[4];
+    char        *description = argv[5];
+    char        *filename = argv[6];
 
     if (argc < 2)
     {
@@ -173,7 +173,8 @@ int main(int argc, char **argv)
                     fprintf(outputFile, "VALUE \"InternalName\", \"%s\"\n",
                      name);
                     fprintf(outputFile, "%s\n",
-                     "VALUE \"LegalCopyright\", \"(C) 2016-2017 Vasiliy Edomin\"");
+                     "VALUE \"LegalCopyright\", \"(C) 2016-2017 Vasiliy "
+                     "Edomin\"");
                     fprintf(outputFile, "VALUE \"OriginalFilename\", \"%s\"\n",
                      filename);
                     fprintf(outputFile, "VALUE \"ProductName\", \"%s\"\n",

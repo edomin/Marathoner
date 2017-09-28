@@ -148,10 +148,10 @@ int main(int argc, char** argv)
     char   *temp; /* Read config result */
     bool    ok;
     int     error;
-    char *autorunAction = NULL;
-    char *autorunPlugin = NULL;
-    char *autorunScript = NULL;
-    char *currentArgument = NULL;
+    char   *autorunAction = NULL;
+    char   *autorunPlugin = NULL;
+    char   *autorunScript = NULL;
+    char   *currentArgument = NULL;
 
     mtrLogInit("Marathoner.log");
 

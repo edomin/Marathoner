@@ -35,9 +35,7 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterFunction(mtrSF_TimerDelayForFPS_f, "TimerDelayForFPS_f");
     }
     else
-    {
         mtrLogWrite("Functions not added", 3, MTR_LMT_ERROR);
-    }
 }
 
 #endif

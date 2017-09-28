@@ -1523,10 +1523,9 @@ void mtrScriptsRegisterAll(void)
         mtrScriptsRegisterNumericVariable("X11_INDIGO", MTR_CLR_X11_INDIGO);
         mtrScriptsRegisterNumericVariable("X11_INDIGO2", MTR_CLR_X11_INDIGO2);
         mtrScriptsRegisterNumericVariable("X11_CRIMSON", MTR_CLR_X11_CRIMSON);
-        mtrScriptsRegisterFunction(mtrSF_ColorAssembleRGB,
-         "ColorAssembleRGB");
         mtrScriptsRegisterFunction(mtrSF_ColorFunctionSupported,
          "ColorFunctionSupported");
+        mtrScriptsRegisterFunction(mtrSF_ColorAssembleRGB, "ColorAssembleRGB");
         mtrScriptsRegisterFunction(mtrSF_ColorAssembleRGBA,
          "ColorAssembleRGBA");
         #ifdef lua_h
