@@ -13,8 +13,7 @@ mtrPluginInitFunc mtrPluginInit;
 
 lua_State *mtrVm;
 
-typedef int (MTR_CALL * mtrScriptsFunctionSupportedFunc)(const char *);
-mtrScriptsFunctionSupportedFunc mtrScriptsFunctionSupported;
+MTR_EXPORT int MTR_CALL mtrScriptsFunctionSupported(const char *);
 
 MTR_EXPORT void MTR_CALL mtrScriptsRegisterFunction(lua_CFunction func,
  const char * funcname);

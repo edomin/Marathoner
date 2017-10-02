@@ -11,8 +11,7 @@ mtrPluginInitFunc mtrPluginInit;
 
 duk_context *mtrVm;
 
-typedef int (MTR_CALL * mtrScriptsFunctionSupportedFunc)(const char *);
-mtrScriptsFunctionSupportedFunc mtrScriptsFunctionSupported;
+MTR_EXPORT int MTR_CALL mtrScriptsFunctionSupported(const char *);
 
 MTR_EXPORT void MTR_CALL mtrScriptsRegisterFunction(duk_c_function func,
  const char *funcname);
