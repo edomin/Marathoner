@@ -20,7 +20,7 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
-/*fa mtrTtfRenderString yes */
+/*fa mtrColorAssembleRGB yes */
 MTR_EXPORT uint32_t MTR_CALL mtrColorAssembleRGB(uint8_t r, uint8_t g,
  uint8_t b)
 {

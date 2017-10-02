@@ -344,7 +344,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCreateAlias(uint32_t texNum)
     return 0;
 }
 
-/*fa mtrTextureSave yes */
+/*fa mtrTextureFree yes */
 MTR_EXPORT void MTR_CALL mtrTextureFree(uint32_t texNum)
 {
     mtrTexture_t *texture;

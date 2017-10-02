@@ -149,7 +149,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveLine_rgb_f(float x1, float y1, float x2,
     lineRGBA(mtrScreen->renderer, x1, y1, x2, y2, r, g, b, 0xFF);
 }
 
-/*fa mtrPrimitiveLine_rgb_f yes */
+/*fa mtrPrimitiveLine_rgba_f yes */
 MTR_EXPORT void MTR_CALL mtrPrimitiveLine_rgba_f(float x1, float y1, float x2,
  float y2, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
@@ -467,7 +467,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveEllipseFilled_ca_f(float x, float y,
     filledEllipseRGBA(mtrScreen->renderer, x, y, rx, ry, r, g, b, a);
 }
 
-/*fa mtrPrimitiveEllipseFilled_ca_f dummy */
+/*fa mtrPrimitiveRingSegment_rgb_f dummy */
 MTR_EXPORT void MTR_CALL mtrPrimitiveRingSegment_rgb_f(float x, float y,
  float innerRadius, float outerRadius, float startAngle, float endAngle,
  uint8_t r, uint8_t g, uint8_t b)
