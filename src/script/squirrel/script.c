@@ -21,6 +21,30 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
+void mtrScriptPrintFunc(HSQUIRRELVM v,const SQChar *s,...)
+{
+    char buf[80];
+    va_list vl;
+    va_start(vl, s);
+
+    vsnprintf(buf, 80, s, vl);
+    mtrLogWrite_s("Squirrel:", 0, MTR_LMT_INFO, buf);
+
+    va_end(vl);
+}
+
+void mtrScriptErrorFunc(HSQUIRRELVM v, const SQChar *s,...)
+{
+    char buf[80];
+    va_list vl;
+    va_start(vl, s);
+
+    vsnprintf(buf, 80, s, vl);
+    mtrLogWrite_s("Squirrel:", 0, MTR_LMT_ERROR, buf);
+
+    va_end(vl);
+}
+
 void mtrScriptsInit(void)
 {
     uint8_t i;
@@ -34,7 +58,14 @@ void mtrScriptsInit(void)
      sq_getversion());
 
     mtrVm = sq_open(1024);
+    sq_setprintfunc(mtrVm, mtrScriptPrintFunc, mtrScriptErrorFunc); //sets the print function
+    sq_pushroottable(mtrVm);
+    sqstd_register_bloblib(mtrVm);
     sqstd_register_iolib(mtrVm);
+    sqstd_register_systemlib(mtrVm);
+    sqstd_register_mathlib(mtrVm);
+    sqstd_register_stringlib(mtrVm);
+    sqstd_seterrorhandlers(mtrVm); //registers the default error handlers
     mtrLogWrite("Squirrel VM created", 1, MTR_LMT_INFO);
     /* Registering functions and constants from all binding plugins */
     mtrLogWrite("Registering functions and constants of engine", 1,
@@ -235,36 +266,9 @@ MTR_EXPORT bool MTR_CALL mtrScriptsRegisterNumericVariable(const char *name,
     return false;
 }
 
-void mtrScriptPrintFunc(HSQUIRRELVM v,const SQChar *s,...)
-{
-    char buf[80];
-    va_list vl;
-    va_start(vl, s);
-
-    vsnprintf(buf, 80, s, vl);
-    mtrLogWrite_s("Squirrel:", 0, MTR_LMT_INFO, buf);
-
-    va_end(vl);
-}
-
-void mtrScriptErrorFunc(HSQUIRRELVM v, const SQChar *s,...)
-{
-    char buf[80];
-    va_list vl;
-    va_start(vl, s);
-
-    vsnprintf(buf, 80, s, vl);
-    mtrLogWrite_s("Squirrel:", 0, MTR_LMT_ERROR, buf);
-
-    va_end(vl);
-}
-
 void mtrScriptsDoFile(const char * filename)
 {
     SQRESULT error;
-    sqstd_seterrorhandlers(mtrVm); //registers the default error handlers
-    sq_setprintfunc(mtrVm, mtrScriptPrintFunc, mtrScriptErrorFunc); //sets the print function
-    sq_pushroottable(mtrVm);
     error = sqstd_dofile(mtrVm, filename, 0, 1);
     if (SQ_FAILED(error))
     {

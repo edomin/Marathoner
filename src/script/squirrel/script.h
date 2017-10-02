@@ -4,7 +4,11 @@
 #include <stdio.h>
 
 #include "squirrel.h"
+#include "sqstdblob.h"
 #include "sqstdio.h"
+#include "sqstdsystem.h"
+#include "sqstdmath.h"
+#include "sqstdstring.h"
 #include "sqstdaux.h"
 
 #include "fa/Script_Squirrel.h"
