@@ -3,7 +3,7 @@
 #include "marathoner/plugin_common.c"
 #include "../common.c"
 
-MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Script, FA_FUNCTIONS_COUNT)
+MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Scripts, FA_FUNCTIONS_COUNT)
 
 MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 {
