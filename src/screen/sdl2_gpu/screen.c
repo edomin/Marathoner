@@ -20,7 +20,7 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
-/*fa mtrScreenInit yes */
+/*fa mtrScreenInit partially */
 MTR_EXPORT bool MTR_CALL mtrScreenInit(int width, int height, bool fullscreen,
  const char *title)
 {
