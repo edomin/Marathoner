@@ -21,6 +21,52 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
+static void push_file_as_string(const char *filename)
+{
+    FILE *f;
+    size_t len;
+    char buf[1048576]; /* 1MB filezise limit */
+
+    f = fopen(filename, "rb");
+    if (f)
+    {
+        len = fread((void *) buf, 1, sizeof(buf), f);
+        fclose(f);
+        duk_push_lstring(mtrVm, (const char *) buf, (duk_size_t) len);
+    }
+    else
+        duk_push_undefined(mtrVm);
+}
+
+static duk_ret_t cb_resolve_module(duk_context *ctx) {
+	const char *module_id;
+//	const char *parent_id;
+
+	module_id = duk_require_string(ctx, 0);
+//	parent_id = duk_require_string(ctx, 1);
+
+	duk_push_sprintf(ctx, "%s.js", module_id);
+//	printf("resolve_cb: id:'%s', parent-id:'%s', resolve-to:'%s'\n",
+//		module_id, parent_id, duk_get_string(ctx, -1));
+
+	return 1;
+}
+
+static duk_ret_t cb_load_module(duk_context *ctx) {
+	const char *filename;
+//	const char *module_id;
+
+//	module_id = duk_require_string(ctx, 0);
+	duk_get_prop_string(ctx, 2, "filename");
+	filename = duk_require_string(ctx, -1);
+
+//	printf("load_cb: id:'%s', filename:'%s'\n", module_id, filename);
+
+	push_file_as_string(filename);
+
+	return 1;
+}
+
 void mtrScriptsInit(void)
 {
     uint8_t i;
@@ -44,6 +90,13 @@ void mtrScriptsInit(void)
         mtrLogWrite("Duktape context created", 1, MTR_LMT_INFO);
     else
         mtrNotify("Unable to create Duktape context", 1, MTR_DMT_FATAL);
+
+    duk_push_object(mtrVm);
+    duk_push_c_function(mtrVm, cb_resolve_module, DUK_VARARGS);
+    duk_put_prop_string(mtrVm, -2, "resolve");
+    duk_push_c_function(mtrVm, cb_load_module, DUK_VARARGS);
+    duk_put_prop_string(mtrVm, -2, "load");
+    duk_module_node_init(mtrVm);
 
     /* Registering functions and constants from all binding plugins */
     mtrLogWrite("Registering functions and constants of engine", 1,
@@ -236,27 +289,10 @@ MTR_EXPORT bool MTR_CALL mtrScriptsRegisterNumericVariable(const char *name,
     return false;
 }
 
-static void push_file_as_string(const char *filename)
-{
-    FILE *f;
-    size_t len;
-    char buf[1048576]; /* 1MB filezise limit */
-
-    f = fopen(filename, "rb");
-    if (f)
-    {
-        len = fread((void *) buf, 1, sizeof(buf), f);
-        fclose(f);
-        duk_push_lstring(mtrVm, (const char *) buf, (duk_size_t) len);
-    }
-    else
-        duk_push_undefined(mtrVm);
-}
-
 void mtrScriptsDoFile(const char * filename)
 {
     push_file_as_string(filename);
-    if (duk_peval(mtrVm) != 0)
+    if (duk_module_node_peval_main(mtrVm, filename) == DUK_EXEC_ERROR)
     {
         mtrNotify("Error in the script or script file not found.", 0,
          MTR_DMT_ERROR);

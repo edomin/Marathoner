@@ -2,6 +2,7 @@
 #define MTR_SCRIPT_DUKTAPE_H
 
 #include "duktape.h"
+#include "duk_module_node.h"
 
 #include "fa/Script_Duktape.h"
 #include "marathoner/plugin.h"
