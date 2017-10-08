@@ -4,6 +4,8 @@
 /* Hack for disabling warning about unused variable */
 #define UNUSED(expr) do { (void)(expr); } while (0)
 
+#define MTR_SRINGIFY(a) #a
+
 /* Function availability */
 #define MTR_FA_NO      0 /* Function availability data not found */
 #define MTR_FA_DUMMY   1 /* Function not supported */
