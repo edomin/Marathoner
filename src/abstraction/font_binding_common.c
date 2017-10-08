@@ -20,51 +20,21 @@ MTR_SCRIPT_FUNC_S_U32t1(mtrSF_FontGetName, mtrFontGetName)
 
 void mtrScriptsRegisterAll(void)
 {
-    bool ok;
-    ok = true;
-
     mtrVm = mtrScriptsGetVm();
 
-    MTR_FIND_FUNCTION(mtrFontFunctionSupported, "Abstraction_font");
-    MTR_FIND_FUNCTION(mtrFontInit, "Abstraction_font");
-    MTR_FIND_FUNCTION(mtrFontLoadTtf, "Abstraction_font");
-    MTR_FIND_FUNCTION(mtrFontFree, "Abstraction_font");
-    MTR_FIND_FUNCTION(mtrFontSetTtfStyle, "Abstraction_font");
-    MTR_FIND_FUNCTION(mtrFontSetTtfOutline, "Abstraction_font");
-    MTR_FIND_FUNCTION(mtrFontRenderTtfString, "Abstraction_font");
-    MTR_FIND_FUNCTION(mtrFontCreateMbf, "Abstraction_font");
-    MTR_FIND_FUNCTION(mtrFontAddMbfTextureTable, "Abstraction_font");
-    MTR_FIND_FUNCTION(mtrFontDrawMbfString_f, "Abstraction_font");
-    MTR_FIND_FUNCTION(mtrFontGetHeight, "Abstraction_font");
-    MTR_FIND_FUNCTION(mtrFontGetStringWidth, "Abstraction_font");
-    MTR_FIND_FUNCTION(mtrFontGetName, "Abstraction_font");
-
-    if (ok)
-    {
-        mtrScriptsRegisterFunction(mtrSF_FontFunctionSupported,
-         "FontFunctionSupported");
-        mtrScriptsRegisterFunction(mtrSF_FontInit, "FontInit");
-        mtrScriptsRegisterFunction(mtrSF_FontLoadTtf, "FontLoadTtf");
-        mtrScriptsRegisterFunction(mtrSF_FontFree, "FontFree");
-        mtrScriptsRegisterFunction(mtrSF_FontSetTtfStyle, "FontSetTtfStyle");
-        mtrScriptsRegisterFunction(mtrSF_FontSetTtfOutline,
-         "FontSetTtfOutline");
-        mtrScriptsRegisterFunction(mtrSF_FontRenderTtfString,
-         "FontRenderTtfString");
-        mtrScriptsRegisterFunction(mtrSF_FontCreateMbf, "FontCreateMbf");
-        mtrScriptsRegisterFunction(mtrSF_FontAddMbfTextureTable,
-         "FontAddMbfTextureTable");
-        mtrScriptsRegisterFunction(mtrSF_FontDrawMbfString_f,
-         "FontDrawMbfString_f");
-        mtrScriptsRegisterFunction(mtrSF_FontGetHeight, "FontGetHeight");
-        mtrScriptsRegisterFunction(mtrSF_FontGetStringWidth,
-         "FontGetStringWidth");
-        mtrScriptsRegisterFunction(mtrSF_FontGetName, "FontGetName");
-    }
-    else
-    {
-        mtrLogWrite("Functions not added", 3, MTR_LMT_ERROR);
-    }
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_font", FontFunctionSupported);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_font", FontInit);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_font", FontLoadTtf);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_font", FontFree);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_font", FontSetTtfStyle);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_font", FontSetTtfOutline);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_font", FontRenderTtfString);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_font", FontCreateMbf);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_font", FontAddMbfTextureTable);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_font", FontDrawMbfString_f);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_font", FontGetHeight);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_font", FontGetStringWidth);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_font", FontGetName);
 }
 
 #endif

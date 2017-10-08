@@ -50,55 +50,26 @@ MTR_SCRIPT_FUNC_V_U32t1I1(mtrSF_TtfSetFontOutline, mtrTtfSetFontOutline)
 
 void mtrScriptsRegisterAll(void)
 {
-    bool ok;
-    ok = true;
-
     mtrVm = mtrScriptsGetVm();
 
-    MTR_FIND_FUNCTION(mtrTtfFunctionSupported, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTtfInit, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTtfQuit, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTtfLoad, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTtfFree, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTtfGetFontHeight, MTR_SOURCE_MODULE);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TtfFunctionSupported);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TtfInit);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TtfQuit);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TtfLoad);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TtfFree);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TtfGetFontHeight);
     #ifdef lua_h
-    MTR_FIND_FUNCTION(mtrTtfGetStringSizes, MTR_SOURCE_MODULE);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TtfGetStringSizes);
     #endif
-    MTR_FIND_FUNCTION(mtrTtfGetStringWidth, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTtfSetFontStyle, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTtfSetFontOutline, MTR_SOURCE_MODULE);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TtfGetStringWidth);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TtfSetFontStyle);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TtfSetFontOutline);
 
-    if (ok)
-    {
-        mtrScriptsRegisterNumericVariable("FS_NORMAL", MTR_FS_NORMAL);
-        mtrScriptsRegisterNumericVariable("FS_BOLD", MTR_FS_BOLD);
-        mtrScriptsRegisterNumericVariable("FS_ITALIC", MTR_FS_ITALIC);
-        mtrScriptsRegisterNumericVariable("FS_UNDERLINE", MTR_FS_UNDERLINE);
-        mtrScriptsRegisterNumericVariable("FS_STRIKETHROUGH",
-         MTR_FS_STRIKETHROUGH);
-
-        mtrScriptsRegisterFunction(mtrSF_TtfFunctionSupported,
-         "TtfFunctionSupported");
-        mtrScriptsRegisterFunction(mtrSF_TtfInit, "TtfInit");
-        mtrScriptsRegisterFunction(mtrSF_TtfQuit, "TtfQuit");
-        mtrScriptsRegisterFunction(mtrSF_TtfLoad, "TtfLoad");
-        mtrScriptsRegisterFunction(mtrSF_TtfFree, "TtfFree");
-        mtrScriptsRegisterFunction(mtrSF_TtfGetFontHeight, "TtfGetFontHeight");
-        #ifdef lua_h
-        mtrScriptsRegisterFunction(mtrSF_TtfGetStringSizes,
-         "TtfGetStringSizes");
-        #endif
-        mtrScriptsRegisterFunction(mtrSF_TtfGetStringWidth,
-         "TtfGetStringWidth");
-        mtrScriptsRegisterFunction(mtrSF_TtfSetFontStyle,
-         "TtfSetFontStyle");
-        mtrScriptsRegisterFunction(mtrSF_TtfSetFontOutline,
-         "TtfSetFontOutline");
-    }
-    else
-    {
-        mtrLogWrite("Functions not added", 3, MTR_LMT_ERROR);
-    }
+    mtrScriptsRegisterNumericVariable("FS_NORMAL", MTR_FS_NORMAL);
+    mtrScriptsRegisterNumericVariable("FS_BOLD", MTR_FS_BOLD);
+    mtrScriptsRegisterNumericVariable("FS_ITALIC", MTR_FS_ITALIC);
+    mtrScriptsRegisterNumericVariable("FS_UNDERLINE", MTR_FS_UNDERLINE);
+    mtrScriptsRegisterNumericVariable("FS_STRIKETHROUGH", MTR_FS_STRIKETHROUGH);
 }
 
 #endif

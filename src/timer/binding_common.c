@@ -12,30 +12,14 @@ MTR_SCRIPT_FUNC_F_F1(mtrSF_TimerDelayForFPS_f, mtrTimerDelayForFPS_f)
 
 void mtrScriptsRegisterAll(void)
 {
-    bool ok;
-    ok = true;
-
     mtrVm = mtrScriptsGetVm();
 
-    MTR_FIND_FUNCTION(mtrTimerFunctionSupported, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTimerInit, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTimerStart, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTimerDelay, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTimerDelayForFPS, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTimerDelayForFPS_f, MTR_SOURCE_MODULE);
-
-    if (ok)
-    {
-        mtrScriptsRegisterFunction(mtrSF_TimerFunctionSupported,
-         "TimerFunctionSupported");
-        mtrScriptsRegisterFunction(mtrSF_TimerInit, "TimerInit");
-        mtrScriptsRegisterFunction(mtrSF_TimerStart, "TimerStart");
-        mtrScriptsRegisterFunction(mtrSF_TimerDelay, "TimerDelay");
-        mtrScriptsRegisterFunction(mtrSF_TimerDelayForFPS, "TimerDelayForFPS");
-        mtrScriptsRegisterFunction(mtrSF_TimerDelayForFPS_f, "TimerDelayForFPS_f");
-    }
-    else
-        mtrLogWrite("Functions not added", 3, MTR_LMT_ERROR);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TimerFunctionSupported);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TimerInit);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TimerStart);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TimerDelay);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TimerDelayForFPS);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TimerDelayForFPS_f);
 }
 
 #endif

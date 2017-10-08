@@ -26,40 +26,18 @@ MTR_SCRIPT_FUNC_B_V(mtrSF_ScreenXed, mtrScreenXed)
 
 void mtrScriptsRegisterAll(void)
 {
-    bool ok;
-    ok = true;
-
     mtrVm = mtrScriptsGetVm();
 
-    MTR_FIND_FUNCTION(mtrScreenFunctionSupported, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrScreenInit, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrScreenQuit, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrScreenFlip, MTR_SOURCE_MODULE);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, ScreenFunctionSupported);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, ScreenInit);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, ScreenQuit);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, ScreenFlip);
     #ifdef lua_h
-    MTR_FIND_FUNCTION(mtrScreenGetSizes, MTR_SOURCE_MODULE);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, ScreenGetSizes);
     #endif
-    MTR_FIND_FUNCTION(mtrScreenGetWidth, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrScreenGetHeight, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrScreenXed, MTR_SOURCE_MODULE);
-
-    if (ok)
-    {
-        mtrScriptsRegisterFunction(mtrSF_ScreenFunctionSupported,
-         "ScreenFunctionSupported");
-        mtrScriptsRegisterFunction(mtrSF_ScreenInit, "ScreenInit");
-        mtrScriptsRegisterFunction(mtrSF_ScreenQuit, "ScreenQuit");
-        mtrScriptsRegisterFunction(mtrSF_ScreenFlip, "ScreenFlip");
-        #ifdef lua_h
-        mtrScriptsRegisterFunction(mtrSF_ScreenGetSizes, "ScreenGetSizes");
-        #endif
-        mtrScriptsRegisterFunction(mtrSF_ScreenGetWidth, "ScreenGetWidth");
-        mtrScriptsRegisterFunction(mtrSF_ScreenGetHeight, "ScreenGetHeight");
-        mtrScriptsRegisterFunction(mtrSF_ScreenXed, "ScreenXed");
-    }
-    else
-    {
-        mtrLogWrite("Functions not added", 3, MTR_LMT_ERROR);
-    }
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, ScreenGetWidth);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, ScreenGetHeight);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, ScreenXed);
 }
 
 #endif

@@ -49,64 +49,32 @@ MTR_SCRIPT_FUNC(mtrSF_MouseGetDeltaXY)
 
 void mtrScriptsRegisterAll(void)
 {
-    bool ok;
-    ok = true;
-
     mtrVm = mtrScriptsGetVm();
 
-    MTR_FIND_FUNCTION(mtrMouseFunctionSupported, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrMouseInit, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrMouseRefresh, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrMousePress, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrMouseRelease, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrMousePressed, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrMouseGetWheelRelative, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrMouseMoving, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrMouseGetX, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrMouseGetY, MTR_SOURCE_MODULE);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, MouseFunctionSupported);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, MouseInit);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, MouseRefresh);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, MousePress);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, MouseRelease);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, MousePressed);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, MouseGetWheelRelative);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, MouseMoving);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, MouseGetX);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, MouseGetY);
     #ifdef lua_h
-    MTR_FIND_FUNCTION(mtrMouseGetXY, MTR_SOURCE_MODULE);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, MouseGetXY);
     #endif
-    MTR_FIND_FUNCTION(mtrMouseGetDeltaX, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrMouseGetDeltaY, MTR_SOURCE_MODULE);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, MouseGetDeltaX);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, MouseGetDeltaY);
     #ifdef lua_h
-    MTR_FIND_FUNCTION(mtrMouseGetDeltaXY, MTR_SOURCE_MODULE);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, MouseGetDeltaXY);
     #endif
 
-    if (ok)
-    {
-        mtrScriptsRegisterNumericVariable("MOUSE_LEFT", MTR_MOUSE_LEFT);
-        mtrScriptsRegisterNumericVariable("MOUSE_RIGHT", MTR_MOUSE_RIGHT);
-        mtrScriptsRegisterNumericVariable("MOUSE_MIDDLE", MTR_MOUSE_MIDDLE);
-        mtrScriptsRegisterNumericVariable("MOUSE_X1", MTR_MOUSE_X1);
-        mtrScriptsRegisterNumericVariable("MOUSE_X2", MTR_MOUSE_X2);
-
-        mtrScriptsRegisterFunction(mtrSF_MouseFunctionSupported,
-         "MouseFunctionSupported");
-        mtrScriptsRegisterFunction(mtrSF_MouseInit, "MouseInit");
-        mtrScriptsRegisterFunction(mtrSF_MouseRefresh, "MouseRefresh");
-        mtrScriptsRegisterFunction(mtrSF_MousePress, "MousePress");
-        mtrScriptsRegisterFunction(mtrSF_MouseRelease, "MouseRelease");
-        mtrScriptsRegisterFunction(mtrSF_MousePressed, "MousePressed");
-        mtrScriptsRegisterFunction(mtrSF_MouseGetWheelRelative,
-         "MouseGetWheelRelative");
-        mtrScriptsRegisterFunction(mtrSF_MouseMoving, "MouseMoving");
-        mtrScriptsRegisterFunction(mtrSF_MouseGetX, "MouseGetX");
-        mtrScriptsRegisterFunction(mtrSF_MouseGetY, "MouseGetY");
-        #ifdef lua_h
-        mtrScriptsRegisterFunction(mtrSF_MouseGetXY, "MouseGetXY");
-        #endif
-        mtrScriptsRegisterFunction(mtrSF_MouseGetDeltaX, "MouseGetDeltaX");
-        mtrScriptsRegisterFunction(mtrSF_MouseGetDeltaY, "MouseGetDeltaY");
-        #ifdef lua_h
-        mtrScriptsRegisterFunction(mtrSF_MouseGetDeltaXY,
-         "MouseGetDeltaXY");
-        #endif
-    }
-    else
-    {
-        mtrLogWrite("Functions not added", 3, MTR_LMT_ERROR);
-    }
+    mtrScriptsRegisterNumericVariable("MOUSE_LEFT", MTR_MOUSE_LEFT);
+    mtrScriptsRegisterNumericVariable("MOUSE_RIGHT", MTR_MOUSE_RIGHT);
+    mtrScriptsRegisterNumericVariable("MOUSE_MIDDLE", MTR_MOUSE_MIDDLE);
+    mtrScriptsRegisterNumericVariable("MOUSE_X1", MTR_MOUSE_X1);
+    mtrScriptsRegisterNumericVariable("MOUSE_X2", MTR_MOUSE_X2);
 }
 
 #endif

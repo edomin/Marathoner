@@ -58,94 +58,45 @@ MTR_SCRIPT_FUNC_I_I1(mtrSF_GameControllerGetPowHatsCount,
 
 void mtrScriptsRegisterAll(void)
 {
-    bool ok;
-    ok = true;
-
     mtrVm = mtrScriptsGetVm();
 
-    MTR_FIND_FUNCTION(mtrGameControllerFunctionSupported, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrGameControllerInit, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrGameControllerQuit, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrGameControllerRefresh, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrGameControllerButtonPress, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrGameControllerButtonRelease, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrGameControllerButtonPressed, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrGameControllerGetAxis, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrGameControllerGetAxis_f, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrGameControllerGetAxisDelta, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrGameControllerGetAxisDelta_f, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrGameControllerGetTrackballDeltaX, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrGameControllerGetTrackballDeltaY, MTR_SOURCE_MODULE);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE,
+     GameControllerFunctionSupported);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, GameControllerInit);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, GameControllerQuit);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, GameControllerRefresh);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, GameControllerButtonPress);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, GameControllerButtonRelease);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, GameControllerButtonPressed);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, GameControllerGetAxis);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, GameControllerGetAxis_f);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, GameControllerGetAxisDelta);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, GameControllerGetAxisDelta_f);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE,
+     GameControllerGetTrackballDeltaX);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE,
+     GameControllerGetTrackballDeltaY);
     #ifdef lua_h
-    MTR_FIND_FUNCTION(mtrGameControllerGetTrackballDeltaXY, MTR_SOURCE_MODULE);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE,
+     GameControllerGetTrackballDeltaXY);
     #endif
-    MTR_FIND_FUNCTION(mtrGameControllerGetPovHat, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrGameControllerGetButtonsCount, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrGameControllerGetAxesCount, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrGameControllerGetTrackballsCount, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrGameControllerGetPowHatsCount, MTR_SOURCE_MODULE);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, GameControllerGetPovHat);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, GameControllerGetButtonsCount);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, GameControllerGetAxesCount);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE,
+     GameControllerGetTrackballsCount);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, GameControllerGetPowHatsCount);
 
-    if (ok)
-    {
-        mtrScriptsRegisterNumericVariable("POVHAT_CENTER",
-         MTR_POVHAT_CENTER);
-        mtrScriptsRegisterNumericVariable("POVHAT_UP", MTR_POVHAT_UP);
-        mtrScriptsRegisterNumericVariable("POVHAT_DOWN", MTR_POVHAT_DOWN);
-        mtrScriptsRegisterNumericVariable("POVHAT_LEFT", MTR_POVHAT_LEFT);
-        mtrScriptsRegisterNumericVariable("POVHAT_RIGHT", MTR_POVHAT_RIGHT);
-        mtrScriptsRegisterNumericVariable("POVHAT_UP_LEFT",
-         MTR_POVHAT_UP_LEFT);
-        mtrScriptsRegisterNumericVariable("POVHAT_UP_RIGHT",
-         MTR_POVHAT_UP_RIGHT);
-        mtrScriptsRegisterNumericVariable("POVHAT_DOWN_LEFT",
-         MTR_POVHAT_DOWN_LEFT);
-        mtrScriptsRegisterNumericVariable("POVHAT_DOWN_RIGHT",
-         MTR_POVHAT_DOWN_RIGHT);
-        mtrScriptsRegisterFunction(mtrSF_GameControllerFunctionSupported,
-         "GameControllerFunctionSupported");
-        mtrScriptsRegisterFunction(mtrSF_GameControllerInit,
-         "GameControllerInit");
-        mtrScriptsRegisterFunction(mtrSF_GameControllerQuit,
-         "GameControllerQuit");
-        mtrScriptsRegisterFunction(mtrSF_GameControllerRefresh,
-         "GameControllerRefresh");
-        mtrScriptsRegisterFunction(mtrSF_GameControllerButtonPress,
-         "GameControllerButtonPress");
-        mtrScriptsRegisterFunction(mtrSF_GameControllerButtonRelease,
-         "GameControllerButtonRelease");
-        mtrScriptsRegisterFunction(mtrSF_GameControllerButtonPressed,
-         "GameControllerButtonPressed");
-        mtrScriptsRegisterFunction(mtrSF_GameControllerGetAxis,
-         "GameControllerGetAxis");
-        mtrScriptsRegisterFunction(mtrSF_GameControllerGetAxis_f,
-         "GameControllerGetAxis_f");
-        mtrScriptsRegisterFunction(mtrSF_GameControllerGetAxisDelta,
-         "GameControllerGetAxisDelta");
-        mtrScriptsRegisterFunction(mtrSF_GameControllerGetAxisDelta_f,
-         "GameControllerGetAxisDelta_f");
-        mtrScriptsRegisterFunction(mtrSF_GameControllerGetTrackballDeltaX,
-         "GameControllerGetTrackballDeltaX");
-        mtrScriptsRegisterFunction(mtrSF_GameControllerGetTrackballDeltaY,
-         "GameControllerGetTrackballDeltaY");
-        #ifdef lua_h
-        mtrScriptsRegisterFunction(mtrSF_GameControllerGetTrackballDeltaXY,
-         "GameControllerGetTrackballDeltaXY");
-        #endif
-        mtrScriptsRegisterFunction(mtrSF_GameControllerGetPovHat,
-         "GameControllerGetPovHat");
-        mtrScriptsRegisterFunction(mtrSF_GameControllerGetButtonsCount,
-         "GameControllerGetButtonsCount");
-        mtrScriptsRegisterFunction(mtrSF_GameControllerGetAxesCount,
-         "GameControllerGetAxesCount");
-        mtrScriptsRegisterFunction(mtrSF_GameControllerGetTrackballsCount,
-         "GameControllerGetTrackballsCount");
-        mtrScriptsRegisterFunction(mtrSF_GameControllerGetPowHatsCount,
-         "GameControllerGetPowHatsCount");
-    }
-    else
-    {
-        mtrLogWrite("Functions not added", 3, MTR_LMT_ERROR);
-    }
+    mtrScriptsRegisterNumericVariable("POVHAT_CENTER", MTR_POVHAT_CENTER);
+    mtrScriptsRegisterNumericVariable("POVHAT_UP", MTR_POVHAT_UP);
+    mtrScriptsRegisterNumericVariable("POVHAT_DOWN", MTR_POVHAT_DOWN);
+    mtrScriptsRegisterNumericVariable("POVHAT_LEFT", MTR_POVHAT_LEFT);
+    mtrScriptsRegisterNumericVariable("POVHAT_RIGHT", MTR_POVHAT_RIGHT);
+    mtrScriptsRegisterNumericVariable("POVHAT_UP_LEFT", MTR_POVHAT_UP_LEFT);
+    mtrScriptsRegisterNumericVariable("POVHAT_UP_RIGHT", MTR_POVHAT_UP_RIGHT);
+    mtrScriptsRegisterNumericVariable("POVHAT_DOWN_LEFT", MTR_POVHAT_DOWN_LEFT);
+    mtrScriptsRegisterNumericVariable("POVHAT_DOWN_RIGHT",
+     MTR_POVHAT_DOWN_RIGHT);
 }
 
 #endif

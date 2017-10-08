@@ -60,199 +60,113 @@ MTR_SCRIPT_FUNC_V_I1(mtrSF_GuiSpacing, mtrGuiSpacing)
 
 void mtrScriptsRegisterAll(void)
 {
-    bool ok;
-    ok = true;
-
     mtrVm = mtrScriptsGetVm();
 
-    MTR_FIND_FUNCTION(mtrGuiFunctionSupported, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiInit, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiQuit, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiProcessEvents, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiRender, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiAddFont, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiAddImage, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiDeleteFont, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiDeleteImage, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiBegin, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiEnd, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiButtonText, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiButtonLabel, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiButtonColor_c, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiButtonColor_ca, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiButtonColor_rgb, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiButtonColor_rgba, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiButtonSymbol, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiButtonSymbolLabel, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiButtonSymbolText, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiButtonImage, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiButtonImageLabel, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiButtonImageText, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiCheckLabel, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiCheckText, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiSelectableLabel, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiSelectableText, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiSelectableImageLabel, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiSelectableImageText, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiEditText, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiEditInteger, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiEditFloat, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiLabel, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiLabelColored_c, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiLabelColored_ca, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiLabelColored_rgb, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiLabelColored_rgba, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiLabelWrap, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiLabelColoredWrap_c, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiLabelColoredWrap_ca, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiLabelColoredWrap_rgb, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiLabelColoredWrap_rgba, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiTreeTabBegin, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiTreeTabEnd, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiLayoutRowDynamic, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiLayoutRowStatic, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiGroupBegin, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiGroupEnd, "Abstraction_gui");
-    MTR_FIND_FUNCTION(mtrGuiSpacing, "Abstraction_gui");
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiFunctionSupported);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiInit);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiQuit);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiProcessEvents);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiRender);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiAddFont);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiAddImage);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiDeleteFont);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiDeleteImage);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiBegin);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiEnd);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiButtonText);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiButtonLabel);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiButtonColor_c);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiButtonColor_ca);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiButtonColor_rgb);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiButtonColor_rgba);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiButtonSymbol);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiButtonSymbolLabel);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiButtonSymbolText);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiButtonImage);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiButtonImageLabel);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiButtonImageText);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiCheckLabel);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiCheckText);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiSelectableLabel);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiSelectableText);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiSelectableImageLabel);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiSelectableImageText);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiEditText);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiEditInteger);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiEditFloat);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiLabel);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiLabelColored_c);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiLabelColored_ca);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiLabelColored_rgb);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiLabelColored_rgba);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiLabelWrap);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiLabelColoredWrap_c);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiLabelColoredWrap_ca);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiLabelColoredWrap_rgb);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiLabelColoredWrap_rgba);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiTreeTabBegin);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiTreeTabEnd);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiLayoutRowDynamic);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiLayoutRowStatic);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiGroupBegin);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiGroupEnd);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiSpacing);
 
-    if (ok)
-    {
-        mtrScriptsRegisterNumericVariable("GUI_WINDOW_BORDER",
-         MTR_GUI_WINDOW_BORDER);
-        mtrScriptsRegisterNumericVariable("GUI_WINDOW_MOVABLE",
-         MTR_GUI_WINDOW_MOVABLE);
-        mtrScriptsRegisterNumericVariable("GUI_WINDOW_SCALABLE",
-         MTR_GUI_WINDOW_SCALABLE);
-        mtrScriptsRegisterNumericVariable("GUI_WINDOW_CLOSABLE",
-         MTR_GUI_WINDOW_CLOSABLE);
-        mtrScriptsRegisterNumericVariable("GUI_WINDOW_MINIMIZABLE",
-         MTR_GUI_WINDOW_MINIMIZABLE);
-        mtrScriptsRegisterNumericVariable("GUI_WINDOW_NO_SCROLLBAR",
-         MTR_GUI_WINDOW_NO_SCROLLBAR);
-        mtrScriptsRegisterNumericVariable("GUI_WINDOW_TITLE",
-         MTR_GUI_WINDOW_TITLE);
-        mtrScriptsRegisterNumericVariable("GUI_WINDOW_SCROLL_AUTO_HIDE",
-         MTR_GUI_WINDOW_SCROLL_AUTO_HIDE);
-        mtrScriptsRegisterNumericVariable("GUI_WINDOW_BACKGROUND",
-         MTR_GUI_WINDOW_BACKGROUND);
-        mtrScriptsRegisterNumericVariable("GUI_WINDOW_SCALE_LEFT",
-         MTR_GUI_WINDOW_SCALE_LEFT);
+    mtrScriptsRegisterNumericVariable("GUI_WINDOW_BORDER",
+     MTR_GUI_WINDOW_BORDER);
+    mtrScriptsRegisterNumericVariable("GUI_WINDOW_MOVABLE",
+     MTR_GUI_WINDOW_MOVABLE);
+    mtrScriptsRegisterNumericVariable("GUI_WINDOW_SCALABLE",
+     MTR_GUI_WINDOW_SCALABLE);
+    mtrScriptsRegisterNumericVariable("GUI_WINDOW_CLOSABLE",
+     MTR_GUI_WINDOW_CLOSABLE);
+    mtrScriptsRegisterNumericVariable("GUI_WINDOW_MINIMIZABLE",
+     MTR_GUI_WINDOW_MINIMIZABLE);
+    mtrScriptsRegisterNumericVariable("GUI_WINDOW_NO_SCROLLBAR",
+     MTR_GUI_WINDOW_NO_SCROLLBAR);
+    mtrScriptsRegisterNumericVariable("GUI_WINDOW_TITLE", MTR_GUI_WINDOW_TITLE);
+    mtrScriptsRegisterNumericVariable("GUI_WINDOW_SCROLL_AUTO_HIDE",
+     MTR_GUI_WINDOW_SCROLL_AUTO_HIDE);
+    mtrScriptsRegisterNumericVariable("GUI_WINDOW_BACKGROUND",
+     MTR_GUI_WINDOW_BACKGROUND);
+    mtrScriptsRegisterNumericVariable("GUI_WINDOW_SCALE_LEFT",
+     MTR_GUI_WINDOW_SCALE_LEFT);
 
-        mtrScriptsRegisterNumericVariable("GUI_TEXT_ALIGN_LEFT",
-         MTR_GUI_TEXT_ALIGN_LEFT);
-        mtrScriptsRegisterNumericVariable("GUI_TEXT_ALIGN_CENTERED",
-         MTR_GUI_TEXT_ALIGN_CENTERED);
-        mtrScriptsRegisterNumericVariable("GUI_TEXT_ALIGN_RIGHT",
-         MTR_GUI_TEXT_ALIGN_RIGHT);
-        mtrScriptsRegisterNumericVariable("GUI_TEXT_ALIGN_TOP",
-         MTR_GUI_TEXT_ALIGN_TOP);
-        mtrScriptsRegisterNumericVariable("GUI_TEXT_ALIGN_MIDDLE",
-         MTR_GUI_TEXT_ALIGN_MIDDLE);
-        mtrScriptsRegisterNumericVariable("GUI_TEXT_ALIGN_BOTTOM",
-         MTR_GUI_TEXT_ALIGN_BOTTOM);
+    mtrScriptsRegisterNumericVariable("GUI_TEXT_ALIGN_LEFT",
+     MTR_GUI_TEXT_ALIGN_LEFT);
+    mtrScriptsRegisterNumericVariable("GUI_TEXT_ALIGN_CENTERED",
+     MTR_GUI_TEXT_ALIGN_CENTERED);
+    mtrScriptsRegisterNumericVariable("GUI_TEXT_ALIGN_RIGHT",
+     MTR_GUI_TEXT_ALIGN_RIGHT);
+    mtrScriptsRegisterNumericVariable("GUI_TEXT_ALIGN_TOP",
+     MTR_GUI_TEXT_ALIGN_TOP);
+    mtrScriptsRegisterNumericVariable("GUI_TEXT_ALIGN_MIDDLE",
+     MTR_GUI_TEXT_ALIGN_MIDDLE);
+    mtrScriptsRegisterNumericVariable("GUI_TEXT_ALIGN_BOTTOM",
+     MTR_GUI_TEXT_ALIGN_BOTTOM);
 
-        mtrScriptsRegisterNumericVariable("GUI_SYMBOL_NONE",
-         MTR_GUI_SYMBOL_NONE);
-        mtrScriptsRegisterNumericVariable("GUI_SYMBOL_X", MTR_GUI_SYMBOL_X);
-        mtrScriptsRegisterNumericVariable("GUI_SYMBOL_UNDERSCORE",
-         MTR_GUI_SYMBOL_UNDERSCORE);
-        mtrScriptsRegisterNumericVariable("GUI_SYMBOL_CIRCLE_SOLID",
-         MTR_GUI_SYMBOL_CIRCLE_SOLID);
-        mtrScriptsRegisterNumericVariable("GUI_SYMBOL_CIRCLE_OUTLINE",
-         MTR_GUI_SYMBOL_CIRCLE_OUTLINE);
-        mtrScriptsRegisterNumericVariable("GUI_SYMBOL_RECT_SOLID",
-         MTR_GUI_SYMBOL_RECT_SOLID);
-        mtrScriptsRegisterNumericVariable("GUI_SYMBOL_RECT_OUTLINE",
-         MTR_GUI_SYMBOL_RECT_OUTLINE);
-        mtrScriptsRegisterNumericVariable("GUI_SYMBOL_TRIANGLE_UP",
-         MTR_GUI_SYMBOL_TRIANGLE_UP);
-        mtrScriptsRegisterNumericVariable("GUI_SYMBOL_TRIANGLE_DOWN",
-         MTR_GUI_SYMBOL_TRIANGLE_DOWN);
-        mtrScriptsRegisterNumericVariable("GUI_SYMBOL_TRIANGLE_LEFT",
-         MTR_GUI_SYMBOL_TRIANGLE_LEFT);
-        mtrScriptsRegisterNumericVariable("GUI_SYMBOL_TRIANGLE_RIGHT",
-         MTR_GUI_SYMBOL_TRIANGLE_RIGHT);
-        mtrScriptsRegisterNumericVariable("GUI_SYMBOL_PLUS",
-         MTR_GUI_SYMBOL_PLUS);
-        mtrScriptsRegisterNumericVariable("GUI_SYMBOL_MINUS",
-         MTR_GUI_SYMBOL_MINUS);
-
-        mtrScriptsRegisterFunction(mtrSF_GuiFunctionSupported,
-         "GuiFunctionSupported");
-        mtrScriptsRegisterFunction(mtrSF_GuiInit, "GuiInit");
-        mtrScriptsRegisterFunction(mtrSF_GuiQuit, "GuiQuit");
-        mtrScriptsRegisterFunction(mtrSF_GuiProcessEvents, "GuiProcessEvents");
-        mtrScriptsRegisterFunction(mtrSF_GuiRender, "GuiRender");
-        mtrScriptsRegisterFunction(mtrSF_GuiAddFont, "GuiAddFont");
-        mtrScriptsRegisterFunction(mtrSF_GuiAddImage, "GuiAddImage");
-        mtrScriptsRegisterFunction(mtrSF_GuiDeleteFont, "GuiDeleteFont");
-        mtrScriptsRegisterFunction(mtrSF_GuiDeleteImage, "GuiDeleteImage");
-        mtrScriptsRegisterFunction(mtrSF_GuiBegin, "GuiBegin");
-        mtrScriptsRegisterFunction(mtrSF_GuiEnd, "GuiEnd");
-        mtrScriptsRegisterFunction(mtrSF_GuiButtonText, "GuiButtonText");
-        mtrScriptsRegisterFunction(mtrSF_GuiButtonLabel, "GuiButtonLabel");
-        mtrScriptsRegisterFunction(mtrSF_GuiButtonColor_c, "GuiButtonColor_c");
-        mtrScriptsRegisterFunction(mtrSF_GuiButtonColor_ca,
-         "GuiButtonColor_ca");
-        mtrScriptsRegisterFunction(mtrSF_GuiButtonColor_rgb,
-         "GuiButtonColor_rgb");
-        mtrScriptsRegisterFunction(mtrSF_GuiButtonColor_rgba,
-         "GuiButtonColor_rgba");
-        mtrScriptsRegisterFunction(mtrSF_GuiButtonSymbol, "GuiButtonSymbol");
-        mtrScriptsRegisterFunction(mtrSF_GuiButtonSymbolLabel,
-         "GuiButtonSymbolLabel");
-        mtrScriptsRegisterFunction(mtrSF_GuiButtonSymbolText,
-         "GuiButtonSymbolText");
-        mtrScriptsRegisterFunction(mtrSF_GuiButtonImage, "GuiButtonImage");
-        mtrScriptsRegisterFunction(mtrSF_GuiButtonImageLabel,
-         "GuiButtonImageLabel");
-        mtrScriptsRegisterFunction(mtrSF_GuiButtonImageText,
-         "GuiButtonImageText");
-        mtrScriptsRegisterFunction(mtrSF_GuiCheckLabel, "GuiCheckLabel");
-        mtrScriptsRegisterFunction(mtrSF_GuiCheckText, "GuiCheckText");
-        mtrScriptsRegisterFunction(mtrSF_GuiSelectableLabel,
-         "GuiSelectableLabel");
-        mtrScriptsRegisterFunction(mtrSF_GuiSelectableText,
-         "GuiSelectableText");
-        mtrScriptsRegisterFunction(mtrSF_GuiSelectableImageLabel,
-         "GuiSelectableImageLabel");
-        mtrScriptsRegisterFunction(mtrSF_GuiSelectableImageText,
-         "GuiSelectableImageText");
-        mtrScriptsRegisterFunction(mtrSF_GuiEditText, "GuiEditText");
-        mtrScriptsRegisterFunction(mtrSF_GuiEditInteger, "GuiEditInteger");
-        mtrScriptsRegisterFunction(mtrSF_GuiEditFloat, "GuiEditFloat");
-        mtrScriptsRegisterFunction(mtrSF_GuiLabel, "GuiLabel");
-        mtrScriptsRegisterFunction(mtrSF_GuiLabelColored_c,
-         "GuiLabelColored_c");
-        mtrScriptsRegisterFunction(mtrSF_GuiLabelColored_ca,
-         "GuiLabelColored_ca");
-        mtrScriptsRegisterFunction(mtrSF_GuiLabelColored_rgb,
-         "GuiLabelColored_rgb");
-        mtrScriptsRegisterFunction(mtrSF_GuiLabelColored_rgba,
-         "GuiLabelColored_rgba");
-        mtrScriptsRegisterFunction(mtrSF_GuiLabelWrap, "GuiLabelWrap");
-        mtrScriptsRegisterFunction(mtrSF_GuiLabelColoredWrap_c,
-         "GuiLabelColoredWrap_c");
-        mtrScriptsRegisterFunction(mtrSF_GuiLabelColoredWrap_ca,
-         "GuiLabelColoredWrap_ca");
-        mtrScriptsRegisterFunction(mtrSF_GuiLabelColoredWrap_rgb,
-         "GuiLabelColoredWrap_rgb");
-        mtrScriptsRegisterFunction(mtrSF_GuiLabelColoredWrap_rgba,
-         "GuiLabelColoredWrap_rgba");
-        mtrScriptsRegisterFunction(mtrSF_GuiTreeTabBegin, "GuiTreeTabBegin");
-        mtrScriptsRegisterFunction(mtrSF_GuiTreeTabEnd, "GuiTreeTabEnd");
-        mtrScriptsRegisterFunction(mtrSF_GuiLayoutRowDynamic,
-         "GuiLayoutRowDynamic");
-        mtrScriptsRegisterFunction(mtrSF_GuiLayoutRowStatic,
-         "GuiLayoutRowStatic");
-        mtrScriptsRegisterFunction(mtrSF_GuiGroupBegin, "GuiGroupBegin");
-        mtrScriptsRegisterFunction(mtrSF_GuiGroupEnd, "GuiGroupEnd");
-        mtrScriptsRegisterFunction(mtrSF_GuiSpacing, "GuiSpacing");
-    }
-    else
-    {
-        mtrLogWrite("Functions not added", 3, MTR_LMT_ERROR);
-    }
+    mtrScriptsRegisterNumericVariable("GUI_SYMBOL_NONE", MTR_GUI_SYMBOL_NONE);
+    mtrScriptsRegisterNumericVariable("GUI_SYMBOL_X", MTR_GUI_SYMBOL_X);
+    mtrScriptsRegisterNumericVariable("GUI_SYMBOL_UNDERSCORE",
+     MTR_GUI_SYMBOL_UNDERSCORE);
+    mtrScriptsRegisterNumericVariable("GUI_SYMBOL_CIRCLE_SOLID",
+     MTR_GUI_SYMBOL_CIRCLE_SOLID);
+    mtrScriptsRegisterNumericVariable("GUI_SYMBOL_CIRCLE_OUTLINE",
+     MTR_GUI_SYMBOL_CIRCLE_OUTLINE);
+    mtrScriptsRegisterNumericVariable("GUI_SYMBOL_RECT_SOLID",
+     MTR_GUI_SYMBOL_RECT_SOLID);
+    mtrScriptsRegisterNumericVariable("GUI_SYMBOL_RECT_OUTLINE",
+     MTR_GUI_SYMBOL_RECT_OUTLINE);
+    mtrScriptsRegisterNumericVariable("GUI_SYMBOL_TRIANGLE_UP",
+     MTR_GUI_SYMBOL_TRIANGLE_UP);
+    mtrScriptsRegisterNumericVariable("GUI_SYMBOL_TRIANGLE_DOWN",
+     MTR_GUI_SYMBOL_TRIANGLE_DOWN);
+    mtrScriptsRegisterNumericVariable("GUI_SYMBOL_TRIANGLE_LEFT",
+     MTR_GUI_SYMBOL_TRIANGLE_LEFT);
+    mtrScriptsRegisterNumericVariable("GUI_SYMBOL_TRIANGLE_RIGHT",
+     MTR_GUI_SYMBOL_TRIANGLE_RIGHT);
+    mtrScriptsRegisterNumericVariable("GUI_SYMBOL_PLUS", MTR_GUI_SYMBOL_PLUS);
+    mtrScriptsRegisterNumericVariable("GUI_SYMBOL_MINUS", MTR_GUI_SYMBOL_MINUS);
 }
 
 #endif

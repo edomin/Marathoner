@@ -66,128 +66,63 @@ MTR_SCRIPT_FUNC_V_U32t1F11I1(mtrSF_TextureBlitRegionGeneral_f,
 
 void mtrScriptsRegisterAll(void)
 {
-    bool ok;
-    ok = true;
-
     mtrVm = mtrScriptsGetVm();
 
-    MTR_FIND_FUNCTION(mtrTextureFunctionSupported, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTextureInit, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTextureBeginTarget, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTextureEndTarget, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTextureGetWidth, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTextureGetHeight, MTR_SOURCE_MODULE);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureFunctionSupported);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureInit);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureBeginTarget);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureEndTarget);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureGetWidth);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureGetHeight);
     #ifdef lua_h
-    MTR_FIND_FUNCTION(mtrTextureGetSizes, MTR_SOURCE_MODULE);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureGetSizes);
     #endif
-    MTR_FIND_FUNCTION(mtrTextureCreate, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTextureLoad, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTextureCopy, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTextureSave, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTextureFree, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTextureSetModulation_c, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTextureSetModulation_ca, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTextureSetModulation_rgb, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTextureSetModulation_rgba, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTextureSetModulationAlpha, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTextureSetModulationAlpha_f, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTextureSetBlendFunction, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTextureSetAlphaBlending, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTextureBlit_f, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTextureBlitScaled_f, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTextureBlitAngled_f, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTextureBlitFlipped_f, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTextureBlitGeneral_f, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTextureBlitRegion_f, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTextureBlitRegionScaled_f, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTextureBlitRegionAngled_f, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTextureBlitRegionFlipped_f, MTR_SOURCE_MODULE);
-    MTR_FIND_FUNCTION(mtrTextureBlitRegionGeneral_f, MTR_SOURCE_MODULE);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureCreate);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureLoad);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureCopy);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureSave);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureFree);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureSetModulation_c);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureSetModulation_ca);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureSetModulation_rgb);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureSetModulation_rgba);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureSetModulationAlpha);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureSetModulationAlpha_f);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureSetBlendFunction);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureSetAlphaBlending);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureBlit_f);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureBlitScaled_f);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureBlitAngled_f);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureBlitFlipped_f);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureBlitGeneral_f);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureBlitRegion_f);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureBlitRegionScaled_f);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureBlitRegionAngled_f);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureBlitRegionFlipped_f);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureBlitRegionGeneral_f);
 
-    if (ok)
-    {
-        mtrScriptsRegisterNumericVariable("FLIP_NONE", MTR_FLIP_NONE);
-        mtrScriptsRegisterNumericVariable("FLIP_HORIZONTAL",
-         MTR_FLIP_HORIZONTAL);
-        mtrScriptsRegisterNumericVariable("FLIP_VERTICAL",
-         MTR_FLIP_VERTICAL);
-        mtrScriptsRegisterNumericVariable("FLIP_BOTH", MTR_FLIP_BOTH);
-//        mtrScriptsRegisterNumericVariable("BLEND_ZERO", MTR_BLEND_ZERO);
-//        mtrScriptsRegisterNumericVariable("BLEND_ONE", MTR_BLEND_ONE);
-//        mtrScriptsRegisterNumericVariable("BLEND_SRC_COLOR",
-//         MTR_BLEND_SRC_COLOR);
-//        mtrScriptsRegisterNumericVariable("BLEND_DST_COLOR",
-//         MTR_BLEND_DST_COLOR);
-//        mtrScriptsRegisterNumericVariable("BLEND_ONE_MINUS_SRC",
-//         MTR_BLEND_ONE_MINUS_SRC);
-//        mtrScriptsRegisterNumericVariable("BLEND_ONE_MINUS_DST",
-//         MTR_BLEND_ONE_MINUS_DST);
-//        mtrScriptsRegisterNumericVariable("BLEND_SRC_ALPHA",
-//         MTR_BLEND_SRC_ALPHA);
-//        mtrScriptsRegisterNumericVariable("BLEND_DST_ALPHA",
-//         MTR_BLEND_DST_ALPHA);
-//        mtrScriptsRegisterNumericVariable("BLEND_ONE_MINUS_SRC_ALPHA",
-//         MTR_BLEND_ONE_MINUS_SRC_ALPHA);
-//        mtrScriptsRegisterNumericVariable("BLEND_ONE_MINUS_DST_ALPHA",
-//         MTR_BLEND_ONE_MINUS_DST_ALPHA);
-        mtrScriptsRegisterFunction(mtrSF_TextureFunctionSupported,
-         "TextureFunctionSupported");
-        mtrScriptsRegisterFunction(mtrSF_TextureInit, "TextureInit");
-        mtrScriptsRegisterFunction(mtrSF_TextureBeginTarget,
-         "TextureBeginTarget");
-        mtrScriptsRegisterFunction(mtrSF_TextureEndTarget, "TextureEndTarget");
-        mtrScriptsRegisterFunction(mtrSF_TextureGetWidth, "TextureGetWidth");
-        mtrScriptsRegisterFunction(mtrSF_TextureGetHeight,
-         "TextureGetHeight");
-        #ifdef lua_h
-        mtrScriptsRegisterFunction(mtrSF_TextureGetSizes,
-         "TextureGetSizes");
-        #endif
-        mtrScriptsRegisterFunction(mtrSF_TextureCreate, "TextureCreate");
-        mtrScriptsRegisterFunction(mtrSF_TextureLoad, "TextureLoad");
-        mtrScriptsRegisterFunction(mtrSF_TextureCopy, "TextureCopy");
-        mtrScriptsRegisterFunction(mtrSF_TextureSave, "TextureSave");
-        mtrScriptsRegisterFunction(mtrSF_TextureFree, "TextureFree");
-        mtrScriptsRegisterFunction(mtrSF_TextureSetModulation_c,
-         "TextureSetModulation_c");
-        mtrScriptsRegisterFunction(mtrSF_TextureSetModulation_ca,
-         "TextureSetModulation_ca");
-        mtrScriptsRegisterFunction(mtrSF_TextureSetModulation_rgb,
-         "TextureSetModulation_rgb");
-        mtrScriptsRegisterFunction(mtrSF_TextureSetModulation_rgba,
-         "TextureSetModulation_rgba");
-        mtrScriptsRegisterFunction(mtrSF_TextureSetModulationAlpha,
-         "TextureSetModulationAlpha");
-        mtrScriptsRegisterFunction(mtrSF_TextureSetModulationAlpha_f,
-         "TextureSetModulationAlpha_f");
-        mtrScriptsRegisterFunction(mtrSF_TextureSetBlendFunction,
-         "TextureSetBlendFunction");
-        mtrScriptsRegisterFunction(mtrSF_TextureSetAlphaBlending,
-         "TextureSetBlending");
-        mtrScriptsRegisterFunction(mtrSF_TextureBlit_f, "TextureBlit_f");
-        mtrScriptsRegisterFunction(mtrSF_TextureBlitScaled_f,
-         "TextureBlitScaled_f");
-        mtrScriptsRegisterFunction(mtrSF_TextureBlitAngled_f,
-         "TextureBlitAngled_f");
-        mtrScriptsRegisterFunction(mtrSF_TextureBlitFlipped_f,
-         "TextureBlitFlipped_f");
-        mtrScriptsRegisterFunction(mtrSF_TextureBlitGeneral_f,
-         "TextureBlitGeneral_f");
-        mtrScriptsRegisterFunction(mtrSF_TextureBlitRegion_f,
-         "TextureBlitRegion_f");
-        mtrScriptsRegisterFunction(mtrSF_TextureBlitRegionScaled_f,
-         "TextureBlitRegionScaled_f");
-        mtrScriptsRegisterFunction(mtrSF_TextureBlitRegionAngled_f,
-         "TextureBlitRegionAngled_f");
-        mtrScriptsRegisterFunction(mtrSF_TextureBlitRegionFlipped_f,
-         "TextureBlitRegionFlipped_f");
-        mtrScriptsRegisterFunction(mtrSF_TextureBlitRegionGeneral_f,
-         "TextureBlitRegionGeneral_f");
-    }
-    else
-    {
-        mtrLogWrite("Functions not added", 3, MTR_LMT_ERROR);
-    }
+    mtrScriptsRegisterNumericVariable("FLIP_NONE", MTR_FLIP_NONE);
+    mtrScriptsRegisterNumericVariable("FLIP_HORIZONTAL", MTR_FLIP_HORIZONTAL);
+    mtrScriptsRegisterNumericVariable("FLIP_VERTICAL", MTR_FLIP_VERTICAL);
+    mtrScriptsRegisterNumericVariable("FLIP_BOTH", MTR_FLIP_BOTH);
+//    mtrScriptsRegisterNumericVariable("BLEND_ZERO", MTR_BLEND_ZERO);
+//    mtrScriptsRegisterNumericVariable("BLEND_ONE", MTR_BLEND_ONE);
+//    mtrScriptsRegisterNumericVariable("BLEND_SRC_COLOR",
+//     MTR_BLEND_SRC_COLOR);
+//    mtrScriptsRegisterNumericVariable("BLEND_DST_COLOR",
+//     MTR_BLEND_DST_COLOR);
+//    mtrScriptsRegisterNumericVariable("BLEND_ONE_MINUS_SRC",
+//     MTR_BLEND_ONE_MINUS_SRC);
+//    mtrScriptsRegisterNumericVariable("BLEND_ONE_MINUS_DST",
+//     MTR_BLEND_ONE_MINUS_DST);
+//    mtrScriptsRegisterNumericVariable("BLEND_SRC_ALPHA",
+//     MTR_BLEND_SRC_ALPHA);
+//    mtrScriptsRegisterNumericVariable("BLEND_DST_ALPHA",
+//     MTR_BLEND_DST_ALPHA);
+//    mtrScriptsRegisterNumericVariable("BLEND_ONE_MINUS_SRC_ALPHA",
+//     MTR_BLEND_ONE_MINUS_SRC_ALPHA);
+//    mtrScriptsRegisterNumericVariable("BLEND_ONE_MINUS_DST_ALPHA",
+//     MTR_BLEND_ONE_MINUS_DST_ALPHA);
 }
 
 #endif
