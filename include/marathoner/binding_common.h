@@ -103,4 +103,16 @@
      const char *name, double value);                                        \
     mtrScriptsRegisterNumericVariableFunc mtrScriptsRegisterNumericVariable;
 
+#define MTR_FIND_AND_ADD_FUNCTION(module, function)                         \
+    mtr ## function = (mtr ## function ## Func)mtrFindFunction(module,      \
+     MTR_SRINGIFY(mtr ## function));                              \
+    if (mtr ## function == NULL)                                            \
+    {                                                                       \
+        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,          \
+         MTR_SRINGIFY(mtr ## function));                          \
+        mtrLogWrite_s("Function not added: ", 3, MTR_LMT_ERROR, #function); \
+    }                                                                       \
+    else                                                                    \
+        mtrScriptsRegisterFunction(mtrSF_ ## function, #function);
+
 #endif /* MTR_BINDING_COMMON_H */
