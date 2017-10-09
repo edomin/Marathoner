@@ -25,6 +25,8 @@
                                                          varname = lua_tostring(mtrVm, stackpos); \
                                                      else \
                                                          varname = NULL;
+
+    #define MTR_SF_GET_POINTER(varname, stackpos)    varname = lua_touserdata(mtrVm, stackpos)
     #define MTR_SF_PUSH_BOOL(value)                  lua_pushboolean(mtrVm, value)
     #define MTR_SF_PUSH_INT(value)                   lua_pushinteger(mtrVm, value)
     #define MTR_SF_PUSH_LINT(value)                  lua_pushinteger(mtrVm, value)
@@ -42,6 +44,7 @@
     #define MTR_SF_PUSH_STRING(value)                lua_pushstring(mtrVm, value)
     #define MTR_SF_PUSH_LSTRING(value, len)          lua_pushlstring(mtrVm, value, len)
     #define MTR_SF_PUSH_NIL()                        lua_pushnil(mtrVm)
+    #define MTR_SF_PUSH_POINTER(value)               lua_pushlightuserdata(mtrVm, value)
 #endif /* lua_h */
 #ifdef _SQUIRREL_H_
     #include <limits.h>
@@ -52,6 +55,7 @@
     #endif
     SQBool      mtrSfBoolTemp;
     int         mtrSfIntTemp;
+    void       *mtrSfPointerTemp;
     #if ((defined (_SQ64)) && (LLONG_MAX == INT64_MAX))
         int64_t mtrSFInt64Temp;
     #endif
@@ -107,6 +111,8 @@
                                                            sq_getstring(mtrVm, stackpos + 1, &varname); \
                                                        else \
                                                            varname = NULL;
+    #define MTR_SF_GET_POINTER(varname, stackpos)      sq_getuserpointer(mtrVm, stackpos + 1, &mtrSfPointerTemp); \
+                                                       varname = mtrSfPointerTemp;
     #define MTR_SF_PUSH_BOOL(value)                    mtrSfBoolTemp = value + UINT_MAX + 1; \
                                                        sq_pushbool(mtrVm, mtrSfBoolTemp);
     #define MTR_SF_PUSH_INT(value)                     sq_pushinteger(mtrVm, value)
@@ -151,6 +157,7 @@
         #define MTR_SF_PUSH_DOUBLE(value)              sq_pushfloat(mtrVm, (float)value)
     #endif
     #define MTR_SF_PUSH_STRING(value)                  sq_pushstring(mtrVm, value, -1)
+    #define MTR_SF_PUSH_POINTER(value)                 sq_pushuserpointer(mtrVm, value)
     #define MTR_SF_PUSH_NIL()                          sq_pushnull(mtrVm)
 #endif /* _SQUIRREL_H_ */
 #ifdef DUKTAPE_H_INCLUDED
@@ -174,6 +181,7 @@
                                                          varname = duk_to_string(mtrVm, stackpos - 1); \
                                                      else \
                                                          varname = NULL;
+    #define MTR_SF_GET_POINTER(varname, stackpos)    varname = duk_to_pointer(mtrVm, stackpos - 1)
     #define MTR_SF_PUSH_BOOL(value)                  duk_push_boolean(mtrVm, value)
     #define MTR_SF_PUSH_INT(value)                   duk_push_int(mtrVm, value)
     #if (INT_MAX == LONG_MAX)
@@ -194,6 +202,7 @@
     #define MTR_SF_PUSH_DOUBLE(value)                duk_push_number(mtrVm, value)
     #define MTR_SF_PUSH_STRING(value)                duk_push_string(mtrVm, value)
     #define MTR_SF_PUSH_LSTRING(value, len)          duk_push_lstring(mtrVm, value, len)
+    #define MTR_SF_PUSH_POINTER(value)               duk_push_pointer(mtrVm, value)
     #define MTR_SF_PUSH_NIL()                        duk_push_null(mtrVm)
 #endif /* DUKTAPE_H_INCLUDED */
 
@@ -1734,6 +1743,32 @@
         result = func(s1, i1, b1, b2);        \
         MTR_SF_PUSH_BOOL(result);             \
         return 1;                             \
+    }
+
+#define MTR_SCRIPT_FUNC_B_S1U1(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)                  \
+    {                                       \
+        const char *s1;                     \
+        unsigned int u1;                    \
+        bool result;                        \
+        MTR_SF_GET_STRING(s1, 1);           \
+        MTR_SF_GET_UINT(u1, 2);             \
+        result = func(s1, u1);              \
+        MTR_SF_PUSH_BOOL(result);           \
+        return 1;                           \
+    }
+
+#define MTR_SCRIPT_FUNC_B_S1F1(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)                  \
+    {                                       \
+        const char *s1;                     \
+        float f1;                           \
+        bool result;                        \
+        MTR_SF_GET_STRING(s1, 1);           \
+        MTR_SF_GET_SINGLE(f1, 2);           \
+        result = func(s1, f1);              \
+        MTR_SF_PUSH_BOOL(result);           \
+        return 1;                           \
     }
 
 #define MTR_SCRIPT_FUNC_B_S3F1(sfunc, func) \
