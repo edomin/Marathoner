@@ -29,22 +29,7 @@ MTR_SCRIPT_FUNC(mtrSF_TtfGetStringSizes)
 }
 #endif
 
-MTR_SCRIPT_FUNC(mtrSF_TtfGetStringWidth)
-{
-    uint32_t    fontNum;
-    const char *string;
-    int         width;
-    int         height;
-
-    MTR_SF_GET_UINT32(fontNum, 1);
-    MTR_SF_GET_STRING(string, 2);
-    mtrTtfGetStringSizes(fontNum, string, &width, &height);
-
-    MTR_SF_PUSH_INT(width);
-
-    return 1;
-}
-
+MTR_SCRIPT_FUNC_I_U32t1S1(mtrSF_TtfGetStringWidth, mtrTtfGetStringWidth)
 MTR_SCRIPT_FUNC_V_U32t1I1(mtrSF_TtfSetFontStyle, mtrTtfSetFontStyle)
 MTR_SCRIPT_FUNC_V_U32t1I1(mtrSF_TtfSetFontOutline, mtrTtfSetFontOutline)
 
