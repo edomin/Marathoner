@@ -1,5 +1,6 @@
 #include "messagebox.h"
 
+/*fa mtrShowSimpleMessageBox yes */
 void MTR_CALL mtrShowSimpleMessageBox(uint8_t type, const char *title,
  const char *message)
 {
@@ -65,6 +66,7 @@ void MTR_CALL mtrShowSimpleMessageBox(uint8_t type, const char *title,
     }
 }
 
+/*fa mtrShowYesNoMessageBox yes */
 bool MTR_CALL mtrShowYesNoMessageBox(const char *title, const char *message)
 {
     const char *emptyString = "";
@@ -110,6 +112,7 @@ bool MTR_CALL mtrShowYesNoMessageBox(const char *title, const char *message)
 }
 
 /* MinGW only */
+/*fa mtrShowOkCancelMessageBox yes */
 bool MTR_CALL mtrShowOkCancelMessageBox(const char *title, const char *message)
 {
     const char *emptyString = "";
@@ -130,6 +133,7 @@ bool MTR_CALL mtrShowOkCancelMessageBox(const char *title, const char *message)
 }
 
 /* MinGW only */
+/*fa mtrShowInputDialog yes */
 const char *MTR_CALL mtrShowInputDialog(const char *title, const char *message,
  const char *defaultInput)
 {
@@ -157,6 +161,7 @@ const char *MTR_CALL mtrShowInputDialog(const char *title, const char *message,
 }
 
 /* MinGW only */
+/*fa mtrShowPasswordDialog yes */
 const char *MTR_CALL mtrShowPasswordDialog(const char *title,
  const char *message)
 {
@@ -177,6 +182,7 @@ const char *MTR_CALL mtrShowPasswordDialog(const char *title,
     return tinyfd_inputBox(resultTitle, resultMessage, NULL);
 }
 
+/*fa mtrAddFileFilter yes */
 void MTR_CALL mtrAddFileFilter(const char *filter)
 {
 //    int len;
@@ -189,6 +195,7 @@ void MTR_CALL mtrAddFileFilter(const char *filter)
     mtrFileFiltersCount++;
 }
 
+/*fa mtrClearFileFilters yes */
 void MTR_CALL mtrClearFileFilters(void)
 {
     int i;
@@ -207,6 +214,7 @@ void MTR_CALL mtrClearFileFilters(void)
 }
 
 /* MinGW only */
+/*fa mtrShowSaveFileDialog yes */
 const char *MTR_CALL mtrShowSaveFileDialog(const char *title,
  const char *defaultPathAndFile, const char *singleFilterDescription)
 {
@@ -229,6 +237,7 @@ const char *MTR_CALL mtrShowSaveFileDialog(const char *title,
 }
 
 /* MinGW only */
+/*fa mtrShowOpenFileDialog yes */
 const char *MTR_CALL mtrShowOpenFileDialog(const char *title,
  const char *defaultPathAndFile, const char *singleFilterDescription)
 {
@@ -250,9 +259,8 @@ const char *MTR_CALL mtrShowOpenFileDialog(const char *title,
      mtrFileFiltersCount, (const char * const * const)mtrFileFilter, singleFilterDescription, 0);
 }
 
-/* TODO: Open Several files by selection */
-
 /* MinGW only */
+/*fa mtrShowSelectFolderDialog yes */
 const char *MTR_CALL mtrShowSelectFolderDialog(const char *title,
  const char *defaultPath)
 {

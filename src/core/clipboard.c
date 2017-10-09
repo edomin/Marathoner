@@ -1,5 +1,6 @@
 #include "clipboard.h"
 
+/*fa mtrClipboardPutText yes */
 bool MTR_CALL mtrClipboardPutText(const char* text)
 {
     bool success;
@@ -14,6 +15,7 @@ bool MTR_CALL mtrClipboardPutText(const char* text)
         return false;
 }
 
+/*fa mtrClipboardGetText yes */
 char *MTR_CALL mtrClipboardGetText(void)
 {
     size_t size;

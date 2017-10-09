@@ -36,6 +36,7 @@ const char *MTR_CALL mtrFileConstToMode(int mode)
     return NULL;
 }
 
+/*fa mtrFileOpen yes */
 uint32_t MTR_CALL mtrFileOpen(const char *filename, int mode)
 {
     uint32_t    freeIndex;
@@ -67,6 +68,7 @@ uint32_t MTR_CALL mtrFileOpen(const char *filename, int mode)
     return freeIndex;
 }
 
+/*fa mtrFileClose yes */
 bool MTR_CALL mtrFileClose(uint32_t fileNum)
 {
     mtrFile_t *file;
@@ -82,6 +84,7 @@ bool MTR_CALL mtrFileClose(uint32_t fileNum)
     return true;
 }
 
+/*fa mtrFileRead yes */
 size_t MTR_CALL mtrFileRead(uint32_t fileNum, char **buffer)
 {
     mtrFile_t *file;
@@ -135,6 +138,7 @@ size_t MTR_CALL mtrFileRead(uint32_t fileNum, char **buffer)
     return file->bufLength;
 }
 
+/*fa mtrFileWrite yes */
 bool MTR_CALL mtrFileWrite(uint32_t fileNum, const char *string)
 {
     mtrFile_t *file;
@@ -151,6 +155,7 @@ bool MTR_CALL mtrFileWrite(uint32_t fileNum, const char *string)
     return true;
 }
 
+/*fa mtrFileWriteLine yes */
 bool MTR_CALL mtrFileWriteLine(uint32_t fileNum, const char *string)
 {
     mtrFile_t *file;
@@ -167,6 +172,7 @@ bool MTR_CALL mtrFileWriteLine(uint32_t fileNum, const char *string)
     return true;
 }
 
+/*fa mtrFileWriteFast yes */
 void MTR_CALL mtrFileWriteFast(const char* filename, const char *text,
  int mode)
 {
@@ -179,6 +185,7 @@ void MTR_CALL mtrFileWriteFast(const char* filename, const char *text,
     fclose(file);
 }
 
+/*fa mtrFileWriteLineFast yes */
 void MTR_CALL mtrFileWriteLineFast(const char* filename, const char *text,
  int mode)
 {
