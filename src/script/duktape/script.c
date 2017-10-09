@@ -246,6 +246,11 @@ MTR_EXPORT duk_context *MTR_CALL mtrScriptsGetVm(void)
     return mtrVm;
 }
 
+MTR_EXPORT char * MTR_CALL mtrScriptsGetAutorunPath(void)
+{
+    return mtrAutorun;
+}
+
 MTR_EXPORT void MTR_CALL mtrScriptsRegisterFunction(duk_c_function func,
  const char *funcname)
 {
@@ -310,5 +315,6 @@ void mtrScriptsQuit(void)
 MTR_EXPORT void MTR_CALL mtrScriptsAutorun(char * filename)
 {
     mtrScriptsInit();
+    mtrAutorun = filename;
     mtrScriptsDoFile(filename);
 }

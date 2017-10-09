@@ -1,6 +1,7 @@
 int ScriptsFunctionSupported(const char *functionName)
 bool RegisterStringVariable(const char *varName, const char *value)
 bool RegisterNumericVariable(const char *varName, double value)
+char *ScriptsGetAutorunPath()
 
 uint32_t MarathonerGetVersion()
 uint32_t MarathonerGetModuleVersion(const char *moduleID)

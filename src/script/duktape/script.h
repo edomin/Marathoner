@@ -11,9 +11,11 @@ typedef void (MTR_CALL * mtrPluginInitFunc)(void);
 mtrPluginInitFunc mtrPluginInit;
 
 duk_context *mtrVm;
+char *mtrAutorun;
 
 MTR_EXPORT int MTR_CALL mtrScriptsFunctionSupported(const char *);
 
+MTR_EXPORT char * MTR_CALL mtrScriptsGetAutorunPath(void);
 MTR_EXPORT void MTR_CALL mtrScriptsRegisterFunction(duk_c_function func,
  const char *funcname);
 MTR_EXPORT bool MTR_CALL mtrScriptsRegisterStringVariable(const char *name,

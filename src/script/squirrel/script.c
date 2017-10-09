@@ -214,6 +214,11 @@ MTR_EXPORT HSQUIRRELVM MTR_CALL mtrScriptsGetVm(void)
     return mtrVm;
 }
 
+MTR_EXPORT char * MTR_CALL mtrScriptsGetAutorunPath(void)
+{
+    return mtrAutorun;
+}
+
 MTR_EXPORT void MTR_CALL mtrScriptsRegisterFunction(SQFUNCTION func,
  const char * funcname)
 {
@@ -287,5 +292,6 @@ void mtrScriptsQuit(void)
 MTR_EXPORT void MTR_CALL mtrScriptsAutorun(char * filename)
 {
     mtrScriptsInit();
+    mtrAutorun = filename;
     mtrScriptsDoFile(filename);
 }
