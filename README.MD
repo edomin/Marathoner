@@ -1,13 +1,13 @@
 Marathoner - game engine for Game Jams.  
 Work in progress.  
-TODO: more detailed description.
+More detailed description will be in v1.0.0.
 
 ### Building
-TODO
+Will be in v1.0.0
 
 ### General usage
-TODO more detailed  
 See function syntax without description in file "FunctionListAndSyntax.txt"
+More detailed will be in v1.0.0
 
 ### Commandline API (See first Configfile usage and Launcher usage)
 You can setup launch options with commandline arguments.  
