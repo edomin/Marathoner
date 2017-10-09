@@ -65,12 +65,12 @@ void mtrScriptsRegisterAll(void)
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, AudioSoundFree);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, AudioMusicFree);
 
-    mtrScriptsRegisterNumericVariable("AU_FREQ_DEFAULT", MTR_AU_FREQ_DEFAULT);
-    mtrScriptsRegisterNumericVariable("AU_CHANNELS_DEFAULT",
+    mtrScriptsRegisterVariable_i("AU_FREQ_DEFAULT", MTR_AU_FREQ_DEFAULT);
+    mtrScriptsRegisterVariable_i("AU_CHANNELS_DEFAULT",
      MTR_AU_CHANNELS_DEFAULT);
-    mtrScriptsRegisterNumericVariable("AU_CHUNK_SIZE_DEFAULT",
+    mtrScriptsRegisterVariable_i("AU_CHUNK_SIZE_DEFAULT",
      MTR_AU_CHUNK_SIZE_DEFAULT);
-    mtrScriptsRegisterNumericVariable("AU_DEFAULT", MTR_AU_DEFAULT);
+    mtrScriptsRegisterVariable_i("AU_DEFAULT", MTR_AU_DEFAULT);
 }
 
 #endif

@@ -101,27 +101,27 @@ void mtrScriptsRegisterAll(void)
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureBlitRegionFlipped_f);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureBlitRegionGeneral_f);
 
-    mtrScriptsRegisterNumericVariable("FLIP_NONE", MTR_FLIP_NONE);
-    mtrScriptsRegisterNumericVariable("FLIP_HORIZONTAL", MTR_FLIP_HORIZONTAL);
-    mtrScriptsRegisterNumericVariable("FLIP_VERTICAL", MTR_FLIP_VERTICAL);
-    mtrScriptsRegisterNumericVariable("FLIP_BOTH", MTR_FLIP_BOTH);
-//    mtrScriptsRegisterNumericVariable("BLEND_ZERO", MTR_BLEND_ZERO);
-//    mtrScriptsRegisterNumericVariable("BLEND_ONE", MTR_BLEND_ONE);
-//    mtrScriptsRegisterNumericVariable("BLEND_SRC_COLOR",
+    mtrScriptsRegisterVariable_i("FLIP_NONE", MTR_FLIP_NONE);
+    mtrScriptsRegisterVariable_i("FLIP_HORIZONTAL", MTR_FLIP_HORIZONTAL);
+    mtrScriptsRegisterVariable_i("FLIP_VERTICAL", MTR_FLIP_VERTICAL);
+    mtrScriptsRegisterVariable_i("FLIP_BOTH", MTR_FLIP_BOTH);
+//    mtrScriptsRegisterVariable_i("BLEND_ZERO", MTR_BLEND_ZERO);
+//    mtrScriptsRegisterVariable_i("BLEND_ONE", MTR_BLEND_ONE);
+//    mtrScriptsRegisterVariable_i("BLEND_SRC_COLOR",
 //     MTR_BLEND_SRC_COLOR);
-//    mtrScriptsRegisterNumericVariable("BLEND_DST_COLOR",
+//    mtrScriptsRegisterVariable_i("BLEND_DST_COLOR",
 //     MTR_BLEND_DST_COLOR);
-//    mtrScriptsRegisterNumericVariable("BLEND_ONE_MINUS_SRC",
+//    mtrScriptsRegisterVariable_i("BLEND_ONE_MINUS_SRC",
 //     MTR_BLEND_ONE_MINUS_SRC);
-//    mtrScriptsRegisterNumericVariable("BLEND_ONE_MINUS_DST",
+//    mtrScriptsRegisterVariable_i("BLEND_ONE_MINUS_DST",
 //     MTR_BLEND_ONE_MINUS_DST);
-//    mtrScriptsRegisterNumericVariable("BLEND_SRC_ALPHA",
+//    mtrScriptsRegisterVariable_i("BLEND_SRC_ALPHA",
 //     MTR_BLEND_SRC_ALPHA);
-//    mtrScriptsRegisterNumericVariable("BLEND_DST_ALPHA",
+//    mtrScriptsRegisterVariable_i("BLEND_DST_ALPHA",
 //     MTR_BLEND_DST_ALPHA);
-//    mtrScriptsRegisterNumericVariable("BLEND_ONE_MINUS_SRC_ALPHA",
+//    mtrScriptsRegisterVariable_i("BLEND_ONE_MINUS_SRC_ALPHA",
 //     MTR_BLEND_ONE_MINUS_SRC_ALPHA);
-//    mtrScriptsRegisterNumericVariable("BLEND_ONE_MINUS_DST_ALPHA",
+//    mtrScriptsRegisterVariable_i("BLEND_ONE_MINUS_DST_ALPHA",
 //     MTR_BLEND_ONE_MINUS_DST_ALPHA);
 }
 

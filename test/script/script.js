@@ -1,80 +1,22 @@
 // Positive
 FileWriteLineFast("test/output.txt", "Positive test", FM_WRITE);
-RegisterStringVariable("STRING_VARIABLE", "Hello");
-RegisterNumericVariable("NUMERIC_VARIABLE", 9000);
+FileWriteLineFast("test/output.txt",
+ "Autorun path: " + ScriptsGetAutorunPath(), FM_APPEND);
+RegisterVariable_b("BOOL_VARIABLE", false);
+RegisterVariable_i("INT_VARIABLE", 42);
+RegisterVariable_u("UNSIGNED_VARIABLE", 0xDEADBEEF);
+RegisterVariable_f("SINGLE_VARIABLE", 3.14);
+RegisterVariable_d("DOUBLE_VARIABLE", 0.0001);
+RegisterVariable_s("STRING_VARIABLE", "Hello");
+FileWriteLineFast("test/output.txt", "BOOL_VARIABLE: " + BOOL_VARIABLE,
+ FM_APPEND);
+FileWriteLineFast("test/output.txt", "INT_VARIABLE: " + INT_VARIABLE,
+ FM_APPEND);
+FileWriteLineFast("test/output.txt", "UNSIGNED_VARIABLE: " + UNSIGNED_VARIABLE,
+ FM_APPEND);
+FileWriteLineFast("test/output.txt", "SINGLE_VARIABLE: " + SINGLE_VARIABLE,
+ FM_APPEND);
+FileWriteLineFast("test/output.txt", "DOUBLE_VARIABLE: " + DOUBLE_VARIABLE,
+ FM_APPEND);
 FileWriteLineFast("test/output.txt", "STRING_VARIABLE: " + STRING_VARIABLE,
- FM_APPEND);
-FileWriteLineFast("test/output.txt", "NUMERIC_VARIABLE: " + NUMERIC_VARIABLE,
- FM_APPEND);
-
-// Negative
-FileWriteLineFast("test/output.txt", "Negative test", FM_APPEND);
-
-FileWriteLineFast("test/output.txt", "string var - empty name", FM_APPEND);
-RegisterStringVariable("", "Hello");
-
-FileWriteLineFast("test/output.txt", "string var - null name", FM_APPEND);
-RegisterStringVariable(null, "Hello");
-
-FileWriteLineFast("test/output.txt", "string var - empty table as name",
- FM_APPEND);
-RegisterStringVariable({}, "Hello");
-
-FileWriteLineFast("test/output.txt", "string var - number as name", FM_APPEND);
-RegisterStringVariable(9000, "Hello");
-
-FileWriteLineFast("test/output.txt", "string var - number as value", FM_APPEND);
-RegisterStringVariable("STRING_VARIABLE_2", 9000);
-
-FileWriteLineFast("test/output.txt", "string var - null as value", FM_APPEND);
-RegisterStringVariable("STRING_VARIABLE_3", null);
-
-FileWriteLineFast("test/output.txt", "string var - empty table as value",
- FM_APPEND);
-RegisterStringVariable("STRING_VARIABLE_4", {});
-
-FileWriteLineFast("test/output.txt", "string var - empty name", FM_APPEND);
-RegisterNumericVariable("", 9000);
-
-FileWriteLineFast("test/output.txt", "string var - null name", FM_APPEND);
-RegisterNumericVariable(null, 9000);
-
-FileWriteLineFast("test/output.txt", "string var - empty table as name",
- FM_APPEND);
-RegisterNumericVariable({}, 9000);
-
-FileWriteLineFast("test/output.txt", "string var - number as name", FM_APPEND);
-RegisterNumericVariable(9000, 9000);
-
-FileWriteLineFast("test/output.txt", "string var - string as value", FM_APPEND);
-RegisterNumericVariable("NUMERIC_VARIABLE_2", "Hello");
-
-FileWriteLineFast("test/output.txt", "string var - null as value", FM_APPEND);
-RegisterNumericVariable("NUMERIC_VARIABLE_3", null);
-
-FileWriteLineFast("test/output.txt", "string var - empty table as value",
- FM_APPEND);
-RegisterNumericVariable("NUMERIC_VARIABLE_4", {});
-
-FileWriteLineFast("test/output.txt", "STRING_VARIABLE_2: " + STRING_VARIABLE_2,
- FM_APPEND);
-FileWriteLineFast("test/output.txt", "STRING_VARIABLE_3: " + STRING_VARIABLE_3,
- FM_APPEND);
-FileWriteLineFast("test/output.txt", "STRING_VARIABLE_4: " + STRING_VARIABLE_4,
- FM_APPEND);
-FileWriteLineFast("test/output.txt",
- "NUMERIC_VARIABLE_2: " + NUMERIC_VARIABLE_2, FM_APPEND);
-FileWriteLineFast("test/output.txt",
- "NUMERIC_VARIABLE_3: " + NUMERIC_VARIABLE_3, FM_APPEND);
-FileWriteLineFast("test/output.txt",
- "NUMERIC_VARIABLE_4: " + NUMERIC_VARIABLE_4, FM_APPEND);
-
-// Registering variable with same name
-FileWriteLineFast("test/output.txt",
- "Test of registering variable with same name", FM_APPEND);
-RegisterStringVariable("STRING_VARIABLE", "Hello");
-RegisterNumericVariable("NUMERIC_VARIABLE", 9000);
-FileWriteLineFast("test/output.txt", "STRING_VARIABLE: " + STRING_VARIABLE,
- FM_APPEND);
-FileWriteLineFast("test/output.txt", "NUMERIC_VARIABLE: " + NUMERIC_VARIABLE,
  FM_APPEND);

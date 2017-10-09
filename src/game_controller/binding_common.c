@@ -87,16 +87,15 @@ void mtrScriptsRegisterAll(void)
      GameControllerGetTrackballsCount);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, GameControllerGetPowHatsCount);
 
-    mtrScriptsRegisterNumericVariable("POVHAT_CENTER", MTR_POVHAT_CENTER);
-    mtrScriptsRegisterNumericVariable("POVHAT_UP", MTR_POVHAT_UP);
-    mtrScriptsRegisterNumericVariable("POVHAT_DOWN", MTR_POVHAT_DOWN);
-    mtrScriptsRegisterNumericVariable("POVHAT_LEFT", MTR_POVHAT_LEFT);
-    mtrScriptsRegisterNumericVariable("POVHAT_RIGHT", MTR_POVHAT_RIGHT);
-    mtrScriptsRegisterNumericVariable("POVHAT_UP_LEFT", MTR_POVHAT_UP_LEFT);
-    mtrScriptsRegisterNumericVariable("POVHAT_UP_RIGHT", MTR_POVHAT_UP_RIGHT);
-    mtrScriptsRegisterNumericVariable("POVHAT_DOWN_LEFT", MTR_POVHAT_DOWN_LEFT);
-    mtrScriptsRegisterNumericVariable("POVHAT_DOWN_RIGHT",
-     MTR_POVHAT_DOWN_RIGHT);
+    mtrScriptsRegisterVariable_i("POVHAT_CENTER", MTR_POVHAT_CENTER);
+    mtrScriptsRegisterVariable_i("POVHAT_UP", MTR_POVHAT_UP);
+    mtrScriptsRegisterVariable_i("POVHAT_DOWN", MTR_POVHAT_DOWN);
+    mtrScriptsRegisterVariable_i("POVHAT_LEFT", MTR_POVHAT_LEFT);
+    mtrScriptsRegisterVariable_i("POVHAT_RIGHT", MTR_POVHAT_RIGHT);
+    mtrScriptsRegisterVariable_i("POVHAT_UP_LEFT", MTR_POVHAT_UP_LEFT);
+    mtrScriptsRegisterVariable_i("POVHAT_UP_RIGHT", MTR_POVHAT_UP_RIGHT);
+    mtrScriptsRegisterVariable_i("POVHAT_DOWN_LEFT", MTR_POVHAT_DOWN_LEFT);
+    mtrScriptsRegisterVariable_i("POVHAT_DOWN_RIGHT", MTR_POVHAT_DOWN_RIGHT);
 }
 
 #endif

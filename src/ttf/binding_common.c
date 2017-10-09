@@ -65,11 +65,11 @@ void mtrScriptsRegisterAll(void)
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TtfSetFontStyle);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TtfSetFontOutline);
 
-    mtrScriptsRegisterNumericVariable("FS_NORMAL", MTR_FS_NORMAL);
-    mtrScriptsRegisterNumericVariable("FS_BOLD", MTR_FS_BOLD);
-    mtrScriptsRegisterNumericVariable("FS_ITALIC", MTR_FS_ITALIC);
-    mtrScriptsRegisterNumericVariable("FS_UNDERLINE", MTR_FS_UNDERLINE);
-    mtrScriptsRegisterNumericVariable("FS_STRIKETHROUGH", MTR_FS_STRIKETHROUGH);
+    mtrScriptsRegisterVariable_i("FS_NORMAL", MTR_FS_NORMAL);
+    mtrScriptsRegisterVariable_i("FS_BOLD", MTR_FS_BOLD);
+    mtrScriptsRegisterVariable_i("FS_ITALIC", MTR_FS_ITALIC);
+    mtrScriptsRegisterVariable_i("FS_UNDERLINE", MTR_FS_UNDERLINE);
+    mtrScriptsRegisterVariable_i("FS_STRIKETHROUGH", MTR_FS_STRIKETHROUGH);
 }
 
 #endif

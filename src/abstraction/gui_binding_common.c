@@ -112,61 +112,58 @@ void mtrScriptsRegisterAll(void)
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiGroupEnd);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiSpacing);
 
-    mtrScriptsRegisterNumericVariable("GUI_WINDOW_BORDER",
-     MTR_GUI_WINDOW_BORDER);
-    mtrScriptsRegisterNumericVariable("GUI_WINDOW_MOVABLE",
-     MTR_GUI_WINDOW_MOVABLE);
-    mtrScriptsRegisterNumericVariable("GUI_WINDOW_SCALABLE",
+    mtrScriptsRegisterVariable_i("GUI_WINDOW_BORDER", MTR_GUI_WINDOW_BORDER);
+    mtrScriptsRegisterVariable_i("GUI_WINDOW_MOVABLE", MTR_GUI_WINDOW_MOVABLE);
+    mtrScriptsRegisterVariable_i("GUI_WINDOW_SCALABLE",
      MTR_GUI_WINDOW_SCALABLE);
-    mtrScriptsRegisterNumericVariable("GUI_WINDOW_CLOSABLE",
+    mtrScriptsRegisterVariable_i("GUI_WINDOW_CLOSABLE",
      MTR_GUI_WINDOW_CLOSABLE);
-    mtrScriptsRegisterNumericVariable("GUI_WINDOW_MINIMIZABLE",
+    mtrScriptsRegisterVariable_i("GUI_WINDOW_MINIMIZABLE",
      MTR_GUI_WINDOW_MINIMIZABLE);
-    mtrScriptsRegisterNumericVariable("GUI_WINDOW_NO_SCROLLBAR",
+    mtrScriptsRegisterVariable_i("GUI_WINDOW_NO_SCROLLBAR",
      MTR_GUI_WINDOW_NO_SCROLLBAR);
-    mtrScriptsRegisterNumericVariable("GUI_WINDOW_TITLE", MTR_GUI_WINDOW_TITLE);
-    mtrScriptsRegisterNumericVariable("GUI_WINDOW_SCROLL_AUTO_HIDE",
+    mtrScriptsRegisterVariable_i("GUI_WINDOW_TITLE", MTR_GUI_WINDOW_TITLE);
+    mtrScriptsRegisterVariable_i("GUI_WINDOW_SCROLL_AUTO_HIDE",
      MTR_GUI_WINDOW_SCROLL_AUTO_HIDE);
-    mtrScriptsRegisterNumericVariable("GUI_WINDOW_BACKGROUND",
+    mtrScriptsRegisterVariable_i("GUI_WINDOW_BACKGROUND",
      MTR_GUI_WINDOW_BACKGROUND);
-    mtrScriptsRegisterNumericVariable("GUI_WINDOW_SCALE_LEFT",
+    mtrScriptsRegisterVariable_i("GUI_WINDOW_SCALE_LEFT",
      MTR_GUI_WINDOW_SCALE_LEFT);
 
-    mtrScriptsRegisterNumericVariable("GUI_TEXT_ALIGN_LEFT",
+    mtrScriptsRegisterVariable_i("GUI_TEXT_ALIGN_LEFT",
      MTR_GUI_TEXT_ALIGN_LEFT);
-    mtrScriptsRegisterNumericVariable("GUI_TEXT_ALIGN_CENTERED",
+    mtrScriptsRegisterVariable_i("GUI_TEXT_ALIGN_CENTERED",
      MTR_GUI_TEXT_ALIGN_CENTERED);
-    mtrScriptsRegisterNumericVariable("GUI_TEXT_ALIGN_RIGHT",
+    mtrScriptsRegisterVariable_i("GUI_TEXT_ALIGN_RIGHT",
      MTR_GUI_TEXT_ALIGN_RIGHT);
-    mtrScriptsRegisterNumericVariable("GUI_TEXT_ALIGN_TOP",
-     MTR_GUI_TEXT_ALIGN_TOP);
-    mtrScriptsRegisterNumericVariable("GUI_TEXT_ALIGN_MIDDLE",
+    mtrScriptsRegisterVariable_i("GUI_TEXT_ALIGN_TOP", MTR_GUI_TEXT_ALIGN_TOP);
+    mtrScriptsRegisterVariable_i("GUI_TEXT_ALIGN_MIDDLE",
      MTR_GUI_TEXT_ALIGN_MIDDLE);
-    mtrScriptsRegisterNumericVariable("GUI_TEXT_ALIGN_BOTTOM",
+    mtrScriptsRegisterVariable_i("GUI_TEXT_ALIGN_BOTTOM",
      MTR_GUI_TEXT_ALIGN_BOTTOM);
 
-    mtrScriptsRegisterNumericVariable("GUI_SYMBOL_NONE", MTR_GUI_SYMBOL_NONE);
-    mtrScriptsRegisterNumericVariable("GUI_SYMBOL_X", MTR_GUI_SYMBOL_X);
-    mtrScriptsRegisterNumericVariable("GUI_SYMBOL_UNDERSCORE",
+    mtrScriptsRegisterVariable_i("GUI_SYMBOL_NONE", MTR_GUI_SYMBOL_NONE);
+    mtrScriptsRegisterVariable_i("GUI_SYMBOL_X", MTR_GUI_SYMBOL_X);
+    mtrScriptsRegisterVariable_i("GUI_SYMBOL_UNDERSCORE",
      MTR_GUI_SYMBOL_UNDERSCORE);
-    mtrScriptsRegisterNumericVariable("GUI_SYMBOL_CIRCLE_SOLID",
+    mtrScriptsRegisterVariable_i("GUI_SYMBOL_CIRCLE_SOLID",
      MTR_GUI_SYMBOL_CIRCLE_SOLID);
-    mtrScriptsRegisterNumericVariable("GUI_SYMBOL_CIRCLE_OUTLINE",
+    mtrScriptsRegisterVariable_i("GUI_SYMBOL_CIRCLE_OUTLINE",
      MTR_GUI_SYMBOL_CIRCLE_OUTLINE);
-    mtrScriptsRegisterNumericVariable("GUI_SYMBOL_RECT_SOLID",
+    mtrScriptsRegisterVariable_i("GUI_SYMBOL_RECT_SOLID",
      MTR_GUI_SYMBOL_RECT_SOLID);
-    mtrScriptsRegisterNumericVariable("GUI_SYMBOL_RECT_OUTLINE",
+    mtrScriptsRegisterVariable_i("GUI_SYMBOL_RECT_OUTLINE",
      MTR_GUI_SYMBOL_RECT_OUTLINE);
-    mtrScriptsRegisterNumericVariable("GUI_SYMBOL_TRIANGLE_UP",
+    mtrScriptsRegisterVariable_i("GUI_SYMBOL_TRIANGLE_UP",
      MTR_GUI_SYMBOL_TRIANGLE_UP);
-    mtrScriptsRegisterNumericVariable("GUI_SYMBOL_TRIANGLE_DOWN",
+    mtrScriptsRegisterVariable_i("GUI_SYMBOL_TRIANGLE_DOWN",
      MTR_GUI_SYMBOL_TRIANGLE_DOWN);
-    mtrScriptsRegisterNumericVariable("GUI_SYMBOL_TRIANGLE_LEFT",
+    mtrScriptsRegisterVariable_i("GUI_SYMBOL_TRIANGLE_LEFT",
      MTR_GUI_SYMBOL_TRIANGLE_LEFT);
-    mtrScriptsRegisterNumericVariable("GUI_SYMBOL_TRIANGLE_RIGHT",
+    mtrScriptsRegisterVariable_i("GUI_SYMBOL_TRIANGLE_RIGHT",
      MTR_GUI_SYMBOL_TRIANGLE_RIGHT);
-    mtrScriptsRegisterNumericVariable("GUI_SYMBOL_PLUS", MTR_GUI_SYMBOL_PLUS);
-    mtrScriptsRegisterNumericVariable("GUI_SYMBOL_MINUS", MTR_GUI_SYMBOL_MINUS);
+    mtrScriptsRegisterVariable_i("GUI_SYMBOL_PLUS", MTR_GUI_SYMBOL_PLUS);
+    mtrScriptsRegisterVariable_i("GUI_SYMBOL_MINUS", MTR_GUI_SYMBOL_MINUS);
 }
 
 #endif

@@ -70,11 +70,11 @@ void mtrScriptsRegisterAll(void)
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, MouseGetDeltaXY);
     #endif
 
-    mtrScriptsRegisterNumericVariable("MOUSE_LEFT", MTR_MOUSE_LEFT);
-    mtrScriptsRegisterNumericVariable("MOUSE_RIGHT", MTR_MOUSE_RIGHT);
-    mtrScriptsRegisterNumericVariable("MOUSE_MIDDLE", MTR_MOUSE_MIDDLE);
-    mtrScriptsRegisterNumericVariable("MOUSE_X1", MTR_MOUSE_X1);
-    mtrScriptsRegisterNumericVariable("MOUSE_X2", MTR_MOUSE_X2);
+    mtrScriptsRegisterVariable_i("MOUSE_LEFT", MTR_MOUSE_LEFT);
+    mtrScriptsRegisterVariable_i("MOUSE_RIGHT", MTR_MOUSE_RIGHT);
+    mtrScriptsRegisterVariable_i("MOUSE_MIDDLE", MTR_MOUSE_MIDDLE);
+    mtrScriptsRegisterVariable_i("MOUSE_X1", MTR_MOUSE_X1);
+    mtrScriptsRegisterVariable_i("MOUSE_X2", MTR_MOUSE_X2);
 }
 
 #endif

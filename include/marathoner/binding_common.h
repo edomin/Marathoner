@@ -17,12 +17,16 @@
 
 #define _PREREQ1 _SCRIPT_MODULE
 
-#define MTR_FIND_AND_REGISTER_ALL()                                \
-    MTR_FIND_FUNCTION(mtrScriptsRegisterFunction, _SCRIPT_MODULE); \
-    MTR_FIND_FUNCTION(mtrScriptsRegisterNumericVariable,           \
-     _SCRIPT_MODULE);                                              \
-    MTR_FIND_FUNCTION(mtrScriptsGetVm, _SCRIPT_MODULE);            \
-    if (ok)                                                        \
+#define MTR_FIND_AND_REGISTER_ALL()                                  \
+    MTR_FIND_FUNCTION(mtrScriptsRegisterFunction, _SCRIPT_MODULE);   \
+    MTR_FIND_FUNCTION(mtrScriptsRegisterVariable_b, _SCRIPT_MODULE); \
+    MTR_FIND_FUNCTION(mtrScriptsRegisterVariable_i, _SCRIPT_MODULE); \
+    MTR_FIND_FUNCTION(mtrScriptsRegisterVariable_u, _SCRIPT_MODULE); \
+    MTR_FIND_FUNCTION(mtrScriptsRegisterVariable_f, _SCRIPT_MODULE); \
+    MTR_FIND_FUNCTION(mtrScriptsRegisterVariable_d, _SCRIPT_MODULE); \
+    MTR_FIND_FUNCTION(mtrScriptsRegisterVariable_s, _SCRIPT_MODULE); \
+    MTR_FIND_FUNCTION(mtrScriptsGetVm, _SCRIPT_MODULE);              \
+    if (ok)                                                          \
         mtrScriptsRegisterAll();
 
 #ifdef lua_h
@@ -92,16 +96,31 @@
     }                                                                    \
     MTR_PLUGIN_INIT()
 
-#define MTR_BINDING_COMMON_HEADER()                                          \
-    _VM mtrVm;                                                               \
-    typedef _VM (MTR_CALL * mtrScriptsGetVmFunc)(void);                      \
-    mtrScriptsGetVmFunc mtrScriptsGetVm;                                     \
-    typedef void (MTR_CALL * mtrScriptsRegisterFunctionFunc)(_CFUNCTION,     \
-     char *);                                                                \
-    mtrScriptsRegisterFunctionFunc mtrScriptsRegisterFunction;               \
-    typedef void (MTR_CALL * mtrScriptsRegisterNumericVariableFunc)(         \
-     const char *name, double value);                                        \
-    mtrScriptsRegisterNumericVariableFunc mtrScriptsRegisterNumericVariable;
+#define MTR_BINDING_COMMON_HEADER()                                      \
+    _VM mtrVm;                                                           \
+    typedef _VM (MTR_CALL * mtrScriptsGetVmFunc)(void);                  \
+    mtrScriptsGetVmFunc mtrScriptsGetVm;                                 \
+    typedef void (MTR_CALL * mtrScriptsRegisterFunctionFunc)(_CFUNCTION, \
+     char *);                                                            \
+    mtrScriptsRegisterFunctionFunc mtrScriptsRegisterFunction;           \
+    typedef void (MTR_CALL * mtrScriptsRegisterVariable_bFunc)(          \
+     const char *name, bool value);                                      \
+    mtrScriptsRegisterVariable_bFunc mtrScriptsRegisterVariable_b;       \
+    typedef void (MTR_CALL * mtrScriptsRegisterVariable_iFunc)(          \
+     const char *name, int value);                                       \
+    mtrScriptsRegisterVariable_iFunc mtrScriptsRegisterVariable_i;       \
+    typedef void (MTR_CALL * mtrScriptsRegisterVariable_uFunc)(          \
+     const char *name, unsigned int value);                              \
+    mtrScriptsRegisterVariable_uFunc mtrScriptsRegisterVariable_u;       \
+    typedef void (MTR_CALL * mtrScriptsRegisterVariable_fFunc)(          \
+     const char *name, float value);                                     \
+    mtrScriptsRegisterVariable_fFunc mtrScriptsRegisterVariable_f;       \
+    typedef void (MTR_CALL * mtrScriptsRegisterVariable_dFunc)(          \
+     const char *name, double value);                                    \
+    mtrScriptsRegisterVariable_dFunc mtrScriptsRegisterVariable_d;       \
+    typedef void (MTR_CALL * mtrScriptsRegisterVariable_sFunc)(          \
+     const char *name, const char *value);                               \
+    mtrScriptsRegisterVariable_sFunc mtrScriptsRegisterVariable_s;
 
 #define MTR_FIND_AND_ADD_FUNCTION(module, function)                         \
     mtr ## function = (mtr ## function ## Func)mtrFindFunction(module,      \
