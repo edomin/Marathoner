@@ -9,6 +9,7 @@ MTR_SCRIPT_FUNC_V_V(mtrSF_TtfQuit, mtrTtfQuit)
 MTR_SCRIPT_FUNC_U32t_S1I1(mtrSF_TtfLoad, mtrTtfLoad)
 MTR_SCRIPT_FUNC_V_U32t1(mtrSF_TtfFree, mtrTtfFree)
 MTR_SCRIPT_FUNC_I_U32t1(mtrSF_TtfGetFontHeight, mtrTtfGetFontHeight)
+MTR_SCRIPT_FUNC_P_U32t1U8t3S1(mtrSF_TtfRenderString, mtrTtfRenderString)
 
 #ifdef lua_h
 MTR_SCRIPT_FUNC(mtrSF_TtfGetStringSizes)
@@ -49,6 +50,7 @@ void mtrScriptsRegisterAll(void)
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TtfGetStringWidth);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TtfSetFontStyle);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TtfSetFontOutline);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TtfRenderString);
 
     mtrScriptsRegisterVariable_i("FS_NORMAL", MTR_FS_NORMAL);
     mtrScriptsRegisterVariable_i("FS_BOLD", MTR_FS_BOLD);

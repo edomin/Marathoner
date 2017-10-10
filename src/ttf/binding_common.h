@@ -32,4 +32,8 @@ mtrTtfSetFontStyleFunc mtrTtfSetFontStyle;
 typedef void (MTR_CALL * mtrTtfSetFontOutlineFunc)(uint32_t, int);
 mtrTtfSetFontOutlineFunc mtrTtfSetFontOutline;
 
+typedef mtrPixels_t *(MTR_CALL * mtrTtfRenderStringFunc)(uint32_t, uint8_t,
+ uint8_t, uint8_t, const char *);
+mtrTtfRenderStringFunc mtrTtfRenderString;
+
 #endif

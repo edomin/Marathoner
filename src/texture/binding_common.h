@@ -105,4 +105,7 @@ typedef void (MTR_CALL * mtrTextureBlitRegionGeneral_fFunc)(uint32_t, float,
  float, float, float, float, float, float, float, float, float, float, int);
 mtrTextureBlitRegionGeneral_fFunc mtrTextureBlitRegionGeneral_f;
 
+typedef bool (MTR_CALL * mtrTextureReceivePixelsFunc)(uint32_t, mtrPixels_t *);
+mtrTextureReceivePixelsFunc mtrTextureReceivePixels;
+
 #endif

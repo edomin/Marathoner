@@ -63,6 +63,7 @@ MTR_SCRIPT_FUNC_V_U32t1F6I1(mtrSF_TextureBlitRegionFlipped_f,
  mtrTextureBlitRegionFlipped_f)
 MTR_SCRIPT_FUNC_V_U32t1F11I1(mtrSF_TextureBlitRegionGeneral_f,
  mtrTextureBlitRegionGeneral_f)
+MTR_SCRIPT_FUNC_B_U32t1P1(mtrSF_TextureReceivePixels, mtrTextureReceivePixels);
 
 void mtrScriptsRegisterAll(void)
 {
@@ -100,6 +101,7 @@ void mtrScriptsRegisterAll(void)
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureBlitRegionAngled_f);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureBlitRegionFlipped_f);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureBlitRegionGeneral_f);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureReceivePixels);
 
     mtrScriptsRegisterVariable_i("FLIP_NONE", MTR_FLIP_NONE);
     mtrScriptsRegisterVariable_i("FLIP_HORIZONTAL", MTR_FLIP_HORIZONTAL);

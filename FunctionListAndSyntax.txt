@@ -103,6 +103,7 @@ void TextureBlitRegionScaled_f(uint32_t texNum, float x, float y, float w, float
 void TextureBlitRegionAngled_f(uint32_t texNum, float x, float y, float rx, float ry, float rw, float rh, float angle, float pivotX, float pivotY)
 void TextureBlitRegionFlipped_f(uint32_t texNum, float x, float y, float rx, float ry, float rw, float rh, int flip)
 void TextureBlitRegionGeneral_f(uint32_t texNum, float x, float y, float w, float h, float rx, float ry, float rw, float rh, float angle, float pivotX, float pivotY, int flip)
+bool TextureReceivePixels(uint32_t texNum, void *pixels)
 
 int TtfFunctionSupported(const char *functionName)
 bool TtfInit(uint32_t dmSize, uint32_t reservedCount)
@@ -114,6 +115,7 @@ int, int TtfGetStringSizes(uint32_t fontNum, const char *string)
 int TtfGetStringWidth(uint32_t fontNum, const char *string)
 void TtfSetFontStyle(uint32_t fontNum, int style)
 void TtfSetFontOutline(uint32_t fontNum, int outline)
+void *TtfRenderString(uint32_t fontNum, uint8_t r, uint8_t g, uint8_t b, const char *string)
 
 int PrimitiveFunctionSupported(const char *functionName)
 bool PrimitiveInit()

@@ -180,6 +180,7 @@ MTR_EXPORT void MTR_CALL mtrTtfFree(uint32_t fontNum)
     }
 }
 
+/*fa mtrTtfRenderString yes */
 MTR_EXPORT mtrPixels_t *MTR_CALL mtrTtfRenderString(uint32_t fontNum, uint8_t r,
  uint8_t g, uint8_t b, const char *string)
 {

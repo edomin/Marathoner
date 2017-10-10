@@ -691,6 +691,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionGeneral_f(uint32_t texNum, float x,
     }
 }
 
+/*fa mtrTextureReceivePixels yes */
 MTR_EXPORT bool MTR_CALL mtrTextureReceivePixels(uint32_t texNum,
  mtrPixels_t *pixels)
 {
