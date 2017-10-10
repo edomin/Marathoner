@@ -39,9 +39,19 @@ static struct mtrNkGui {
 
 mtrIndexkeeper_t *mtrGuiFontKeeper;
 mtrIndexkeeper_t *mtrGuiImageKeeper;
-
 /* Buffer used by function mtrNkGetTextWidth */
 char getTextWidthBuffer[0x10000];
+static bool mtrGuiInited = false;
+#define MTR_GUI_CHECK_IF_NOT_INITED(returnValue) \
+    if (!mtrGuiInited)                           \
+        return returnValue;
+#define MTR_GUI_CHECK_IF_NOT_INITED_WITH_LOG(message, returnValue)             \
+    if (!mtrGuiInited)                                                         \
+    {                                                                          \
+        mtrLogWrite(message ". GUI abstraction subsystem are not initialized", \
+         1, MTR_LMT_ERROR);                                                    \
+        return returnValue;                                                    \
+    }
 
 typedef bool (MTR_CALL * mtrFontDrawMbfString_fFunc)(uint32_t fontNum, float x,
  float y, const char *string);

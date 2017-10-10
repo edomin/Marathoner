@@ -59,6 +59,7 @@ MTR_EXPORT bool MTR_CALL mtrSpriteInit(uint32_t dmSize, uint32_t reservedCount)
          MTR_LMT_INFO);
 
     mtrLogWrite("Sprite abstraction manager initialized", 0, MTR_LMT_INFO);
+    mtrSpriteInited = true;
     return true;
 }
 
@@ -72,6 +73,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrSpriteLoad(const char *filename, int clipWidth,
     int          textureWidth;
     int          textureHeight;
     int          i;
+    MTR_SPRITE_CHECK_IF_NOT_INITED_WITH_LOG("Unable to load sprite", 0U);
 
     mtrLogWrite_s("Loading sprite", 0, MTR_LMT_INFO, filename);
 
@@ -165,6 +167,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrSpriteLoadSimple(const char *filename,
     mtrSprite_t *sprite;
     int          textureWidth;
     int          textureHeight;
+    MTR_SPRITE_CHECK_IF_NOT_INITED_WITH_LOG("Unable to load sprite", 0U);
 
     mtrLogWrite_s("Loading sprite", 0, MTR_LMT_INFO, filename);
 
@@ -224,6 +227,8 @@ MTR_EXPORT uint32_t MTR_CALL mtrSpriteLoadSimple(const char *filename,
 MTR_EXPORT void MTR_CALL mtrSpriteFree(uint32_t sprNum)
 {
     mtrSprite_t *sprite;
+    MTR_SPRITE_CHECK_IF_NOT_INITED_WITH_LOG("Unable to unload sprite",);
+
     if (sprNum != 0)
     {
         sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
@@ -241,6 +246,8 @@ MTR_EXPORT void MTR_CALL mtrSpriteSetModulation_c(uint32_t sprNum,
  uint32_t color)
 {
     mtrSprite_t *sprite;
+    MTR_SPRITE_CHECK_IF_NOT_INITED();
+
     if (sprNum != 0)
     {
         sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
@@ -253,6 +260,8 @@ MTR_EXPORT void MTR_CALL mtrSpriteSetModulation_ca(uint32_t sprNum,
  uint32_t color)
 {
     mtrSprite_t *sprite;
+    MTR_SPRITE_CHECK_IF_NOT_INITED();
+
     if (sprNum != 0)
     {
         sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
@@ -265,6 +274,8 @@ MTR_EXPORT void MTR_CALL mtrSpriteSetModulation_rgb(uint32_t sprNum,
  uint8_t r, uint8_t g, uint8_t b)
 {
     mtrSprite_t *sprite;
+    MTR_SPRITE_CHECK_IF_NOT_INITED();
+
     if (sprNum != 0)
     {
         sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
@@ -277,6 +288,8 @@ MTR_EXPORT void MTR_CALL mtrSpriteSetModulation_rgba(uint32_t sprNum,
  uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
     mtrSprite_t *sprite;
+    MTR_SPRITE_CHECK_IF_NOT_INITED();
+
     if (sprNum != 0)
     {
         sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
@@ -289,6 +302,8 @@ MTR_EXPORT void MTR_CALL mtrSpriteSetModulationAlpha(uint32_t sprNum,
  uint8_t alpha)
 {
     mtrSprite_t *sprite;
+    MTR_SPRITE_CHECK_IF_NOT_INITED();
+
     if (sprNum != 0)
     {
         sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
@@ -301,6 +316,8 @@ MTR_EXPORT void MTR_CALL mtrSpriteSetModulationAlpha_f(uint32_t sprNum,
  float alpha)
 {
     mtrSprite_t *sprite;
+    MTR_SPRITE_CHECK_IF_NOT_INITED();
+
     if (sprNum != 0)
     {
         sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
@@ -313,6 +330,8 @@ MTR_EXPORT void MTR_CALL mtrSpriteDraw_f(uint32_t sprNum, int clipNum, float x,
  float y)
 {
     mtrSprite_t *sprite;
+    MTR_SPRITE_CHECK_IF_NOT_INITED();
+
     if (sprNum != 0)
     {
         sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
@@ -328,6 +347,8 @@ MTR_EXPORT void MTR_CALL mtrSpriteDrawScaled_f(uint32_t sprNum, int clipNum,
  float x, float y, float w, float h)
 {
     mtrSprite_t *sprite;
+    MTR_SPRITE_CHECK_IF_NOT_INITED();
+
     if (sprNum != 0)
     {
         sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
@@ -343,6 +364,8 @@ MTR_EXPORT void MTR_CALL mtrSpriteDrawAngled_f(uint32_t sprNum, int clipNum,
  float x, float y, float angle)
 {
     mtrSprite_t *sprite;
+    MTR_SPRITE_CHECK_IF_NOT_INITED();
+
     if (sprNum != 0)
     {
         sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
@@ -358,6 +381,8 @@ MTR_EXPORT void MTR_CALL mtrSpriteDrawFlipped_f(uint32_t sprNum, int clipNum,
  float x, float y, int flip)
 {
     mtrSprite_t *sprite;
+    MTR_SPRITE_CHECK_IF_NOT_INITED();
+
     if (sprNum != 0)
     {
         sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
@@ -373,6 +398,8 @@ MTR_EXPORT void MTR_CALL mtrSpriteDrawGeneral_f(uint32_t sprNum, int clipNum,
  float x, float y, float w, float h, float angle, int flip)
 {
     mtrSprite_t *sprite;
+    MTR_SPRITE_CHECK_IF_NOT_INITED();
+
     if (sprNum != 0)
     {
         sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);

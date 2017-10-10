@@ -19,8 +19,18 @@ typedef struct mtrFont_t {
 } mtrFont_t;
 
 char mtrDefaultFontName[] = "Unnamed_Font";
-
 mtrIndexkeeper_t *mtrFontKeeper;
+static bool mtrFontInited = false;
+#define MTR_FONT_CHECK_IF_NOT_INITED(returnValue) \
+    if (!mtrFontInited)                           \
+        return returnValue;
+#define MTR_FONT_CHECK_IF_NOT_INITED_WITH_LOG(message, returnValue)           \
+    if (!mtrFontInited)                                                       \
+    {                                                                         \
+        mtrLogWrite(message ". Font abstraction manager are not initialized", \
+         1, MTR_LMT_ERROR);                                                   \
+        return returnValue;                                                   \
+    }
 
 typedef uint32_t (MTR_CALL * mtrTtfLoadFunc)(const char *filename, int size);
 mtrTtfLoadFunc mtrTtfLoad;

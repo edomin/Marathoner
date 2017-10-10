@@ -27,8 +27,19 @@ typedef struct mtrSprite_t {
 } mtrSprite_t;
 
 char mtrDefaultSpriteName[] = "Unnamed_Sprite";
-
 mtrIndexkeeper_t *mtrSpriteKeeper;
+static bool mtrSpriteInited = false;
+#define MTR_SPRITE_CHECK_IF_NOT_INITED(returnValue) \
+    if (!mtrSpriteInited)                           \
+        return returnValue;
+#define MTR_SPRITE_CHECK_IF_NOT_INITED_WITH_LOG(message, returnValue) \
+    if (!mtrSpriteInited)                                             \
+    {                                                                 \
+        mtrLogWrite(                                                  \
+         message ". Sprite abstraction manager are not initialized",  \
+         1, MTR_LMT_ERROR);                                           \
+        return returnValue;                                           \
+    }
 
 typedef uint32_t (MTR_CALL * mtrTextureLoadFunc)(const char *);
 mtrTextureLoadFunc mtrTextureLoad;

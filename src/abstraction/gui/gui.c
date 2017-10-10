@@ -66,6 +66,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrGuiAddFont(uint32_t fontnum)
     mtrNkFont           *nkFont;
     uint32_t             freeIndex;
     struct nk_user_font *font;
+    MTR_GUI_CHECK_IF_NOT_INITED(0U);
 
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrGuiFontKeeper);
     nkFont = (mtrNkFont *)(&((mtrNkFont *)mtrGuiFontKeeper->data)[freeIndex]);
@@ -88,6 +89,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrGuiAddImage(uint32_t texnum, int x, int y,
     mtrNkImage      *nkImage;
     uint32_t         freeIndex;
     struct nk_image *image;
+    MTR_GUI_CHECK_IF_NOT_INITED(0U);
 
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrGuiImageKeeper);
     nkImage = (mtrNkImage *)(
@@ -110,6 +112,8 @@ MTR_EXPORT uint32_t MTR_CALL mtrGuiAddImage(uint32_t texnum, int x, int y,
 /*fa mtrGuiDeleteFont yes */
 MTR_EXPORT void MTR_CALL mtrGuiDeleteFont(uint32_t fontnum)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED();
+
     if (fontnum != 0)
         mtrIndexkeeperFreeIndex(mtrGuiFontKeeper, fontnum);
 }
@@ -117,6 +121,8 @@ MTR_EXPORT void MTR_CALL mtrGuiDeleteFont(uint32_t fontnum)
 /*fa mtrGuiDeleteImage yes */
 MTR_EXPORT void MTR_CALL mtrGuiDeleteImage(uint32_t imagenum)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED();
+
     if (imagenum != 0)
         mtrIndexkeeperFreeIndex(mtrGuiImageKeeper, imagenum);
 }
@@ -364,12 +370,14 @@ MTR_EXPORT bool MTR_CALL mtrGuiInit(uint32_t fontDmSize,
     }
 
     mtrLogWrite("GUI abstraction subsystem initialized", 0, MTR_LMT_INFO);
+    mtrGuiInited = true;
     return true;
 }
 
 /*fa mtrGuiQuit yes */
 MTR_EXPORT void MTR_CALL mtrGuiQuit(void)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED();
     nk_free(&mtrNkGui.ctx);
     memset(&mtrNkGui.ctx, 0, sizeof(mtrNkGui));
 }
@@ -378,6 +386,7 @@ MTR_EXPORT void MTR_CALL mtrGuiQuit(void)
 MTR_EXPORT void MTR_CALL mtrGuiProcessEvents(void)
 {
     struct nk_context *ctx;
+    MTR_GUI_CHECK_IF_NOT_INITED();
 
     ctx = &mtrNkGui.ctx;
     nk_input_begin(ctx);
@@ -391,7 +400,7 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
     const struct nk_command *cmd;
     int                      i;
     float                    points[8];
-
+    MTR_GUI_CHECK_IF_NOT_INITED();
     UNUSED(points);
 
     nk_foreach(cmd, &mtrNkGui.ctx)
@@ -564,6 +573,7 @@ MTR_EXPORT bool MTR_CALL mtrGuiBegin(const char *title, float boundsX,
  float boundsY, float boundsW, float boundsH, int flags)
 {
     struct nk_rect bounds = nk_rect(boundsX, boundsY, boundsW, boundsH);
+    MTR_GUI_CHECK_IF_NOT_INITED(false);
 
     return nk_begin(&mtrNkGui.ctx, title, bounds, flags);
 }
@@ -571,18 +581,21 @@ MTR_EXPORT bool MTR_CALL mtrGuiBegin(const char *title, float boundsX,
 /*fa mtrGuiEnd yes */
 MTR_EXPORT void MTR_CALL mtrGuiEnd(void)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED();
     nk_end(&mtrNkGui.ctx);
 }
 
 /*fa mtrGuiButtonText yes */
 MTR_EXPORT bool MTR_CALL mtrGuiButtonText(const char *title, int len)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED(false);
     return nk_button_text(&mtrNkGui.ctx, title, len);
 }
 
 /*fa mtrGuiButtonLabel yes */
 MTR_EXPORT bool MTR_CALL mtrGuiButtonLabel(const char *title)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED(false);
     return nk_button_label(&mtrNkGui.ctx, title);
 }
 
@@ -590,6 +603,7 @@ MTR_EXPORT bool MTR_CALL mtrGuiButtonLabel(const char *title)
 MTR_EXPORT bool MTR_CALL mtrGuiButtonColor_c(uint32_t color)
 {
     struct nk_color nkColor;
+    MTR_GUI_CHECK_IF_NOT_INITED(false);
 
     nkColor = (nk_rgba_u32((color << 8) | 0xFF));
     return nk_button_color(&mtrNkGui.ctx, nkColor);
@@ -598,12 +612,14 @@ MTR_EXPORT bool MTR_CALL mtrGuiButtonColor_c(uint32_t color)
 /*fa mtrGuiButtonColor_ca yes */
 MTR_EXPORT bool MTR_CALL mtrGuiButtonColor_ca(uint32_t color)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED(false);
     return nk_button_color(&mtrNkGui.ctx, nk_rgba_u32(color));
 }
 
 /*fa mtrGuiButtonColor_rgb yes */
 MTR_EXPORT bool MTR_CALL mtrGuiButtonColor_rgb(uint8_t r, uint8_t g, uint8_t b)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED(false);
     return nk_button_color(&mtrNkGui.ctx, nk_rgb(r, g, b));
 }
 
@@ -611,12 +627,14 @@ MTR_EXPORT bool MTR_CALL mtrGuiButtonColor_rgb(uint8_t r, uint8_t g, uint8_t b)
 MTR_EXPORT bool MTR_CALL mtrGuiButtonColor_rgba(uint8_t r, uint8_t g, uint8_t b,
  uint8_t a)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED(false);
     return nk_button_color(&mtrNkGui.ctx, nk_rgba(r, g, b, a));
 }
 
 /*fa mtrGuiButtonSymbol yes */
 MTR_EXPORT bool MTR_CALL mtrGuiButtonSymbol(int symbol)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED(false);
     return nk_button_symbol(&mtrNkGui.ctx, symbol);
 }
 
@@ -624,6 +642,7 @@ MTR_EXPORT bool MTR_CALL mtrGuiButtonSymbol(int symbol)
 MTR_EXPORT bool MTR_CALL mtrGuiButtonSymbolLabel(int symbol, const char *string,
  int alignment)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED(false);
     return nk_button_symbol_label(&mtrNkGui.ctx, symbol, string, alignment);
 }
 
@@ -631,6 +650,7 @@ MTR_EXPORT bool MTR_CALL mtrGuiButtonSymbolLabel(int symbol, const char *string,
 MTR_EXPORT bool MTR_CALL mtrGuiButtonSymbolText(int symbol, const char *string,
  int len, int alignment)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED(false);
     return nk_button_symbol_text(&mtrNkGui.ctx, symbol, string, len, alignment);
 }
 
@@ -638,6 +658,7 @@ MTR_EXPORT bool MTR_CALL mtrGuiButtonSymbolText(int symbol, const char *string,
 MTR_EXPORT bool MTR_CALL mtrGuiButtonImage(uint32_t imagenum)
 {
     mtrNkImage *nkImage;
+    MTR_GUI_CHECK_IF_NOT_INITED(false);
 
     nkImage = (mtrNkImage *)(
      &((mtrNkImage *)mtrGuiImageKeeper->data)[imagenum]);
@@ -650,6 +671,7 @@ MTR_EXPORT bool MTR_CALL mtrGuiButtonImageLabel(uint32_t imagenum,
  const char *string, int alignment)
 {
     mtrNkImage *nkImage;
+    MTR_GUI_CHECK_IF_NOT_INITED(false);
 
     nkImage = (mtrNkImage *)(
      &((mtrNkImage *)mtrGuiImageKeeper->data)[imagenum]);
@@ -662,6 +684,7 @@ MTR_EXPORT bool MTR_CALL mtrGuiButtonImageText(uint32_t imagenum,
  const char *string, int len, int alignment)
 {
     mtrNkImage *nkImage;
+    MTR_GUI_CHECK_IF_NOT_INITED(false);
 
     nkImage = (mtrNkImage *)(
      &((mtrNkImage *)mtrGuiImageKeeper->data)[imagenum]);
@@ -673,12 +696,14 @@ MTR_EXPORT bool MTR_CALL mtrGuiButtonImageText(uint32_t imagenum,
 /*fa mtrGuiCheckLabel yes */
 MTR_EXPORT bool MTR_CALL mtrGuiCheckLabel(const char *label, bool active)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED(false);
     return nk_check_label(&mtrNkGui.ctx, label, active);
 }
 
 /*fa mtrGuiCheckText yes */
 MTR_EXPORT bool MTR_CALL mtrGuiCheckText(const char *text, int len, bool active)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED(false);
     return nk_check_text(&mtrNkGui.ctx, text, len, active);
 }
 
@@ -686,6 +711,7 @@ MTR_EXPORT bool MTR_CALL mtrGuiCheckText(const char *text, int len, bool active)
 MTR_EXPORT bool MTR_CALL mtrGuiSelectableLabel(const char *text, int alignment,
  bool selected)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED(false);
     return nk_select_label(&mtrNkGui.ctx, text, alignment, selected);
 }
 
@@ -693,6 +719,7 @@ MTR_EXPORT bool MTR_CALL mtrGuiSelectableLabel(const char *text, int alignment,
 MTR_EXPORT bool MTR_CALL mtrGuiSelectableText(const char *text, int len,
  int alignment, bool selected)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED(false);
     return nk_select_text(&mtrNkGui.ctx, text, len, alignment, selected);
 }
 
@@ -701,6 +728,7 @@ MTR_EXPORT bool MTR_CALL mtrGuiSelectableImageLabel(uint32_t imagenum,
  const char *text, int alignment, bool selected)
 {
     mtrNkImage *nkImage;
+    MTR_GUI_CHECK_IF_NOT_INITED(false);
 
     nkImage = (mtrNkImage *)(
      &((mtrNkImage *)mtrGuiImageKeeper->data)[imagenum]);
@@ -718,6 +746,7 @@ MTR_EXPORT bool MTR_CALL mtrGuiSelectableImageText(uint32_t imagenum,
  const char *text, int len, int alignment, bool selected)
 {
     mtrNkImage *nkImage;
+    MTR_GUI_CHECK_IF_NOT_INITED(false);
     nkImage = (mtrNkImage *)(
      &((mtrNkImage *)mtrGuiImageKeeper->data)[imagenum]);
 
@@ -728,6 +757,7 @@ MTR_EXPORT bool MTR_CALL mtrGuiSelectableImageText(uint32_t imagenum,
 /*fa mtrGuiEditText yes */
 MTR_EXPORT void MTR_CALL mtrGuiEditText(uint32_t sbnum)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED();
     nk_edit_string_zero_terminated(&mtrNkGui.ctx, NK_EDIT_FIELD,
      mtrStringBufferGetString(sbnum), mtrStringBufferGetMaxLen(sbnum),
      nk_filter_default);
@@ -736,6 +766,7 @@ MTR_EXPORT void MTR_CALL mtrGuiEditText(uint32_t sbnum)
 /*fa mtrGuiEditInteger yes */
 MTR_EXPORT void MTR_CALL mtrGuiEditInteger(uint32_t sbnum)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED();
     nk_edit_string_zero_terminated(&mtrNkGui.ctx, NK_EDIT_FIELD,
      mtrStringBufferGetString(sbnum), mtrStringBufferGetMaxLen(sbnum),
      nk_filter_decimal);
@@ -744,6 +775,7 @@ MTR_EXPORT void MTR_CALL mtrGuiEditInteger(uint32_t sbnum)
 /*fa mtrGuiEditFloat yes */
 MTR_EXPORT void MTR_CALL mtrGuiEditFloat(uint32_t sbnum)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED();
     nk_edit_string_zero_terminated(&mtrNkGui.ctx, NK_EDIT_FIELD,
      mtrStringBufferGetString(sbnum), mtrStringBufferGetMaxLen(sbnum),
      nk_filter_float);
@@ -752,6 +784,7 @@ MTR_EXPORT void MTR_CALL mtrGuiEditFloat(uint32_t sbnum)
 /*fa mtrGuiLabel yes */
 MTR_EXPORT void MTR_CALL mtrGuiLabel(const char *string, int alignment)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED();
     nk_label(&mtrNkGui.ctx, string, alignment);
 }
 
@@ -760,6 +793,7 @@ MTR_EXPORT void MTR_CALL mtrGuiLabelColored_c(const char *string, int alignment,
  uint32_t color)
 {
     struct nk_color nkColor;
+    MTR_GUI_CHECK_IF_NOT_INITED();
 
     nkColor = (nk_rgba_u32((color << 8) | 0xFF));
     nk_label_colored(&mtrNkGui.ctx, string, alignment, nkColor);
@@ -769,6 +803,7 @@ MTR_EXPORT void MTR_CALL mtrGuiLabelColored_c(const char *string, int alignment,
 MTR_EXPORT void MTR_CALL mtrGuiLabelColored_ca(const char *string,
  int alignment, uint32_t color)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED();
     nk_label_colored(&mtrNkGui.ctx, string, alignment, nk_rgba_u32(color));
 }
 
@@ -776,6 +811,7 @@ MTR_EXPORT void MTR_CALL mtrGuiLabelColored_ca(const char *string,
 MTR_EXPORT void MTR_CALL mtrGuiLabelColored_rgb(const char *string,
  int alignment, uint8_t r, uint8_t g, uint8_t b)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED();
     nk_label_colored(&mtrNkGui.ctx, string, alignment, nk_rgb(r, g, b));
 }
 
@@ -783,12 +819,14 @@ MTR_EXPORT void MTR_CALL mtrGuiLabelColored_rgb(const char *string,
 MTR_EXPORT void MTR_CALL mtrGuiLabelColored_rgba(const char *string,
  int alignment, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED();
     nk_label_colored(&mtrNkGui.ctx, string, alignment, nk_rgba(r, g, b, a));
 }
 
 /*fa mtrGuiLabelWrap yes */
 MTR_EXPORT void MTR_CALL mtrGuiLabelWrap(const char *string)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED();
     nk_label_wrap(&mtrNkGui.ctx, string);
 }
 
@@ -797,6 +835,7 @@ MTR_EXPORT void MTR_CALL mtrGuiLabelColoredWrap_c(const char *string,
  uint32_t color)
 {
     struct nk_color nkColor;
+    MTR_GUI_CHECK_IF_NOT_INITED();
 
     nkColor = (nk_rgba_u32((color << 8) | 0xFF));
     nk_label_colored_wrap(&mtrNkGui.ctx, string, nkColor);
@@ -806,6 +845,7 @@ MTR_EXPORT void MTR_CALL mtrGuiLabelColoredWrap_c(const char *string,
 MTR_EXPORT void MTR_CALL mtrGuiLabelColoredWrap_ca(const char *string,
  uint32_t color)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED();
     nk_label_colored_wrap(&mtrNkGui.ctx, string, nk_rgba_u32(color));
 }
 
@@ -813,6 +853,7 @@ MTR_EXPORT void MTR_CALL mtrGuiLabelColoredWrap_ca(const char *string,
 MTR_EXPORT void MTR_CALL mtrGuiLabelColoredWrap_rgb(const char *string,
  uint8_t r, uint8_t g, uint8_t b)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED();
     nk_label_colored_wrap(&mtrNkGui.ctx, string, nk_rgb(r, g, b));
 }
 
@@ -820,24 +861,28 @@ MTR_EXPORT void MTR_CALL mtrGuiLabelColoredWrap_rgb(const char *string,
 MTR_EXPORT void MTR_CALL mtrGuiLabelColoredWrap_rgba(const char *string,
  uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED();
     nk_label_colored_wrap(&mtrNkGui.ctx, string, nk_rgba(r, g, b, a));
 }
 
 /*fa mtrGuiTreeTabBegin yes */
 MTR_EXPORT bool MTR_CALL mtrGuiTreeTabBegin(const char *title, bool maximized)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED(false);
     return nk_tree_push(&mtrNkGui.ctx, NK_TREE_TAB, title, maximized);
 }
 
 /*fa mtrGuiTreeTabEnd yes */
 MTR_EXPORT void MTR_CALL mtrGuiTreeTabEnd(void)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED();
     nk_tree_pop(&mtrNkGui.ctx);
 }
 
 /*fa mtrGuiLayoutRowDynamic yes */
 MTR_EXPORT void MTR_CALL mtrGuiLayoutRowDynamic(float height, int cols)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED();
     nk_layout_row_dynamic(&mtrNkGui.ctx, height, cols);
 }
 
@@ -845,23 +890,27 @@ MTR_EXPORT void MTR_CALL mtrGuiLayoutRowDynamic(float height, int cols)
 MTR_EXPORT void MTR_CALL mtrGuiLayoutRowStatic(float height, int cols,
  int itemWidth)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED();
     nk_layout_row_static(&mtrNkGui.ctx, height, itemWidth, cols);
 }
 
 /*fa mtrGuiGroupBegin yes */
 MTR_EXPORT bool MTR_CALL mtrGuiGroupBegin(const char *title, int flags)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED(false);
     return nk_group_begin(&mtrNkGui.ctx, title, flags);
 }
 
 /*fa mtrGuiGroupEnd yes */
 MTR_EXPORT void MTR_CALL mtrGuiGroupEnd(void)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED();
     return nk_group_end(&mtrNkGui.ctx);
 }
 
 /*fa mtrGuiSpacing yes */
 MTR_EXPORT void MTR_CALL mtrGuiSpacing(int cols)
 {
+    MTR_GUI_CHECK_IF_NOT_INITED();
     nk_spacing(&mtrNkGui.ctx, cols);
 }
