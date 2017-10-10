@@ -4,12 +4,12 @@
 #include "marathoner/script_func.h"
 
 MTR_SCRIPT_FUNC_I_S1(mtrSF_TextureFunctionSupported,
- mtrTextureFunctionSupported)
-MTR_SCRIPT_FUNC_B_U32t2(mtrSF_TextureInit, mtrTextureInit)
-MTR_SCRIPT_FUNC_V_U32t1(mtrSF_TextureBeginTarget, mtrTextureBeginTarget)
-MTR_SCRIPT_FUNC_V_V(mtrSF_TextureEndTarget, mtrTextureEndTarget)
-MTR_SCRIPT_FUNC_I_U32t1(mtrSF_TextureGetWidth, mtrTextureGetWidth)
-MTR_SCRIPT_FUNC_I_U32t1(mtrSF_TextureGetHeight, mtrTextureGetHeight)
+ mtrTextureFunctionSupported);
+MTR_SCRIPT_FUNC_B_U32t2(mtrSF_TextureInit, mtrTextureInit);
+MTR_SCRIPT_FUNC_V_U32t1(mtrSF_TextureBeginTarget, mtrTextureBeginTarget);
+MTR_SCRIPT_FUNC_V_V(mtrSF_TextureEndTarget, mtrTextureEndTarget);
+MTR_SCRIPT_FUNC_I_U32t1(mtrSF_TextureGetWidth, mtrTextureGetWidth);
+MTR_SCRIPT_FUNC_I_U32t1(mtrSF_TextureGetHeight, mtrTextureGetHeight);
 
 #ifdef lua_h
 MTR_SCRIPT_FUNC(mtrSF_TextureGetSizes)
@@ -28,41 +28,43 @@ MTR_SCRIPT_FUNC(mtrSF_TextureGetSizes)
 }
 #endif
 
-MTR_SCRIPT_FUNC_U32t_S1I2(mtrSF_TextureCreate, mtrTextureCreate)
-MTR_SCRIPT_FUNC_U32t_S1(mtrSF_TextureLoad, mtrTextureLoad)
-MTR_SCRIPT_FUNC_U32t_U32t1(mtrSF_TextureCopy, mtrTextureCopy)
-MTR_SCRIPT_FUNC_V_U32t1S1(mtrSF_TextureSave, mtrTextureSave)
-MTR_SCRIPT_FUNC_V_U32t1(mtrSF_TextureFree, mtrTextureFree)
-MTR_SCRIPT_FUNC_V_U32t2(mtrSF_TextureSetModulation_c, mtrTextureSetModulation_c)
+MTR_SCRIPT_FUNC_U32t_S1I2(mtrSF_TextureCreate, mtrTextureCreate);
+MTR_SCRIPT_FUNC_U32t_S1(mtrSF_TextureLoad, mtrTextureLoad);
+MTR_SCRIPT_FUNC_U32t_U32t1(mtrSF_TextureCopy, mtrTextureCopy);
+MTR_SCRIPT_FUNC_V_U32t1S1(mtrSF_TextureSave, mtrTextureSave);
+MTR_SCRIPT_FUNC_V_U32t1(mtrSF_TextureFree, mtrTextureFree);
+MTR_SCRIPT_FUNC_V_U32t2(mtrSF_TextureSetModulation_c,
+ mtrTextureSetModulation_c);
 MTR_SCRIPT_FUNC_V_U32t2(mtrSF_TextureSetModulation_ca,
- mtrTextureSetModulation_ca)
+ mtrTextureSetModulation_ca);
 MTR_SCRIPT_FUNC_V_U32t1U8t3(mtrSF_TextureSetModulation_rgb,
- mtrTextureSetModulation_rgb)
+ mtrTextureSetModulation_rgb);
 MTR_SCRIPT_FUNC_V_U32t1U8t4(mtrSF_TextureSetModulation_rgba,
- mtrTextureSetModulation_rgba)
+ mtrTextureSetModulation_rgba);
 MTR_SCRIPT_FUNC_V_U32t1U8t1(mtrSF_TextureSetModulationAlpha,
- mtrTextureSetModulationAlpha)
+ mtrTextureSetModulationAlpha);
 MTR_SCRIPT_FUNC_V_U32t1F1(mtrSF_TextureSetModulationAlpha_f,
- mtrTextureSetModulationAlpha_f)
+ mtrTextureSetModulationAlpha_f);
 MTR_SCRIPT_FUNC_V_U32t1I4(mtrSF_TextureSetBlendFunction,
- mtrTextureSetBlendFunction)
+ mtrTextureSetBlendFunction);
 MTR_SCRIPT_FUNC_V_U32t1B1(mtrSF_TextureSetAlphaBlending,
- mtrTextureSetAlphaBlending)
-MTR_SCRIPT_FUNC_V_U32t1F2(mtrSF_TextureBlit_f, mtrTextureBlit_f)
-MTR_SCRIPT_FUNC_V_U32t1F4(mtrSF_TextureBlitScaled_f, mtrTextureBlitScaled_f)
-MTR_SCRIPT_FUNC_V_U32t1F5(mtrSF_TextureBlitAngled_f, mtrTextureBlitAngled_f)
-MTR_SCRIPT_FUNC_V_U32t1F2I1(mtrSF_TextureBlitFlipped_f, mtrTextureBlitFlipped_f)
+ mtrTextureSetAlphaBlending);
+MTR_SCRIPT_FUNC_V_U32t1F2(mtrSF_TextureBlit_f, mtrTextureBlit_f);
+MTR_SCRIPT_FUNC_V_U32t1F4(mtrSF_TextureBlitScaled_f, mtrTextureBlitScaled_f);
+MTR_SCRIPT_FUNC_V_U32t1F5(mtrSF_TextureBlitAngled_f, mtrTextureBlitAngled_f);
+MTR_SCRIPT_FUNC_V_U32t1F2I1(mtrSF_TextureBlitFlipped_f,
+ mtrTextureBlitFlipped_f);
 MTR_SCRIPT_FUNC_V_U32t1F7I1(mtrSF_TextureBlitGeneral_f,
- mtrTextureBlitGeneral_f)
-MTR_SCRIPT_FUNC_V_U32t1F6(mtrSF_TextureBlitRegion_f, mtrTextureBlitRegion_f)
+ mtrTextureBlitGeneral_f);
+MTR_SCRIPT_FUNC_V_U32t1F6(mtrSF_TextureBlitRegion_f, mtrTextureBlitRegion_f);
 MTR_SCRIPT_FUNC_V_U32t1F8(mtrSF_TextureBlitRegionScaled_f,
- mtrTextureBlitRegionScaled_f)
+ mtrTextureBlitRegionScaled_f);
 MTR_SCRIPT_FUNC_V_U32t1F9(mtrSF_TextureBlitRegionAngled_f,
- mtrTextureBlitRegionAngled_f)
+ mtrTextureBlitRegionAngled_f);
 MTR_SCRIPT_FUNC_V_U32t1F6I1(mtrSF_TextureBlitRegionFlipped_f,
- mtrTextureBlitRegionFlipped_f)
+ mtrTextureBlitRegionFlipped_f);
 MTR_SCRIPT_FUNC_V_U32t1F11I1(mtrSF_TextureBlitRegionGeneral_f,
- mtrTextureBlitRegionGeneral_f)
+ mtrTextureBlitRegionGeneral_f);
 MTR_SCRIPT_FUNC_B_U32t1P1(mtrSF_TextureReceivePixels, mtrTextureReceivePixels);
 
 void mtrScriptsRegisterAll(void)
