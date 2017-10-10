@@ -1597,6 +1597,19 @@
         return 1;                                  \
     }
 
+#define MTR_SCRIPT_FUNC_B_U32t1P1(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)                     \
+    {                                          \
+        uint32_t u32_1;                        \
+        void *p1;                              \
+        bool result;                           \
+        MTR_SF_GET_UINT32(u32_1, 1);           \
+        MTR_SF_GET_POINTER(p1, 2);             \
+        result = func(u32_1, p1);              \
+        MTR_SF_PUSH_BOOL(result);              \
+        return 1;                              \
+    }
+
 #define MTR_SCRIPT_FUNC_B_S1(sfunc, func) \
     MTR_SCRIPT_FUNC(sfunc)                \
     {                                     \
@@ -2571,6 +2584,28 @@
         else                                \
             MTR_SF_PUSH_NIL();              \
         return 1;                           \
+    }
+
+#define MTR_SCRIPT_FUNC_P_U32t1U8t3S1(sfunc, func)  \
+    MTR_SCRIPT_FUNC(sfunc)                          \
+    {                                               \
+        uint32_t u32_1;                             \
+        uint8_t u8_1;                               \
+        uint8_t u8_2;                               \
+        uint8_t u8_3;                               \
+        const char *s1;                             \
+        void *result;                               \
+        MTR_SF_GET_UINT32(u32_1, 1);                \
+        MTR_SF_GET_UINT8(u8_1, 2);                  \
+        MTR_SF_GET_UINT8(u8_2, 3);                  \
+        MTR_SF_GET_UINT8(u8_3, 4);                  \
+        MTR_SF_GET_STRING(s1, 5);                   \
+        result = func(u32_1, u8_1, u8_2, u8_3, s1); \
+        if (result != NULL)                         \
+            MTR_SF_PUSH_POINTER(result);            \
+        else                                        \
+            MTR_SF_PUSH_NIL();                      \
+        return 1;                                   \
     }
 
 #endif
