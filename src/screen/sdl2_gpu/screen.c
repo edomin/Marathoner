@@ -60,7 +60,7 @@ MTR_EXPORT void MTR_CALL mtrScreenQuit(void)
 
     GPU_Quit();
     free(mtrScreen);
-    mtrLogWrite("Window destroyed", 0, MTR_LMT_INFO);
+    mtrLogWrite("Screen destroyed", 0, MTR_LMT_INFO);
 }
 
 /*fa mtrScreenFlip yes */

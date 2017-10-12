@@ -73,7 +73,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonCreateArray(void)
     json->json = cJSON_CreateArray();
     if (json->json == NULL)
     {
-        mtrLogWrite("Unable to create JSON object", 0, MTR_LMT_ERROR);
+        mtrLogWrite("Unable to create JSON array", 0, MTR_LMT_ERROR);
         mtrIndexkeeperFreeIndex(mtrJsonKeeper, freeIndex);
         return 0U;
     }

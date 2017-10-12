@@ -117,7 +117,7 @@ int mtrEnableController(int index)
             {
                 mtrLogWrite_i("Unable to allocate memory for previous axes' "
                  "state of controller", 2, MTR_LMT_WARNING, index);
-                mtrLogWrite_i("Axes of this controller will not processing",
+                mtrLogWrite_i("Axes of this controller will not be processed",
                  2, MTR_LMT_NOTE, index);
                 ok = false;
                 free(gameController->currentAxis);
@@ -136,7 +136,7 @@ int mtrEnableController(int index)
         {
             mtrLogWrite_i("Unable to allocate memory for trackballs' state "
              "of controller", 2, MTR_LMT_WARNING, index);
-            mtrLogWrite_i("Trackballs of this controller will not processing",
+            mtrLogWrite_i("Trackballs of this controller will not be processed",
              2, MTR_LMT_NOTE, index);
             gameController->trackballsCount = 0;
         }
@@ -150,7 +150,7 @@ int mtrEnableController(int index)
         {
             mtrLogWrite_i("Unable to allocate memory for current POV hats' "
              "state of controller", 2, MTR_LMT_WARNING, index);
-            mtrLogWrite_i("POV hats of this controller will not processing",
+            mtrLogWrite_i("POV hats of this controller will not be processed",
              2, MTR_LMT_NOTE, index);
             gameController->povHatsCount = 0;
         }
