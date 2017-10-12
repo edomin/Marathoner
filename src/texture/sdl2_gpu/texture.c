@@ -254,6 +254,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCopy(uint32_t texNum)
     mtrTexture_t *texture;
     mtrTexture_t *newTexture;
     SDL_Surface  *surface;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED(0U);
 
     if (texNum != 0)
     {
