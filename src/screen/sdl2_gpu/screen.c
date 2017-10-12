@@ -24,7 +24,6 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
 MTR_EXPORT bool MTR_CALL mtrScreenInit(int width, int height, bool fullscreen,
  const char *title)
 {
-    TODO(Window title in SDL2_GPU screen module)
 //    const char *actualTitle;
 //    const char  defaultTitle[] = "Marathoner";
 
