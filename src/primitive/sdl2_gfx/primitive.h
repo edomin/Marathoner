@@ -37,4 +37,21 @@ static bool  mtrPrimitiveInited = false;
 typedef mtrScreen_t *(MTR_CALL * mtrGetScreenFunc)(void);
 mtrGetScreenFunc mtrGetScreen;
 
+static inline void mtrColor24ToRgb(uint32_t color, uint8_t *r, uint8_t *g,
+ uint8_t *b)
+{
+    *r = color >> 16U;
+    *g = (color & 0x00FF00U) >> 8U;
+    *b = color & 0x0000FFU;
+}
+
+static inline void mtrColor32ToRgba(uint32_t color, uint8_t *r, uint8_t *g,
+ uint8_t *b, uint8_t *a)
+{
+    *r = color >> 24U;
+    *g = (color & 0x00FF0000U) >> 16U;
+    *b = (color & 0x0000FF00U) >> 8U;
+    *a = color & 0x000000FFU;
+}
+
 #endif

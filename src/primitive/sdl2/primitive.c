@@ -89,10 +89,9 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveFill_c(uint32_t color)
     uint8_t r;
     uint8_t g;
     uint8_t b;
-    r = (uint8_t)(color >> 16);
-    g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
-    b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
     MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
+    mtrColor24ToRgb(color, &r, &g, &b);
     SDL_SetRenderDrawColor(mtrScreen->renderer, r, g, b, 0xFF);
     SDL_RenderClear(mtrScreen->renderer);
 }
@@ -104,13 +103,9 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveFill_ca(uint32_t color)
     uint8_t g;
     uint8_t b;
     uint8_t a;
-    r = (uint8_t)(color >> 24);
-    g = (uint8_t)((color >> 16) - ((uint32_t)r << 8));
-    b = (uint8_t)((color >> 8) - ((uint32_t)r << 16) - ((uint32_t)g << 8));
-    a = (uint8_t)(color  - ((uint32_t)r << 24) - ((uint32_t)g << 16) -
-     ((uint32_t)b << 8));
     MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
+    mtrColor32ToRgba(color, &r, &g, &b, &a);
     SDL_SetRenderDrawColor(mtrScreen->renderer, r, g, b, a);
     SDL_RenderClear(mtrScreen->renderer);
 }
@@ -141,11 +136,9 @@ MTR_EXPORT void MTR_CALL mtrPrimitivePixel_c_f(float x, float y, uint32_t color)
     uint8_t r;
     uint8_t g;
     uint8_t b;
-    r = (uint8_t)(color >> 16);
-    g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
-    b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
     MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
+    mtrColor24ToRgb(color, &r, &g, &b);
     SDL_SetRenderDrawColor(mtrScreen->renderer, r, g, b, 0xFF);
     SDL_RenderDrawPoint(mtrScreen->renderer, x, y);
 }
@@ -158,13 +151,9 @@ MTR_EXPORT void MTR_CALL mtrPrimitivePixel_ca_f(float x, float y,
     uint8_t g;
     uint8_t b;
     uint8_t a;
-    r = (uint8_t)(color >> 24);
-    g = (uint8_t)((color >> 16) - ((uint32_t)r << 8));
-    b = (uint8_t)((color >> 8) - ((uint32_t)r << 16) - ((uint32_t)g << 8));
-    a = (uint8_t)(color  - ((uint32_t)r << 24) - ((uint32_t)g << 16) -
-     ((uint32_t)b << 8));
     MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
+    mtrColor32ToRgba(color, &r, &g, &b, &a);
     SDL_SetRenderDrawColor(mtrScreen->renderer, r, g, b, a);
     SDL_RenderDrawPoint(mtrScreen->renderer, x, y);
 }
@@ -196,11 +185,9 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveLine_c_f(float x1, float y1, float x2,
     uint8_t r;
     uint8_t g;
     uint8_t b;
-    r = (uint8_t)(color >> 16);
-    g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
-    b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
     MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
+    mtrColor24ToRgb(color, &r, &g, &b);
     SDL_SetRenderDrawColor(mtrScreen->renderer, r, g, b, 0xFF);
     SDL_RenderDrawLine(mtrScreen->renderer, x1, y1, x2, y2);
 }
@@ -213,13 +200,9 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveLine_ca_f(float x1, float y1, float x2,
     uint8_t g;
     uint8_t b;
     uint8_t a;
-    r = (uint8_t)(color >> 24);
-    g = (uint8_t)((color >> 16) - ((uint32_t)r << 8));
-    b = (uint8_t)((color >> 8) - ((uint32_t)r << 16) - ((uint32_t)g << 8));
-    a = (uint8_t)(color  - ((uint32_t)r << 24) - ((uint32_t)g << 16) -
-     ((uint32_t)b << 8));
     MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
+    mtrColor32ToRgba(color, &r, &g, &b, &a);
     SDL_SetRenderDrawColor(mtrScreen->renderer, r, g, b, a);
     SDL_RenderDrawLine(mtrScreen->renderer, x1, y1, x2, y2);
 }
@@ -698,11 +681,9 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveTriangle_c_f(float x1, float y1, float x2,
     uint8_t r;
     uint8_t g;
     uint8_t b;
-    r = (uint8_t)(color >> 16);
-    g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
-    b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
     MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
+    mtrColor24ToRgb(color, &r, &g, &b);
     SDL_SetRenderDrawColor(mtrScreen->renderer, r, g, b, 0xFF);
     SDL_RenderDrawLine(mtrScreen->renderer, x1, y1, x2, y2);
     SDL_RenderDrawLine(mtrScreen->renderer, x2, y2, x3, y3);
@@ -717,13 +698,9 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveTriangle_ca_f(float x1, float y1, float x2,
     uint8_t g;
     uint8_t b;
     uint8_t a;
-    r = (uint8_t)(color >> 24);
-    g = (uint8_t)((color >> 16) - ((uint32_t)r << 8));
-    b = (uint8_t)((color >> 8) - ((uint32_t)r << 16) - ((uint32_t)g << 8));
-    a = (uint8_t)(color  - ((uint32_t)r << 24) - ((uint32_t)g << 16) -
-     ((uint32_t)b << 8));
     MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
+    mtrColor32ToRgba(color, &r, &g, &b, &a);
     SDL_SetRenderDrawColor(mtrScreen->renderer, r, g, b, a);
     SDL_RenderDrawLine(mtrScreen->renderer, x1, y1, x2, y2);
     SDL_RenderDrawLine(mtrScreen->renderer, x2, y2, x3, y3);
@@ -797,11 +774,9 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRectangle_c_f(float x1, float y1, float x2,
     uint8_t r;
     uint8_t g;
     uint8_t b;
-    r = (uint8_t)(color >> 16);
-    g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
-    b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
     MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
+    mtrColor24ToRgb(color, &r, &g, &b);
     SDL_SetRenderDrawColor(mtrScreen->renderer, r, g, b, 0xFF);
     rect.x = x1;
     rect.y = y1;
@@ -819,13 +794,9 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRectangle_ca_f(float x1, float y1,
     uint8_t g;
     uint8_t b;
     uint8_t a;
-    r = (uint8_t)(color >> 24);
-    g = (uint8_t)((color >> 16) - ((uint32_t)r << 8));
-    b = (uint8_t)((color >> 8) - ((uint32_t)r << 16) - ((uint32_t)g << 8));
-    a = (uint8_t)(color  - ((uint32_t)r << 24) - ((uint32_t)g << 16) -
-     ((uint32_t)b << 8));
     MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
+    mtrColor32ToRgba(color, &r, &g, &b, &a);
     SDL_SetRenderDrawColor(mtrScreen->renderer, r, g, b, a);
     rect.x = x1;
     rect.y = y1;
@@ -872,11 +843,9 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRectangleFilled_c_f(float x1, float y1,
     uint8_t r;
     uint8_t g;
     uint8_t b;
-    r = (uint8_t)(color >> 16);
-    g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
-    b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
     MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
+    mtrColor24ToRgb(color, &r, &g, &b);
     SDL_SetRenderDrawColor(mtrScreen->renderer, r, g, b, 0xFF);
     rect.x = x1;
     rect.y = y1;
@@ -894,13 +863,9 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRectangleFilled_ca_f(float x1, float y1,
     uint8_t g;
     uint8_t b;
     uint8_t a;
-    r = (uint8_t)(color >> 24);
-    g = (uint8_t)((color >> 16) - ((uint32_t)r << 8));
-    b = (uint8_t)((color >> 8) - ((uint32_t)r << 16) - ((uint32_t)g << 8));
-    a = (uint8_t)(color  - ((uint32_t)r << 24) - ((uint32_t)g << 16) -
-     ((uint32_t)b << 8));
     MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
+    mtrColor32ToRgba(color, &r, &g, &b, &a);
     SDL_SetRenderDrawColor(mtrScreen->renderer, r, g, b, a);
     rect.x = x1;
     rect.y = y1;
@@ -1072,9 +1037,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_c_f(float x, float y,
         return;
     }
 
-    r = (uint8_t)(color >> 16);
-    g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
-    b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
+    mtrColor24ToRgb(color, &r, &g, &b);
     SDL_SetRenderDrawColor(mtrScreen->renderer, r, g, b, 0xFF);
     SDL_RenderDrawLine(mtrScreen->renderer, mtrLinePointX_f, mtrLinePointY_f,
      x, y);
@@ -1098,11 +1061,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_ca_f(float x, float y,
         return;
     }
 
-    r = (uint8_t)(color >> 24);
-    g = (uint8_t)((color >> 16) - ((uint32_t)r << 8));
-    b = (uint8_t)((color >> 8) - ((uint32_t)r << 16) - ((uint32_t)g << 8));
-    a = (uint8_t)(color  - ((uint32_t)r << 24) - ((uint32_t)g << 16) -
-     ((uint32_t)b << 8));
+    mtrColor32ToRgba(color, &r, &g, &b, &a);
     SDL_SetRenderDrawColor(mtrScreen->renderer, r, g, b, a);
     SDL_RenderDrawLine(mtrScreen->renderer, mtrLinePointX_f, mtrLinePointY_f,
      x, y);
