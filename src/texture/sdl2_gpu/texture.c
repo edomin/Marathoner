@@ -205,9 +205,9 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCreate(const char *name, int width,
     {
         mtrNotify("Unable to create texture", 1, MTR_LMT_ERROR);
         mtrIndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
-        return 0;
+        return 0U;
     }
-    return 0;
+    return 0U;
 }
 
 /*fa mtrTextureLoad yes */
@@ -241,9 +241,9 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureLoad(const char *filename)
     {
         mtrNotify("Unable to load texture", 1, MTR_LMT_ERROR);
         mtrIndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
-        return 0;
+        return 0U;
     }
-    return 0;
+    return 0U;
 }
 
 /*fa mtrTextureCopy yes */
@@ -286,16 +286,16 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCopy(uint32_t texNum)
         {
             mtrNotify("Unable to copy texture", 1, MTR_LMT_ERROR);
             mtrIndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
-            return 0;
+            return 0U;
         }
     }
     else
     {
         mtrNotify("Unable to copy texture. Incorrect texture for copy", 1,
          MTR_LMT_ERROR);
-        return 0;
+        return 0U;
     }
-    return 0;
+    return 0U;
 }
 
 /*fa mtrTextureSave yes */
@@ -362,9 +362,9 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCreateAlias(uint32_t texNum)
     {
         mtrNotify("Unable to create texture alias", 1, MTR_LMT_ERROR);
         mtrIndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
-        return 0;
+        return 0U;
     }
-    return 0;
+    return 0U;
 }
 
 /*fa mtrTextureFree yes */

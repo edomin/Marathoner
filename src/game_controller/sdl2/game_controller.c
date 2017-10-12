@@ -438,7 +438,7 @@ MTR_EXPORT int16_t MTR_CALL mtrGameControllerGetAxis(int controllerNum,
  int axisNum)
 {
     mtrGameController_t *gameController;
-    MTR_GAME_CONTROLLER_CHECK_IF_NOT_INITED(0.0f);
+    MTR_GAME_CONTROLLER_CHECK_IF_NOT_INITED(0);
 
     gameController = IK_GET_DATA(mtrGameController_t *,
      mtrGameControllerKeeper, controllerNum);
@@ -456,7 +456,7 @@ MTR_EXPORT float MTR_CALL mtrGameControllerGetAxis_f(int controllerNum,
  int axisNum)
 {
     mtrGameController_t *gameController;
-    MTR_GAME_CONTROLLER_CHECK_IF_NOT_INITED(0);
+    MTR_GAME_CONTROLLER_CHECK_IF_NOT_INITED(0.0f);
 
     gameController = IK_GET_DATA(mtrGameController_t *,
      mtrGameControllerKeeper, controllerNum);
@@ -479,7 +479,7 @@ MTR_EXPORT int MTR_CALL mtrGameControllerGetAxisDelta(int controllerNum,
  int axisNum)
 {
     mtrGameController_t *gameController;
-    MTR_GAME_CONTROLLER_CHECK_IF_NOT_INITED(0.0f);
+    MTR_GAME_CONTROLLER_CHECK_IF_NOT_INITED(0);
 
     gameController = IK_GET_DATA(mtrGameController_t *,
      mtrGameControllerKeeper, controllerNum);
@@ -498,7 +498,7 @@ MTR_EXPORT float MTR_CALL mtrGameControllerGetAxisDelta_f(int controllerNum,
  int axisNum)
 {
     mtrGameController_t *gameController;
-    MTR_GAME_CONTROLLER_CHECK_IF_NOT_INITED(0);
+    MTR_GAME_CONTROLLER_CHECK_IF_NOT_INITED(0.0f);
 
     gameController = IK_GET_DATA(mtrGameController_t *,
      mtrGameControllerKeeper, controllerNum);

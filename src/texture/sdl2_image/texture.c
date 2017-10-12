@@ -231,9 +231,9 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCreate(const char *name, int width,
         mtrNotify("Unable to create texture", 1, MTR_LMT_ERROR);
         mtrLogWrite(SDL_GetError(), 1, MTR_LMT_ERROR);
         mtrIndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
-        return 0;
+        return 0U;
     }
-    return 0;
+    return 0U;
 }
 
 /*fa mtrTextureLoad yes */
@@ -279,9 +279,9 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureLoad(const char *filename)
         mtrNotify("Unable to create texture", 1, MTR_LMT_ERROR);
         mtrLogWrite(SDL_GetError(), 1, MTR_LMT_ERROR);
         mtrIndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
-        return 0;
+        return 0U;
     }
-    return 0;
+    return 0U;
 }
 
 /*fa mtrTextureCopy yes */
@@ -308,7 +308,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCopy(uint32_t texNum)
             {
                 mtrNotify("Unable to query texture", 1, MTR_LMT_ERROR);
                 mtrLogWrite(SDL_GetError(), 1, MTR_LMT_ERROR);
-                return 0;
+                return 0U;
             }
 
             if (SDL_SetRenderTarget(mtrScreen->renderer, texture->texture) < 0)
@@ -316,19 +316,19 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCopy(uint32_t texNum)
                 mtrNotify("Unable to set target texture for reading pixels", 1,
                  MTR_LMT_ERROR);
                 mtrLogWrite(SDL_GetError(), 1, MTR_LMT_ERROR);
-                return 0;
+                return 0U;
             }
             if (SDL_RenderReadPixels(mtrScreen->renderer, NULL, pixFormat,
              pixels, w * 4) < 0)
             {
                 mtrNotify("Unable to read pixels", 1, MTR_LMT_ERROR);
                 mtrLogWrite(SDL_GetError(), 1, MTR_LMT_ERROR);
-                return 0;
+                return 0U;
             }
             SDL_SetRenderTarget(mtrScreen->renderer, NULL);
             newIndex = mtrTextureCreate(texture->name, w, h);
             if (newIndex == 0)
-                return 0;
+                return 0U;
             newTexture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper,
              newIndex);
             if (SDL_UpdateTexture(newTexture->texture, NULL, pixels, w * 4) < 0)
@@ -337,7 +337,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCopy(uint32_t texNum)
                  MTR_LMT_ERROR);
                 mtrLogWrite(SDL_GetError(), 1, MTR_LMT_ERROR);
                 mtrTextureFree(newIndex);
-                return 0;
+                return 0U;
             }
         }
         else /* texture->surface == NULL */
@@ -355,7 +355,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCopy(uint32_t texNum)
                     mtrNotify("Unable to lock surface for reading pixels", 1,
                      MTR_LMT_ERROR);
                     mtrTextureFree(newIndex);
-                    return 0;
+                    return 0U;
                 }
 
             newTexture->surface = SDL_CreateRGBSurfaceFrom(
@@ -366,7 +366,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCopy(uint32_t texNum)
             {
                 mtrNotify("Unable to create new surface", 1, MTR_LMT_ERROR);
                 mtrTextureFree(newIndex);
-                return 0;
+                return 0U;
             }
 
             if (SDL_MUSTLOCK(texture->surface))
@@ -395,9 +395,9 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCopy(uint32_t texNum)
     {
         mtrNotify("Unable to copy texture. Incorrect texture for copy", 0,
          MTR_LMT_ERROR);
-        return 0;
+        return 0U;
     }
-    return 0;
+    return 0U;
 }
 
 /*fa mtrTextureSave buggy */

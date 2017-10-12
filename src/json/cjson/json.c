@@ -55,9 +55,9 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonCreateObject(void)
     {
         mtrLogWrite("Unable to create JSON object", 0, MTR_LMT_ERROR);
         mtrIndexkeeperFreeIndex(mtrJsonKeeper, freeIndex);
-        return 0;
+        return 0U;
     }
-    json->parent = 0;
+    json->parent = 0U;
     return freeIndex;
 }
 
@@ -75,9 +75,9 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonCreateArray(void)
     {
         mtrLogWrite("Unable to create JSON object", 0, MTR_LMT_ERROR);
         mtrIndexkeeperFreeIndex(mtrJsonKeeper, freeIndex);
-        return 0;
+        return 0U;
     }
-    json->parent = 0;
+    json->parent = 0U;
     return freeIndex;
 }
 
@@ -95,9 +95,9 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonParseString(const char *string)
     {
         mtrLogWrite("Unable to parse JSON string", 0, MTR_LMT_ERROR);
         mtrIndexkeeperFreeIndex(mtrJsonKeeper, freeIndex);
-        return 0;
+        return 0U;
     }
-    json->parent = 0;
+    json->parent = 0U;
     return freeIndex;
 }
 
@@ -115,7 +115,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonParseFile(const char *filename)
     if (file == 0)
     {
         mtrLogWrite("Unable to open JSON file", 0, MTR_LMT_ERROR);
-        return 0;
+        return 0U;
     }
 
     size = mtrFileRead(file, &buffer);
@@ -124,7 +124,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonParseFile(const char *filename)
     if (size == 0)
     {
         mtrLogWrite("Unable to read JSON file", 0, MTR_LMT_ERROR);
-        return 0;
+        return 0U;
     }
 
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrJsonKeeper);
@@ -135,9 +135,9 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonParseFile(const char *filename)
     {
         mtrLogWrite("Unable to parse JSON file", 0, MTR_LMT_ERROR);
         mtrIndexkeeperFreeIndex(mtrJsonKeeper, freeIndex);
-        return 0;
+        return 0U;
     }
-    json->parent = 0;
+    json->parent = 0U;
     return freeIndex;
 }
 
@@ -156,19 +156,19 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonAddItemToObject(uint32_t object,
     {
         mtrLogWrite("Unable to add item to JSON object. Incorrect item name", 0,
          MTR_LMT_ERROR);
-        return 0;
+        return 0U;
     }
     if (jsonObject->json == NULL)
     {
         mtrLogWrite("Unable to add item to JSON object. Invalid JSON object", 0,
          MTR_LMT_ERROR);
-        return 0;
+        return 0U;
     }
     if (jsonItem->json == NULL)
     {
         mtrLogWrite("Unable to add item to JSON object. Invalid JSON item", 0,
          MTR_LMT_ERROR);
-        return 0;
+        return 0U;
     }
     cJSON_AddItemToObject(jsonObject->json, itemName, jsonItem->json);
     jsonItem->parent = object;
@@ -192,19 +192,19 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonAddStringToObject(uint32_t object,
     {
         mtrLogWrite("Unable to add string to JSON object. Incorrect item name",
          0, MTR_LMT_ERROR);
-        return 0;
+        return 0U;
     }
     if (jsonObject->json == NULL)
     {
         mtrLogWrite("Unable to add string to JSON object. Invalid JSON object",
          0, MTR_LMT_ERROR);
-        return 0;
+        return 0U;
     }
     if (string == NULL)
     {
         mtrLogWrite("Unable to add string to JSON object. String is empty", 0,
          MTR_LMT_ERROR);
-        return 0;
+        return 0U;
     }
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrJsonKeeper);
     jsonString = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, freeIndex);
@@ -231,13 +231,13 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonAddDoubleToObject(uint32_t object,
     {
         mtrLogWrite("Unable to add double number to JSON object. Incorrect "
          "item name", 0, MTR_LMT_ERROR);
-        return 0;
+        return 0U;
     }
     if (jsonObject->json == NULL)
     {
         mtrLogWrite("Unable to add double number to JSON object. Invalid "
          "JSON object", 0, MTR_LMT_ERROR);
-        return 0;
+        return 0U;
     }
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrJsonKeeper);
     jsonNum = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, freeIndex);
@@ -264,13 +264,13 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonAddBoolToObject(uint32_t object,
     {
         mtrLogWrite("Unable to add boolean value to JSON object. Incorrect "
          "item name", 0, MTR_LMT_ERROR);
-        return 0;
+        return 0U;
     }
     if (jsonObject->json == NULL)
     {
         mtrLogWrite("Unable to add boolean value to JSON object. Invalid "
          "JSON object", 0, MTR_LMT_ERROR);
-        return 0;
+        return 0U;
     }
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrJsonKeeper);
     jsonBool = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, freeIndex);
@@ -297,13 +297,13 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonAddNullToObject(uint32_t object,
     {
         mtrLogWrite("Unable to add null value to JSON object. Incorrect "
          "item name", 0, MTR_LMT_ERROR);
-        return 0;
+        return 0U;
     }
     if (jsonObject->json == NULL)
     {
         mtrLogWrite("Unable to add null value to JSON object. Invalid "
          "JSON object", 0, MTR_LMT_ERROR);
-        return 0;
+        return 0U;
     }
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrJsonKeeper);
     jsonNull = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, freeIndex);
@@ -330,13 +330,13 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonAddItemToArray(uint32_t array,
     {
         mtrLogWrite("Unable to add item to JSON array. Invalid JSON array", 0,
          MTR_LMT_ERROR);
-        return 0;
+        return 0U;
     }
     if (jsonItem->json == NULL)
     {
         mtrLogWrite("Unable to add item to JSON array. Invalid JSON item", 0,
          MTR_LMT_ERROR);
-        return 0;
+        return 0U;
     }
     cJSON_AddItemToArray(jsonArray->json, jsonItem->json);
     jsonItem->parent = array;
@@ -360,13 +360,13 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonAddStringToArray(uint32_t array,
     {
         mtrLogWrite("Unable to add string to JSON array. Invalid JSON array",
          0, MTR_LMT_ERROR);
-        return 0;
+        return 0U;
     }
     if (string == NULL)
     {
         mtrLogWrite("Unable to add string to JSON array. String is empty", 0,
          MTR_LMT_ERROR);
-        return 0;
+        return 0U;
     }
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrJsonKeeper);
     jsonString = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, freeIndex);
@@ -393,7 +393,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonAddDoubleToArray(uint32_t array, double num)
     {
         mtrLogWrite("Unable to add double number to JSON array. Invalid "
          "JSON array", 0, MTR_LMT_ERROR);
-        return 0;
+        return 0U;
     }
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrJsonKeeper);
     jsonDouble = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, freeIndex);
@@ -420,7 +420,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonAddBoolToArray(uint32_t array, bool value)
     {
         mtrLogWrite("Unable to add boolean value to JSON array. Invalid JSON "
          "array", 0, MTR_LMT_ERROR);
-        return 0;
+        return 0U;
     }
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrJsonKeeper);
     jsonBool = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, freeIndex);
@@ -447,7 +447,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonAddNullToArray(uint32_t array)
     {
         mtrLogWrite("Unable to add null value to JSON array. Invalid JSON "
          "array", 0, MTR_LMT_ERROR);
-        return 0;
+        return 0U;
     }
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrJsonKeeper);
     jsonNull = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, freeIndex);
@@ -471,14 +471,14 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonGetObjectItem(uint32_t object,
     jsonObject = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, object);
 
     if (jsonObject->json == NULL)
-        return 0;
+        return 0U;
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrJsonKeeper);
     jsonItem = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, freeIndex);
     jsonItem->json = cJSON_GetObjectItemCaseSensitive(jsonObject->json, item);
     if (jsonItem->json == NULL)
     {
         mtrIndexkeeperFreeIndex(mtrJsonKeeper, freeIndex);
-        return 0;
+        return 0U;
     }
     jsonItem->parent = object;
 
@@ -496,14 +496,14 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonGetArrayItem(uint32_t array, int item)
     jsonArray = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, array);
 
     if (jsonArray->json == NULL)
-        return 0;
+        return 0U;
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrJsonKeeper);
     jsonItem = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, freeIndex);
     jsonItem->json = cJSON_GetArrayItem(jsonArray->json, item);
     if (jsonItem->json == NULL)
     {
         mtrIndexkeeperFreeIndex(mtrJsonKeeper, freeIndex);
-        return 0;
+        return 0U;
     }
     jsonItem->parent = array;
 

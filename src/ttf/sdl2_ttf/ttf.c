@@ -99,9 +99,9 @@ MTR_EXPORT uint32_t MTR_CALL mtrTtfLoad(const char *filename, int size)
     {
         mtrNotify("Unable to load TTF font", 1, MTR_LMT_ERROR);
         mtrIndexkeeperFreeIndex(mtrTtfKeeper, freeIndex);
-        return 0;
+        return 0U;
     }
-    return 0;
+    return 0U;
 }
 
 /*fa mtrTtfGetFontHeight yes */

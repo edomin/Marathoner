@@ -268,9 +268,9 @@ MTR_EXPORT uint32_t MTR_CALL mtrAudioSoundLoad(const char *filename)
     {
         mtrNotify("Unable to load sound", 1, MTR_LMT_ERROR);
         mtrIndexkeeperFreeIndex(mtrSoundKeeper, freeIndex);
-        return 0;
+        return 0U;
     }
-    return 0;
+    return 0U;
 }
 
 /*fa mtrAudioMusicLoad yes */
@@ -339,9 +339,9 @@ MTR_EXPORT uint32_t MTR_CALL mtrAudioMusicLoad(const char *filename)
     {
         mtrNotify("Unable to load music", 1, MTR_LMT_ERROR);
         mtrIndexkeeperFreeIndex(mtrMusicKeeper, freeIndex);
-        return 0;
+        return 0U;
     }
-    return 0;
+    return 0U;
 }
 
 /*fa mtrAudioSoundPlay yes */
