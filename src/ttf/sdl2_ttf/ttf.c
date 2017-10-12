@@ -76,8 +76,8 @@ MTR_EXPORT void MTR_CALL mtrTtfQuit(void)
 /*fa mtrTtfLoad yes */
 MTR_EXPORT uint32_t MTR_CALL mtrTtfLoad(const char *filename, int size)
 {
-    uint32_t    freeIndex;
-    mtrTtf_t   *font;
+    uint32_t  freeIndex;
+    mtrTtf_t *font;
     MTR_TTF_CHECK_IF_NOT_INITED_WITH_LOG("Unable to load TTF font", 0U);
 
     mtrLogWrite_s("Loading TTF font", 0, MTR_LMT_INFO, filename);

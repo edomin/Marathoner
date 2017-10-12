@@ -72,8 +72,8 @@ int mtrEnableController(int index)
         {
             mtrLogWrite_i("Unable to allocate memory for current buttons' "
              "state of controller", 2, MTR_LMT_WARNING, index);
-            mtrLogWrite_i("Buttons of this controller will not processing",
-             2, MTR_LMT_NOTE, index);
+            mtrLogWrite_i("Buttons of this controller will not be processed", 2,
+             MTR_LMT_NOTE, index);
             ok = false;
         }
         if (ok)
@@ -84,8 +84,9 @@ int mtrEnableController(int index)
             {
                 mtrLogWrite_i("Unable to allocate memory for previous "
                  "buttons' state of controller", 2, MTR_LMT_WARNING, index);
-                mtrLogWrite_i("Buttons of this controller will not processing",
-                 2, MTR_LMT_NOTE, index);
+                mtrLogWrite_i(
+                 "Buttons of this controller will not be processed", 2,
+                 MTR_LMT_NOTE, index);
                 ok = false;
                 free(gameController->currentButtonState);
             }
@@ -104,8 +105,8 @@ int mtrEnableController(int index)
         {
             mtrLogWrite_i("Unable to allocate memory for current axes' state "
              "of controller", 2, MTR_LMT_WARNING, index);
-            mtrLogWrite_i("Axes of this controller will not processing",
-             2, MTR_LMT_NOTE, index);
+            mtrLogWrite_i("Axes of this controller will not be processed", 2,
+             MTR_LMT_NOTE, index);
             ok = false;
         }
         if (ok)

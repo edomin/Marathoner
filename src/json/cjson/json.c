@@ -516,8 +516,8 @@ MTR_EXPORT char *MTR_CALL mtrJsonToString(uint32_t entity)
 {
     mtrJson_t *json;
     char      *text;
-    MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG("Unable to print JSON entity to file",
-     false);
+    MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG(
+     "Unable to print JSON entity to string", NULL);
 
     json = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, entity);
     if (json->json == NULL)
@@ -573,8 +573,8 @@ MTR_EXPORT bool MTR_CALL mtrJsonToFile(uint32_t entity, const char *filename)
 {
     mtrJson_t *json;
     char      *text;
-    MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG(
-     "Unable to print JSON entity to string", NULL);
+    MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG("Unable to print JSON entity to file",
+     false);
 
     json = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, entity);
     if (json->json == NULL)

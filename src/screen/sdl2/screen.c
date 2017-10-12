@@ -57,19 +57,22 @@ MTR_EXPORT bool MTR_CALL mtrScreenInit(int width, int height, bool fullscreen,
 
     if(SDL_WasInit(SDL_INIT_VIDEO | SDL_INIT_EVENTS) == 0)
         if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) == 0)
-            mtrLogWrite("SDL library with video and events subsystems initialized",
-             1, MTR_LMT_INFO);
+            mtrLogWrite(
+             "SDL library with video and events subsystems initialized", 1,
+              MTR_LMT_INFO);
         else
         {
-            mtrNotify("Unable to initialize SDL library with video and events subsystems",
-             1, MTR_LMT_ERROR);
+            mtrNotify(
+             "Unable to initialize SDL library with video and events "
+             "subsystems", 1, MTR_LMT_ERROR);
             free(mtrScreen);
             mtrNotify("Screen not initialized", 0, MTR_LMT_ERROR);
             return false;
         }
     else
-        mtrLogWrite("SDL library with video and events subsystems already initialized",
-         1, MTR_LMT_INFO);
+        mtrLogWrite(
+         "SDL library with video and events subsystems already initialized", 1,
+         MTR_LMT_INFO);
 
     mtrLogWrite("Reporting available display modes", 1, MTR_LMT_INFO);
     modesNum = SDL_GetNumDisplayModes(0);
@@ -141,11 +144,14 @@ MTR_EXPORT bool MTR_CALL mtrScreenInit(int width, int height, bool fullscreen,
         mtrLogWrite("Supported renderer flags", 2, MTR_LMT_INFO);
         if ((rendererInfo.flags | SDL_RENDERER_SOFTWARE) == rendererInfo.flags)
             mtrLogWrite("SDL_RENDERER_SOFTWARE", 3, MTR_LMT_INFO);
-        if ((rendererInfo.flags | SDL_RENDERER_ACCELERATED) == rendererInfo.flags)
+        if ((rendererInfo.flags | SDL_RENDERER_ACCELERATED) ==
+         rendererInfo.flags)
             mtrLogWrite("SDL_RENDERER_ACCELERATED", 3, MTR_LMT_INFO);
-        if ((rendererInfo.flags | SDL_RENDERER_PRESENTVSYNC) == rendererInfo.flags)
+        if ((rendererInfo.flags | SDL_RENDERER_PRESENTVSYNC) ==
+         rendererInfo.flags)
             mtrLogWrite("SDL_RENDERER_PRESENTVSYNC", 3, MTR_LMT_INFO);
-        if ((rendererInfo.flags | SDL_RENDERER_TARGETTEXTURE) == rendererInfo.flags)
+        if ((rendererInfo.flags | SDL_RENDERER_TARGETTEXTURE) ==
+         rendererInfo.flags)
             mtrLogWrite("SDL_RENDERER_TARGETTEXTURE", 3, MTR_LMT_INFO);
         mtrLogWrite_i("Maximum texture width:", 2, MTR_LMT_INFO,
          rendererInfo.max_texture_width);
@@ -165,7 +171,8 @@ MTR_EXPORT bool MTR_CALL mtrScreenInit(int width, int height, bool fullscreen,
     #else
     //mtrScreen->renderer = SDL_CreateRenderer(mtrScreen->screen, -1, 0);
     SDL_GetRenderDriverInfo(1, &rendererInfo);
-    mtrScreen->renderer = SDL_CreateRenderer(mtrScreen->screen, 1, SDL_RENDERER_SOFTWARE);
+    mtrScreen->renderer = SDL_CreateRenderer(mtrScreen->screen, 1,
+     SDL_RENDERER_SOFTWARE);
     #endif
     if (mtrScreen->renderer != NULL)
     {

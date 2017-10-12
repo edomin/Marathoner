@@ -389,10 +389,10 @@ MTR_EXPORT void MTR_CALL mtrAudioSoundSetVolume_f(uint32_t soundNum,
 /*fa mtrAudioSoundStop yes */
 MTR_EXPORT void MTR_CALL mtrAudioSoundStop(uint32_t soundNum)
 {
-    int i;
-    int channelsCount;
+    int         i;
+    int         channelsCount;
     mtrSound_t *sound;
-    Mix_Chunk *playingChunk;
+    Mix_Chunk  *playingChunk;
     MTR_AUDIO_CHECK_IF_NOT_INITED();
 
     sound = (mtrSound_t *)(&((mtrSound_t *)mtrSoundKeeper->data)[soundNum]);
@@ -410,10 +410,10 @@ MTR_EXPORT void MTR_CALL mtrAudioSoundStop(uint32_t soundNum)
 /*fa mtrAudioSoundFadeOutStop yes */
 MTR_EXPORT void MTR_CALL mtrAudioSoundFadeOutStop(uint32_t soundNum, int ms)
 {
-    int i;
-    int channelsCount;
+    int         i;
+    int         channelsCount;
     mtrSound_t *sound;
-    Mix_Chunk *playingChunk;
+    Mix_Chunk  *playingChunk;
     MTR_AUDIO_CHECK_IF_NOT_INITED();
 
     sound = (mtrSound_t *)(&((mtrSound_t *)mtrSoundKeeper->data)[soundNum]);

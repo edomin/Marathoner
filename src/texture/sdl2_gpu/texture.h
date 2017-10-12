@@ -28,9 +28,8 @@ typedef struct mtrTexture_t {
     char *name;
 } mtrTexture_t;
 
-char mtrDefaultTextureName[] = "Unnamed_Texture";
-
-mtrScreen_t *mtrScreen; /* this will imported from screen plugin */
+char              mtrDefaultTextureName[] = "Unnamed_Texture";
+mtrScreen_t      *mtrScreen; /* this will imported from screen plugin */
 mtrIndexkeeper_t *mtrTextureKeeper;
 static bool       mtrTextureInited = false;
 #define MTR_TEXTURE_CHECK_IF_NOT_INITED(returnValue) \

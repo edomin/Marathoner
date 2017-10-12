@@ -40,9 +40,9 @@ typedef struct mtrScreen_t {
 } mtrScreen_t;
 
 mtrScreen_t *mtrScreen; /* this will imported from screen plugin */
-float mtrLinePointX_f;
-float mtrLinePointY_f;
-bool  mtrLineDrawing;
+float        mtrLinePointX_f;
+float        mtrLinePointY_f;
+bool         mtrLineDrawing;
 static bool  mtrPrimitiveInited = false;
 #define MTR_PRIMITIVE_CHECK_IF_NOT_INITED(returnValue) \
     if (!mtrPrimitiveInited)                           \

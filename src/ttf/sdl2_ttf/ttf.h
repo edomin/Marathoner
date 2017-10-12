@@ -12,10 +12,8 @@ typedef struct mtrTtf_t {
     char     *name;
 } mtrTtf_t;
 
-char mtrDefaultTTFName[] = "Unnamed_TTF";
-
+char              mtrDefaultTTFName[] = "Unnamed_TTF";
 mtrIndexkeeper_t *mtrTtfKeeper;
-
 SDL_Surface      *tempSurface;
 mtrPixels_t      *tempPixels;
 static bool       mtrTtfInited = false;

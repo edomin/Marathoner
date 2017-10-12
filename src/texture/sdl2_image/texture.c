@@ -82,8 +82,9 @@ MTR_EXPORT bool MTR_CALL mtrTextureInit(uint32_t dmSize, uint32_t reservedCount)
      "mtrGetScreen");
     if (mtrGetScreen == NULL)
     {
-        mtrNotify("Unable to load 'mtrGetScreen' function from 'Screen_SDL2' module",
-         1, MTR_LMT_FATAL);
+        mtrNotify(
+         "Unable to load 'mtrGetScreen' function from 'Screen_SDL2' module", 1,
+         MTR_LMT_FATAL);
         return false;
     }
     mtrScreen = mtrGetScreen();
@@ -140,7 +141,7 @@ MTR_EXPORT void MTR_CALL mtrTextureEndTarget()
 MTR_EXPORT int MTR_CALL mtrTextureGetWidth(uint32_t texNum)
 {
     mtrTexture_t *texture;
-    int w;
+    int           w;
     MTR_TEXTURE_CHECK_IF_NOT_INITED(0);
 
     if (texNum != 0)
@@ -157,7 +158,7 @@ MTR_EXPORT int MTR_CALL mtrTextureGetWidth(uint32_t texNum)
 MTR_EXPORT int MTR_CALL mtrTextureGetHeight(uint32_t texNum)
 {
     mtrTexture_t *texture;
-    int h;
+    int           h;
     MTR_TEXTURE_CHECK_IF_NOT_INITED(0);
 
     if (texNum != 0)
@@ -379,7 +380,8 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCopy(uint32_t texNum)
                 mtrTextureFree(newIndex);
                 return 0;
             }
-            newTexture->name = malloc(sizeof(char) * (strlen(texture->name) + 1));
+            newTexture->name = malloc(
+             sizeof(char) * (strlen(texture->name) + 1));
             if (newTexture->name == NULL)
                 newTexture->name = mtrDefaultTextureName;
             else
@@ -505,9 +507,9 @@ MTR_EXPORT void MTR_CALL mtrTextureSetModulation_c(uint32_t texNum,
  uint32_t color)
 {
     mtrTexture_t *texture;
-    uint8_t r;
-    uint8_t g;
-    uint8_t b;
+    uint8_t       r;
+    uint8_t       g;
+    uint8_t       b;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
     r = (uint8_t)(color >> 16);
@@ -525,10 +527,10 @@ MTR_EXPORT void MTR_CALL mtrTextureSetModulation_ca(uint32_t texNum,
  uint32_t color)
 {
     mtrTexture_t *texture;
-    uint8_t r;
-    uint8_t g;
-    uint8_t b;
-    uint8_t a;
+    uint8_t       r;
+    uint8_t       g;
+    uint8_t       b;
+    uint8_t       a;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
     r = (uint8_t)(color >> 24);
@@ -592,7 +594,7 @@ MTR_EXPORT void MTR_CALL mtrTextureSetModulationAlpha_f(uint32_t texNum,
  float alpha)
 {
     mtrTexture_t *texture;
-    uint8_t alpha8;
+    uint8_t       alpha8;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
     if (texNum != 0)
@@ -870,7 +872,6 @@ MTR_EXPORT bool MTR_CALL mtrTextureReceivePixels(uint32_t texNum,
     int           textureAccess; /* not using */
     int           textureW;
     int           textureH;
-    //SDL_Surface * tempSurface;
     MTR_TEXTURE_CHECK_IF_NOT_INITED(false);
 
 
@@ -878,7 +879,8 @@ MTR_EXPORT bool MTR_CALL mtrTextureReceivePixels(uint32_t texNum,
     {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
 
-        if (SDL_QueryTexture(texture->texture, &textureFormat, &textureAccess, &textureW, &textureH) == -1)
+        if (SDL_QueryTexture(texture->texture, &textureFormat, &textureAccess,
+         &textureW, &textureH) == -1)
             return false;
 
         if (textureW != pixels->w || textureH != pixels->h)
@@ -899,7 +901,8 @@ MTR_EXPORT bool MTR_CALL mtrTextureReceivePixels(uint32_t texNum,
         rect.y = 0;
         rect.w = pixels->w;
         rect.h = pixels->h;
-        if (SDL_UpdateTexture(texture->texture, &rect, pixels->data, pixels->pitch) == 0)
+        if (SDL_UpdateTexture(texture->texture, &rect, pixels->data,
+         pixels->pitch) == 0)
             return true;
     }
     return false;

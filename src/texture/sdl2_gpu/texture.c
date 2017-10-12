@@ -69,7 +69,8 @@ MTR_EXPORT bool MTR_CALL mtrTextureInit(uint32_t dmSize, uint32_t reservedCount)
      "mtrGetScreen");
     if (mtrGetScreen == NULL)
     {
-        mtrNotify("Unable to load 'mtrGetScreen' function from 'Screen_SDL2_gpu' module",
+        mtrNotify(
+         "Unable to load 'mtrGetScreen' function from 'Screen_SDL2_gpu' module",
          1, MTR_LMT_FATAL);
         return false;
     }
@@ -172,7 +173,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCreate(const char *name, int width,
 {
     uint32_t      freeIndex;
     mtrTexture_t *texture;
-    GPU_Target* target;
+    GPU_Target   *target;
     MTR_TEXTURE_CHECK_IF_NOT_INITED(0U);
 
     mtrLogWrite_s("Creating texture", 0, MTR_LMT_INFO, name);
@@ -252,7 +253,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCopy(uint32_t texNum)
     uint32_t      freeIndex;
     mtrTexture_t *texture;
     mtrTexture_t *newTexture;
-    SDL_Surface* surface;
+    SDL_Surface  *surface;
 
     if (texNum != 0)
     {
@@ -271,7 +272,8 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCopy(uint32_t texNum)
         if (newTexture->texture != NULL)
         {
             mtrLogWrite_s("Copying texture", 0, MTR_LMT_INFO, texture->name);
-            newTexture->name = malloc(sizeof(char) * (strlen(texture->name) + 1));
+            newTexture->name = malloc(
+             sizeof(char) * (strlen(texture->name) + 1));
             if (newTexture->name == NULL)
                 newTexture->name = mtrDefaultTextureName;
             else
@@ -390,9 +392,9 @@ MTR_EXPORT void MTR_CALL mtrTextureSetModulation_c(uint32_t texNum,
  uint32_t color)
 {
     mtrTexture_t *texture;
-    uint8_t r;
-    uint8_t g;
-    uint8_t b;
+    uint8_t       r;
+    uint8_t       g;
+    uint8_t       b;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
     r = (uint8_t)(color >> 16);
@@ -410,10 +412,10 @@ MTR_EXPORT void MTR_CALL mtrTextureSetModulation_ca(uint32_t texNum,
  uint32_t color)
 {
     mtrTexture_t *texture;
-    uint8_t r;
-    uint8_t g;
-    uint8_t b;
-    uint8_t a;
+    uint8_t       r;
+    uint8_t       g;
+    uint8_t       b;
+    uint8_t       a;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
     r = (uint8_t)(color >> 24);
@@ -475,7 +477,7 @@ MTR_EXPORT void MTR_CALL mtrTextureSetModulationAlpha_f(uint32_t texNum,
  float alpha)
 {
     mtrTexture_t *texture;
-    uint8_t alpha8;
+    uint8_t       alpha8;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
     if (texNum != 0)
@@ -533,7 +535,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlit_f(uint32_t texNum, float x, float y)
 MTR_EXPORT void MTR_CALL mtrTextureBlitScaled_f(uint32_t texNum, float x,
  float y, float w, float h)
 {
-    GPU_Rect outputRegion;
+    GPU_Rect      outputRegion;
     mtrTexture_t *texture;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
@@ -552,7 +554,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitScaled_f(uint32_t texNum, float x,
 MTR_EXPORT void MTR_CALL mtrTextureBlitAngled_f(uint32_t texNum, float x,
  float y, float angle, float pivotX, float pivotY)
 {
-    GPU_Rect outputRegion;
+    GPU_Rect      outputRegion;
     mtrTexture_t *texture;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
@@ -572,9 +574,9 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitAngled_f(uint32_t texNum, float x,
 MTR_EXPORT void MTR_CALL mtrTextureBlitFlipped_f(uint32_t texNum, float x,
  float y, int flip)
 {
-    GPU_Rect outputRegion;
+    GPU_Rect      outputRegion;
     mtrTexture_t *texture;
-    int actualFlip;
+    int           actualFlip;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
     if (texNum != 0)
@@ -598,9 +600,9 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitFlipped_f(uint32_t texNum, float x,
 MTR_EXPORT void MTR_CALL mtrTextureBlitGeneral_f(uint32_t texNum, float x,
  float y, float w, float h, float angle, float pivotX, float pivotY, int flip)
 {
-    GPU_Rect outputRegion;
+    GPU_Rect      outputRegion;
     mtrTexture_t *texture;
-    int actualFlip;
+    int           actualFlip;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
     if (texNum != 0)
@@ -624,7 +626,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitGeneral_f(uint32_t texNum, float x,
 MTR_EXPORT void MTR_CALL mtrTextureBlitRegion_f(uint32_t texNum, float x,
  float y, float rx, float ry, float rw, float rh)
 {
-    GPU_Rect region;
+    GPU_Rect      region;
     mtrTexture_t *texture;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
@@ -643,8 +645,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegion_f(uint32_t texNum, float x,
 MTR_EXPORT void MTR_CALL mtrTextureBlitRegionScaled_f(uint32_t texNum, float x,
  float y, float w, float h, float rx, float ry, float rw, float rh)
 {
-    GPU_Rect region;
-    GPU_Rect outputRegion;
+    GPU_Rect      region;
+    GPU_Rect      outputRegion;
     mtrTexture_t *texture;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
@@ -659,7 +661,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionScaled_f(uint32_t texNum, float x,
         outputRegion.w = w;
         outputRegion.h = h;
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
-        GPU_BlitRect(texture->texture, &region, mtrScreen->target, &outputRegion);
+        GPU_BlitRect(texture->texture, &region, mtrScreen->target,
+         &outputRegion);
     }
 }
 
@@ -668,8 +671,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionAngled_f(uint32_t texNum, float x,
  float y, float rx, float ry, float rw, float rh, float angle, float pivotX,
  float pivotY)
 {
-    GPU_Rect region;
-    GPU_Rect outputRegion;
+    GPU_Rect      region;
+    GPU_Rect      outputRegion;
     mtrTexture_t *texture;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
@@ -693,10 +696,10 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionAngled_f(uint32_t texNum, float x,
 MTR_EXPORT void MTR_CALL mtrTextureBlitRegionFlipped_f(uint32_t texNum, float x,
  float y, float rx, float ry, float rw, float rh, int flip)
 {
-    GPU_Rect region;
-    GPU_Rect outputRegion;
+    GPU_Rect      region;
+    GPU_Rect      outputRegion;
     mtrTexture_t *texture;
-    int actualFlip;
+    int           actualFlip;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
     if (texNum != 0)
@@ -725,10 +728,10 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionGeneral_f(uint32_t texNum, float x,
  float y, float w, float h, float rx, float ry, float rw, float rh, float angle,
  float pivotX, float pivotY, int flip)
 {
-    GPU_Rect region;
-    GPU_Rect outputRegion;
+    GPU_Rect      region;
+    GPU_Rect      outputRegion;
     mtrTexture_t *texture;
-    int actualFlip;
+    int           actualFlip;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
     if (texNum != 0)

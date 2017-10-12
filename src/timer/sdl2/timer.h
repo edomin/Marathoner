@@ -10,7 +10,7 @@ typedef struct mtrTimer_t{
     uint32_t startTime;
 } mtrTimer_t;
 
-mtrTimer_t mtrTimer;
+mtrTimer_t  mtrTimer;
 static bool mtrTimerInited = false;
 #define MTR_TIMER_CHECK_IF_NOT_INITED(returnValue) \
     if (!mtrTimerInited)                           \

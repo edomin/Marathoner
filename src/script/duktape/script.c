@@ -113,7 +113,8 @@ void mtrScriptsInit(void)
     {
         for (j = 0; j < mtrPluginData[i].report->prereqsCount; j++)
         {
-            if (strcmp(mtrPluginData[i].report->prereqs[j], "Script_Duktape") == 0)
+            if (
+             strcmp(mtrPluginData[i].report->prereqs[j], "Script_Duktape") == 0)
             {
                 mtrLogWrite_s("Binding found:", 2, MTR_LMT_INFO,
                  mtrPluginData[i].report->moduleID);
