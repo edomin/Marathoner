@@ -59,12 +59,15 @@ MTR_EXPORT bool MTR_CALL mtrTtfInit(uint32_t dmSize, uint32_t reservedCount)
     else
         mtrLogWrite("TTF font manager initialized", 0, MTR_LMT_INFO);
 
+    mtrTtfInited = true;
     return true;
 }
 
 /*fa mtrTtfQuit yes */
 MTR_EXPORT void MTR_CALL mtrTtfQuit(void)
 {
+    MTR_TTF_CHECK_IF_NOT_INITED_WITH_LOG("Unable to destroy TTF font manager",);
+
     mtrLogWrite("Destroying TTF font manager", 0, MTR_LMT_INFO);
     TTF_Quit();
     mtrLogWrite("TTF font manager destroyed", 0, MTR_LMT_INFO);
@@ -75,6 +78,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrTtfLoad(const char *filename, int size)
 {
     uint32_t    freeIndex;
     mtrTtf_t   *font;
+    MTR_TTF_CHECK_IF_NOT_INITED_WITH_LOG("Unable to load TTF font", 0U);
 
     mtrLogWrite_s("Loading TTF font", 0, MTR_LMT_INFO, filename);
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrTtfKeeper);
@@ -104,6 +108,8 @@ MTR_EXPORT uint32_t MTR_CALL mtrTtfLoad(const char *filename, int size)
 MTR_EXPORT int MTR_CALL mtrTtfGetFontHeight(uint32_t fontNum)
 {
     mtrTtf_t *font;
+    MTR_TTF_CHECK_IF_NOT_INITED(0);
+
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
     if (font->font != NULL)
         return TTF_FontHeight(font->font);
@@ -116,6 +122,14 @@ MTR_EXPORT bool MTR_CALL mtrTtfGetStringSizes(uint32_t fontNum,
  const char *string, int *w, int *h)
 {
     mtrTtf_t *font;
+
+    if (!mtrTtfInited)
+    {
+        *w = 0;
+        *h = 0;
+        return false;
+    }
+
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
     if (font->font == NULL || string == NULL)
     {
@@ -137,6 +151,8 @@ MTR_EXPORT int MTR_CALL mtrTtfGetStringWidth(uint32_t fontNum,
 {
     mtrTtf_t *font;
     int       width;
+    MTR_TTF_CHECK_IF_NOT_INITED(0);
+
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
     if (font->font == NULL || string == NULL)
     {
@@ -152,6 +168,8 @@ MTR_EXPORT int MTR_CALL mtrTtfGetStringWidth(uint32_t fontNum,
 MTR_EXPORT void MTR_CALL mtrTtfSetFontStyle(uint32_t fontNum, int style)
 {
     mtrTtf_t *font;
+    MTR_TTF_CHECK_IF_NOT_INITED();
+
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
     TTF_SetFontStyle(font->font, style);
 }
@@ -160,6 +178,8 @@ MTR_EXPORT void MTR_CALL mtrTtfSetFontStyle(uint32_t fontNum, int style)
 MTR_EXPORT void MTR_CALL mtrTtfSetFontOutline(uint32_t fontNum, int outline)
 {
     mtrTtf_t *font;
+    MTR_TTF_CHECK_IF_NOT_INITED();
+
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
     TTF_SetFontOutline(font->font, outline);
 }
@@ -168,6 +188,8 @@ MTR_EXPORT void MTR_CALL mtrTtfSetFontOutline(uint32_t fontNum, int outline)
 MTR_EXPORT void MTR_CALL mtrTtfFree(uint32_t fontNum)
 {
     mtrTtf_t *font;
+    MTR_TTF_CHECK_IF_NOT_INITED_WITH_LOG("Unable to unload TTF font",);
+
     if (fontNum != 0)
     {
         font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
@@ -188,6 +210,7 @@ MTR_EXPORT mtrPixels_t *MTR_CALL mtrTtfRenderString(uint32_t fontNum, uint8_t r,
     SDL_Color        textcolor;
     SDL_Surface     *renderedSurface;
     int              success;
+    MTR_TTF_CHECK_IF_NOT_INITED(NULL);
 
     if (tempSurface != NULL)
     {

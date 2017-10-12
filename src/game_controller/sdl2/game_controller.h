@@ -29,8 +29,18 @@ typedef struct mtrGameController_t{
 
 int                  mtrGameControllersCount;
 mtrGameController_t *mtrGameController;
-
 mtrIndexkeeper_t *mtrGameControllerKeeper;
+static bool mtrGameControllerInited = false;
+#define MTR_GAME_CONTROLLER_CHECK_IF_NOT_INITED(returnValue) \
+    if (!mtrGameControllerInited)                            \
+        return returnValue;
+#define MTR_GAME_CONTROLLER_CHECK_IF_NOT_INITED_WITH_LOG(message, returnValue) \
+    if (!mtrGameControllerInited)                                              \
+    {                                                                          \
+        mtrLogWrite(message ". game controller support are not initialized",   \
+         1, MTR_LMT_ERROR);                                                    \
+        return returnValue;                                                    \
+    }
 
 #endif
 

@@ -62,6 +62,8 @@ MTR_EXPORT bool MTR_CALL mtrMouseInit(void)
     mtrMouse.relativeWheel = 0;
 
     mtrLogWrite("Mouse support initialized", 0, MTR_LMT_INFO);
+
+    mtrMouseInited = true;
     return true;
 }
 
@@ -74,6 +76,7 @@ MTR_EXPORT void MTR_CALL mtrMouseRefresh(void)
     int       mouseY;
     SDL_Event events[32];
     int       numEvents;
+    MTR_MOUSE_CHECK_IF_NOT_INITED();
 
     mtrMouse.relativeWheel = 0;
     mtrMouse.mouseMotion = false;
@@ -108,6 +111,8 @@ MTR_EXPORT void MTR_CALL mtrMouseRefresh(void)
 /*fa mtrMousePress yes */
 MTR_EXPORT bool MTR_CALL mtrMousePress(int button)
 {
+    MTR_MOUSE_CHECK_IF_NOT_INITED(false);
+
     if (button > 5)
         return false;
     if (!(mtrMouse.previousMousestate[button]) &&
@@ -124,6 +129,8 @@ MTR_EXPORT bool MTR_CALL mtrMousePress(int button)
 /*fa mtrMouseRelease yes */
 MTR_EXPORT bool MTR_CALL mtrMouseRelease(int button)
 {
+    MTR_MOUSE_CHECK_IF_NOT_INITED(false);
+
     if (button > 5)
         return false;
     if ((mtrMouse.previousMousestate[button]) &&
@@ -140,6 +147,8 @@ MTR_EXPORT bool MTR_CALL mtrMouseRelease(int button)
 /*fa mtrMousePressed yes */
 MTR_EXPORT bool MTR_CALL mtrMousePressed(int button)
 {
+    MTR_MOUSE_CHECK_IF_NOT_INITED(false);
+
     if (button > 5)
         return false;
     if (mtrMouse.currentMousestate[button])
@@ -159,6 +168,7 @@ MTR_EXPORT int MTR_CALL mtrMouseGetWheelRelative(void)
     int       numEvents;
     int       i;
     int       wheelRel;
+    MTR_MOUSE_CHECK_IF_NOT_INITED(0);
 
     numEvents = SDL_PeepEvents(events, 32, SDL_GETEVENT, SDL_MOUSEWHEEL,
      SDL_MOUSEWHEEL);
@@ -177,24 +187,35 @@ MTR_EXPORT int MTR_CALL mtrMouseGetWheelRelative(void)
 /*fa mtrMouseMoving yes */
 MTR_EXPORT bool MTR_CALL mtrMouseMoving(void)
 {
+    MTR_MOUSE_CHECK_IF_NOT_INITED(false);
+
     return mtrMouse.mouseMotion;
 }
 
 /*fa mtrMouseGetX yes */
 MTR_EXPORT int MTR_CALL mtrMouseGetX(void)
 {
+    MTR_MOUSE_CHECK_IF_NOT_INITED(0);
+
     return mtrMouse.x;
 }
 
 /*fa mtrMouseGetY yes */
 MTR_EXPORT int MTR_CALL mtrMouseGetY(void)
 {
+    MTR_MOUSE_CHECK_IF_NOT_INITED(0);
+
     return mtrMouse.y;
 }
 
 /*fa mtrMouseGetXY yes */
 MTR_EXPORT void MTR_CALL mtrMouseGetXY(int *mouseX, int *mouseY)
 {
+    if (!mtrMouseInited)
+    {
+        *mouseX = 0;
+        *mouseY = 0;
+    }
     *mouseX = mtrMouse.x;
     *mouseY = mtrMouse.y;
 }
@@ -202,18 +223,27 @@ MTR_EXPORT void MTR_CALL mtrMouseGetXY(int *mouseX, int *mouseY)
 /*fa mtrMouseGetDeltaX yes */
 MTR_EXPORT int MTR_CALL mtrMouseGetDeltaX(void)
 {
+    MTR_MOUSE_CHECK_IF_NOT_INITED(0);
+
     return mtrMouse.deltaX;
 }
 
 /*fa mtrMouseGetDeltaY yes */
 MTR_EXPORT int MTR_CALL mtrMouseGetDeltaY(void)
 {
+    MTR_MOUSE_CHECK_IF_NOT_INITED(0);
+
     return mtrMouse.deltaY;
 }
 
 /*fa mtrMouseGetDeltaXY yes */
 MTR_EXPORT void MTR_CALL mtrMouseGetDeltaXY(int *deltaX, int *deltaY)
 {
+    if (!mtrMouseInited)
+    {
+        *deltaX = 0;
+        *deltaY = 0;
+    }
     *deltaX = mtrMouse.deltaX;
     *deltaY = mtrMouse.deltaY;
 }

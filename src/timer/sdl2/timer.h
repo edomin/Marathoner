@@ -11,5 +11,16 @@ typedef struct mtrTimer_t{
 } mtrTimer_t;
 
 mtrTimer_t mtrTimer;
+static bool mtrTimerInited = false;
+#define MTR_TIMER_CHECK_IF_NOT_INITED(returnValue) \
+    if (!mtrTimerInited)                           \
+        return returnValue;
+#define MTR_TIMER_CHECK_IF_NOT_INITED_WITH_LOG(message, returnValue) \
+    if (!mtrTimerInited)                                             \
+    {                                                                \
+        mtrLogWrite(message ". Timer subsystem are not initialized", \
+         1, MTR_LMT_ERROR);                                          \
+        return returnValue;                                          \
+    }
 
 #endif

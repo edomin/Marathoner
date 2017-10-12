@@ -50,6 +50,8 @@ MTR_EXPORT bool MTR_CALL mtrPrimitiveInit(void)
     SDL_GetRendererOutputSize(mtrScreen->renderer, &screenWidth, &screenHeight);
 
     mtrLogWrite("Primitive drawing subsystem initialized", 0, MTR_LMT_INFO);
+
+    mtrPrimitiveInited = true;
     return true;
 }
 
@@ -57,6 +59,8 @@ MTR_EXPORT bool MTR_CALL mtrPrimitiveInit(void)
 MTR_EXPORT void MTR_CALL mtrPrimitiveFill_rgb(uint8_t r, uint8_t g,
  uint8_t b)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     boxRGBA(mtrScreen->renderer, 0, 0, screenWidth, screenHeight, r, g, b,
      0xFF);
 }
@@ -65,6 +69,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveFill_rgb(uint8_t r, uint8_t g,
 MTR_EXPORT void MTR_CALL mtrPrimitiveFill_rgba(uint8_t r, uint8_t g,
  uint8_t b, uint8_t a)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     boxRGBA(mtrScreen->renderer, 0, 0, screenWidth, screenHeight, r, g, b, a);
 }
 
@@ -77,6 +83,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveFill_c(uint32_t color)
     r = (uint8_t)(color >> 16);
     g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
     b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
     boxRGBA(mtrScreen->renderer, 0, 0, screenWidth, screenHeight, r, g, b,
      0xFF);
@@ -94,6 +101,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveFill_ca(uint32_t color)
     b = (uint8_t)((color >> 8) - ((uint32_t)r << 16) - ((uint32_t)g << 8));
     a = (uint8_t)(color  - ((uint32_t)r << 24) - ((uint32_t)g << 16) -
      ((uint32_t)b << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
     boxRGBA(mtrScreen->renderer, 0, 0, screenWidth, screenHeight, r, g, b, a);
 }
@@ -102,6 +110,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveFill_ca(uint32_t color)
 MTR_EXPORT void MTR_CALL mtrPrimitivePixel_rgb_f(float x, float y, uint8_t r,
  uint8_t g, uint8_t b)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     pixelRGBA(mtrScreen->renderer, x, y, r, g, b, 0xFF);
 }
 
@@ -109,6 +119,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitivePixel_rgb_f(float x, float y, uint8_t r,
 MTR_EXPORT void MTR_CALL mtrPrimitivePixel_rgba_f(float x, float y, uint8_t r,
  uint8_t g, uint8_t b, uint8_t a)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     pixelRGBA(mtrScreen->renderer, x, y, r, g, b, a);
 }
 
@@ -121,6 +133,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitivePixel_c_f(float x, float y, uint32_t color)
     r = (uint8_t)(color >> 16);
     g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
     b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
     pixelRGBA(mtrScreen->renderer, x, y, r, g, b, 0xFF);
 }
@@ -146,6 +159,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitivePixel_ca_f(float x, float y,
 MTR_EXPORT void MTR_CALL mtrPrimitiveLine_rgb_f(float x1, float y1, float x2,
  float y2, uint8_t r, uint8_t g, uint8_t b)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     lineRGBA(mtrScreen->renderer, x1, y1, x2, y2, r, g, b, 0xFF);
 }
 
@@ -153,6 +168,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveLine_rgb_f(float x1, float y1, float x2,
 MTR_EXPORT void MTR_CALL mtrPrimitiveLine_rgba_f(float x1, float y1, float x2,
  float y2, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     lineRGBA(mtrScreen->renderer, x1, y1, x2, y2, r, g, b, a);
 }
 
@@ -166,6 +183,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveLine_c_f(float x1, float y1, float x2,
     r = (uint8_t)(color >> 16);
     g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
     b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
     lineRGBA(mtrScreen->renderer, x1, y1, x2, y2, r, g, b, 0xFF);
 }
@@ -183,6 +201,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveLine_ca_f(float x1, float y1, float x2,
     b = (uint8_t)((color >> 8) - ((uint32_t)r << 16) - ((uint32_t)g << 8));
     a = (uint8_t)(color  - ((uint32_t)r << 24) - ((uint32_t)g << 16) -
      ((uint32_t)b << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
     lineRGBA(mtrScreen->renderer, x1, y1, x2, y2, r, g, b, a);
 }
@@ -191,6 +210,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveLine_ca_f(float x1, float y1, float x2,
 MTR_EXPORT void MTR_CALL mtrPrimitiveArc_rgb_f(float x, float y, float radius,
  float startAngle, float endAngle, uint8_t r, uint8_t g, uint8_t b)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     arcRGBA(mtrScreen->renderer, x, y, radius, -endAngle, -startAngle, r, g, b,
      0xFF);
 }
@@ -199,6 +220,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveArc_rgb_f(float x, float y, float radius,
 MTR_EXPORT void MTR_CALL mtrPrimitiveArc_rgba_f(float x, float y, float radius,
  float startAngle, float endAngle, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     arcRGBA(mtrScreen->renderer, x, y, radius, -endAngle, -startAngle, r, g, b,
      a);
 }
@@ -213,6 +236,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveArc_c_f(float x, float y, float radius,
     r = (uint8_t)(color >> 16);
     g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
     b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
     arcRGBA(mtrScreen->renderer, x, y, radius, -endAngle, -startAngle, r, g, b,
      0xFF);
@@ -231,6 +255,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveArc_ca_f(float x, float y, float radius,
     b = (uint8_t)((color >> 8) - ((uint32_t)r << 16) - ((uint32_t)g << 8));
     a = (uint8_t)(color  - ((uint32_t)r << 24) - ((uint32_t)g << 16) -
      ((uint32_t)b << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
     arcRGBA(mtrScreen->renderer, x, y, radius, -endAngle, -startAngle, r, g, b,
      a);
@@ -264,6 +289,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveSegmentFilled_c_f(float x, float y,
     r = (uint8_t)(color >> 16);
     g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
     b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
     filledPieRGBA(mtrScreen->renderer, x, y, radius, -endAngle, -startAngle, r,
      g, b, 0xFF);
@@ -282,6 +308,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveSegmentFilled_ca_f(float x, float y,
     b = (uint8_t)((color >> 8) - ((uint32_t)r << 16) - ((uint32_t)g << 8));
     a = (uint8_t)(color  - ((uint32_t)r << 24) - ((uint32_t)g << 16) -
      ((uint32_t)b << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
     filledPieRGBA(mtrScreen->renderer, x, y, radius, -endAngle, -startAngle, r,
      g, b, a);
@@ -291,6 +318,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveSegmentFilled_ca_f(float x, float y,
 MTR_EXPORT void MTR_CALL mtrPrimitiveCircle_rgb_f(float x, float y,
  float radius, uint8_t r, uint8_t g, uint8_t b)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     circleRGBA(mtrScreen->renderer, x, y, radius, r, g, b, 0xFF);
 }
 
@@ -298,6 +327,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveCircle_rgb_f(float x, float y,
 MTR_EXPORT void MTR_CALL mtrPrimitiveCircle_rgba_f(float x, float y,
  float radius, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     circleRGBA(mtrScreen->renderer, x, y, radius, r, g, b, a);
 }
 
@@ -311,6 +342,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveCircle_c_f(float x, float y, float radius,
     r = (uint8_t)(color >> 16);
     g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
     b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
     circleRGBA(mtrScreen->renderer, x, y, radius, r, g, b, 0xFF);
 }
@@ -328,6 +360,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveCircle_ca_f(float x, float y, float radius,
     b = (uint8_t)((color >> 8) - ((uint32_t)r << 16) - ((uint32_t)g << 8));
     a = (uint8_t)(color  - ((uint32_t)r << 24) - ((uint32_t)g << 16) -
      ((uint32_t)b << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
     circleRGBA(mtrScreen->renderer, x, y, radius, r, g, b, a);
 }
@@ -336,6 +369,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveCircle_ca_f(float x, float y, float radius,
 MTR_EXPORT void MTR_CALL mtrPrimitiveCircleFilled_rgb_f(float x, float y,
  float radius, uint8_t r, uint8_t g, uint8_t b)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     filledCircleRGBA(mtrScreen->renderer, x, y, radius, r, g, b, 0xFF);
 }
 
@@ -343,6 +378,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveCircleFilled_rgb_f(float x, float y,
 MTR_EXPORT void MTR_CALL mtrPrimitiveCircleFilled_rgba_f(float x, float y,
  float radius, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     filledCircleRGBA(mtrScreen->renderer, x, y, radius, r, g, b, a);
 }
 
@@ -356,6 +393,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveCircleFilled_c_f(float x, float y,
     r = (uint8_t)(color >> 16);
     g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
     b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
     filledCircleRGBA(mtrScreen->renderer, x, y, radius, r, g, b, 0xFF);
 }
@@ -373,6 +411,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveCircleFilled_ca_f(float x, float y,
     b = (uint8_t)((color >> 8) - ((uint32_t)r << 16) - ((uint32_t)g << 8));
     a = (uint8_t)(color  - ((uint32_t)r << 24) - ((uint32_t)g << 16) -
      ((uint32_t)b << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
     filledCircleRGBA(mtrScreen->renderer, x, y, radius, r, g, b, a);
 }
@@ -381,6 +420,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveCircleFilled_ca_f(float x, float y,
 MTR_EXPORT void MTR_CALL mtrPrimitiveEllipse_rgb_f(float x, float y, float rx,
  float ry, float angle, uint8_t r, uint8_t g, uint8_t b)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     ellipseRGBA(mtrScreen->renderer, x, y, rx, ry, r, g, b, 0xFF);
 }
 
@@ -388,6 +429,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveEllipse_rgb_f(float x, float y, float rx,
 MTR_EXPORT void MTR_CALL mtrPrimitiveEllipse_rgba_f(float x, float y, float rx,
  float ry, float angle, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     ellipseRGBA(mtrScreen->renderer, x, y, rx, ry, r, g, b, a);
 }
 
@@ -401,6 +444,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveEllipse_c_f(float x, float y, float rx,
     r = (uint8_t)(color >> 16);
     g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
     b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
     ellipseRGBA(mtrScreen->renderer, x, y, rx, ry, r, g, b, 0xFF);
 }
@@ -418,6 +462,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveEllipse_ca_f(float x, float y, float rx,
     b = (uint8_t)((color >> 8) - ((uint32_t)r << 16) - ((uint32_t)g << 8));
     a = (uint8_t)(color  - ((uint32_t)r << 24) - ((uint32_t)g << 16) -
      ((uint32_t)b << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
     ellipseRGBA(mtrScreen->renderer, x, y, rx, ry, r, g, b, a);
 }
@@ -426,6 +471,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveEllipse_ca_f(float x, float y, float rx,
 MTR_EXPORT void MTR_CALL mtrPrimitiveEllipseFilled_rgb_f(float x, float y,
  float rx, float ry, float angle, uint8_t r, uint8_t g, uint8_t b)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     filledEllipseRGBA(mtrScreen->renderer, x, y, rx, ry, r, g, b, 0xFF);
 }
 
@@ -433,6 +480,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveEllipseFilled_rgb_f(float x, float y,
 MTR_EXPORT void MTR_CALL mtrPrimitiveEllipseFilled_rgba_f(float x, float y,
  float rx, float ry, float angle, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     filledEllipseRGBA(mtrScreen->renderer, x, y, rx, ry, r, g, b, a);
 }
 
@@ -446,6 +495,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveEllipseFilled_c_f(float x, float y,
     r = (uint8_t)(color >> 16);
     g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
     b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
     filledEllipseRGBA(mtrScreen->renderer, x, y, rx, ry, r, g, b, 0xFF);
 }
@@ -463,6 +513,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveEllipseFilled_ca_f(float x, float y,
     b = (uint8_t)((color >> 8) - ((uint32_t)r << 16) - ((uint32_t)g << 8));
     a = (uint8_t)(color  - ((uint32_t)r << 24) - ((uint32_t)g << 16) -
      ((uint32_t)b << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
     filledEllipseRGBA(mtrScreen->renderer, x, y, rx, ry, r, g, b, a);
 }
@@ -535,6 +586,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRingSegmentFilled_ca_f(float x, float y,
 MTR_EXPORT void MTR_CALL mtrPrimitiveTriangle_rgb_f(float x1, float y1,
  float x2, float y2, float x3, float y3, uint8_t r, uint8_t g, uint8_t b)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     trigonRGBA(mtrScreen->renderer, x1, y1, x2, y2, x3, y3, r, g, b, 0xFF);
 }
 
@@ -543,6 +596,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveTriangle_rgba_f(float x1, float y1,
  float x2, float y2, float x3, float y3, uint8_t r, uint8_t g, uint8_t b,
  uint8_t a)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     trigonRGBA(mtrScreen->renderer, x1, y1, x2, y2, x3, y3, r, g, b, a);
 }
 
@@ -556,7 +611,9 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveTriangle_c_f(float x1, float y1, float x2,
     r = (uint8_t)(color >> 16);
     g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
     b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
+    mtrColor24ToRgb(color, &r, &g, &b);
     trigonRGBA(mtrScreen->renderer, x1, y1, x2, y2, x3, y3, r, g, b, 0xFF);
 }
 
@@ -573,6 +630,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveTriangle_ca_f(float x1, float y1, float x2,
     b = (uint8_t)((color >> 8) - ((uint32_t)r << 16) - ((uint32_t)g << 8));
     a = (uint8_t)(color  - ((uint32_t)r << 24) - ((uint32_t)g << 16) -
      ((uint32_t)b << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
     trigonRGBA(mtrScreen->renderer, x1, y1, x2, y2, x3, y3, r, g, b, a);
 }
@@ -581,6 +639,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveTriangle_ca_f(float x1, float y1, float x2,
 MTR_EXPORT void MTR_CALL mtrPrimitiveTriangleFilled_rgb_f(float x1, float y1,
  float x2, float y2, float x3, float y3, uint8_t r, uint8_t g, uint8_t b)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     filledTrigonRGBA(mtrScreen->renderer, x1, y1, x2, y2, x3, y3, r, g, b,
      0xFF);
 }
@@ -590,6 +650,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveTriangleFilled_rgba_f(float x1, float y1,
  float x2, float y2, float x3, float y3, uint8_t r, uint8_t g, uint8_t b,
  uint8_t a)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     filledTrigonRGBA(mtrScreen->renderer, x1, y1, x2, y2, x3, y3, r, g, b, a);
 }
 
@@ -603,6 +665,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveTriangleFilled_c_f(float x1, float y1,
     r = (uint8_t)(color >> 16);
     g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
     b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
     filledTrigonRGBA(mtrScreen->renderer, x1, y1, x2, y2, x3, y3, r, g, b,
      0xFF);
@@ -621,6 +684,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveTriangleFilled_ca_f(float x1, float y1,
     b = (uint8_t)((color >> 8) - ((uint32_t)r << 16) - ((uint32_t)g << 8));
     a = (uint8_t)(color  - ((uint32_t)r << 24) - ((uint32_t)g << 16) -
      ((uint32_t)b << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
     filledTrigonRGBA(mtrScreen->renderer, x1, y1, x2, y2, x3, y3, r, g, b, a);
 }
@@ -629,6 +693,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveTriangleFilled_ca_f(float x1, float y1,
 MTR_EXPORT void MTR_CALL mtrPrimitiveRectangle_rgb_f(float x1, float y1,
  float x2, float y2, uint8_t r, uint8_t g, uint8_t b)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     rectangleRGBA(mtrScreen->renderer, x1, y1, x2, y2, r, g, b, 0xFF);
 }
 
@@ -636,6 +702,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRectangle_rgb_f(float x1, float y1,
 MTR_EXPORT void MTR_CALL mtrPrimitiveRectangle_rgba_f(float x1, float y1,
  float x2, float y2, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     rectangleRGBA(mtrScreen->renderer, x1, y1, x2, y2, r, g, b, a);
 }
 
@@ -649,6 +717,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRectangle_c_f(float x1, float y1, float x2,
     r = (uint8_t)(color >> 16);
     g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
     b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
     rectangleRGBA(mtrScreen->renderer, x1, y1, x2, y2, r, g, b, 0xFF);
 }
@@ -666,6 +735,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRectangle_ca_f(float x1, float y1,
     b = (uint8_t)((color >> 8) - ((uint32_t)r << 16) - ((uint32_t)g << 8));
     a = (uint8_t)(color  - ((uint32_t)r << 24) - ((uint32_t)g << 16) -
      ((uint32_t)b << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
     rectangleRGBA(mtrScreen->renderer, x1, y1, x2, y2, r, g, b, a);
 }
@@ -674,6 +744,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRectangle_ca_f(float x1, float y1,
 MTR_EXPORT void MTR_CALL mtrPrimitiveRectangleFilled_rgb_f(float x1, float y1,
  float x2, float y2, uint8_t r, uint8_t g, uint8_t b)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     boxRGBA(mtrScreen->renderer, x1, y1, x2, y2, r, g, b, 0xFF);
 }
 
@@ -681,6 +753,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRectangleFilled_rgb_f(float x1, float y1,
 MTR_EXPORT void MTR_CALL mtrPrimitiveRectangleFilled_rgba_f(float x1, float y1,
  float x2, float y2, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     boxRGBA(mtrScreen->renderer, x1, y1, x2, y2, r, g, b, a);
 }
 
@@ -694,6 +768,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRectangleFilled_c_f(float x1, float y1,
     r = (uint8_t)(color >> 16);
     g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
     b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
     boxRGBA(mtrScreen->renderer, x1, y1, x2, y2, r, g, b, 0xFF);
 }
@@ -711,6 +786,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRectangleFilled_ca_f(float x1, float y1,
     b = (uint8_t)((color >> 8) - ((uint32_t)r << 16) - ((uint32_t)g << 8));
     a = (uint8_t)(color  - ((uint32_t)r << 24) - ((uint32_t)g << 16) -
      ((uint32_t)b << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
     boxRGBA(mtrScreen->renderer, x1, y1, x2, y2, r, g, b, a);
 }
@@ -719,6 +795,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRectangleFilled_ca_f(float x1, float y1,
 MTR_EXPORT void MTR_CALL mtrPrimitiveRoundedRectangle_rgb_f(float x1, float y1,
  float x2, float y2, float radius, uint8_t r, uint8_t g, uint8_t b)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     roundedRectangleRGBA(mtrScreen->renderer, x1, y1, x2, y2, radius, r, g, b,
      0xFF);
 }
@@ -727,6 +805,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRoundedRectangle_rgb_f(float x1, float y1,
 MTR_EXPORT void MTR_CALL mtrPrimitiveRoundedRectangle_rgba_f(float x1, float y1,
  float x2, float y2, float radius, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     roundedRectangleRGBA(mtrScreen->renderer, x1, y1, x2, y2, radius, r, g, b,
      a);
 }
@@ -741,6 +821,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRoundedRectangle_c_f(float x1, float y1,
     r = (uint8_t)(color >> 16);
     g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
     b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
     roundedRectangleRGBA(mtrScreen->renderer, x1, y1, x2, y2, radius, r, g, b,
      0xFF);
@@ -759,6 +840,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRoundedRectangle_ca_f(float x1, float y1,
     b = (uint8_t)((color >> 8) - ((uint32_t)r << 16) - ((uint32_t)g << 8));
     a = (uint8_t)(color  - ((uint32_t)r << 24) - ((uint32_t)g << 16) -
      ((uint32_t)b << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
     roundedRectangleRGBA(mtrScreen->renderer, x1, y1, x2, y2, radius, r, g, b,
      a);
@@ -768,6 +850,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRoundedRectangle_ca_f(float x1, float y1,
 MTR_EXPORT void MTR_CALL mtrPrimitiveRoundedRectangleFilled_rgb_f(float x1,
  float y1, float x2, float y2, float radius, uint8_t r, uint8_t g, uint8_t b)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     roundedBoxRGBA(mtrScreen->renderer, x1, y1, x2, y2, radius, r, g, b, 0xFF);
 }
 
@@ -776,6 +860,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRoundedRectangleFilled_rgba_f(float x1,
  float y1, float x2, float y2, float radius, uint8_t r, uint8_t g, uint8_t b,
  uint8_t a)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     roundedBoxRGBA(mtrScreen->renderer, x1, y1, x2, y2, radius, r, g, b, a);
 }
 
@@ -789,6 +875,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRoundedRectangleFilled_c_f(float x1,
     r = (uint8_t)(color >> 16);
     g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
     b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
     roundedBoxRGBA(mtrScreen->renderer, x1, y1, x2, y2, radius, r, g, b, 0xFF);
 }
@@ -806,6 +893,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRoundedRectangleFilled_ca_f(float x1,
     b = (uint8_t)((color >> 8) - ((uint32_t)r << 16) - ((uint32_t)g << 8));
     a = (uint8_t)(color  - ((uint32_t)r << 24) - ((uint32_t)g << 16) -
      ((uint32_t)b << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
     roundedBoxRGBA(mtrScreen->renderer, x1, y1, x2, y2, radius, r, g, b, a);
 }
@@ -813,6 +901,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveRoundedRectangleFilled_ca_f(float x1,
 /*fa mtrPrimitiveLineBegin_f yes */
 MTR_EXPORT void MTR_CALL mtrPrimitiveLineBegin_f(float x, float y)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     mtrLineDrawing = true;
     mtrLinePointX_f = x;
     mtrLinePointY_f = y;
@@ -822,6 +912,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveLineBegin_f(float x, float y)
 MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_rgb_f(float x, float y,
  uint8_t r, uint8_t g, uint8_t b)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     if (!mtrLineDrawing)
     {
         mtrPrimitiveLineBegin_f(x, y);
@@ -838,6 +930,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_rgb_f(float x, float y,
 MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_rgba_f(float x, float y,
  uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     if (!mtrLineDrawing)
     {
         mtrPrimitiveLineBegin_f(x, y);
@@ -860,6 +954,8 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_c_f(float x, float y,
     r = (uint8_t)(color >> 16);
     g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
     b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
 
     if (!mtrLineDrawing)
     {
@@ -886,6 +982,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_ca_f(float x, float y,
     b = (uint8_t)((color >> 8) - ((uint32_t)r << 16) - ((uint32_t)g << 8));
     a = (uint8_t)(color  - ((uint32_t)r << 24) - ((uint32_t)g << 16) -
      ((uint32_t)b << 8));
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
     if (!mtrLineDrawing)
     {
@@ -902,5 +999,7 @@ MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_ca_f(float x, float y,
 /*fa mtrPrimitiveLineEnd yes */
 MTR_EXPORT void MTR_CALL mtrPrimitiveLineEnd(void)
 {
+    MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
+
     mtrLineDrawing = false;
 }

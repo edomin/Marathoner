@@ -183,12 +183,15 @@ MTR_EXPORT bool MTR_CALL mtrScreenInit(int width, int height, bool fullscreen,
     }
     mtrLogWrite("Screen initialized", 0, MTR_LMT_INFO);
 
+    mtrScreenInited = true;
     return true;
 }
 
 /*fa mtrScreenQuit yes */
 MTR_EXPORT void MTR_CALL mtrScreenQuit(void)
 {
+    MTR_SCREEN_CHECK_IF_NOT_INITED_WITH_LOG("Unable to destroy Screen",);
+
     SDL_DestroyRenderer(mtrScreen->renderer);
     SDL_DestroyWindow(mtrScreen->screen);
     free(mtrScreen);
@@ -198,6 +201,8 @@ MTR_EXPORT void MTR_CALL mtrScreenQuit(void)
 /*fa mtrScreenFlip yes */
 MTR_EXPORT void MTR_CALL mtrScreenFlip(void)
 {
+    MTR_SCREEN_CHECK_IF_NOT_INITED();
+
     SDL_RenderPresent(mtrScreen->renderer);
 }
 
@@ -206,6 +211,13 @@ MTR_EXPORT void MTR_CALL mtrScreenGetSizes(int *w, int *h)
 {
     int width;
     int height;
+
+    if (!mtrScreenInited)
+    {
+        *w = 0;
+        *h = 0;
+        return;
+    }
 
     SDL_GetRendererOutputSize(mtrScreen->renderer, &width, &height);
     if (w != NULL)
@@ -219,6 +231,7 @@ MTR_EXPORT int MTR_CALL mtrScreenGetWidth(void)
 {
     int width;
     int height;
+    MTR_SCREEN_CHECK_IF_NOT_INITED(0);
 
     SDL_GetRendererOutputSize(mtrScreen->renderer, &width, &height);
     return width;
@@ -229,6 +242,7 @@ MTR_EXPORT int MTR_CALL mtrScreenGetHeight(void)
 {
     int width;
     int height;
+    MTR_SCREEN_CHECK_IF_NOT_INITED(0);
 
     SDL_GetRendererOutputSize(mtrScreen->renderer, &width, &height);
     return height;
@@ -239,6 +253,7 @@ MTR_EXPORT bool MTR_CALL mtrScreenXed(void)
 {
     SDL_Event events[32];
     int       numEvents;
+    MTR_SCREEN_CHECK_IF_NOT_INITED(false);
 
     numEvents = SDL_PeepEvents(events, 32, SDL_GETEVENT, SDL_QUIT, SDL_QUIT);
 
@@ -250,5 +265,7 @@ MTR_EXPORT bool MTR_CALL mtrScreenXed(void)
 
 MTR_EXPORT mtrScreen_t *MTR_CALL mtrGetScreen(void)
 {
+    MTR_SCREEN_CHECK_IF_NOT_INITED(NULL);
+
     return mtrScreen;
 }

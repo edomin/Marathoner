@@ -37,6 +37,7 @@ MTR_EXPORT bool MTR_CALL mtrJsonInit(uint32_t dmSize, uint32_t reservedCount)
     else
         mtrLogWrite("JSON subsystem initialized", 0, MTR_LMT_INFO);
 
+    mtrJsonInited = false;
     return true;
 }
 
@@ -45,6 +46,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonCreateObject(void)
 {
     uint32_t   freeIndex;
     mtrJson_t *json;
+    MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG("Unable to create JSON object", 0U);
 
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrJsonKeeper);
     json = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, freeIndex);
@@ -64,6 +66,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonCreateArray(void)
 {
     uint32_t   freeIndex;
     mtrJson_t *json;
+    MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG("Unable to create JSON array", 0U);
 
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrJsonKeeper);
     json = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, freeIndex);
@@ -83,6 +86,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonParseString(const char *string)
 {
     uint32_t   freeIndex;
     mtrJson_t *json;
+    MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG("Unable to parse JSON string", 0U);
 
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrJsonKeeper);
     json = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, freeIndex);
@@ -105,6 +109,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonParseFile(const char *filename)
     uint32_t   file;
     char      *buffer;
     size_t     size;
+    MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG("Unable to parse JSON file", 0U);
 
     file = mtrFileOpen(filename, MTR_FM_READ);
     if (file == 0)
@@ -142,6 +147,8 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonAddItemToObject(uint32_t object,
 {
     mtrJson_t *jsonObject;
     mtrJson_t *jsonItem;
+    MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG("Unable to add item to JSON object",
+     0U);
 
     jsonObject = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, object);
     jsonItem = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, item);
@@ -176,6 +183,8 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonAddStringToObject(uint32_t object,
     uint32_t   freeIndex;
     mtrJson_t *jsonObject;
     mtrJson_t *jsonString;
+    MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG("Unable to add string to JSON object",
+     0U);
 
     jsonObject = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, object);
 
@@ -214,6 +223,8 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonAddDoubleToObject(uint32_t object,
     uint32_t   freeIndex;
     mtrJson_t *jsonObject;
     mtrJson_t *jsonNum;
+    MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG(
+     "Unable to add double number to JSON object", 0U);
 
     jsonObject = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, object);
     if (itemName == NULL)
@@ -245,6 +256,8 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonAddBoolToObject(uint32_t object,
     uint32_t   freeIndex;
     mtrJson_t *jsonObject;
     mtrJson_t *jsonBool;
+    MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG(
+     "Unable to add boolean value to JSON object", 0U);
 
     jsonObject = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, object);
     if (itemName == NULL)
@@ -276,6 +289,8 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonAddNullToObject(uint32_t object,
     uint32_t   freeIndex;
     mtrJson_t *jsonObject;
     mtrJson_t *jsonNull;
+    MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG(
+     "Unable to add null value to JSON object", 0U);
 
     jsonObject = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, object);
     if (itemName == NULL)
@@ -306,6 +321,8 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonAddItemToArray(uint32_t array,
 {
     mtrJson_t *jsonArray;
     mtrJson_t *jsonItem;
+    MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG("Unable to add item to JSON array",
+     0U);
 
     jsonArray = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, array);
     jsonItem = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, item);
@@ -334,6 +351,8 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonAddStringToArray(uint32_t array,
     uint32_t   freeIndex;
     mtrJson_t *jsonArray;
     mtrJson_t *jsonString;
+    MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG("Unable to add string to JSON array",
+     0U);
 
     jsonArray = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, array);
 
@@ -365,6 +384,8 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonAddDoubleToArray(uint32_t array, double num)
     uint32_t   freeIndex;
     mtrJson_t *jsonArray;
     mtrJson_t *jsonDouble;
+    MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG(
+     "Unable to add double number to JSON array", 0U);
 
     jsonArray = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, array);
 
@@ -390,6 +411,8 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonAddBoolToArray(uint32_t array, bool value)
     uint32_t   freeIndex;
     mtrJson_t *jsonArray;
     mtrJson_t *jsonBool;
+    MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG(
+     "Unable to add boolean value to JSON array", 0U);
 
     jsonArray = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, array);
 
@@ -415,6 +438,8 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonAddNullToArray(uint32_t array)
     uint32_t   freeIndex;
     mtrJson_t *jsonArray;
     mtrJson_t *jsonNull;
+    MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG(
+     "Unable to add null value to JSON array", 0U);
 
     jsonArray = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, array);
 
@@ -441,6 +466,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonGetObjectItem(uint32_t object,
     uint32_t   freeIndex;
     mtrJson_t *jsonObject;
     mtrJson_t *jsonItem;
+    MTR_JSON_CHECK_IF_NOT_INITED(0U);
 
     jsonObject = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, object);
 
@@ -465,6 +491,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrJsonGetArrayItem(uint32_t array, int item)
     uint32_t   freeIndex;
     mtrJson_t *jsonArray;
     mtrJson_t *jsonItem;
+    MTR_JSON_CHECK_IF_NOT_INITED(0U);
 
     jsonArray = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, array);
 
@@ -489,6 +516,8 @@ MTR_EXPORT char *MTR_CALL mtrJsonToString(uint32_t entity)
 {
     mtrJson_t *json;
     char      *text;
+    MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG("Unable to print JSON entity to file",
+     false);
 
     json = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, entity);
     if (json->json == NULL)
@@ -516,6 +545,8 @@ MTR_EXPORT char *MTR_CALL mtrJsonToStringFormatted(uint32_t entity)
 {
     mtrJson_t *json;
     char      *text;
+    MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG(
+     "Unable to print JSON entity to string", NULL);
 
     json = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, entity);
     if (json->json == NULL)
@@ -542,6 +573,8 @@ MTR_EXPORT bool MTR_CALL mtrJsonToFile(uint32_t entity, const char *filename)
 {
     mtrJson_t *json;
     char      *text;
+    MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG(
+     "Unable to print JSON entity to string", NULL);
 
     json = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, entity);
     if (json->json == NULL)
@@ -573,6 +606,8 @@ MTR_EXPORT bool MTR_CALL mtrJsonToFileFormatted(uint32_t entity,
 {
     mtrJson_t *json;
     char      *text;
+    MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG("Unable to print JSON entity to file",
+     false);
 
     json = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, entity);
     if (json->json == NULL)
@@ -604,6 +639,7 @@ MTR_EXPORT void MTR_CALL mtrJsonDelete(uint32_t entity)
     uint32_t   i;
     mtrJson_t *json;
     mtrJson_t *checkedJson;
+    MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG("Unable to delete JSON entity",);
 
     json = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, entity);
     if (json->json == NULL)
@@ -637,6 +673,8 @@ MTR_EXPORT void MTR_CALL mtrJsonDeleteItemFromObject(uint32_t object,
     uint32_t   i;
     mtrJson_t *jsonObject;
     mtrJson_t *checkedJson;
+    MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG(
+     "Unable to delete JSON item from object",);
 
     jsonObject = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, object);
     if (item == NULL)
@@ -675,6 +713,8 @@ MTR_EXPORT void MTR_CALL mtrJsonDeleteItemFromArray(uint32_t array, int item)
     uint32_t   i;
     mtrJson_t *jsonArray;
     mtrJson_t *checkedJson;
+    MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG(
+     "Unable to delete JSON item from array",);
 
     jsonArray = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, array);
     if (jsonArray->json == NULL)
@@ -706,6 +746,8 @@ MTR_EXPORT void MTR_CALL mtrJsonDetachItemFromObject(uint32_t object,
 {
     mtrJson_t *jsonObject;
     mtrJson_t *jsonItem;
+    MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG(
+     "Unable to detach JSON item from object",);
 
     jsonObject = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, object);
     jsonItem = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, item);
@@ -744,6 +786,8 @@ MTR_EXPORT void MTR_CALL mtrJsonDetachItemFromArray(uint32_t array,
     mtrJson_t *jsonArray;
     mtrJson_t *jsonItem;
     cJSON     *jsonChild;
+    MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG(
+     "Unable to detach JSON item from array",);
 
     jsonArray = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, array);
     jsonItem = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, item);
@@ -794,6 +838,7 @@ MTR_EXPORT void MTR_CALL mtrJsonDetachItemFromArray(uint32_t array,
 MTR_EXPORT bool MTR_CALL mtrJsonObjectHasItem(uint32_t object, const char *item)
 {
     mtrJson_t *json;
+    MTR_JSON_CHECK_IF_NOT_INITED(false);
 
     if (item == NULL)
         return false;
@@ -811,6 +856,7 @@ MTR_EXPORT bool MTR_CALL mtrJsonObjectHasItem(uint32_t object, const char *item)
 MTR_EXPORT int MTR_CALL mtrJsonLength(uint32_t entity)
 {
     mtrJson_t *json;
+    MTR_JSON_CHECK_IF_NOT_INITED(0);
 
     json = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, entity);
     if (json->json == NULL)

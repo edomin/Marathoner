@@ -22,6 +22,18 @@ bool  mtrLineDrawing;
 
 int screenWidth;
 int screenHeight;
+static bool  mtrPrimitiveInited = false;
+#define MTR_PRIMITIVE_CHECK_IF_NOT_INITED(returnValue) \
+    if (!mtrPrimitiveInited)                           \
+        return returnValue;
+#define MTR_PRIMITIVE_CHECK_IF_NOT_INITED_WITH_LOG(message, returnValue) \
+    if (!mtrPrimitiveInited)                                             \
+    {                                                                    \
+        mtrLogWrite(                                                     \
+         message ". Primitive drawing subsystem are not initialized", 1, \
+         MTR_LMT_ERROR);                                                 \
+        return returnValue;                                              \
+    }
 
 typedef mtrScreen_t *(MTR_CALL * mtrGetScreenFunc)(void);
 mtrGetScreenFunc mtrGetScreen;

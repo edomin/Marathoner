@@ -18,5 +18,16 @@ typedef struct mtrMouse_t{
 } mtrMouse_t;
 
 mtrMouse_t mtrMouse;
+static bool mtrMouseInited = false;
+#define MTR_MOUSE_CHECK_IF_NOT_INITED(returnValue) \
+    if (!mtrMouseInited)                           \
+        return returnValue;
+#define MTR_MOUSE_CHECK_IF_NOT_INITED_WITH_LOG(message, returnValue) \
+    if (!mtrMouseInited)                                             \
+    {                                                                \
+        mtrLogWrite(message ". Mouse support are not initialized",   \
+         1, MTR_LMT_ERROR);                                          \
+        return returnValue;                                          \
+    }
 
 #endif

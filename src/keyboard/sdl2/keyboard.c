@@ -63,6 +63,8 @@ MTR_EXPORT bool MTR_CALL mtrKeyboardInit(void)
         return false;
     }
     mtrLogWrite("Keyboard support initialized", 0, MTR_LMT_INFO);
+
+    mtrKeyboardInited = true;
     return true;
 }
 
@@ -70,6 +72,8 @@ MTR_EXPORT bool MTR_CALL mtrKeyboardInit(void)
 MTR_EXPORT void MTR_CALL mtrKeyboardRefresh(void)
 {
     int i;
+    MTR_KEYBOARD_CHECK_IF_NOT_INITED();
+
     for (i = 0; i < SDL_NUM_SCANCODES; i++)
     {
         mtrKeyboard.previousKeystate[i] = (uint8_t)mtrKeyboard.currentKeystate[i];
@@ -80,6 +84,8 @@ MTR_EXPORT void MTR_CALL mtrKeyboardRefresh(void)
 /*fa mtrKeyboardPress yes */
 MTR_EXPORT bool MTR_CALL mtrKeyboardPress(int key)
 {
+    MTR_KEYBOARD_CHECK_IF_NOT_INITED(false);
+
     if (key >= SDL_NUM_SCANCODES)
         return false;
     if ((mtrKeyboard.currentKeystate[key]) &&
@@ -96,6 +102,8 @@ MTR_EXPORT bool MTR_CALL mtrKeyboardPress(int key)
 /*fa mtrKeyboardRelease yes */
 MTR_EXPORT bool MTR_CALL mtrKeyboardRelease(int key)
 {
+    MTR_KEYBOARD_CHECK_IF_NOT_INITED(false);
+
     if (key >= SDL_NUM_SCANCODES)
         return false;
     if (!(mtrKeyboard.currentKeystate[key]) &&
@@ -112,6 +120,8 @@ MTR_EXPORT bool MTR_CALL mtrKeyboardRelease(int key)
 /*fa mtrKeyboardPressed yes */
 MTR_EXPORT bool MTR_CALL mtrKeyboardPressed(int key)
 {
+    MTR_KEYBOARD_CHECK_IF_NOT_INITED(false);
+
     if (key >= SDL_NUM_SCANCODES)
         return false;
     if (mtrKeyboard.currentKeystate [key])
@@ -129,6 +139,7 @@ MTR_EXPORT char *MTR_CALL mtrKeyboardInputChar(void)
 {
     SDL_Event  event;
     int        numEvents;
+    MTR_KEYBOARD_CHECK_IF_NOT_INITED(NULL);
 
     numEvents = SDL_PeepEvents(&event, 1, SDL_GETEVENT, SDL_TEXTINPUT,
      SDL_TEXTINPUT);

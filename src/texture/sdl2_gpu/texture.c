@@ -84,6 +84,8 @@ MTR_EXPORT bool MTR_CALL mtrTextureInit(uint32_t dmSize, uint32_t reservedCount)
     }
     else
         mtrLogWrite("Texture manager initialized", 0, MTR_LMT_INFO);
+
+    mtrTextureInited = true;
     return true;
 }
 
@@ -91,6 +93,8 @@ MTR_EXPORT bool MTR_CALL mtrTextureInit(uint32_t dmSize, uint32_t reservedCount)
 MTR_EXPORT void MTR_CALL mtrTextureBeginTarget(uint32_t texNum)
 {
     mtrTexture_t *texture;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
     if (texNum != 0)
     {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
@@ -101,6 +105,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBeginTarget(uint32_t texNum)
 /*fa mtrTextureEndTarget yes */
 MTR_EXPORT void MTR_CALL mtrTextureEndTarget(void)
 {
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
     mtrScreen->target = mtrScreen->screen;
 }
 
@@ -108,6 +114,8 @@ MTR_EXPORT void MTR_CALL mtrTextureEndTarget(void)
 MTR_EXPORT int MTR_CALL mtrTextureGetWidth(uint32_t texNum)
 {
     mtrTexture_t *texture;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED(0);
+
     if (texNum != 0)
     {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
@@ -121,6 +129,8 @@ MTR_EXPORT int MTR_CALL mtrTextureGetWidth(uint32_t texNum)
 MTR_EXPORT int MTR_CALL mtrTextureGetHeight(uint32_t texNum)
 {
     mtrTexture_t *texture;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED(0);
+
     if (texNum != 0)
     {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
@@ -135,6 +145,14 @@ MTR_EXPORT void MTR_CALL mtrTextureGetSizes(uint32_t texNum, int *width,
  int *height)
 {
     mtrTexture_t *texture;
+
+    if (!mtrTextureInited)
+    {
+        *width = 0;
+        *height = 0;
+        return;
+    }
+
     if (texNum != 0)
     {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
@@ -155,6 +173,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCreate(const char *name, int width,
     uint32_t      freeIndex;
     mtrTexture_t *texture;
     GPU_Target* target;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED(0U);
 
     mtrLogWrite_s("Creating texture", 0, MTR_LMT_INFO, name);
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrTextureKeeper);
@@ -196,6 +215,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureLoad(const char *filename)
 {
     uint32_t      freeIndex;
     mtrTexture_t *texture;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED(0U);
 
     mtrLogWrite_s("Loading texture", 0, MTR_LMT_INFO, filename);
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrTextureKeeper);
@@ -282,6 +302,8 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCopy(uint32_t texNum)
 MTR_EXPORT bool MTR_CALL mtrTextureSave(uint32_t texNum, const char *filename)
 {
     mtrTexture_t *texture;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED(false);
+
     if (texNum != 0)
     {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
@@ -320,6 +342,7 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCreateAlias(uint32_t texNum)
     uint32_t      freeIndex;
     mtrTexture_t *texture;
     mtrTexture_t *oldTexture;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED(0U);
 
     mtrLogWrite("Creating texture alias", 0, MTR_LMT_INFO);
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrTextureKeeper);
@@ -348,6 +371,8 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCreateAlias(uint32_t texNum)
 MTR_EXPORT void MTR_CALL mtrTextureFree(uint32_t texNum)
 {
     mtrTexture_t *texture;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
     if (texNum != 0)
     {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
@@ -368,6 +393,8 @@ MTR_EXPORT void MTR_CALL mtrTextureSetModulation_c(uint32_t texNum,
     uint8_t r;
     uint8_t g;
     uint8_t b;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
     r = (uint8_t)(color >> 16);
     g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
     b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
@@ -387,6 +414,8 @@ MTR_EXPORT void MTR_CALL mtrTextureSetModulation_ca(uint32_t texNum,
     uint8_t g;
     uint8_t b;
     uint8_t a;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
     r = (uint8_t)(color >> 24);
     g = (uint8_t)((color >> 16) - ((uint32_t)r << 8));
     b = (uint8_t)((color >> 8) - ((uint32_t)r << 16) - ((uint32_t)g << 8));
@@ -404,6 +433,8 @@ MTR_EXPORT void MTR_CALL mtrTextureSetModulation_rgb(uint32_t texNum,
  uint8_t r, uint8_t g, uint8_t b)
 {
     mtrTexture_t *texture;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
     if (texNum != 0)
     {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
@@ -416,6 +447,8 @@ MTR_EXPORT void MTR_CALL mtrTextureSetModulation_rgba(uint32_t texNum,
  uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
     mtrTexture_t *texture;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
     if (texNum != 0)
     {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
@@ -428,6 +461,8 @@ MTR_EXPORT void MTR_CALL mtrTextureSetModulationAlpha(uint32_t texNum,
  uint8_t alpha)
 {
     mtrTexture_t *texture;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
     if (texNum != 0)
     {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
@@ -441,6 +476,8 @@ MTR_EXPORT void MTR_CALL mtrTextureSetModulationAlpha_f(uint32_t texNum,
 {
     mtrTexture_t *texture;
     uint8_t alpha8;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
     if (texNum != 0)
     {
         alpha8 = (alpha * 255);
@@ -455,6 +492,8 @@ MTR_EXPORT void MTR_CALL mtrTextureSetBlendFunction(uint32_t texNum,
  int srcColor, int destColor, int srcAlpha, int dstAlpha)
 {
     mtrTexture_t *texture;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
     if (texNum != 0)
     {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
@@ -468,6 +507,8 @@ MTR_EXPORT void MTR_CALL mtrTextureSetAlphaBlending(uint32_t texNum,
  bool blending)
 {
     mtrTexture_t *texture;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
     if (texNum != 0)
     {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
@@ -479,6 +520,8 @@ MTR_EXPORT void MTR_CALL mtrTextureSetAlphaBlending(uint32_t texNum,
 MTR_EXPORT void MTR_CALL mtrTextureBlit_f(uint32_t texNum, float x, float y)
 {
     mtrTexture_t *texture;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
     if (texNum != 0)
     {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
@@ -492,6 +535,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitScaled_f(uint32_t texNum, float x,
 {
     GPU_Rect outputRegion;
     mtrTexture_t *texture;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
     if (texNum != 0)
     {
         outputRegion.x = x;
@@ -509,6 +554,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitAngled_f(uint32_t texNum, float x,
 {
     GPU_Rect outputRegion;
     mtrTexture_t *texture;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
     if (texNum != 0)
     {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
@@ -528,6 +575,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitFlipped_f(uint32_t texNum, float x,
     GPU_Rect outputRegion;
     mtrTexture_t *texture;
     int actualFlip;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
     if (texNum != 0)
     {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
@@ -552,6 +601,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitGeneral_f(uint32_t texNum, float x,
     GPU_Rect outputRegion;
     mtrTexture_t *texture;
     int actualFlip;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
     if (texNum != 0)
     {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
@@ -575,6 +626,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegion_f(uint32_t texNum, float x,
 {
     GPU_Rect region;
     mtrTexture_t *texture;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
     if (texNum != 0)
     {
         region.x = rx;
@@ -593,6 +646,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionScaled_f(uint32_t texNum, float x,
     GPU_Rect region;
     GPU_Rect outputRegion;
     mtrTexture_t *texture;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
     if (texNum != 0)
     {
         region.x = rx;
@@ -616,6 +671,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionAngled_f(uint32_t texNum, float x,
     GPU_Rect region;
     GPU_Rect outputRegion;
     mtrTexture_t *texture;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
     if (texNum != 0)
     {
         region.x = rx;
@@ -640,6 +697,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionFlipped_f(uint32_t texNum, float x,
     GPU_Rect outputRegion;
     mtrTexture_t *texture;
     int actualFlip;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
     if (texNum != 0)
     {
         actualFlip = mtrFlipToActualFlip(flip);
@@ -670,6 +729,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionGeneral_f(uint32_t texNum, float x,
     GPU_Rect outputRegion;
     mtrTexture_t *texture;
     int actualFlip;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
     if (texNum != 0)
     {
         actualFlip = mtrFlipToActualFlip(flip);
@@ -699,6 +760,7 @@ MTR_EXPORT bool MTR_CALL mtrTextureReceivePixels(uint32_t texNum,
     GPU_Rect      rect;
     int           textureW;
     int           textureH;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED(false);
 
     if (texNum == 0)
         return false;

@@ -51,12 +51,16 @@ MTR_EXPORT bool MTR_CALL mtrTimerInit(void)
     else
         mtrLogWrite("SDL timer subsystem already initialized", 1, MTR_LMT_INFO);
     mtrLogWrite("Timer subsystem initialized", 0, MTR_LMT_INFO);
+
+    mtrTimerInited = true;
     return true;
 }
 
 /*fa mtrTimerStart yes */
 MTR_EXPORT void MTR_CALL mtrTimerStart(void)
 {
+    MTR_TIMER_CHECK_IF_NOT_INITED();
+
     mtrTimer.startTime = SDL_GetTicks();
 }
 
@@ -69,6 +73,8 @@ MTR_EXPORT uint32_t MTR_CALL mtrTimerGetTicks(void)
 /*fa mtrTimerDelay yes */
 MTR_EXPORT int MTR_CALL mtrTimerDelay(int ms)
 {
+    MTR_TIMER_CHECK_IF_NOT_INITED(0);
+
     if (ms > 0)
         SDL_Delay(ms);
     return 1000 / mtrTimerGetTicks();
@@ -77,6 +83,8 @@ MTR_EXPORT int MTR_CALL mtrTimerDelay(int ms)
 /*fa mtrTimerDelayForFPS yes */
 MTR_EXPORT int MTR_CALL mtrTimerDelayForFPS(int fps)
 {
+    MTR_TIMER_CHECK_IF_NOT_INITED(0);
+
     if (fps > 0)
         if(mtrTimerGetTicks() < 1000U / fps)
         {
@@ -95,6 +103,8 @@ MTR_EXPORT int MTR_CALL mtrTimerDelayForFPS(int fps)
 /*fa mtrTimerDelayForFPS_f yes */
 MTR_EXPORT float MTR_CALL mtrTimerDelayForFPS_f(float fps)
 {
+    MTR_TIMER_CHECK_IF_NOT_INITED(0.0f);
+
     if (fps > 0.0f)
         if(mtrTimerGetTicks() < 1000.0f / fps)
         {

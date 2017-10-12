@@ -32,6 +32,17 @@ char mtrDefaultTextureName[] = "Unnamed_Texture";
 
 mtrScreen_t *mtrScreen; /* this will imported from screen plugin */
 mtrIndexkeeper_t *mtrTextureKeeper;
+static bool       mtrTextureInited = false;
+#define MTR_TEXTURE_CHECK_IF_NOT_INITED(returnValue) \
+    if (!mtrTextureInited)                           \
+        return returnValue;
+#define MTR_TEXTURE_CHECK_IF_NOT_INITED_WITH_LOG(message, returnValue) \
+    if (!mtrTextureInited)                                             \
+    {                                                                  \
+        mtrLogWrite(message ". Texture manager are not initialized",   \
+         1, MTR_LMT_ERROR);                                            \
+        return returnValue;                                            \
+    }
 
 typedef mtrScreen_t *(MTR_CALL * mtrGetScreenFunc)(void);
 mtrGetScreenFunc mtrGetScreen;

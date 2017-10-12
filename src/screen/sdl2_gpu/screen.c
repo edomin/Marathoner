@@ -49,12 +49,15 @@ MTR_EXPORT bool MTR_CALL mtrScreenInit(int width, int height, bool fullscreen,
     }
     mtrScreen->target = mtrScreen->screen;
 
+    mtrScreenInited = true;
     return true;
 }
 
 /*fa mtrScreenQuit yes */
 MTR_EXPORT void MTR_CALL mtrScreenQuit(void)
 {
+    MTR_SCREEN_CHECK_IF_NOT_INITED_WITH_LOG("Unable to destroy Screen",);
+
     GPU_Quit();
     free(mtrScreen);
     mtrLogWrite("Window destroyed", 0, MTR_LMT_INFO);
@@ -63,6 +66,8 @@ MTR_EXPORT void MTR_CALL mtrScreenQuit(void)
 /*fa mtrScreenFlip yes */
 MTR_EXPORT void MTR_CALL mtrScreenFlip(void)
 {
+    MTR_SCREEN_CHECK_IF_NOT_INITED();
+
     GPU_Flip(mtrScreen->screen);
 }
 
@@ -71,6 +76,13 @@ MTR_EXPORT void MTR_CALL mtrScreenGetSizes(int *w, int *h)
 {
     uint16_t width;
     uint16_t height;
+
+    if (!mtrScreenInited)
+    {
+        *w = 0;
+        *h = 0;
+        return;
+    }
 
     GPU_GetVirtualResolution(mtrScreen->screen, &width, &height);
     if (w != NULL)
@@ -84,6 +96,7 @@ MTR_EXPORT int MTR_CALL mtrScreenGetWidth(void)
 {
     uint16_t width;
     uint16_t height;
+    MTR_SCREEN_CHECK_IF_NOT_INITED(0);
 
     GPU_GetVirtualResolution(mtrScreen->screen, &width, &height);
     return width;
@@ -94,6 +107,7 @@ MTR_EXPORT int MTR_CALL mtrScreenGetHeight(void)
 {
     uint16_t width;
     uint16_t height;
+    MTR_SCREEN_CHECK_IF_NOT_INITED(0);
 
     GPU_GetVirtualResolution(mtrScreen->screen, &width, &height);
     return height;
@@ -104,6 +118,7 @@ MTR_EXPORT bool MTR_CALL mtrScreenXed(void)
 {
     SDL_Event events[32];
     int       numEvents;
+    MTR_SCREEN_CHECK_IF_NOT_INITED(false);
 
     numEvents = SDL_PeepEvents(events, 32, SDL_GETEVENT, SDL_QUIT, SDL_QUIT);
 
@@ -115,5 +130,7 @@ MTR_EXPORT bool MTR_CALL mtrScreenXed(void)
 
 MTR_EXPORT mtrScreen_t *MTR_CALL mtrGetScreen(void)
 {
+    MTR_SCREEN_CHECK_IF_NOT_INITED(NULL);
+
     return mtrScreen;
 }
