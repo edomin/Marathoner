@@ -106,12 +106,6 @@ MTR_EXPORT bool MTR_CALL mtrScreenInit(int width, int height, bool fullscreen,
         }
     }
 
-    /* Copypasted from Run and Jump
-    if (!fullscreen)
-        Screen.window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED,
-                                         SDL_WINDOWPOS_UNDEFINED, w, h,
-                                         SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN);
-    */
     if (title == NULL)
         actualTitle = defaultTitle;
     else
