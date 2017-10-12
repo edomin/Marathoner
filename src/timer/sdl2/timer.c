@@ -64,7 +64,6 @@ MTR_EXPORT void MTR_CALL mtrTimerStart(void)
     mtrTimer.startTime = SDL_GetTicks();
 }
 
-/*fa mtrTimerGetTicks yes */
 MTR_EXPORT uint32_t MTR_CALL mtrTimerGetTicks(void)
 {
     return SDL_GetTicks() - mtrTimer.startTime;
