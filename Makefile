@@ -90,7 +90,7 @@ all: $(PLATFORM)
 
 win32: prebuild
 	make -j$(CORES) -C src/_build_utils/fagen PREFIX=$(PREFIX)
-	make -j$(CORES) -C src/platform_specific/windows PREFIX=$(PREFIX)
+	make -j$(CORES) -C src/_build_utils/rcgen PREFIX=$(PREFIX)
 
 	make -j$(CORES) -C src/$(SCREEN_SDL2_GPU) PREFIX=$(PREFIX)
 	make -j$(CORES) -C src/$(SCREEN_SDL2_GPU_LUA) PREFIX=$(PREFIX)
