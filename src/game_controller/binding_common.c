@@ -47,6 +47,31 @@ MTR_SCRIPT_FUNC(mtrSF_GameControllerGetTrackballDeltaXY)
 
 MTR_SCRIPT_FUNC_U8t_I2(mtrSF_GameControllerGetPovHat,
  mtrGameControllerGetPovHat)
+MTR_SCRIPT_FUNC_I_I2(mtrSF_GameControllerGetPovHatHorizontal,
+ mtrGameControllerGetPovHatHorizontal)
+MTR_SCRIPT_FUNC_I_I2(mtrSF_GameControllerGetPovHatVertical,
+ mtrGameControllerGetPovHatVertical)
+
+#ifdef lua_h
+MTR_SCRIPT_FUNC(mtrSF_GameControllerGetPovHatAxes)
+{
+    int controllerNum;
+    int povHatNum;
+    int horizontal;
+    int vertical;
+
+    MTR_SF_GET_INT(controllerNum, 1);
+    MTR_SF_GET_INT(povHatNum, 2);
+    mtrGameControllerGetPovHatAxes(controllerNum, povHatNum, &horizontal,
+     &vertical);
+
+    MTR_SF_PUSH_INT(horizontal);
+    MTR_SF_PUSH_INT(vertical);
+
+    return 2;
+}
+#endif
+
 MTR_SCRIPT_FUNC_I_I1(mtrSF_GameControllerGetButtonsCount,
  mtrGameControllerGetButtonsCount)
 MTR_SCRIPT_FUNC_I_I1(mtrSF_GameControllerGetAxesCount,
@@ -81,6 +106,13 @@ void mtrScriptsRegisterAll(void)
      GameControllerGetTrackballDeltaXY);
     #endif
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, GameControllerGetPovHat);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE,
+     GameControllerGetPovHatHorizontal);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE,
+     GameControllerGetPovHatVertical);
+    #ifdef lua_h
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, GameControllerGetPovHatAxes);
+    #endif
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, GameControllerGetButtonsCount);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, GameControllerGetAxesCount);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE,

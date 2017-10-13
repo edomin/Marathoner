@@ -49,6 +49,16 @@ mtrGameControllerGetTrackballDeltaXYFunc mtrGameControllerGetTrackballDeltaXY;
 typedef uint8_t (MTR_CALL * mtrGameControllerGetPovHatFunc)(int, int);
 mtrGameControllerGetPovHatFunc mtrGameControllerGetPovHat;
 
+typedef int (MTR_CALL * mtrGameControllerGetPovHatHorizontalFunc)(int, int);
+mtrGameControllerGetPovHatHorizontalFunc mtrGameControllerGetPovHatHorizontal;
+
+typedef int (MTR_CALL * mtrGameControllerGetPovHatVerticalFunc)(int, int);
+mtrGameControllerGetPovHatVerticalFunc mtrGameControllerGetPovHatVertical;
+
+typedef void (MTR_CALL * mtrGameControllerGetPovHatAxesFunc)(int, int, int *,
+ int *);
+mtrGameControllerGetPovHatAxesFunc mtrGameControllerGetPovHatAxes;
+
 typedef int (MTR_CALL * mtrGameControllerGetButtonsCountFunc)(int);
 mtrGameControllerGetButtonsCountFunc mtrGameControllerGetButtonsCount;
 

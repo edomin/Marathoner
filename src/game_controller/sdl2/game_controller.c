@@ -597,7 +597,94 @@ MTR_EXPORT uint8_t MTR_CALL mtrGameControllerGetPovHat(int controllerNum,
         else
             return 0;
     else
+
+/*fa mtrGameControllerGetPovHatHorizontal yes */
+MTR_EXPORT int MTR_CALL mtrGameControllerGetPovHatHorizontal(int controllerNum,
+ int povHatNum)
+{
+    mtrGameController_t *gameController;
+    MTR_GAME_CONTROLLER_CHECK_IF_NOT_INITED(0);
+
+    gameController = IK_GET_DATA(mtrGameController_t *,
+     mtrGameControllerKeeper, controllerNum);
+
+    if (mtrIndexkeeperIndexIsEmpty(mtrGameControllerKeeper, controllerNum))
         return 0;
+
+    if (povHatNum >= gameController->povHatsCount)
+        return 0;
+
+    if (
+     (gameController->povHat[povHatNum] & MTR_POVHAT_LEFT) == MTR_POVHAT_LEFT)
+        return -1;
+    else if (
+     (gameController->povHat[povHatNum] & MTR_POVHAT_RIGHT) == MTR_POVHAT_RIGHT)
+        return 1;
+
+    return 0;
+}
+
+/*fa mtrGameControllerGetPovHatVertical yes */
+MTR_EXPORT int MTR_CALL mtrGameControllerGetPovHatVertical(int controllerNum,
+ int povHatNum)
+{
+    mtrGameController_t *gameController;
+    MTR_GAME_CONTROLLER_CHECK_IF_NOT_INITED(0);
+
+    gameController = IK_GET_DATA(mtrGameController_t *,
+     mtrGameControllerKeeper, controllerNum);
+
+    if (mtrIndexkeeperIndexIsEmpty(mtrGameControllerKeeper, controllerNum))
+        return 0;
+
+    if (povHatNum >= gameController->povHatsCount)
+        return 0;
+
+    if ((gameController->povHat[povHatNum] & MTR_POVHAT_UP) == MTR_POVHAT_UP)
+        return -1;
+    else if (
+     (gameController->povHat[povHatNum] & MTR_POVHAT_DOWN) == MTR_POVHAT_DOWN)
+        return 1;
+
+    return 0;
+}
+
+/*fa mtrGameControllerGetPovHatAxes yes */
+MTR_EXPORT void MTR_CALL mtrGameControllerGetPovHatAxes(int controllerNum,
+ int povHatNum, int *vertical, int *horizontal)
+{
+    mtrGameController_t *gameController;
+
+    *horizontal = 0;
+    *vertical = 0;
+
+    MTR_GAME_CONTROLLER_CHECK_IF_NOT_INITED();
+
+    gameController = IK_GET_DATA(mtrGameController_t *,
+     mtrGameControllerKeeper, controllerNum);
+
+    if (mtrIndexkeeperIndexIsEmpty(mtrGameControllerKeeper, controllerNum))
+        return;
+
+    if (povHatNum >= gameController->povHatsCount)
+        return;
+
+    if (
+     (gameController->povHat[povHatNum] & MTR_POVHAT_LEFT) == MTR_POVHAT_LEFT)
+        *horizontal = -1;
+    else if (
+     (gameController->povHat[povHatNum] & MTR_POVHAT_RIGHT) == MTR_POVHAT_RIGHT)
+        *horizontal = 1;
+    else
+        *horizontal = 0;
+
+    if ((gameController->povHat[povHatNum] & MTR_POVHAT_UP) == MTR_POVHAT_UP)
+        *vertical = -1;
+    else if (
+     (gameController->povHat[povHatNum] & MTR_POVHAT_DOWN) == MTR_POVHAT_DOWN)
+        *vertical = 1;
+    else
+        *vertical = 0;
 }
 
 /*fa mtrGameControllerGetButtonsCount yes */

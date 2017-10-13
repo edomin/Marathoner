@@ -32,6 +32,9 @@ end;
 
 local powHatsCount = GameControllerGetPowHatsCount(1);
 local powHat = {};
+for i = 0, powHatsCount - 1, 1 do
+    powHat[i] = {};
+end;
 
 while not quit do
     TimerStart();
@@ -60,7 +63,9 @@ while not quit do
     end;
 
     for i = 0, powHatsCount - 1, 1 do
-        powHat[i] = GameControllerGetPovHat(1, i);
+        powHat[i].dir = GameControllerGetPovHat(1, i);
+        powHat[i].hor = GameControllerGetPovHatHorizontal(1, i);
+        powHat[i].ver = GameControllerGetPovHatVertical(1, i);
     end;
 
     PrimitiveFill_c(0x000000);
@@ -82,25 +87,27 @@ while not quit do
     end;
 
     for i = 0, powHatsCount - 1, 1 do
-        if powHat[i] == POVHAT_UP then
+        if powHat[i].dir == POVHAT_UP then
             PrimitiveCircleFilled_c_f(32 + i * 32, 256 - 16, 8, 0x0000FF);
-        elseif powHat[i] == POVHAT_DOWN then
+        elseif powHat[i].dir == POVHAT_DOWN then
             PrimitiveCircleFilled_c_f(32 + i * 32, 256 + 16, 8, 0x0000FF);
-        elseif powHat[i] == POVHAT_LEFT then
+        elseif powHat[i].dir == POVHAT_LEFT then
             PrimitiveCircleFilled_c_f(32 + i * 32 - 16, 256, 8, 0x0000FF);
-        elseif powHat[i] == POVHAT_RIGHT then
+        elseif powHat[i].dir == POVHAT_RIGHT then
             PrimitiveCircleFilled_c_f(32 + i * 32 + 16, 256, 8, 0x0000FF);
-        elseif powHat[i] == POVHAT_UP_LEFT then
+        elseif powHat[i].dir == POVHAT_UP_LEFT then
             PrimitiveCircleFilled_c_f(32 + i * 32 - 16, 256 - 16, 8, 0x0000FF);
-        elseif powHat[i] == POVHAT_UP_RIGHT then
+        elseif powHat[i].dir == POVHAT_UP_RIGHT then
             PrimitiveCircleFilled_c_f(32 + i * 32 + 16, 256 - 16, 8, 0x0000FF);
-        elseif powHat[i] == POVHAT_DOWN_LEFT then
+        elseif powHat[i].dir == POVHAT_DOWN_LEFT then
             PrimitiveCircleFilled_c_f(32 + i * 32 - 16, 256 + 16, 8, 0x0000FF);
-        elseif powHat[i] == POVHAT_DOWN_RIGHT then
+        elseif powHat[i].dir == POVHAT_DOWN_RIGHT then
             PrimitiveCircleFilled_c_f(32 + i * 32 + 16, 256 + 16, 8, 0x0000FF);
         else
             PrimitiveCircleFilled_c_f(32 + i * 32, 256, 8, 0x0000FF);
         end;
+        PrimitiveCircleFilled_c_f(32 + i * 32 + Sign(powHat[i].hor) * 16,
+         320 + Sign(powHat[i].ver) * 16, 8, 0x0000FF);
     end;
 
     ScreenFlip();
