@@ -595,8 +595,10 @@ MTR_EXPORT uint8_t MTR_CALL mtrGameControllerGetPovHat(int controllerNum,
         if (povHatNum < gameController->povHatsCount)
             return gameController->povHat[povHatNum];
         else
-            return 0;
+            return 0U;
     else
+        return 0U;
+}
 
 /*fa mtrGameControllerGetPovHatHorizontal yes */
 MTR_EXPORT int MTR_CALL mtrGameControllerGetPovHatHorizontal(int controllerNum,

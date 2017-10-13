@@ -35,8 +35,8 @@ MTR_SCRIPT_FUNC(mtrSF_GameControllerGetTrackballDeltaXY)
 
     MTR_SF_GET_INT(controllerNum, 1);
     MTR_SF_GET_INT(trackball, 2);
-    mtrGameControllerGetTrackballDeltaXY(controllerNum,
-     trackball, &deltaX, &deltaY);
+    mtrGameControllerGetTrackballDeltaXY(controllerNum, trackball, &deltaX,
+     &deltaY);
 
     MTR_SF_PUSH_INT(deltaX);
     MTR_SF_PUSH_INT(deltaY);
