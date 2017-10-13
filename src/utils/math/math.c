@@ -37,7 +37,13 @@ MTR_EXPORT double MTR_CALL mtrSin_d(double num)
 MTR_EXPORT float MTR_CALL mtrSinFast_f(float num)
 {
     float sine;
-    float num2 = num * MTR_DEGREE_F;
+    float num2 = num;
+
+    if (num2 < 0)
+        num2 = 360 - fmodf(-num2 + 180, 360) - 180;
+    else
+        num2 = fmodf(num2 + 180, 360) - 180;
+    num2 = num2 * MTR_DEGREE_F;
     if (num2 < 0)
         sine = num2 * (1.27323954f + 0.405284735f * num2);
     else
@@ -55,7 +61,13 @@ MTR_EXPORT float MTR_CALL mtrSinFast_f(float num)
 MTR_EXPORT double MTR_CALL mtrSinFast_d(double num)
 {
     double sine;
-    double num2 = num * MTR_DEGREE_D;
+    double num2 = num;
+
+    if (num2 < 0)
+        num2 = 360 - fmod(-num2 + 180, 360) - 180;
+    else
+        num2 = fmod(num2 + 180, 360) - 180;
+    num2 = num2 * MTR_DEGREE_D;
     if (num2 < 0)
         sine = num2 * (1.27323954 + 0.405284735 * num2);
     else
@@ -84,8 +96,13 @@ MTR_EXPORT double MTR_CALL mtrCos_d(double num)
 /*fa mtrCosFast_f yes */
 MTR_EXPORT float MTR_CALL mtrCosFast_f(float num)
 {
-    float num2 = num * MTR_DEGREE_F;
+    float num2 = num;
 
+    if (num2 < 0)
+        num2 = 360 - fmodf(-num2, 360);
+    else
+        num2 = fmodf(num2, 360);
+    num2 = num2 * MTR_DEGREE_F;
     if (num2 < -3.14159265f)
         num2 += 6.28318531f;
     else
@@ -106,8 +123,13 @@ MTR_EXPORT float MTR_CALL mtrCosFast_f(float num)
 /*fa mtrCosFast_d yes */
 MTR_EXPORT double MTR_CALL mtrCosFast_d(double num)
 {
-    double num2 = num * MTR_DEGREE_D;
+    double num2 = num;
 
+    if (num2 < 0)
+        num2 = 360 - fmod(-num2, 360);
+    else
+        num2 = fmod(num2, 360);
+    num2 = num2 * MTR_DEGREE_D;
     if (num2 < -3.14159265)
         num2 += 6.28318531;
     else
