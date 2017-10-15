@@ -113,8 +113,8 @@ MTR_EXPORT uint32_t MTR_CALL mtrSpriteLoad(const char *filename, int clipWidth,
         mtrLogWrite_i("Rows count:", 1, MTR_LMT_INFO, sprite->rowsCount);
 
         if ((colsCount == 0) ||
-         (colsCount * sprite->clipHeight > textureHeight))
-            sprite->colsCount = textureHeight / sprite->clipHeight;
+         (colsCount * sprite->clipWidth > textureWidth))
+            sprite->colsCount = textureWidth / sprite->clipWidth;
         else
             sprite->colsCount = colsCount;
         mtrLogWrite_i("Cols count:", 1, MTR_LMT_INFO, sprite->colsCount);
