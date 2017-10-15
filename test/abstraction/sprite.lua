@@ -8,6 +8,7 @@ FileWriteLineFast("test/output.txt", "Positive test", FM_WRITE);
 ScreenInit(640, 480, false, "Sprite Test");
 TimerInit();
 PrimitiveInit();
+MouseInit();
 TextureInit(IKDM_SMALL, 32);
 SpriteInit(IKDM_SMALL, 32);
 helicopter = SpriteLoadSimple("test/media/helicopter.png", 48, 16);
@@ -16,6 +17,7 @@ helicopterAnim = SpriteLoad("test/media/helicopter_anim.png", 96, 32, 1, 8, 8,
 
 -- Prepare to watch
 for i = 0, 60, 1 do
+    MouseRefresh();
     TimerStart();
     PrimitiveFill_c(0x000000);
     ScreenFlip();
@@ -25,6 +27,7 @@ end;
 -- Animated sprite
 x = 32;
 for i = 0, 60, 1 do
+    MouseRefresh();
     TimerStart();
     x = x + 2;
     PrimitiveFill_c(0x000000);
@@ -35,6 +38,7 @@ end;
 
 x = 32;
 for i = 0, 60, 1 do
+    MouseRefresh();
     TimerStart();
     x = x + 2;
     PrimitiveFill_c(0x000000);
@@ -46,6 +50,7 @@ end;
 
 x = 32;
 for i = 0, 60, 1 do
+    MouseRefresh();
     TimerStart();
     x = x + 2;
     PrimitiveFill_c(0x000000);
@@ -56,6 +61,7 @@ end;
 
 x = 32;
 for i = 0, 60, 1 do
+    MouseRefresh();
     TimerStart();
     x = x + 2;
     PrimitiveFill_c(0x000000);
@@ -71,6 +77,7 @@ end;
 
 x = 32;
 for i = 0, 60, 1 do
+    MouseRefresh();
     TimerStart();
     x = x + 2;
     PrimitiveFill_c(0x000000);
@@ -89,6 +96,7 @@ end;
 -- Non-animated sprite with modulation
 x = 32;
 for i = 0, 60, 1 do
+    MouseRefresh();
     TimerStart();
     x = x + 2;
     PrimitiveFill_c(0x000000);
@@ -101,6 +109,7 @@ TextureSetModulation_c(helicopter, 0xFFFFFF);
 
 x = 32;
 for i = 0, 60, 1 do
+    MouseRefresh();
     TimerStart();
     x = x + 2;
     PrimitiveFill_c(0x000000);
@@ -113,6 +122,7 @@ TextureSetModulation_ca(helicopter, 0xFFFFFFFF);
 
 x = 32;
 for i = 0, 60, 1 do
+    MouseRefresh();
     TimerStart();
     x = x + 2;
     PrimitiveFill_c(0x000000);
@@ -126,6 +136,7 @@ TextureSetModulation_rgb(helicopter, 0xFF, 0xFF, 0xFF);
 
 x = 32;
 for i = 0, 60, 1 do
+    MouseRefresh();
     TimerStart();
     x = x + 2;
     PrimitiveFill_c(0x000000);
@@ -139,6 +150,7 @@ TextureSetModulation_rgba(helicopter, 0xFF, 0xFF, 0xFF, 0xFF);
 
 x = 32;
 for i = 0, 60, 1 do
+    MouseRefresh();
     TimerStart();
     x = x + 2;
     PrimitiveFill_c(0x000000);
@@ -151,6 +163,7 @@ TextureSetModulationAlpha(helicopter, 0xFF);
 
 x = 32;
 for i = 0, 60, 1 do
+    MouseRefresh();
     TimerStart();
     x = x + 2;
     PrimitiveFill_c(0x000000);
