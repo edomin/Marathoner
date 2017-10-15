@@ -13,6 +13,5 @@ README-SDL.txt
 autorun/*
 GDG/*
 Marathoner.cfg
-test/output.txt
-test/output.png
+test/output*
 fa/*
