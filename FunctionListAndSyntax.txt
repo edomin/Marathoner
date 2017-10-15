@@ -67,6 +67,9 @@ long int OptionsGet_l(char *option)
 float OptionsGet_f(char *option)
 double OptionsGet_d(char *option)
 
+void ConsoleShow()
+void ConsoleHide()
+
 int ScreenFunctionSupported(const char *functionName)
 bool ScreenInit(int width, int height, bool fullscreen, const char *title)
 void ScreenQuit()

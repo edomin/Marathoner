@@ -143,6 +143,9 @@ typedef long int    (MTR_CALL * mtrOptionsGet_lFunc_t)(const char *);
 typedef float       (MTR_CALL * mtrOptionsGet_fFunc_t)(const char *);
 typedef double      (MTR_CALL * mtrOptionsGet_dFunc_t)(const char *);
 
+typedef void        (MTR_CALL * mtrConsoleShowFunc_t)(void);
+typedef void        (MTR_CALL * mtrConsoleHideFunc_t)(void);
+
 /* loaded dll-plugin data */
 mtrPlugin *mtrPluginData;
 

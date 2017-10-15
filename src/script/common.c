@@ -100,6 +100,8 @@ MTR_SCRIPT_FUNC_I_S1(mtrSF_OptionsGet_i, mtrOptionsGet_i)
 MTR_SCRIPT_FUNC_L_S1(mtrSF_OptionsGet_l, mtrOptionsGet_l)
 MTR_SCRIPT_FUNC_F_S1(mtrSF_OptionsGet_f, mtrOptionsGet_f)
 MTR_SCRIPT_FUNC_D_S1(mtrSF_OptionsGet_d, mtrOptionsGet_d)
+MTR_SCRIPT_FUNC_V_V(mtrSF_ConsoleShow, mtrConsoleShow)
+MTR_SCRIPT_FUNC_V_V(mtrSF_ConsoleHide, mtrConsoleHide)
 
 void mtrScriptsRegisterAll(void)
 {
@@ -224,6 +226,9 @@ void mtrScriptsRegisterAll(void)
     mtrScriptsRegisterFunction(mtrSF_OptionsGet_l, "OptionsGet_l");
     mtrScriptsRegisterFunction(mtrSF_OptionsGet_f, "OptionsGet_f");
     mtrScriptsRegisterFunction(mtrSF_OptionsGet_d, "OptionsGet_d");
+
+    mtrScriptsRegisterFunction(mtrSF_ConsoleShow, "ConsoleShow");
+    mtrScriptsRegisterFunction(mtrSF_ConsoleHide, "ConsoleHide");
 }
 
 #endif

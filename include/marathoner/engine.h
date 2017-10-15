@@ -176,6 +176,11 @@ mtrRequireOptionsGet_fFunc mtrRequireOptionsGet_f;
 typedef void (MTR_CALL * mtrRequireOptionsGet_dFunc)(mtrOptionsGet_dFunc_t);
 mtrRequireOptionsGet_dFunc mtrRequireOptionsGet_d;
 
+typedef void (MTR_CALL * mtrRequireConsoleShowFunc)(mtrConsoleShowFunc_t);
+mtrRequireConsoleShowFunc mtrRequireConsoleShow;
+typedef void (MTR_CALL * mtrRequireConsoleHideFunc)(mtrConsoleHideFunc_t);
+mtrRequireConsoleHideFunc mtrRequireConsoleHide;
+
 /*  */
 typedef void (MTR_CALL * mtrRequirePluginDataFunc)(mtrPlugin *, uint8_t);
 mtrRequirePluginDataFunc mtrRequirePluginData;

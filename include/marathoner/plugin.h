@@ -99,6 +99,9 @@ mtrOptionsGet_lFunc_t                       mtrOptionsGet_l;
 mtrOptionsGet_fFunc_t                       mtrOptionsGet_f;
 mtrOptionsGet_dFunc_t                       mtrOptionsGet_d;
 
+mtrConsoleShowFunc_t                        mtrConsoleShow;
+mtrConsoleHideFunc_t                        mtrConsoleHide;
+
 uint8_t mtrPluginsCount;
 
 

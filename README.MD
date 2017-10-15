@@ -12,6 +12,10 @@ More detailed will be in v1.0.0
 ### Commandline API (See first Configfile usage and Launcher usage)
 You can setup launch options with commandline arguments.  
 "Marathoner [\<option\> \<value\>] [...]"  
+Engine options:
+
+* "show-console" - show console with log on startup. Default - no. Valid values for showing console - "yes", "y", "1", "true".
+
 Autorun options. This options have priority higher than configfile options:
 
 * "--autorun-action \<action\>" - running way. Valid values: "runScript"
@@ -24,6 +28,9 @@ Force disable modules via commandline not implemented now.
 More examples in tests' bat-files. See "test" directory.
 
 ### Configfile usage (Not recommended for use. Read Launcher usage)
+##### "Engine" section
+* "show_console" key - show console with log on startup. Default - no
+
 ##### "Autorun" section
 Game starting settings
 

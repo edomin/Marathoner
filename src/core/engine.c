@@ -11,6 +11,7 @@
 #include "plugin_loader.h"
 #include "options.h"
 #include "version.h"
+#include "console.h"
 
 #include "marathoner/engine.h"
 
@@ -110,6 +111,8 @@ void RequireEngineFuncs(uint8_t plugin)
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireOptionsGet_l, mtrOptionsGet_l);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireOptionsGet_f, mtrOptionsGet_f);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireOptionsGet_d, mtrOptionsGet_d);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireConsoleShow, mtrConsoleShow);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireConsoleHide, mtrConsoleHide);
 }
 
 /* Check if module disabled and process it */
@@ -153,17 +156,7 @@ int main(int argc, char** argv)
     char   *autorunPlugin = NULL;
     char   *autorunScript = NULL;
     char   *currentArgument = NULL;
-
-    mtrLogInit("Marathoner.log");
-
-    mtrLogWrite("Reporting Marathoner version:", 0, MTR_LMT_INFO);
-    mtrLogWrite_i("Majon:", 1, MTR_LMT_INFO,
-     (MTR_VERSION_MARATHONER & 0xFF0000) >> 16);
-    mtrLogWrite_i("Minor:", 1, MTR_LMT_INFO,
-     (MTR_VERSION_MARATHONER & 0x00FF00) >> 8);
-    mtrLogWrite_i("Patch:", 1, MTR_LMT_INFO,
-     MTR_VERSION_MARATHONER & 0x0000FF);
-    mtrLogWrite("Searching available plugins", 0, MTR_LMT_INFO);
+    bool    showConsole;
 
     mtrOptionsProcess(argc, argv);
     mtrOptionsAlias("help", "h");
@@ -171,6 +164,14 @@ int main(int argc, char** argv)
     {
         /* Print help to log */
     }
+
+    showConsole = mtrOptionsGet_b("show-console");
+    if (!showConsole)
+        showConsole = mtrConfigfileReadBool("Marathoner.cfg", "Engine",
+         "show_console", false);
+
+    if (showConsole)
+        mtrConsoleShow();
 
     autorunAction = mtrOptionsGet("autorun-action");
     autorunPlugin = mtrOptionsGet("autorun-plugin");
@@ -185,6 +186,17 @@ int main(int argc, char** argv)
     if (autorunScript == NULL)
         autorunScript = mtrConfigfileReadString("Marathoner.cfg", "Autorun",
          "script", "none");
+
+    mtrLogInit("Marathoner.log");
+
+    mtrLogWrite("Reporting Marathoner version:", 0, MTR_LMT_INFO);
+    mtrLogWrite_i("Majon:", 1, MTR_LMT_INFO,
+     (MTR_VERSION_MARATHONER & 0xFF0000) >> 16);
+    mtrLogWrite_i("Minor:", 1, MTR_LMT_INFO,
+     (MTR_VERSION_MARATHONER & 0x00FF00) >> 8);
+    mtrLogWrite_i("Patch:", 1, MTR_LMT_INFO,
+     MTR_VERSION_MARATHONER & 0x0000FF);
+    mtrLogWrite("Searching available plugins", 0, MTR_LMT_INFO);
 
     error = mtrLoadAllPlugins(RequireEngineFuncs);
     if (error != 0)

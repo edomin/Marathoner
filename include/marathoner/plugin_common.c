@@ -351,6 +351,18 @@ MTR_EXPORT void MTR_CALL mtrRequireOptionsGet_d(
     mtrOptionsGet_d = OptionsGet_dFunc;
 }
 
+MTR_EXPORT void MTR_CALL mtrRequireConsoleShow(
+ mtrConsoleShowFunc_t ConsoleShowFunc)
+{
+    mtrConsoleShow = ConsoleShowFunc;
+}
+
+MTR_EXPORT void MTR_CALL mtrRequireConsoleHide(
+ mtrConsoleHideFunc_t ConsoleHideFunc)
+{
+    mtrConsoleHide = ConsoleHideFunc;
+}
+
 MTR_EXPORT void MTR_CALL mtrRequirePluginData(mtrPlugin* pluginData,
  uint8_t pluginsCount)
 {
