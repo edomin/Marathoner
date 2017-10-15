@@ -66,7 +66,6 @@ MTR_EXPORT uint32_t MTR_CALL mtrGuiAddFont(uint32_t fontnum)
     mtrNkFont           *nkFont;
     uint32_t             freeIndex;
     struct nk_user_font *font;
-    MTR_GUI_CHECK_IF_NOT_INITED(0U);
 
     freeIndex = mtrIndexkeeperGetFreeIndex(mtrGuiFontKeeper);
     nkFont = (mtrNkFont *)(&((mtrNkFont *)mtrGuiFontKeeper->data)[freeIndex]);
