@@ -20,6 +20,8 @@ fa.FunctionSupported(SpriteSetModulationAlpha, "mtrSpriteSetModulationAlpha",
 fa.FunctionSupported(SpriteSetModulationAlpha_f,
  "mtrSpriteSetModulationAlpha_f", SpriteFunctionSupported);
 fa.FunctionSupported(SpriteDraw_f, "mtrSpriteDraw_f", SpriteFunctionSupported);
+fa.FunctionSupported(SpriteDrawSized_f, "mtrSpriteDrawSized_f",
+ SpriteFunctionSupported);
 fa.FunctionSupported(SpriteDrawScaled_f, "mtrSpriteDrawScaled_f",
  SpriteFunctionSupported);
 fa.FunctionSupported(SpriteDrawAngled_f, "mtrSpriteDrawAngled_f",

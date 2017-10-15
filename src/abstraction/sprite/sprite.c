@@ -83,81 +83,77 @@ MTR_EXPORT uint32_t MTR_CALL mtrSpriteLoad(const char *filename, int clipWidth,
     sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, freeIndex);
 
     sprite->textureIndex = mtrTextureLoad(filename);
-    if (sprite->textureIndex != 0)
-    {
-        sprite->name = malloc(sizeof(char) * (strlen(filename) + 1));
-        if (sprite->name == NULL)
-            sprite->name = mtrDefaultSpriteName;
-        else
-            sprite->name = strcpy(sprite->name, filename);
-        /* TODO: Write actual values in log */
-        mtrTextureGetSizes(sprite->textureIndex, &textureWidth, &textureHeight);
-        mtrLogWrite_i("Texture width:", 1, MTR_LMT_INFO, textureWidth);
-        mtrLogWrite_i("Texture height:", 1, MTR_LMT_INFO, textureHeight);
-
-        if ((clipWidth != 0) && (clipWidth <= textureWidth))
-            sprite->clipWidth = clipWidth;
-        else
-            sprite->clipWidth = textureWidth;
-        mtrLogWrite_i("Clip width:", 1, MTR_LMT_INFO, sprite->clipWidth);
-
-        if ((clipHeight != 0) && (clipHeight <= textureHeight))
-            sprite->clipHeight = clipHeight;
-        else
-            sprite->clipHeight = textureHeight;
-        mtrLogWrite_i("Clip height:", 1, MTR_LMT_INFO, sprite->clipHeight);
-
-        if ((rowsCount == 0) || (rowsCount * sprite->clipWidth > textureWidth))
-            sprite->rowsCount = textureWidth / sprite->clipWidth;
-        else
-            sprite->rowsCount = rowsCount;
-        mtrLogWrite_i("Rows count:", 1, MTR_LMT_INFO, sprite->rowsCount);
-
-        if ((colsCount == 0) ||
-         (colsCount * sprite->clipWidth > textureWidth))
-            sprite->colsCount = textureWidth / sprite->clipWidth;
-        else
-            sprite->colsCount = colsCount;
-        mtrLogWrite_i("Cols count:", 1, MTR_LMT_INFO, sprite->colsCount);
-
-        if (clipsCount == 0)
-            sprite->clipsCount = sprite->rowsCount * sprite->colsCount;
-        else
-            sprite->clipsCount = clipsCount;
-        mtrLogWrite_i("Clips count:", 1, MTR_LMT_INFO, sprite->clipsCount);
-
-        sprite->clip = malloc(sizeof(mtrClip_t) * sprite->clipsCount);
-        if (sprite->clip == NULL)
-        {
-            mtrNotify("Unable to allocate memory for clips' coords array", 1,
-             MTR_LMT_ERROR);
-            mtrIndexkeeperFreeIndex(mtrSpriteKeeper, freeIndex);
-            if (sprite->name != mtrDefaultSpriteName)
-                free(sprite->name);
-            return 0;
-        }
-
-        for (i = 0; i < sprite->clipsCount; i++)
-        {
-            sprite->clip[i].x = sprite->clipWidth *
-             (fmodl(i, sprite->colsCount));
-            sprite->clip[i].y = sprite->clipHeight * (i / sprite->colsCount);
-            sprite->clip[i].w = sprite->clipWidth;
-            sprite->clip[i].h = sprite->clipHeight;
-        }
-
-        sprite->anchorX = anchorX;
-        sprite->anchorY = anchorY;
-
-        return freeIndex;
-    }
-    else
+    if (sprite->textureIndex == 0)
     {
         mtrNotify("Unable to load sprite", 1, MTR_LMT_ERROR);
         mtrIndexkeeperFreeIndex(mtrSpriteKeeper, freeIndex);
         return 0;
     }
-    return 0;
+    sprite->name = malloc(sizeof(char) * (strlen(filename) + 1));
+    if (sprite->name == NULL)
+        sprite->name = mtrDefaultSpriteName;
+    else
+        sprite->name = strcpy(sprite->name, filename);
+
+    mtrTextureGetSizes(sprite->textureIndex, &textureWidth, &textureHeight);
+    mtrLogWrite_i("Texture width:", 1, MTR_LMT_INFO, textureWidth);
+    mtrLogWrite_i("Texture height:", 1, MTR_LMT_INFO, textureHeight);
+
+    if ((clipWidth != 0) && (clipWidth <= textureWidth))
+        sprite->clipWidth = clipWidth;
+    else
+        sprite->clipWidth = textureWidth;
+    mtrLogWrite_i("Clip width:", 1, MTR_LMT_INFO, sprite->clipWidth);
+
+    if ((clipHeight != 0) && (clipHeight <= textureHeight))
+        sprite->clipHeight = clipHeight;
+    else
+        sprite->clipHeight = textureHeight;
+    mtrLogWrite_i("Clip height:", 1, MTR_LMT_INFO, sprite->clipHeight);
+
+    if ((rowsCount == 0) || (rowsCount * sprite->clipWidth > textureWidth))
+        sprite->rowsCount = textureWidth / sprite->clipWidth;
+    else
+        sprite->rowsCount = rowsCount;
+    mtrLogWrite_i("Rows count:", 1, MTR_LMT_INFO, sprite->rowsCount);
+
+    if ((colsCount == 0) ||
+     (colsCount * sprite->clipWidth > textureWidth))
+        sprite->colsCount = textureWidth / sprite->clipWidth;
+    else
+        sprite->colsCount = colsCount;
+    mtrLogWrite_i("Cols count:", 1, MTR_LMT_INFO, sprite->colsCount);
+
+    if (clipsCount == 0)
+        sprite->clipsCount = sprite->rowsCount * sprite->colsCount;
+    else
+        sprite->clipsCount = clipsCount;
+    mtrLogWrite_i("Clips count:", 1, MTR_LMT_INFO, sprite->clipsCount);
+
+    sprite->clip = malloc(sizeof(mtrClip_t) * sprite->clipsCount);
+    if (sprite->clip == NULL)
+    {
+        mtrNotify("Unable to allocate memory for clips' coords array", 1,
+         MTR_LMT_ERROR);
+        mtrIndexkeeperFreeIndex(mtrSpriteKeeper, freeIndex);
+        if (sprite->name != mtrDefaultSpriteName)
+            free(sprite->name);
+        return 0;
+    }
+
+    for (i = 0; i < sprite->clipsCount; i++)
+    {
+        sprite->clip[i].x = sprite->clipWidth *
+         (fmodl(i, sprite->colsCount));
+        sprite->clip[i].y = sprite->clipHeight * (i / sprite->colsCount);
+        sprite->clip[i].w = sprite->clipWidth;
+        sprite->clip[i].h = sprite->clipHeight;
+        sprite->clip[i].anchorX = anchorX;
+        sprite->clip[i].anchorY = anchorY;
+    }
+    sprite->atlas = false;
+
+    return freeIndex;
 }
 
 /*fa mtrSpriteLoadSimple yes */
@@ -177,51 +173,137 @@ MTR_EXPORT uint32_t MTR_CALL mtrSpriteLoadSimple(const char *filename,
     sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, freeIndex);
 
     sprite->textureIndex = mtrTextureLoad(filename);
-    if (sprite->textureIndex != 0)
-    {
-        sprite->name = malloc(sizeof(char) * (strlen(filename) + 1));
-        if (sprite->name == NULL)
-            sprite->name = mtrDefaultSpriteName;
-        else
-            sprite->name = strcpy(sprite->name, filename);
-
-        mtrTextureGetSizes(sprite->textureIndex, &textureWidth, &textureHeight);
-        mtrLogWrite_i("Texture width:", 1, MTR_LMT_INFO, textureWidth);
-        mtrLogWrite_i("Texture height:", 1, MTR_LMT_INFO, textureHeight);
-
-        sprite->clipWidth = textureWidth;
-        sprite->clipHeight = textureHeight;
-        sprite->rowsCount = 1;
-        sprite->colsCount = 1;
-        sprite->clipsCount = 1;
-        sprite->clip = malloc(sizeof(mtrClip_t) * sprite->clipsCount);
-        if (sprite->clip == NULL)
-        {
-            mtrNotify("Unable to allocate memory for clips' coords array", 1,
-             MTR_LMT_ERROR);
-            mtrIndexkeeperFreeIndex(mtrSpriteKeeper, freeIndex);
-            if (sprite->name != mtrDefaultSpriteName)
-                free(sprite->name);
-            return 0;
-        }
-
-        sprite->clip[0].x = 0;
-        sprite->clip[0].y = 0;
-        sprite->clip[0].w = sprite->clipWidth;
-        sprite->clip[0].h = sprite->clipHeight;
-
-        sprite->anchorX = anchorX;
-        sprite->anchorY = anchorY;
-
-        return freeIndex;
-    }
-    else
+    if (sprite->textureIndex == 0)
     {
         mtrNotify("Unable to load sprite", 1, MTR_LMT_ERROR);
         mtrIndexkeeperFreeIndex(mtrSpriteKeeper, freeIndex);
         return 0;
     }
-    return 0;
+    sprite->name = malloc(sizeof(char) * (strlen(filename) + 1));
+    if (sprite->name == NULL)
+        sprite->name = mtrDefaultSpriteName;
+    else
+        sprite->name = strcpy(sprite->name, filename);
+
+    mtrTextureGetSizes(sprite->textureIndex, &textureWidth, &textureHeight);
+    mtrLogWrite_i("Texture width:", 1, MTR_LMT_INFO, textureWidth);
+    mtrLogWrite_i("Texture height:", 1, MTR_LMT_INFO, textureHeight);
+
+    sprite->clipWidth = textureWidth;
+    sprite->clipHeight = textureHeight;
+    sprite->rowsCount = 1;
+    sprite->colsCount = 1;
+    sprite->clipsCount = 1;
+    sprite->clip = malloc(sizeof(mtrClip_t) * sprite->clipsCount);
+    if (sprite->clip == NULL)
+    {
+        mtrNotify("Unable to allocate memory for clips' coords array", 1,
+         MTR_LMT_ERROR);
+        mtrIndexkeeperFreeIndex(mtrSpriteKeeper, freeIndex);
+        if (sprite->name != mtrDefaultSpriteName)
+            free(sprite->name);
+        return 0;
+    }
+
+    sprite->clip[0].x = 0;
+    sprite->clip[0].y = 0;
+    sprite->clip[0].w = sprite->clipWidth;
+    sprite->clip[0].h = sprite->clipHeight;
+    sprite->clip[0].anchorX = anchorX;
+    sprite->clip[0].anchorY = anchorY;
+    sprite->atlas = false;
+
+    return freeIndex;
+}
+
+/*fa mtrSpriteLoadAtlas yes */
+MTR_EXPORT uint32_t MTR_CALL mtrSpriteLoadAtlas(const char *filename,
+ int clipsCount)
+{
+    uint32_t     freeIndex;
+    mtrSprite_t *sprite;
+    int          textureWidth;
+    int          textureHeight;
+    int          i;
+    MTR_SPRITE_CHECK_IF_NOT_INITED_WITH_LOG("Unable to load sprite", 0U);
+
+    mtrLogWrite_s("Loading texture atlas", 0, MTR_LMT_INFO, filename);
+
+    freeIndex = mtrIndexkeeperGetFreeIndex(mtrSpriteKeeper);
+    mtrLogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
+    sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, freeIndex);
+
+    sprite->textureIndex = mtrTextureLoad(filename);
+    if (sprite->textureIndex == 0)
+    {
+        mtrNotify("Unable to load sprite", 1, MTR_LMT_ERROR);
+        mtrIndexkeeperFreeIndex(mtrSpriteKeeper, freeIndex);
+        return 0;
+    }
+    sprite->name = malloc(sizeof(char) * (strlen(filename) + 1));
+    if (sprite->name == NULL)
+        sprite->name = mtrDefaultSpriteName;
+    else
+        sprite->name = strcpy(sprite->name, filename);
+    mtrTextureGetSizes(sprite->textureIndex, &textureWidth, &textureHeight);
+    mtrLogWrite_i("Texture width:", 1, MTR_LMT_INFO, textureWidth);
+    mtrLogWrite_i("Texture height:", 1, MTR_LMT_INFO, textureHeight);
+
+    sprite->clipWidth = 0;
+    sprite->clipHeight = 0;
+    sprite->rowsCount = 0;
+    sprite->colsCount = 0;
+    sprite->clipsCount = clipsCount;
+    mtrLogWrite_i("Clips count:", 1, MTR_LMT_INFO, sprite->clipsCount);
+
+    sprite->clip = malloc(sizeof(mtrClip_t) * sprite->clipsCount);
+    if (sprite->clip == NULL)
+    {
+        mtrNotify("Unable to allocate memory for clips' coords array", 1,
+         MTR_LMT_ERROR);
+        mtrIndexkeeperFreeIndex(mtrSpriteKeeper, freeIndex);
+        if (sprite->name != mtrDefaultSpriteName)
+            free(sprite->name);
+        return 0;
+    }
+
+    for (i = 0; i < sprite->clipsCount; i++)
+    {
+        sprite->clip[i].x = 0;
+        sprite->clip[i].y = 0;
+        sprite->clip[i].w = 0;
+        sprite->clip[i].h = 0;
+        sprite->clip[i].anchorX = 0;
+        sprite->clip[i].anchorY = 0;
+    }
+    sprite->atlas = true;
+
+    return freeIndex;
+}
+
+/*fa mtrSpriteSetAtlasFrame yes */
+MTR_EXPORT bool MTR_CALL mtrSpriteSetAtlasFrame(uint32_t sprNum, int clipNum,
+ int x, int y, int w, int h, int anchorX, int anchorY)
+{
+    mtrSprite_t *sprite;
+    MTR_SPRITE_CHECK_IF_NOT_INITED(false);
+
+    if (sprNum == 0)
+        return false;
+
+    sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+
+    if (clipNum > sprite->clipsCount)
+        return false;
+
+    sprite->clip[clipNum].x = x;
+    sprite->clip[clipNum].y = y;
+    sprite->clip[clipNum].w = w;
+    sprite->clip[clipNum].h = h;
+    sprite->clip[clipNum].anchorX = anchorX;
+    sprite->clip[clipNum].anchorY = anchorY;
+
+    return true;
 }
 
 /*fa mtrSpriteFree yes */
@@ -236,6 +318,7 @@ MTR_EXPORT void MTR_CALL mtrSpriteFree(uint32_t sprNum)
         mtrLogWrite_s("Unloading sprite", 0, MTR_LMT_INFO, sprite->name);
         if (sprite->name != mtrDefaultSpriteName)
             free(sprite->name);
+        free(sprite->clip);
         mtrTextureFree(sprite->textureIndex);
         mtrIndexkeeperFreeIndex(mtrSpriteKeeper, sprNum);
         mtrLogWrite("Sprite unloaded", 0, MTR_LMT_INFO);
@@ -336,8 +419,33 @@ MTR_EXPORT void MTR_CALL mtrSpriteDraw_f(uint32_t sprNum, int clipNum, float x,
     if (sprNum != 0)
     {
         sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
-        mtrTextureBlitRegion_f(sprite->textureIndex, x - sprite->anchorX,
-         y - sprite->anchorY, sprite->clip[clipNum].x,
+        mtrTextureBlitRegion_f(sprite->textureIndex,
+         x - sprite->clip[clipNum].anchorX, y - sprite->clip[clipNum].anchorY,
+         sprite->clip[clipNum].x, sprite->clip[clipNum].y,
+         sprite->clip[clipNum].w, sprite->clip[clipNum].h);
+    }
+}
+
+/*fa mtrSpriteDrawSized_f yes */
+MTR_EXPORT void MTR_CALL mtrSpriteDrawSized_f(uint32_t sprNum, int clipNum,
+ float x, float y, float w, float h)
+{
+    mtrSprite_t *sprite;
+    float        offsetX;
+    float        offsetY;
+    MTR_SPRITE_CHECK_IF_NOT_INITED();
+
+    if (sprNum != 0)
+    {
+        sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+
+        offsetX = x - (float)sprite->clip[clipNum].anchorX /
+         (float)sprite->clip[clipNum].w * w;
+        offsetY = y - (float)sprite->clip[clipNum].anchorY /
+         (float)sprite->clip[clipNum].h * h;
+
+        mtrTextureBlitRegionSized_f(sprite->textureIndex,
+         offsetX, offsetY, w, h, sprite->clip[clipNum].x,
          sprite->clip[clipNum].y, sprite->clip[clipNum].w,
          sprite->clip[clipNum].h);
     }
@@ -345,18 +453,24 @@ MTR_EXPORT void MTR_CALL mtrSpriteDraw_f(uint32_t sprNum, int clipNum, float x,
 
 /*fa mtrSpriteDrawScaled_f yes */
 MTR_EXPORT void MTR_CALL mtrSpriteDrawScaled_f(uint32_t sprNum, int clipNum,
- float x, float y, float w, float h)
+ float x, float y, float hscale, float vscale)
 {
     mtrSprite_t *sprite;
+    float        offsetX;
+    float        offsetY;
     MTR_SPRITE_CHECK_IF_NOT_INITED();
 
     if (sprNum != 0)
     {
         sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
-        mtrTextureBlitRegionScaled_f(sprite->textureIndex, x - sprite->anchorX,
-         y - sprite->anchorY, w, h, sprite->clip[clipNum].x,
-         sprite->clip[clipNum].y, sprite->clip[clipNum].w,
-         sprite->clip[clipNum].h);
+
+        offsetX = x - (float)sprite->clip[clipNum].anchorX * hscale;
+        offsetY = y - (float)sprite->clip[clipNum].anchorY * vscale;
+
+        mtrTextureBlitRegionScaled_f(sprite->textureIndex,
+         offsetX, offsetY,
+         hscale, vscale, sprite->clip[clipNum].x, sprite->clip[clipNum].y,
+         sprite->clip[clipNum].w, sprite->clip[clipNum].h);
     }
 }
 
@@ -370,10 +484,11 @@ MTR_EXPORT void MTR_CALL mtrSpriteDrawAngled_f(uint32_t sprNum, int clipNum,
     if (sprNum != 0)
     {
         sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
-        mtrTextureBlitRegionAngled_f(sprite->textureIndex, x - sprite->anchorX,
-         y - sprite->anchorY, sprite->clip[clipNum].x,
-         sprite->clip[clipNum].y, sprite->clip[clipNum].w,
-         sprite->clip[clipNum].h, angle, sprite->anchorX, sprite->anchorY);
+        mtrTextureBlitRegionAngled_f(sprite->textureIndex,
+         x - sprite->clip[clipNum].anchorX, y - sprite->clip[clipNum].anchorY,
+         sprite->clip[clipNum].x, sprite->clip[clipNum].y,
+         sprite->clip[clipNum].w, sprite->clip[clipNum].h, angle,
+         sprite->clip[clipNum].anchorX, sprite->clip[clipNum].anchorY);
     }
 }
 
@@ -387,27 +502,33 @@ MTR_EXPORT void MTR_CALL mtrSpriteDrawFlipped_f(uint32_t sprNum, int clipNum,
     if (sprNum != 0)
     {
         sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
-        mtrTextureBlitRegionFlipped_f(sprite->textureIndex, x - sprite->anchorX,
-         y - sprite->anchorY, sprite->clip[clipNum].x,
-         sprite->clip[clipNum].y, sprite->clip[clipNum].w,
-         sprite->clip[clipNum].h, flip);
+        mtrTextureBlitRegionFlipped_f(sprite->textureIndex,
+         x - sprite->clip[clipNum].anchorX, y - sprite->clip[clipNum].anchorY,
+         sprite->clip[clipNum].x, sprite->clip[clipNum].y,
+         sprite->clip[clipNum].w, sprite->clip[clipNum].h, flip);
     }
 }
 
 /*fa mtrSpriteDrawGeneral_f yes */
 MTR_EXPORT void MTR_CALL mtrSpriteDrawGeneral_f(uint32_t sprNum, int clipNum,
- float x, float y, float w, float h, float angle, int flip)
+ float x, float y, float hscale, float vscale, float angle, int flip)
 {
     mtrSprite_t *sprite;
+    float        offsetX;
+    float        offsetY;
     MTR_SPRITE_CHECK_IF_NOT_INITED();
 
     if (sprNum != 0)
     {
         sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
-        mtrTextureBlitRegionGeneral_f(sprite->textureIndex, x - sprite->anchorX,
-         y - sprite->anchorY, w, h, sprite->clip[clipNum].x,
+
+        offsetX = x - (float)sprite->clip[clipNum].anchorX * hscale;
+        offsetY = y - (float)sprite->clip[clipNum].anchorY * vscale;
+
+        mtrTextureBlitRegionGeneral_f(sprite->textureIndex,
+         offsetX, offsetY, hscale, vscale, sprite->clip[clipNum].x,
          sprite->clip[clipNum].y, sprite->clip[clipNum].w,
-         sprite->clip[clipNum].h, angle, sprite->anchorX, sprite->anchorY,
-         flip);
+         sprite->clip[clipNum].h, angle, sprite->clip[clipNum].anchorX,
+         sprite->clip[clipNum].anchorY, flip);
     }
 }

@@ -19,6 +19,7 @@ MTR_SCRIPT_FUNC_V_U32t1U8t1(mtrSF_SpriteSetModulationAlpha,
 MTR_SCRIPT_FUNC_V_U32t1F1(mtrSF_SpriteSetModulationAlpha_f,
  mtrSpriteSetModulationAlpha_f)
 MTR_SCRIPT_FUNC_V_U32t1I1F2(mtrSF_SpriteDraw_f, mtrSpriteDraw_f)
+MTR_SCRIPT_FUNC_V_U32t1I1F4(mtrSF_SpriteDrawSized_f, mtrSpriteDrawSized_f)
 MTR_SCRIPT_FUNC_V_U32t1I1F4(mtrSF_SpriteDrawScaled_f, mtrSpriteDrawScaled_f)
 MTR_SCRIPT_FUNC_V_U32t1I1F3(mtrSF_SpriteDrawAngled_f, mtrSpriteDrawAngled_f)
 MTR_SCRIPT_FUNC_V_U32t1I1F2I1(mtrSF_SpriteDrawFlipped_f, mtrSpriteDrawFlipped_f)
@@ -40,6 +41,7 @@ void mtrScriptsRegisterAll(void)
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteSetModulationAlpha);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteSetModulationAlpha_f);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteDraw_f);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteDrawSized_f);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteDrawScaled_f);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteDrawAngled_f);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteDrawFlipped_f);

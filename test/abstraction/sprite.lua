@@ -36,14 +36,22 @@ for i = 0, 60, 1 do
     TimerDelayForFPS(30);
 end;
 
-x = 32;
 for i = 0, 60, 1 do
     MouseRefresh();
     TimerStart();
-    x = x + 2;
     PrimitiveFill_c(0x000000);
-    SpriteDrawScaled_f(helicopterAnim, Floor_f(i / 4) % 8, x, 128,
-     (162 - x) / 162 * 96, (162 - x) / 162 * 32);
+    SpriteDrawSized_f(helicopterAnim, Floor_f(i / 4) % 8, 64, 128,
+     96 / 60 * i, 32 / 60 * i);
+    ScreenFlip();
+    TimerDelayForFPS(30);
+end;
+
+for i = 0, 60, 1 do
+    MouseRefresh();
+    TimerStart();
+    PrimitiveFill_c(0x000000);
+    SpriteDrawScaled_f(helicopterAnim, Floor_f(i / 4) % 8, 64, 128, i / 30,
+     i / 30);
     ScreenFlip();
     TimerDelayForFPS(30);
 end;
@@ -75,20 +83,18 @@ for i = 0, 60, 1 do
     TimerDelayForFPS(30);
 end;
 
-x = 32;
 for i = 0, 60, 1 do
     MouseRefresh();
     TimerStart();
-    x = x + 2;
     PrimitiveFill_c(0x000000);
-    SpriteDrawGeneral_f(helicopterAnim, Floor_f(i / 4) % 8, x, 128,
-     (162 - x) / 162 * 96, (162 - x) / 162 * 32, -x, FLIP_NONE);
-    SpriteDrawGeneral_f(helicopterAnim, Floor_f(i / 4) % 8, x, 160,
-     (162 - x) / 162 * 96, (162 - x) / 162 * 32, -x, FLIP_HORIZONTAL);
-    SpriteDrawGeneral_f(helicopterAnim, Floor_f(i / 4) % 8, x, 192,
-     (162 - x) / 162 * 96, (162 - x) / 162 * 32, -x, FLIP_VERTICAL);
-    SpriteDrawGeneral_f(helicopterAnim, Floor_f(i / 4) % 8, x, 244,
-     (162 - x) / 162 * 96, (162 - x) / 162 * 32, -x, FLIP_BOTH);
+    SpriteDrawGeneral_f(helicopterAnim, Floor_f(i / 4) % 8, 64, 128, i / 30,
+     i / 30, -i * 2, FLIP_NONE);
+    SpriteDrawGeneral_f(helicopterAnim, Floor_f(i / 4) % 8, 64, 160, i / 30,
+     i / 30, -i * 2, FLIP_HORIZONTAL);
+    SpriteDrawGeneral_f(helicopterAnim, Floor_f(i / 4) % 8, 64, 192, i / 30,
+     i / 30, -i * 2, FLIP_VERTICAL);
+    SpriteDrawGeneral_f(helicopterAnim, Floor_f(i / 4) % 8, 64, 244, i / 30,
+     i / 30, -i * 2, FLIP_BOTH);
     ScreenFlip();
     TimerDelayForFPS(30);
 end;
@@ -100,7 +106,7 @@ for i = 0, 60, 1 do
     TimerStart();
     x = x + 2;
     PrimitiveFill_c(0x000000);
-    SpriteSetModulation_c(helicopter, 0x010101 * i * 4);
+    SpriteSetModulation_c(helicopter, 0x000101 * (60 - i) * 4 + 0xFF0000);
     SpriteDraw_f(helicopter, 0, x, 128);
     ScreenFlip();
     TimerDelayForFPS(30);
@@ -113,7 +119,8 @@ for i = 0, 60, 1 do
     TimerStart();
     x = x + 2;
     PrimitiveFill_c(0x000000);
-    SpriteSetModulation_ca(helicopter, 0x01010101 * i * 4);
+    SpriteSetModulation_ca(helicopter,
+     0x00010100 * (60 - i) * 4 + 0x00000001 * i * 4 + 0xFF000000);
     SpriteDraw_f(helicopter, 0, x, 128);
     ScreenFlip();
     TimerDelayForFPS(30);
@@ -126,8 +133,8 @@ for i = 0, 60, 1 do
     TimerStart();
     x = x + 2;
     PrimitiveFill_c(0x000000);
-    SpriteSetModulation_rgb(helicopter, 0x01 * i * 4, 0x01 * i * 4,
-     0x01 * i * 4);
+    SpriteSetModulation_rgb(helicopter, 0xFF, 0x01 * (60 - i) * 4,
+     0x01 * (60 - i) * 4);
     SpriteDraw_f(helicopter, 0, x, 128);
     ScreenFlip();
     TimerDelayForFPS(30);
@@ -140,8 +147,8 @@ for i = 0, 60, 1 do
     TimerStart();
     x = x + 2;
     PrimitiveFill_c(0x000000);
-    SpriteSetModulation_rgba(helicopter, 0x01 * i * 4, 0x01 * i * 4,
-     0x01 * i * 4, 0x01 * i * 4);
+    SpriteSetModulation_rgba(helicopter, 0xFF, 0x01 * (60 - i) * 4,
+     0x01 * (60 - i) * 4, 0x01 * i * 4);
     SpriteDraw_f(helicopter, 0, x, 128);
     ScreenFlip();
     TimerDelayForFPS(30);

@@ -40,6 +40,10 @@ mtrSpriteSetModulationAlpha_fFunc mtrSpriteSetModulationAlpha_f;
 typedef bool (MTR_CALL * mtrSpriteDraw_fFunc)(uint32_t, int, float, float);
 mtrSpriteDraw_fFunc mtrSpriteDraw_f;
 
+typedef bool (MTR_CALL * mtrSpriteDrawSized_fFunc)(uint32_t, int, float, float,
+ float, float);
+mtrSpriteDrawSized_fFunc mtrSpriteDrawSized_f;
+
 typedef bool (MTR_CALL * mtrSpriteDrawScaled_fFunc)(uint32_t, int, float, float,
  float, float);
 mtrSpriteDrawScaled_fFunc mtrSpriteDrawScaled_f;

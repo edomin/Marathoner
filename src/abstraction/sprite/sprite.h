@@ -11,6 +11,8 @@ typedef struct mtrClip_t {
     int y;
     int w;
     int h;
+    int anchorX;
+    int anchorY;
 } mtrClip_t;
 
 typedef struct mtrSprite_t {
@@ -21,9 +23,8 @@ typedef struct mtrSprite_t {
     int        colsCount;
     int        clipsCount;
     mtrClip_t *clip;
-    int        anchorX;
-    int        anchorY;
     char      *name;
+    bool       atlas;
 } mtrSprite_t;
 
 char mtrDefaultSpriteName[] = "Unnamed_Sprite";
