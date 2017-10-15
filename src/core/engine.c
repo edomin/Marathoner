@@ -105,6 +105,7 @@ void RequireEngineFuncs(uint8_t plugin)
      mtrStringBufferGetMaxLen);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireOptionsAlias, mtrOptionsAlias);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireOptionsGet, mtrOptionsGet);
+    MTR_REQUIRE_ENGINE_FUNC(mtrRequireOptionsGet_b, mtrOptionsGet_b);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireOptionsGet_i, mtrOptionsGet_i);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireOptionsGet_l, mtrOptionsGet_l);
     MTR_REQUIRE_ENGINE_FUNC(mtrRequireOptionsGet_f, mtrOptionsGet_f);

@@ -93,6 +93,7 @@ mtrStringBufferGetMaxLenFunc_t              mtrStringBufferGetMaxLen;
 
 mtrOptionsAliasFunc_t                       mtrOptionsAlias;
 mtrOptionsGetFunc_t                         mtrOptionsGet;
+mtrOptionsGet_bFunc_t                       mtrOptionsGet_b;
 mtrOptionsGet_iFunc_t                       mtrOptionsGet_i;
 mtrOptionsGet_lFunc_t                       mtrOptionsGet_l;
 mtrOptionsGet_fFunc_t                       mtrOptionsGet_f;

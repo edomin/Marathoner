@@ -68,6 +68,31 @@ char *MTR_CALL mtrOptionsGet(const char *option)
     return result;
 }
 
+/*fa mtrOptionsGet_b yes */
+bool MTR_CALL mtrOptionsGet_b(const char *option)
+{
+    char *charOption;
+    char *result = NULL;
+    if (option != NULL)
+    {
+        charOption = mtrCharOption(option);
+
+        result = saneopt_get(mtrArguments, charOption);
+        free(charOption);
+        if (result == NULL)
+            return false;
+        if (strcmp(result, "yes") == 0)
+            return true;
+        if (strcmp(result, "y") == 0)
+            return true;
+        if (strcmp(result, "1") == 0)
+            return true;
+        if (strcmp(result, "true") == 0)
+            return true;
+    }
+    return false;
+}
+
 /*fa mtrOptionsGet_i yes */
 int MTR_CALL mtrOptionsGet_i(const char *option)
 {

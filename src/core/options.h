@@ -17,6 +17,7 @@ saneopt_t* mtrArguments;
 void MTR_CALL mtrOptionsProcess(int argc, char **argv);
 bool MTR_CALL mtrOptionsAlias(const char *option, const char *alias);
 char *MTR_CALL mtrOptionsGet(const char *option);
+bool MTR_CALL mtrOptionsGet_b(const char *option);
 int MTR_CALL mtrOptionsGet_i(const char *option);
 long int MTR_CALL mtrOptionsGet_l(const char *option);
 float MTR_CALL mtrOptionsGet_f(const char *option);

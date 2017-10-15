@@ -165,6 +165,8 @@ typedef void (MTR_CALL * mtrRequireOptionsAliasFunc)(mtrOptionsAliasFunc_t);
 mtrRequireOptionsAliasFunc mtrRequireOptionsAlias;
 typedef void (MTR_CALL * mtrRequireOptionsGetFunc)(mtrOptionsGetFunc_t);
 mtrRequireOptionsGetFunc mtrRequireOptionsGet;
+typedef void (MTR_CALL * mtrRequireOptionsGet_bFunc)(mtrOptionsGet_bFunc_t);
+mtrRequireOptionsGet_bFunc mtrRequireOptionsGet_b;
 typedef void (MTR_CALL * mtrRequireOptionsGet_iFunc)(mtrOptionsGet_iFunc_t);
 mtrRequireOptionsGet_iFunc mtrRequireOptionsGet_i;
 typedef void (MTR_CALL * mtrRequireOptionsGet_lFunc)(mtrOptionsGet_lFunc_t);

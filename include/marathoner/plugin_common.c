@@ -321,6 +321,12 @@ MTR_EXPORT void MTR_CALL mtrRequireOptionsGet(
     mtrOptionsGet = OptionsGetFunc;
 }
 
+MTR_EXPORT void MTR_CALL mtrRequireOptionsGet_b(
+ mtrOptionsGet_bFunc_t OptionsGet_bFunc)
+{
+    mtrOptionsGet_b = OptionsGet_bFunc;
+}
+
 MTR_EXPORT void MTR_CALL mtrRequireOptionsGet_i(
  mtrOptionsGet_iFunc_t OptionsGet_iFunc)
 {
