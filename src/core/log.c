@@ -1,5 +1,21 @@
 #include "log.h"
 
+int mtrLogPrintf(char *format, ...)
+{
+    va_list aptr;
+    int     ret;
+
+    va_start(aptr, format);
+    ret = vsprintf(mtrLogBuffer, format, aptr);
+    va_end(aptr);
+
+    fprintf(mtrLogFile, "%s", mtrLogBuffer);
+    if (mtrConsoleShowed)
+       printf("%s", mtrLogBuffer);
+
+    return ret;
+}
+
 void MTR_CALL mtrLogWriteMeta(uint8_t messageType, uint8_t level)
 {
     uint8_t i;
@@ -8,34 +24,34 @@ void MTR_CALL mtrLogWriteMeta(uint8_t messageType, uint8_t level)
     mtrNow = localtime(&mtrCurrentTime);
     #ifdef __MINGW32__
         mtrLogFile = fopen(logFilename, "a");
-        fprintf(mtrLogFile, "[%i-%i-%i %i:%i:%i] ",
+        mtrLogPrintf("[%i-%i-%i %i:%i:%i] ",
          mtrNow->tm_year + 1900, mtrNow->tm_mon + 1, mtrNow->tm_mday,
          mtrNow->tm_hour, mtrNow->tm_min, mtrNow->tm_sec);
         switch (messageType)
         {
             case MTR_LMT_INFO:
-                fprintf(mtrLogFile, "%s", "   Info: ");
+                mtrLogPrintf("%s", "   Info: ");
                 break;
             case MTR_LMT_NOTE:
-                fprintf(mtrLogFile, "%s", "   Note: ");
+                mtrLogPrintf("%s", "   Note: ");
                 break;
             case MTR_LMT_WARNING:
-                fprintf(mtrLogFile, "%s", "Warning: ");
+                mtrLogPrintf("%s", "Warning: ");
                 break;
             case MTR_LMT_ERROR:
-                fprintf(mtrLogFile, "%s", "  Error: ");
+                mtrLogPrintf("%s", "  Error: ");
                 break;
             case MTR_LMT_FATAL:
-                fprintf(mtrLogFile, "%s", "  Fatal: ");
+                mtrLogPrintf("%s", "  Fatal: ");
                 break;
             case MTR_LMT_DEBUG:
             default:
-                fprintf(mtrLogFile, "%s", "  Debug: ");
+                mtrLogPrintf("%s", "  Debug: ");
                 break;
         }
         for (i = 0; i < level; i++)
         {
-            fprintf(mtrLogFile, "%s", "-- ");
+            mtrLogPrintf("%s", "-- ");
         }
     #else
         printf("[%i-%i-%i %i:%i:%i] ",
@@ -76,7 +92,7 @@ void MTR_CALL mtrLogInit(const char *filename)
     mtrNow = localtime(&mtrCurrentTime);
     #ifdef __MINGW32__
         mtrLogFile = fopen(logFilename, "w");
-        fprintf(mtrLogFile, "[%i-%i-%i %i:%i:%i]          Begin Logging.\n",
+        mtrLogPrintf("[%i-%i-%i %i:%i:%i]          Begin Logging.\n",
          mtrNow->tm_year + 1900, mtrNow->tm_mon + 1, mtrNow->tm_mday,
          mtrNow->tm_hour, mtrNow->tm_min, mtrNow->tm_sec);
         fclose(mtrLogFile);
@@ -93,7 +109,7 @@ void MTR_CALL mtrLogWrite(const char *message, uint8_t level,
 {
     mtrLogWriteMeta(messageType, level);
     #ifdef __MINGW32__
-        fprintf(mtrLogFile, "%s\n", message);
+        mtrLogPrintf("%s\n", message);
         fclose(mtrLogFile);
     #else
         printf("%s\n", message);
@@ -106,7 +122,7 @@ void MTR_CALL mtrLogWrite_s(const char *message, uint8_t level,
 {
     mtrLogWriteMeta(messageType, level);
     #ifdef __MINGW32__
-        fprintf(mtrLogFile, "%s %s\n", message, argument);
+        mtrLogPrintf("%s %s\n", message, argument);
         fclose(mtrLogFile);
     #else
         printf("%s %s\n", message, argument);
@@ -119,7 +135,7 @@ void MTR_CALL mtrLogWrite_i(const char *message, uint8_t level,
 {
     mtrLogWriteMeta(messageType, level);
     #ifdef __MINGW32__
-        fprintf(mtrLogFile, "%s %i\n", message, argument);
+        mtrLogPrintf("%s %i\n", message, argument);
         fclose(mtrLogFile);
     #else
         printf("%s %i\n", message, argument);
@@ -132,7 +148,7 @@ void MTR_CALL mtrLogWrite_d(const char *message, uint8_t level,
 {
     mtrLogWriteMeta(messageType, level);
     #ifdef __MINGW32__
-        fprintf(mtrLogFile, "%s %f\n", message, argument);
+        mtrLogPrintf("%s %f\n", message, argument);
         fclose(mtrLogFile);
     #else
         printf("%s %f\n", message, argument);

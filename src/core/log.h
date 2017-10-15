@@ -4,12 +4,15 @@
 #include <stdio.h>
 #include <time.h>
 
+#include "console.h"
+
 #include "marathoner/engine.h"
 
 FILE       *mtrLogFile;
 time_t      mtrCurrentTime;
 struct tm  *mtrNow;
 const char *logFilename;
+char        mtrLogBuffer[256];
 
 void MTR_CALL mtrLogInit(const char *filename);
 void MTR_CALL mtrLogWrite(const char *message, uint8_t level,
