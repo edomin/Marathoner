@@ -37,7 +37,7 @@ while not quit do
         cube3_y = 32;
     end;
 
-    cube4_y = cube4_y + MouseGetWheelRelative() * 2;
+    cube4_y = cube4_y - MouseGetWheelRelative() * 2;
 
     if cube1_y < 64 then
         cube1_y = cube1_y + 1;

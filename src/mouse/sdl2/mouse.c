@@ -20,6 +20,25 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
+int mtrButtonToActualButton(int button)
+{
+    switch (button)
+    {
+        case MTR_MOUSE_LEFT:
+            return SDL_BUTTON_LEFT;
+        case MTR_MOUSE_RIGHT:
+            return  SDL_BUTTON_LEFT;
+        case MTR_MOUSE_MIDDLE:
+            return SDL_BUTTON_MIDDLE;
+        case MTR_MOUSE_X1:
+            return SDL_BUTTON_X1;
+        case MTR_MOUSE_X2:
+            return SDL_BUTTON_X2;
+        default:
+            return button;
+    }
+}
+
 /*fa mtrMouseInit yes */
 MTR_EXPORT bool MTR_CALL mtrMouseInit(void)
 {
@@ -111,54 +130,42 @@ MTR_EXPORT void MTR_CALL mtrMouseRefresh(void)
 /*fa mtrMousePress yes */
 MTR_EXPORT bool MTR_CALL mtrMousePress(int button)
 {
+    int actualButton;
     MTR_MOUSE_CHECK_IF_NOT_INITED(false);
 
-    if (button > 5)
-        return false;
-    if (!(mtrMouse.previousMousestate[button]) &&
-        (mtrMouse.currentMousestate[button]))
-    {
+    actualButton = mtrButtonToActualButton(button);
+    if (!(mtrMouse.previousMousestate[actualButton]) &&
+     (mtrMouse.currentMousestate[actualButton]))
         return true;
-    }
     else
-    {
         return false;
-    }
 }
 
 /*fa mtrMouseRelease yes */
 MTR_EXPORT bool MTR_CALL mtrMouseRelease(int button)
 {
+    int actualButton;
     MTR_MOUSE_CHECK_IF_NOT_INITED(false);
 
-    if (button > 5)
-        return false;
-    if ((mtrMouse.previousMousestate[button]) &&
-        !(mtrMouse.currentMousestate[button]))
-    {
+    actualButton = mtrButtonToActualButton(button);
+    if ((mtrMouse.previousMousestate[actualButton]) &&
+     !(mtrMouse.currentMousestate[actualButton]))
         return true;
-    }
     else
-    {
         return false;
-    }
 }
 
 /*fa mtrMousePressed yes */
 MTR_EXPORT bool MTR_CALL mtrMousePressed(int button)
 {
+    int actualButton;
     MTR_MOUSE_CHECK_IF_NOT_INITED(false);
 
-    if (button > 5)
-        return false;
-    if (mtrMouse.currentMousestate[button])
-    {
+    actualButton = mtrButtonToActualButton(button);
+    if (mtrMouse.currentMousestate[actualButton])
         return true;
-    }
     else
-    {
         return false;
-    }
 }
 
 /*fa mtrMouseGetWheelRelative yes */
@@ -181,7 +188,7 @@ MTR_EXPORT int MTR_CALL mtrMouseGetWheelRelative(void)
         if (events[i].wheel.which != SDL_TOUCH_MOUSEID)
             wheelRel += events[i].wheel.y;
 
-    return -wheelRel;
+    return wheelRel;
 }
 
 /*fa mtrMouseMoving yes */
