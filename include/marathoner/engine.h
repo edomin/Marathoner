@@ -194,7 +194,7 @@ mtrScriptsAutorunFunc mtrScriptsAutorun;
     if (require_funcname != NULL)                                                             \
         require_funcname(funcname);                                                           \
     else                                                                                      \
-        mtrLogWrite("Module are not contain declaration for 'funcname' function",             \
+        mtrLogWrite("Module are not contain declaration for '" #funcname" ' function",             \
          1, MTR_LMT_WARNING);                                                                 \
 
 #endif
