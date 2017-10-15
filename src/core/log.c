@@ -10,8 +10,7 @@ int mtrLogPrintf(char *format, ...)
     va_end(aptr);
 
     fprintf(mtrLogFile, "%s", mtrLogBuffer);
-    if (mtrConsoleShowed)
-       printf("%s", mtrLogBuffer);
+    mtrConsolePrint(mtrLogBuffer);
 
     return ret;
 }

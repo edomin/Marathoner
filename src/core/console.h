@@ -11,5 +11,6 @@ bool mtrConsoleShowed;
 
 void MTR_CALL mtrConsoleShow(void);
 void MTR_CALL mtrConsoleHide(void);
+void mtrConsolePrint(const char *string);
 
 #endif

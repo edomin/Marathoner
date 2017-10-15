@@ -72,3 +72,9 @@ void MTR_CALL mtrConsoleHide(void)
     ShowWindow(mtrConsole, SW_HIDE);
     mtrConsoleShowed = false;
 }
+
+void mtrConsolePrint(const char *string)
+{
+    if ((mtrConsoleInited) && (mtrConsoleShowed))
+       printf("%s", string);
+}

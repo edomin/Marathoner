@@ -34,7 +34,8 @@ LCHR_OBJS = $(OBJSDIR)/launcher.o \
  $(OBJSDIR)/configfile.o \
  $(OBJSDIR)/directory.o \
  $(OBJSDIR)/clipboard.o \
- $(OBJSDIR)/plugin_loader.o
+ $(OBJSDIR)/plugin_loader.o \
+ $(OBJSDIR)/console.o
 
 ifeq ($(PLATFORM), win32)
   MTR_OBJS += $(OBJSDIR)/engine.res
