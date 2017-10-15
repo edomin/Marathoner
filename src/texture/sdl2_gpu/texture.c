@@ -532,8 +532,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlit_f(uint32_t texNum, float x, float y)
     }
 }
 
-/*fa mtrTextureBlitScaled_f yes */
-MTR_EXPORT void MTR_CALL mtrTextureBlitScaled_f(uint32_t texNum, float x,
+/*fa mtrTextureBlitSized_f yes */
+MTR_EXPORT void MTR_CALL mtrTextureBlitSized_f(uint32_t texNum, float x,
  float y, float w, float h)
 {
     GPU_Rect      outputRegion;
@@ -547,6 +547,25 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitScaled_f(uint32_t texNum, float x,
         outputRegion.w = w;
         outputRegion.h = h;
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
+        GPU_BlitRect(texture->texture, NULL, mtrScreen->target, &outputRegion);
+    }
+}
+
+/*fa mtrTextureBlitScaled_f yes */
+MTR_EXPORT void MTR_CALL mtrTextureBlitScaled_f(uint32_t texNum, float x,
+ float y, float hscale, float vscale)
+{
+    GPU_Rect      outputRegion;
+    mtrTexture_t *texture;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
+    if (texNum != 0)
+    {
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
+        outputRegion.x = x;
+        outputRegion.y = y;
+        outputRegion.w = texture->texture->w * hscale;
+        outputRegion.h = texture->texture->h * vscale;
         GPU_BlitRect(texture->texture, NULL, mtrScreen->target, &outputRegion);
     }
 }
@@ -599,7 +618,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitFlipped_f(uint32_t texNum, float x,
 
 /*fa mtrTextureBlitGeneral_f yes */
 MTR_EXPORT void MTR_CALL mtrTextureBlitGeneral_f(uint32_t texNum, float x,
- float y, float w, float h, float angle, float pivotX, float pivotY, int flip)
+ float y, float hscale, float vscale, float angle, float pivotX, float pivotY,
+ int flip)
 {
     GPU_Rect      outputRegion;
     mtrTexture_t *texture;
@@ -612,8 +632,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitGeneral_f(uint32_t texNum, float x,
         actualFlip = mtrFlipToActualFlip(flip);
         outputRegion.x = x;
         outputRegion.y = y;
-        outputRegion.w = texture->texture->w;
-        outputRegion.h = texture->texture->h;
+        outputRegion.w = texture->texture->w * hscale;
+        outputRegion.h = texture->texture->h * vscale;
         if ((actualFlip & GPU_FLIP_VERTICAL) == GPU_FLIP_VERTICAL)
             outputRegion.y += outputRegion.h;
         if ((actualFlip & GPU_FLIP_HORIZONTAL) == GPU_FLIP_HORIZONTAL)
@@ -642,8 +662,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegion_f(uint32_t texNum, float x,
     }
 }
 
-/*fa mtrTextureBlitRegionScaled_f yes */
-MTR_EXPORT void MTR_CALL mtrTextureBlitRegionScaled_f(uint32_t texNum, float x,
+/*fa mtrTextureBlitRegionSized_f yes */
+MTR_EXPORT void MTR_CALL mtrTextureBlitRegionSized_f(uint32_t texNum, float x,
  float y, float w, float h, float rx, float ry, float rw, float rh)
 {
     GPU_Rect      region;
@@ -661,6 +681,31 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionScaled_f(uint32_t texNum, float x,
         outputRegion.y = y;
         outputRegion.w = w;
         outputRegion.h = h;
+        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
+        GPU_BlitRect(texture->texture, &region, mtrScreen->target,
+         &outputRegion);
+    }
+}
+
+/*fa mtrTextureBlitRegionScaled_f yes */
+MTR_EXPORT void MTR_CALL mtrTextureBlitRegionScaled_f(uint32_t texNum, float x,
+ float y, float hscale, float vscale, float rx, float ry, float rw, float rh)
+{
+    GPU_Rect      region;
+    GPU_Rect      outputRegion;
+    mtrTexture_t *texture;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
+    if (texNum != 0)
+    {
+        region.x = rx;
+        region.y = ry;
+        region.w = rw;
+        region.h = rh;
+        outputRegion.x = x;
+        outputRegion.y = y;
+        outputRegion.w = rw * hscale;
+        outputRegion.h = rh * vscale;
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         GPU_BlitRect(texture->texture, &region, mtrScreen->target,
          &outputRegion);
@@ -726,8 +771,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionFlipped_f(uint32_t texNum, float x,
 
 /*fa mtrTextureBlitRegionGeneral_f yes */
 MTR_EXPORT void MTR_CALL mtrTextureBlitRegionGeneral_f(uint32_t texNum, float x,
- float y, float w, float h, float rx, float ry, float rw, float rh, float angle,
- float pivotX, float pivotY, int flip)
+ float y, float hscale, float vscale, float rx, float ry, float rw, float rh,
+ float angle, float pivotX, float pivotY, int flip)
 {
     GPU_Rect      region;
     GPU_Rect      outputRegion;
@@ -744,8 +789,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionGeneral_f(uint32_t texNum, float x,
         region.h = rh;
         outputRegion.x = x;
         outputRegion.y = y;
-        outputRegion.w = w;
-        outputRegion.h = h;
+        outputRegion.w = rw * hscale;
+        outputRegion.h = rh * vscale;
         if ((actualFlip & GPU_FLIP_VERTICAL) == GPU_FLIP_VERTICAL)
             outputRegion.y += outputRegion.h;
         if ((actualFlip & GPU_FLIP_HORIZONTAL) == GPU_FLIP_HORIZONTAL)

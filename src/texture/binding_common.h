@@ -69,6 +69,10 @@ mtrTextureSetAlphaBlendingFunc mtrTextureSetAlphaBlending;
 typedef void (MTR_CALL * mtrTextureBlit_fFunc)(uint32_t, float, float);
 mtrTextureBlit_fFunc mtrTextureBlit_f;
 
+typedef void (MTR_CALL * mtrTextureBlitSized_fFunc)(uint32_t, float, float,
+ float, float);
+mtrTextureBlitSized_fFunc mtrTextureBlitSized_f;
+
 typedef void (MTR_CALL * mtrTextureBlitScaled_fFunc)(uint32_t, float, float,
  float, float);
 mtrTextureBlitScaled_fFunc mtrTextureBlitScaled_f;
@@ -88,6 +92,10 @@ mtrTextureBlitGeneral_fFunc mtrTextureBlitGeneral_f;
 typedef void (MTR_CALL * mtrTextureBlitRegion_fFunc)(uint32_t, float, float,
  float, float, float, float);
 mtrTextureBlitRegion_fFunc mtrTextureBlitRegion_f;
+
+typedef void (MTR_CALL * mtrTextureBlitRegionSized_fFunc)(uint32_t, float,
+ float, float, float, float, float, float, float);
+mtrTextureBlitRegionSized_fFunc mtrTextureBlitRegionSized_f;
 
 typedef void (MTR_CALL * mtrTextureBlitRegionScaled_fFunc)(uint32_t, float,
  float, float, float, float, float, float, float);

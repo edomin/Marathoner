@@ -74,6 +74,10 @@ typedef void (MTR_CALL * mtrTextureBlitRegion_fFunc)(uint32_t, float, float,
  float, float, float, float);
 mtrTextureBlitRegion_fFunc mtrTextureBlitRegion_f;
 
+typedef void (MTR_CALL * mtrTextureBlitRegionSized_fFunc)(uint32_t, float,
+ float, float, float, float, float, float, float);
+mtrTextureBlitRegionSized_fFunc mtrTextureBlitRegionSized_f;
+
 typedef void (MTR_CALL * mtrTextureBlitRegionScaled_fFunc)(uint32_t, float,
  float, float, float, float, float, float, float);
 mtrTextureBlitRegionScaled_fFunc mtrTextureBlitRegionScaled_f;

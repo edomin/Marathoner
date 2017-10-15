@@ -303,7 +303,7 @@ MTR_EXPORT bool MTR_CALL mtrGuiInit(uint32_t fontDmSize,
     MTR_FIND_FUNCTION(mtrFontGetStringWidth, "Abstraction_font");
     MTR_FIND_FUNCTION(mtrFontGetName, "Abstraction_font");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrScreenGetSizes, "screen");
-    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTextureBlitRegionScaled_f, "texture");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTextureBlitRegionSized_f, "texture");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTextureGetSizes, "texture");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrPrimitiveLine_rgba_f, "primitive");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrPrimitiveArc_rgba_f, "primitive");
@@ -545,7 +545,7 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
                     const struct nk_command_image *img = (
                      const struct nk_command_image *)cmd;
                     mtrNkImage *image = (mtrNkImage *)img->img.handle.ptr;
-                    mtrTextureBlitRegionScaled_f(image->texture, img->x, img->y,
+                    mtrTextureBlitRegionSized_f(image->texture, img->x, img->y,
                      img->w, img->h, image->nk.region[0], image->nk.region[1],
                      image->nk.region[2] - image->nk.region[0],
                      image->nk.region[3] - image->nk.region[1]);

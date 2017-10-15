@@ -70,9 +70,9 @@ mtrFontGetNameFunc mtrFontGetName;
 typedef void (MTR_CALL * mtrScreenGetSizesFunc)(int *w, int *h);
 mtrScreenGetSizesFunc mtrScreenGetSizes;
 
-typedef void (MTR_CALL * mtrTextureBlitRegionScaled_fFunc)(uint32_t texNum,
+typedef void (MTR_CALL * mtrTextureBlitRegionSized_fFunc)(uint32_t texNum,
  float x, float y, float w, float h, float rx, float ry, float rw, float rh);
-mtrTextureBlitRegionScaled_fFunc mtrTextureBlitRegionScaled_f;
+mtrTextureBlitRegionSized_fFunc mtrTextureBlitRegionSized_f;
 
 typedef void (MTR_CALL * mtrTextureGetSizesFunc)(uint32_t texNum, int *width,
  int *height);

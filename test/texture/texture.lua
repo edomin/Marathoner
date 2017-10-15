@@ -48,8 +48,19 @@ for i = 0, 60, 1 do
     MouseRefresh();
     x = x + 2;
     PrimitiveFill_c(0x000000);
-    TextureBlitScaled_f(helicopter, x, 128, (162 - x) / 162 * 96,
+    TextureBlitSized_f(helicopter, x, 128, (162 - x) / 162 * 96,
      (162 - x) / 162 * 32);
+    ScreenFlip();
+    TimerDelayForFPS(30);
+end;
+
+x = 32;
+for i = 0, 60, 1 do
+    TimerStart();
+    MouseRefresh();
+    x = x + 2;
+    PrimitiveFill_c(0x000000);
+    TextureBlitScaled_f(helicopter, x, 128, i / 30, i / 30);
     ScreenFlip();
     TimerDelayForFPS(30);
 end;
@@ -89,14 +100,14 @@ for i = 0, 60, 1 do
     MouseRefresh();
     x = x + 2;
     PrimitiveFill_c(0x000000);
-    TextureBlitGeneral_f(helicopter, x, 128, (162 - x) / 162 * 96,
-     (162 - x) / 162 * 32, -x, 48, 16, FLIP_NONE);
-    TextureBlitGeneral_f(helicopter, x, 160, (162 - x) / 162 * 96,
-     (162 - x) / 162 * 32, -x, 48, 16, FLIP_HORIZONTAL);
-    TextureBlitGeneral_f(helicopter, x, 192, (162 - x) / 162 * 96,
-     (162 - x) / 162 * 32, -x, 48, 16, FLIP_VERTICAL);
-    TextureBlitGeneral_f(helicopter, x, 244, (162 - x) / 162 * 96,
-     (162 - x) / 162 * 32, -x, 48, 16, FLIP_BOTH);
+    TextureBlitGeneral_f(helicopter, x, 128, i / 30, i / 30, -x, 48, 16,
+     FLIP_NONE);
+    TextureBlitGeneral_f(helicopter, x, 160, i / 30, i / 30, -x, 48, 16,
+     FLIP_HORIZONTAL);
+    TextureBlitGeneral_f(helicopter, x, 192, i / 30, i / 30, -x, 48, 16,
+     FLIP_VERTICAL);
+    TextureBlitGeneral_f(helicopter, x, 244, i / 30, i / 30, -x, 48, 16,
+     FLIP_BOTH);
     ScreenFlip();
     TimerDelayForFPS(30);
 end;
@@ -120,8 +131,20 @@ for i = 0, 60, 1 do
     MouseRefresh();
     x = x + 2;
     PrimitiveFill_c(0x000000);
-    TextureBlitRegionScaled_f(helicopterAnim, x, 128, (162 - x) / 162 * 96,
+    TextureBlitRegionSized_f(helicopterAnim, x, 128, (162 - x) / 162 * 96,
      (162 - x) / 162 * 32, (Floor_f(i / 4) % 8) * 96, 0, 96, 32);
+    ScreenFlip();
+    TimerDelayForFPS(30);
+end;
+
+x = 32;
+for i = 0, 60, 1 do
+    TimerStart();
+    MouseRefresh();
+    x = x + 2;
+    PrimitiveFill_c(0x000000);
+    TextureBlitRegionScaled_f(helicopterAnim, x, 128, i / 30, i / 30,
+     (Floor_f(i / 4) % 8) * 96, 0, 96, 32);
     ScreenFlip();
     TimerDelayForFPS(30);
 end;
@@ -162,18 +185,14 @@ for i = 0, 60, 1 do
     MouseRefresh();
     x = x + 2;
     PrimitiveFill_c(0x000000);
-    TextureBlitRegionGeneral_f(helicopterAnim, x, 128, (162 - x) / 162 * 96,
-     (162 - x) / 162 * 32, (Floor_f(i / 4) % 8) * 96, 0, 96, 32, -x, 48, 16,
-     FLIP_NONE);
-    TextureBlitRegionGeneral_f(helicopterAnim, x, 160, (162 - x) / 162 * 96,
-     (162 - x) / 162 * 32, (Floor_f(i / 4) % 8) * 96, 0, 96, 32, -x, 48, 16,
-     FLIP_HORIZONTAL);
-    TextureBlitRegionGeneral_f(helicopterAnim, x, 192, (162 - x) / 162 * 96,
-     (162 - x) / 162 * 32, (Floor_f(i / 4) % 8) * 96, 0, 96, 32, -x, 48, 16,
-     FLIP_VERTICAL);
-    TextureBlitRegionGeneral_f(helicopterAnim, x, 244, (162 - x) / 162 * 96,
-     (162 - x) / 162 * 32, (Floor_f(i / 4) % 8) * 96, 0, 96, 32, -x, 48, 16,
-     FLIP_BOTH);
+    TextureBlitRegionGeneral_f(helicopterAnim, x, 128, i / 30, i / 30,
+     (Floor_f(i / 4) % 8) * 96, 0, 96, 32, -x, 48, 16, FLIP_NONE);
+    TextureBlitRegionGeneral_f(helicopterAnim, x, 160, i / 30, i / 30,
+     (Floor_f(i / 4) % 8) * 96, 0, 96, 32, -x, 48, 16, FLIP_HORIZONTAL);
+    TextureBlitRegionGeneral_f(helicopterAnim, x, 192, i / 30, i / 30,
+     (Floor_f(i / 4) % 8) * 96, 0, 96, 32, -x, 48, 16, FLIP_VERTICAL);
+    TextureBlitRegionGeneral_f(helicopterAnim, x, 244, i / 30, i / 30,
+     (Floor_f(i / 4) % 8) * 96, 0, 96, 32, -x, 48, 16, FLIP_BOTH);
     ScreenFlip();
     TimerDelayForFPS(30);
 end;

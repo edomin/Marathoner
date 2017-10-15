@@ -41,6 +41,7 @@ MTR_EXPORT bool MTR_CALL mtrSpriteInit(uint32_t dmSize, uint32_t reservedCount)
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTextureSetModulationAlpha, "texture");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTextureSetModulationAlpha_f, "texture");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTextureBlitRegion_f, "texture");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTextureBlitRegionSized_f, "texture");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTextureBlitRegionScaled_f, "texture");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTextureBlitRegionAngled_f, "texture");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTextureBlitRegionFlipped_f, "texture");
