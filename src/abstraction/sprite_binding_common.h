@@ -14,6 +14,13 @@ mtrSpriteLoadFunc mtrSpriteLoad;
 typedef uint32_t (MTR_CALL * mtrSpriteLoadSimpleFunc)(const char *, int, int);
 mtrSpriteLoadSimpleFunc mtrSpriteLoadSimple;
 
+typedef uint32_t (MTR_CALL * mtrSpriteLoadAtlasFunc)(const char *, int);
+mtrSpriteLoadAtlasFunc mtrSpriteLoadAtlas;
+
+typedef bool (MTR_CALL * mtrSpriteSetAtlasFrameFunc)(uint32_t, int, int, int,
+ int, int, int, int);
+mtrSpriteLoadAtlasFunc mtrSpriteLoadAtlas;
+
 typedef void (MTR_CALL * mtrSpriteFreeFunc)(uint32_t);
 mtrSpriteFreeFunc mtrSpriteFree;
 

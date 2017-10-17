@@ -7,6 +7,8 @@ MTR_SCRIPT_FUNC_I_S1(mtrSF_SpriteFunctionSupported, mtrSpriteFunctionSupported)
 MTR_SCRIPT_FUNC_B_U32t2(mtrSF_SpriteInit, mtrSpriteInit)
 MTR_SCRIPT_FUNC_U32t_S1I7(mtrSF_SpriteLoad, mtrSpriteLoad)
 MTR_SCRIPT_FUNC_U32t_S1I2(mtrSF_SpriteLoadSimple, mtrSpriteLoadSimple)
+MTR_SCRIPT_FUNC_U32t_S1I1(mtrSF_SpriteLoadAtlas, mtrSpriteLoadAtlas)
+MTR_SCRIPT_FUNC_B_U32t1I7(mtrSF_SpriteSetAtlasFrame, mtrSpriteSetAtlasFrame)
 MTR_SCRIPT_FUNC_V_U32t1(mtrSF_SpriteFree, mtrSpriteFree)
 MTR_SCRIPT_FUNC_V_U32t2(mtrSF_SpriteSetModulation_c, mtrSpriteSetModulation_c)
 MTR_SCRIPT_FUNC_V_U32t2(mtrSF_SpriteSetModulation_ca, mtrSpriteSetModulation_ca)
@@ -33,6 +35,8 @@ void mtrScriptsRegisterAll(void)
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteInit);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteLoad);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteLoadSimple);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteLoadAtlas);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteSetAtlasFrame);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteFree);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteSetModulation_c);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteSetModulation_ca);
