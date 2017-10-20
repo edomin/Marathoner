@@ -4,7 +4,7 @@
 
 MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Ttf, FA_FUNCTIONS_COUNT)
 
-MTR_EXPORT mtrReport* MTR_CALL MTR_CreateReport(void)
+MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -21,7 +21,7 @@ MTR_EXPORT mtrReport* MTR_CALL MTR_CreateReport(void)
 }
 
 /*fa MTR_TtfInit yes */
-MTR_EXPORT bool MTR_CALL MTR_TtfInit(uint32_t dmSize, uint32_t reservedCount)
+MTR_DCLSPC bool MTR_CALL MTR_TtfInit(uint32_t dmSize, uint32_t reservedCount)
 {
     SDL_version        compiled;
     const SDL_version *linked;
@@ -64,7 +64,7 @@ MTR_EXPORT bool MTR_CALL MTR_TtfInit(uint32_t dmSize, uint32_t reservedCount)
 }
 
 /*fa MTR_TtfQuit yes */
-MTR_EXPORT void MTR_CALL MTR_TtfQuit(void)
+MTR_DCLSPC void MTR_CALL MTR_TtfQuit(void)
 {
     MTR_TTF_CHECK_IF_NOT_INITED_WITH_LOG("Unable to destroy TTF font manager",);
 
@@ -74,7 +74,7 @@ MTR_EXPORT void MTR_CALL MTR_TtfQuit(void)
 }
 
 /*fa MTR_TtfLoad yes */
-MTR_EXPORT uint32_t MTR_CALL MTR_TtfLoad(const char *filename, int size)
+MTR_DCLSPC uint32_t MTR_CALL MTR_TtfLoad(const char *filename, int size)
 {
     uint32_t  freeIndex;
     mtrTtf_t *font;
@@ -105,7 +105,7 @@ MTR_EXPORT uint32_t MTR_CALL MTR_TtfLoad(const char *filename, int size)
 }
 
 /*fa MTR_TtfGetFontHeight yes */
-MTR_EXPORT int MTR_CALL MTR_TtfGetFontHeight(uint32_t fontNum)
+MTR_DCLSPC int MTR_CALL MTR_TtfGetFontHeight(uint32_t fontNum)
 {
     mtrTtf_t *font;
     MTR_TTF_CHECK_IF_NOT_INITED(0);
@@ -118,7 +118,7 @@ MTR_EXPORT int MTR_CALL MTR_TtfGetFontHeight(uint32_t fontNum)
 }
 
 /*fa MTR_TtfGetStringSizes yes */
-MTR_EXPORT bool MTR_CALL MTR_TtfGetStringSizes(uint32_t fontNum,
+MTR_DCLSPC bool MTR_CALL MTR_TtfGetStringSizes(uint32_t fontNum,
  const char *string, int *w, int *h)
 {
     mtrTtf_t *font;
@@ -146,7 +146,7 @@ MTR_EXPORT bool MTR_CALL MTR_TtfGetStringSizes(uint32_t fontNum,
 }
 
 /*fa MTR_TtfGetStringWidth yes */
-MTR_EXPORT int MTR_CALL MTR_TtfGetStringWidth(uint32_t fontNum,
+MTR_DCLSPC int MTR_CALL MTR_TtfGetStringWidth(uint32_t fontNum,
  const char *string)
 {
     mtrTtf_t *font;
@@ -165,7 +165,7 @@ MTR_EXPORT int MTR_CALL MTR_TtfGetStringWidth(uint32_t fontNum,
 }
 
 /*fa MTR_TtfSetFontStyle yes */
-MTR_EXPORT void MTR_CALL MTR_TtfSetFontStyle(uint32_t fontNum, int style)
+MTR_DCLSPC void MTR_CALL MTR_TtfSetFontStyle(uint32_t fontNum, int style)
 {
     mtrTtf_t *font;
     MTR_TTF_CHECK_IF_NOT_INITED();
@@ -175,7 +175,7 @@ MTR_EXPORT void MTR_CALL MTR_TtfSetFontStyle(uint32_t fontNum, int style)
 }
 
 /*fa MTR_TtfSetFontOutline yes */
-MTR_EXPORT void MTR_CALL MTR_TtfSetFontOutline(uint32_t fontNum, int outline)
+MTR_DCLSPC void MTR_CALL MTR_TtfSetFontOutline(uint32_t fontNum, int outline)
 {
     mtrTtf_t *font;
     MTR_TTF_CHECK_IF_NOT_INITED();
@@ -185,7 +185,7 @@ MTR_EXPORT void MTR_CALL MTR_TtfSetFontOutline(uint32_t fontNum, int outline)
 }
 
 /*fa MTR_TtfFree yes */
-MTR_EXPORT void MTR_CALL MTR_TtfFree(uint32_t fontNum)
+MTR_DCLSPC void MTR_CALL MTR_TtfFree(uint32_t fontNum)
 {
     mtrTtf_t *font;
     MTR_TTF_CHECK_IF_NOT_INITED_WITH_LOG("Unable to unload TTF font",);
@@ -203,7 +203,7 @@ MTR_EXPORT void MTR_CALL MTR_TtfFree(uint32_t fontNum)
 }
 
 /*fa MTR_TtfRenderString yes */
-MTR_EXPORT mtrPixels_t *MTR_CALL MTR_TtfRenderString(uint32_t fontNum, uint8_t r,
+MTR_DCLSPC mtrPixels_t *MTR_CALL MTR_TtfRenderString(uint32_t fontNum, uint8_t r,
  uint8_t g, uint8_t b, const char *string)
 {
     mtrTtf_t        *font;

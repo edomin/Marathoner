@@ -4,7 +4,7 @@
 
 MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Audio, FA_FUNCTIONS_COUNT)
 
-MTR_EXPORT mtrReport* MTR_CALL MTR_CreateReport(void)
+MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -21,7 +21,7 @@ MTR_EXPORT mtrReport* MTR_CALL MTR_CreateReport(void)
 }
 
 /*fa MTR_AudioInit yes */
-MTR_EXPORT bool MTR_CALL MTR_AudioInit(uint32_t sndDmSize,
+MTR_DCLSPC bool MTR_CALL MTR_AudioInit(uint32_t sndDmSize,
  uint32_t sndReservedCount, uint32_t musDmSize, uint32_t musReservedCount,
  int freq, int channels, int chunkSize)
 {
@@ -230,7 +230,7 @@ MTR_EXPORT bool MTR_CALL MTR_AudioInit(uint32_t sndDmSize,
 }
 
 /*fa MTR_AudioQuit yes */
-MTR_EXPORT void MTR_CALL MTR_AudioQuit(void)
+MTR_DCLSPC void MTR_CALL MTR_AudioQuit(void)
 {
     MTR_AUDIO_CHECK_IF_NOT_INITED_WITH_LOG("Unable to destroy audio manager",);
 
@@ -241,7 +241,7 @@ MTR_EXPORT void MTR_CALL MTR_AudioQuit(void)
 }
 
 /*fa MTR_AudioSoundLoad yes */
-MTR_EXPORT uint32_t MTR_CALL MTR_AudioSoundLoad(const char *filename)
+MTR_DCLSPC uint32_t MTR_CALL MTR_AudioSoundLoad(const char *filename)
 {
     uint32_t    freeIndex;
     mtrSound_t *sound;
@@ -272,7 +272,7 @@ MTR_EXPORT uint32_t MTR_CALL MTR_AudioSoundLoad(const char *filename)
 }
 
 /*fa MTR_AudioMusicLoad yes */
-MTR_EXPORT uint32_t MTR_CALL MTR_AudioMusicLoad(const char *filename)
+MTR_DCLSPC uint32_t MTR_CALL MTR_AudioMusicLoad(const char *filename)
 {
     uint32_t     freeIndex;
     mtrMusic_t  *music;
@@ -343,7 +343,7 @@ MTR_EXPORT uint32_t MTR_CALL MTR_AudioMusicLoad(const char *filename)
 }
 
 /*fa MTR_AudioSoundPlay yes */
-MTR_EXPORT void MTR_CALL MTR_AudioSoundPlay(uint32_t soundNum)
+MTR_DCLSPC void MTR_CALL MTR_AudioSoundPlay(uint32_t soundNum)
 {
     mtrSound_t *sound;
     MTR_AUDIO_CHECK_IF_NOT_INITED();
@@ -353,7 +353,7 @@ MTR_EXPORT void MTR_CALL MTR_AudioSoundPlay(uint32_t soundNum)
 }
 
 /*fa MTR_AudioSoundFadeInPlay yes */
-MTR_EXPORT void MTR_CALL MTR_AudioSoundFadeInPlay(uint32_t soundNum, int ms)
+MTR_DCLSPC void MTR_CALL MTR_AudioSoundFadeInPlay(uint32_t soundNum, int ms)
 {
     mtrSound_t *sound;
     MTR_AUDIO_CHECK_IF_NOT_INITED();
@@ -363,7 +363,7 @@ MTR_EXPORT void MTR_CALL MTR_AudioSoundFadeInPlay(uint32_t soundNum, int ms)
 }
 
 /*fa MTR_AudioSoundSetVolume yes */
-MTR_EXPORT void MTR_CALL MTR_AudioSoundSetVolume(uint32_t soundNum,
+MTR_DCLSPC void MTR_CALL MTR_AudioSoundSetVolume(uint32_t soundNum,
  int volume)
 {
     mtrSound_t *sound;
@@ -374,7 +374,7 @@ MTR_EXPORT void MTR_CALL MTR_AudioSoundSetVolume(uint32_t soundNum,
 }
 
 /*fa MTR_AudioSoundSetVolume_f yes */
-MTR_EXPORT void MTR_CALL MTR_AudioSoundSetVolume_f(uint32_t soundNum,
+MTR_DCLSPC void MTR_CALL MTR_AudioSoundSetVolume_f(uint32_t soundNum,
  float volume)
 {
     mtrSound_t *sound;
@@ -385,7 +385,7 @@ MTR_EXPORT void MTR_CALL MTR_AudioSoundSetVolume_f(uint32_t soundNum,
 }
 
 /*fa MTR_AudioSoundStop yes */
-MTR_EXPORT void MTR_CALL MTR_AudioSoundStop(uint32_t soundNum)
+MTR_DCLSPC void MTR_CALL MTR_AudioSoundStop(uint32_t soundNum)
 {
     int         i;
     int         channelsCount;
@@ -406,7 +406,7 @@ MTR_EXPORT void MTR_CALL MTR_AudioSoundStop(uint32_t soundNum)
 }
 
 /*fa MTR_AudioSoundFadeOutStop yes */
-MTR_EXPORT void MTR_CALL MTR_AudioSoundFadeOutStop(uint32_t soundNum, int ms)
+MTR_DCLSPC void MTR_CALL MTR_AudioSoundFadeOutStop(uint32_t soundNum, int ms)
 {
     int         i;
     int         channelsCount;
@@ -427,7 +427,7 @@ MTR_EXPORT void MTR_CALL MTR_AudioSoundFadeOutStop(uint32_t soundNum, int ms)
 }
 
 /*fa MTR_AudioChannelsSetVolume yes */
-MTR_EXPORT void MTR_CALL MTR_AudioChannelsSetVolume(int volume)
+MTR_DCLSPC void MTR_CALL MTR_AudioChannelsSetVolume(int volume)
 {
     MTR_AUDIO_CHECK_IF_NOT_INITED();
 
@@ -435,7 +435,7 @@ MTR_EXPORT void MTR_CALL MTR_AudioChannelsSetVolume(int volume)
 }
 
 /*fa MTR_AudioChannelsSetVolume_f yes */
-MTR_EXPORT void MTR_CALL MTR_AudioChannelsSetVolume_f(float volume)
+MTR_DCLSPC void MTR_CALL MTR_AudioChannelsSetVolume_f(float volume)
 {
     MTR_AUDIO_CHECK_IF_NOT_INITED();
 
@@ -443,7 +443,7 @@ MTR_EXPORT void MTR_CALL MTR_AudioChannelsSetVolume_f(float volume)
 }
 
 /*fa MTR_AudioChannelsPause yes */
-MTR_EXPORT void MTR_CALL MTR_AudioChannelsPause(void)
+MTR_DCLSPC void MTR_CALL MTR_AudioChannelsPause(void)
 {
     MTR_AUDIO_CHECK_IF_NOT_INITED();
 
@@ -452,7 +452,7 @@ MTR_EXPORT void MTR_CALL MTR_AudioChannelsPause(void)
 }
 
 /*fa MTR_AudioChannelsResume yes */
-MTR_EXPORT void MTR_CALL MTR_AudioChannelsResume(void)
+MTR_DCLSPC void MTR_CALL MTR_AudioChannelsResume(void)
 {
     MTR_AUDIO_CHECK_IF_NOT_INITED();
 
@@ -461,7 +461,7 @@ MTR_EXPORT void MTR_CALL MTR_AudioChannelsResume(void)
 }
 
 /*fa MTR_AudioChannelsStop yes */
-MTR_EXPORT void MTR_CALL MTR_AudioChannelsStop(void)
+MTR_DCLSPC void MTR_CALL MTR_AudioChannelsStop(void)
 {
     MTR_AUDIO_CHECK_IF_NOT_INITED();
 
@@ -469,7 +469,7 @@ MTR_EXPORT void MTR_CALL MTR_AudioChannelsStop(void)
 }
 
 /*fa MTR_AudioChannelsFadeOutStop yes */
-MTR_EXPORT void MTR_CALL MTR_AudioChannelsFadeOutStop(int ms)
+MTR_DCLSPC void MTR_CALL MTR_AudioChannelsFadeOutStop(int ms)
 {
     MTR_AUDIO_CHECK_IF_NOT_INITED();
 
@@ -477,7 +477,7 @@ MTR_EXPORT void MTR_CALL MTR_AudioChannelsFadeOutStop(int ms)
 }
 
 /*fa MTR_AudioMusicPlay yes */
-MTR_EXPORT void MTR_CALL MTR_AudioMusicPlay(uint32_t musicNum)
+MTR_DCLSPC void MTR_CALL MTR_AudioMusicPlay(uint32_t musicNum)
 {
     mtrMusic_t *music;
     MTR_AUDIO_CHECK_IF_NOT_INITED();
@@ -487,7 +487,7 @@ MTR_EXPORT void MTR_CALL MTR_AudioMusicPlay(uint32_t musicNum)
 }
 
 /*fa MTR_AudioMusicFadeInPlay yes */
-MTR_EXPORT void MTR_CALL MTR_AudioMusicFadeInPlay(uint32_t musicNum, int ms)
+MTR_DCLSPC void MTR_CALL MTR_AudioMusicFadeInPlay(uint32_t musicNum, int ms)
 {
     mtrMusic_t *music;
     MTR_AUDIO_CHECK_IF_NOT_INITED();
@@ -497,7 +497,7 @@ MTR_EXPORT void MTR_CALL MTR_AudioMusicFadeInPlay(uint32_t musicNum, int ms)
 }
 
 /*fa MTR_AudioMusicPause yes */
-MTR_EXPORT void MTR_CALL MTR_AudioMusicPause(void)
+MTR_DCLSPC void MTR_CALL MTR_AudioMusicPause(void)
 {
     MTR_AUDIO_CHECK_IF_NOT_INITED();
 
@@ -506,7 +506,7 @@ MTR_EXPORT void MTR_CALL MTR_AudioMusicPause(void)
 }
 
 /*fa MTR_AudioMusicResume yes */
-MTR_EXPORT void MTR_CALL MTR_AudioMusicResume(void)
+MTR_DCLSPC void MTR_CALL MTR_AudioMusicResume(void)
 {
     MTR_AUDIO_CHECK_IF_NOT_INITED();
 
@@ -515,7 +515,7 @@ MTR_EXPORT void MTR_CALL MTR_AudioMusicResume(void)
 }
 
 /*fa MTR_AudioMusicStop yes */
-MTR_EXPORT void MTR_CALL MTR_AudioMusicStop(void)
+MTR_DCLSPC void MTR_CALL MTR_AudioMusicStop(void)
 {
     MTR_AUDIO_CHECK_IF_NOT_INITED();
 
@@ -524,7 +524,7 @@ MTR_EXPORT void MTR_CALL MTR_AudioMusicStop(void)
 }
 
 /*fa MTR_AudioMusicFadeOutStop yes */
-MTR_EXPORT void MTR_CALL MTR_AudioMusicFadeOutStop(int ms)
+MTR_DCLSPC void MTR_CALL MTR_AudioMusicFadeOutStop(int ms)
 {
     MTR_AUDIO_CHECK_IF_NOT_INITED();
 
@@ -533,7 +533,7 @@ MTR_EXPORT void MTR_CALL MTR_AudioMusicFadeOutStop(int ms)
 }
 
 /*fa MTR_AudioMusicSetVolume yes */
-MTR_EXPORT void MTR_CALL MTR_AudioMusicSetVolume(int volume)
+MTR_DCLSPC void MTR_CALL MTR_AudioMusicSetVolume(int volume)
 {
     MTR_AUDIO_CHECK_IF_NOT_INITED();
 
@@ -541,7 +541,7 @@ MTR_EXPORT void MTR_CALL MTR_AudioMusicSetVolume(int volume)
 }
 
 /*fa MTR_AudioMusicSetVolume_f yes */
-MTR_EXPORT void MTR_CALL MTR_AudioMusicSetVolume_f(float volume)
+MTR_DCLSPC void MTR_CALL MTR_AudioMusicSetVolume_f(float volume)
 {
     MTR_AUDIO_CHECK_IF_NOT_INITED();
 
@@ -549,7 +549,7 @@ MTR_EXPORT void MTR_CALL MTR_AudioMusicSetVolume_f(float volume)
 }
 
 /*fa MTR_AudioSoundFree yes */
-MTR_EXPORT void MTR_CALL MTR_AudioSoundFree(uint32_t soundNum)
+MTR_DCLSPC void MTR_CALL MTR_AudioSoundFree(uint32_t soundNum)
 {
     mtrSound_t *sound;
     MTR_AUDIO_CHECK_IF_NOT_INITED_WITH_LOG("Unable to unload sound",);
@@ -567,7 +567,7 @@ MTR_EXPORT void MTR_CALL MTR_AudioSoundFree(uint32_t soundNum)
 }
 
 /*fa MTR_AudioMusicFree yes */
-MTR_EXPORT void MTR_CALL MTR_AudioMusicFree(uint32_t musicNum)
+MTR_DCLSPC void MTR_CALL MTR_AudioMusicFree(uint32_t musicNum)
 {
     mtrMusic_t *music;
     MTR_AUDIO_CHECK_IF_NOT_INITED_WITH_LOG("Unable to unload music",);

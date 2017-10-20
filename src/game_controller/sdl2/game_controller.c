@@ -4,7 +4,7 @@
 
 MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(GameController, FA_FUNCTIONS_COUNT)
 
-MTR_EXPORT mtrReport* MTR_CALL MTR_CreateReport(void)
+MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -213,7 +213,7 @@ void MTR_DisableController(int controllerNum)
 }
 
 /*fa MTR_GameControllerInit yes */
-MTR_EXPORT bool MTR_CALL MTR_GameControllerInit(void)
+MTR_DCLSPC bool MTR_CALL MTR_GameControllerInit(void)
 {
     SDL_version             compiled;
     SDL_version             linked;
@@ -289,7 +289,7 @@ MTR_EXPORT bool MTR_CALL MTR_GameControllerInit(void)
 }
 
 /*fa MTR_GameControllerQuit yes */
-MTR_EXPORT void MTR_CALL MTR_GameControllerQuit(void)
+MTR_DCLSPC void MTR_CALL MTR_GameControllerQuit(void)
 {
     uint32_t i;
     MTR_GAME_CONTROLLER_CHECK_IF_NOT_INITED_WITH_LOG(
@@ -308,7 +308,7 @@ MTR_EXPORT void MTR_CALL MTR_GameControllerQuit(void)
 }
 
 /*fa MTR_GameControllerRefresh yes */
-MTR_EXPORT void MTR_CALL MTR_GameControllerRefresh(void)
+MTR_DCLSPC void MTR_CALL MTR_GameControllerRefresh(void)
 {
     unsigned int         i;
     int                  j;
@@ -373,7 +373,7 @@ MTR_EXPORT void MTR_CALL MTR_GameControllerRefresh(void)
 }
 
 /*fa MTR_GameControllerButtonPress yes */
-MTR_EXPORT bool MTR_CALL MTR_GameControllerButtonPress(int controllerNum,
+MTR_DCLSPC bool MTR_CALL MTR_GameControllerButtonPress(int controllerNum,
  int button)
 {
     mtrGameController_t *gameController;
@@ -395,7 +395,7 @@ MTR_EXPORT bool MTR_CALL MTR_GameControllerButtonPress(int controllerNum,
 }
 
 /*fa MTR_GameControllerButtonRelease yes */
-MTR_EXPORT bool MTR_CALL MTR_GameControllerButtonRelease(int controllerNum,
+MTR_DCLSPC bool MTR_CALL MTR_GameControllerButtonRelease(int controllerNum,
  int button)
 {
     mtrGameController_t *gameController;
@@ -417,7 +417,7 @@ MTR_EXPORT bool MTR_CALL MTR_GameControllerButtonRelease(int controllerNum,
 }
 
 /*fa MTR_GameControllerButtonPressed yes */
-MTR_EXPORT bool MTR_CALL MTR_GameControllerButtonPressed(int controllerNum,
+MTR_DCLSPC bool MTR_CALL MTR_GameControllerButtonPressed(int controllerNum,
  int button)
 {
     mtrGameController_t *gameController;
@@ -435,7 +435,7 @@ MTR_EXPORT bool MTR_CALL MTR_GameControllerButtonPressed(int controllerNum,
 }
 
 /*fa MTR_GameControllerGetAxis yes */
-MTR_EXPORT int16_t MTR_CALL MTR_GameControllerGetAxis(int controllerNum,
+MTR_DCLSPC int16_t MTR_CALL MTR_GameControllerGetAxis(int controllerNum,
  int axisNum)
 {
     mtrGameController_t *gameController;
@@ -453,7 +453,7 @@ MTR_EXPORT int16_t MTR_CALL MTR_GameControllerGetAxis(int controllerNum,
 }
 
 /*fa MTR_GameControllerGetAxis_f yes */
-MTR_EXPORT float MTR_CALL MTR_GameControllerGetAxis_f(int controllerNum,
+MTR_DCLSPC float MTR_CALL MTR_GameControllerGetAxis_f(int controllerNum,
  int axisNum)
 {
     mtrGameController_t *gameController;
@@ -476,7 +476,7 @@ MTR_EXPORT float MTR_CALL MTR_GameControllerGetAxis_f(int controllerNum,
 }
 
 /*fa MTR_GameControllerGetAxisDelta yes */
-MTR_EXPORT int MTR_CALL MTR_GameControllerGetAxisDelta(int controllerNum,
+MTR_DCLSPC int MTR_CALL MTR_GameControllerGetAxisDelta(int controllerNum,
  int axisNum)
 {
     mtrGameController_t *gameController;
@@ -495,7 +495,7 @@ MTR_EXPORT int MTR_CALL MTR_GameControllerGetAxisDelta(int controllerNum,
 }
 
 /*fa MTR_GameControllerGetAxisDelta_f yes */
-MTR_EXPORT float MTR_CALL MTR_GameControllerGetAxisDelta_f(int controllerNum,
+MTR_DCLSPC float MTR_CALL MTR_GameControllerGetAxisDelta_f(int controllerNum,
  int axisNum)
 {
     mtrGameController_t *gameController;
@@ -514,7 +514,7 @@ MTR_EXPORT float MTR_CALL MTR_GameControllerGetAxisDelta_f(int controllerNum,
 }
 
 /*fa MTR_GameControllerGetTrackballDeltaX yes */
-MTR_EXPORT int MTR_CALL MTR_GameControllerGetTrackballDeltaX(int controllerNum,
+MTR_DCLSPC int MTR_CALL MTR_GameControllerGetTrackballDeltaX(int controllerNum,
  int trackballNum)
 {
     mtrGameController_t *gameController;
@@ -532,7 +532,7 @@ MTR_EXPORT int MTR_CALL MTR_GameControllerGetTrackballDeltaX(int controllerNum,
 }
 
 /*fa MTR_GameControllerGetTrackballDeltaY yes */
-MTR_EXPORT int MTR_CALL MTR_GameControllerGetTrackballDeltaY(int controllerNum,
+MTR_DCLSPC int MTR_CALL MTR_GameControllerGetTrackballDeltaY(int controllerNum,
  int trackballNum)
 {
     mtrGameController_t *gameController;
@@ -550,7 +550,7 @@ MTR_EXPORT int MTR_CALL MTR_GameControllerGetTrackballDeltaY(int controllerNum,
 }
 
 /*fa MTR_GameControllerGetTrackballDeltaXY yes */
-MTR_EXPORT void MTR_CALL MTR_GameControllerGetTrackballDeltaXY(int controllerNum,
+MTR_DCLSPC void MTR_CALL MTR_GameControllerGetTrackballDeltaXY(int controllerNum,
  int trackballNum, int *deltaX, int *deltaY)
 {
     mtrGameController_t *gameController;
@@ -583,7 +583,7 @@ MTR_EXPORT void MTR_CALL MTR_GameControllerGetTrackballDeltaXY(int controllerNum
 }
 
 /*fa MTR_GameControllerGetPovHat yes */
-MTR_EXPORT uint8_t MTR_CALL MTR_GameControllerGetPovHat(int controllerNum,
+MTR_DCLSPC uint8_t MTR_CALL MTR_GameControllerGetPovHat(int controllerNum,
  int povHatNum)
 {
     mtrGameController_t *gameController;
@@ -601,7 +601,7 @@ MTR_EXPORT uint8_t MTR_CALL MTR_GameControllerGetPovHat(int controllerNum,
 }
 
 /*fa MTR_GameControllerGetPovHatHorizontal yes */
-MTR_EXPORT int MTR_CALL MTR_GameControllerGetPovHatHorizontal(int controllerNum,
+MTR_DCLSPC int MTR_CALL MTR_GameControllerGetPovHatHorizontal(int controllerNum,
  int povHatNum)
 {
     mtrGameController_t *gameController;
@@ -627,7 +627,7 @@ MTR_EXPORT int MTR_CALL MTR_GameControllerGetPovHatHorizontal(int controllerNum,
 }
 
 /*fa MTR_GameControllerGetPovHatVertical yes */
-MTR_EXPORT int MTR_CALL MTR_GameControllerGetPovHatVertical(int controllerNum,
+MTR_DCLSPC int MTR_CALL MTR_GameControllerGetPovHatVertical(int controllerNum,
  int povHatNum)
 {
     mtrGameController_t *gameController;
@@ -652,7 +652,7 @@ MTR_EXPORT int MTR_CALL MTR_GameControllerGetPovHatVertical(int controllerNum,
 }
 
 /*fa MTR_GameControllerGetPovHatAxes yes */
-MTR_EXPORT void MTR_CALL MTR_GameControllerGetPovHatAxes(int controllerNum,
+MTR_DCLSPC void MTR_CALL MTR_GameControllerGetPovHatAxes(int controllerNum,
  int povHatNum, int *vertical, int *horizontal)
 {
     mtrGameController_t *gameController;
@@ -690,7 +690,7 @@ MTR_EXPORT void MTR_CALL MTR_GameControllerGetPovHatAxes(int controllerNum,
 }
 
 /*fa MTR_GameControllerGetButtonsCount yes */
-MTR_EXPORT int MTR_CALL MTR_GameControllerGetButtonsCount(int controllerNum)
+MTR_DCLSPC int MTR_CALL MTR_GameControllerGetButtonsCount(int controllerNum)
 {
     mtrGameController_t *gameController;
     MTR_GAME_CONTROLLER_CHECK_IF_NOT_INITED(0);
@@ -704,7 +704,7 @@ MTR_EXPORT int MTR_CALL MTR_GameControllerGetButtonsCount(int controllerNum)
 }
 
 /*fa MTR_GameControllerGetAxesCount yes */
-MTR_EXPORT int MTR_CALL MTR_GameControllerGetAxesCount(int controllerNum)
+MTR_DCLSPC int MTR_CALL MTR_GameControllerGetAxesCount(int controllerNum)
 {
     mtrGameController_t *gameController;
     MTR_GAME_CONTROLLER_CHECK_IF_NOT_INITED(0);
@@ -718,7 +718,7 @@ MTR_EXPORT int MTR_CALL MTR_GameControllerGetAxesCount(int controllerNum)
 }
 
 /*fa MTR_GameControllerGetTrackballsCount yes */
-MTR_EXPORT int MTR_CALL MTR_GameControllerGetTrackballsCount(int controllerNum)
+MTR_DCLSPC int MTR_CALL MTR_GameControllerGetTrackballsCount(int controllerNum)
 {
     mtrGameController_t *gameController;
     MTR_GAME_CONTROLLER_CHECK_IF_NOT_INITED(0);
@@ -732,7 +732,7 @@ MTR_EXPORT int MTR_CALL MTR_GameControllerGetTrackballsCount(int controllerNum)
 }
 
 /*fa MTR_GameControllerGetPowHatsCount yes */
-MTR_EXPORT int MTR_CALL MTR_GameControllerGetPowHatsCount(int controllerNum)
+MTR_DCLSPC int MTR_CALL MTR_GameControllerGetPowHatsCount(int controllerNum)
 {
     mtrGameController_t *gameController;
     MTR_GAME_CONTROLLER_CHECK_IF_NOT_INITED(0);

@@ -4,7 +4,7 @@
 
 MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Screen, FA_FUNCTIONS_COUNT)
 
-MTR_EXPORT mtrReport* MTR_CALL MTR_CreateReport(void)
+MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -21,7 +21,7 @@ MTR_EXPORT mtrReport* MTR_CALL MTR_CreateReport(void)
 }
 
 /*fa MTR_ScreenInit partially */
-MTR_EXPORT bool MTR_CALL MTR_ScreenInit(int width, int height, bool fullscreen,
+MTR_DCLSPC bool MTR_CALL MTR_ScreenInit(int width, int height, bool fullscreen,
  const char *title)
 {
 //    const char *actualTitle;
@@ -53,7 +53,7 @@ MTR_EXPORT bool MTR_CALL MTR_ScreenInit(int width, int height, bool fullscreen,
 }
 
 /*fa MTR_ScreenQuit yes */
-MTR_EXPORT void MTR_CALL MTR_ScreenQuit(void)
+MTR_DCLSPC void MTR_CALL MTR_ScreenQuit(void)
 {
     MTR_SCREEN_CHECK_IF_NOT_INITED_WITH_LOG("Unable to destroy Screen",);
 
@@ -63,7 +63,7 @@ MTR_EXPORT void MTR_CALL MTR_ScreenQuit(void)
 }
 
 /*fa MTR_ScreenFlip yes */
-MTR_EXPORT void MTR_CALL MTR_ScreenFlip(void)
+MTR_DCLSPC void MTR_CALL MTR_ScreenFlip(void)
 {
     MTR_SCREEN_CHECK_IF_NOT_INITED();
 
@@ -71,7 +71,7 @@ MTR_EXPORT void MTR_CALL MTR_ScreenFlip(void)
 }
 
 /*fa MTR_ScreenGetSizes yes */
-MTR_EXPORT void MTR_CALL MTR_ScreenGetSizes(int *w, int *h)
+MTR_DCLSPC void MTR_CALL MTR_ScreenGetSizes(int *w, int *h)
 {
     uint16_t width;
     uint16_t height;
@@ -91,7 +91,7 @@ MTR_EXPORT void MTR_CALL MTR_ScreenGetSizes(int *w, int *h)
 }
 
 /*fa MTR_ScreenGetWidth yes */
-MTR_EXPORT int MTR_CALL MTR_ScreenGetWidth(void)
+MTR_DCLSPC int MTR_CALL MTR_ScreenGetWidth(void)
 {
     uint16_t width;
     uint16_t height;
@@ -102,7 +102,7 @@ MTR_EXPORT int MTR_CALL MTR_ScreenGetWidth(void)
 }
 
 /*fa MTR_ScreenGetHeight yes */
-MTR_EXPORT int MTR_CALL MTR_ScreenGetHeight(void)
+MTR_DCLSPC int MTR_CALL MTR_ScreenGetHeight(void)
 {
     uint16_t width;
     uint16_t height;
@@ -113,7 +113,7 @@ MTR_EXPORT int MTR_CALL MTR_ScreenGetHeight(void)
 }
 
 /*fa MTR_ScreenXed yes */
-MTR_EXPORT bool MTR_CALL MTR_ScreenXed(void)
+MTR_DCLSPC bool MTR_CALL MTR_ScreenXed(void)
 {
     SDL_Event events[32];
     int       numEvents;
@@ -127,7 +127,7 @@ MTR_EXPORT bool MTR_CALL MTR_ScreenXed(void)
     return true;
 }
 
-MTR_EXPORT mtrScreen_t *MTR_CALL MTR_GetScreen(void)
+MTR_DCLSPC mtrScreen_t *MTR_CALL MTR_GetScreen(void)
 {
     MTR_SCREEN_CHECK_IF_NOT_INITED(NULL);
 

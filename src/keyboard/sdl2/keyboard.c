@@ -4,7 +4,7 @@
 
 MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Keyboard, FA_FUNCTIONS_COUNT)
 
-MTR_EXPORT mtrReport* MTR_CALL MTR_CreateReport(void)
+MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -21,7 +21,7 @@ MTR_EXPORT mtrReport* MTR_CALL MTR_CreateReport(void)
 }
 
 /*fa MTR_KeyboardInit yes */
-MTR_EXPORT bool MTR_CALL MTR_KeyboardInit(void)
+MTR_DCLSPC bool MTR_CALL MTR_KeyboardInit(void)
 {
     SDL_version compiled;
     SDL_version linked;
@@ -69,7 +69,7 @@ MTR_EXPORT bool MTR_CALL MTR_KeyboardInit(void)
 }
 
 /*fa MTR_KeyboardRefresh yes */
-MTR_EXPORT void MTR_CALL MTR_KeyboardRefresh(void)
+MTR_DCLSPC void MTR_CALL MTR_KeyboardRefresh(void)
 {
     int i;
     MTR_KEYBOARD_CHECK_IF_NOT_INITED();
@@ -82,7 +82,7 @@ MTR_EXPORT void MTR_CALL MTR_KeyboardRefresh(void)
 }
 
 /*fa MTR_KeyboardPress yes */
-MTR_EXPORT bool MTR_CALL MTR_KeyboardPress(int key)
+MTR_DCLSPC bool MTR_CALL MTR_KeyboardPress(int key)
 {
     MTR_KEYBOARD_CHECK_IF_NOT_INITED(false);
 
@@ -100,7 +100,7 @@ MTR_EXPORT bool MTR_CALL MTR_KeyboardPress(int key)
 }
 
 /*fa MTR_KeyboardRelease yes */
-MTR_EXPORT bool MTR_CALL MTR_KeyboardRelease(int key)
+MTR_DCLSPC bool MTR_CALL MTR_KeyboardRelease(int key)
 {
     MTR_KEYBOARD_CHECK_IF_NOT_INITED(false);
 
@@ -118,7 +118,7 @@ MTR_EXPORT bool MTR_CALL MTR_KeyboardRelease(int key)
 }
 
 /*fa MTR_KeyboardPressed yes */
-MTR_EXPORT bool MTR_CALL MTR_KeyboardPressed(int key)
+MTR_DCLSPC bool MTR_CALL MTR_KeyboardPressed(int key)
 {
     MTR_KEYBOARD_CHECK_IF_NOT_INITED(false);
 
@@ -135,7 +135,7 @@ MTR_EXPORT bool MTR_CALL MTR_KeyboardPressed(int key)
 }
 
 /*fa MTR_KeyboardInputChar yes */
-MTR_EXPORT char *MTR_CALL MTR_KeyboardInputChar(void)
+MTR_DCLSPC char *MTR_CALL MTR_KeyboardInputChar(void)
 {
     SDL_Event  event;
     int        numEvents;

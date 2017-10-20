@@ -3,367 +3,367 @@
 
 #include <string.h>
 
-MTR_EXPORT void MTR_CALL MTR_RequireMarathonerGetVersion(
+MTR_DCLSPC void MTR_CALL MTR_RequireMarathonerGetVersion(
  MTR_MarathonerGetVersionFunc_t MarathonerGetVersionFunc)
 {
     MTR_MarathonerGetVersion = MarathonerGetVersionFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireMarathonerGetModuleVersion(
+MTR_DCLSPC void MTR_CALL MTR_RequireMarathonerGetModuleVersion(
  MTR_MarathonerGetModuleVersionFunc_t MarathonerGetModuleVersionFunc)
 {
     MTR_MarathonerGetModuleVersion = MarathonerGetModuleVersionFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireConfigfileGetKeyName(
+MTR_DCLSPC void MTR_CALL MTR_RequireConfigfileGetKeyName(
  MTR_ConfigfileGetKeyNameFunc_t ConfigfileGetKeyNameFunc)
 {
     MTR_ConfigfileGetKeyName = ConfigfileGetKeyNameFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireConfigfileGetSectionName(
+MTR_DCLSPC void MTR_CALL MTR_RequireConfigfileGetSectionName(
  MTR_ConfigfileGetSectionNameFunc_t ConfigfileGetSectionNameFunc)
 {
     MTR_ConfigfileGetSectionName = ConfigfileGetSectionNameFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireConfigfileDeleteKey(
+MTR_DCLSPC void MTR_CALL MTR_RequireConfigfileDeleteKey(
  MTR_ConfigfileDeleteKeyFunc_t ConfigfileDeleteKeyFunc)
 {
     MTR_ConfigfileDeleteKey = ConfigfileDeleteKeyFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireConfigfileDeleteSection(
+MTR_DCLSPC void MTR_CALL MTR_RequireConfigfileDeleteSection(
  MTR_ConfigfileDeleteSectionFunc_t ConfigfileDeleteSectionFunc)
 {
     MTR_ConfigfileDeleteSection = ConfigfileDeleteSectionFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireConfigfileReadBool(
+MTR_DCLSPC void MTR_CALL MTR_RequireConfigfileReadBool(
  MTR_ConfigfileReadBoolFunc_t ConfigfileReadBoolFunc)
 {
     MTR_ConfigfileReadBool = ConfigfileReadBoolFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireConfigfileReadInt(
+MTR_DCLSPC void MTR_CALL MTR_RequireConfigfileReadInt(
  MTR_ConfigfileReadIntFunc_t ConfigfileReadIntFunc)
 {
     MTR_ConfigfileReadInt = ConfigfileReadIntFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireConfigfileReadSingle(
+MTR_DCLSPC void MTR_CALL MTR_RequireConfigfileReadSingle(
  MTR_ConfigfileReadSingleFunc_t ConfigfileReadSingleFunc)
 {
     MTR_ConfigfileReadSingle = ConfigfileReadSingleFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireConfigfileReadString(
+MTR_DCLSPC void MTR_CALL MTR_RequireConfigfileReadString(
  MTR_ConfigfileReadStringFunc_t ConfigfileReadStringFunc)
 {
     MTR_ConfigfileReadString = ConfigfileReadStringFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireConfigfileWriteBool(
+MTR_DCLSPC void MTR_CALL MTR_RequireConfigfileWriteBool(
  MTR_ConfigfileWriteBoolFunc_t ConfigfileWriteBoolFunc)
 {
     MTR_ConfigfileWriteBool = ConfigfileWriteBoolFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireConfigfileWriteInt(
+MTR_DCLSPC void MTR_CALL MTR_RequireConfigfileWriteInt(
  MTR_ConfigfileWriteIntFunc_t ConfigfileWriteIntFunc)
 {
     MTR_ConfigfileWriteInt = ConfigfileWriteIntFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireConfigfileWriteSingle(
+MTR_DCLSPC void MTR_CALL MTR_RequireConfigfileWriteSingle(
  MTR_ConfigfileWriteSingleFunc_t ConfigfileWriteSingleFunc)
 {
     MTR_ConfigfileWriteSingle = ConfigfileWriteSingleFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireConfigfileWriteString(
+MTR_DCLSPC void MTR_CALL MTR_RequireConfigfileWriteString(
  MTR_ConfigfileWriteStringFunc_t ConfigfileWriteStringFunc)
 {
     MTR_ConfigfileWriteString = ConfigfileWriteStringFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireConfigfileCreateSection(
+MTR_DCLSPC void MTR_CALL MTR_RequireConfigfileCreateSection(
  MTR_ConfigfileCreateSectionFunc_t ConfigfileCreateSectionFunc)
 {
     MTR_ConfigfileCreateSection = ConfigfileCreateSectionFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireLogWrite(MTR_LogWriteFunc_t LogWriteFunc)
+MTR_DCLSPC void MTR_CALL MTR_RequireLogWrite(MTR_LogWriteFunc_t LogWriteFunc)
 {
     MTR_LogWrite = LogWriteFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireLogWrite_s(
+MTR_DCLSPC void MTR_CALL MTR_RequireLogWrite_s(
  MTR_LogWrite_sFunc_t LogWrite_sFunc)
 {
     MTR_LogWrite_s = LogWrite_sFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireLogWrite_i(
+MTR_DCLSPC void MTR_CALL MTR_RequireLogWrite_i(
  MTR_LogWrite_iFunc_t LogWrite_iFunc)
 {
     MTR_LogWrite_i = LogWrite_iFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireLogWrite_d(
+MTR_DCLSPC void MTR_CALL MTR_RequireLogWrite_d(
  MTR_LogWrite_dFunc_t LogWrite_dFunc)
 {
     MTR_LogWrite_d = LogWrite_dFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireShowSimpleMessageBox(
+MTR_DCLSPC void MTR_CALL MTR_RequireShowSimpleMessageBox(
  MTR_ShowSimpleMessageBoxFunc_t ShowSimpleMessageBoxFunc)
 {
     MTR_ShowSimpleMessageBox = ShowSimpleMessageBoxFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireShowYesNoMessageBox(
+MTR_DCLSPC void MTR_CALL MTR_RequireShowYesNoMessageBox(
  MTR_ShowYesNoMessageBoxFunc_t ShowYesNoMessageBoxFunc)
 {
     MTR_ShowYesNoMessageBox = ShowYesNoMessageBoxFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireShowOkCancelMessageBox(
+MTR_DCLSPC void MTR_CALL MTR_RequireShowOkCancelMessageBox(
  MTR_ShowOkCancelMessageBoxFunc_t ShowOkCancelMessageBoxFunc)
 {
     MTR_ShowOkCancelMessageBox = ShowOkCancelMessageBoxFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireShowInputDialog(
+MTR_DCLSPC void MTR_CALL MTR_RequireShowInputDialog(
  MTR_ShowInputDialogFunc_t ShowInputDialogFunc)
 {
     MTR_ShowInputDialog = ShowInputDialogFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireShowPasswordDialog(
+MTR_DCLSPC void MTR_CALL MTR_RequireShowPasswordDialog(
  MTR_ShowPasswordDialogFunc_t ShowPasswordDialogFunc)
 {
     MTR_ShowPasswordDialog = ShowPasswordDialogFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireAddFileFilter(
+MTR_DCLSPC void MTR_CALL MTR_RequireAddFileFilter(
  MTR_AddFileFilterFunc_t AddFileFilterFunc)
 {
     MTR_AddFileFilter = AddFileFilterFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireClearFileFilters(
+MTR_DCLSPC void MTR_CALL MTR_RequireClearFileFilters(
  MTR_ClearFileFiltersFunc_t ClearFileFiltersFunc)
 {
     MTR_ClearFileFilters = ClearFileFiltersFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireShowSaveFileDialog(
+MTR_DCLSPC void MTR_CALL MTR_RequireShowSaveFileDialog(
  MTR_ShowSaveFileDialogFunc_t ShowSaveFileDialogFunc)
 {
     MTR_ShowSaveFileDialog = ShowSaveFileDialogFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireShowOpenFileDialog(
+MTR_DCLSPC void MTR_CALL MTR_RequireShowOpenFileDialog(
  MTR_ShowOpenFileDialogFunc_t ShowOpenFileDialogFunc)
 {
     MTR_ShowOpenFileDialog = ShowOpenFileDialogFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireShowSelectFolderDialog(
+MTR_DCLSPC void MTR_CALL MTR_RequireShowSelectFolderDialog(
  MTR_ShowSelectFolderDialogFunc_t ShowSelectFolderDialogFunc)
 {
     MTR_ShowSelectFolderDialog = ShowSelectFolderDialogFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireNotify(MTR_NotifyFunc_t NotifyFunc)
+MTR_DCLSPC void MTR_CALL MTR_RequireNotify(MTR_NotifyFunc_t NotifyFunc)
 {
     MTR_Notify = NotifyFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireIndexkeeperCreate(
+MTR_DCLSPC void MTR_CALL MTR_RequireIndexkeeperCreate(
  MTR_IndexkeeperCreateFunc_t IndexkeeperCreateFunc)
 {
     MTR_IndexkeeperCreate = IndexkeeperCreateFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireIndexkeeperGetFreeIndex(
+MTR_DCLSPC void MTR_CALL MTR_RequireIndexkeeperGetFreeIndex(
  MTR_IndexkeeperGetFreeIndexFunc_t IndexkeeperGetFreeIndexFunc)
 {
     MTR_IndexkeeperGetFreeIndex = IndexkeeperGetFreeIndexFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireIndexkeeperFreeIndex(
+MTR_DCLSPC void MTR_CALL MTR_RequireIndexkeeperFreeIndex(
  MTR_IndexkeeperFreeIndexFunc_t IndexkeeperFreeIndexFunc)
 {
     MTR_IndexkeeperFreeIndex = IndexkeeperFreeIndexFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireIndexkeeperIndexIsEmpty(
+MTR_DCLSPC void MTR_CALL MTR_RequireIndexkeeperIndexIsEmpty(
  MTR_IndexkeeperIndexIsEmptyFunc_t IndexkeeperIndexIsEmptyFunc)
 {
     MTR_IndexkeeperIndexIsEmpty = IndexkeeperIndexIsEmptyFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireIndexkeeperGetReservedDataCount(
+MTR_DCLSPC void MTR_CALL MTR_RequireIndexkeeperGetReservedDataCount(
  MTR_IndexkeeperGetReservedDataCountFunc_t IndexkeeperGetReservedDataCountFunc)
 {
     MTR_IndexkeeperGetReservedDataCount = IndexkeeperGetReservedDataCountFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireIndexkeeperDestroy(
+MTR_DCLSPC void MTR_CALL MTR_RequireIndexkeeperDestroy(
  MTR_IndexkeeperDestroyFunc_t IndexkeeperDestroyFunc)
 {
     MTR_IndexkeeperDestroy = IndexkeeperDestroyFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireEncodingUtf8ToUcs4(
+MTR_DCLSPC void MTR_CALL MTR_RequireEncodingUtf8ToUcs4(
  MTR_EncodingUtf8ToUcs4Func_t EncodingUtf8ToUcs4Func)
 {
     MTR_EncodingUtf8ToUcs4 = EncodingUtf8ToUcs4Func;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireEncodingUtf8Codepoints(
+MTR_DCLSPC void MTR_CALL MTR_RequireEncodingUtf8Codepoints(
  MTR_EncodingUtf8CodepointsFunc_t EncodingUtf8CodepointsFunc)
 {
     MTR_EncodingUtf8Codepoints = EncodingUtf8CodepointsFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireFileOpen(MTR_FileOpenFunc_t FileOpenFunc)
+MTR_DCLSPC void MTR_CALL MTR_RequireFileOpen(MTR_FileOpenFunc_t FileOpenFunc)
 {
     MTR_FileOpen = FileOpenFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireFileClose(MTR_FileCloseFunc_t FileCloseFunc)
+MTR_DCLSPC void MTR_CALL MTR_RequireFileClose(MTR_FileCloseFunc_t FileCloseFunc)
 {
     MTR_FileClose = FileCloseFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireFileRead(MTR_FileReadFunc_t FileReadFunc)
+MTR_DCLSPC void MTR_CALL MTR_RequireFileRead(MTR_FileReadFunc_t FileReadFunc)
 {
     MTR_FileRead = FileReadFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireFileWrite(MTR_FileWriteFunc_t FileWriteFunc)
+MTR_DCLSPC void MTR_CALL MTR_RequireFileWrite(MTR_FileWriteFunc_t FileWriteFunc)
 {
     MTR_FileWrite = FileWriteFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireFileWriteLine(
+MTR_DCLSPC void MTR_CALL MTR_RequireFileWriteLine(
  MTR_FileWriteLineFunc_t FileWriteLineFunc)
 {
     MTR_FileWriteLine = FileWriteLineFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireFileWriteFast(
+MTR_DCLSPC void MTR_CALL MTR_RequireFileWriteFast(
  MTR_FileWriteFastFunc_t FileWriteFastFunc)
 {
     MTR_FileWriteFast = FileWriteFastFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireFileWriteLineFast(
+MTR_DCLSPC void MTR_CALL MTR_RequireFileWriteLineFast(
  MTR_FileWriteLineFastFunc_t FileWriteLineFastFunc)
 {
     MTR_FileWriteLineFast = FileWriteLineFastFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireClipboardPutText(
+MTR_DCLSPC void MTR_CALL MTR_RequireClipboardPutText(
  MTR_ClipboardPutTextFunc_t ClipboardPutTextFunc)
 {
     MTR_ClipboardPutText = ClipboardPutTextFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireClipboardGetText(
+MTR_DCLSPC void MTR_CALL MTR_RequireClipboardGetText(
  MTR_ClipboardGetTextFunc_t ClipboardGetTextFunc)
 {
     MTR_ClipboardGetText = ClipboardGetTextFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireStringBufferAdd(
+MTR_DCLSPC void MTR_CALL MTR_RequireStringBufferAdd(
  MTR_StringBufferAddFunc_t StringBufferAddFunc)
 {
     MTR_StringBufferAdd = StringBufferAddFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireStringBufferDelete(
+MTR_DCLSPC void MTR_CALL MTR_RequireStringBufferDelete(
  MTR_StringBufferDeleteFunc_t StringBufferDeleteFunc)
 {
     MTR_StringBufferDelete = StringBufferDeleteFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireStringBufferSetString(
+MTR_DCLSPC void MTR_CALL MTR_RequireStringBufferSetString(
  MTR_StringBufferSetStringFunc_t StringBufferSetStringFunc)
 {
     MTR_StringBufferSetString = StringBufferSetStringFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireStringBufferGetString(
+MTR_DCLSPC void MTR_CALL MTR_RequireStringBufferGetString(
  MTR_StringBufferGetStringFunc_t StringBufferGetStringFunc)
 {
     MTR_StringBufferGetString = StringBufferGetStringFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireStringBufferGetMaxLen(
+MTR_DCLSPC void MTR_CALL MTR_RequireStringBufferGetMaxLen(
  MTR_StringBufferGetMaxLenFunc_t StringBufferGetMaxLenFunc)
 {
     MTR_StringBufferGetMaxLen = StringBufferGetMaxLenFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireOptionsAlias(
+MTR_DCLSPC void MTR_CALL MTR_RequireOptionsAlias(
  MTR_OptionsAliasFunc_t OptionsAliasFunc)
 {
     MTR_OptionsAlias = OptionsAliasFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireOptionsGet(
+MTR_DCLSPC void MTR_CALL MTR_RequireOptionsGet(
  MTR_OptionsGetFunc_t OptionsGetFunc)
 {
     MTR_OptionsGet = OptionsGetFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireOptionsGet_b(
+MTR_DCLSPC void MTR_CALL MTR_RequireOptionsGet_b(
  MTR_OptionsGet_bFunc_t OptionsGet_bFunc)
 {
     MTR_OptionsGet_b = OptionsGet_bFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireOptionsGet_i(
+MTR_DCLSPC void MTR_CALL MTR_RequireOptionsGet_i(
  MTR_OptionsGet_iFunc_t OptionsGet_iFunc)
 {
     MTR_OptionsGet_i = OptionsGet_iFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireOptionsGet_l(
+MTR_DCLSPC void MTR_CALL MTR_RequireOptionsGet_l(
  MTR_OptionsGet_lFunc_t OptionsGet_lFunc)
 {
     MTR_OptionsGet_l = OptionsGet_lFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireOptionsGet_f(
+MTR_DCLSPC void MTR_CALL MTR_RequireOptionsGet_f(
  MTR_OptionsGet_fFunc_t OptionsGet_fFunc)
 {
     MTR_OptionsGet_f = OptionsGet_fFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireOptionsGet_d(
+MTR_DCLSPC void MTR_CALL MTR_RequireOptionsGet_d(
  MTR_OptionsGet_dFunc_t OptionsGet_dFunc)
 {
     MTR_OptionsGet_d = OptionsGet_dFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireConsoleShow(
+MTR_DCLSPC void MTR_CALL MTR_RequireConsoleShow(
  MTR_ConsoleShowFunc_t ConsoleShowFunc)
 {
     MTR_ConsoleShow = ConsoleShowFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequireConsoleHide(
+MTR_DCLSPC void MTR_CALL MTR_RequireConsoleHide(
  MTR_ConsoleHideFunc_t ConsoleHideFunc)
 {
     MTR_ConsoleHide = ConsoleHideFunc;
 }
 
-MTR_EXPORT void MTR_CALL MTR_RequirePluginData(mtrPlugin* pluginData,
+MTR_DCLSPC void MTR_CALL MTR_RequirePluginData(mtrPlugin* pluginData,
  uint8_t pluginsCount)
 {
     mtrPluginData = pluginData;

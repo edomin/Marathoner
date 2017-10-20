@@ -4,7 +4,7 @@
 
 MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Mouse, FA_FUNCTIONS_COUNT)
 
-MTR_EXPORT mtrReport* MTR_CALL MTR_CreateReport(void)
+MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -40,7 +40,7 @@ int MTR_ButtonToActualButton(int button)
 }
 
 /*fa MTR_MouseInit yes */
-MTR_EXPORT bool MTR_CALL MTR_MouseInit(void)
+MTR_DCLSPC bool MTR_CALL MTR_MouseInit(void)
 {
     SDL_version compiled;
     SDL_version linked;
@@ -88,7 +88,7 @@ MTR_EXPORT bool MTR_CALL MTR_MouseInit(void)
 }
 
 /*fa MTR_MouseRefresh yes */
-MTR_EXPORT void MTR_CALL MTR_MouseRefresh(void)
+MTR_DCLSPC void MTR_CALL MTR_MouseRefresh(void)
 {
     int       mouseState;
     int       i;
@@ -129,7 +129,7 @@ MTR_EXPORT void MTR_CALL MTR_MouseRefresh(void)
 }
 
 /*fa MTR_MousePress yes */
-MTR_EXPORT bool MTR_CALL MTR_MousePress(int button)
+MTR_DCLSPC bool MTR_CALL MTR_MousePress(int button)
 {
     int actualButton;
     MTR_MOUSE_CHECK_IF_NOT_INITED(false);
@@ -143,7 +143,7 @@ MTR_EXPORT bool MTR_CALL MTR_MousePress(int button)
 }
 
 /*fa MTR_MouseRelease yes */
-MTR_EXPORT bool MTR_CALL MTR_MouseRelease(int button)
+MTR_DCLSPC bool MTR_CALL MTR_MouseRelease(int button)
 {
     int actualButton;
     MTR_MOUSE_CHECK_IF_NOT_INITED(false);
@@ -157,7 +157,7 @@ MTR_EXPORT bool MTR_CALL MTR_MouseRelease(int button)
 }
 
 /*fa MTR_MousePressed yes */
-MTR_EXPORT bool MTR_CALL MTR_MousePressed(int button)
+MTR_DCLSPC bool MTR_CALL MTR_MousePressed(int button)
 {
     int actualButton;
     MTR_MOUSE_CHECK_IF_NOT_INITED(false);
@@ -170,7 +170,7 @@ MTR_EXPORT bool MTR_CALL MTR_MousePressed(int button)
 }
 
 /*fa MTR_MouseGetWheelRelative yes */
-MTR_EXPORT int MTR_CALL MTR_MouseGetWheelRelative(void)
+MTR_DCLSPC int MTR_CALL MTR_MouseGetWheelRelative(void)
 {
     SDL_Event events[32];
     int       numEvents;
@@ -193,7 +193,7 @@ MTR_EXPORT int MTR_CALL MTR_MouseGetWheelRelative(void)
 }
 
 /*fa MTR_MouseMoving yes */
-MTR_EXPORT bool MTR_CALL MTR_MouseMoving(void)
+MTR_DCLSPC bool MTR_CALL MTR_MouseMoving(void)
 {
     MTR_MOUSE_CHECK_IF_NOT_INITED(false);
 
@@ -201,7 +201,7 @@ MTR_EXPORT bool MTR_CALL MTR_MouseMoving(void)
 }
 
 /*fa MTR_MouseGetX yes */
-MTR_EXPORT int MTR_CALL MTR_MouseGetX(void)
+MTR_DCLSPC int MTR_CALL MTR_MouseGetX(void)
 {
     MTR_MOUSE_CHECK_IF_NOT_INITED(0);
 
@@ -209,7 +209,7 @@ MTR_EXPORT int MTR_CALL MTR_MouseGetX(void)
 }
 
 /*fa MTR_MouseGetY yes */
-MTR_EXPORT int MTR_CALL MTR_MouseGetY(void)
+MTR_DCLSPC int MTR_CALL MTR_MouseGetY(void)
 {
     MTR_MOUSE_CHECK_IF_NOT_INITED(0);
 
@@ -217,7 +217,7 @@ MTR_EXPORT int MTR_CALL MTR_MouseGetY(void)
 }
 
 /*fa MTR_MouseGetXY yes */
-MTR_EXPORT void MTR_CALL MTR_MouseGetXY(int *mouseX, int *mouseY)
+MTR_DCLSPC void MTR_CALL MTR_MouseGetXY(int *mouseX, int *mouseY)
 {
     if (!mtrMouseInited)
     {
@@ -229,7 +229,7 @@ MTR_EXPORT void MTR_CALL MTR_MouseGetXY(int *mouseX, int *mouseY)
 }
 
 /*fa MTR_MouseGetDeltaX yes */
-MTR_EXPORT int MTR_CALL MTR_MouseGetDeltaX(void)
+MTR_DCLSPC int MTR_CALL MTR_MouseGetDeltaX(void)
 {
     MTR_MOUSE_CHECK_IF_NOT_INITED(0);
 
@@ -237,7 +237,7 @@ MTR_EXPORT int MTR_CALL MTR_MouseGetDeltaX(void)
 }
 
 /*fa MTR_MouseGetDeltaY yes */
-MTR_EXPORT int MTR_CALL MTR_MouseGetDeltaY(void)
+MTR_DCLSPC int MTR_CALL MTR_MouseGetDeltaY(void)
 {
     MTR_MOUSE_CHECK_IF_NOT_INITED(0);
 
@@ -245,7 +245,7 @@ MTR_EXPORT int MTR_CALL MTR_MouseGetDeltaY(void)
 }
 
 /*fa MTR_MouseGetDeltaXY yes */
-MTR_EXPORT void MTR_CALL MTR_MouseGetDeltaXY(int *deltaX, int *deltaY)
+MTR_DCLSPC void MTR_CALL MTR_MouseGetDeltaXY(int *deltaX, int *deltaY)
 {
     if (!mtrMouseInited)
     {

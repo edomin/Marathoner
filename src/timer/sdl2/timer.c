@@ -4,7 +4,7 @@
 
 MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Timer, FA_FUNCTIONS_COUNT)
 
-MTR_EXPORT mtrReport* MTR_CALL MTR_CreateReport(void)
+MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -21,7 +21,7 @@ MTR_EXPORT mtrReport* MTR_CALL MTR_CreateReport(void)
 }
 
 /*fa MTR_TimerInit yes */
-MTR_EXPORT bool MTR_CALL MTR_TimerInit(void)
+MTR_DCLSPC bool MTR_CALL MTR_TimerInit(void)
 {
     SDL_version compiled;
     SDL_version linked;
@@ -57,20 +57,20 @@ MTR_EXPORT bool MTR_CALL MTR_TimerInit(void)
 }
 
 /*fa MTR_TimerStart yes */
-MTR_EXPORT void MTR_CALL MTR_TimerStart(void)
+MTR_DCLSPC void MTR_CALL MTR_TimerStart(void)
 {
     MTR_TIMER_CHECK_IF_NOT_INITED();
 
     mtrTimer.startTime = SDL_GetTicks();
 }
 
-MTR_EXPORT uint32_t MTR_CALL MTR_TimerGetTicks(void)
+MTR_DCLSPC uint32_t MTR_CALL MTR_TimerGetTicks(void)
 {
     return SDL_GetTicks() - mtrTimer.startTime;
 }
 
 /*fa MTR_TimerDelay yes */
-MTR_EXPORT int MTR_CALL MTR_TimerDelay(int ms)
+MTR_DCLSPC int MTR_CALL MTR_TimerDelay(int ms)
 {
     MTR_TIMER_CHECK_IF_NOT_INITED(0);
 
@@ -80,7 +80,7 @@ MTR_EXPORT int MTR_CALL MTR_TimerDelay(int ms)
 }
 
 /*fa MTR_TimerDelayForFPS yes */
-MTR_EXPORT int MTR_CALL MTR_TimerDelayForFPS(int fps)
+MTR_DCLSPC int MTR_CALL MTR_TimerDelayForFPS(int fps)
 {
     MTR_TIMER_CHECK_IF_NOT_INITED(0);
 
@@ -100,7 +100,7 @@ MTR_EXPORT int MTR_CALL MTR_TimerDelayForFPS(int fps)
 }
 
 /*fa MTR_TimerDelayForFPS_f yes */
-MTR_EXPORT float MTR_CALL MTR_TimerDelayForFPS_f(float fps)
+MTR_DCLSPC float MTR_CALL MTR_TimerDelayForFPS_f(float fps)
 {
     MTR_TIMER_CHECK_IF_NOT_INITED(0.0f);
 

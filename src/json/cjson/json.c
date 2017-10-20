@@ -4,7 +4,7 @@
 
 MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Json, FA_FUNCTIONS_COUNT)
 
-MTR_EXPORT mtrReport* MTR_CALL MTR_CreateReport(void)
+MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -21,7 +21,7 @@ MTR_EXPORT mtrReport* MTR_CALL MTR_CreateReport(void)
 }
 
 /*fa MTR_JsonInit yes */
-MTR_EXPORT bool MTR_CALL MTR_JsonInit(uint32_t dmSize, uint32_t reservedCount)
+MTR_DCLSPC bool MTR_CALL MTR_JsonInit(uint32_t dmSize, uint32_t reservedCount)
 {
     MTR_LogWrite("Initializing JSON subsystem", 0, MTR_LMT_INFO);
 
@@ -43,7 +43,7 @@ MTR_EXPORT bool MTR_CALL MTR_JsonInit(uint32_t dmSize, uint32_t reservedCount)
 }
 
 /*fa MTR_JsonCreateObject yes */
-MTR_EXPORT uint32_t MTR_CALL MTR_JsonCreateObject(void)
+MTR_DCLSPC uint32_t MTR_CALL MTR_JsonCreateObject(void)
 {
     uint32_t   freeIndex;
     mtrJson_t *json;
@@ -63,7 +63,7 @@ MTR_EXPORT uint32_t MTR_CALL MTR_JsonCreateObject(void)
 }
 
 /*fa MTR_JsonCreateArray yes */
-MTR_EXPORT uint32_t MTR_CALL MTR_JsonCreateArray(void)
+MTR_DCLSPC uint32_t MTR_CALL MTR_JsonCreateArray(void)
 {
     uint32_t   freeIndex;
     mtrJson_t *json;
@@ -83,7 +83,7 @@ MTR_EXPORT uint32_t MTR_CALL MTR_JsonCreateArray(void)
 }
 
 /*fa MTR_JsonParseString yes */
-MTR_EXPORT uint32_t MTR_CALL MTR_JsonParseString(const char *string)
+MTR_DCLSPC uint32_t MTR_CALL MTR_JsonParseString(const char *string)
 {
     uint32_t   freeIndex;
     mtrJson_t *json;
@@ -103,7 +103,7 @@ MTR_EXPORT uint32_t MTR_CALL MTR_JsonParseString(const char *string)
 }
 
 /*fa MTR_JsonParseFile yes */
-MTR_EXPORT uint32_t MTR_CALL MTR_JsonParseFile(const char *filename)
+MTR_DCLSPC uint32_t MTR_CALL MTR_JsonParseFile(const char *filename)
 {
     uint32_t   freeIndex;
     mtrJson_t *json;
@@ -143,7 +143,7 @@ MTR_EXPORT uint32_t MTR_CALL MTR_JsonParseFile(const char *filename)
 }
 
 /*fa MTR_JsonAddItemToObject yes */
-MTR_EXPORT uint32_t MTR_CALL MTR_JsonAddItemToObject(uint32_t object,
+MTR_DCLSPC uint32_t MTR_CALL MTR_JsonAddItemToObject(uint32_t object,
  const char *itemName, uint32_t item)
 {
     mtrJson_t *jsonObject;
@@ -178,7 +178,7 @@ MTR_EXPORT uint32_t MTR_CALL MTR_JsonAddItemToObject(uint32_t object,
 }
 
 /*fa MTR_JsonAddStringToObject yes */
-MTR_EXPORT uint32_t MTR_CALL MTR_JsonAddStringToObject(uint32_t object,
+MTR_DCLSPC uint32_t MTR_CALL MTR_JsonAddStringToObject(uint32_t object,
  const char *itemName, const char *string)
 {
     uint32_t   freeIndex;
@@ -218,7 +218,7 @@ MTR_EXPORT uint32_t MTR_CALL MTR_JsonAddStringToObject(uint32_t object,
 }
 
 /*fa MTR_JsonAddDoubleToObject yes */
-MTR_EXPORT uint32_t MTR_CALL MTR_JsonAddDoubleToObject(uint32_t object,
+MTR_DCLSPC uint32_t MTR_CALL MTR_JsonAddDoubleToObject(uint32_t object,
  const char *itemName, double num)
 {
     uint32_t   freeIndex;
@@ -251,7 +251,7 @@ MTR_EXPORT uint32_t MTR_CALL MTR_JsonAddDoubleToObject(uint32_t object,
 }
 
 /*fa MTR_JsonAddBoolToObject yes */
-MTR_EXPORT uint32_t MTR_CALL MTR_JsonAddBoolToObject(uint32_t object,
+MTR_DCLSPC uint32_t MTR_CALL MTR_JsonAddBoolToObject(uint32_t object,
  const char *itemName, bool value)
 {
     uint32_t   freeIndex;
@@ -284,7 +284,7 @@ MTR_EXPORT uint32_t MTR_CALL MTR_JsonAddBoolToObject(uint32_t object,
 }
 
 /*fa MTR_JsonAddNullToObject yes */
-MTR_EXPORT uint32_t MTR_CALL MTR_JsonAddNullToObject(uint32_t object,
+MTR_DCLSPC uint32_t MTR_CALL MTR_JsonAddNullToObject(uint32_t object,
  const char *itemName)
 {
     uint32_t   freeIndex;
@@ -317,7 +317,7 @@ MTR_EXPORT uint32_t MTR_CALL MTR_JsonAddNullToObject(uint32_t object,
 }
 
 /*fa MTR_JsonAddItemToArray yes */
-MTR_EXPORT uint32_t MTR_CALL MTR_JsonAddItemToArray(uint32_t array,
+MTR_DCLSPC uint32_t MTR_CALL MTR_JsonAddItemToArray(uint32_t array,
  uint32_t item)
 {
     mtrJson_t *jsonArray;
@@ -346,7 +346,7 @@ MTR_EXPORT uint32_t MTR_CALL MTR_JsonAddItemToArray(uint32_t array,
 }
 
 /*fa MTR_JsonAddStringToArray yes */
-MTR_EXPORT uint32_t MTR_CALL MTR_JsonAddStringToArray(uint32_t array,
+MTR_DCLSPC uint32_t MTR_CALL MTR_JsonAddStringToArray(uint32_t array,
  const char *string)
 {
     uint32_t   freeIndex;
@@ -380,7 +380,7 @@ MTR_EXPORT uint32_t MTR_CALL MTR_JsonAddStringToArray(uint32_t array,
 }
 
 /*fa MTR_JsonAddDoubleToArray yes */
-MTR_EXPORT uint32_t MTR_CALL MTR_JsonAddDoubleToArray(uint32_t array, double num)
+MTR_DCLSPC uint32_t MTR_CALL MTR_JsonAddDoubleToArray(uint32_t array, double num)
 {
     uint32_t   freeIndex;
     mtrJson_t *jsonArray;
@@ -407,7 +407,7 @@ MTR_EXPORT uint32_t MTR_CALL MTR_JsonAddDoubleToArray(uint32_t array, double num
 }
 
 /*fa MTR_JsonAddBoolToArray yes */
-MTR_EXPORT uint32_t MTR_CALL MTR_JsonAddBoolToArray(uint32_t array, bool value)
+MTR_DCLSPC uint32_t MTR_CALL MTR_JsonAddBoolToArray(uint32_t array, bool value)
 {
     uint32_t   freeIndex;
     mtrJson_t *jsonArray;
@@ -434,7 +434,7 @@ MTR_EXPORT uint32_t MTR_CALL MTR_JsonAddBoolToArray(uint32_t array, bool value)
 }
 
 /*fa MTR_JsonAddNullToArray yes */
-MTR_EXPORT uint32_t MTR_CALL MTR_JsonAddNullToArray(uint32_t array)
+MTR_DCLSPC uint32_t MTR_CALL MTR_JsonAddNullToArray(uint32_t array)
 {
     uint32_t   freeIndex;
     mtrJson_t *jsonArray;
@@ -461,7 +461,7 @@ MTR_EXPORT uint32_t MTR_CALL MTR_JsonAddNullToArray(uint32_t array)
 }
 
 /*fa MTR_JsonGetObjectItem yes */
-MTR_EXPORT uint32_t MTR_CALL MTR_JsonGetObjectItem(uint32_t object,
+MTR_DCLSPC uint32_t MTR_CALL MTR_JsonGetObjectItem(uint32_t object,
  const char *item)
 {
     uint32_t   freeIndex;
@@ -487,7 +487,7 @@ MTR_EXPORT uint32_t MTR_CALL MTR_JsonGetObjectItem(uint32_t object,
 }
 
 /*fa MTR_JsonGetArrayItem yes */
-MTR_EXPORT uint32_t MTR_CALL MTR_JsonGetArrayItem(uint32_t array, int item)
+MTR_DCLSPC uint32_t MTR_CALL MTR_JsonGetArrayItem(uint32_t array, int item)
 {
     uint32_t   freeIndex;
     mtrJson_t *jsonArray;
@@ -513,7 +513,7 @@ MTR_EXPORT uint32_t MTR_CALL MTR_JsonGetArrayItem(uint32_t array, int item)
 
 /* Returned string need to be freed after using */
 /*fa MTR_JsonToString yes */
-MTR_EXPORT char *MTR_CALL MTR_JsonToString(uint32_t entity)
+MTR_DCLSPC char *MTR_CALL MTR_JsonToString(uint32_t entity)
 {
     mtrJson_t *json;
     char      *text;
@@ -542,7 +542,7 @@ MTR_EXPORT char *MTR_CALL MTR_JsonToString(uint32_t entity)
 
 /* Returned string need to be freed after using */
 /*fa MTR_JsonToStringFormatted yes */
-MTR_EXPORT char *MTR_CALL MTR_JsonToStringFormatted(uint32_t entity)
+MTR_DCLSPC char *MTR_CALL MTR_JsonToStringFormatted(uint32_t entity)
 {
     mtrJson_t *json;
     char      *text;
@@ -570,7 +570,7 @@ MTR_EXPORT char *MTR_CALL MTR_JsonToStringFormatted(uint32_t entity)
 }
 
 /*fa MTR_JsonToFile yes */
-MTR_EXPORT bool MTR_CALL MTR_JsonToFile(uint32_t entity, const char *filename)
+MTR_DCLSPC bool MTR_CALL MTR_JsonToFile(uint32_t entity, const char *filename)
 {
     mtrJson_t *json;
     char      *text;
@@ -602,7 +602,7 @@ MTR_EXPORT bool MTR_CALL MTR_JsonToFile(uint32_t entity, const char *filename)
 }
 
 /*fa MTR_JsonToFileFormatted yes */
-MTR_EXPORT bool MTR_CALL MTR_JsonToFileFormatted(uint32_t entity,
+MTR_DCLSPC bool MTR_CALL MTR_JsonToFileFormatted(uint32_t entity,
  const char *filename)
 {
     mtrJson_t *json;
@@ -635,7 +635,7 @@ MTR_EXPORT bool MTR_CALL MTR_JsonToFileFormatted(uint32_t entity,
 }
 
 /*fa MTR_JsonDelete yes */
-MTR_EXPORT void MTR_CALL MTR_JsonDelete(uint32_t entity)
+MTR_DCLSPC void MTR_CALL MTR_JsonDelete(uint32_t entity)
 {
     uint32_t   i;
     mtrJson_t *json;
@@ -668,7 +668,7 @@ MTR_EXPORT void MTR_CALL MTR_JsonDelete(uint32_t entity)
 }
 
 /*fa MTR_JsonDeleteItemFromObject yes */
-MTR_EXPORT void MTR_CALL MTR_JsonDeleteItemFromObject(uint32_t object,
+MTR_DCLSPC void MTR_CALL MTR_JsonDeleteItemFromObject(uint32_t object,
  const char *item)
 {
     uint32_t   i;
@@ -709,7 +709,7 @@ MTR_EXPORT void MTR_CALL MTR_JsonDeleteItemFromObject(uint32_t object,
 }
 
 /*fa MTR_JsonDeleteItemFromArray yes */
-MTR_EXPORT void MTR_CALL MTR_JsonDeleteItemFromArray(uint32_t array, int item)
+MTR_DCLSPC void MTR_CALL MTR_JsonDeleteItemFromArray(uint32_t array, int item)
 {
     uint32_t   i;
     mtrJson_t *jsonArray;
@@ -742,7 +742,7 @@ MTR_EXPORT void MTR_CALL MTR_JsonDeleteItemFromArray(uint32_t array, int item)
 }
 
 /*fa MTR_JsonDetachItemFromObject yes */
-MTR_EXPORT void MTR_CALL MTR_JsonDetachItemFromObject(uint32_t object,
+MTR_DCLSPC void MTR_CALL MTR_JsonDetachItemFromObject(uint32_t object,
  uint32_t item)
 {
     mtrJson_t *jsonObject;
@@ -778,7 +778,7 @@ MTR_EXPORT void MTR_CALL MTR_JsonDetachItemFromObject(uint32_t object,
 }
 
 /*fa MTR_JsonDetachItemFromArray yes */
-MTR_EXPORT void MTR_CALL MTR_JsonDetachItemFromArray(uint32_t array,
+MTR_DCLSPC void MTR_CALL MTR_JsonDetachItemFromArray(uint32_t array,
  uint32_t item)
 {
     int        i;
@@ -836,7 +836,7 @@ MTR_EXPORT void MTR_CALL MTR_JsonDetachItemFromArray(uint32_t array,
 }
 
 /*fa MTR_JsonObjectHasItem yes */
-MTR_EXPORT bool MTR_CALL MTR_JsonObjectHasItem(uint32_t object, const char *item)
+MTR_DCLSPC bool MTR_CALL MTR_JsonObjectHasItem(uint32_t object, const char *item)
 {
     mtrJson_t *json;
     MTR_JSON_CHECK_IF_NOT_INITED(false);
@@ -854,7 +854,7 @@ MTR_EXPORT bool MTR_CALL MTR_JsonObjectHasItem(uint32_t object, const char *item
 }
 
 /*fa MTR_JsonLength yes */
-MTR_EXPORT int MTR_CALL MTR_JsonLength(uint32_t entity)
+MTR_DCLSPC int MTR_CALL MTR_JsonLength(uint32_t entity)
 {
     mtrJson_t *json;
     MTR_JSON_CHECK_IF_NOT_INITED(0);

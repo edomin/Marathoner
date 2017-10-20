@@ -20,22 +20,22 @@ mtrPluginInitFunc MTR_PluginInit;
 HSQUIRRELVM mtrVm;
 char       *mtrAutorun;
 
-MTR_EXPORT int MTR_CALL MTR_ScriptsFunctionSupported(const char *);
+MTR_DCLSPC int MTR_CALL MTR_ScriptsFunctionSupported(const char *);
 
-MTR_EXPORT char * MTR_CALL MTR_ScriptsGetAutorunPath(void);
-MTR_EXPORT void MTR_CALL MTR_ScriptsRegisterFunction(SQFUNCTION func,
+MTR_DCLSPC char * MTR_CALL MTR_ScriptsGetAutorunPath(void);
+MTR_DCLSPC void MTR_CALL MTR_ScriptsRegisterFunction(SQFUNCTION func,
  const char * funcname);
-MTR_EXPORT bool MTR_CALL MTR_ScriptsRegisterVariable_b(const char *name,
+MTR_DCLSPC bool MTR_CALL MTR_ScriptsRegisterVariable_b(const char *name,
  bool value);
-MTR_EXPORT bool MTR_CALL MTR_ScriptsRegisterVariable_i(const char *name,
+MTR_DCLSPC bool MTR_CALL MTR_ScriptsRegisterVariable_i(const char *name,
  int value);
-MTR_EXPORT bool MTR_CALL MTR_ScriptsRegisterVariable_u(const char *name,
+MTR_DCLSPC bool MTR_CALL MTR_ScriptsRegisterVariable_u(const char *name,
  unsigned int value);
-MTR_EXPORT bool MTR_CALL MTR_ScriptsRegisterVariable_f(const char *name,
+MTR_DCLSPC bool MTR_CALL MTR_ScriptsRegisterVariable_f(const char *name,
  float value);
-MTR_EXPORT bool MTR_CALL MTR_ScriptsRegisterVariable_d(const char *name,
+MTR_DCLSPC bool MTR_CALL MTR_ScriptsRegisterVariable_d(const char *name,
  double value);
-MTR_EXPORT bool MTR_CALL MTR_ScriptsRegisterVariable_s(const char *name,
+MTR_DCLSPC bool MTR_CALL MTR_ScriptsRegisterVariable_s(const char *name,
  const char *value);
 
 #endif

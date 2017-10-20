@@ -52,7 +52,7 @@ static bool       mtrTextureInited = false;
 typedef mtrScreen_t *(MTR_CALL * mtrGetScreenFunc)(void);
 mtrGetScreenFunc MTR_GetScreen;
 
-MTR_EXPORT void MTR_CALL MTR_TextureFree(uint32_t texNum);
+MTR_DCLSPC void MTR_CALL MTR_TextureFree(uint32_t texNum);
 
 #endif
 

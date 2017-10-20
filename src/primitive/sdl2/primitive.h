@@ -51,14 +51,14 @@ static inline void MTR_Color32ToRgba(uint32_t color, uint8_t *r, uint8_t *g,
     *a = color & 0x000000FFU;
 }
 
-MTR_EXPORT void MTR_CALL MTR_PrimitiveLineBegin_f(float, float);
-MTR_EXPORT void MTR_CALL MTR_PrimitiveLineTo_rgb_f(float, float, uint8_t,
+MTR_DCLSPC void MTR_CALL MTR_PrimitiveLineBegin_f(float, float);
+MTR_DCLSPC void MTR_CALL MTR_PrimitiveLineTo_rgb_f(float, float, uint8_t,
  uint8_t, uint8_t);
-MTR_EXPORT void MTR_CALL MTR_PrimitiveLineTo_rgba_f(float, float, uint8_t,
+MTR_DCLSPC void MTR_CALL MTR_PrimitiveLineTo_rgba_f(float, float, uint8_t,
  uint8_t, uint8_t, uint8_t);
-MTR_EXPORT void MTR_CALL MTR_PrimitiveLineTo_c_f(float, float, uint32_t);
-MTR_EXPORT void MTR_CALL MTR_PrimitiveLineTo_ca_f(float, float, uint32_t);
-MTR_EXPORT void MTR_CALL MTR_PrimitiveLineEnd(void);
+MTR_DCLSPC void MTR_CALL MTR_PrimitiveLineTo_c_f(float, float, uint32_t);
+MTR_DCLSPC void MTR_CALL MTR_PrimitiveLineTo_ca_f(float, float, uint32_t);
+MTR_DCLSPC void MTR_CALL MTR_PrimitiveLineEnd(void);
 
 #endif
 

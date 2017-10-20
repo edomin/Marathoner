@@ -31,7 +31,7 @@
 
 #ifdef lua_h
     #define MTR_PLUGIN_INIT()                                        \
-        MTR_EXPORT void MTR_CALL MTR_PluginInit(void)                \
+        MTR_DCLSPC void MTR_CALL MTR_PluginInit(void)                \
         {                                                            \
             bool ok = true;                                          \
             MTR_LogWrite_s("Reporting Lua compile-time version:", 3, \
@@ -41,7 +41,7 @@
 #endif /* lua_h */
 #ifdef _SQUIRREL_H_
     #define MTR_PLUGIN_INIT()                                             \
-        MTR_EXPORT void MTR_CALL MTR_PluginInit(void)                     \
+        MTR_DCLSPC void MTR_CALL MTR_PluginInit(void)                     \
         {                                                                 \
             bool ok = true;                                               \
             MTR_LogWrite_s("Reporting Squirrel compile-time version:", 1, \
@@ -53,7 +53,7 @@
 #endif /* _SQUIRREL_H_ */
 #ifdef DUKTAPE_H_INCLUDED
     #define MTR_PLUGIN_INIT()                                           \
-        MTR_EXPORT void MTR_CALL MTR_PluginInit(void)                   \
+        MTR_DCLSPC void MTR_CALL MTR_PluginInit(void)                   \
         {                                                               \
             long int verMajor;                                          \
             long int verMinor;                                          \
@@ -72,7 +72,7 @@
 #endif /* DUKTAPE_H_INCLUDED */
 
 #define MTR_BINDING_COMMON_CODE(_moduleID, _version, _prereq0)           \
-    MTR_EXPORT mtrReport* MTR_CALL MTR_CreateReport(void)                \
+    MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)                \
     {                                                                    \
         mtrReport *report;                                               \
         report = malloc(sizeof(mtrReport));                              \

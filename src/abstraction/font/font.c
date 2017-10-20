@@ -4,7 +4,7 @@
 
 MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Font, FA_FUNCTIONS_COUNT)
 
-MTR_EXPORT mtrReport* MTR_CALL MTR_CreateReport(void)
+MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -29,7 +29,7 @@ MTR_EXPORT mtrReport* MTR_CALL MTR_CreateReport(void)
 }
 
 /*fa MTR_FontInit yes */
-MTR_EXPORT bool MTR_CALL MTR_FontInit(uint32_t dmSize, uint32_t reservedCount)
+MTR_DCLSPC bool MTR_CALL MTR_FontInit(uint32_t dmSize, uint32_t reservedCount)
 {
     MTR_LogWrite("Initializing font abstraction manager", 0, MTR_LMT_INFO);
 
@@ -63,7 +63,7 @@ MTR_EXPORT bool MTR_CALL MTR_FontInit(uint32_t dmSize, uint32_t reservedCount)
 }
 
 /*fa MTR_FontLoadTtf yes */
-MTR_EXPORT uint32_t MTR_CALL MTR_FontLoadTtf(const char *filename, int size)
+MTR_DCLSPC uint32_t MTR_CALL MTR_FontLoadTtf(const char *filename, int size)
 {
     uint32_t   freeIndex;
     mtrFont_t *font;
@@ -94,7 +94,7 @@ MTR_EXPORT uint32_t MTR_CALL MTR_FontLoadTtf(const char *filename, int size)
 }
 
 /*fa MTR_FontFree yes */
-MTR_EXPORT void MTR_CALL MTR_FontFree(uint32_t fontNum)
+MTR_DCLSPC void MTR_CALL MTR_FontFree(uint32_t fontNum)
 {
     mtrFont_t *font;
     MTR_FONT_CHECK_IF_NOT_INITED_WITH_LOG("Unable to unload font",);
@@ -112,7 +112,7 @@ MTR_EXPORT void MTR_CALL MTR_FontFree(uint32_t fontNum)
 }
 
 /*fa MTR_FontSetTtfStyle yes */
-MTR_EXPORT void MTR_CALL MTR_FontSetTtfStyle(uint32_t fontNum, int style)
+MTR_DCLSPC void MTR_CALL MTR_FontSetTtfStyle(uint32_t fontNum, int style)
 {
     mtrFont_t *font;
     MTR_FONT_CHECK_IF_NOT_INITED();
@@ -122,7 +122,7 @@ MTR_EXPORT void MTR_CALL MTR_FontSetTtfStyle(uint32_t fontNum, int style)
 }
 
 /*fa MTR_FontSetTtfOutline yes */
-MTR_EXPORT void MTR_CALL MTR_FontSetTtfOutline(uint32_t fontNum, int outline)
+MTR_DCLSPC void MTR_CALL MTR_FontSetTtfOutline(uint32_t fontNum, int outline)
 {
     mtrFont_t *font;
     MTR_FONT_CHECK_IF_NOT_INITED();
@@ -132,7 +132,7 @@ MTR_EXPORT void MTR_CALL MTR_FontSetTtfOutline(uint32_t fontNum, int outline)
 }
 
 /*fa MTR_FontRenderTtfString yes */
-MTR_EXPORT bool MTR_CALL MTR_FontRenderTtfString(uint32_t fontNum,
+MTR_DCLSPC bool MTR_CALL MTR_FontRenderTtfString(uint32_t fontNum,
  uint32_t texNum, uint8_t r, uint8_t g, uint8_t b, const char *string)
 {
     mtrFont_t   *font;
@@ -150,7 +150,7 @@ MTR_EXPORT bool MTR_CALL MTR_FontRenderTtfString(uint32_t fontNum,
 
 /* Create monospace bitmap font */
 /*fa MTR_FontCreateMbf yes */
-MTR_EXPORT uint32_t MTR_CALL MTR_FontCreateMbf(const char *name,
+MTR_DCLSPC uint32_t MTR_CALL MTR_FontCreateMbf(const char *name,
  int reservedTables, int width, int height)
 {
     uint32_t   freeIndex;
@@ -206,7 +206,7 @@ MTR_EXPORT uint32_t MTR_CALL MTR_FontCreateMbf(const char *name,
 }
 
 /*fa MTR_FontAddMbfTextureTable yes */
-MTR_EXPORT bool MTR_CALL MTR_FontAddMbfTextureTable(uint32_t fontNum,
+MTR_DCLSPC bool MTR_CALL MTR_FontAddMbfTextureTable(uint32_t fontNum,
  uint32_t texNum, unsigned int tableNum)
 {
     mtrFont_t *font;
@@ -225,7 +225,7 @@ MTR_EXPORT bool MTR_CALL MTR_FontAddMbfTextureTable(uint32_t fontNum,
 }
 
 /*fa MTR_FontDrawMbfString_f yes */
-MTR_EXPORT bool MTR_CALL MTR_FontDrawMbfString_f(uint32_t fontNum,
+MTR_DCLSPC bool MTR_CALL MTR_FontDrawMbfString_f(uint32_t fontNum,
  float x, float y, const char *string)
 {
     mtrFont_t   *font;
@@ -269,7 +269,7 @@ MTR_EXPORT bool MTR_CALL MTR_FontDrawMbfString_f(uint32_t fontNum,
 }
 
 /*fa MTR_FontGetHeight yes */
-MTR_EXPORT int MTR_CALL MTR_FontGetHeight(uint32_t fontNum)
+MTR_DCLSPC int MTR_CALL MTR_FontGetHeight(uint32_t fontNum)
 {
     mtrFont_t *font;
     MTR_FONT_CHECK_IF_NOT_INITED(0);
@@ -283,7 +283,7 @@ MTR_EXPORT int MTR_CALL MTR_FontGetHeight(uint32_t fontNum)
 }
 
 /*fa MTR_FontGetStringWidth yes */
-MTR_EXPORT int MTR_CALL MTR_FontGetStringWidth(uint32_t fontNum,
+MTR_DCLSPC int MTR_CALL MTR_FontGetStringWidth(uint32_t fontNum,
  const char *string)
 {
     mtrFont_t *font;
@@ -298,7 +298,7 @@ MTR_EXPORT int MTR_CALL MTR_FontGetStringWidth(uint32_t fontNum,
 }
 
 /*fa MTR_FontGetName yes */
-MTR_EXPORT char *MTR_CALL MTR_FontGetName(uint32_t fontNum)
+MTR_DCLSPC char *MTR_CALL MTR_FontGetName(uint32_t fontNum)
 {
     mtrFont_t *font;
     MTR_FONT_CHECK_IF_NOT_INITED(NULL);

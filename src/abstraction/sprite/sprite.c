@@ -4,7 +4,7 @@
 
 MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Sprite, FA_FUNCTIONS_COUNT)
 
-MTR_EXPORT mtrReport* MTR_CALL MTR_CreateReport(void)
+MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -27,7 +27,7 @@ MTR_EXPORT mtrReport* MTR_CALL MTR_CreateReport(void)
 }
 
 /*fa MTR_SpriteInit yes */
-MTR_EXPORT bool MTR_CALL MTR_SpriteInit(uint32_t dmSize, uint32_t reservedCount)
+MTR_DCLSPC bool MTR_CALL MTR_SpriteInit(uint32_t dmSize, uint32_t reservedCount)
 {
     MTR_LogWrite("Initializing sprite abstraction manager", 0, MTR_LMT_INFO);
 
@@ -65,7 +65,7 @@ MTR_EXPORT bool MTR_CALL MTR_SpriteInit(uint32_t dmSize, uint32_t reservedCount)
 }
 
 /*fa MTR_SpriteLoad yes */
-MTR_EXPORT uint32_t MTR_CALL MTR_SpriteLoad(const char *filename, int clipWidth,
+MTR_DCLSPC uint32_t MTR_CALL MTR_SpriteLoad(const char *filename, int clipWidth,
  int clipHeight, int rowsCount, int colsCount, int clipsCount, int anchorX,
  int anchorY)
 {
@@ -157,7 +157,7 @@ MTR_EXPORT uint32_t MTR_CALL MTR_SpriteLoad(const char *filename, int clipWidth,
 }
 
 /*fa MTR_SpriteLoadSimple yes */
-MTR_EXPORT uint32_t MTR_CALL MTR_SpriteLoadSimple(const char *filename,
+MTR_DCLSPC uint32_t MTR_CALL MTR_SpriteLoadSimple(const char *filename,
  int anchorX, int anchorY)
 {
     uint32_t     freeIndex;
@@ -217,7 +217,7 @@ MTR_EXPORT uint32_t MTR_CALL MTR_SpriteLoadSimple(const char *filename,
 }
 
 /*fa MTR_SpriteLoadAtlas yes */
-MTR_EXPORT uint32_t MTR_CALL MTR_SpriteLoadAtlas(const char *filename,
+MTR_DCLSPC uint32_t MTR_CALL MTR_SpriteLoadAtlas(const char *filename,
  int clipsCount)
 {
     uint32_t     freeIndex;
@@ -282,7 +282,7 @@ MTR_EXPORT uint32_t MTR_CALL MTR_SpriteLoadAtlas(const char *filename,
 }
 
 /*fa MTR_SpriteSetAtlasFrame yes */
-MTR_EXPORT bool MTR_CALL MTR_SpriteSetAtlasFrame(uint32_t sprNum, int clipNum,
+MTR_DCLSPC bool MTR_CALL MTR_SpriteSetAtlasFrame(uint32_t sprNum, int clipNum,
  int x, int y, int w, int h, int anchorX, int anchorY)
 {
     mtrSprite_t *sprite;
@@ -307,7 +307,7 @@ MTR_EXPORT bool MTR_CALL MTR_SpriteSetAtlasFrame(uint32_t sprNum, int clipNum,
 }
 
 /*fa MTR_SpriteFree yes */
-MTR_EXPORT void MTR_CALL MTR_SpriteFree(uint32_t sprNum)
+MTR_DCLSPC void MTR_CALL MTR_SpriteFree(uint32_t sprNum)
 {
     mtrSprite_t *sprite;
     MTR_SPRITE_CHECK_IF_NOT_INITED_WITH_LOG("Unable to unload sprite",);
@@ -326,7 +326,7 @@ MTR_EXPORT void MTR_CALL MTR_SpriteFree(uint32_t sprNum)
 }
 
 /*fa MTR_SpriteSetModulation_c yes */
-MTR_EXPORT void MTR_CALL MTR_SpriteSetModulation_c(uint32_t sprNum,
+MTR_DCLSPC void MTR_CALL MTR_SpriteSetModulation_c(uint32_t sprNum,
  uint32_t color)
 {
     mtrSprite_t *sprite;
@@ -340,7 +340,7 @@ MTR_EXPORT void MTR_CALL MTR_SpriteSetModulation_c(uint32_t sprNum,
 }
 
 /*fa MTR_SpriteSetModulation_ca yes */
-MTR_EXPORT void MTR_CALL MTR_SpriteSetModulation_ca(uint32_t sprNum,
+MTR_DCLSPC void MTR_CALL MTR_SpriteSetModulation_ca(uint32_t sprNum,
  uint32_t color)
 {
     mtrSprite_t *sprite;
@@ -354,7 +354,7 @@ MTR_EXPORT void MTR_CALL MTR_SpriteSetModulation_ca(uint32_t sprNum,
 }
 
 /*fa MTR_SpriteSetModulation_rgb yes */
-MTR_EXPORT void MTR_CALL MTR_SpriteSetModulation_rgb(uint32_t sprNum,
+MTR_DCLSPC void MTR_CALL MTR_SpriteSetModulation_rgb(uint32_t sprNum,
  uint8_t r, uint8_t g, uint8_t b)
 {
     mtrSprite_t *sprite;
@@ -368,7 +368,7 @@ MTR_EXPORT void MTR_CALL MTR_SpriteSetModulation_rgb(uint32_t sprNum,
 }
 
 /*fa MTR_SpriteSetModulation_rgba yes */
-MTR_EXPORT void MTR_CALL MTR_SpriteSetModulation_rgba(uint32_t sprNum,
+MTR_DCLSPC void MTR_CALL MTR_SpriteSetModulation_rgba(uint32_t sprNum,
  uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
     mtrSprite_t *sprite;
@@ -382,7 +382,7 @@ MTR_EXPORT void MTR_CALL MTR_SpriteSetModulation_rgba(uint32_t sprNum,
 }
 
 /*fa MTR_SpriteSetModulationAlpha yes */
-MTR_EXPORT void MTR_CALL MTR_SpriteSetModulationAlpha(uint32_t sprNum,
+MTR_DCLSPC void MTR_CALL MTR_SpriteSetModulationAlpha(uint32_t sprNum,
  uint8_t alpha)
 {
     mtrSprite_t *sprite;
@@ -396,7 +396,7 @@ MTR_EXPORT void MTR_CALL MTR_SpriteSetModulationAlpha(uint32_t sprNum,
 }
 
 /*fa MTR_SpriteSetModulationAlpha_f yes */
-MTR_EXPORT void MTR_CALL MTR_SpriteSetModulationAlpha_f(uint32_t sprNum,
+MTR_DCLSPC void MTR_CALL MTR_SpriteSetModulationAlpha_f(uint32_t sprNum,
  float alpha)
 {
     mtrSprite_t *sprite;
@@ -410,7 +410,7 @@ MTR_EXPORT void MTR_CALL MTR_SpriteSetModulationAlpha_f(uint32_t sprNum,
 }
 
 /*fa MTR_SpriteDraw_f yes */
-MTR_EXPORT void MTR_CALL MTR_SpriteDraw_f(uint32_t sprNum, int clipNum, float x,
+MTR_DCLSPC void MTR_CALL MTR_SpriteDraw_f(uint32_t sprNum, int clipNum, float x,
  float y)
 {
     mtrSprite_t *sprite;
@@ -427,7 +427,7 @@ MTR_EXPORT void MTR_CALL MTR_SpriteDraw_f(uint32_t sprNum, int clipNum, float x,
 }
 
 /*fa MTR_SpriteDrawSized_f yes */
-MTR_EXPORT void MTR_CALL MTR_SpriteDrawSized_f(uint32_t sprNum, int clipNum,
+MTR_DCLSPC void MTR_CALL MTR_SpriteDrawSized_f(uint32_t sprNum, int clipNum,
  float x, float y, float w, float h)
 {
     mtrSprite_t *sprite;
@@ -452,7 +452,7 @@ MTR_EXPORT void MTR_CALL MTR_SpriteDrawSized_f(uint32_t sprNum, int clipNum,
 }
 
 /*fa MTR_SpriteDrawScaled_f yes */
-MTR_EXPORT void MTR_CALL MTR_SpriteDrawScaled_f(uint32_t sprNum, int clipNum,
+MTR_DCLSPC void MTR_CALL MTR_SpriteDrawScaled_f(uint32_t sprNum, int clipNum,
  float x, float y, float hscale, float vscale)
 {
     mtrSprite_t *sprite;
@@ -475,7 +475,7 @@ MTR_EXPORT void MTR_CALL MTR_SpriteDrawScaled_f(uint32_t sprNum, int clipNum,
 }
 
 /*fa MTR_SpriteDrawAngled_f yes */
-MTR_EXPORT void MTR_CALL MTR_SpriteDrawAngled_f(uint32_t sprNum, int clipNum,
+MTR_DCLSPC void MTR_CALL MTR_SpriteDrawAngled_f(uint32_t sprNum, int clipNum,
  float x, float y, float angle)
 {
     mtrSprite_t *sprite;
@@ -493,7 +493,7 @@ MTR_EXPORT void MTR_CALL MTR_SpriteDrawAngled_f(uint32_t sprNum, int clipNum,
 }
 
 /*fa MTR_SpriteDrawFlipped_f yes */
-MTR_EXPORT void MTR_CALL MTR_SpriteDrawFlipped_f(uint32_t sprNum, int clipNum,
+MTR_DCLSPC void MTR_CALL MTR_SpriteDrawFlipped_f(uint32_t sprNum, int clipNum,
  float x, float y, int flip)
 {
     mtrSprite_t *sprite;
@@ -510,7 +510,7 @@ MTR_EXPORT void MTR_CALL MTR_SpriteDrawFlipped_f(uint32_t sprNum, int clipNum,
 }
 
 /*fa MTR_SpriteDrawGeneral_f yes */
-MTR_EXPORT void MTR_CALL MTR_SpriteDrawGeneral_f(uint32_t sprNum, int clipNum,
+MTR_DCLSPC void MTR_CALL MTR_SpriteDrawGeneral_f(uint32_t sprNum, int clipNum,
  float x, float y, float hscale, float vscale, float angle, int flip)
 {
     mtrSprite_t *sprite;

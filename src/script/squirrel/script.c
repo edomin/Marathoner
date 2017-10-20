@@ -5,7 +5,7 @@
 
 MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Scripts, FA_FUNCTIONS_COUNT)
 
-MTR_EXPORT mtrReport* MTR_CALL MTR_CreateReport(void)
+MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -102,17 +102,17 @@ void MTR_ScriptsInit(void)
     MTR_LogWrite("Script subsystem initialized", 0, MTR_LMT_INFO);
 }
 
-MTR_EXPORT HSQUIRRELVM MTR_CALL MTR_ScriptsGetVm(void)
+MTR_DCLSPC HSQUIRRELVM MTR_CALL MTR_ScriptsGetVm(void)
 {
     return mtrVm;
 }
 
-MTR_EXPORT char * MTR_CALL MTR_ScriptsGetAutorunPath(void)
+MTR_DCLSPC char * MTR_CALL MTR_ScriptsGetAutorunPath(void)
 {
     return mtrAutorun;
 }
 
-MTR_EXPORT void MTR_CALL MTR_ScriptsRegisterFunction(SQFUNCTION func,
+MTR_DCLSPC void MTR_CALL MTR_ScriptsRegisterFunction(SQFUNCTION func,
  const char * funcname)
 {
     sq_pushroottable(mtrVm);
@@ -125,7 +125,7 @@ MTR_EXPORT void MTR_CALL MTR_ScriptsRegisterFunction(SQFUNCTION func,
 }
 
 /*fa MTR_ScriptsRegisterVariable_b buggy */
-MTR_EXPORT bool MTR_CALL MTR_ScriptsRegisterVariable_b(const char *name,
+MTR_DCLSPC bool MTR_CALL MTR_ScriptsRegisterVariable_b(const char *name,
  bool value)
 {
     if ((name != NULL) && (strcmp(name, "") != 0))
@@ -145,7 +145,7 @@ MTR_EXPORT bool MTR_CALL MTR_ScriptsRegisterVariable_b(const char *name,
 }
 
 /*fa MTR_ScriptsRegisterVariable_i buggy */
-MTR_EXPORT bool MTR_CALL MTR_ScriptsRegisterVariable_i(const char *name,
+MTR_DCLSPC bool MTR_CALL MTR_ScriptsRegisterVariable_i(const char *name,
  int value)
 {
     if ((name != NULL) && (strcmp(name, "") != 0))
@@ -165,7 +165,7 @@ MTR_EXPORT bool MTR_CALL MTR_ScriptsRegisterVariable_i(const char *name,
 }
 
 /*fa MTR_ScriptsRegisterVariable_u buggy */
-MTR_EXPORT bool MTR_CALL MTR_ScriptsRegisterVariable_u(const char *name,
+MTR_DCLSPC bool MTR_CALL MTR_ScriptsRegisterVariable_u(const char *name,
  unsigned int value)
 {
     if ((name != NULL) && (strcmp(name, "") != 0))
@@ -185,7 +185,7 @@ MTR_EXPORT bool MTR_CALL MTR_ScriptsRegisterVariable_u(const char *name,
 }
 
 /*fa MTR_ScriptsRegisterVariable_f buggy */
-MTR_EXPORT bool MTR_CALL MTR_ScriptsRegisterVariable_f(const char *name,
+MTR_DCLSPC bool MTR_CALL MTR_ScriptsRegisterVariable_f(const char *name,
  float value)
 {
     if ((name != NULL) && (strcmp(name, "") != 0))
@@ -205,7 +205,7 @@ MTR_EXPORT bool MTR_CALL MTR_ScriptsRegisterVariable_f(const char *name,
 }
 
 /*fa MTR_ScriptsRegisterVariable_d buggy */
-MTR_EXPORT bool MTR_CALL MTR_ScriptsRegisterVariable_d(const char *name,
+MTR_DCLSPC bool MTR_CALL MTR_ScriptsRegisterVariable_d(const char *name,
  double value)
 {
     if ((name != NULL) && (strcmp(name, "") != 0))
@@ -225,7 +225,7 @@ MTR_EXPORT bool MTR_CALL MTR_ScriptsRegisterVariable_d(const char *name,
 }
 
 /*fa MTR_ScriptsRegisterVariable_s buggy */
-MTR_EXPORT bool MTR_CALL MTR_ScriptsRegisterVariable_s(const char *name,
+MTR_DCLSPC bool MTR_CALL MTR_ScriptsRegisterVariable_s(const char *name,
  const char *value)
 {
     if ((name != NULL) && (strcmp(name, "") != 0))
@@ -262,7 +262,7 @@ void MTR_ScriptsQuit(void)
     MTR_LogWrite("Squirrel VM closed", 0, MTR_LMT_INFO);
 }
 
-MTR_EXPORT void MTR_CALL MTR_ScriptsAutorun(char * filename)
+MTR_DCLSPC void MTR_CALL MTR_ScriptsAutorun(char * filename)
 {
     MTR_ScriptsInit();
     mtrAutorun = filename;

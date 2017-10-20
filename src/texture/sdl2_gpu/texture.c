@@ -4,7 +4,7 @@
 
 MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Texture, FA_FUNCTIONS_COUNT)
 
-MTR_EXPORT mtrReport* MTR_CALL MTR_CreateReport(void)
+MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -49,7 +49,7 @@ int MTR_FlipToActualFlip(int flip)
 }
 
 /*fa MTR_TextureInit yes */
-MTR_EXPORT bool MTR_CALL MTR_TextureInit(uint32_t dmSize, uint32_t reservedCount)
+MTR_DCLSPC bool MTR_CALL MTR_TextureInit(uint32_t dmSize, uint32_t reservedCount)
 {
     SDL_version linked;
 
@@ -90,7 +90,7 @@ MTR_EXPORT bool MTR_CALL MTR_TextureInit(uint32_t dmSize, uint32_t reservedCount
 }
 
 /*fa MTR_TextureBeginTarget yes */
-MTR_EXPORT void MTR_CALL MTR_TextureBeginTarget(uint32_t texNum)
+MTR_DCLSPC void MTR_CALL MTR_TextureBeginTarget(uint32_t texNum)
 {
     mtrTexture_t *texture;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
@@ -103,7 +103,7 @@ MTR_EXPORT void MTR_CALL MTR_TextureBeginTarget(uint32_t texNum)
 }
 
 /*fa MTR_TextureEndTarget yes */
-MTR_EXPORT void MTR_CALL MTR_TextureEndTarget(void)
+MTR_DCLSPC void MTR_CALL MTR_TextureEndTarget(void)
 {
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
@@ -111,7 +111,7 @@ MTR_EXPORT void MTR_CALL MTR_TextureEndTarget(void)
 }
 
 /*fa MTR_TextureGetWidth yes */
-MTR_EXPORT int MTR_CALL MTR_TextureGetWidth(uint32_t texNum)
+MTR_DCLSPC int MTR_CALL MTR_TextureGetWidth(uint32_t texNum)
 {
     mtrTexture_t *texture;
     MTR_TEXTURE_CHECK_IF_NOT_INITED(0);
@@ -126,7 +126,7 @@ MTR_EXPORT int MTR_CALL MTR_TextureGetWidth(uint32_t texNum)
 }
 
 /*fa MTR_TextureGetHeight yes */
-MTR_EXPORT int MTR_CALL MTR_TextureGetHeight(uint32_t texNum)
+MTR_DCLSPC int MTR_CALL MTR_TextureGetHeight(uint32_t texNum)
 {
     mtrTexture_t *texture;
     MTR_TEXTURE_CHECK_IF_NOT_INITED(0);
@@ -141,7 +141,7 @@ MTR_EXPORT int MTR_CALL MTR_TextureGetHeight(uint32_t texNum)
 }
 
 /*fa MTR_TextureGetSizes yes */
-MTR_EXPORT void MTR_CALL MTR_TextureGetSizes(uint32_t texNum, int *width,
+MTR_DCLSPC void MTR_CALL MTR_TextureGetSizes(uint32_t texNum, int *width,
  int *height)
 {
     mtrTexture_t *texture;
@@ -167,7 +167,7 @@ MTR_EXPORT void MTR_CALL MTR_TextureGetSizes(uint32_t texNum, int *width,
 }
 
 /*fa MTR_TextureCreate yes */
-MTR_EXPORT uint32_t MTR_CALL MTR_TextureCreate(const char *name, int width,
+MTR_DCLSPC uint32_t MTR_CALL MTR_TextureCreate(const char *name, int width,
  int height)
 {
     uint32_t      freeIndex;
@@ -211,7 +211,7 @@ MTR_EXPORT uint32_t MTR_CALL MTR_TextureCreate(const char *name, int width,
 }
 
 /*fa MTR_TextureLoad yes */
-MTR_EXPORT uint32_t MTR_CALL MTR_TextureLoad(const char *filename)
+MTR_DCLSPC uint32_t MTR_CALL MTR_TextureLoad(const char *filename)
 {
     uint32_t      freeIndex;
     mtrTexture_t *texture;
@@ -247,7 +247,7 @@ MTR_EXPORT uint32_t MTR_CALL MTR_TextureLoad(const char *filename)
 }
 
 /*fa MTR_TextureCopy yes */
-MTR_EXPORT uint32_t MTR_CALL MTR_TextureCopy(uint32_t texNum)
+MTR_DCLSPC uint32_t MTR_CALL MTR_TextureCopy(uint32_t texNum)
 {
     uint32_t      freeIndex;
     mtrTexture_t *texture;
@@ -301,7 +301,7 @@ MTR_EXPORT uint32_t MTR_CALL MTR_TextureCopy(uint32_t texNum)
 }
 
 /*fa MTR_TextureSave yes */
-MTR_EXPORT bool MTR_CALL MTR_TextureSave(uint32_t texNum, const char *filename)
+MTR_DCLSPC bool MTR_CALL MTR_TextureSave(uint32_t texNum, const char *filename)
 {
     mtrTexture_t *texture;
     MTR_TEXTURE_CHECK_IF_NOT_INITED(false);
@@ -339,7 +339,7 @@ MTR_EXPORT bool MTR_CALL MTR_TextureSave(uint32_t texNum, const char *filename)
 }
 
 /*fa MTR_TextureSave buggy */
-MTR_EXPORT uint32_t MTR_CALL MTR_TextureCreateAlias(uint32_t texNum)
+MTR_DCLSPC uint32_t MTR_CALL MTR_TextureCreateAlias(uint32_t texNum)
 {
     uint32_t      freeIndex;
     mtrTexture_t *texture;
@@ -370,7 +370,7 @@ MTR_EXPORT uint32_t MTR_CALL MTR_TextureCreateAlias(uint32_t texNum)
 }
 
 /*fa MTR_TextureFree yes */
-MTR_EXPORT void MTR_CALL MTR_TextureFree(uint32_t texNum)
+MTR_DCLSPC void MTR_CALL MTR_TextureFree(uint32_t texNum)
 {
     mtrTexture_t *texture;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
@@ -388,7 +388,7 @@ MTR_EXPORT void MTR_CALL MTR_TextureFree(uint32_t texNum)
 }
 
 /*fa MTR_TextureSetModulation_c yes */
-MTR_EXPORT void MTR_CALL MTR_TextureSetModulation_c(uint32_t texNum,
+MTR_DCLSPC void MTR_CALL MTR_TextureSetModulation_c(uint32_t texNum,
  uint32_t color)
 {
     mtrTexture_t *texture;
@@ -408,7 +408,7 @@ MTR_EXPORT void MTR_CALL MTR_TextureSetModulation_c(uint32_t texNum,
 }
 
 /*fa MTR_TextureSetModulation_ca yes */
-MTR_EXPORT void MTR_CALL MTR_TextureSetModulation_ca(uint32_t texNum,
+MTR_DCLSPC void MTR_CALL MTR_TextureSetModulation_ca(uint32_t texNum,
  uint32_t color)
 {
     mtrTexture_t *texture;
@@ -431,7 +431,7 @@ MTR_EXPORT void MTR_CALL MTR_TextureSetModulation_ca(uint32_t texNum,
 }
 
 /*fa MTR_TextureSetModulation_rgb yes */
-MTR_EXPORT void MTR_CALL MTR_TextureSetModulation_rgb(uint32_t texNum,
+MTR_DCLSPC void MTR_CALL MTR_TextureSetModulation_rgb(uint32_t texNum,
  uint8_t r, uint8_t g, uint8_t b)
 {
     mtrTexture_t *texture;
@@ -445,7 +445,7 @@ MTR_EXPORT void MTR_CALL MTR_TextureSetModulation_rgb(uint32_t texNum,
 }
 
 /*fa MTR_TextureSetModulation_rgba yes */
-MTR_EXPORT void MTR_CALL MTR_TextureSetModulation_rgba(uint32_t texNum,
+MTR_DCLSPC void MTR_CALL MTR_TextureSetModulation_rgba(uint32_t texNum,
  uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
     mtrTexture_t *texture;
@@ -459,7 +459,7 @@ MTR_EXPORT void MTR_CALL MTR_TextureSetModulation_rgba(uint32_t texNum,
 }
 
 /*fa MTR_TextureSetModulationAlpha yes */
-MTR_EXPORT void MTR_CALL MTR_TextureSetModulationAlpha(uint32_t texNum,
+MTR_DCLSPC void MTR_CALL MTR_TextureSetModulationAlpha(uint32_t texNum,
  uint8_t alpha)
 {
     mtrTexture_t *texture;
@@ -473,7 +473,7 @@ MTR_EXPORT void MTR_CALL MTR_TextureSetModulationAlpha(uint32_t texNum,
 }
 
 /*fa MTR_TextureSetModulationAlpha_f yes */
-MTR_EXPORT void MTR_CALL MTR_TextureSetModulationAlpha_f(uint32_t texNum,
+MTR_DCLSPC void MTR_CALL MTR_TextureSetModulationAlpha_f(uint32_t texNum,
  float alpha)
 {
     mtrTexture_t *texture;
@@ -490,7 +490,7 @@ MTR_EXPORT void MTR_CALL MTR_TextureSetModulationAlpha_f(uint32_t texNum,
 }
 
 /*fa MTR_TextureSetBlendFunction buggy */
-MTR_EXPORT void MTR_CALL MTR_TextureSetBlendFunction(uint32_t texNum,
+MTR_DCLSPC void MTR_CALL MTR_TextureSetBlendFunction(uint32_t texNum,
  int srcColor, int destColor, int srcAlpha, int dstAlpha)
 {
     mtrTexture_t *texture;
@@ -505,7 +505,7 @@ MTR_EXPORT void MTR_CALL MTR_TextureSetBlendFunction(uint32_t texNum,
 }
 
 /*fa MTR_TextureSetAlphaBlending yes */
-MTR_EXPORT void MTR_CALL MTR_TextureSetAlphaBlending(uint32_t texNum,
+MTR_DCLSPC void MTR_CALL MTR_TextureSetAlphaBlending(uint32_t texNum,
  bool blending)
 {
     mtrTexture_t *texture;
@@ -519,7 +519,7 @@ MTR_EXPORT void MTR_CALL MTR_TextureSetAlphaBlending(uint32_t texNum,
 }
 
 /*fa MTR_TextureBlit_f yes */
-MTR_EXPORT void MTR_CALL MTR_TextureBlit_f(uint32_t texNum, float x, float y)
+MTR_DCLSPC void MTR_CALL MTR_TextureBlit_f(uint32_t texNum, float x, float y)
 {
     mtrTexture_t *texture;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
@@ -532,7 +532,7 @@ MTR_EXPORT void MTR_CALL MTR_TextureBlit_f(uint32_t texNum, float x, float y)
 }
 
 /*fa MTR_TextureBlitSized_f yes */
-MTR_EXPORT void MTR_CALL MTR_TextureBlitSized_f(uint32_t texNum, float x,
+MTR_DCLSPC void MTR_CALL MTR_TextureBlitSized_f(uint32_t texNum, float x,
  float y, float w, float h)
 {
     GPU_Rect      outputRegion;
@@ -551,7 +551,7 @@ MTR_EXPORT void MTR_CALL MTR_TextureBlitSized_f(uint32_t texNum, float x,
 }
 
 /*fa MTR_TextureBlitScaled_f yes */
-MTR_EXPORT void MTR_CALL MTR_TextureBlitScaled_f(uint32_t texNum, float x,
+MTR_DCLSPC void MTR_CALL MTR_TextureBlitScaled_f(uint32_t texNum, float x,
  float y, float hscale, float vscale)
 {
     GPU_Rect      outputRegion;
@@ -570,7 +570,7 @@ MTR_EXPORT void MTR_CALL MTR_TextureBlitScaled_f(uint32_t texNum, float x,
 }
 
 /*fa MTR_TextureBlitAngled_f yes */
-MTR_EXPORT void MTR_CALL MTR_TextureBlitAngled_f(uint32_t texNum, float x,
+MTR_DCLSPC void MTR_CALL MTR_TextureBlitAngled_f(uint32_t texNum, float x,
  float y, float angle, float pivotX, float pivotY)
 {
     GPU_Rect      outputRegion;
@@ -590,7 +590,7 @@ MTR_EXPORT void MTR_CALL MTR_TextureBlitAngled_f(uint32_t texNum, float x,
 }
 
 /*fa MTR_TextureBlitFlipped_f yes */
-MTR_EXPORT void MTR_CALL MTR_TextureBlitFlipped_f(uint32_t texNum, float x,
+MTR_DCLSPC void MTR_CALL MTR_TextureBlitFlipped_f(uint32_t texNum, float x,
  float y, int flip)
 {
     GPU_Rect      outputRegion;
@@ -616,7 +616,7 @@ MTR_EXPORT void MTR_CALL MTR_TextureBlitFlipped_f(uint32_t texNum, float x,
 }
 
 /*fa MTR_TextureBlitGeneral_f yes */
-MTR_EXPORT void MTR_CALL MTR_TextureBlitGeneral_f(uint32_t texNum, float x,
+MTR_DCLSPC void MTR_CALL MTR_TextureBlitGeneral_f(uint32_t texNum, float x,
  float y, float hscale, float vscale, float angle, float pivotX, float pivotY,
  int flip)
 {
@@ -643,7 +643,7 @@ MTR_EXPORT void MTR_CALL MTR_TextureBlitGeneral_f(uint32_t texNum, float x,
 }
 
 /*fa MTR_TextureBlitRegion_f yes */
-MTR_EXPORT void MTR_CALL MTR_TextureBlitRegion_f(uint32_t texNum, float x,
+MTR_DCLSPC void MTR_CALL MTR_TextureBlitRegion_f(uint32_t texNum, float x,
  float y, float rx, float ry, float rw, float rh)
 {
     GPU_Rect      region;
@@ -662,7 +662,7 @@ MTR_EXPORT void MTR_CALL MTR_TextureBlitRegion_f(uint32_t texNum, float x,
 }
 
 /*fa MTR_TextureBlitRegionSized_f yes */
-MTR_EXPORT void MTR_CALL MTR_TextureBlitRegionSized_f(uint32_t texNum, float x,
+MTR_DCLSPC void MTR_CALL MTR_TextureBlitRegionSized_f(uint32_t texNum, float x,
  float y, float w, float h, float rx, float ry, float rw, float rh)
 {
     GPU_Rect      region;
@@ -687,7 +687,7 @@ MTR_EXPORT void MTR_CALL MTR_TextureBlitRegionSized_f(uint32_t texNum, float x,
 }
 
 /*fa MTR_TextureBlitRegionScaled_f yes */
-MTR_EXPORT void MTR_CALL MTR_TextureBlitRegionScaled_f(uint32_t texNum, float x,
+MTR_DCLSPC void MTR_CALL MTR_TextureBlitRegionScaled_f(uint32_t texNum, float x,
  float y, float hscale, float vscale, float rx, float ry, float rw, float rh)
 {
     GPU_Rect      region;
@@ -712,7 +712,7 @@ MTR_EXPORT void MTR_CALL MTR_TextureBlitRegionScaled_f(uint32_t texNum, float x,
 }
 
 /*fa MTR_TextureBlitRegionAngled_f yes */
-MTR_EXPORT void MTR_CALL MTR_TextureBlitRegionAngled_f(uint32_t texNum, float x,
+MTR_DCLSPC void MTR_CALL MTR_TextureBlitRegionAngled_f(uint32_t texNum, float x,
  float y, float rx, float ry, float rw, float rh, float angle, float pivotX,
  float pivotY)
 {
@@ -738,7 +738,7 @@ MTR_EXPORT void MTR_CALL MTR_TextureBlitRegionAngled_f(uint32_t texNum, float x,
 }
 
 /*fa MTR_TextureBlitRegionFlipped_f yes */
-MTR_EXPORT void MTR_CALL MTR_TextureBlitRegionFlipped_f(uint32_t texNum, float x,
+MTR_DCLSPC void MTR_CALL MTR_TextureBlitRegionFlipped_f(uint32_t texNum, float x,
  float y, float rx, float ry, float rw, float rh, int flip)
 {
     GPU_Rect      region;
@@ -769,7 +769,7 @@ MTR_EXPORT void MTR_CALL MTR_TextureBlitRegionFlipped_f(uint32_t texNum, float x
 }
 
 /*fa MTR_TextureBlitRegionGeneral_f yes */
-MTR_EXPORT void MTR_CALL MTR_TextureBlitRegionGeneral_f(uint32_t texNum, float x,
+MTR_DCLSPC void MTR_CALL MTR_TextureBlitRegionGeneral_f(uint32_t texNum, float x,
  float y, float hscale, float vscale, float rx, float ry, float rw, float rh,
  float angle, float pivotX, float pivotY, int flip)
 {
@@ -801,7 +801,7 @@ MTR_EXPORT void MTR_CALL MTR_TextureBlitRegionGeneral_f(uint32_t texNum, float x
 }
 
 /*fa MTR_TextureReceivePixels yes */
-MTR_EXPORT bool MTR_CALL MTR_TextureReceivePixels(uint32_t texNum,
+MTR_DCLSPC bool MTR_CALL MTR_TextureReceivePixels(uint32_t texNum,
  mtrPixels_t *pixels)
 {
     mtrTexture_t *texture;

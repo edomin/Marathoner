@@ -126,7 +126,7 @@ uint8_t mtrPluginsCount;
     }
 
 #define MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(subsystemPrefix, functionsCount) \
-    MTR_EXPORT int MTR_CALL MTR_ ## subsystemPrefix ## FunctionSupported(      \
+    MTR_DCLSPC int MTR_CALL MTR_ ## subsystemPrefix ## FunctionSupported(      \
      const char *functionName)                                                 \
     {                                                                          \
         int i;                                                                 \

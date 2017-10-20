@@ -80,7 +80,7 @@ bool CreateEmptyFunction(const char *outputPath)
         return false;
 
     fprintf(outputFile,
-     "%s\n", "MTR_EXPORT bool MTR_CALL mtrModulePreInit(void)");
+     "%s\n", "MTR_DCLSPC bool MTR_CALL mtrModulePreInit(void)");
     fprintf(outputFile, "%s\n", "{");
         fprintf(outputFile, "%s\n", "functionsCount = 0;");
         fprintf(outputFile, "%s\n", "return true;");

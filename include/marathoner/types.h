@@ -10,7 +10,7 @@
  * mtrCloseLibrary      - close shared library
  * Macros (other):
  * MTR_CALL             - calling convention
- * MTR_EXPORT           - function's attribute for exporting it from shared
+ * MTR_DCLSPC           - function's attribute for exporting it from shared
  *                        library
  */
 
@@ -24,7 +24,7 @@
     #define MTR_LoadSymbolName GetProcAddress
     #define MTR_CloseLibrary FreeLibrary
     #define MTR_CALL __stdcall
-    #define MTR_EXPORT __declspec(dllexport)
+    #define MTR_DCLSPC __declspec(dllexport)
 #else
     #include <emscripten.h>
     typedef void* mtr_lhandler;
@@ -32,7 +32,7 @@
     #define MTR_LoadSymbolName dlsym
     #define MTR_CloseLibrary dlclose
     #define MTR_CALL
-    #define MTR_EXPORT EMSCRIPTEN_KEEPALIVE
+    #define MTR_DCLSPC EMSCRIPTEN_KEEPALIVE
 #endif
 
 #endif
