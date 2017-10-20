@@ -6,22 +6,22 @@ int CountPlugins(char *directoryName)
     int pluginsFound;
 
     pluginsFound = 0;
-    directory = mtrDirectoryOpen(directoryName);
+    directory = MTR_DirectoryOpen(directoryName);
     if (directory == NULL)
         return -1;
     else
     {
-        while (mtrDirectoryNextFile(directory))
+        while (MTR_DirectoryNextFile(directory))
         {
-            if (!mtrDirectoryFileIsDir(directory))
+            if (!MTR_DirectoryFileIsDir(directory))
                 pluginsFound++;
         }
-        mtrDirectoryClose(directory);
+        MTR_DirectoryClose(directory);
     }
     return pluginsFound;
 }
 
-int mtrLoadAllPlugins(RequireEngineFuncsFunc RequireEngineFuncs)
+int MTR_LoadAllPlugins(RequireEngineFuncsFunc RequireEngineFuncs)
 {
     char   *fullPluginFileName;
     uint8_t i;
@@ -31,7 +31,7 @@ int mtrLoadAllPlugins(RequireEngineFuncsFunc RequireEngineFuncs)
     mtrPluginsFound = CountPlugins("./plugin/");
     if (mtrPluginsFound == -1)
     {
-        mtrNotify("Unable to open 'plugin/' directory for counting files",
+        MTR_Notify("Unable to open 'plugin/' directory for counting files",
          0, MTR_LMT_FATAL);
         return 1;
     }
@@ -41,87 +41,90 @@ int mtrLoadAllPlugins(RequireEngineFuncsFunc RequireEngineFuncs)
         mtrPluginData = malloc(sizeof(mtrPlugin) * mtrPluginsFound);
         if (mtrPluginData == NULL)
         {
-            mtrNotify("Unable to allocate memory for plugin data", 0,
+            MTR_Notify("Unable to allocate memory for plugin data", 0,
              MTR_LMT_FATAL);
             return 2;
         }
     }
     else
     {
-        mtrNotify("Plugins not Found", 0, MTR_LMT_FATAL);
+        MTR_Notify("Plugins not Found", 0, MTR_LMT_FATAL);
         return 3;
     }
     /* Getting plugins data */
-    pluginDirectory = mtrDirectoryOpen("./plugin/");
+    pluginDirectory = MTR_DirectoryOpen("./plugin/");
     if (pluginDirectory != NULL)
     {
         currentPlugin = 0;
-        while (mtrDirectoryNextFile(pluginDirectory))
+        while (MTR_DirectoryNextFile(pluginDirectory))
         {
-            tempFilename = mtrDirectoryGetFilename(pluginDirectory);
-            if (!mtrDirectoryFileIsDir(pluginDirectory))
+            tempFilename = MTR_DirectoryGetFilename(pluginDirectory);
+            if (!MTR_DirectoryFileIsDir(pluginDirectory))
             {
-                mtrLogWrite_s("Plugin found:", 0, MTR_LMT_INFO, tempFilename);
+                MTR_LogWrite_s("Plugin found:", 0, MTR_LMT_INFO, tempFilename);
                 /* file name in plugin/ directory */
-                mtrPluginData[currentPlugin].filename = malloc(strlen(tempFilename) + 1);
+                mtrPluginData[currentPlugin].filename = malloc(
+                 strlen(tempFilename) + 1);
                 strcpy(mtrPluginData[currentPlugin].filename, tempFilename);
-                //mtrPluginData[currentPlugin].filename = tempFilename;
                 /* temporary plugin file name with relative path */
                 fullPluginFileName = malloc(strlen("plugin/") +
                  strlen(mtrPluginData[currentPlugin].filename) + 1);
                 if (fullPluginFileName == NULL)
                 {
-                    mtrNotify("Unable to allocate memory for plugin's full filename: ",
+                    MTR_Notify(
+                     "Unable to allocate memory for plugin's full filename: ",
                      1, MTR_LMT_ERROR);
                     continue;
                 }
                 strcpy(fullPluginFileName, "plugin/");
-                strcat(fullPluginFileName, mtrPluginData[currentPlugin].filename);
+                strcat(fullPluginFileName,
+                 mtrPluginData[currentPlugin].filename);
                 /* Loading plugin library */
-                mtrPluginData[currentPlugin].dll = mtrLoadLibrary(fullPluginFileName);
+                mtrPluginData[currentPlugin].dll = MTR_LoadLibrary(
+                 fullPluginFileName);
                 if (mtrPluginData[currentPlugin].dll == NULL)
                 {
-                    mtrNotify("Library not loaded", 1, MTR_LMT_ERROR);
+                    MTR_Notify("Library not loaded", 1, MTR_LMT_ERROR);
                     #ifdef __EMSCRIPTEN__
-                    mtrLogWrite(dlerror(), 1, MTR_LMT_ERROR);
+                    MTR_LogWrite(dlerror(), 1, MTR_LMT_ERROR);
                     #endif
                     continue;
                 }
-                mtrCreateReport = (mtrReportFunc)mtrLoadSymbolName(mtrPluginData[currentPlugin].dll,
-                  "mtrCreateReport");
-                if (mtrCreateReport == NULL)
-                    mtrNotify("Library not contain mtrCreateReport function", 1,
-                     MTR_LMT_ERROR);
-                mtrPluginData[currentPlugin].report = mtrCreateReport();
+                MTR_CreateReport = (MTR_ReportFunc)MTR_LoadSymbolName(
+                 mtrPluginData[currentPlugin].dll, "MTR_CreateReport");
+                if (MTR_CreateReport == NULL)
+                    MTR_Notify("Library not contain MTR_CreateReport function",
+                     1, MTR_LMT_ERROR);
+                mtrPluginData[currentPlugin].report = MTR_CreateReport();
                 if (mtrPluginData[currentPlugin].report == NULL)
                 {
-                    mtrNotify("Module are not returned report", 1,
+                    MTR_Notify("Module are not returned report", 1,
                      MTR_LMT_ERROR);
                     free(fullPluginFileName);
-                    mtrCloseLibrary(mtrPluginData[currentPlugin].dll);
+                    MTR_CloseLibrary(mtrPluginData[currentPlugin].dll);
                     continue;
                 }
-                mtrLogWrite_s("Module ID:", 1, MTR_LMT_INFO,
+                MTR_LogWrite_s("Module ID:", 1, MTR_LMT_INFO,
                   mtrPluginData[currentPlugin].report->moduleID);
-                mtrLogWrite("Version:", 1, MTR_LMT_INFO);
-                mtrLogWrite_i("Majon:", 2, MTR_LMT_INFO,
+                MTR_LogWrite("Version:", 1, MTR_LMT_INFO);
+                MTR_LogWrite_i("Majon:", 2, MTR_LMT_INFO,
                   (mtrPluginData[currentPlugin].report->version & 0xFF0000) >> 16);
-                mtrLogWrite_i("Minor:", 2, MTR_LMT_INFO,
+                MTR_LogWrite_i("Minor:", 2, MTR_LMT_INFO,
                   (mtrPluginData[currentPlugin].report->version & 0x00FF00) >> 8);
-                mtrLogWrite_i("Patch:", 2, MTR_LMT_INFO,
+                MTR_LogWrite_i("Patch:", 2, MTR_LMT_INFO,
                   mtrPluginData[currentPlugin].report->version & 0x0000FF);
                 if (mtrPluginData[currentPlugin].report->prereqSubsystemsCount > 0)
                 {
-                    mtrLogWrite("Requirement subsystems:", 1, MTR_LMT_INFO);
+                    MTR_LogWrite("Requirement subsystems:", 1, MTR_LMT_INFO);
                     for (i = 0; i < mtrPluginData[currentPlugin].report->prereqSubsystemsCount; i++)
-                        mtrLogWrite(mtrPluginData[currentPlugin].report->prereqSubsystems[i],
+                        MTR_LogWrite(mtrPluginData[currentPlugin].report->prereqSubsystems[i],
                           2, MTR_LMT_INFO);
                 }
                 if (mtrPluginData[currentPlugin].report->prereqsCount > 0)
                 {
-                    mtrLogWrite("Requirement modules:", 1, MTR_LMT_INFO);
+                    MTR_LogWrite("Requirement modules:", 1, MTR_LMT_INFO);
                     for (i = 0; i < mtrPluginData[currentPlugin].report->prereqsCount; i++)
-                        mtrLogWrite(mtrPluginData[currentPlugin].report->prereqs[i],
+                        MTR_LogWrite(mtrPluginData[currentPlugin].report->prereqs[i],
                           2, MTR_LMT_INFO);
                 }
                 /* Plugin requiring some engine functions */
@@ -129,16 +132,16 @@ int mtrLoadAllPlugins(RequireEngineFuncsFunc RequireEngineFuncs)
                     RequireEngineFuncs(currentPlugin);
 
                 /* Plugin requiring information about every other plugin */
-                mtrRequirePluginData = (mtrRequirePluginDataFunc)mtrLoadSymbolName(mtrPluginData[currentPlugin].dll,
-                 "mtrRequirePluginData");
-                mtrRequirePluginData(mtrPluginData, mtrPluginsFound);
+                MTR_RequirePluginData = (MTR_RequirePluginDataFunc)MTR_LoadSymbolName(mtrPluginData[currentPlugin].dll,
+                 "MTR_RequirePluginData");
+                MTR_RequirePluginData(mtrPluginData, mtrPluginsFound);
 
                 currentPlugin++;
                 /* freing temporary allocated structures */
                 free(fullPluginFileName);
             }
         }
-        mtrDirectoryClose(pluginDirectory);
+        MTR_DirectoryClose(pluginDirectory);
     }
     return 0;
 }

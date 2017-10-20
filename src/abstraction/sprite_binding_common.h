@@ -1,69 +1,69 @@
 #ifndef MTR_ABSTRACTION_SPRITE_BINDING_COMMON_H
 #define MTR_ABSTRACTION_SPRITE_BINDING_COMMON_H
 
-typedef int (MTR_CALL * mtrSpriteFunctionSupportedFunc)(const char *);
-mtrSpriteFunctionSupportedFunc mtrSpriteFunctionSupported;
+typedef int (MTR_CALL * MTR_SpriteFunctionSupportedFunc)(const char *);
+MTR_SpriteFunctionSupportedFunc MTR_SpriteFunctionSupported;
 
-typedef bool (MTR_CALL * mtrSpriteInitFunc)(uint32_t, uint32_t);
-mtrSpriteInitFunc mtrSpriteInit;
+typedef bool (MTR_CALL * MTR_SpriteInitFunc)(uint32_t, uint32_t);
+MTR_SpriteInitFunc MTR_SpriteInit;
 
-typedef uint32_t (MTR_CALL * mtrSpriteLoadFunc)(const char *, int, int, int,
+typedef uint32_t (MTR_CALL * MTR_SpriteLoadFunc)(const char *, int, int, int,
  int, int, int, int);
-mtrSpriteLoadFunc mtrSpriteLoad;
+MTR_SpriteLoadFunc MTR_SpriteLoad;
 
-typedef uint32_t (MTR_CALL * mtrSpriteLoadSimpleFunc)(const char *, int, int);
-mtrSpriteLoadSimpleFunc mtrSpriteLoadSimple;
+typedef uint32_t (MTR_CALL * MTR_SpriteLoadSimpleFunc)(const char *, int, int);
+MTR_SpriteLoadSimpleFunc MTR_SpriteLoadSimple;
 
-typedef uint32_t (MTR_CALL * mtrSpriteLoadAtlasFunc)(const char *, int);
-mtrSpriteLoadAtlasFunc mtrSpriteLoadAtlas;
+typedef uint32_t (MTR_CALL * MTR_SpriteLoadAtlasFunc)(const char *, int);
+MTR_SpriteLoadAtlasFunc MTR_SpriteLoadAtlas;
 
-typedef bool (MTR_CALL * mtrSpriteSetAtlasFrameFunc)(uint32_t, int, int, int,
+typedef bool (MTR_CALL * MTR_SpriteSetAtlasFrameFunc)(uint32_t, int, int, int,
  int, int, int, int);
-mtrSpriteLoadAtlasFunc mtrSpriteLoadAtlas;
+MTR_SpriteSetAtlasFrameFunc MTR_SpriteSetAtlasFrame;
 
-typedef void (MTR_CALL * mtrSpriteFreeFunc)(uint32_t);
-mtrSpriteFreeFunc mtrSpriteFree;
+typedef void (MTR_CALL * MTR_SpriteFreeFunc)(uint32_t);
+MTR_SpriteFreeFunc MTR_SpriteFree;
 
-typedef void (MTR_CALL * mtrSpriteSetModulation_cFunc)(uint32_t, uint32_t);
-mtrSpriteSetModulation_cFunc mtrSpriteSetModulation_c;
+typedef void (MTR_CALL * MTR_SpriteSetModulation_cFunc)(uint32_t, uint32_t);
+MTR_SpriteSetModulation_cFunc MTR_SpriteSetModulation_c;
 
-typedef void (MTR_CALL * mtrSpriteSetModulation_caFunc)(uint32_t, uint32_t);
-mtrSpriteSetModulation_caFunc mtrSpriteSetModulation_ca;
+typedef void (MTR_CALL * MTR_SpriteSetModulation_caFunc)(uint32_t, uint32_t);
+MTR_SpriteSetModulation_caFunc MTR_SpriteSetModulation_ca;
 
-typedef void (MTR_CALL * mtrSpriteSetModulation_rgbFunc)(uint32_t, uint8_t,
+typedef void (MTR_CALL * MTR_SpriteSetModulation_rgbFunc)(uint32_t, uint8_t,
  uint8_t, uint8_t);
-mtrSpriteSetModulation_rgbFunc mtrSpriteSetModulation_rgb;
+MTR_SpriteSetModulation_rgbFunc MTR_SpriteSetModulation_rgb;
 
-typedef void (MTR_CALL * mtrSpriteSetModulation_rgbaFunc)(uint32_t, uint8_t,
+typedef void (MTR_CALL * MTR_SpriteSetModulation_rgbaFunc)(uint32_t, uint8_t,
  uint8_t, uint8_t, uint8_t);
-mtrSpriteSetModulation_rgbaFunc mtrSpriteSetModulation_rgba;
+MTR_SpriteSetModulation_rgbaFunc MTR_SpriteSetModulation_rgba;
 
-typedef void (MTR_CALL * mtrSpriteSetModulationAlphaFunc)(uint32_t, uint8_t);
-mtrSpriteSetModulationAlphaFunc mtrSpriteSetModulationAlpha;
+typedef void (MTR_CALL * MTR_SpriteSetModulationAlphaFunc)(uint32_t, uint8_t);
+MTR_SpriteSetModulationAlphaFunc MTR_SpriteSetModulationAlpha;
 
-typedef void (MTR_CALL * mtrSpriteSetModulationAlpha_fFunc)(uint32_t, float);
-mtrSpriteSetModulationAlpha_fFunc mtrSpriteSetModulationAlpha_f;
+typedef void (MTR_CALL * MTR_SpriteSetModulationAlpha_fFunc)(uint32_t, float);
+MTR_SpriteSetModulationAlpha_fFunc MTR_SpriteSetModulationAlpha_f;
 
-typedef bool (MTR_CALL * mtrSpriteDraw_fFunc)(uint32_t, int, float, float);
-mtrSpriteDraw_fFunc mtrSpriteDraw_f;
+typedef bool (MTR_CALL * MTR_SpriteDraw_fFunc)(uint32_t, int, float, float);
+MTR_SpriteDraw_fFunc MTR_SpriteDraw_f;
 
-typedef bool (MTR_CALL * mtrSpriteDrawSized_fFunc)(uint32_t, int, float, float,
+typedef bool (MTR_CALL * MTR_SpriteDrawSized_fFunc)(uint32_t, int, float, float,
  float, float);
-mtrSpriteDrawSized_fFunc mtrSpriteDrawSized_f;
+MTR_SpriteDrawSized_fFunc MTR_SpriteDrawSized_f;
 
-typedef bool (MTR_CALL * mtrSpriteDrawScaled_fFunc)(uint32_t, int, float, float,
+typedef bool (MTR_CALL * MTR_SpriteDrawScaled_fFunc)(uint32_t, int, float, float,
  float, float);
-mtrSpriteDrawScaled_fFunc mtrSpriteDrawScaled_f;
+MTR_SpriteDrawScaled_fFunc MTR_SpriteDrawScaled_f;
 
-typedef bool (MTR_CALL * mtrSpriteDrawAngled_fFunc)(uint32_t, int, float, float,
+typedef bool (MTR_CALL * MTR_SpriteDrawAngled_fFunc)(uint32_t, int, float, float,
  float);
-mtrSpriteDrawAngled_fFunc mtrSpriteDrawAngled_f;
+MTR_SpriteDrawAngled_fFunc MTR_SpriteDrawAngled_f;
 
-typedef bool (MTR_CALL * mtrSpriteDrawFlipped_fFunc)(uint32_t, int, float,
+typedef bool (MTR_CALL * MTR_SpriteDrawFlipped_fFunc)(uint32_t, int, float,
  float, int);
-mtrSpriteDrawFlipped_fFunc mtrSpriteDrawFlipped_f;
+MTR_SpriteDrawFlipped_fFunc MTR_SpriteDrawFlipped_f;
 
-typedef bool (MTR_CALL * mtrSpriteDrawGeneral_fFunc)(uint32_t, int, float,
+typedef bool (MTR_CALL * MTR_SpriteDrawGeneral_fFunc)(uint32_t, int, float,
  float, float, float, float, int);
-mtrSpriteDrawGeneral_fFunc mtrSpriteDrawGeneral_f;
+MTR_SpriteDrawGeneral_fFunc MTR_SpriteDrawGeneral_f;
 #endif

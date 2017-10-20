@@ -25,7 +25,7 @@ static bool mtrMouseInited = false;
 #define MTR_MOUSE_CHECK_IF_NOT_INITED_WITH_LOG(message, returnValue) \
     if (!mtrMouseInited)                                             \
     {                                                                \
-        mtrLogWrite(message ". Mouse support are not initialized",   \
+        MTR_LogWrite(message ". Mouse support are not initialized",  \
          1, MTR_LMT_ERROR);                                          \
         return returnValue;                                          \
     }

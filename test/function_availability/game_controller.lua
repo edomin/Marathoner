@@ -2,39 +2,39 @@
 FileWriteLineFast("test/output.txt", "Function Availability", FM_WRITE);
 local fa = dofile("test/common/function_availability.lua");
 
-fa.FunctionSupported(GameControllerInit, "mtrGameControllerInit",
+fa.FunctionSupported(GameControllerInit, "MTR_GameControllerInit",
  GameControllerFunctionSupported);
-fa.FunctionSupported(GameControllerQuit, "mtrGameControllerQuit",
+fa.FunctionSupported(GameControllerQuit, "MTR_GameControllerQuit",
  GameControllerFunctionSupported);
-fa.FunctionSupported(GameControllerRefresh, "mtrGameControllerRefresh",
+fa.FunctionSupported(GameControllerRefresh, "MTR_GameControllerRefresh",
  GameControllerFunctionSupported);
-fa.FunctionSupported(GameControllerButtonPress, "mtrGameControllerButtonPress",
+fa.FunctionSupported(GameControllerButtonPress, "MTR_GameControllerButtonPress",
  GameControllerFunctionSupported);
 fa.FunctionSupported(GameControllerButtonRelease,
- "mtrGameControllerButtonRelease", GameControllerFunctionSupported);
+ "MTR_GameControllerButtonRelease", GameControllerFunctionSupported);
 fa.FunctionSupported(GameControllerButtonPressed,
- "mtrGameControllerButtonPressed", GameControllerFunctionSupported);
-fa.FunctionSupported(GameControllerGetAxis, "mtrGameControllerGetAxis",
+ "MTR_GameControllerButtonPressed", GameControllerFunctionSupported);
+fa.FunctionSupported(GameControllerGetAxis, "MTR_GameControllerGetAxis",
  GameControllerFunctionSupported);
-fa.FunctionSupported(GameControllerGetAxis_f, "mtrGameControllerGetAxis_f",
+fa.FunctionSupported(GameControllerGetAxis_f, "MTR_GameControllerGetAxis_f",
  GameControllerFunctionSupported);
 fa.FunctionSupported(GameControllerGetAxisDelta,
- "mtrGameControllerGetAxisDelta", GameControllerFunctionSupported);
+ "MTR_GameControllerGetAxisDelta", GameControllerFunctionSupported);
 fa.FunctionSupported(GameControllerGetAxisDelta_f,
- "mtrGameControllerGetAxisDelta_f", GameControllerFunctionSupported);
+ "MTR_GameControllerGetAxisDelta_f", GameControllerFunctionSupported);
 fa.FunctionSupported(GameControllerGetTrackballDeltaX,
- "mtrGameControllerGetTrackballDeltaX", GameControllerFunctionSupported);
+ "MTR_GameControllerGetTrackballDeltaX", GameControllerFunctionSupported);
 fa.FunctionSupported(GameControllerGetTrackballDeltaY,
- "mtrGameControllerGetTrackballDeltaY", GameControllerFunctionSupported);
+ "MTR_GameControllerGetTrackballDeltaY", GameControllerFunctionSupported);
 fa.FunctionSupported(GameControllerGetTrackballDeltaXY,
- "mtrGameControllerGetTrackballDeltaXY", GameControllerFunctionSupported);
-fa.FunctionSupported(GameControllerGetPovHat, "mtrGameControllerGetPovHat",
+ "MTR_GameControllerGetTrackballDeltaXY", GameControllerFunctionSupported);
+fa.FunctionSupported(GameControllerGetPovHat, "MTR_GameControllerGetPovHat",
  GameControllerFunctionSupported);
 fa.FunctionSupported(GameControllerGetButtonsCount,
- "mtrGameControllerGetButtonsCount", GameControllerFunctionSupported);
+ "MTR_GameControllerGetButtonsCount", GameControllerFunctionSupported);
 fa.FunctionSupported(GameControllerGetAxesCount,
- "mtrGameControllerGetAxesCount", GameControllerFunctionSupported);
+ "MTR_GameControllerGetAxesCount", GameControllerFunctionSupported);
 fa.FunctionSupported(GameControllerGetTrackballsCount,
- "mtrGameControllerGetTrackballsCount", GameControllerFunctionSupported);
+ "MTR_GameControllerGetTrackballsCount", GameControllerFunctionSupported);
 fa.FunctionSupported(GameControllerGetPowHatsCount,
- "mtrGameControllerGetPowHatsCount", GameControllerFunctionSupported);
+ "MTR_GameControllerGetPowHatsCount", GameControllerFunctionSupported);

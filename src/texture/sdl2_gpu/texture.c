@@ -4,7 +4,7 @@
 
 MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Texture, FA_FUNCTIONS_COUNT)
 
-MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
+MTR_EXPORT mtrReport* MTR_CALL MTR_CreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -26,7 +26,7 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
-int mtrFlipToActualFlip(int flip)
+int MTR_FlipToActualFlip(int flip)
 {
     switch (flip)
     {
@@ -48,50 +48,49 @@ int mtrFlipToActualFlip(int flip)
     }
 }
 
-/*fa mtrTextureInit yes */
-MTR_EXPORT bool MTR_CALL mtrTextureInit(uint32_t dmSize, uint32_t reservedCount)
+/*fa MTR_TextureInit yes */
+MTR_EXPORT bool MTR_CALL MTR_TextureInit(uint32_t dmSize, uint32_t reservedCount)
 {
     SDL_version linked;
 
-    mtrLogWrite("Initializing texture manager", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Initializing texture manager", 0, MTR_LMT_INFO);
 
-    mtrLogWrite("Reporting sdl_gpu compile-time version:", 1, MTR_LMT_INFO);
-    mtrLogWrite_i("Major:", 2, MTR_LMT_INFO, SDL_GPU_VERSION_MAJOR);
-    mtrLogWrite_i("Minor:", 2, MTR_LMT_INFO, SDL_GPU_VERSION_MINOR);
-    mtrLogWrite_i("Patch:", 2, MTR_LMT_INFO, SDL_GPU_VERSION_PATCH);
-    mtrLogWrite("Reporting sdl_gpu linked version:", 1, MTR_LMT_INFO);
+    MTR_LogWrite("Reporting sdl_gpu compile-time version:", 1, MTR_LMT_INFO);
+    MTR_LogWrite_i("Major:", 2, MTR_LMT_INFO, SDL_GPU_VERSION_MAJOR);
+    MTR_LogWrite_i("Minor:", 2, MTR_LMT_INFO, SDL_GPU_VERSION_MINOR);
+    MTR_LogWrite_i("Patch:", 2, MTR_LMT_INFO, SDL_GPU_VERSION_PATCH);
+    MTR_LogWrite("Reporting sdl_gpu linked version:", 1, MTR_LMT_INFO);
     linked = GPU_GetLinkedVersion();
-    mtrLogWrite_i("Major:", 2, MTR_LMT_INFO, linked.major);
-    mtrLogWrite_i("Minor:", 2, MTR_LMT_INFO, linked.minor);
-    mtrLogWrite_i("Patch:", 2, MTR_LMT_INFO, linked.patch);
+    MTR_LogWrite_i("Major:", 2, MTR_LMT_INFO, linked.major);
+    MTR_LogWrite_i("Minor:", 2, MTR_LMT_INFO, linked.minor);
+    MTR_LogWrite_i("Patch:", 2, MTR_LMT_INFO, linked.patch);
 
-    mtrGetScreen = (mtrGetScreenFunc)mtrFindFunction("Screen_SDL2_gpu",
-     "mtrGetScreen");
-    if (mtrGetScreen == NULL)
+    MTR_GetScreen = (mtrGetScreenFunc)MTR_FindFunction("Screen_SDL2_gpu",
+     "MTR_GetScreen");
+    if (MTR_GetScreen == NULL)
     {
-        mtrNotify(
-         "Unable to load 'mtrGetScreen' function from 'Screen_SDL2_gpu' module",
-         1, MTR_LMT_FATAL);
+        MTR_Notify("Unable to load 'MTR_GetScreen' function from "
+         "'Screen_SDL2_gpu' module", 1, MTR_LMT_FATAL);
         return false;
     }
-    mtrScreen = mtrGetScreen();
+    mtrScreen = MTR_GetScreen();
 
-    mtrTextureKeeper = (mtrIndexkeeper_t *)mtrIndexkeeperCreate(dmSize,
+    mtrTextureKeeper = (mtrIndexkeeper_t *)MTR_IndexkeeperCreate(dmSize,
      reservedCount, sizeof(mtrTexture_t));
     if (mtrTextureKeeper == NULL)
     {
-        mtrNotify("Unable to initialize texture manager", 1, MTR_LMT_ERROR);
+        MTR_Notify("Unable to initialize texture manager", 1, MTR_LMT_ERROR);
         return false;
     }
     else
-        mtrLogWrite("Texture manager initialized", 0, MTR_LMT_INFO);
+        MTR_LogWrite("Texture manager initialized", 0, MTR_LMT_INFO);
 
     mtrTextureInited = true;
     return true;
 }
 
-/*fa mtrTextureBeginTarget yes */
-MTR_EXPORT void MTR_CALL mtrTextureBeginTarget(uint32_t texNum)
+/*fa MTR_TextureBeginTarget yes */
+MTR_EXPORT void MTR_CALL MTR_TextureBeginTarget(uint32_t texNum)
 {
     mtrTexture_t *texture;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
@@ -103,16 +102,16 @@ MTR_EXPORT void MTR_CALL mtrTextureBeginTarget(uint32_t texNum)
     }
 }
 
-/*fa mtrTextureEndTarget yes */
-MTR_EXPORT void MTR_CALL mtrTextureEndTarget(void)
+/*fa MTR_TextureEndTarget yes */
+MTR_EXPORT void MTR_CALL MTR_TextureEndTarget(void)
 {
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
     mtrScreen->target = mtrScreen->screen;
 }
 
-/*fa mtrTextureGetWidth yes */
-MTR_EXPORT int MTR_CALL mtrTextureGetWidth(uint32_t texNum)
+/*fa MTR_TextureGetWidth yes */
+MTR_EXPORT int MTR_CALL MTR_TextureGetWidth(uint32_t texNum)
 {
     mtrTexture_t *texture;
     MTR_TEXTURE_CHECK_IF_NOT_INITED(0);
@@ -126,8 +125,8 @@ MTR_EXPORT int MTR_CALL mtrTextureGetWidth(uint32_t texNum)
         return 0;
 }
 
-/*fa mtrTextureGetHeight yes */
-MTR_EXPORT int MTR_CALL mtrTextureGetHeight(uint32_t texNum)
+/*fa MTR_TextureGetHeight yes */
+MTR_EXPORT int MTR_CALL MTR_TextureGetHeight(uint32_t texNum)
 {
     mtrTexture_t *texture;
     MTR_TEXTURE_CHECK_IF_NOT_INITED(0);
@@ -141,8 +140,8 @@ MTR_EXPORT int MTR_CALL mtrTextureGetHeight(uint32_t texNum)
         return 0;
 }
 
-/*fa mtrTextureGetSizes yes */
-MTR_EXPORT void MTR_CALL mtrTextureGetSizes(uint32_t texNum, int *width,
+/*fa MTR_TextureGetSizes yes */
+MTR_EXPORT void MTR_CALL MTR_TextureGetSizes(uint32_t texNum, int *width,
  int *height)
 {
     mtrTexture_t *texture;
@@ -167,8 +166,8 @@ MTR_EXPORT void MTR_CALL mtrTextureGetSizes(uint32_t texNum, int *width,
     }
 }
 
-/*fa mtrTextureCreate yes */
-MTR_EXPORT uint32_t MTR_CALL mtrTextureCreate(const char *name, int width,
+/*fa MTR_TextureCreate yes */
+MTR_EXPORT uint32_t MTR_CALL MTR_TextureCreate(const char *name, int width,
  int height)
 {
     uint32_t      freeIndex;
@@ -176,9 +175,9 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCreate(const char *name, int width,
     GPU_Target   *target;
     MTR_TEXTURE_CHECK_IF_NOT_INITED(0U);
 
-    mtrLogWrite_s("Creating texture", 0, MTR_LMT_INFO, name);
-    freeIndex = mtrIndexkeeperGetFreeIndex(mtrTextureKeeper);
-    mtrLogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
+    MTR_LogWrite_s("Creating texture", 0, MTR_LMT_INFO, name);
+    freeIndex = MTR_IndexkeeperGetFreeIndex(mtrTextureKeeper);
+    MTR_LogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
     texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, freeIndex);
     texture->texture = GPU_CreateImage(width, height, GPU_FORMAT_RGBA);
     if (texture->texture != NULL)
@@ -193,34 +192,34 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCreate(const char *name, int width,
             texture->name = strcpy(texture->name, name);
         GPU_SetAnchor(texture->texture, 0.0f, 0.0f);
         GPU_SetBlending(texture->texture, true);
-        mtrLogWrite_s("Texture created", 0, MTR_LMT_INFO, name);
+        MTR_LogWrite_s("Texture created", 0, MTR_LMT_INFO, name);
         target = GPU_LoadTarget(texture->texture);
         if (target == NULL)
         {
-            mtrLogWrite_s("Texture can not be used as render targer", 0,
+            MTR_LogWrite_s("Texture can not be used as render targer", 0,
              MTR_LMT_INFO, name);
         }
         return freeIndex;
     }
     else
     {
-        mtrNotify("Unable to create texture", 1, MTR_LMT_ERROR);
-        mtrIndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
+        MTR_Notify("Unable to create texture", 1, MTR_LMT_ERROR);
+        MTR_IndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
         return 0U;
     }
     return 0U;
 }
 
-/*fa mtrTextureLoad yes */
-MTR_EXPORT uint32_t MTR_CALL mtrTextureLoad(const char *filename)
+/*fa MTR_TextureLoad yes */
+MTR_EXPORT uint32_t MTR_CALL MTR_TextureLoad(const char *filename)
 {
     uint32_t      freeIndex;
     mtrTexture_t *texture;
     MTR_TEXTURE_CHECK_IF_NOT_INITED(0U);
 
-    mtrLogWrite_s("Loading texture", 0, MTR_LMT_INFO, filename);
-    freeIndex = mtrIndexkeeperGetFreeIndex(mtrTextureKeeper);
-    mtrLogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
+    MTR_LogWrite_s("Loading texture", 0, MTR_LMT_INFO, filename);
+    freeIndex = MTR_IndexkeeperGetFreeIndex(mtrTextureKeeper);
+    MTR_LogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
     texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, freeIndex);
     texture->texture = GPU_LoadImage(filename);
     if (texture->texture != NULL)
@@ -235,20 +234,20 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureLoad(const char *filename)
             texture->name = strcpy(texture->name, filename);
         GPU_SetAnchor(texture->texture, 0.0f, 0.0f);
         GPU_SetBlending(texture->texture, true);
-        mtrLogWrite_s("Texture loaded", 0, MTR_LMT_INFO, filename);
+        MTR_LogWrite_s("Texture loaded", 0, MTR_LMT_INFO, filename);
         return freeIndex;
     }
     else
     {
-        mtrNotify("Unable to load texture", 1, MTR_LMT_ERROR);
-        mtrIndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
+        MTR_Notify("Unable to load texture", 1, MTR_LMT_ERROR);
+        MTR_IndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
         return 0U;
     }
     return 0U;
 }
 
-/*fa mtrTextureCopy yes */
-MTR_EXPORT uint32_t MTR_CALL mtrTextureCopy(uint32_t texNum)
+/*fa MTR_TextureCopy yes */
+MTR_EXPORT uint32_t MTR_CALL MTR_TextureCopy(uint32_t texNum)
 {
     uint32_t      freeIndex;
     mtrTexture_t *texture;
@@ -258,21 +257,21 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCopy(uint32_t texNum)
 
     if (texNum != 0)
     {
-        freeIndex = mtrIndexkeeperGetFreeIndex(mtrTextureKeeper);
-        mtrLogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
+        freeIndex = MTR_IndexkeeperGetFreeIndex(mtrTextureKeeper);
+        MTR_LogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
         newTexture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, freeIndex);
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         surface = GPU_CopySurfaceFromImage(texture->texture);
         if (surface == NULL)
         {
-            mtrNotify("Unable to copy texture", 1, MTR_LMT_ERROR);
-            mtrIndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
+            MTR_Notify("Unable to copy texture", 1, MTR_LMT_ERROR);
+            MTR_IndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
             return 0;
         }
         newTexture->texture = GPU_CopyImageFromSurface(surface);
         if (newTexture->texture != NULL)
         {
-            mtrLogWrite_s("Copying texture", 0, MTR_LMT_INFO, texture->name);
+            MTR_LogWrite_s("Copying texture", 0, MTR_LMT_INFO, texture->name);
             newTexture->name = malloc(
              sizeof(char) * (strlen(texture->name) + 1));
             if (newTexture->name == NULL)
@@ -282,27 +281,27 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCopy(uint32_t texNum)
             GPU_SetAnchor(newTexture->texture, 0.0f, 0.0f);
             GPU_SetBlending(newTexture->texture, true);
             SDL_FreeSurface(surface);
-            mtrLogWrite_s("Texture copyed", 0, MTR_LMT_INFO, newTexture->name);
+            MTR_LogWrite_s("Texture copyed", 0, MTR_LMT_INFO, newTexture->name);
             return freeIndex;
         }
         else
         {
-            mtrNotify("Unable to copy texture", 1, MTR_LMT_ERROR);
-            mtrIndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
+            MTR_Notify("Unable to copy texture", 1, MTR_LMT_ERROR);
+            MTR_IndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
             return 0U;
         }
     }
     else
     {
-        mtrNotify("Unable to copy texture. Incorrect texture for copy", 1,
+        MTR_Notify("Unable to copy texture. Incorrect texture for copy", 1,
          MTR_LMT_ERROR);
         return 0U;
     }
     return 0U;
 }
 
-/*fa mtrTextureSave yes */
-MTR_EXPORT bool MTR_CALL mtrTextureSave(uint32_t texNum, const char *filename)
+/*fa MTR_TextureSave yes */
+MTR_EXPORT bool MTR_CALL MTR_TextureSave(uint32_t texNum, const char *filename)
 {
     mtrTexture_t *texture;
     MTR_TEXTURE_CHECK_IF_NOT_INITED(false);
@@ -310,46 +309,46 @@ MTR_EXPORT bool MTR_CALL mtrTextureSave(uint32_t texNum, const char *filename)
     if (texNum != 0)
     {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
-        mtrLogWrite_s("Saving texture", 0, MTR_LMT_INFO, texture->name);
+        MTR_LogWrite_s("Saving texture", 0, MTR_LMT_INFO, texture->name);
 
         if (GPU_SaveImage(texture->texture, filename, GPU_FILE_AUTO))
         {
-            mtrLogWrite("Texture saved", 0, MTR_LMT_INFO);
+            MTR_LogWrite("Texture saved", 0, MTR_LMT_INFO);
             return true;
         }
         else
         {
-            mtrLogWrite("Unable to save to format autodetected by extension. "
+            MTR_LogWrite("Unable to save to format autodetected by extension. "
              "Saving to PNG", 0, MTR_LMT_WARNING);
             if (GPU_SaveImage(texture->texture, filename, GPU_FILE_PNG))
             {
-                mtrLogWrite("Texture saved", 0, MTR_LMT_INFO);
+                MTR_LogWrite("Texture saved", 0, MTR_LMT_INFO);
                 return true;
             }
             else
             {
-                mtrLogWrite("Unable to save texture", 0, MTR_LMT_ERROR);
+                MTR_LogWrite("Unable to save texture", 0, MTR_LMT_ERROR);
                 return false;
             }
         }
     }
     else
-        mtrLogWrite("Unable to save texture. Incorrect texture index", 0,
+        MTR_LogWrite("Unable to save texture. Incorrect texture index", 0,
          MTR_LMT_ERROR);
     return false;
 }
 
-/*fa mtrTextureSave buggy */
-MTR_EXPORT uint32_t MTR_CALL mtrTextureCreateAlias(uint32_t texNum)
+/*fa MTR_TextureSave buggy */
+MTR_EXPORT uint32_t MTR_CALL MTR_TextureCreateAlias(uint32_t texNum)
 {
     uint32_t      freeIndex;
     mtrTexture_t *texture;
     mtrTexture_t *oldTexture;
     MTR_TEXTURE_CHECK_IF_NOT_INITED(0U);
 
-    mtrLogWrite("Creating texture alias", 0, MTR_LMT_INFO);
-    freeIndex = mtrIndexkeeperGetFreeIndex(mtrTextureKeeper);
-    mtrLogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
+    MTR_LogWrite("Creating texture alias", 0, MTR_LMT_INFO);
+    freeIndex = MTR_IndexkeeperGetFreeIndex(mtrTextureKeeper);
+    MTR_LogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
     texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, freeIndex);
     oldTexture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
     texture->texture = GPU_CreateAliasImage(oldTexture->texture);
@@ -357,21 +356,21 @@ MTR_EXPORT uint32_t MTR_CALL mtrTextureCreateAlias(uint32_t texNum)
     {
         texture->name = malloc(sizeof(char) * (strlen(oldTexture->name) + 1));
         texture->name = strcpy(texture->name, oldTexture->name);
-        mtrLogWrite_s("Created alias for texture", 0, MTR_LMT_INFO,
+        MTR_LogWrite_s("Created alias for texture", 0, MTR_LMT_INFO,
          oldTexture->name);
         return freeIndex;
     }
     else
     {
-        mtrNotify("Unable to create texture alias", 1, MTR_LMT_ERROR);
-        mtrIndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
+        MTR_Notify("Unable to create texture alias", 1, MTR_LMT_ERROR);
+        MTR_IndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
         return 0U;
     }
     return 0U;
 }
 
-/*fa mtrTextureFree yes */
-MTR_EXPORT void MTR_CALL mtrTextureFree(uint32_t texNum)
+/*fa MTR_TextureFree yes */
+MTR_EXPORT void MTR_CALL MTR_TextureFree(uint32_t texNum)
 {
     mtrTexture_t *texture;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
@@ -379,17 +378,17 @@ MTR_EXPORT void MTR_CALL mtrTextureFree(uint32_t texNum)
     if (texNum != 0)
     {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
-        mtrLogWrite_s("Unloading texture", 0, MTR_LMT_INFO, texture->name);
+        MTR_LogWrite_s("Unloading texture", 0, MTR_LMT_INFO, texture->name);
         if (texture->name != mtrDefaultTextureName)
             free(texture->name);
         GPU_FreeImage (texture->texture);
-        mtrIndexkeeperFreeIndex(mtrTextureKeeper, texNum);
-        mtrLogWrite("Texture unloaded", 0, MTR_LMT_INFO);
+        MTR_IndexkeeperFreeIndex(mtrTextureKeeper, texNum);
+        MTR_LogWrite("Texture unloaded", 0, MTR_LMT_INFO);
     }
 }
 
-/*fa mtrTextureSetModulation_c yes */
-MTR_EXPORT void MTR_CALL mtrTextureSetModulation_c(uint32_t texNum,
+/*fa MTR_TextureSetModulation_c yes */
+MTR_EXPORT void MTR_CALL MTR_TextureSetModulation_c(uint32_t texNum,
  uint32_t color)
 {
     mtrTexture_t *texture;
@@ -408,8 +407,8 @@ MTR_EXPORT void MTR_CALL mtrTextureSetModulation_c(uint32_t texNum,
     }
 }
 
-/*fa mtrTextureSetModulation_ca yes */
-MTR_EXPORT void MTR_CALL mtrTextureSetModulation_ca(uint32_t texNum,
+/*fa MTR_TextureSetModulation_ca yes */
+MTR_EXPORT void MTR_CALL MTR_TextureSetModulation_ca(uint32_t texNum,
  uint32_t color)
 {
     mtrTexture_t *texture;
@@ -431,8 +430,8 @@ MTR_EXPORT void MTR_CALL mtrTextureSetModulation_ca(uint32_t texNum,
     }
 }
 
-/*fa mtrTextureSetModulation_rgb yes */
-MTR_EXPORT void MTR_CALL mtrTextureSetModulation_rgb(uint32_t texNum,
+/*fa MTR_TextureSetModulation_rgb yes */
+MTR_EXPORT void MTR_CALL MTR_TextureSetModulation_rgb(uint32_t texNum,
  uint8_t r, uint8_t g, uint8_t b)
 {
     mtrTexture_t *texture;
@@ -445,8 +444,8 @@ MTR_EXPORT void MTR_CALL mtrTextureSetModulation_rgb(uint32_t texNum,
     }
 }
 
-/*fa mtrTextureSetModulation_rgba yes */
-MTR_EXPORT void MTR_CALL mtrTextureSetModulation_rgba(uint32_t texNum,
+/*fa MTR_TextureSetModulation_rgba yes */
+MTR_EXPORT void MTR_CALL MTR_TextureSetModulation_rgba(uint32_t texNum,
  uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
     mtrTexture_t *texture;
@@ -459,8 +458,8 @@ MTR_EXPORT void MTR_CALL mtrTextureSetModulation_rgba(uint32_t texNum,
     }
 }
 
-/*fa mtrTextureSetModulationAlpha yes */
-MTR_EXPORT void MTR_CALL mtrTextureSetModulationAlpha(uint32_t texNum,
+/*fa MTR_TextureSetModulationAlpha yes */
+MTR_EXPORT void MTR_CALL MTR_TextureSetModulationAlpha(uint32_t texNum,
  uint8_t alpha)
 {
     mtrTexture_t *texture;
@@ -473,8 +472,8 @@ MTR_EXPORT void MTR_CALL mtrTextureSetModulationAlpha(uint32_t texNum,
     }
 }
 
-/*fa mtrTextureSetModulationAlpha_f yes */
-MTR_EXPORT void MTR_CALL mtrTextureSetModulationAlpha_f(uint32_t texNum,
+/*fa MTR_TextureSetModulationAlpha_f yes */
+MTR_EXPORT void MTR_CALL MTR_TextureSetModulationAlpha_f(uint32_t texNum,
  float alpha)
 {
     mtrTexture_t *texture;
@@ -490,8 +489,8 @@ MTR_EXPORT void MTR_CALL mtrTextureSetModulationAlpha_f(uint32_t texNum,
     }
 }
 
-/*fa mtrTextureSetBlendFunction buggy */
-MTR_EXPORT void MTR_CALL mtrTextureSetBlendFunction(uint32_t texNum,
+/*fa MTR_TextureSetBlendFunction buggy */
+MTR_EXPORT void MTR_CALL MTR_TextureSetBlendFunction(uint32_t texNum,
  int srcColor, int destColor, int srcAlpha, int dstAlpha)
 {
     mtrTexture_t *texture;
@@ -505,8 +504,8 @@ MTR_EXPORT void MTR_CALL mtrTextureSetBlendFunction(uint32_t texNum,
     }
 }
 
-/*fa mtrTextureSetAlphaBlending yes */
-MTR_EXPORT void MTR_CALL mtrTextureSetAlphaBlending(uint32_t texNum,
+/*fa MTR_TextureSetAlphaBlending yes */
+MTR_EXPORT void MTR_CALL MTR_TextureSetAlphaBlending(uint32_t texNum,
  bool blending)
 {
     mtrTexture_t *texture;
@@ -519,8 +518,8 @@ MTR_EXPORT void MTR_CALL mtrTextureSetAlphaBlending(uint32_t texNum,
     }
 }
 
-/*fa mtrTextureBlit_f yes */
-MTR_EXPORT void MTR_CALL mtrTextureBlit_f(uint32_t texNum, float x, float y)
+/*fa MTR_TextureBlit_f yes */
+MTR_EXPORT void MTR_CALL MTR_TextureBlit_f(uint32_t texNum, float x, float y)
 {
     mtrTexture_t *texture;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
@@ -532,8 +531,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlit_f(uint32_t texNum, float x, float y)
     }
 }
 
-/*fa mtrTextureBlitSized_f yes */
-MTR_EXPORT void MTR_CALL mtrTextureBlitSized_f(uint32_t texNum, float x,
+/*fa MTR_TextureBlitSized_f yes */
+MTR_EXPORT void MTR_CALL MTR_TextureBlitSized_f(uint32_t texNum, float x,
  float y, float w, float h)
 {
     GPU_Rect      outputRegion;
@@ -551,8 +550,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitSized_f(uint32_t texNum, float x,
     }
 }
 
-/*fa mtrTextureBlitScaled_f yes */
-MTR_EXPORT void MTR_CALL mtrTextureBlitScaled_f(uint32_t texNum, float x,
+/*fa MTR_TextureBlitScaled_f yes */
+MTR_EXPORT void MTR_CALL MTR_TextureBlitScaled_f(uint32_t texNum, float x,
  float y, float hscale, float vscale)
 {
     GPU_Rect      outputRegion;
@@ -570,8 +569,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitScaled_f(uint32_t texNum, float x,
     }
 }
 
-/*fa mtrTextureBlitAngled_f yes */
-MTR_EXPORT void MTR_CALL mtrTextureBlitAngled_f(uint32_t texNum, float x,
+/*fa MTR_TextureBlitAngled_f yes */
+MTR_EXPORT void MTR_CALL MTR_TextureBlitAngled_f(uint32_t texNum, float x,
  float y, float angle, float pivotX, float pivotY)
 {
     GPU_Rect      outputRegion;
@@ -590,8 +589,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitAngled_f(uint32_t texNum, float x,
     }
 }
 
-/*fa mtrTextureBlitFlipped_f yes */
-MTR_EXPORT void MTR_CALL mtrTextureBlitFlipped_f(uint32_t texNum, float x,
+/*fa MTR_TextureBlitFlipped_f yes */
+MTR_EXPORT void MTR_CALL MTR_TextureBlitFlipped_f(uint32_t texNum, float x,
  float y, int flip)
 {
     GPU_Rect      outputRegion;
@@ -602,7 +601,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitFlipped_f(uint32_t texNum, float x,
     if (texNum != 0)
     {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
-        actualFlip = mtrFlipToActualFlip(flip);
+        actualFlip = MTR_FlipToActualFlip(flip);
         outputRegion.x = x;
         outputRegion.y = y;
         outputRegion.w = texture->texture->w;
@@ -616,8 +615,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitFlipped_f(uint32_t texNum, float x,
     }
 }
 
-/*fa mtrTextureBlitGeneral_f yes */
-MTR_EXPORT void MTR_CALL mtrTextureBlitGeneral_f(uint32_t texNum, float x,
+/*fa MTR_TextureBlitGeneral_f yes */
+MTR_EXPORT void MTR_CALL MTR_TextureBlitGeneral_f(uint32_t texNum, float x,
  float y, float hscale, float vscale, float angle, float pivotX, float pivotY,
  int flip)
 {
@@ -629,7 +628,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitGeneral_f(uint32_t texNum, float x,
     if (texNum != 0)
     {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
-        actualFlip = mtrFlipToActualFlip(flip);
+        actualFlip = MTR_FlipToActualFlip(flip);
         outputRegion.x = x;
         outputRegion.y = y;
         outputRegion.w = texture->texture->w * hscale;
@@ -643,8 +642,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitGeneral_f(uint32_t texNum, float x,
     }
 }
 
-/*fa mtrTextureBlitRegion_f yes */
-MTR_EXPORT void MTR_CALL mtrTextureBlitRegion_f(uint32_t texNum, float x,
+/*fa MTR_TextureBlitRegion_f yes */
+MTR_EXPORT void MTR_CALL MTR_TextureBlitRegion_f(uint32_t texNum, float x,
  float y, float rx, float ry, float rw, float rh)
 {
     GPU_Rect      region;
@@ -662,8 +661,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegion_f(uint32_t texNum, float x,
     }
 }
 
-/*fa mtrTextureBlitRegionSized_f yes */
-MTR_EXPORT void MTR_CALL mtrTextureBlitRegionSized_f(uint32_t texNum, float x,
+/*fa MTR_TextureBlitRegionSized_f yes */
+MTR_EXPORT void MTR_CALL MTR_TextureBlitRegionSized_f(uint32_t texNum, float x,
  float y, float w, float h, float rx, float ry, float rw, float rh)
 {
     GPU_Rect      region;
@@ -687,8 +686,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionSized_f(uint32_t texNum, float x,
     }
 }
 
-/*fa mtrTextureBlitRegionScaled_f yes */
-MTR_EXPORT void MTR_CALL mtrTextureBlitRegionScaled_f(uint32_t texNum, float x,
+/*fa MTR_TextureBlitRegionScaled_f yes */
+MTR_EXPORT void MTR_CALL MTR_TextureBlitRegionScaled_f(uint32_t texNum, float x,
  float y, float hscale, float vscale, float rx, float ry, float rw, float rh)
 {
     GPU_Rect      region;
@@ -712,8 +711,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionScaled_f(uint32_t texNum, float x,
     }
 }
 
-/*fa mtrTextureBlitRegionAngled_f yes */
-MTR_EXPORT void MTR_CALL mtrTextureBlitRegionAngled_f(uint32_t texNum, float x,
+/*fa MTR_TextureBlitRegionAngled_f yes */
+MTR_EXPORT void MTR_CALL MTR_TextureBlitRegionAngled_f(uint32_t texNum, float x,
  float y, float rx, float ry, float rw, float rh, float angle, float pivotX,
  float pivotY)
 {
@@ -738,8 +737,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionAngled_f(uint32_t texNum, float x,
     }
 }
 
-/*fa mtrTextureBlitRegionFlipped_f yes */
-MTR_EXPORT void MTR_CALL mtrTextureBlitRegionFlipped_f(uint32_t texNum, float x,
+/*fa MTR_TextureBlitRegionFlipped_f yes */
+MTR_EXPORT void MTR_CALL MTR_TextureBlitRegionFlipped_f(uint32_t texNum, float x,
  float y, float rx, float ry, float rw, float rh, int flip)
 {
     GPU_Rect      region;
@@ -750,7 +749,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionFlipped_f(uint32_t texNum, float x,
 
     if (texNum != 0)
     {
-        actualFlip = mtrFlipToActualFlip(flip);
+        actualFlip = MTR_FlipToActualFlip(flip);
         region.x = rx;
         region.y = ry;
         region.w = rw;
@@ -769,8 +768,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionFlipped_f(uint32_t texNum, float x,
     }
 }
 
-/*fa mtrTextureBlitRegionGeneral_f yes */
-MTR_EXPORT void MTR_CALL mtrTextureBlitRegionGeneral_f(uint32_t texNum, float x,
+/*fa MTR_TextureBlitRegionGeneral_f yes */
+MTR_EXPORT void MTR_CALL MTR_TextureBlitRegionGeneral_f(uint32_t texNum, float x,
  float y, float hscale, float vscale, float rx, float ry, float rw, float rh,
  float angle, float pivotX, float pivotY, int flip)
 {
@@ -782,7 +781,7 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionGeneral_f(uint32_t texNum, float x,
 
     if (texNum != 0)
     {
-        actualFlip = mtrFlipToActualFlip(flip);
+        actualFlip = MTR_FlipToActualFlip(flip);
         region.x = rx;
         region.y = ry;
         region.w = rw;
@@ -801,8 +800,8 @@ MTR_EXPORT void MTR_CALL mtrTextureBlitRegionGeneral_f(uint32_t texNum, float x,
     }
 }
 
-/*fa mtrTextureReceivePixels yes */
-MTR_EXPORT bool MTR_CALL mtrTextureReceivePixels(uint32_t texNum,
+/*fa MTR_TextureReceivePixels yes */
+MTR_EXPORT bool MTR_CALL MTR_TextureReceivePixels(uint32_t texNum,
  mtrPixels_t *pixels)
 {
     mtrTexture_t *texture;
@@ -826,7 +825,7 @@ MTR_EXPORT bool MTR_CALL mtrTextureReceivePixels(uint32_t texNum,
          GPU_FORMAT_RGBA);
         if (texture->texture == NULL)
         {
-            mtrIndexkeeperFreeIndex(mtrTextureKeeper, texNum);
+            MTR_IndexkeeperFreeIndex(mtrTextureKeeper, texNum);
             return false;
         }
         GPU_SetAnchor(texture->texture, 0.0f, 0.0f);

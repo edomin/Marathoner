@@ -3,24 +3,24 @@
 
 #include "marathoner/script_func.h"
 
-MTR_SCRIPT_FUNC_I_S1(mtrSF_MouseFunctionSupported, mtrMouseFunctionSupported)
-MTR_SCRIPT_FUNC_B_V(mtrSF_MouseInit, mtrMouseInit)
-MTR_SCRIPT_FUNC_V_V(mtrSF_MouseRefresh, mtrMouseRefresh)
-MTR_SCRIPT_FUNC_B_I1(mtrSF_MousePress, mtrMousePress)
-MTR_SCRIPT_FUNC_B_I1(mtrSF_MouseRelease, mtrMouseRelease)
-MTR_SCRIPT_FUNC_B_I1(mtrSF_MousePressed, mtrMousePressed)
-MTR_SCRIPT_FUNC_I_V(mtrSF_MouseGetWheelRelative, mtrMouseGetWheelRelative)
-MTR_SCRIPT_FUNC_B_V(mtrSF_MouseMoving, mtrMouseMoving)
-MTR_SCRIPT_FUNC_I_V(mtrSF_MouseGetX, mtrMouseGetX)
-MTR_SCRIPT_FUNC_I_V(mtrSF_MouseGetY, mtrMouseGetY)
+MTR_SCRIPT_FUNC_I_S1(MTR_SF_MouseFunctionSupported, MTR_MouseFunctionSupported)
+MTR_SCRIPT_FUNC_B_V(MTR_SF_MouseInit, MTR_MouseInit)
+MTR_SCRIPT_FUNC_V_V(MTR_SF_MouseRefresh, MTR_MouseRefresh)
+MTR_SCRIPT_FUNC_B_I1(MTR_SF_MousePress, MTR_MousePress)
+MTR_SCRIPT_FUNC_B_I1(MTR_SF_MouseRelease, MTR_MouseRelease)
+MTR_SCRIPT_FUNC_B_I1(MTR_SF_MousePressed, MTR_MousePressed)
+MTR_SCRIPT_FUNC_I_V(MTR_SF_MouseGetWheelRelative, MTR_MouseGetWheelRelative)
+MTR_SCRIPT_FUNC_B_V(MTR_SF_MouseMoving, MTR_MouseMoving)
+MTR_SCRIPT_FUNC_I_V(MTR_SF_MouseGetX, MTR_MouseGetX)
+MTR_SCRIPT_FUNC_I_V(MTR_SF_MouseGetY, MTR_MouseGetY)
 
 #ifdef lua_h
-MTR_SCRIPT_FUNC(mtrSF_MouseGetXY)
+MTR_SCRIPT_FUNC(MTR_SF_MouseGetXY)
 {
     int x;
     int y;
 
-    mtrMouseGetXY(&x, &y);
+    MTR_MouseGetXY(&x, &y);
 
     MTR_SF_PUSH_INT(x);
     MTR_SF_PUSH_INT(y);
@@ -29,16 +29,16 @@ MTR_SCRIPT_FUNC(mtrSF_MouseGetXY)
 }
 #endif
 
-MTR_SCRIPT_FUNC_I_V(mtrSF_MouseGetDeltaX, mtrMouseGetDeltaX)
-MTR_SCRIPT_FUNC_I_V(mtrSF_MouseGetDeltaY, mtrMouseGetDeltaY)
+MTR_SCRIPT_FUNC_I_V(MTR_SF_MouseGetDeltaX, MTR_MouseGetDeltaX)
+MTR_SCRIPT_FUNC_I_V(MTR_SF_MouseGetDeltaY, MTR_MouseGetDeltaY)
 
 #ifdef lua_h
-MTR_SCRIPT_FUNC(mtrSF_MouseGetDeltaXY)
+MTR_SCRIPT_FUNC(MTR_SF_MouseGetDeltaXY)
 {
     int deltaX;
     int deltaY;
 
-    mtrMouseGetDeltaXY(&deltaX, &deltaY);
+    MTR_MouseGetDeltaXY(&deltaX, &deltaY);
 
     MTR_SF_PUSH_INT(deltaX);
     MTR_SF_PUSH_INT(deltaY);
@@ -47,9 +47,9 @@ MTR_SCRIPT_FUNC(mtrSF_MouseGetDeltaXY)
 }
 #endif
 
-void mtrScriptsRegisterAll(void)
+void MTR_ScriptsRegisterAll(void)
 {
-    mtrVm = mtrScriptsGetVm();
+    mtrVm = MTR_ScriptsGetVm();
 
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, MouseFunctionSupported);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, MouseInit);
@@ -70,11 +70,11 @@ void mtrScriptsRegisterAll(void)
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, MouseGetDeltaXY);
     #endif
 
-    mtrScriptsRegisterVariable_i("MOUSE_LEFT", MTR_MOUSE_LEFT);
-    mtrScriptsRegisterVariable_i("MOUSE_RIGHT", MTR_MOUSE_RIGHT);
-    mtrScriptsRegisterVariable_i("MOUSE_MIDDLE", MTR_MOUSE_MIDDLE);
-    mtrScriptsRegisterVariable_i("MOUSE_X1", MTR_MOUSE_X1);
-    mtrScriptsRegisterVariable_i("MOUSE_X2", MTR_MOUSE_X2);
+    MTR_ScriptsRegisterVariable_i("MOUSE_LEFT", MTR_MOUSE_LEFT);
+    MTR_ScriptsRegisterVariable_i("MOUSE_RIGHT", MTR_MOUSE_RIGHT);
+    MTR_ScriptsRegisterVariable_i("MOUSE_MIDDLE", MTR_MOUSE_MIDDLE);
+    MTR_ScriptsRegisterVariable_i("MOUSE_X1", MTR_MOUSE_X1);
+    MTR_ScriptsRegisterVariable_i("MOUSE_X2", MTR_MOUSE_X2);
 }
 
 #endif

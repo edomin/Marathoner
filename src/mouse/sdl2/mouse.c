@@ -4,7 +4,7 @@
 
 MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Mouse, FA_FUNCTIONS_COUNT)
 
-MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
+MTR_EXPORT mtrReport* MTR_CALL MTR_CreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -20,7 +20,7 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
-int mtrButtonToActualButton(int button)
+int MTR_ButtonToActualButton(int button)
 {
     switch (button)
     {
@@ -39,37 +39,38 @@ int mtrButtonToActualButton(int button)
     }
 }
 
-/*fa mtrMouseInit yes */
-MTR_EXPORT bool MTR_CALL mtrMouseInit(void)
+/*fa MTR_MouseInit yes */
+MTR_EXPORT bool MTR_CALL MTR_MouseInit(void)
 {
     SDL_version compiled;
     SDL_version linked;
     uint8_t i;
 
-    mtrLogWrite("Initializing mouse support", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Initializing mouse support", 0, MTR_LMT_INFO);
 
-    mtrLogWrite("Reporting SDL compile-time version:", 1, MTR_LMT_INFO);
+    MTR_LogWrite("Reporting SDL compile-time version:", 1, MTR_LMT_INFO);
     SDL_VERSION(&compiled);
-    mtrLogWrite_i("Major:", 2, MTR_LMT_INFO, compiled.major);
-    mtrLogWrite_i("Minor:", 2, MTR_LMT_INFO, compiled.minor);
-    mtrLogWrite_i("Patch:", 2, MTR_LMT_INFO, compiled.patch);
-    mtrLogWrite("Reporting SDL linked version:", 1, MTR_LMT_INFO);
+    MTR_LogWrite_i("Major:", 2, MTR_LMT_INFO, compiled.major);
+    MTR_LogWrite_i("Minor:", 2, MTR_LMT_INFO, compiled.minor);
+    MTR_LogWrite_i("Patch:", 2, MTR_LMT_INFO, compiled.patch);
+    MTR_LogWrite("Reporting SDL linked version:", 1, MTR_LMT_INFO);
     SDL_GetVersion(&linked);
-    mtrLogWrite_i("Major:", 2, MTR_LMT_INFO, linked.major);
-    mtrLogWrite_i("Minor:", 2, MTR_LMT_INFO, linked.minor);
-    mtrLogWrite_i("Patch:", 2, MTR_LMT_INFO, linked.patch);
+    MTR_LogWrite_i("Major:", 2, MTR_LMT_INFO, linked.major);
+    MTR_LogWrite_i("Minor:", 2, MTR_LMT_INFO, linked.minor);
+    MTR_LogWrite_i("Patch:", 2, MTR_LMT_INFO, linked.patch);
 
     if(SDL_WasInit(SDL_INIT_EVENTS) == 0)
         if (SDL_InitSubSystem(SDL_INIT_EVENTS) == 0)
-            mtrLogWrite("SDL events subsystem initialized", 1, MTR_LMT_INFO);
+            MTR_LogWrite("SDL events subsystem initialized", 1, MTR_LMT_INFO);
         else
         {
-             mtrNotify("Unable to initialize SDL events subsystem", 1,
+             MTR_Notify("Unable to initialize SDL events subsystem", 1,
               MTR_LMT_ERROR);
               return false;
         }
     else
-        mtrLogWrite("SDL events subsystem already initialized", 1, MTR_LMT_INFO);
+        MTR_LogWrite("SDL events subsystem already initialized", 1,
+         MTR_LMT_INFO);
 
     for (i = 0; i < 5; i++)
     {
@@ -80,14 +81,14 @@ MTR_EXPORT bool MTR_CALL mtrMouseInit(void)
     mtrMouse.y = 0;
     mtrMouse.relativeWheel = 0;
 
-    mtrLogWrite("Mouse support initialized", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Mouse support initialized", 0, MTR_LMT_INFO);
 
     mtrMouseInited = true;
     return true;
 }
 
-/*fa mtrMouseRefresh yes */
-MTR_EXPORT void MTR_CALL mtrMouseRefresh(void)
+/*fa MTR_MouseRefresh yes */
+MTR_EXPORT void MTR_CALL MTR_MouseRefresh(void)
 {
     int       mouseState;
     int       i;
@@ -127,13 +128,13 @@ MTR_EXPORT void MTR_CALL mtrMouseRefresh(void)
     }
 }
 
-/*fa mtrMousePress yes */
-MTR_EXPORT bool MTR_CALL mtrMousePress(int button)
+/*fa MTR_MousePress yes */
+MTR_EXPORT bool MTR_CALL MTR_MousePress(int button)
 {
     int actualButton;
     MTR_MOUSE_CHECK_IF_NOT_INITED(false);
 
-    actualButton = mtrButtonToActualButton(button);
+    actualButton = MTR_ButtonToActualButton(button);
     if (!(mtrMouse.previousMousestate[actualButton]) &&
      (mtrMouse.currentMousestate[actualButton]))
         return true;
@@ -141,13 +142,13 @@ MTR_EXPORT bool MTR_CALL mtrMousePress(int button)
         return false;
 }
 
-/*fa mtrMouseRelease yes */
-MTR_EXPORT bool MTR_CALL mtrMouseRelease(int button)
+/*fa MTR_MouseRelease yes */
+MTR_EXPORT bool MTR_CALL MTR_MouseRelease(int button)
 {
     int actualButton;
     MTR_MOUSE_CHECK_IF_NOT_INITED(false);
 
-    actualButton = mtrButtonToActualButton(button);
+    actualButton = MTR_ButtonToActualButton(button);
     if ((mtrMouse.previousMousestate[actualButton]) &&
      !(mtrMouse.currentMousestate[actualButton]))
         return true;
@@ -155,21 +156,21 @@ MTR_EXPORT bool MTR_CALL mtrMouseRelease(int button)
         return false;
 }
 
-/*fa mtrMousePressed yes */
-MTR_EXPORT bool MTR_CALL mtrMousePressed(int button)
+/*fa MTR_MousePressed yes */
+MTR_EXPORT bool MTR_CALL MTR_MousePressed(int button)
 {
     int actualButton;
     MTR_MOUSE_CHECK_IF_NOT_INITED(false);
 
-    actualButton = mtrButtonToActualButton(button);
+    actualButton = MTR_ButtonToActualButton(button);
     if (mtrMouse.currentMousestate[actualButton])
         return true;
     else
         return false;
 }
 
-/*fa mtrMouseGetWheelRelative yes */
-MTR_EXPORT int MTR_CALL mtrMouseGetWheelRelative(void)
+/*fa MTR_MouseGetWheelRelative yes */
+MTR_EXPORT int MTR_CALL MTR_MouseGetWheelRelative(void)
 {
     SDL_Event events[32];
     int       numEvents;
@@ -191,32 +192,32 @@ MTR_EXPORT int MTR_CALL mtrMouseGetWheelRelative(void)
     return wheelRel;
 }
 
-/*fa mtrMouseMoving yes */
-MTR_EXPORT bool MTR_CALL mtrMouseMoving(void)
+/*fa MTR_MouseMoving yes */
+MTR_EXPORT bool MTR_CALL MTR_MouseMoving(void)
 {
     MTR_MOUSE_CHECK_IF_NOT_INITED(false);
 
     return mtrMouse.mouseMotion;
 }
 
-/*fa mtrMouseGetX yes */
-MTR_EXPORT int MTR_CALL mtrMouseGetX(void)
+/*fa MTR_MouseGetX yes */
+MTR_EXPORT int MTR_CALL MTR_MouseGetX(void)
 {
     MTR_MOUSE_CHECK_IF_NOT_INITED(0);
 
     return mtrMouse.x;
 }
 
-/*fa mtrMouseGetY yes */
-MTR_EXPORT int MTR_CALL mtrMouseGetY(void)
+/*fa MTR_MouseGetY yes */
+MTR_EXPORT int MTR_CALL MTR_MouseGetY(void)
 {
     MTR_MOUSE_CHECK_IF_NOT_INITED(0);
 
     return mtrMouse.y;
 }
 
-/*fa mtrMouseGetXY yes */
-MTR_EXPORT void MTR_CALL mtrMouseGetXY(int *mouseX, int *mouseY)
+/*fa MTR_MouseGetXY yes */
+MTR_EXPORT void MTR_CALL MTR_MouseGetXY(int *mouseX, int *mouseY)
 {
     if (!mtrMouseInited)
     {
@@ -227,24 +228,24 @@ MTR_EXPORT void MTR_CALL mtrMouseGetXY(int *mouseX, int *mouseY)
     *mouseY = mtrMouse.y;
 }
 
-/*fa mtrMouseGetDeltaX yes */
-MTR_EXPORT int MTR_CALL mtrMouseGetDeltaX(void)
+/*fa MTR_MouseGetDeltaX yes */
+MTR_EXPORT int MTR_CALL MTR_MouseGetDeltaX(void)
 {
     MTR_MOUSE_CHECK_IF_NOT_INITED(0);
 
     return mtrMouse.deltaX;
 }
 
-/*fa mtrMouseGetDeltaY yes */
-MTR_EXPORT int MTR_CALL mtrMouseGetDeltaY(void)
+/*fa MTR_MouseGetDeltaY yes */
+MTR_EXPORT int MTR_CALL MTR_MouseGetDeltaY(void)
 {
     MTR_MOUSE_CHECK_IF_NOT_INITED(0);
 
     return mtrMouse.deltaY;
 }
 
-/*fa mtrMouseGetDeltaXY yes */
-MTR_EXPORT void MTR_CALL mtrMouseGetDeltaXY(int *deltaX, int *deltaY)
+/*fa MTR_MouseGetDeltaXY yes */
+MTR_EXPORT void MTR_CALL MTR_MouseGetDeltaXY(int *deltaX, int *deltaY)
 {
     if (!mtrMouseInited)
     {

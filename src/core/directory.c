@@ -1,7 +1,7 @@
 #include "directory.h"
 
 /* Win32 only */
-char *mtrGetCurrentDirectory(void)
+char *MTR_GetCurrentDirectory(void)
 {
     char *directoryName;
     int directoryNameLength;
@@ -17,7 +17,7 @@ char *mtrGetCurrentDirectory(void)
         return NULL;
 }
 
-mtrDirectory_t *mtrDirectoryOpen(const char *directoryName)
+mtrDirectory_t *MTR_DirectoryOpen(const char *directoryName)
 {
     mtrDirectory_t *mtrDirectory;
     #ifdef __MINGW32__
@@ -64,7 +64,7 @@ mtrDirectory_t *mtrDirectoryOpen(const char *directoryName)
     return mtrDirectory;
 }
 
-bool mtrDirectoryNextFile(mtrDirectory_t *directory)
+bool MTR_DirectoryNextFile(mtrDirectory_t *directory)
 {
     #ifdef __MINGW32__
     if (directory->firstFile)
@@ -92,7 +92,7 @@ bool mtrDirectoryNextFile(mtrDirectory_t *directory)
     #endif
 }
 
-char *mtrDirectoryGetFilename(mtrDirectory_t *directory)
+char *MTR_DirectoryGetFilename(mtrDirectory_t *directory)
 {
     if (directory->endOfDirectory)
         return NULL;
@@ -103,11 +103,11 @@ char *mtrDirectoryGetFilename(mtrDirectory_t *directory)
     #endif
 }
 
-bool mtrDirectoryFileIsDir(mtrDirectory_t *directory)
+bool MTR_DirectoryFileIsDir(mtrDirectory_t *directory)
 {
     char *tempFilename;
 
-    tempFilename = mtrDirectoryGetFilename(directory);
+    tempFilename = MTR_DirectoryGetFilename(directory);
     if (tempFilename == NULL)
         return false;
     if ((strcmp(tempFilename, "..") == 0) ||
@@ -117,7 +117,7 @@ bool mtrDirectoryFileIsDir(mtrDirectory_t *directory)
         return false;
 }
 
-void mtrDirectoryClose(mtrDirectory_t *directory)
+void MTR_DirectoryClose(mtrDirectory_t *directory)
 {
     if (directory != NULL)
     {

@@ -4,7 +4,7 @@
 
 MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Gui, FA_FUNCTIONS_COUNT)
 
-MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
+MTR_EXPORT mtrReport* MTR_CALL MTR_CreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -40,7 +40,7 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
-static float mtrNkGetTextWidth(nk_handle handle, float height,
+static float MTR_NkGetTextWidth(nk_handle handle, float height,
  const char *text, int len)
 {
     mtrNkFont *font;
@@ -53,36 +53,36 @@ static float mtrNkGetTextWidth(nk_handle handle, float height,
     strncpy((char*)&getTextWidthBuffer, text, len);
     getTextWidthBuffer[len] = '\0';
 
-    return mtrFontGetStringWidth(font->font, getTextWidthBuffer);
+    return MTR_FontGetStringWidth(font->font, getTextWidthBuffer);
 }
 
 /* Берёт номер шрифта менеджера шрифтов и возвращает внутренний индекс шрифта.
  * Подсистема GUI работает только с внутренними ресурсами (индекасми), т. е.
  * перед использованием их нужно непосредственно добавить
  */
-/*fa mtrGuiAddFont yes */
-MTR_EXPORT uint32_t MTR_CALL mtrGuiAddFont(uint32_t fontnum)
+/*fa MTR_GuiAddFont yes */
+MTR_EXPORT uint32_t MTR_CALL MTR_GuiAddFont(uint32_t fontnum)
 {
     mtrNkFont           *nkFont;
     uint32_t             freeIndex;
     struct nk_user_font *font;
 
-    freeIndex = mtrIndexkeeperGetFreeIndex(mtrGuiFontKeeper);
+    freeIndex = MTR_IndexkeeperGetFreeIndex(mtrGuiFontKeeper);
     nkFont = (mtrNkFont *)(&((mtrNkFont *)mtrGuiFontKeeper->data)[freeIndex]);
 
     nkFont->font = fontnum;
-    nkFont->height = mtrFontGetHeight(fontnum);
+    nkFont->height = MTR_FontGetHeight(fontnum);
 
     font = &nkFont->nk;
     font->userdata = nk_handle_ptr(nkFont);
     font->height = nkFont->height;
-    font->width = mtrNkGetTextWidth;
+    font->width = MTR_NkGetTextWidth;
 
     return freeIndex;
 }
 
 /*fa mtrGuiAddImage yes */
-MTR_EXPORT uint32_t MTR_CALL mtrGuiAddImage(uint32_t texnum, int x, int y,
+MTR_EXPORT uint32_t MTR_CALL MTR_GuiAddImage(uint32_t texnum, int x, int y,
  int w, int h)
 {
     mtrNkImage      *nkImage;
@@ -90,12 +90,12 @@ MTR_EXPORT uint32_t MTR_CALL mtrGuiAddImage(uint32_t texnum, int x, int y,
     struct nk_image *image;
     MTR_GUI_CHECK_IF_NOT_INITED(0U);
 
-    freeIndex = mtrIndexkeeperGetFreeIndex(mtrGuiImageKeeper);
+    freeIndex = MTR_IndexkeeperGetFreeIndex(mtrGuiImageKeeper);
     nkImage = (mtrNkImage *)(
      &((mtrNkImage *)mtrGuiImageKeeper->data)[freeIndex]);
 
     nkImage->texture = texnum;
-    mtrTextureGetSizes(texnum, &nkImage->width, &nkImage->height);
+    MTR_TextureGetSizes(texnum, &nkImage->width, &nkImage->height);
     image = &nkImage->nk;
     image->handle = nk_handle_ptr(nkImage);
     image->w = nkImage->width;
@@ -109,28 +109,28 @@ MTR_EXPORT uint32_t MTR_CALL mtrGuiAddImage(uint32_t texnum, int x, int y,
 }
 
 /*fa mtrGuiDeleteFont yes */
-MTR_EXPORT void MTR_CALL mtrGuiDeleteFont(uint32_t fontnum)
+MTR_EXPORT void MTR_CALL MTR_GuiDeleteFont(uint32_t fontnum)
 {
     MTR_GUI_CHECK_IF_NOT_INITED();
 
     if (fontnum != 0)
-        mtrIndexkeeperFreeIndex(mtrGuiFontKeeper, fontnum);
+        MTR_IndexkeeperFreeIndex(mtrGuiFontKeeper, fontnum);
 }
 
 /*fa mtrGuiDeleteImage yes */
-MTR_EXPORT void MTR_CALL mtrGuiDeleteImage(uint32_t imagenum)
+MTR_EXPORT void MTR_CALL MTR_GuiDeleteImage(uint32_t imagenum)
 {
     MTR_GUI_CHECK_IF_NOT_INITED();
 
     if (imagenum != 0)
-        mtrIndexkeeperFreeIndex(mtrGuiImageKeeper, imagenum);
+        MTR_IndexkeeperFreeIndex(mtrGuiImageKeeper, imagenum);
 }
 
-NK_INTERN void mtrNkClipboardPaste(nk_handle usr, struct nk_text_edit *edit)
+NK_INTERN void MTR_NkClipboardPaste(nk_handle usr, struct nk_text_edit *edit)
 {
     char *text;
 
-    text = mtrClipboardGetText();
+    text = MTR_ClipboardGetText();
 
     if (text)
         nk_textedit_paste(edit, text, nk_strlen(text));
@@ -138,7 +138,7 @@ NK_INTERN void mtrNkClipboardPaste(nk_handle usr, struct nk_text_edit *edit)
     free(text);
 }
 
-NK_INTERN void mtrNkClipboardCopy(nk_handle usr, const char *text, int len)
+NK_INTERN void MTR_NkClipboardCopy(nk_handle usr, const char *text, int len)
 {
     char *str;
 
@@ -152,12 +152,12 @@ NK_INTERN void mtrNkClipboardCopy(nk_handle usr, const char *text, int len)
     memcpy(str, text, (size_t)len);
     str[len] = '\0';
 
-    mtrClipboardPutText(str);
+    MTR_ClipboardPutText(str);
 
     free(str);
 }
 
-NK_API struct nk_context* mtrNkInit(uint32_t fontnum, unsigned int width,
+NK_API struct nk_context* MTR_NkInit(uint32_t fontnum, unsigned int width,
  unsigned int height)
 {
     mtrNkFont           *nkFont;
@@ -168,7 +168,7 @@ NK_API struct nk_context* mtrNkInit(uint32_t fontnum, unsigned int width,
     font = &nkFont->nk;
     font->userdata = nk_handle_ptr(nkFont);
     font->height = nkFont->height;
-    font->width = mtrNkGetTextWidth;
+    font->width = MTR_NkGetTextWidth;
 
     mtrNkGui.width = width;
     mtrNkGui.height = height;
@@ -176,21 +176,21 @@ NK_API struct nk_context* mtrNkInit(uint32_t fontnum, unsigned int width,
     mtrNkGui.touch_down_id = -1;
 
     nk_init_default(&mtrNkGui.ctx, &nkFont->nk);
-    mtrNkGui.ctx.clip.copy = mtrNkClipboardCopy;
-    mtrNkGui.ctx.clip.paste = mtrNkClipboardPaste;
+    mtrNkGui.ctx.clip.copy = MTR_NkClipboardCopy;
+    mtrNkGui.ctx.clip.paste = MTR_NkClipboardPaste;
     mtrNkGui.ctx.clip.userdata = nk_handle_ptr(0);
     return &mtrNkGui.ctx;
 }
 
-void mtrNkUpdateKey(struct nk_context *ctx, int key, enum nk_keys nk_key)
+void MTR_NkUpdateKey(struct nk_context *ctx, int key, enum nk_keys nk_key)
 {
-    if (mtrKeyboardPress(key))
+    if (MTR_KeyboardPress(key))
         nk_input_key(ctx, nk_key, 1);
-    if (mtrKeyboardRelease(key))
+    if (MTR_KeyboardRelease(key))
         nk_input_key(ctx, nk_key, 0);
 }
 
-void mtrNkHandleEvents(void)
+void MTR_NkHandleEvents(void)
 {
     struct nk_context *ctx;
     bool               mouseMotion;
@@ -209,84 +209,84 @@ void mtrNkHandleEvents(void)
 //        al_acknowledge_resize(ev->display.source);
 //    } break;
 
-    mouseMotion = mtrMouseMoving();
-    mtrMouseGetXY(&mouseX, &mouseY);
+    mouseMotion = MTR_MouseMoving();
+    MTR_MouseGetXY(&mouseX, &mouseY);
     if (mouseMotion)
         nk_input_motion(ctx, mouseX, mouseY);
 
-    mouseRelWheel = mtrMouseGetWheelRelative();
+    mouseRelWheel = MTR_MouseGetWheelRelative();
     if (mouseRelWheel != 0)
         nk_input_scroll(ctx, (float)mouseRelWheel);
 
-    if (mtrMousePress(MTR_MOUSE_LEFT))
+    if (MTR_MousePress(MTR_MOUSE_LEFT))
         nk_input_button(ctx, NK_BUTTON_LEFT, mouseX, mouseY, 1);
-    if (mtrMousePress(MTR_MOUSE_RIGHT))
+    if (MTR_MousePress(MTR_MOUSE_RIGHT))
         nk_input_button(ctx, NK_BUTTON_RIGHT, mouseX, mouseY, 1);
-    if (mtrMousePress(MTR_MOUSE_MIDDLE))
+    if (MTR_MousePress(MTR_MOUSE_MIDDLE))
         nk_input_button(ctx, NK_BUTTON_MIDDLE, mouseX, mouseY, 1);
 
-    if (mtrMouseRelease(MTR_MOUSE_LEFT))
+    if (MTR_MouseRelease(MTR_MOUSE_LEFT))
         nk_input_button(ctx, NK_BUTTON_LEFT, mouseX, mouseY, 0);
-    if (mtrMouseRelease(MTR_MOUSE_RIGHT))
+    if (MTR_MouseRelease(MTR_MOUSE_RIGHT))
         nk_input_button(ctx, NK_BUTTON_RIGHT, mouseX, mouseY, 0);
-    if (mtrMouseRelease(MTR_MOUSE_MIDDLE))
+    if (MTR_MouseRelease(MTR_MOUSE_MIDDLE))
         nk_input_button(ctx, NK_BUTTON_MIDDLE, mouseX, mouseY, 0);
 
-    if (mtrKeyboardPress(MTR_KEY_LSHIFT) || mtrKeyboardPress(MTR_KEY_RSHIFT))
+    if (MTR_KeyboardPress(MTR_KEY_LSHIFT) || MTR_KeyboardPress(MTR_KEY_RSHIFT))
         nk_input_key(ctx, NK_KEY_SHIFT, 1);
-    if (mtrKeyboardRelease(
-     MTR_KEY_LSHIFT) || mtrKeyboardRelease(MTR_KEY_RSHIFT))
+    if (MTR_KeyboardRelease(
+     MTR_KEY_LSHIFT) || MTR_KeyboardRelease(MTR_KEY_RSHIFT))
         nk_input_key(ctx, NK_KEY_SHIFT, 0);
 
-    mtrNkUpdateKey(ctx, MTR_KEY_DELETE, NK_KEY_DEL);
-    mtrNkUpdateKey(ctx, MTR_KEY_RETURN, NK_KEY_ENTER);
-    mtrNkUpdateKey(ctx, MTR_KEY_TAB, NK_KEY_TAB);
-    mtrNkUpdateKey(ctx, MTR_KEY_LEFT, NK_KEY_LEFT);
-    mtrNkUpdateKey(ctx, MTR_KEY_RIGHT, NK_KEY_RIGHT);
-    mtrNkUpdateKey(ctx, MTR_KEY_UP, NK_KEY_UP);
-    mtrNkUpdateKey(ctx, MTR_KEY_DOWN, NK_KEY_DOWN);
-    mtrNkUpdateKey(ctx, MTR_KEY_BACKSPACE, NK_KEY_BACKSPACE);
-    mtrNkUpdateKey(ctx, MTR_KEY_ESCAPE, NK_KEY_TEXT_RESET_MODE);
-    mtrNkUpdateKey(ctx, MTR_KEY_PAGEUP, NK_KEY_SCROLL_UP);
-    mtrNkUpdateKey(ctx, MTR_KEY_PAGEDOWN, NK_KEY_SCROLL_DOWN);
+    MTR_NkUpdateKey(ctx, MTR_KEY_DELETE, NK_KEY_DEL);
+    MTR_NkUpdateKey(ctx, MTR_KEY_RETURN, NK_KEY_ENTER);
+    MTR_NkUpdateKey(ctx, MTR_KEY_TAB, NK_KEY_TAB);
+    MTR_NkUpdateKey(ctx, MTR_KEY_LEFT, NK_KEY_LEFT);
+    MTR_NkUpdateKey(ctx, MTR_KEY_RIGHT, NK_KEY_RIGHT);
+    MTR_NkUpdateKey(ctx, MTR_KEY_UP, NK_KEY_UP);
+    MTR_NkUpdateKey(ctx, MTR_KEY_DOWN, NK_KEY_DOWN);
+    MTR_NkUpdateKey(ctx, MTR_KEY_BACKSPACE, NK_KEY_BACKSPACE);
+    MTR_NkUpdateKey(ctx, MTR_KEY_ESCAPE, NK_KEY_TEXT_RESET_MODE);
+    MTR_NkUpdateKey(ctx, MTR_KEY_PAGEUP, NK_KEY_SCROLL_UP);
+    MTR_NkUpdateKey(ctx, MTR_KEY_PAGEDOWN, NK_KEY_SCROLL_DOWN);
 
-    if (mtrKeyboardPress(MTR_KEY_HOME))
+    if (MTR_KeyboardPress(MTR_KEY_HOME))
     {
         nk_input_key(ctx, NK_KEY_TEXT_START, 1);
         nk_input_key(ctx, NK_KEY_SCROLL_START, 1);
     }
-    if (mtrKeyboardRelease(MTR_KEY_END))
+    if (MTR_KeyboardRelease(MTR_KEY_END))
     {
         nk_input_key(ctx, NK_KEY_TEXT_END, 0);
         nk_input_key(ctx, NK_KEY_SCROLL_END, 0);
     }
 
-    controlPressed = mtrKeyboardPress(MTR_KEY_LCTRL)
-      || mtrKeyboardPress(MTR_KEY_RCTRL) || mtrKeyboardPress(MTR_KEY_LGUI)
-      || mtrKeyboardPress(MTR_KEY_RGUI);
+    controlPressed = MTR_KeyboardPress(MTR_KEY_LCTRL)
+      || MTR_KeyboardPress(MTR_KEY_RCTRL) || MTR_KeyboardPress(MTR_KEY_LGUI)
+      || MTR_KeyboardPress(MTR_KEY_RGUI);
 
-    if (mtrKeyboardPress(MTR_KEY_C) && controlPressed)
+    if (MTR_KeyboardPress(MTR_KEY_C) && controlPressed)
         nk_input_key(ctx, NK_KEY_COPY, 1);
-    else if (mtrKeyboardPress(MTR_KEY_V) && controlPressed)
+    else if (MTR_KeyboardPress(MTR_KEY_V) && controlPressed)
         nk_input_key(ctx, NK_KEY_PASTE, 1);
-    else if (mtrKeyboardPress(MTR_KEY_X) && controlPressed)
+    else if (MTR_KeyboardPress(MTR_KEY_X) && controlPressed)
         nk_input_key(ctx, NK_KEY_CUT, 1);
-    else if (mtrKeyboardPress(MTR_KEY_Z) && controlPressed)
+    else if (MTR_KeyboardPress(MTR_KEY_Z) && controlPressed)
         nk_input_key(ctx, NK_KEY_TEXT_UNDO, 1);
-    else if (mtrKeyboardPress(MTR_KEY_R) && controlPressed)
+    else if (MTR_KeyboardPress(MTR_KEY_R) && controlPressed)
         nk_input_key(ctx, NK_KEY_TEXT_REDO, 1);
-    else if (mtrKeyboardPress(MTR_KEY_A) && controlPressed)
+    else if (MTR_KeyboardPress(MTR_KEY_A) && controlPressed)
         nk_input_key(ctx, NK_KEY_TEXT_SELECT_ALL, 1);
     else
     {
-        utf8char = mtrKeyboardInputChar();
+        utf8char = MTR_KeyboardInputChar();
         if (utf8char != NULL)
             nk_input_glyph(ctx, utf8char);
     }
 }
 
-/*fa mtrGuiInit yes */
-MTR_EXPORT bool MTR_CALL mtrGuiInit(uint32_t fontDmSize,
+/*fa MTR_GuiInit yes */
+MTR_EXPORT bool MTR_CALL MTR_GuiInit(uint32_t fontDmSize,
  uint32_t fontReservedCount, uint32_t imageDmSize, uint32_t imageReservedCount,
  uint32_t fontnum)
 {
@@ -296,105 +296,105 @@ MTR_EXPORT bool MTR_CALL mtrGuiInit(uint32_t fontDmSize,
     bool ok;
 
     ok = true;
-    mtrLogWrite("Initializing GUI abstraction subsystem", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Initializing GUI abstraction subsystem", 0, MTR_LMT_INFO);
 
-    MTR_FIND_FUNCTION(mtrFontDrawMbfString_f, "Abstraction_font");
-    MTR_FIND_FUNCTION(mtrFontGetHeight, "Abstraction_font");
-    MTR_FIND_FUNCTION(mtrFontGetStringWidth, "Abstraction_font");
-    MTR_FIND_FUNCTION(mtrFontGetName, "Abstraction_font");
-    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrScreenGetSizes, "screen");
-    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTextureBlitRegionSized_f, "texture");
-    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrTextureGetSizes, "texture");
-    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrPrimitiveLine_rgba_f, "primitive");
-    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrPrimitiveArc_rgba_f, "primitive");
-    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrPrimitiveCircle_rgba_f, "primitive");
-    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrPrimitiveCircleFilled_rgba_f,
+    MTR_FIND_FUNCTION(MTR_FontDrawMbfString_f, "Abstraction_font");
+    MTR_FIND_FUNCTION(MTR_FontGetHeight, "Abstraction_font");
+    MTR_FIND_FUNCTION(MTR_FontGetStringWidth, "Abstraction_font");
+    MTR_FIND_FUNCTION(MTR_FontGetName, "Abstraction_font");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_ScreenGetSizes, "screen");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TextureBlitRegionSized_f, "texture");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TextureGetSizes, "texture");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_PrimitiveLine_rgba_f, "primitive");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_PrimitiveArc_rgba_f, "primitive");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_PrimitiveCircle_rgba_f, "primitive");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_PrimitiveCircleFilled_rgba_f,
      "primitive");
-    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrPrimitiveTriangle_rgba_f, "primitive");
-    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrPrimitiveTriangleFilled_rgba_f,
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_PrimitiveTriangle_rgba_f, "primitive");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_PrimitiveTriangleFilled_rgba_f,
      "primitive");
-    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrPrimitiveRoundedRectangle_rgba_f,
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_PrimitiveRoundedRectangle_rgba_f,
      "primitive");
-    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrPrimitiveRoundedRectangleFilled_rgba_f,
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_PrimitiveRoundedRectangleFilled_rgba_f,
      "primitive");
-    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrKeyboardPress, "keyboard");
-    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrKeyboardRelease, "keyboard");
-    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrKeyboardPressed, "keyboard");
-    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrKeyboardInputChar, "keyboard");
-    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrMouseMoving, "mouse");
-    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrMouseGetXY, "mouse");
-    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrMousePress, "mouse");
-    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrMouseRelease, "mouse");
-    MTR_FIND_FUNCTION_IN_SUBSYSTEM(mtrMouseGetWheelRelative, "mouse");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_KeyboardPress, "keyboard");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_KeyboardRelease, "keyboard");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_KeyboardPressed, "keyboard");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_KeyboardInputChar, "keyboard");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_MouseMoving, "mouse");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_MouseGetXY, "mouse");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_MousePress, "mouse");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_MouseRelease, "mouse");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_MouseGetWheelRelative, "mouse");
 
     if (ok)
-        mtrLogWrite("Added dependently functions", 1, MTR_LMT_INFO);
+        MTR_LogWrite("Added dependently functions", 1, MTR_LMT_INFO);
     else
     {
-        mtrNotify("Functions not added", 1, MTR_LMT_FATAL);
+        MTR_Notify("Functions not added", 1, MTR_LMT_FATAL);
         return false;
     }
 
-    mtrGuiFontKeeper = (mtrIndexkeeper_t *)mtrIndexkeeperCreate(fontDmSize,
+    mtrGuiFontKeeper = (mtrIndexkeeper_t *)MTR_IndexkeeperCreate(fontDmSize,
      fontReservedCount, sizeof(mtrNkFont));
     if (mtrGuiFontKeeper == NULL)
     {
-        mtrNotify("Unable to create indexkeeper structure for gui fonts", 1,
+        MTR_Notify("Unable to create indexkeeper structure for gui fonts", 1,
          MTR_LMT_FATAL);
         return false;
     }
     else
-        mtrLogWrite("Indexkeeper structure for gui fonts created", 1,
+        MTR_LogWrite("Indexkeeper structure for gui fonts created", 1,
          MTR_LMT_INFO);
 
-    mtrGuiImageKeeper = (mtrIndexkeeper_t *)mtrIndexkeeperCreate(imageDmSize,
+    mtrGuiImageKeeper = (mtrIndexkeeper_t *)MTR_IndexkeeperCreate(imageDmSize,
      imageReservedCount, sizeof(mtrNkImage));
     if (mtrGuiImageKeeper == NULL)
     {
-        mtrNotify("Unable to create indexkeeper structure for gui images", 1,
+        MTR_Notify("Unable to create indexkeeper structure for gui images", 1,
          MTR_LMT_FATAL);
         return false;
     }
     else
-        mtrLogWrite("Indexkeeper structure for gui images created", 1,
+        MTR_LogWrite("Indexkeeper structure for gui images created", 1,
          MTR_LMT_INFO);
 
-    nkFontNum = mtrGuiAddFont(fontnum);
+    nkFontNum = MTR_GuiAddFont(fontnum);
 
-    mtrScreenGetSizes(&screenWidth, &screenHeight);
-    if (mtrNkInit(nkFontNum, screenWidth, screenHeight) == NULL)
+    MTR_ScreenGetSizes(&screenWidth, &screenHeight);
+    if (MTR_NkInit(nkFontNum, screenWidth, screenHeight) == NULL)
     {
-        mtrNotify("Unable to create nuklear context", 1, MTR_LMT_FATAL);
+        MTR_Notify("Unable to create nuklear context", 1, MTR_LMT_FATAL);
         return false;
     }
 
-    mtrLogWrite("GUI abstraction subsystem initialized", 0, MTR_LMT_INFO);
+    MTR_LogWrite("GUI abstraction subsystem initialized", 0, MTR_LMT_INFO);
     mtrGuiInited = true;
     return true;
 }
 
-/*fa mtrGuiQuit yes */
-MTR_EXPORT void MTR_CALL mtrGuiQuit(void)
+/*fa MTR_GuiQuit yes */
+MTR_EXPORT void MTR_CALL MTR_GuiQuit(void)
 {
     MTR_GUI_CHECK_IF_NOT_INITED();
     nk_free(&mtrNkGui.ctx);
     memset(&mtrNkGui.ctx, 0, sizeof(mtrNkGui));
 }
 
-/*fa mtrGuiProcessEvents yes */
-MTR_EXPORT void MTR_CALL mtrGuiProcessEvents(void)
+/*fa MTR_GuiProcessEvents yes */
+MTR_EXPORT void MTR_CALL MTR_GuiProcessEvents(void)
 {
     struct nk_context *ctx;
     MTR_GUI_CHECK_IF_NOT_INITED();
 
     ctx = &mtrNkGui.ctx;
     nk_input_begin(ctx);
-    mtrNkHandleEvents();
+    MTR_NkHandleEvents();
     nk_input_end(ctx);
 }
 
-/*fa mtrGuiRender yes */
-MTR_EXPORT void MTR_CALL mtrGuiRender(void)
+/*fa MTR_GuiRender yes */
+MTR_EXPORT void MTR_CALL MTR_GuiRender(void)
 {
     const struct nk_command *cmd;
     int                      i;
@@ -416,7 +416,7 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
                 {
                     const struct nk_command_line *l = (
                      const struct nk_command_line *)cmd;
-                    mtrPrimitiveLine_rgba_f(l->begin.x, l->begin.y, l->end.x,
+                    MTR_PrimitiveLine_rgba_f(l->begin.x, l->begin.y, l->end.x,
                      l->end.y, l->color.r, l->color.g, l->color.b, l->color.a);
                 }
                 break;
@@ -424,16 +424,16 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
                 {
                     const struct nk_command_rect *r = (
                      const struct nk_command_rect *)cmd;
-                    mtrPrimitiveRoundedRectangle_rgba_f(r->x, r->y, r->x + r->w,
-                     r->y + r->h, r->rounding, r->color.r, r->color.g,
-                     r->color.b, r->color.a);
+                    MTR_PrimitiveRoundedRectangle_rgba_f(r->x, r->y,
+                     r->x + r->w, r->y + r->h, r->rounding, r->color.r,
+                     r->color.g, r->color.b, r->color.a);
                 }
                 break;
             case NK_COMMAND_RECT_FILLED:
                 {
                     const struct nk_command_rect_filled *r = (
                      const struct nk_command_rect_filled *)cmd;
-                    mtrPrimitiveRoundedRectangleFilled_rgba_f(r->x, r->y,
+                    MTR_PrimitiveRoundedRectangleFilled_rgba_f(r->x, r->y,
                      r->x + r->w, r->y + r->h, r->rounding, r->color.r,
                      r->color.g, r->color.b, r->color.a);
                 }
@@ -442,7 +442,7 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
                 {
                     const struct nk_command_circle *c = (
                      const struct nk_command_circle *)cmd;
-                    mtrPrimitiveCircle_rgba_f(c->x + (c->w >> 1),
+                    MTR_PrimitiveCircle_rgba_f(c->x + (c->w >> 1),
                      c->y + (c->h >> 1), (c->w > c->h) ? c->w : c->h,
                      c->color.r, c->color.g, c->color.b, c->color.a);
                 }
@@ -451,7 +451,7 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
                 {
                     const struct nk_command_circle_filled *c = (
                      const struct nk_command_circle_filled *)cmd;
-                    mtrPrimitiveCircleFilled_rgba_f(c->x + (c->w >> 1),
+                    MTR_PrimitiveCircleFilled_rgba_f(c->x + (c->w >> 1),
                      c->y + (c->h >> 1), (c->w > c->h) ? c->w : c->h,
                      c->color.r, c->color.g, c->color.b, c->color.a);
                 }
@@ -460,7 +460,7 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
                 {
                     const struct nk_command_triangle*t = (
                      const struct nk_command_triangle*)cmd;
-                    mtrPrimitiveTriangle_rgba_f(t->a.x, t->a.y, t->b.x, t->b.y,
+                    MTR_PrimitiveTriangle_rgba_f(t->a.x, t->a.y, t->b.x, t->b.y,
                      t->c.x, t->c.y, t->color.r, t->color.g, t->color.b,
                      t->color.a);
                 }
@@ -469,7 +469,7 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
                 {
                     const struct nk_command_triangle_filled *t = (
                      const struct nk_command_triangle_filled *)cmd;
-                    mtrPrimitiveTriangleFilled_rgba_f(t->a.x, t->a.y, t->b.x,
+                    MTR_PrimitiveTriangleFilled_rgba_f(t->a.x, t->a.y, t->b.x,
                      t->b.y, t->c.x, t->c.y, t->color.r, t->color.g, t->color.b,
                      t->color.a);
                 }
@@ -481,11 +481,11 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
                     for (i = 0; i < p->point_count; i++)
                     {
                         if (i == p->point_count - 1)
-                            mtrPrimitiveLine_rgba_f(p->points[i].x,
+                            MTR_PrimitiveLine_rgba_f(p->points[i].x,
                              p->points[i].y, p->points[0].x, p->points[0].y,
                              p->color.r, p->color.g, p->color.b, p->color.a);
                         else
-                            mtrPrimitiveLine_rgba_f(p->points[i].x,
+                            MTR_PrimitiveLine_rgba_f(p->points[i].x,
                              p->points[i].y, p->points[i + 1].x,
                              p->points[i + 1].y, p->color.r, p->color.g,
                              p->color.b, p->color.a);
@@ -499,11 +499,11 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
                     for (i = 0; i < p->point_count; i++)
                     {
                         if (i == p->point_count - 1)
-                            mtrPrimitiveLine_rgba_f(p->points[i].x,
+                            MTR_PrimitiveLine_rgba_f(p->points[i].x,
                              p->points[i].y, p->points[0].x, p->points[0].y,
                              p->color.r, p->color.g, p->color.b, p->color.a);
                         else
-                            mtrPrimitiveLine_rgba_f(p->points[i].x,
+                            MTR_PrimitiveLine_rgba_f(p->points[i].x,
                              p->points[i].y, p->points[i + 1].x,
                              p->points[i + 1].y, p->color.r, p->color.g,
                              p->color.b, p->color.a);
@@ -515,7 +515,7 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
                     const struct nk_command_polyline *p = (
                      const struct nk_command_polyline *)cmd;
                     for (i = 0; i < p->point_count - 1; i++)
-                        mtrPrimitiveLine_rgba_f(p->points[i].x,
+                        MTR_PrimitiveLine_rgba_f(p->points[i].x,
                          p->points[i].y, p->points[i + 1].x,
                          p->points[i + 1].y, p->color.r, p->color.g,
                          p->color.b, p->color.a);
@@ -526,7 +526,7 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
                     const struct nk_command_text *t = (
                      const struct nk_command_text*)cmd;
                     mtrNkFont *font = (mtrNkFont*)t->font->userdata.ptr;
-                    mtrFontDrawMbfString_f(font->font, t->x, t->y, t->string);
+                    MTR_FontDrawMbfString_f(font->font, t->x, t->y, t->string);
                 }
                 break;
             case NK_COMMAND_CURVE:
@@ -535,8 +535,8 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
                 {
                     const struct nk_command_arc *a = (
                      const struct nk_command_arc *)cmd;
-                    mtrPrimitiveArc_rgba_f(a->cx, a->cy, a->r, a->a[0], a->a[1],
-                     a->color.r, a->color.g, a->color.b, a->color.a);
+                    MTR_PrimitiveArc_rgba_f(a->cx, a->cy, a->r, a->a[0],
+                     a->a[1], a->color.r, a->color.g, a->color.b, a->color.a);
                 }
                 break;
             case NK_COMMAND_RECT_MULTI_COLOR:
@@ -545,7 +545,7 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
                     const struct nk_command_image *img = (
                      const struct nk_command_image *)cmd;
                     mtrNkImage *image = (mtrNkImage *)img->img.handle.ptr;
-                    mtrTextureBlitRegionSized_f(image->texture, img->x, img->y,
+                    MTR_TextureBlitRegionSized_f(image->texture, img->x, img->y,
                      img->w, img->h, image->nk.region[0], image->nk.region[1],
                      image->nk.region[2] - image->nk.region[0],
                      image->nk.region[3] - image->nk.region[1]);
@@ -555,7 +555,7 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
                 {
                     const struct nk_command_arc_filled *a = (
                      const struct nk_command_arc_filled *)cmd;
-                    mtrPrimitiveSegmentFilled_rgba_f(a->cx, a->cy, a->r,
+                    MTR_PrimitiveSegmentFilled_rgba_f(a->cx, a->cy, a->r,
                      a->a[0], a->a[1], a->color.r, a->color.g, a->color.b,
                      a->color.a);
                 }
@@ -567,8 +567,8 @@ MTR_EXPORT void MTR_CALL mtrGuiRender(void)
     nk_clear(&mtrNkGui.ctx);
 }
 
-/*fa mtrGuiBegin yes */
-MTR_EXPORT bool MTR_CALL mtrGuiBegin(const char *title, float boundsX,
+/*fa MTR_GuiBegin yes */
+MTR_EXPORT bool MTR_CALL MTR_GuiBegin(const char *title, float boundsX,
  float boundsY, float boundsW, float boundsH, int flags)
 {
     struct nk_rect bounds = nk_rect(boundsX, boundsY, boundsW, boundsH);
@@ -577,29 +577,29 @@ MTR_EXPORT bool MTR_CALL mtrGuiBegin(const char *title, float boundsX,
     return nk_begin(&mtrNkGui.ctx, title, bounds, flags);
 }
 
-/*fa mtrGuiEnd yes */
-MTR_EXPORT void MTR_CALL mtrGuiEnd(void)
+/*fa MTR_GuiEnd yes */
+MTR_EXPORT void MTR_CALL MTR_GuiEnd(void)
 {
     MTR_GUI_CHECK_IF_NOT_INITED();
     nk_end(&mtrNkGui.ctx);
 }
 
-/*fa mtrGuiButtonText yes */
-MTR_EXPORT bool MTR_CALL mtrGuiButtonText(const char *title, int len)
+/*fa MTR_GuiButtonText yes */
+MTR_EXPORT bool MTR_CALL MTR_GuiButtonText(const char *title, int len)
 {
     MTR_GUI_CHECK_IF_NOT_INITED(false);
     return nk_button_text(&mtrNkGui.ctx, title, len);
 }
 
-/*fa mtrGuiButtonLabel yes */
-MTR_EXPORT bool MTR_CALL mtrGuiButtonLabel(const char *title)
+/*fa MTR_GuiButtonLabel yes */
+MTR_EXPORT bool MTR_CALL MTR_GuiButtonLabel(const char *title)
 {
     MTR_GUI_CHECK_IF_NOT_INITED(false);
     return nk_button_label(&mtrNkGui.ctx, title);
 }
 
-/*fa mtrGuiButtonColor_c yes */
-MTR_EXPORT bool MTR_CALL mtrGuiButtonColor_c(uint32_t color)
+/*fa MTR_GuiButtonColor_c yes */
+MTR_EXPORT bool MTR_CALL MTR_GuiButtonColor_c(uint32_t color)
 {
     struct nk_color nkColor;
     MTR_GUI_CHECK_IF_NOT_INITED(false);
@@ -608,53 +608,53 @@ MTR_EXPORT bool MTR_CALL mtrGuiButtonColor_c(uint32_t color)
     return nk_button_color(&mtrNkGui.ctx, nkColor);
 }
 
-/*fa mtrGuiButtonColor_ca yes */
-MTR_EXPORT bool MTR_CALL mtrGuiButtonColor_ca(uint32_t color)
+/*fa MTR_GuiButtonColor_ca yes */
+MTR_EXPORT bool MTR_CALL MTR_GuiButtonColor_ca(uint32_t color)
 {
     MTR_GUI_CHECK_IF_NOT_INITED(false);
     return nk_button_color(&mtrNkGui.ctx, nk_rgba_u32(color));
 }
 
-/*fa mtrGuiButtonColor_rgb yes */
-MTR_EXPORT bool MTR_CALL mtrGuiButtonColor_rgb(uint8_t r, uint8_t g, uint8_t b)
+/*fa MTR_GuiButtonColor_rgb yes */
+MTR_EXPORT bool MTR_CALL MTR_GuiButtonColor_rgb(uint8_t r, uint8_t g, uint8_t b)
 {
     MTR_GUI_CHECK_IF_NOT_INITED(false);
     return nk_button_color(&mtrNkGui.ctx, nk_rgb(r, g, b));
 }
 
-/*fa mtrGuiButtonColor_rgba yes */
-MTR_EXPORT bool MTR_CALL mtrGuiButtonColor_rgba(uint8_t r, uint8_t g, uint8_t b,
- uint8_t a)
+/*fa MTR_GuiButtonColor_rgba yes */
+MTR_EXPORT bool MTR_CALL MTR_GuiButtonColor_rgba(uint8_t r, uint8_t g,
+ uint8_t b, uint8_t a)
 {
     MTR_GUI_CHECK_IF_NOT_INITED(false);
     return nk_button_color(&mtrNkGui.ctx, nk_rgba(r, g, b, a));
 }
 
-/*fa mtrGuiButtonSymbol yes */
-MTR_EXPORT bool MTR_CALL mtrGuiButtonSymbol(int symbol)
+/*fa MTR_GuiButtonSymbol yes */
+MTR_EXPORT bool MTR_CALL MTR_GuiButtonSymbol(int symbol)
 {
     MTR_GUI_CHECK_IF_NOT_INITED(false);
     return nk_button_symbol(&mtrNkGui.ctx, symbol);
 }
 
-/*fa mtrGuiButtonSymbolLabel yes */
-MTR_EXPORT bool MTR_CALL mtrGuiButtonSymbolLabel(int symbol, const char *string,
- int alignment)
+/*fa MTR_GuiButtonSymbolLabel yes */
+MTR_EXPORT bool MTR_CALL MTR_GuiButtonSymbolLabel(int symbol,
+ const char *string, int alignment)
 {
     MTR_GUI_CHECK_IF_NOT_INITED(false);
     return nk_button_symbol_label(&mtrNkGui.ctx, symbol, string, alignment);
 }
 
-/*fa mtrGuiButtonSymbolText yes */
-MTR_EXPORT bool MTR_CALL mtrGuiButtonSymbolText(int symbol, const char *string,
+/*fa MTR_GuiButtonSymbolText yes */
+MTR_EXPORT bool MTR_CALL MTR_GuiButtonSymbolText(int symbol, const char *string,
  int len, int alignment)
 {
     MTR_GUI_CHECK_IF_NOT_INITED(false);
     return nk_button_symbol_text(&mtrNkGui.ctx, symbol, string, len, alignment);
 }
 
-/*fa mtrGuiButtonImage yes */
-MTR_EXPORT bool MTR_CALL mtrGuiButtonImage(uint32_t imagenum)
+/*fa MTR_GuiButtonImage yes */
+MTR_EXPORT bool MTR_CALL MTR_GuiButtonImage(uint32_t imagenum)
 {
     mtrNkImage *nkImage;
     MTR_GUI_CHECK_IF_NOT_INITED(false);
@@ -665,8 +665,8 @@ MTR_EXPORT bool MTR_CALL mtrGuiButtonImage(uint32_t imagenum)
     return nk_button_image(&mtrNkGui.ctx, nkImage->nk);
 }
 
-/*fa mtrGuiButtonImageLabel yes */
-MTR_EXPORT bool MTR_CALL mtrGuiButtonImageLabel(uint32_t imagenum,
+/*fa MTR_GuiButtonImageLabel yes */
+MTR_EXPORT bool MTR_CALL MTR_GuiButtonImageLabel(uint32_t imagenum,
  const char *string, int alignment)
 {
     mtrNkImage *nkImage;
@@ -678,8 +678,8 @@ MTR_EXPORT bool MTR_CALL mtrGuiButtonImageLabel(uint32_t imagenum,
     return nk_button_image_label(&mtrNkGui.ctx, nkImage->nk, string, alignment);
 }
 
-/*fa mtrGuiButtonImageText yes */
-MTR_EXPORT bool MTR_CALL mtrGuiButtonImageText(uint32_t imagenum,
+/*fa MTR_GuiButtonImageText yes */
+MTR_EXPORT bool MTR_CALL MTR_GuiButtonImageText(uint32_t imagenum,
  const char *string, int len, int alignment)
 {
     mtrNkImage *nkImage;
@@ -692,38 +692,39 @@ MTR_EXPORT bool MTR_CALL mtrGuiButtonImageText(uint32_t imagenum,
      alignment);
 }
 
-/*fa mtrGuiCheckLabel yes */
-MTR_EXPORT bool MTR_CALL mtrGuiCheckLabel(const char *label, bool active)
+/*fa MTR_GuiCheckLabel yes */
+MTR_EXPORT bool MTR_CALL MTR_GuiCheckLabel(const char *label, bool active)
 {
     MTR_GUI_CHECK_IF_NOT_INITED(false);
     return nk_check_label(&mtrNkGui.ctx, label, active);
 }
 
-/*fa mtrGuiCheckText yes */
-MTR_EXPORT bool MTR_CALL mtrGuiCheckText(const char *text, int len, bool active)
+/*fa MTR_GuiCheckText yes */
+MTR_EXPORT bool MTR_CALL MTR_GuiCheckText(const char *text, int len,
+ bool active)
 {
     MTR_GUI_CHECK_IF_NOT_INITED(false);
     return nk_check_text(&mtrNkGui.ctx, text, len, active);
 }
 
-/*fa mtrGuiSelectableLabel yes */
-MTR_EXPORT bool MTR_CALL mtrGuiSelectableLabel(const char *text, int alignment,
+/*fa MTR_GuiSelectableLabel yes */
+MTR_EXPORT bool MTR_CALL MTR_GuiSelectableLabel(const char *text, int alignment,
  bool selected)
 {
     MTR_GUI_CHECK_IF_NOT_INITED(false);
     return nk_select_label(&mtrNkGui.ctx, text, alignment, selected);
 }
 
-/*fa mtrGuiSelectableText yes */
-MTR_EXPORT bool MTR_CALL mtrGuiSelectableText(const char *text, int len,
+/*fa MTR_GuiSelectableText yes */
+MTR_EXPORT bool MTR_CALL MTR_GuiSelectableText(const char *text, int len,
  int alignment, bool selected)
 {
     MTR_GUI_CHECK_IF_NOT_INITED(false);
     return nk_select_text(&mtrNkGui.ctx, text, len, alignment, selected);
 }
 
-/*fa mtrGuiSelectableImageLabel yes */
-MTR_EXPORT bool MTR_CALL mtrGuiSelectableImageLabel(uint32_t imagenum,
+/*fa MTR_GuiSelectableImageLabel yes */
+MTR_EXPORT bool MTR_CALL MTR_GuiSelectableImageLabel(uint32_t imagenum,
  const char *text, int alignment, bool selected)
 {
     mtrNkImage *nkImage;
@@ -740,8 +741,8 @@ MTR_EXPORT bool MTR_CALL mtrGuiSelectableImageLabel(uint32_t imagenum,
      selected);
 }
 
-/*fa mtrGuiSelectableImageText yes */
-MTR_EXPORT bool MTR_CALL mtrGuiSelectableImageText(uint32_t imagenum,
+/*fa MTR_GuiSelectableImageText yes */
+MTR_EXPORT bool MTR_CALL MTR_GuiSelectableImageText(uint32_t imagenum,
  const char *text, int len, int alignment, bool selected)
 {
     mtrNkImage *nkImage;
@@ -753,43 +754,43 @@ MTR_EXPORT bool MTR_CALL mtrGuiSelectableImageText(uint32_t imagenum,
      alignment, selected);
 }
 
-/*fa mtrGuiEditText yes */
-MTR_EXPORT void MTR_CALL mtrGuiEditText(uint32_t sbnum)
+/*fa MTR_GuiEditText yes */
+MTR_EXPORT void MTR_CALL MTR_GuiEditText(uint32_t sbnum)
 {
     MTR_GUI_CHECK_IF_NOT_INITED();
     nk_edit_string_zero_terminated(&mtrNkGui.ctx, NK_EDIT_FIELD,
-     mtrStringBufferGetString(sbnum), mtrStringBufferGetMaxLen(sbnum),
+     MTR_StringBufferGetString(sbnum), MTR_StringBufferGetMaxLen(sbnum),
      nk_filter_default);
 }
 
-/*fa mtrGuiEditInteger yes */
-MTR_EXPORT void MTR_CALL mtrGuiEditInteger(uint32_t sbnum)
+/*fa MTR_GuiEditInteger yes */
+MTR_EXPORT void MTR_CALL MTR_GuiEditInteger(uint32_t sbnum)
 {
     MTR_GUI_CHECK_IF_NOT_INITED();
     nk_edit_string_zero_terminated(&mtrNkGui.ctx, NK_EDIT_FIELD,
-     mtrStringBufferGetString(sbnum), mtrStringBufferGetMaxLen(sbnum),
+     MTR_StringBufferGetString(sbnum), MTR_StringBufferGetMaxLen(sbnum),
      nk_filter_decimal);
 }
 
-/*fa mtrGuiEditFloat yes */
-MTR_EXPORT void MTR_CALL mtrGuiEditFloat(uint32_t sbnum)
+/*fa MTR_GuiEditFloat yes */
+MTR_EXPORT void MTR_CALL MTR_GuiEditFloat(uint32_t sbnum)
 {
     MTR_GUI_CHECK_IF_NOT_INITED();
     nk_edit_string_zero_terminated(&mtrNkGui.ctx, NK_EDIT_FIELD,
-     mtrStringBufferGetString(sbnum), mtrStringBufferGetMaxLen(sbnum),
+     MTR_StringBufferGetString(sbnum), MTR_StringBufferGetMaxLen(sbnum),
      nk_filter_float);
 }
 
-/*fa mtrGuiLabel yes */
-MTR_EXPORT void MTR_CALL mtrGuiLabel(const char *string, int alignment)
+/*fa MTR_GuiLabel yes */
+MTR_EXPORT void MTR_CALL MTR_GuiLabel(const char *string, int alignment)
 {
     MTR_GUI_CHECK_IF_NOT_INITED();
     nk_label(&mtrNkGui.ctx, string, alignment);
 }
 
-/*fa mtrGuiLabelColored_c yes */
-MTR_EXPORT void MTR_CALL mtrGuiLabelColored_c(const char *string, int alignment,
- uint32_t color)
+/*fa MTR_GuiLabelColored_c yes */
+MTR_EXPORT void MTR_CALL MTR_GuiLabelColored_c(const char *string,
+ int alignment, uint32_t color)
 {
     struct nk_color nkColor;
     MTR_GUI_CHECK_IF_NOT_INITED();
@@ -798,39 +799,39 @@ MTR_EXPORT void MTR_CALL mtrGuiLabelColored_c(const char *string, int alignment,
     nk_label_colored(&mtrNkGui.ctx, string, alignment, nkColor);
 }
 
-/*fa mtrGuiLabelColored_ca yes */
-MTR_EXPORT void MTR_CALL mtrGuiLabelColored_ca(const char *string,
+/*fa MTR_GuiLabelColored_ca yes */
+MTR_EXPORT void MTR_CALL MTR_GuiLabelColored_ca(const char *string,
  int alignment, uint32_t color)
 {
     MTR_GUI_CHECK_IF_NOT_INITED();
     nk_label_colored(&mtrNkGui.ctx, string, alignment, nk_rgba_u32(color));
 }
 
-/*fa mtrGuiLabelColored_rgb yes */
-MTR_EXPORT void MTR_CALL mtrGuiLabelColored_rgb(const char *string,
+/*fa MTR_GuiLabelColored_rgb yes */
+MTR_EXPORT void MTR_CALL MTR_GuiLabelColored_rgb(const char *string,
  int alignment, uint8_t r, uint8_t g, uint8_t b)
 {
     MTR_GUI_CHECK_IF_NOT_INITED();
     nk_label_colored(&mtrNkGui.ctx, string, alignment, nk_rgb(r, g, b));
 }
 
-/*fa mtrGuiLabelColored_rgba yes */
-MTR_EXPORT void MTR_CALL mtrGuiLabelColored_rgba(const char *string,
+/*fa MTR_GuiLabelColored_rgba yes */
+MTR_EXPORT void MTR_CALL MTR_GuiLabelColored_rgba(const char *string,
  int alignment, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
     MTR_GUI_CHECK_IF_NOT_INITED();
     nk_label_colored(&mtrNkGui.ctx, string, alignment, nk_rgba(r, g, b, a));
 }
 
-/*fa mtrGuiLabelWrap yes */
-MTR_EXPORT void MTR_CALL mtrGuiLabelWrap(const char *string)
+/*fa MTR_GuiLabelWrap yes */
+MTR_EXPORT void MTR_CALL MTR_GuiLabelWrap(const char *string)
 {
     MTR_GUI_CHECK_IF_NOT_INITED();
     nk_label_wrap(&mtrNkGui.ctx, string);
 }
 
-/*fa mtrGuiLabelColoredWrap_c yes */
-MTR_EXPORT void MTR_CALL mtrGuiLabelColoredWrap_c(const char *string,
+/*fa MTR_GuiLabelColoredWrap_c yes */
+MTR_EXPORT void MTR_CALL MTR_GuiLabelColoredWrap_c(const char *string,
  uint32_t color)
 {
     struct nk_color nkColor;
@@ -840,75 +841,75 @@ MTR_EXPORT void MTR_CALL mtrGuiLabelColoredWrap_c(const char *string,
     nk_label_colored_wrap(&mtrNkGui.ctx, string, nkColor);
 }
 
-/*fa mtrGuiLabelColoredWrap_ca yes */
-MTR_EXPORT void MTR_CALL mtrGuiLabelColoredWrap_ca(const char *string,
+/*fa MTR_GuiLabelColoredWrap_ca yes */
+MTR_EXPORT void MTR_CALL MTR_GuiLabelColoredWrap_ca(const char *string,
  uint32_t color)
 {
     MTR_GUI_CHECK_IF_NOT_INITED();
     nk_label_colored_wrap(&mtrNkGui.ctx, string, nk_rgba_u32(color));
 }
 
-/*fa mtrGuiLabelColoredWrap_rgb yes */
-MTR_EXPORT void MTR_CALL mtrGuiLabelColoredWrap_rgb(const char *string,
+/*fa MTR_GuiLabelColoredWrap_rgb yes */
+MTR_EXPORT void MTR_CALL MTR_GuiLabelColoredWrap_rgb(const char *string,
  uint8_t r, uint8_t g, uint8_t b)
 {
     MTR_GUI_CHECK_IF_NOT_INITED();
     nk_label_colored_wrap(&mtrNkGui.ctx, string, nk_rgb(r, g, b));
 }
 
-/*fa mtrGuiLabelColoredWrap_rgba yes */
-MTR_EXPORT void MTR_CALL mtrGuiLabelColoredWrap_rgba(const char *string,
+/*fa MTR_GuiLabelColoredWrap_rgba yes */
+MTR_EXPORT void MTR_CALL MTR_GuiLabelColoredWrap_rgba(const char *string,
  uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
     MTR_GUI_CHECK_IF_NOT_INITED();
     nk_label_colored_wrap(&mtrNkGui.ctx, string, nk_rgba(r, g, b, a));
 }
 
-/*fa mtrGuiTreeTabBegin yes */
-MTR_EXPORT bool MTR_CALL mtrGuiTreeTabBegin(const char *title, bool maximized)
+/*fa MTR_GuiTreeTabBegin yes */
+MTR_EXPORT bool MTR_CALL MTR_GuiTreeTabBegin(const char *title, bool maximized)
 {
     MTR_GUI_CHECK_IF_NOT_INITED(false);
     return nk_tree_push(&mtrNkGui.ctx, NK_TREE_TAB, title, maximized);
 }
 
-/*fa mtrGuiTreeTabEnd yes */
-MTR_EXPORT void MTR_CALL mtrGuiTreeTabEnd(void)
+/*fa MTR_GuiTreeTabEnd yes */
+MTR_EXPORT void MTR_CALL MTR_GuiTreeTabEnd(void)
 {
     MTR_GUI_CHECK_IF_NOT_INITED();
     nk_tree_pop(&mtrNkGui.ctx);
 }
 
-/*fa mtrGuiLayoutRowDynamic yes */
-MTR_EXPORT void MTR_CALL mtrGuiLayoutRowDynamic(float height, int cols)
+/*fa MTR_GuiLayoutRowDynamic yes */
+MTR_EXPORT void MTR_CALL MTR_GuiLayoutRowDynamic(float height, int cols)
 {
     MTR_GUI_CHECK_IF_NOT_INITED();
     nk_layout_row_dynamic(&mtrNkGui.ctx, height, cols);
 }
 
-/*fa mtrGuiLayoutRowStatic yes */
-MTR_EXPORT void MTR_CALL mtrGuiLayoutRowStatic(float height, int cols,
+/*fa MTR_GuiLayoutRowStatic yes */
+MTR_EXPORT void MTR_CALL MTR_GuiLayoutRowStatic(float height, int cols,
  int itemWidth)
 {
     MTR_GUI_CHECK_IF_NOT_INITED();
     nk_layout_row_static(&mtrNkGui.ctx, height, itemWidth, cols);
 }
 
-/*fa mtrGuiGroupBegin yes */
-MTR_EXPORT bool MTR_CALL mtrGuiGroupBegin(const char *title, int flags)
+/*fa MTR_GuiGroupBegin yes */
+MTR_EXPORT bool MTR_CALL MTR_GuiGroupBegin(const char *title, int flags)
 {
     MTR_GUI_CHECK_IF_NOT_INITED(false);
     return nk_group_begin(&mtrNkGui.ctx, title, flags);
 }
 
-/*fa mtrGuiGroupEnd yes */
-MTR_EXPORT void MTR_CALL mtrGuiGroupEnd(void)
+/*fa MTR_GuiGroupEnd yes */
+MTR_EXPORT void MTR_CALL MTR_GuiGroupEnd(void)
 {
     MTR_GUI_CHECK_IF_NOT_INITED();
     return nk_group_end(&mtrNkGui.ctx);
 }
 
-/*fa mtrGuiSpacing yes */
-MTR_EXPORT void MTR_CALL mtrGuiSpacing(int cols)
+/*fa MTR_GuiSpacing yes */
+MTR_EXPORT void MTR_CALL MTR_GuiSpacing(int cols)
 {
     MTR_GUI_CHECK_IF_NOT_INITED();
     nk_spacing(&mtrNkGui.ctx, cols);

@@ -4,7 +4,7 @@
 
 MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Screen, FA_FUNCTIONS_COUNT)
 
-MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
+MTR_EXPORT mtrReport* MTR_CALL MTR_CreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -20,8 +20,8 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
-/*fa mtrScreenInit yes */
-MTR_EXPORT bool MTR_CALL mtrScreenInit(int width, int height, bool fullscreen,
+/*fa MTR_ScreenInit yes */
+MTR_EXPORT bool MTR_CALL MTR_ScreenInit(int width, int height, bool fullscreen,
  const char *title)
 {
     SDL_version         compiled;
@@ -34,74 +34,74 @@ MTR_EXPORT bool MTR_CALL mtrScreenInit(int width, int height, bool fullscreen,
     const char          defaultTitle[] = "Marathoner";
     int                 fullscreenFlag;
 
-    mtrLogWrite("Creating Screen", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Creating Screen", 0, MTR_LMT_INFO);
 
-    mtrLogWrite("Reporting SDL compile-time version:", 1, MTR_LMT_INFO);
+    MTR_LogWrite("Reporting SDL compile-time version:", 1, MTR_LMT_INFO);
     SDL_VERSION(&compiled);
-    mtrLogWrite_i("Major:", 2, MTR_LMT_INFO, compiled.major);
-    mtrLogWrite_i("Minor:", 2, MTR_LMT_INFO, compiled.minor);
-    mtrLogWrite_i("Patch:", 2, MTR_LMT_INFO, compiled.patch);
-    mtrLogWrite("Reporting SDL linked version:", 1, MTR_LMT_INFO);
+    MTR_LogWrite_i("Major:", 2, MTR_LMT_INFO, compiled.major);
+    MTR_LogWrite_i("Minor:", 2, MTR_LMT_INFO, compiled.minor);
+    MTR_LogWrite_i("Patch:", 2, MTR_LMT_INFO, compiled.patch);
+    MTR_LogWrite("Reporting SDL linked version:", 1, MTR_LMT_INFO);
     SDL_GetVersion(&sdlLinked);
-    mtrLogWrite_i("Major:", 2, MTR_LMT_INFO, sdlLinked.major);
-    mtrLogWrite_i("Minor:", 2, MTR_LMT_INFO, sdlLinked.minor);
-    mtrLogWrite_i("Patch:", 2, MTR_LMT_INFO, sdlLinked.patch);
+    MTR_LogWrite_i("Major:", 2, MTR_LMT_INFO, sdlLinked.major);
+    MTR_LogWrite_i("Minor:", 2, MTR_LMT_INFO, sdlLinked.minor);
+    MTR_LogWrite_i("Patch:", 2, MTR_LMT_INFO, sdlLinked.patch);
 
     mtrScreen = malloc(sizeof(mtrScreen_t));
     if (mtrScreen == NULL)
     {
-        mtrNotify("Unable to allocate memory for mtrScreen structure", 1,
+        MTR_Notify("Unable to allocate memory for mtrScreen structure", 1,
          MTR_LMT_ERROR);
         return false;
     }
 
     if(SDL_WasInit(SDL_INIT_VIDEO | SDL_INIT_EVENTS) == 0)
         if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) == 0)
-            mtrLogWrite(
+            MTR_LogWrite(
              "SDL library with video and events subsystems initialized", 1,
               MTR_LMT_INFO);
         else
         {
-            mtrNotify(
+            MTR_Notify(
              "Unable to initialize SDL library with video and events "
              "subsystems", 1, MTR_LMT_ERROR);
             free(mtrScreen);
-            mtrNotify("Screen not initialized", 0, MTR_LMT_ERROR);
+            MTR_Notify("Screen not initialized", 0, MTR_LMT_ERROR);
             return false;
         }
     else
-        mtrLogWrite(
+        MTR_LogWrite(
          "SDL library with video and events subsystems already initialized", 1,
          MTR_LMT_INFO);
 
-    mtrLogWrite("Reporting available display modes", 1, MTR_LMT_INFO);
+    MTR_LogWrite("Reporting available display modes", 1, MTR_LMT_INFO);
     modesNum = SDL_GetNumDisplayModes(0);
     if (modesNum < 0)
     {
-        mtrLogWrite("Unable to check available display modes", 1,
+        MTR_LogWrite("Unable to check available display modes", 1,
          MTR_LMT_WARNING);
-        mtrLogWrite(SDL_GetError(), 1, MTR_LMT_WARNING);
+        MTR_LogWrite(SDL_GetError(), 1, MTR_LMT_WARNING);
     }
     else
     {
-        mtrLogWrite_i("Modes found:", 1, MTR_LMT_INFO, modesNum);
+        MTR_LogWrite_i("Modes found:", 1, MTR_LMT_INFO, modesNum);
         for (i = 0; i < modesNum; i++)
         {
             if (SDL_GetDisplayMode(0, i, &mode) == 0)
             {
-                mtrLogWrite_i("No.", 1, MTR_LMT_INFO, i);
-                mtrLogWrite_i("Width:", 2, MTR_LMT_INFO, mode.w);
-                mtrLogWrite_i("Height:", 2, MTR_LMT_INFO, mode.h);
-                mtrLogWrite_s("Pixel Format:", 2, MTR_LMT_INFO,
+                MTR_LogWrite_i("No.", 1, MTR_LMT_INFO, i);
+                MTR_LogWrite_i("Width:", 2, MTR_LMT_INFO, mode.w);
+                MTR_LogWrite_i("Height:", 2, MTR_LMT_INFO, mode.h);
+                MTR_LogWrite_s("Pixel Format:", 2, MTR_LMT_INFO,
                  SDL_GetPixelFormatName(mode.format));
-                mtrLogWrite_i("Refresh Rate (Hz):", 2, MTR_LMT_INFO,
+                MTR_LogWrite_i("Refresh Rate (Hz):", 2, MTR_LMT_INFO,
                  mode.refresh_rate);
             }
             else
             {
-                mtrLogWrite_i("Unable to get info of dosplay mode", 1,
+                MTR_LogWrite_i("Unable to get info of dosplay mode", 1,
                  MTR_LMT_WARNING, i);
-                mtrLogWrite(SDL_GetError(), 1, MTR_LMT_WARNING);
+                MTR_LogWrite(SDL_GetError(), 1, MTR_LMT_WARNING);
             }
         }
     }
@@ -119,37 +119,38 @@ MTR_EXPORT bool MTR_CALL mtrScreenInit(int width, int height, bool fullscreen,
      SDL_WINDOW_OPENGL | fullscreenFlag);
 
     if (mtrScreen->screen != NULL)
-        mtrLogWrite("Window created", 1, MTR_LMT_INFO);
+        MTR_LogWrite("Window created", 1, MTR_LMT_INFO);
     else
     {
-        mtrNotify("Unable to create window", 1, MTR_LMT_ERROR);
+        MTR_Notify("Unable to create window", 1, MTR_LMT_ERROR);
         free(mtrScreen);
-        mtrNotify("Screen not initialized", 0, MTR_LMT_ERROR);
+        MTR_Notify("Screen not initialized", 0, MTR_LMT_ERROR);
         return false;
     }
 
-    mtrLogWrite("Checking available renderers", 1, MTR_LMT_INFO);
-    mtrLogWrite_i("Drivers found:", 1, MTR_LMT_INFO, SDL_GetNumRenderDrivers());
+    MTR_LogWrite("Checking available renderers", 1, MTR_LMT_INFO);
+    MTR_LogWrite_i("Drivers found:", 1, MTR_LMT_INFO,
+     SDL_GetNumRenderDrivers());
     i = 0;
     while (SDL_GetRenderDriverInfo(i, &rendererInfo) == 0)
     {
-        mtrLogWrite_i("No.", 1, MTR_LMT_INFO, i);
-        mtrLogWrite_s("Renderer name:", 2, MTR_LMT_INFO, rendererInfo.name);
-        mtrLogWrite("Supported renderer flags", 2, MTR_LMT_INFO);
+        MTR_LogWrite_i("No.", 1, MTR_LMT_INFO, i);
+        MTR_LogWrite_s("Renderer name:", 2, MTR_LMT_INFO, rendererInfo.name);
+        MTR_LogWrite("Supported renderer flags", 2, MTR_LMT_INFO);
         if ((rendererInfo.flags | SDL_RENDERER_SOFTWARE) == rendererInfo.flags)
-            mtrLogWrite("SDL_RENDERER_SOFTWARE", 3, MTR_LMT_INFO);
+            MTR_LogWrite("SDL_RENDERER_SOFTWARE", 3, MTR_LMT_INFO);
         if ((rendererInfo.flags | SDL_RENDERER_ACCELERATED) ==
          rendererInfo.flags)
-            mtrLogWrite("SDL_RENDERER_ACCELERATED", 3, MTR_LMT_INFO);
+            MTR_LogWrite("SDL_RENDERER_ACCELERATED", 3, MTR_LMT_INFO);
         if ((rendererInfo.flags | SDL_RENDERER_PRESENTVSYNC) ==
          rendererInfo.flags)
-            mtrLogWrite("SDL_RENDERER_PRESENTVSYNC", 3, MTR_LMT_INFO);
+            MTR_LogWrite("SDL_RENDERER_PRESENTVSYNC", 3, MTR_LMT_INFO);
         if ((rendererInfo.flags | SDL_RENDERER_TARGETTEXTURE) ==
          rendererInfo.flags)
-            mtrLogWrite("SDL_RENDERER_TARGETTEXTURE", 3, MTR_LMT_INFO);
-        mtrLogWrite_i("Maximum texture width:", 2, MTR_LMT_INFO,
+            MTR_LogWrite("SDL_RENDERER_TARGETTEXTURE", 3, MTR_LMT_INFO);
+        MTR_LogWrite_i("Maximum texture width:", 2, MTR_LMT_INFO,
          rendererInfo.max_texture_width);
-        mtrLogWrite_i("Maximum texture height:", 2, MTR_LMT_INFO,
+        MTR_LogWrite_i("Maximum texture height:", 2, MTR_LMT_INFO,
          rendererInfo.max_texture_height);
         i++;
     }
@@ -163,7 +164,6 @@ MTR_EXPORT bool MTR_CALL mtrScreenInit(int width, int height, bool fullscreen,
         mtrScreen->renderer = SDL_CreateRenderer(mtrScreen->screen, 0,
          SDL_RENDERER_SOFTWARE);
     #else
-    //mtrScreen->renderer = SDL_CreateRenderer(mtrScreen->screen, -1, 0);
     SDL_GetRenderDriverInfo(1, &rendererInfo);
     mtrScreen->renderer = SDL_CreateRenderer(mtrScreen->screen, 1,
      SDL_RENDERER_SOFTWARE);
@@ -171,44 +171,44 @@ MTR_EXPORT bool MTR_CALL mtrScreenInit(int width, int height, bool fullscreen,
     if (mtrScreen->renderer != NULL)
     {
         SDL_GetRenderDriverInfo(1, &rendererInfo);
-        mtrLogWrite_s("Renderer initialized:", 1, MTR_LMT_INFO,
+        MTR_LogWrite_s("Renderer initialized:", 1, MTR_LMT_INFO,
          rendererInfo.name);
     }
     else
     {
-        mtrNotify("Unable to initialize renderer", 1, MTR_LMT_ERROR);
+        MTR_Notify("Unable to initialize renderer", 1, MTR_LMT_ERROR);
         SDL_DestroyWindow(mtrScreen->screen);
         free(mtrScreen);
-        mtrNotify("Screen not initialized", 0, MTR_LMT_ERROR);
+        MTR_Notify("Screen not initialized", 0, MTR_LMT_ERROR);
         return false;
     }
-    mtrLogWrite("Screen initialized", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Screen initialized", 0, MTR_LMT_INFO);
 
     mtrScreenInited = true;
     return true;
 }
 
-/*fa mtrScreenQuit yes */
-MTR_EXPORT void MTR_CALL mtrScreenQuit(void)
+/*fa MTR_ScreenQuit yes */
+MTR_EXPORT void MTR_CALL MTR_ScreenQuit(void)
 {
     MTR_SCREEN_CHECK_IF_NOT_INITED_WITH_LOG("Unable to destroy Screen",);
 
     SDL_DestroyRenderer(mtrScreen->renderer);
     SDL_DestroyWindow(mtrScreen->screen);
     free(mtrScreen);
-    mtrLogWrite("Screen destroyed", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Screen destroyed", 0, MTR_LMT_INFO);
 }
 
-/*fa mtrScreenFlip yes */
-MTR_EXPORT void MTR_CALL mtrScreenFlip(void)
+/*fa MTR_ScreenFlip yes */
+MTR_EXPORT void MTR_CALL MTR_ScreenFlip(void)
 {
     MTR_SCREEN_CHECK_IF_NOT_INITED();
 
     SDL_RenderPresent(mtrScreen->renderer);
 }
 
-/*fa mtrScreenGetSizes yes */
-MTR_EXPORT void MTR_CALL mtrScreenGetSizes(int *w, int *h)
+/*fa MTR_ScreenGetSizes yes */
+MTR_EXPORT void MTR_CALL MTR_ScreenGetSizes(int *w, int *h)
 {
     int width;
     int height;
@@ -227,8 +227,8 @@ MTR_EXPORT void MTR_CALL mtrScreenGetSizes(int *w, int *h)
         *h = height;
 }
 
-/*fa mtrScreenGetWidth yes */
-MTR_EXPORT int MTR_CALL mtrScreenGetWidth(void)
+/*fa MTR_ScreenGetWidth yes */
+MTR_EXPORT int MTR_CALL MTR_ScreenGetWidth(void)
 {
     int width;
     int height;
@@ -238,8 +238,8 @@ MTR_EXPORT int MTR_CALL mtrScreenGetWidth(void)
     return width;
 }
 
-/*fa mtrScreenGetHeight yes */
-MTR_EXPORT int MTR_CALL mtrScreenGetHeight(void)
+/*fa MTR_ScreenGetHeight yes */
+MTR_EXPORT int MTR_CALL MTR_ScreenGetHeight(void)
 {
     int width;
     int height;
@@ -249,8 +249,8 @@ MTR_EXPORT int MTR_CALL mtrScreenGetHeight(void)
     return height;
 }
 
-/*fa mtrScreenXed yes */
-MTR_EXPORT bool MTR_CALL mtrScreenXed(void)
+/*fa MTR_ScreenXed yes */
+MTR_EXPORT bool MTR_CALL MTR_ScreenXed(void)
 {
     SDL_Event events[32];
     int       numEvents;
@@ -264,7 +264,7 @@ MTR_EXPORT bool MTR_CALL mtrScreenXed(void)
     return true;
 }
 
-MTR_EXPORT mtrScreen_t *MTR_CALL mtrGetScreen(void)
+MTR_EXPORT mtrScreen_t *MTR_CALL MTR_GetScreen(void)
 {
     MTR_SCREEN_CHECK_IF_NOT_INITED(NULL);
 

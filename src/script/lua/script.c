@@ -5,7 +5,7 @@
 
 MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Scripts, FA_FUNCTIONS_COUNT)
 
-MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
+MTR_EXPORT mtrReport* MTR_CALL MTR_CreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -21,33 +21,33 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
-void mtrScriptsInit(void)
+void MTR_ScriptsInit(void)
 {
     uint8_t i;
     uint8_t j;
 
-    mtrLogWrite("Initializing script subsystem", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Initializing script subsystem", 0, MTR_LMT_INFO);
 
-    mtrLogWrite_s("Reporting Lua compile-time version:", 1, MTR_LMT_INFO,
+    MTR_LogWrite_s("Reporting Lua compile-time version:", 1, MTR_LMT_INFO,
      LUA_RELEASE);
 
     mtrVm = luaL_newstate();
     if (mtrVm != NULL)
-        mtrLogWrite("Lua VM created", 1, MTR_LMT_INFO);
+        MTR_LogWrite("Lua VM created", 1, MTR_LMT_INFO);
     else
-        mtrNotify("Unable to create Lua VM", 1, MTR_DMT_FATAL);
+        MTR_Notify("Unable to create Lua VM", 1, MTR_DMT_FATAL);
     luaL_openlibs(mtrVm);
-    mtrLogWrite("Lua libs opened", 1, MTR_LMT_INFO);
+    MTR_LogWrite("Lua libs opened", 1, MTR_LMT_INFO);
     /* Registering functions and constants from all binding plugins */
-    mtrLogWrite("Registering functions and constants of engine", 1,
+    MTR_LogWrite("Registering functions and constants of engine", 1,
      MTR_LMT_INFO);
 
-    mtrScriptsRegisterAll();
+    MTR_ScriptsRegisterAll();
 
-    mtrLogWrite("Script functions and constants of engine registered",
+    MTR_LogWrite("Script functions and constants of engine registered",
      1, MTR_LMT_INFO);
     /* Registering functions and constants from all binding plugins */
-    mtrLogWrite("Registering functions and constants of bindings", 1,
+    MTR_LogWrite("Registering functions and constants of bindings", 1,
      MTR_LMT_INFO);
     for (i = 0; i < mtrPluginsCount; i++)
     {
@@ -55,164 +55,164 @@ void mtrScriptsInit(void)
         {
             if (strcmp(mtrPluginData[i].report->prereqs[j], "Script_Lua") == 0)
             {
-                mtrLogWrite_s("Binding found:", 2, MTR_LMT_INFO,
+                MTR_LogWrite_s("Binding found:", 2, MTR_LMT_INFO,
                  mtrPluginData[i].report->moduleID);
-                mtrPluginInit = (mtrPluginInitFunc)mtrFindFunction(
-                 mtrPluginData[i].report->moduleID, "mtrPluginInit");
-                if (mtrPluginInit != NULL)
-                    mtrPluginInit();
+                MTR_PluginInit = (mtrPluginInitFunc)MTR_FindFunction(
+                 mtrPluginData[i].report->moduleID, "MTR_PluginInit");
+                if (MTR_PluginInit != NULL)
+                    MTR_PluginInit();
                 else
-                    mtrNotify("Library not contain mtrPluginInit function", 1,
+                    MTR_Notify("Library not contain MTR_PluginInit function", 1,
                      MTR_LMT_ERROR);
             }
         }
     }
 
-    mtrLogWrite("Script functions and constants of bindings registered",
+    MTR_LogWrite("Script functions and constants of bindings registered",
      1, MTR_LMT_INFO);
-    mtrLogWrite("Script subsystem initialized", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Script subsystem initialized", 0, MTR_LMT_INFO);
 }
 
-MTR_EXPORT lua_State * MTR_CALL mtrScriptsGetVm(void)
+MTR_EXPORT lua_State * MTR_CALL MTR_ScriptsGetVm(void)
 {
     return mtrVm;
 }
 
-MTR_EXPORT char * MTR_CALL mtrScriptsGetAutorunPath(void)
+MTR_EXPORT char * MTR_CALL MTR_ScriptsGetAutorunPath(void)
 {
     return mtrAutorun;
 }
 
-MTR_EXPORT void MTR_CALL mtrScriptsRegisterFunction(lua_CFunction func,
+MTR_EXPORT void MTR_CALL MTR_ScriptsRegisterFunction(lua_CFunction func,
  const char * funcname)
 {
     lua_register(mtrVm, funcname, func); /* регистрируем функцию */
-    mtrLogWrite_s("Script function added:", 3, MTR_LMT_INFO, funcname);
+    MTR_LogWrite_s("Script function added:", 3, MTR_LMT_INFO, funcname);
 }
 
-/*fa mtrScriptsRegisterVariable_b yes */
-MTR_EXPORT bool MTR_CALL mtrScriptsRegisterVariable_b(const char *name,
+/*fa MTR_ScriptsRegisterVariable_b yes */
+MTR_EXPORT bool MTR_CALL MTR_ScriptsRegisterVariable_b(const char *name,
  bool value)
 {
     if ((name != NULL) && (strcmp(name, "") != 0))
     {
         lua_pushboolean(mtrVm, value);
         lua_setglobal(mtrVm, name);
-        mtrLogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
+        MTR_LogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
         return true;
     } else {
-        mtrLogWrite("Script const not added. Incorrect const name:", 3,
+        MTR_LogWrite("Script const not added. Incorrect const name:", 3,
          MTR_LMT_ERROR);
     }
     return false;
 }
 
-/*fa mtrScriptsRegisterVariable_i yes */
-MTR_EXPORT bool MTR_CALL mtrScriptsRegisterVariable_i(const char *name,
+/*fa MTR_ScriptsRegisterVariable_i yes */
+MTR_EXPORT bool MTR_CALL MTR_ScriptsRegisterVariable_i(const char *name,
  int value)
 {
     if ((name != NULL) && (strcmp(name, "") != 0))
     {
         lua_pushinteger(mtrVm, value);
         lua_setglobal(mtrVm, name);
-        mtrLogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
+        MTR_LogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
         return true;
     } else {
-        mtrLogWrite("Script const not added. Incorrect const name:", 3,
+        MTR_LogWrite("Script const not added. Incorrect const name:", 3,
          MTR_LMT_ERROR);
     }
     return false;
 }
 
-/*fa mtrScriptsRegisterVariable_u yes */
-MTR_EXPORT bool MTR_CALL mtrScriptsRegisterVariable_u(const char *name,
+/*fa MTR_ScriptsRegisterVariable_u yes */
+MTR_EXPORT bool MTR_CALL MTR_ScriptsRegisterVariable_u(const char *name,
  unsigned int value)
 {
     if ((name != NULL) && (strcmp(name, "") != 0))
     {
         lua_pushnumber(mtrVm, value);
         lua_setglobal(mtrVm, name);
-        mtrLogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
+        MTR_LogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
         return true;
     } else {
-        mtrLogWrite("Script const not added. Incorrect const name:", 3,
+        MTR_LogWrite("Script const not added. Incorrect const name:", 3,
          MTR_LMT_ERROR);
     }
     return false;
 }
 
-/*fa mtrScriptsRegisterVariable_f yes */
-MTR_EXPORT bool MTR_CALL mtrScriptsRegisterVariable_f(const char *name,
+/*fa MTR_ScriptsRegisterVariable_f yes */
+MTR_EXPORT bool MTR_CALL MTR_ScriptsRegisterVariable_f(const char *name,
  float value)
 {
     if ((name != NULL) && (strcmp(name, "") != 0))
     {
         lua_pushnumber(mtrVm, value);
         lua_setglobal(mtrVm, name);
-        mtrLogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
+        MTR_LogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
         return true;
     } else {
-        mtrLogWrite("Script const not added. Incorrect const name:", 3,
+        MTR_LogWrite("Script const not added. Incorrect const name:", 3,
          MTR_LMT_ERROR);
     }
     return false;
 }
 
-/*fa mtrScriptsRegisterVariable_d yes */
-MTR_EXPORT bool MTR_CALL mtrScriptsRegisterVariable_d(const char *name,
+/*fa MTR_ScriptsRegisterVariable_d yes */
+MTR_EXPORT bool MTR_CALL MTR_ScriptsRegisterVariable_d(const char *name,
  double value)
 {
     if ((name != NULL) && (strcmp(name, "") != 0))
     {
         lua_pushnumber(mtrVm, value);
         lua_setglobal(mtrVm, name);
-        mtrLogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
+        MTR_LogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
         return true;
     } else {
-        mtrLogWrite("Script const not added. Incorrect const name:", 3,
+        MTR_LogWrite("Script const not added. Incorrect const name:", 3,
          MTR_LMT_ERROR);
     }
     return false;
 }
 
-/*fa mtrScriptsRegisterVariable_s yes */
-MTR_EXPORT bool MTR_CALL mtrScriptsRegisterVariable_s(const char *name,
+/*fa MTR_ScriptsRegisterVariable_s yes */
+MTR_EXPORT bool MTR_CALL MTR_ScriptsRegisterVariable_s(const char *name,
  const char *value)
 {
     if ((name != NULL) && (strcmp(name, "") != 0))
     {
         lua_pushstring(mtrVm, value);
         lua_setglobal(mtrVm, name);
-        mtrLogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
+        MTR_LogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
         return true;
     } else {
-        mtrLogWrite("Script const not added. Incorrect const name:", 3,
+        MTR_LogWrite("Script const not added. Incorrect const name:", 3,
          MTR_LMT_ERROR);
     }
     return false;
 }
 
-void mtrScriptsDoFile(const char * filename)
+void MTR_ScriptsDoFile(const char * filename)
 {
     bool error;
     error = luaL_dofile(mtrVm, filename);
     if (error)
     {
-        mtrNotify("Error in the script or script file not found.", 0,
+        MTR_Notify("Error in the script or script file not found.", 0,
          MTR_DMT_ERROR);
-        mtrLogWrite(lua_tostring(mtrVm, -1), 0, MTR_LMT_ERROR);
+        MTR_LogWrite(lua_tostring(mtrVm, -1), 0, MTR_LMT_ERROR);
     }
 }
 
-void mtrScriptsQuit(void)
+void MTR_ScriptsQuit(void)
 {
     lua_close(mtrVm);
-    mtrLogWrite("Lua VM closed", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Lua VM closed", 0, MTR_LMT_INFO);
 }
 
-MTR_EXPORT void MTR_CALL mtrScriptsAutorun(char * filename)
+MTR_EXPORT void MTR_CALL MTR_ScriptsAutorun(char * filename)
 {
-    mtrScriptsInit();
+    MTR_ScriptsInit();
     mtrAutorun = filename;
-    mtrScriptsDoFile(filename);
+    MTR_ScriptsDoFile(filename);
 }

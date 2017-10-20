@@ -29,7 +29,7 @@ static bool mtrAudioInited = false;
 #define MTR_AUDIO_CHECK_IF_NOT_INITED_WITH_LOG(message, returnValue) \
     if (!mtrAudioInited)                                              \
     {                                                                 \
-        mtrLogWrite(message ". Audio manager are not initialized",    \
+        MTR_LogWrite(message ". Audio manager are not initialized",   \
          1, MTR_LMT_ERROR);                                           \
         return returnValue;                                           \
     }

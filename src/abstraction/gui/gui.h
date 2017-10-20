@@ -48,103 +48,103 @@ static bool mtrGuiInited = false;
 #define MTR_GUI_CHECK_IF_NOT_INITED_WITH_LOG(message, returnValue)             \
     if (!mtrGuiInited)                                                         \
     {                                                                          \
-        mtrLogWrite(message ". GUI abstraction subsystem are not initialized", \
+        MTR_LogWrite(message ". GUI abstraction subsystem are not initialized",\
          1, MTR_LMT_ERROR);                                                    \
         return returnValue;                                                    \
     }
 
-typedef bool (MTR_CALL * mtrFontDrawMbfString_fFunc)(uint32_t fontNum, float x,
+typedef bool (MTR_CALL * MTR_FontDrawMbfString_fFunc)(uint32_t fontNum, float x,
  float y, const char *string);
-mtrFontDrawMbfString_fFunc mtrFontDrawMbfString_f;
+MTR_FontDrawMbfString_fFunc MTR_FontDrawMbfString_f;
 
-typedef int (MTR_CALL * mtrFontGetHeightFunc)(uint32_t fontNum);
-mtrFontGetHeightFunc mtrFontGetHeight;
+typedef int (MTR_CALL * MTR_FontGetHeightFunc)(uint32_t fontNum);
+MTR_FontGetHeightFunc MTR_FontGetHeight;
 
-typedef int (MTR_CALL * mtrFontGetStringWidthFunc)(uint32_t fontNum,
+typedef int (MTR_CALL * MTR_FontGetStringWidthFunc)(uint32_t fontNum,
  const char *string);
-mtrFontGetStringWidthFunc mtrFontGetStringWidth;
+MTR_FontGetStringWidthFunc MTR_FontGetStringWidth;
 
-typedef char *(MTR_CALL * mtrFontGetNameFunc)(uint32_t fontNum);
-mtrFontGetNameFunc mtrFontGetName;
+typedef char *(MTR_CALL * MTR_FontGetNameFunc)(uint32_t fontNum);
+MTR_FontGetNameFunc MTR_FontGetName;
 
-typedef void (MTR_CALL * mtrScreenGetSizesFunc)(int *w, int *h);
-mtrScreenGetSizesFunc mtrScreenGetSizes;
+typedef void (MTR_CALL * MTR_ScreenGetSizesFunc)(int *w, int *h);
+MTR_ScreenGetSizesFunc MTR_ScreenGetSizes;
 
-typedef void (MTR_CALL * mtrTextureBlitRegionSized_fFunc)(uint32_t texNum,
+typedef void (MTR_CALL * MTR_TextureBlitRegionSized_fFunc)(uint32_t texNum,
  float x, float y, float w, float h, float rx, float ry, float rw, float rh);
-mtrTextureBlitRegionSized_fFunc mtrTextureBlitRegionSized_f;
+MTR_TextureBlitRegionSized_fFunc MTR_TextureBlitRegionSized_f;
 
-typedef void (MTR_CALL * mtrTextureGetSizesFunc)(uint32_t texNum, int *width,
+typedef void (MTR_CALL * MTR_TextureGetSizesFunc)(uint32_t texNum, int *width,
  int *height);
-mtrTextureGetSizesFunc mtrTextureGetSizes;
+MTR_TextureGetSizesFunc MTR_TextureGetSizes;
 
-typedef void (MTR_CALL * mtrPrimitiveLine_rgba_fFunc)(float x1, float y1,
+typedef void (MTR_CALL * MTR_PrimitiveLine_rgba_fFunc)(float x1, float y1,
  float x2, float y2, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
-mtrPrimitiveLine_rgba_fFunc mtrPrimitiveLine_rgba_f;
+MTR_PrimitiveLine_rgba_fFunc MTR_PrimitiveLine_rgba_f;
 
-typedef void (MTR_CALL * mtrPrimitiveArc_rgba_fFunc)(float x, float y,
+typedef void (MTR_CALL * MTR_PrimitiveArc_rgba_fFunc)(float x, float y,
  float radius, float startAngle, float endAngle, uint8_t r, uint8_t g,
  uint8_t b, uint8_t a);
-mtrPrimitiveArc_rgba_fFunc mtrPrimitiveArc_rgba_f;
+MTR_PrimitiveArc_rgba_fFunc MTR_PrimitiveArc_rgba_f;
 
-typedef void (MTR_CALL * mtrPrimitiveSegmentFilled_rgba_fFunc)(float x, float y,
+typedef void (MTR_CALL * MTR_PrimitiveSegmentFilled_rgba_fFunc)(float x, float y,
  float radius, float startAngle, float endAngle, uint8_t r, uint8_t g,
  uint8_t b, uint8_t a);
-mtrPrimitiveSegmentFilled_rgba_fFunc mtrPrimitiveSegmentFilled_rgba_f;
+MTR_PrimitiveSegmentFilled_rgba_fFunc MTR_PrimitiveSegmentFilled_rgba_f;
 
-typedef void (MTR_CALL * mtrPrimitiveCircle_rgba_fFunc)(float x, float y,
+typedef void (MTR_CALL * MTR_PrimitiveCircle_rgba_fFunc)(float x, float y,
  float radius, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
-mtrPrimitiveCircle_rgba_fFunc mtrPrimitiveCircle_rgba_f;
+MTR_PrimitiveCircle_rgba_fFunc MTR_PrimitiveCircle_rgba_f;
 
-typedef void (MTR_CALL * mtrPrimitiveCircleFilled_rgba_fFunc)(float x, float y,
+typedef void (MTR_CALL * MTR_PrimitiveCircleFilled_rgba_fFunc)(float x, float y,
  float radius, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
-mtrPrimitiveCircleFilled_rgba_fFunc mtrPrimitiveCircleFilled_rgba_f;
+MTR_PrimitiveCircleFilled_rgba_fFunc MTR_PrimitiveCircleFilled_rgba_f;
 
-typedef void (MTR_CALL * mtrPrimitiveTriangle_rgba_fFunc)(float x1, float y1,
+typedef void (MTR_CALL * MTR_PrimitiveTriangle_rgba_fFunc)(float x1, float y1,
  float x2, float y2, float x3, float y3, uint8_t r, uint8_t g, uint8_t b,
  uint8_t a);
-mtrPrimitiveTriangle_rgba_fFunc mtrPrimitiveTriangle_rgba_f;
+MTR_PrimitiveTriangle_rgba_fFunc MTR_PrimitiveTriangle_rgba_f;
 
-typedef void (MTR_CALL * mtrPrimitiveTriangleFilled_rgba_fFunc)(float x1,
+typedef void (MTR_CALL * MTR_PrimitiveTriangleFilled_rgba_fFunc)(float x1,
  float y1, float x2, float y2, float x3, float y3, uint8_t r, uint8_t g,
  uint8_t b, uint8_t a);
-mtrPrimitiveTriangleFilled_rgba_fFunc mtrPrimitiveTriangleFilled_rgba_f;
+MTR_PrimitiveTriangleFilled_rgba_fFunc MTR_PrimitiveTriangleFilled_rgba_f;
 
-typedef void (MTR_CALL * mtrPrimitiveRoundedRectangle_rgba_fFunc)(float x1,
+typedef void (MTR_CALL * MTR_PrimitiveRoundedRectangle_rgba_fFunc)(float x1,
  float y1, float x2, float y2, float radius, uint8_t r, uint8_t g, uint8_t b,
  uint8_t a);
-mtrPrimitiveRoundedRectangle_rgba_fFunc mtrPrimitiveRoundedRectangle_rgba_f;
+MTR_PrimitiveRoundedRectangle_rgba_fFunc MTR_PrimitiveRoundedRectangle_rgba_f;
 
-typedef void (MTR_CALL * mtrPrimitiveRoundedRectangleFilled_rgba_fFunc)(
+typedef void (MTR_CALL * MTR_PrimitiveRoundedRectangleFilled_rgba_fFunc)(
  float x1, float y1, float x2, float y2, float radius, uint8_t r, uint8_t g,
  uint8_t b, uint8_t a);
-mtrPrimitiveRoundedRectangleFilled_rgba_fFunc mtrPrimitiveRoundedRectangleFilled_rgba_f;
+MTR_PrimitiveRoundedRectangleFilled_rgba_fFunc MTR_PrimitiveRoundedRectangleFilled_rgba_f;
 
-typedef bool (MTR_CALL * mtrKeyboardPressFunc)(int key);
-mtrKeyboardPressFunc mtrKeyboardPress;
+typedef bool (MTR_CALL * MTR_KeyboardPressFunc)(int key);
+MTR_KeyboardPressFunc MTR_KeyboardPress;
 
-typedef bool (MTR_CALL * mtrKeyboardReleaseFunc)(int key);
-mtrKeyboardReleaseFunc mtrKeyboardRelease;
+typedef bool (MTR_CALL * MTR_KeyboardReleaseFunc)(int key);
+MTR_KeyboardReleaseFunc MTR_KeyboardRelease;
 
-typedef bool (MTR_CALL * mtrKeyboardPressedFunc)(int key);
-mtrKeyboardPressedFunc mtrKeyboardPressed;
+typedef bool (MTR_CALL * MTR_KeyboardPressedFunc)(int key);
+MTR_KeyboardPressedFunc MTR_KeyboardPressed;
 
-typedef char *(MTR_CALL * mtrKeyboardInputCharFunc)(void);
-mtrKeyboardInputCharFunc mtrKeyboardInputChar;
+typedef char *(MTR_CALL * MTR_KeyboardInputCharFunc)(void);
+MTR_KeyboardInputCharFunc MTR_KeyboardInputChar;
 
-typedef bool (MTR_CALL * mtrMouseMovingFunc)(void);
-mtrMouseMovingFunc mtrMouseMoving;
+typedef bool (MTR_CALL * MTR_MouseMovingFunc)(void);
+MTR_MouseMovingFunc MTR_MouseMoving;
 
-typedef void (MTR_CALL * mtrMouseGetXYFunc)(int *mouseX, int *mouseY);
-mtrMouseGetXYFunc mtrMouseGetXY;
+typedef void (MTR_CALL * MTR_MouseGetXYFunc)(int *mouseX, int *mouseY);
+MTR_MouseGetXYFunc MTR_MouseGetXY;
 
-typedef bool (MTR_CALL * mtrMousePressFunc)(int button);
-mtrMousePressFunc mtrMousePress;
+typedef bool (MTR_CALL * MTR_MousePressFunc)(int button);
+MTR_MousePressFunc MTR_MousePress;
 
-typedef bool (MTR_CALL * mtrMouseReleaseFunc)(int button);
-mtrMouseReleaseFunc mtrMouseRelease;
+typedef bool (MTR_CALL * MTR_MouseReleaseFunc)(int button);
+MTR_MouseReleaseFunc MTR_MouseRelease;
 
-typedef int (MTR_CALL * mtrMouseGetWheelRelativeFunc)(void);
-mtrMouseGetWheelRelativeFunc mtrMouseGetWheelRelative;
+typedef int (MTR_CALL * MTR_MouseGetWheelRelativeFunc)(void);
+MTR_MouseGetWheelRelativeFunc MTR_MouseGetWheelRelative;
 
 #endif

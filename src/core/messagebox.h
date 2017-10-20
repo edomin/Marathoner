@@ -14,20 +14,21 @@
 const char *mtrFileFilter[256];
 static int mtrFileFiltersCount __attribute__((used)) = 0;
 
-void MTR_CALL mtrShowSimpleMessageBox(uint8_t type, const char *title,
+void MTR_CALL MTR_ShowSimpleMessageBox(uint8_t type, const char *title,
  const char *message);
-bool MTR_CALL mtrShowYesNoMessageBox(const char *title, const char *message);
-bool MTR_CALL mtrShowOkCancelMessageBox(const char *title, const char *message);
-const char *MTR_CALL mtrShowInputDialog(const char *title, const char *message,
+bool MTR_CALL MTR_ShowYesNoMessageBox(const char *title, const char *message);
+bool MTR_CALL MTR_ShowOkCancelMessageBox(const char *title,
+ const char *message);
+const char *MTR_CALL MTR_ShowInputDialog(const char *title, const char *message,
  const char *defaultInput);
-const char *MTR_CALL mtrShowPasswordDialog(const char *title,
+const char *MTR_CALL MTR_ShowPasswordDialog(const char *title,
  const char *message);
-void MTR_CALL mtrAddFileFilter(const char *filter);
-void MTR_CALL mtrClearFileFilters(void);
-const char *MTR_CALL mtrShowSaveFileDialog(const char *title,
+void MTR_CALL MTR_AddFileFilter(const char *filter);
+void MTR_CALL MTR_ClearFileFilters(void);
+const char *MTR_CALL MTR_ShowSaveFileDialog(const char *title,
  const char *defaultPathAndFile, const char *singleFilterDescription);
-const char *MTR_CALL mtrShowOpenFileDialog(const char *title,
+const char *MTR_CALL MTR_ShowOpenFileDialog(const char *title,
  const char *defaultPathAndFile, const char *singleFilterDescription);
-const char *MTR_CALL mtrShowSelectFolderDialog(const char *title,
+const char *MTR_CALL MTR_ShowSelectFolderDialog(const char *title,
  const char *defaultPath);
 #endif

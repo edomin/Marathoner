@@ -19,13 +19,13 @@
 #define MTR_BLEND_ONE_MINUS_DST_ALPHA   GPU_FUNC_ONE_MINUS_DST_ALPHA
 
 typedef struct mtrScreen_t {
-    GPU_Target* screen;
-    GPU_Target* target;
+    GPU_Target *screen;
+    GPU_Target *target;
 } mtrScreen_t;
 
 typedef struct mtrTexture_t {
     GPU_Image *texture;
-    char *name;
+    char      *name;
 } mtrTexture_t;
 
 char              mtrDefaultTextureName[] = "Unnamed_Texture";
@@ -38,12 +38,12 @@ static bool       mtrTextureInited = false;
 #define MTR_TEXTURE_CHECK_IF_NOT_INITED_WITH_LOG(message, returnValue) \
     if (!mtrTextureInited)                                             \
     {                                                                  \
-        mtrLogWrite(message ". Texture manager are not initialized",   \
+        MTR_LogWrite(message ". Texture manager are not initialized",  \
          1, MTR_LMT_ERROR);                                            \
         return returnValue;                                            \
     }
 
 typedef mtrScreen_t *(MTR_CALL * mtrGetScreenFunc)(void);
-mtrGetScreenFunc mtrGetScreen;
+mtrGetScreenFunc MTR_GetScreen;
 
 #endif

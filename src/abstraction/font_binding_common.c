@@ -3,24 +3,24 @@
 
 #include "marathoner/script_func.h"
 
-MTR_SCRIPT_FUNC_I_S1(mtrSF_FontFunctionSupported, mtrFontFunctionSupported)
-MTR_SCRIPT_FUNC_B_U32t2(mtrSF_FontInit, mtrFontInit)
-MTR_SCRIPT_FUNC_U32t_S1I1(mtrSF_FontLoadTtf, mtrFontLoadTtf)
-MTR_SCRIPT_FUNC_V_U32t1(mtrSF_FontFree, mtrFontFree)
-MTR_SCRIPT_FUNC_V_U32t1I1(mtrSF_FontSetTtfStyle, mtrFontSetTtfStyle)
-MTR_SCRIPT_FUNC_V_U32t1I1(mtrSF_FontSetTtfOutline, mtrFontSetTtfOutline)
-MTR_SCRIPT_FUNC_B_U32t2U8t3S1(mtrSF_FontRenderTtfString, mtrFontRenderTtfString)
-MTR_SCRIPT_FUNC_U32t_S1I3(mtrSF_FontCreateMbf, mtrFontCreateMbf)
-MTR_SCRIPT_FUNC_B_U32t2UI1(mtrSF_FontAddMbfTextureTable,
- mtrFontAddMbfTextureTable)
-MTR_SCRIPT_FUNC_B_U32t1F2S1(mtrSF_FontDrawMbfString_f, mtrFontDrawMbfString_f)
-MTR_SCRIPT_FUNC_I_U32t1(mtrSF_FontGetHeight, mtrFontGetHeight)
-MTR_SCRIPT_FUNC_I_U32t1S1(mtrSF_FontGetStringWidth, mtrFontGetStringWidth)
-MTR_SCRIPT_FUNC_S_U32t1(mtrSF_FontGetName, mtrFontGetName)
+MTR_SCRIPT_FUNC_I_S1(MTR_SF_FontFunctionSupported, MTR_FontFunctionSupported)
+MTR_SCRIPT_FUNC_B_U32t2(MTR_SF_FontInit, MTR_FontInit)
+MTR_SCRIPT_FUNC_U32t_S1I1(MTR_SF_FontLoadTtf, MTR_FontLoadTtf)
+MTR_SCRIPT_FUNC_V_U32t1(MTR_SF_FontFree, MTR_FontFree)
+MTR_SCRIPT_FUNC_V_U32t1I1(MTR_SF_FontSetTtfStyle, MTR_FontSetTtfStyle)
+MTR_SCRIPT_FUNC_V_U32t1I1(MTR_SF_FontSetTtfOutline, MTR_FontSetTtfOutline)
+MTR_SCRIPT_FUNC_B_U32t2U8t3S1(MTR_SF_FontRenderTtfString, MTR_FontRenderTtfString)
+MTR_SCRIPT_FUNC_U32t_S1I3(MTR_SF_FontCreateMbf, MTR_FontCreateMbf)
+MTR_SCRIPT_FUNC_B_U32t2UI1(MTR_SF_FontAddMbfTextureTable,
+ MTR_FontAddMbfTextureTable)
+MTR_SCRIPT_FUNC_B_U32t1F2S1(MTR_SF_FontDrawMbfString_f, MTR_FontDrawMbfString_f)
+MTR_SCRIPT_FUNC_I_U32t1(MTR_SF_FontGetHeight, MTR_FontGetHeight)
+MTR_SCRIPT_FUNC_I_U32t1S1(MTR_SF_FontGetStringWidth, MTR_FontGetStringWidth)
+MTR_SCRIPT_FUNC_S_U32t1(MTR_SF_FontGetName, MTR_FontGetName)
 
-void mtrScriptsRegisterAll(void)
+void MTR_ScriptsRegisterAll(void)
 {
-    mtrVm = mtrScriptsGetVm();
+    mtrVm = MTR_ScriptsGetVm();
 
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_font", FontFunctionSupported);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_font", FontInit);

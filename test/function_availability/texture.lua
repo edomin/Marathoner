@@ -2,56 +2,56 @@
 FileWriteLineFast("test/output.txt", "Function Availability", FM_WRITE);
 local fa = dofile("test/common/function_availability.lua");
 
-fa.FunctionSupported(TextureInit, "mtrTextureInit", TextureFunctionSupported);
-fa.FunctionSupported(TextureBeginTarget, "mtrTextureBeginTarget",
+fa.FunctionSupported(TextureInit, "MTR_TextureInit", TextureFunctionSupported);
+fa.FunctionSupported(TextureBeginTarget, "MTR_TextureBeginTarget",
  TextureFunctionSupported);
-fa.FunctionSupported(TextureEndTarget, "mtrTextureEndTarget",
+fa.FunctionSupported(TextureEndTarget, "MTR_TextureEndTarget",
  TextureFunctionSupported);
-fa.FunctionSupported(TextureGetWidth, "mtrTextureGetWidth",
+fa.FunctionSupported(TextureGetWidth, "MTR_TextureGetWidth",
  TextureFunctionSupported);
-fa.FunctionSupported(TextureGetHeight, "mtrTextureGetHeight",
+fa.FunctionSupported(TextureGetHeight, "MTR_TextureGetHeight",
  TextureFunctionSupported);
-fa.FunctionSupported(TextureGetSizes, "mtrTextureGetSizes",
+fa.FunctionSupported(TextureGetSizes, "MTR_TextureGetSizes",
  TextureFunctionSupported);
-fa.FunctionSupported(TextureCreate, "mtrTextureCreate",
+fa.FunctionSupported(TextureCreate, "MTR_TextureCreate",
  TextureFunctionSupported);
-fa.FunctionSupported(TextureLoad, "mtrTextureLoad", TextureFunctionSupported);
-fa.FunctionSupported(TextureCopy, "mtrTextureCopy", TextureFunctionSupported);
-fa.FunctionSupported(TextureSave, "mtrTextureSave", TextureFunctionSupported);
-fa.FunctionSupported(TextureFree, "mtrTextureFree", TextureFunctionSupported);
-fa.FunctionSupported(TextureSetModulation_c, "mtrTextureSetModulation_c",
+fa.FunctionSupported(TextureLoad, "MTR_TextureLoad", TextureFunctionSupported);
+fa.FunctionSupported(TextureCopy, "MTR_TextureCopy", TextureFunctionSupported);
+fa.FunctionSupported(TextureSave, "MTR_TextureSave", TextureFunctionSupported);
+fa.FunctionSupported(TextureFree, "MTR_TextureFree", TextureFunctionSupported);
+fa.FunctionSupported(TextureSetModulation_c, "MTR_TextureSetModulation_c",
  TextureFunctionSupported);
-fa.FunctionSupported(TextureSetModulation_ca, "mtrTextureSetModulation_ca",
+fa.FunctionSupported(TextureSetModulation_ca, "MTR_TextureSetModulation_ca",
  TextureFunctionSupported);
-fa.FunctionSupported(TextureSetModulation_rgb, "mtrTextureSetModulation_rgb",
+fa.FunctionSupported(TextureSetModulation_rgb, "MTR_TextureSetModulation_rgb",
  TextureFunctionSupported);
-fa.FunctionSupported(TextureSetModulation_rgba, "mtrTextureSetModulation_rgba",
+fa.FunctionSupported(TextureSetModulation_rgba, "MTR_TextureSetModulation_rgba",
  TextureFunctionSupported);
-fa.FunctionSupported(TextureSetModulationAlpha, "mtrTextureSetModulationAlpha",
+fa.FunctionSupported(TextureSetModulationAlpha, "MTR_TextureSetModulationAlpha",
  TextureFunctionSupported);
 fa.FunctionSupported(TextureSetModulationAlpha_f,
- "mtrTextureSetModulationAlpha_f", TextureFunctionSupported);
-fa.FunctionSupported(TextureBlit_f, "mtrTextureBlit_f",
+ "MTR_TextureSetModulationAlpha_f", TextureFunctionSupported);
+fa.FunctionSupported(TextureBlit_f, "MTR_TextureBlit_f",
  TextureFunctionSupported);
-fa.FunctionSupported(TextureBlitSized_f, "mtrTextureBlitSized_f",
+fa.FunctionSupported(TextureBlitSized_f, "MTR_TextureBlitSized_f",
  TextureFunctionSupported);
-fa.FunctionSupported(TextureBlitScaled_f, "mtrTextureBlitScaled_f",
+fa.FunctionSupported(TextureBlitScaled_f, "MTR_TextureBlitScaled_f",
  TextureFunctionSupported);
-fa.FunctionSupported(TextureBlitAngled_f, "mtrTextureBlitAngled_f",
+fa.FunctionSupported(TextureBlitAngled_f, "MTR_TextureBlitAngled_f",
  TextureFunctionSupported);
-fa.FunctionSupported(TextureBlitFlipped_f, "mtrTextureBlitFlipped_f",
+fa.FunctionSupported(TextureBlitFlipped_f, "MTR_TextureBlitFlipped_f",
  TextureFunctionSupported);
-fa.FunctionSupported(TextureBlitGeneral_f, "mtrTextureBlitGeneral_f",
+fa.FunctionSupported(TextureBlitGeneral_f, "MTR_TextureBlitGeneral_f",
  TextureFunctionSupported);
-fa.FunctionSupported(TextureBlitRegion_f, "mtrTextureBlitRegion_f",
+fa.FunctionSupported(TextureBlitRegion_f, "MTR_TextureBlitRegion_f",
  TextureFunctionSupported);
-fa.FunctionSupported(TextureBlitRegionSized_f, "mtrTextureBlitRegionSized_f",
+fa.FunctionSupported(TextureBlitRegionSized_f, "MTR_TextureBlitRegionSized_f",
  TextureFunctionSupported);
-fa.FunctionSupported(TextureBlitRegionScaled_f, "mtrTextureBlitRegionScaled_f",
+fa.FunctionSupported(TextureBlitRegionScaled_f, "MTR_TextureBlitRegionScaled_f",
  TextureFunctionSupported);
-fa.FunctionSupported(TextureBlitRegionAngled_f, "mtrTextureBlitRegionAngled_f",
+fa.FunctionSupported(TextureBlitRegionAngled_f, "MTR_TextureBlitRegionAngled_f",
  TextureFunctionSupported);
 fa.FunctionSupported(TextureBlitRegionFlipped_f,
- "mtrTextureBlitRegionFlipped_f", TextureFunctionSupported);
+ "MTR_TextureBlitRegionFlipped_f", TextureFunctionSupported);
 fa.FunctionSupported(TextureBlitRegionGeneral_f,
- "mtrTextureBlitRegionGeneral_f", TextureFunctionSupported);
+ "MTR_TextureBlitRegionGeneral_f", TextureFunctionSupported);

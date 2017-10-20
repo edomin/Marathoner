@@ -20,7 +20,7 @@ static bool  mtrScreenInited = false;
 #define MTR_SCREEN_CHECK_IF_NOT_INITED_WITH_LOG(message, returnValue) \
     if (!mtrScreenInited)                                             \
     {                                                                 \
-        mtrLogWrite(message ". Screen are not initialized",           \
+        MTR_LogWrite(message ". Screen are not initialized",          \
          1, MTR_LMT_ERROR);                                           \
         return returnValue;                                           \
     }

@@ -7,9 +7,6 @@
 #include "fa/Primitive_SDL2_gfx.h"
 #include "marathoner/plugin.h"
 
-//#define MTR_ARC_SEGMENTS_COUNT 64
-//#define MTR_PI_180_F 0.01745329f
-
 typedef struct mtrScreen_t {
     SDL_Window   *screen;
     SDL_Renderer *renderer;
@@ -28,16 +25,16 @@ static bool  mtrPrimitiveInited = false;
 #define MTR_PRIMITIVE_CHECK_IF_NOT_INITED_WITH_LOG(message, returnValue) \
     if (!mtrPrimitiveInited)                                             \
     {                                                                    \
-        mtrLogWrite(                                                     \
+        MTR_LogWrite(                                                    \
          message ". Primitive drawing subsystem are not initialized", 1, \
          MTR_LMT_ERROR);                                                 \
         return returnValue;                                              \
     }
 
 typedef mtrScreen_t *(MTR_CALL * mtrGetScreenFunc)(void);
-mtrGetScreenFunc mtrGetScreen;
+mtrGetScreenFunc MTR_GetScreen;
 
-static inline void mtrColor24ToRgb(uint32_t color, uint8_t *r, uint8_t *g,
+static inline void MTR_Color24ToRgb(uint32_t color, uint8_t *r, uint8_t *g,
  uint8_t *b)
 {
     *r = color >> 16U;
@@ -45,7 +42,7 @@ static inline void mtrColor24ToRgb(uint32_t color, uint8_t *r, uint8_t *g,
     *b = color & 0x0000FFU;
 }
 
-static inline void mtrColor32ToRgba(uint32_t color, uint8_t *r, uint8_t *g,
+static inline void MTR_Color32ToRgba(uint32_t color, uint8_t *r, uint8_t *g,
  uint8_t *b, uint8_t *a)
 {
     *r = color >> 24U;

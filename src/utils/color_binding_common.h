@@ -1,75 +1,75 @@
 #ifndef MTR_UTILS_COLOR_BINDING_COMMON_H
 #define MTR_UTILS_COLOR_BINDING_COMMON_H
 
-typedef int (MTR_CALL * mtrColorFunctionSupportedFunc)(const char *);
-mtrColorFunctionSupportedFunc mtrColorFunctionSupported;
+typedef int (MTR_CALL * MTR_ColorFunctionSupportedFunc)(const char *);
+MTR_ColorFunctionSupportedFunc MTR_ColorFunctionSupported;
 
-typedef uint32_t (MTR_CALL * mtrColorAssembleRGBFunc)(uint8_t, uint8_t,
+typedef uint32_t (MTR_CALL * MTR_ColorAssembleRGBFunc)(uint8_t, uint8_t,
  uint8_t);
-mtrColorAssembleRGBFunc mtrColorAssembleRGB;
+MTR_ColorAssembleRGBFunc MTR_ColorAssembleRGB;
 
-typedef uint32_t (MTR_CALL * mtrColorAssembleRGBAFunc)(uint8_t, uint8_t,
+typedef uint32_t (MTR_CALL * MTR_ColorAssembleRGBAFunc)(uint8_t, uint8_t,
  uint8_t, uint8_t);
-mtrColorAssembleRGBAFunc mtrColorAssembleRGBA;
+MTR_ColorAssembleRGBAFunc MTR_ColorAssembleRGBA;
 
 #ifdef lua_h
-typedef void (MTR_CALL * mtrColorSplitRGBFunc)(uint32_t, uint8_t *, uint8_t *,
+typedef void (MTR_CALL * MTR_ColorSplitRGBFunc)(uint32_t, uint8_t *, uint8_t *,
  uint8_t *);
-mtrColorSplitRGBFunc mtrColorSplitRGB;
+MTR_ColorSplitRGBFunc MTR_ColorSplitRGB;
 #endif
 
-typedef uint8_t (MTR_CALL * mtrColorRGBGetRFunc)(uint32_t);
-mtrColorRGBGetRFunc mtrColorRGBGetR;
+typedef uint8_t (MTR_CALL * MTR_ColorRGBGetRFunc)(uint32_t);
+MTR_ColorRGBGetRFunc MTR_ColorRGBGetR;
 
-typedef uint8_t (MTR_CALL * mtrColorRGBGetGFunc)(uint32_t);
-mtrColorRGBGetGFunc mtrColorRGBGetG;
+typedef uint8_t (MTR_CALL * MTR_ColorRGBGetGFunc)(uint32_t);
+MTR_ColorRGBGetGFunc MTR_ColorRGBGetG;
 
-typedef uint8_t (MTR_CALL * mtrColorRGBGetBFunc)(uint32_t);
-mtrColorRGBGetBFunc mtrColorRGBGetB;
+typedef uint8_t (MTR_CALL * MTR_ColorRGBGetBFunc)(uint32_t);
+MTR_ColorRGBGetBFunc MTR_ColorRGBGetB;
 
-typedef uint32_t (MTR_CALL * mtrColorRGBSetRFunc)(uint32_t, uint8_t);
-mtrColorRGBSetRFunc mtrColorRGBSetR;
+typedef uint32_t (MTR_CALL * MTR_ColorRGBSetRFunc)(uint32_t, uint8_t);
+MTR_ColorRGBSetRFunc MTR_ColorRGBSetR;
 
-typedef uint32_t (MTR_CALL * mtrColorRGBSetGFunc)(uint32_t, uint8_t);
-mtrColorRGBSetGFunc mtrColorRGBSetG;
+typedef uint32_t (MTR_CALL * MTR_ColorRGBSetGFunc)(uint32_t, uint8_t);
+MTR_ColorRGBSetGFunc MTR_ColorRGBSetG;
 
-typedef uint32_t (MTR_CALL * mtrColorRGBSetBFunc)(uint32_t, uint8_t);
-mtrColorRGBSetBFunc mtrColorRGBSetB;
+typedef uint32_t (MTR_CALL * MTR_ColorRGBSetBFunc)(uint32_t, uint8_t);
+MTR_ColorRGBSetBFunc MTR_ColorRGBSetB;
 
 #ifdef lua_h
-typedef void (MTR_CALL * mtrColorSplitRGBAFunc)(uint32_t, uint8_t *, uint8_t *,
+typedef void (MTR_CALL * MTR_ColorSplitRGBAFunc)(uint32_t, uint8_t *, uint8_t *,
  uint8_t *, uint8_t *);
-mtrColorSplitRGBAFunc mtrColorSplitRGBA;
+MTR_ColorSplitRGBAFunc MTR_ColorSplitRGBA;
 #endif
 
-typedef uint8_t (MTR_CALL * mtrColorRGBAGetRFunc)(uint32_t);
-mtrColorRGBAGetRFunc mtrColorRGBAGetR;
+typedef uint8_t (MTR_CALL * MTR_ColorRGBAGetRFunc)(uint32_t);
+MTR_ColorRGBAGetRFunc MTR_ColorRGBAGetR;
 
-typedef uint8_t (MTR_CALL * mtrColorRGBAGetGFunc)(uint32_t);
-mtrColorRGBAGetGFunc mtrColorRGBAGetG;
+typedef uint8_t (MTR_CALL * MTR_ColorRGBAGetGFunc)(uint32_t);
+MTR_ColorRGBAGetGFunc MTR_ColorRGBAGetG;
 
-typedef uint8_t (MTR_CALL * mtrColorRGBAGetBFunc)(uint32_t);
-mtrColorRGBAGetBFunc mtrColorRGBAGetB;
+typedef uint8_t (MTR_CALL * MTR_ColorRGBAGetBFunc)(uint32_t);
+MTR_ColorRGBAGetBFunc MTR_ColorRGBAGetB;
 
-typedef uint8_t (MTR_CALL * mtrColorRGBAGetAFunc)(uint32_t);
-mtrColorRGBAGetAFunc mtrColorRGBAGetA;
+typedef uint8_t (MTR_CALL * MTR_ColorRGBAGetAFunc)(uint32_t);
+MTR_ColorRGBAGetAFunc MTR_ColorRGBAGetA;
 
-typedef uint32_t (MTR_CALL * mtrColorRGBASetRFunc)(uint32_t, uint8_t);
-mtrColorRGBASetRFunc mtrColorRGBASetR;
+typedef uint32_t (MTR_CALL * MTR_ColorRGBASetRFunc)(uint32_t, uint8_t);
+MTR_ColorRGBASetRFunc MTR_ColorRGBASetR;
 
-typedef uint32_t (MTR_CALL * mtrColorRGBASetGFunc)(uint32_t, uint8_t);
-mtrColorRGBASetGFunc mtrColorRGBASetG;
+typedef uint32_t (MTR_CALL * MTR_ColorRGBASetGFunc)(uint32_t, uint8_t);
+MTR_ColorRGBASetGFunc MTR_ColorRGBASetG;
 
-typedef uint32_t (MTR_CALL * mtrColorRGBASetBFunc)(uint32_t, uint8_t);
-mtrColorRGBASetBFunc mtrColorRGBASetB;
+typedef uint32_t (MTR_CALL * MTR_ColorRGBASetBFunc)(uint32_t, uint8_t);
+MTR_ColorRGBASetBFunc MTR_ColorRGBASetB;
 
-typedef uint32_t (MTR_CALL * mtrColorRGBASetAFunc)(uint32_t, uint8_t);
-mtrColorRGBASetAFunc mtrColorRGBASetA;
+typedef uint32_t (MTR_CALL * MTR_ColorRGBASetAFunc)(uint32_t, uint8_t);
+MTR_ColorRGBASetAFunc MTR_ColorRGBASetA;
 
-typedef uint32_t (MTR_CALL * mtrColorRGBtoRGBAFunc)(uint32_t);
-mtrColorRGBtoRGBAFunc mtrColorRGBtoRGBA;
+typedef uint32_t (MTR_CALL * MTR_ColorRGBtoRGBAFunc)(uint32_t);
+MTR_ColorRGBtoRGBAFunc MTR_ColorRGBtoRGBA;
 
-typedef uint32_t (MTR_CALL * mtrColorRGBAtoRGBFunc)(uint32_t);
-mtrColorRGBAtoRGBFunc mtrColorRGBAtoRGB;
+typedef uint32_t (MTR_CALL * MTR_ColorRGBAtoRGBFunc)(uint32_t);
+MTR_ColorRGBAtoRGBFunc MTR_ColorRGBAtoRGB;
 
 #endif

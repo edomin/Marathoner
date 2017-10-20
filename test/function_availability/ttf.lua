@@ -2,17 +2,17 @@
 FileWriteLineFast("test/output.txt", "Function Availability", FM_WRITE);
 local fa = dofile("test/common/function_availability.lua");
 
-fa.FunctionSupported(TtfInit, "mtrTtfInit", TtfFunctionSupported);
-fa.FunctionSupported(TtfQuit, "mtrTtfQuit", TtfFunctionSupported);
-fa.FunctionSupported(TtfLoad, "mtrTtfLoad", TtfFunctionSupported);
-fa.FunctionSupported(TtfFree, "mtrTtfFree", TtfFunctionSupported);
-fa.FunctionSupported(TtfGetFontHeight, "mtrTtfGetFontHeight",
+fa.FunctionSupported(TtfInit, "MTR_TtfInit", TtfFunctionSupported);
+fa.FunctionSupported(TtfQuit, "MTR_TtfQuit", TtfFunctionSupported);
+fa.FunctionSupported(TtfLoad, "MTR_TtfLoad", TtfFunctionSupported);
+fa.FunctionSupported(TtfFree, "MTR_TtfFree", TtfFunctionSupported);
+fa.FunctionSupported(TtfGetFontHeight, "MTR_TtfGetFontHeight",
  TtfFunctionSupported);
-fa.FunctionSupported(TtfGetStringSizes, "mtrTtfGetStringSizes",
+fa.FunctionSupported(TtfGetStringSizes, "MTR_TtfGetStringSizes",
  TtfFunctionSupported);
-fa.FunctionSupported(TtfGetStringWidth, "mtrTtfGetStringWidth",
+fa.FunctionSupported(TtfGetStringWidth, "MTR_TtfGetStringWidth",
  TtfFunctionSupported);
-fa.FunctionSupported(TtfSetFontStyle, "mtrTtfSetFontStyle",
+fa.FunctionSupported(TtfSetFontStyle, "MTR_TtfSetFontStyle",
  TtfFunctionSupported);
-fa.FunctionSupported(TtfSetFontOutline, "mtrTtfSetFontOutline",
+fa.FunctionSupported(TtfSetFontOutline, "MTR_TtfSetFontOutline",
  TtfFunctionSupported);

@@ -1,7 +1,7 @@
 #include "messagebox.h"
 
-/*fa mtrShowSimpleMessageBox yes */
-void MTR_CALL mtrShowSimpleMessageBox(uint8_t type, const char *title,
+/*fa MTR_ShowSimpleMessageBox yes */
+void MTR_CALL MTR_ShowSimpleMessageBox(uint8_t type, const char *title,
  const char *message)
 {
     const char *emptyString = "";
@@ -66,8 +66,8 @@ void MTR_CALL mtrShowSimpleMessageBox(uint8_t type, const char *title,
     }
 }
 
-/*fa mtrShowYesNoMessageBox yes */
-bool MTR_CALL mtrShowYesNoMessageBox(const char *title, const char *message)
+/*fa MTR_ShowYesNoMessageBox yes */
+bool MTR_CALL MTR_ShowYesNoMessageBox(const char *title, const char *message)
 {
     const char *emptyString = "";
     const char *resultTitle;
@@ -112,8 +112,8 @@ bool MTR_CALL mtrShowYesNoMessageBox(const char *title, const char *message)
 }
 
 /* MinGW only */
-/*fa mtrShowOkCancelMessageBox yes */
-bool MTR_CALL mtrShowOkCancelMessageBox(const char *title, const char *message)
+/*fa MTR_ShowOkCancelMessageBox yes */
+bool MTR_CALL MTR_ShowOkCancelMessageBox(const char *title, const char *message)
 {
     const char *emptyString = "";
     const char *resultTitle;
@@ -133,8 +133,8 @@ bool MTR_CALL mtrShowOkCancelMessageBox(const char *title, const char *message)
 }
 
 /* MinGW only */
-/*fa mtrShowInputDialog yes */
-const char *MTR_CALL mtrShowInputDialog(const char *title, const char *message,
+/*fa MTR_ShowInputDialog yes */
+const char *MTR_CALL MTR_ShowInputDialog(const char *title, const char *message,
  const char *defaultInput)
 {
     const char *emptyString = "";
@@ -161,8 +161,8 @@ const char *MTR_CALL mtrShowInputDialog(const char *title, const char *message,
 }
 
 /* MinGW only */
-/*fa mtrShowPasswordDialog yes */
-const char *MTR_CALL mtrShowPasswordDialog(const char *title,
+/*fa MTR_ShowPasswordDialog yes */
+const char *MTR_CALL MTR_ShowPasswordDialog(const char *title,
  const char *message)
 {
     const char *emptyString = "";
@@ -182,8 +182,8 @@ const char *MTR_CALL mtrShowPasswordDialog(const char *title,
     return tinyfd_inputBox(resultTitle, resultMessage, NULL);
 }
 
-/*fa mtrAddFileFilter yes */
-void MTR_CALL mtrAddFileFilter(const char *filter)
+/*fa MTR_AddFileFilter yes */
+void MTR_CALL MTR_AddFileFilter(const char *filter)
 {
 //    int len;
 //    len = strlen(filter);
@@ -195,8 +195,8 @@ void MTR_CALL mtrAddFileFilter(const char *filter)
     mtrFileFiltersCount++;
 }
 
-/*fa mtrClearFileFilters yes */
-void MTR_CALL mtrClearFileFilters(void)
+/*fa MTR_ClearFileFilters yes */
+void MTR_CALL MTR_ClearFileFilters(void)
 {
     int i;
 
@@ -214,8 +214,8 @@ void MTR_CALL mtrClearFileFilters(void)
 }
 
 /* MinGW only */
-/*fa mtrShowSaveFileDialog yes */
-const char *MTR_CALL mtrShowSaveFileDialog(const char *title,
+/*fa MTR_ShowSaveFileDialog yes */
+const char *MTR_CALL MTR_ShowSaveFileDialog(const char *title,
  const char *defaultPathAndFile, const char *singleFilterDescription)
 {
     const char *emptyString = "";
@@ -237,8 +237,8 @@ const char *MTR_CALL mtrShowSaveFileDialog(const char *title,
 }
 
 /* MinGW only */
-/*fa mtrShowOpenFileDialog yes */
-const char *MTR_CALL mtrShowOpenFileDialog(const char *title,
+/*fa MTR_ShowOpenFileDialog yes */
+const char *MTR_CALL MTR_ShowOpenFileDialog(const char *title,
  const char *defaultPathAndFile, const char *singleFilterDescription)
 {
     const char *emptyString = "";
@@ -260,8 +260,8 @@ const char *MTR_CALL mtrShowOpenFileDialog(const char *title,
 }
 
 /* MinGW only */
-/*fa mtrShowSelectFolderDialog yes */
-const char *MTR_CALL mtrShowSelectFolderDialog(const char *title,
+/*fa MTR_ShowSelectFolderDialog yes */
+const char *MTR_CALL MTR_ShowSelectFolderDialog(const char *title,
  const char *defaultPath)
 {
     const char *emptyString = "";

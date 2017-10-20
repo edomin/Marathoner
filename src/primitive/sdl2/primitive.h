@@ -15,26 +15,26 @@ typedef struct mtrScreen_t {
 } mtrScreen_t;
 
 mtrScreen_t *mtrScreen; /* this will imported from screen plugin */
-float mtrLinePointX_f;
-float mtrLinePointY_f;
-bool  mtrLineDrawing;
-static bool mtrPrimitiveInited = false;
+float        mtrLinePointX_f;
+float        mtrLinePointY_f;
+bool         mtrLineDrawing;
+static bool  mtrPrimitiveInited = false;
 #define MTR_PRIMITIVE_CHECK_IF_NOT_INITED(returnValue) \
     if (!mtrPrimitiveInited)                           \
         return returnValue;
 #define MTR_PRIMITIVE_CHECK_IF_NOT_INITED_WITH_LOG(message, returnValue) \
     if (!mtrPrimitiveInited)                                             \
     {                                                                    \
-        mtrLogWrite(                                                     \
+        MTR_LogWrite(                                                    \
          message ". Primitive drawing subsystem are not initialized", 1, \
          MTR_LMT_ERROR);                                                 \
         return returnValue;                                              \
     }
 
 typedef mtrScreen_t *(MTR_CALL * mtrGetScreenFunc)(void);
-mtrGetScreenFunc mtrGetScreen;
+mtrGetScreenFunc MTR_GetScreen;
 
-static inline void mtrColor24ToRgb(uint32_t color, uint8_t *r, uint8_t *g,
+static inline void MTR_Color24ToRgb(uint32_t color, uint8_t *r, uint8_t *g,
  uint8_t *b)
 {
     *r = color >> 16U;
@@ -42,7 +42,7 @@ static inline void mtrColor24ToRgb(uint32_t color, uint8_t *r, uint8_t *g,
     *b = color & 0x0000FFU;
 }
 
-static inline void mtrColor32ToRgba(uint32_t color, uint8_t *r, uint8_t *g,
+static inline void MTR_Color32ToRgba(uint32_t color, uint8_t *r, uint8_t *g,
  uint8_t *b, uint8_t *a)
 {
     *r = color >> 24U;
@@ -51,14 +51,14 @@ static inline void mtrColor32ToRgba(uint32_t color, uint8_t *r, uint8_t *g,
     *a = color & 0x000000FFU;
 }
 
-MTR_EXPORT void MTR_CALL mtrPrimitiveLineBegin_f(float, float);
-MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_rgb_f(float, float, uint8_t,
+MTR_EXPORT void MTR_CALL MTR_PrimitiveLineBegin_f(float, float);
+MTR_EXPORT void MTR_CALL MTR_PrimitiveLineTo_rgb_f(float, float, uint8_t,
  uint8_t, uint8_t);
-MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_rgba_f(float, float, uint8_t,
+MTR_EXPORT void MTR_CALL MTR_PrimitiveLineTo_rgba_f(float, float, uint8_t,
  uint8_t, uint8_t, uint8_t);
-MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_c_f(float, float, uint32_t);
-MTR_EXPORT void MTR_CALL mtrPrimitiveLineTo_ca_f(float, float, uint32_t);
-MTR_EXPORT void MTR_CALL mtrPrimitiveLineEnd(void);
+MTR_EXPORT void MTR_CALL MTR_PrimitiveLineTo_c_f(float, float, uint32_t);
+MTR_EXPORT void MTR_CALL MTR_PrimitiveLineTo_ca_f(float, float, uint32_t);
+MTR_EXPORT void MTR_CALL MTR_PrimitiveLineEnd(void);
 
 #endif
 

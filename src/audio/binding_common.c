@@ -3,39 +3,41 @@
 
 #include "marathoner/script_func.h"
 
-MTR_SCRIPT_FUNC_I_S1(mtrSF_AudioFunctionSupported, mtrAudioFunctionSupported)
-MTR_SCRIPT_FUNC_B_U32t4I3(mtrSF_AudioInit, mtrAudioInit)
-MTR_SCRIPT_FUNC_V_V(mtrSF_AudioQuit, mtrAudioQuit)
-MTR_SCRIPT_FUNC_U32t_S1(mtrSF_AudioSoundLoad, mtrAudioSoundLoad)
-MTR_SCRIPT_FUNC_U32t_S1(mtrSF_AudioMusicLoad, mtrAudioMusicLoad)
-MTR_SCRIPT_FUNC_V_U32t1(mtrSF_AudioSoundPlay, mtrAudioSoundPlay)
-MTR_SCRIPT_FUNC_V_U32t1I1(mtrSF_AudioSoundFadeInPlay, mtrAudioSoundFadeInPlay)
-MTR_SCRIPT_FUNC_V_U32t1I1(mtrSF_AudioSoundSetVolume, mtrAudioSoundSetVolume)
-MTR_SCRIPT_FUNC_V_U32t1F1(mtrSF_AudioSoundSetVolume_f, mtrAudioSoundSetVolume_f)
-MTR_SCRIPT_FUNC_V_U32t1(mtrSF_AudioSoundStop, mtrAudioSoundStop)
-MTR_SCRIPT_FUNC_V_U32t1I1(mtrSF_AudioSoundFadeOutStop, mtrAudioSoundFadeOutStop)
-MTR_SCRIPT_FUNC_V_I1(mtrSF_AudioChannelsSetVolume, mtrAudioChannelsSetVolume)
-MTR_SCRIPT_FUNC_V_F1(mtrSF_AudioChannelsSetVolume_f,
- mtrAudioChannelsSetVolume_f)
-MTR_SCRIPT_FUNC_V_V(mtrSF_AudioChannelsPause, mtrAudioChannelsPause)
-MTR_SCRIPT_FUNC_V_V(mtrSF_AudioChannelsResume, mtrAudioChannelsResume)
-MTR_SCRIPT_FUNC_V_V(mtrSF_AudioChannelsStop, mtrAudioChannelsStop)
-MTR_SCRIPT_FUNC_V_I1(mtrSF_AudioChannelsFadeOutStop,
- mtrAudioChannelsFadeOutStop)
-MTR_SCRIPT_FUNC_V_U32t1(mtrSF_AudioMusicPlay, mtrAudioMusicPlay)
-MTR_SCRIPT_FUNC_V_U32t1I1(mtrSF_AudioMusicFadeInPlay, mtrAudioMusicFadeInPlay)
-MTR_SCRIPT_FUNC_V_I1(mtrSF_AudioMusicSetVolume, mtrAudioMusicSetVolume)
-MTR_SCRIPT_FUNC_V_F1(mtrSF_AudioMusicSetVolume_f, mtrAudioMusicSetVolume_f)
-MTR_SCRIPT_FUNC_V_V(mtrSF_AudioMusicPause, mtrAudioMusicPause)
-MTR_SCRIPT_FUNC_V_V(mtrSF_AudioMusicResume, mtrAudioMusicResume)
-MTR_SCRIPT_FUNC_V_V(mtrSF_AudioMusicStop, mtrAudioMusicStop)
-MTR_SCRIPT_FUNC_V_I1(mtrSF_AudioMusicFadeOutStop, mtrAudioMusicFadeOutStop)
-MTR_SCRIPT_FUNC_V_U32t1(mtrSF_AudioSoundFree, mtrAudioSoundFree)
-MTR_SCRIPT_FUNC_V_U32t1(mtrSF_AudioMusicFree, mtrAudioMusicFree)
+MTR_SCRIPT_FUNC_I_S1(MTR_SF_AudioFunctionSupported, MTR_AudioFunctionSupported)
+MTR_SCRIPT_FUNC_B_U32t4I3(MTR_SF_AudioInit, MTR_AudioInit)
+MTR_SCRIPT_FUNC_V_V(MTR_SF_AudioQuit, MTR_AudioQuit)
+MTR_SCRIPT_FUNC_U32t_S1(MTR_SF_AudioSoundLoad, MTR_AudioSoundLoad)
+MTR_SCRIPT_FUNC_U32t_S1(MTR_SF_AudioMusicLoad, MTR_AudioMusicLoad)
+MTR_SCRIPT_FUNC_V_U32t1(MTR_SF_AudioSoundPlay, MTR_AudioSoundPlay)
+MTR_SCRIPT_FUNC_V_U32t1I1(MTR_SF_AudioSoundFadeInPlay, MTR_AudioSoundFadeInPlay)
+MTR_SCRIPT_FUNC_V_U32t1I1(MTR_SF_AudioSoundSetVolume, MTR_AudioSoundSetVolume)
+MTR_SCRIPT_FUNC_V_U32t1F1(MTR_SF_AudioSoundSetVolume_f,
+ MTR_AudioSoundSetVolume_f)
+MTR_SCRIPT_FUNC_V_U32t1(MTR_SF_AudioSoundStop, MTR_AudioSoundStop)
+MTR_SCRIPT_FUNC_V_U32t1I1(MTR_SF_AudioSoundFadeOutStop,
+ MTR_AudioSoundFadeOutStop)
+MTR_SCRIPT_FUNC_V_I1(MTR_SF_AudioChannelsSetVolume, MTR_AudioChannelsSetVolume)
+MTR_SCRIPT_FUNC_V_F1(MTR_SF_AudioChannelsSetVolume_f,
+ MTR_AudioChannelsSetVolume_f)
+MTR_SCRIPT_FUNC_V_V(MTR_SF_AudioChannelsPause, MTR_AudioChannelsPause)
+MTR_SCRIPT_FUNC_V_V(MTR_SF_AudioChannelsResume, MTR_AudioChannelsResume)
+MTR_SCRIPT_FUNC_V_V(MTR_SF_AudioChannelsStop, MTR_AudioChannelsStop)
+MTR_SCRIPT_FUNC_V_I1(MTR_SF_AudioChannelsFadeOutStop,
+ MTR_AudioChannelsFadeOutStop)
+MTR_SCRIPT_FUNC_V_U32t1(MTR_SF_AudioMusicPlay, MTR_AudioMusicPlay)
+MTR_SCRIPT_FUNC_V_U32t1I1(MTR_SF_AudioMusicFadeInPlay, MTR_AudioMusicFadeInPlay)
+MTR_SCRIPT_FUNC_V_I1(MTR_SF_AudioMusicSetVolume, MTR_AudioMusicSetVolume)
+MTR_SCRIPT_FUNC_V_F1(MTR_SF_AudioMusicSetVolume_f, MTR_AudioMusicSetVolume_f)
+MTR_SCRIPT_FUNC_V_V(MTR_SF_AudioMusicPause, MTR_AudioMusicPause)
+MTR_SCRIPT_FUNC_V_V(MTR_SF_AudioMusicResume, MTR_AudioMusicResume)
+MTR_SCRIPT_FUNC_V_V(MTR_SF_AudioMusicStop, MTR_AudioMusicStop)
+MTR_SCRIPT_FUNC_V_I1(MTR_SF_AudioMusicFadeOutStop, MTR_AudioMusicFadeOutStop)
+MTR_SCRIPT_FUNC_V_U32t1(MTR_SF_AudioSoundFree, MTR_AudioSoundFree)
+MTR_SCRIPT_FUNC_V_U32t1(MTR_SF_AudioMusicFree, MTR_AudioMusicFree)
 
-void mtrScriptsRegisterAll(void)
+void MTR_ScriptsRegisterAll(void)
 {
-    mtrVm = mtrScriptsGetVm();
+    mtrVm = MTR_ScriptsGetVm();
 
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, AudioFunctionSupported);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, AudioInit);
@@ -65,12 +67,12 @@ void mtrScriptsRegisterAll(void)
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, AudioSoundFree);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, AudioMusicFree);
 
-    mtrScriptsRegisterVariable_i("AU_FREQ_DEFAULT", MTR_AU_FREQ_DEFAULT);
-    mtrScriptsRegisterVariable_i("AU_CHANNELS_DEFAULT",
+    MTR_ScriptsRegisterVariable_i("AU_FREQ_DEFAULT", MTR_AU_FREQ_DEFAULT);
+    MTR_ScriptsRegisterVariable_i("AU_CHANNELS_DEFAULT",
      MTR_AU_CHANNELS_DEFAULT);
-    mtrScriptsRegisterVariable_i("AU_CHUNK_SIZE_DEFAULT",
+    MTR_ScriptsRegisterVariable_i("AU_CHUNK_SIZE_DEFAULT",
      MTR_AU_CHUNK_SIZE_DEFAULT);
-    mtrScriptsRegisterVariable_i("AU_DEFAULT", MTR_AU_DEFAULT);
+    MTR_ScriptsRegisterVariable_i("AU_DEFAULT", MTR_AU_DEFAULT);
 }
 
 #endif

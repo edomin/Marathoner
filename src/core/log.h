@@ -14,14 +14,14 @@ struct tm  *mtrNow;
 const char *logFilename;
 char        mtrLogBuffer[256];
 
-void MTR_CALL mtrLogInit(const char *filename);
-void MTR_CALL mtrLogWrite(const char *message, uint8_t level,
+void MTR_CALL MTR_LogInit(const char *filename);
+void MTR_CALL MTR_LogWrite(const char *message, uint8_t level,
  uint8_t messageType);
-void MTR_CALL mtrLogWrite_s(const char *message, uint8_t level,
+void MTR_CALL MTR_LogWrite_s(const char *message, uint8_t level,
  uint8_t messageType, const char *argument);
-void MTR_CALL mtrLogWrite_i(const char *message, uint8_t level,
+void MTR_CALL MTR_LogWrite_i(const char *message, uint8_t level,
  uint8_t messageType, int32_t argument);
-void MTR_CALL mtrLogWrite_d(const char *message, uint8_t level,
+void MTR_CALL MTR_LogWrite_d(const char *message, uint8_t level,
  uint8_t messageType, double argument);
 
 #endif

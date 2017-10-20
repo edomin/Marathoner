@@ -17,12 +17,12 @@ typedef struct mtrIndexkeeper_t {
     uint32_t *dataMap;
 } mtrIndexkeeper_t;
 
-void *MTR_CALL mtrIndexkeeperCreate(uint32_t dmSize, uint32_t reservedCount,
+void *MTR_CALL MTR_IndexkeeperCreate(uint32_t dmSize, uint32_t reservedCount,
  size_t datasize);
-uint32_t MTR_CALL mtrIndexkeeperGetFreeIndex(void *ik);
-void MTR_CALL mtrIndexkeeperFreeIndex(void *ik, uint32_t index);
-bool MTR_CALL mtrIndexkeeperIndexIsEmpty(void *ik, uint32_t index);
-uint32_t MTR_CALL mtrIndexkeeperGetReservedDataCount(void *ik);
-void MTR_CALL mtrIndexkeeperDestroy(void *ik);
+uint32_t MTR_CALL MTR_IndexkeeperGetFreeIndex(void *ik);
+void MTR_CALL MTR_IndexkeeperFreeIndex(void *ik, uint32_t index);
+bool MTR_CALL MTR_IndexkeeperIndexIsEmpty(void *ik, uint32_t index);
+uint32_t MTR_CALL MTR_IndexkeeperGetReservedDataCount(void *ik);
+void MTR_CALL MTR_IndexkeeperDestroy(void *ik);
 
 #endif

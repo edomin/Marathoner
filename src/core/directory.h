@@ -15,12 +15,12 @@ typedef struct mtrDirectory_t{
     bool            endOfDirectory;
 } mtrDirectory_t;
 
-char *mtrGetCurrentDirectory(void);
+char *MTR_GetCurrentDirectory(void);
 /* directoryName format: "./<directoryName>/" */
-mtrDirectory_t *mtrDirectoryOpen(const char *directoryName);
-bool mtrDirectoryNextFile(mtrDirectory_t *directory);
-char *mtrDirectoryGetFilename(mtrDirectory_t *directory);
-bool mtrDirectoryFileIsDir(mtrDirectory_t *directory);
-void mtrDirectoryClose(mtrDirectory_t *directory);
+mtrDirectory_t *MTR_DirectoryOpen(const char *directoryName);
+bool MTR_DirectoryNextFile(mtrDirectory_t *directory);
+char *MTR_DirectoryGetFilename(mtrDirectory_t *directory);
+bool MTR_DirectoryFileIsDir(mtrDirectory_t *directory);
+void MTR_DirectoryClose(mtrDirectory_t *directory);
 
 #endif

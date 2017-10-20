@@ -20,12 +20,12 @@ static bool       mtrTtfInited = false;
 #define MTR_TTF_CHECK_IF_NOT_INITED(returnValue) \
     if (!mtrTtfInited)                           \
         return returnValue;
-#define MTR_TTF_CHECK_IF_NOT_INITED_WITH_LOG(message, returnValue)    \
-    if (!mtrTtfInited)                                                \
-    {                                                                 \
-        mtrLogWrite(message ". TTF font manager are not initialized", \
-         1, MTR_LMT_ERROR);                                           \
-        return returnValue;                                           \
+#define MTR_TTF_CHECK_IF_NOT_INITED_WITH_LOG(message, returnValue)     \
+    if (!mtrTtfInited)                                                 \
+    {                                                                  \
+        MTR_LogWrite(message ". TTF font manager are not initialized", \
+         1, MTR_LMT_ERROR);                                            \
+        return returnValue;                                            \
     }
 
 #endif

@@ -11,11 +11,11 @@ typedef struct mtrStringBuffer_t {
 
 mtrIndexkeeper_t *mtrStringBufferKeeper;
 
-bool MTR_CALL mtrStringBufferInit(uint32_t dmSize, uint32_t reservedCount);
-uint32_t MTR_CALL mtrStringBufferAdd(const char *initialString, int maxlen);
-void MTR_CALL mtrStringBufferDelete(uint32_t sbnum);
-void MTR_CALL mtrStringBufferSetString(uint32_t sbnum, const char *string);
-char *MTR_CALL mtrStringBufferGetString(uint32_t sbnum);
-int MTR_CALL mtrStringBufferGetMaxLen(uint32_t sbnum);
+bool MTR_CALL MTR_StringBufferInit(uint32_t dmSize, uint32_t reservedCount);
+uint32_t MTR_CALL MTR_StringBufferAdd(const char *initialString, int maxlen);
+void MTR_CALL MTR_StringBufferDelete(uint32_t sbnum);
+void MTR_CALL MTR_StringBufferSetString(uint32_t sbnum, const char *string);
+char *MTR_CALL MTR_StringBufferGetString(uint32_t sbnum);
+int MTR_CALL MTR_StringBufferGetMaxLen(uint32_t sbnum);
 
 #endif

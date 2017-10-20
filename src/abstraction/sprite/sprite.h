@@ -36,63 +36,63 @@ static bool mtrSpriteInited = false;
 #define MTR_SPRITE_CHECK_IF_NOT_INITED_WITH_LOG(message, returnValue) \
     if (!mtrSpriteInited)                                             \
     {                                                                 \
-        mtrLogWrite(                                                  \
+        MTR_LogWrite(                                                 \
          message ". Sprite abstraction manager are not initialized",  \
          1, MTR_LMT_ERROR);                                           \
         return returnValue;                                           \
     }
 
-typedef uint32_t (MTR_CALL * mtrTextureLoadFunc)(const char *);
-mtrTextureLoadFunc mtrTextureLoad;
+typedef uint32_t (MTR_CALL * MTR_TextureLoadFunc)(const char *);
+MTR_TextureLoadFunc MTR_TextureLoad;
 
-typedef void (MTR_CALL * mtrTextureFreeFunc)(uint32_t);
-mtrTextureFreeFunc mtrTextureFree;
+typedef void (MTR_CALL * MTR_TextureFreeFunc)(uint32_t);
+MTR_TextureFreeFunc MTR_TextureFree;
 
-typedef void (MTR_CALL * mtrTextureGetSizesFunc)(uint32_t, int *, int *);
-mtrTextureGetSizesFunc mtrTextureGetSizes;
+typedef void (MTR_CALL * MTR_TextureGetSizesFunc)(uint32_t, int *, int *);
+MTR_TextureGetSizesFunc MTR_TextureGetSizes;
 
-typedef void (MTR_CALL * mtrTextureSetModulation_cFunc)(uint32_t, uint32_t);
-mtrTextureSetModulation_cFunc mtrTextureSetModulation_c;
+typedef void (MTR_CALL * MTR_TextureSetModulation_cFunc)(uint32_t, uint32_t);
+MTR_TextureSetModulation_cFunc MTR_TextureSetModulation_c;
 
-typedef void (MTR_CALL * mtrTextureSetModulation_caFunc)(uint32_t, uint32_t);
-mtrTextureSetModulation_caFunc mtrTextureSetModulation_ca;
+typedef void (MTR_CALL * MTR_TextureSetModulation_caFunc)(uint32_t, uint32_t);
+MTR_TextureSetModulation_caFunc MTR_TextureSetModulation_ca;
 
-typedef void (MTR_CALL * mtrTextureSetModulation_rgbFunc)(uint32_t, uint8_t,
+typedef void (MTR_CALL * MTR_TextureSetModulation_rgbFunc)(uint32_t, uint8_t,
  uint8_t, uint8_t);
-mtrTextureSetModulation_rgbFunc mtrTextureSetModulation_rgb;
+MTR_TextureSetModulation_rgbFunc MTR_TextureSetModulation_rgb;
 
-typedef void (MTR_CALL * mtrTextureSetModulation_rgbaFunc)(uint32_t, uint8_t,
+typedef void (MTR_CALL * MTR_TextureSetModulation_rgbaFunc)(uint32_t, uint8_t,
  uint8_t, uint8_t, uint8_t);
-mtrTextureSetModulation_rgbaFunc mtrTextureSetModulation_rgba;
+MTR_TextureSetModulation_rgbaFunc MTR_TextureSetModulation_rgba;
 
-typedef void (MTR_CALL * mtrTextureSetModulationAlphaFunc)(uint32_t, uint8_t);
-mtrTextureSetModulationAlphaFunc mtrTextureSetModulationAlpha;
+typedef void (MTR_CALL * MTR_TextureSetModulationAlphaFunc)(uint32_t, uint8_t);
+MTR_TextureSetModulationAlphaFunc MTR_TextureSetModulationAlpha;
 
-typedef void (MTR_CALL * mtrTextureSetModulationAlpha_fFunc)(uint32_t, float);
-mtrTextureSetModulationAlpha_fFunc mtrTextureSetModulationAlpha_f;
+typedef void (MTR_CALL * MTR_TextureSetModulationAlpha_fFunc)(uint32_t, float);
+MTR_TextureSetModulationAlpha_fFunc MTR_TextureSetModulationAlpha_f;
 
-typedef void (MTR_CALL * mtrTextureBlitRegion_fFunc)(uint32_t, float, float,
+typedef void (MTR_CALL * MTR_TextureBlitRegion_fFunc)(uint32_t, float, float,
  float, float, float, float);
-mtrTextureBlitRegion_fFunc mtrTextureBlitRegion_f;
+MTR_TextureBlitRegion_fFunc MTR_TextureBlitRegion_f;
 
-typedef void (MTR_CALL * mtrTextureBlitRegionSized_fFunc)(uint32_t, float,
+typedef void (MTR_CALL * MTR_TextureBlitRegionSized_fFunc)(uint32_t, float,
  float, float, float, float, float, float, float);
-mtrTextureBlitRegionSized_fFunc mtrTextureBlitRegionSized_f;
+MTR_TextureBlitRegionSized_fFunc MTR_TextureBlitRegionSized_f;
 
-typedef void (MTR_CALL * mtrTextureBlitRegionScaled_fFunc)(uint32_t, float,
+typedef void (MTR_CALL * MTR_TextureBlitRegionScaled_fFunc)(uint32_t, float,
  float, float, float, float, float, float, float);
-mtrTextureBlitRegionScaled_fFunc mtrTextureBlitRegionScaled_f;
+MTR_TextureBlitRegionScaled_fFunc MTR_TextureBlitRegionScaled_f;
 
-typedef void (MTR_CALL * mtrTextureBlitRegionAngled_fFunc)(uint32_t, float,
+typedef void (MTR_CALL * MTR_TextureBlitRegionAngled_fFunc)(uint32_t, float,
  float, float, float, float, float, float, float, float);
-mtrTextureBlitRegionAngled_fFunc mtrTextureBlitRegionAngled_f;
+MTR_TextureBlitRegionAngled_fFunc MTR_TextureBlitRegionAngled_f;
 
-typedef void (MTR_CALL * mtrTextureBlitRegionFlipped_fFunc)(uint32_t, float,
+typedef void (MTR_CALL * MTR_TextureBlitRegionFlipped_fFunc)(uint32_t, float,
  float, float, float, float, float, int);
-mtrTextureBlitRegionFlipped_fFunc mtrTextureBlitRegionFlipped_f;
+MTR_TextureBlitRegionFlipped_fFunc MTR_TextureBlitRegionFlipped_f;
 
-typedef void (MTR_CALL * mtrTextureBlitRegionGeneral_fFunc)(uint32_t, float,
+typedef void (MTR_CALL * MTR_TextureBlitRegionGeneral_fFunc)(uint32_t, float,
  float, float, float, float, float, float, float, float, float, float, int);
-mtrTextureBlitRegionGeneral_fFunc mtrTextureBlitRegionGeneral_f;
+MTR_TextureBlitRegionGeneral_fFunc MTR_TextureBlitRegionGeneral_f;
 
 #endif

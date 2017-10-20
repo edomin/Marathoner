@@ -2,53 +2,53 @@
 FileWriteLineFast("test/output.txt", "Function Availability", FM_WRITE);
 local fa = dofile("test/common/function_availability.lua");
 
-fa.FunctionSupported(JsonInit, "mtrJsonInit", JsonFunctionSupported);
-fa.FunctionSupported(JsonCreateObject, "mtrJsonCreateObject",
+fa.FunctionSupported(JsonInit, "MTR_JsonInit", JsonFunctionSupported);
+fa.FunctionSupported(JsonCreateObject, "MTR_JsonCreateObject",
  JsonFunctionSupported);
-fa.FunctionSupported(JsonCreateArray, "mtrJsonCreateArray",
+fa.FunctionSupported(JsonCreateArray, "MTR_JsonCreateArray",
  JsonFunctionSupported);
-fa.FunctionSupported(JsonParseString, "mtrJsonParseString",
+fa.FunctionSupported(JsonParseString, "MTR_JsonParseString",
  JsonFunctionSupported);
-fa.FunctionSupported(JsonParseFile, "mtrJsonParseFile", JsonFunctionSupported);
-fa.FunctionSupported(JsonAddItemToObject, "mtrJsonAddItemToObject",
+fa.FunctionSupported(JsonParseFile, "MTR_JsonParseFile", JsonFunctionSupported);
+fa.FunctionSupported(JsonAddItemToObject, "MTR_JsonAddItemToObject",
  JsonFunctionSupported);
-fa.FunctionSupported(JsonAddStringToObject, "mtrJsonAddStringToObject",
+fa.FunctionSupported(JsonAddStringToObject, "MTR_JsonAddStringToObject",
  JsonFunctionSupported);
-fa.FunctionSupported(JsonAddDoubleToObject, "mtrJsonAddDoubleToObject",
+fa.FunctionSupported(JsonAddDoubleToObject, "MTR_JsonAddDoubleToObject",
  JsonFunctionSupported);
-fa.FunctionSupported(JsonAddBoolToObject, "mtrJsonAddBoolToObject",
+fa.FunctionSupported(JsonAddBoolToObject, "MTR_JsonAddBoolToObject",
  JsonFunctionSupported);
-fa.FunctionSupported(JsonAddNullToObject, "mtrJsonAddNullToObject",
+fa.FunctionSupported(JsonAddNullToObject, "MTR_JsonAddNullToObject",
  JsonFunctionSupported);
-fa.FunctionSupported(JsonAddItemToArray, "mtrJsonAddItemToArray",
+fa.FunctionSupported(JsonAddItemToArray, "MTR_JsonAddItemToArray",
  JsonFunctionSupported);
-fa.FunctionSupported(JsonAddStringToArray, "mtrJsonAddStringToArray",
+fa.FunctionSupported(JsonAddStringToArray, "MTR_JsonAddStringToArray",
  JsonFunctionSupported);
-fa.FunctionSupported(JsonAddDoubleToArray, "mtrJsonAddDoubleToArray",
+fa.FunctionSupported(JsonAddDoubleToArray, "MTR_JsonAddDoubleToArray",
  JsonFunctionSupported);
-fa.FunctionSupported(JsonAddBoolToArray, "mtrJsonAddBoolToArray",
+fa.FunctionSupported(JsonAddBoolToArray, "MTR_JsonAddBoolToArray",
  JsonFunctionSupported);
-fa.FunctionSupported(JsonAddNullToArray, "mtrJsonAddNullToArray",
+fa.FunctionSupported(JsonAddNullToArray, "MTR_JsonAddNullToArray",
  JsonFunctionSupported);
-fa.FunctionSupported(JsonGetObjectItem, "mtrJsonGetObjectItem",
+fa.FunctionSupported(JsonGetObjectItem, "MTR_JsonGetObjectItem",
  JsonFunctionSupported);
-fa.FunctionSupported(JsonGetArrayItem, "mtrJsonGetArrayItem",
+fa.FunctionSupported(JsonGetArrayItem, "MTR_JsonGetArrayItem",
  JsonFunctionSupported);
-fa.FunctionSupported(JsonToString, "mtrJsonToString", JsonFunctionSupported);
-fa.FunctionSupported(JsonToStringFormatted, "mtrJsonToStringFormatted",
+fa.FunctionSupported(JsonToString, "MTR_JsonToString", JsonFunctionSupported);
+fa.FunctionSupported(JsonToStringFormatted, "MTR_JsonToStringFormatted",
  JsonFunctionSupported);
-fa.FunctionSupported(JsonToFile, "mtrJsonToFile", JsonFunctionSupported);
-fa.FunctionSupported(JsonToFileFormatted, "mtrJsonToFileFormatted",
+fa.FunctionSupported(JsonToFile, "MTR_JsonToFile", JsonFunctionSupported);
+fa.FunctionSupported(JsonToFileFormatted, "MTR_JsonToFileFormatted",
  JsonFunctionSupported);
-fa.FunctionSupported(JsonDelete, "mtrJsonDelete", JsonFunctionSupported);
-fa.FunctionSupported(JsonDeleteItemFromObject, "mtrJsonDeleteItemFromObject",
+fa.FunctionSupported(JsonDelete, "MTR_JsonDelete", JsonFunctionSupported);
+fa.FunctionSupported(JsonDeleteItemFromObject, "MTR_JsonDeleteItemFromObject",
  JsonFunctionSupported);
-fa.FunctionSupported(JsonDeleteItemFromArray, "mtrJsonDeleteItemFromArray",
+fa.FunctionSupported(JsonDeleteItemFromArray, "MTR_JsonDeleteItemFromArray",
  JsonFunctionSupported);
-fa.FunctionSupported(JsonDetachItemFromObject, "mtrJsonDetachItemFromObject",
+fa.FunctionSupported(JsonDetachItemFromObject, "MTR_JsonDetachItemFromObject",
  JsonFunctionSupported);
-fa.FunctionSupported(JsonDetachItemFromArray, "mtrJsonDetachItemFromArray",
+fa.FunctionSupported(JsonDetachItemFromArray, "MTR_JsonDetachItemFromArray",
  JsonFunctionSupported);
-fa.FunctionSupported(JsonObjectHasItem, "mtrJsonObjectHasItem",
+fa.FunctionSupported(JsonObjectHasItem, "MTR_JsonObjectHasItem",
  JsonFunctionSupported);
-fa.FunctionSupported(JsonLength, "mtrJsonLength", JsonFunctionSupported);
+fa.FunctionSupported(JsonLength, "MTR_JsonLength", JsonFunctionSupported);

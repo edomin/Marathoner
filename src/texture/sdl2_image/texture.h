@@ -44,15 +44,15 @@ static bool       mtrTextureInited = false;
 #define MTR_TEXTURE_CHECK_IF_NOT_INITED_WITH_LOG(message, returnValue) \
     if (!mtrTextureInited)                                             \
     {                                                                  \
-        mtrLogWrite(message ". Texture manager are not initialized",   \
+        MTR_LogWrite(message ". Texture manager are not initialized",  \
          1, MTR_LMT_ERROR);                                            \
         return returnValue;                                            \
     }
 
 typedef mtrScreen_t *(MTR_CALL * mtrGetScreenFunc)(void);
-mtrGetScreenFunc mtrGetScreen;
+mtrGetScreenFunc MTR_GetScreen;
 
-MTR_EXPORT void MTR_CALL mtrTextureFree(uint32_t texNum);
+MTR_EXPORT void MTR_CALL MTR_TextureFree(uint32_t texNum);
 
 #endif
 

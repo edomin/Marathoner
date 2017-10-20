@@ -2,53 +2,53 @@
 FileWriteLineFast("test/output.txt", "Function Availability", FM_WRITE);
 local fa = dofile("test/common/function_availability.lua");
 
-fa.FunctionSupported(AudioInit, "mtrAudioInit", AudioFunctionSupported);
-fa.FunctionSupported(AudioQuit, "mtrAudioQuit", AudioFunctionSupported);
-fa.FunctionSupported(AudioSoundLoad, "mtrAudioSoundLoad",
+fa.FunctionSupported(AudioInit, "MTR_AudioInit", AudioFunctionSupported);
+fa.FunctionSupported(AudioQuit, "MTR_AudioQuit", AudioFunctionSupported);
+fa.FunctionSupported(AudioSoundLoad, "MTR_AudioSoundLoad",
  AudioFunctionSupported);
-fa.FunctionSupported(AudioMusicLoad, "mtrAudioMusicLoad",
+fa.FunctionSupported(AudioMusicLoad, "MTR_AudioMusicLoad",
  AudioFunctionSupported);
-fa.FunctionSupported(AudioSoundPlay, "mtrAudioSoundPlay",
+fa.FunctionSupported(AudioSoundPlay, "MTR_AudioSoundPlay",
  AudioFunctionSupported);
-fa.FunctionSupported(AudioSoundFadeInPlay, "mtrAudioSoundFadeInPlay",
+fa.FunctionSupported(AudioSoundFadeInPlay, "MTR_AudioSoundFadeInPlay",
  AudioFunctionSupported);
-fa.FunctionSupported(AudioSoundSetVolume, "mtrAudioSoundSetVolume",
+fa.FunctionSupported(AudioSoundSetVolume, "MTR_AudioSoundSetVolume",
  AudioFunctionSupported);
-fa.FunctionSupported(AudioSoundSetVolume_f, "mtrAudioSoundSetVolume_f",
+fa.FunctionSupported(AudioSoundSetVolume_f, "MTR_AudioSoundSetVolume_f",
  AudioFunctionSupported);
-fa.FunctionSupported(AudioSoundStop, "mtrAudioSoundStop",
+fa.FunctionSupported(AudioSoundStop, "MTR_AudioSoundStop",
  AudioFunctionSupported);
-fa.FunctionSupported(AudioSoundFadeOutStop, "mtrAudioSoundFadeOutStop",
+fa.FunctionSupported(AudioSoundFadeOutStop, "MTR_AudioSoundFadeOutStop",
  AudioFunctionSupported);
-fa.FunctionSupported(AudioChannelsSetVolume, "mtrAudioChannelsSetVolume",
+fa.FunctionSupported(AudioChannelsSetVolume, "MTR_AudioChannelsSetVolume",
  AudioFunctionSupported);
-fa.FunctionSupported(AudioChannelsSetVolume_f, "mtrAudioChannelsSetVolume_f",
+fa.FunctionSupported(AudioChannelsSetVolume_f, "MTR_AudioChannelsSetVolume_f",
  AudioFunctionSupported);
-fa.FunctionSupported(AudioChannelsPause, "mtrAudioChannelsPause",
+fa.FunctionSupported(AudioChannelsPause, "MTR_AudioChannelsPause",
  AudioFunctionSupported);
-fa.FunctionSupported(AudioChannelsResume, "mtrAudioChannelsResume",
+fa.FunctionSupported(AudioChannelsResume, "MTR_AudioChannelsResume",
  AudioFunctionSupported);
-fa.FunctionSupported(AudioChannelsStop, "mtrAudioChannelsStop",
+fa.FunctionSupported(AudioChannelsStop, "MTR_AudioChannelsStop",
  AudioFunctionSupported);
-fa.FunctionSupported(AudioChannelsFadeOutStop, "mtrAudioChannelsFadeOutStop",
+fa.FunctionSupported(AudioChannelsFadeOutStop, "MTR_AudioChannelsFadeOutStop",
  AudioFunctionSupported);
-fa.FunctionSupported(AudioMusicPlay, "mtrAudioMusicPlay",
+fa.FunctionSupported(AudioMusicPlay, "MTR_AudioMusicPlay",
  AudioFunctionSupported);
-fa.FunctionSupported(AudioMusicFadeInPlay, "mtrAudioMusicFadeInPlay",
+fa.FunctionSupported(AudioMusicFadeInPlay, "MTR_AudioMusicFadeInPlay",
  AudioFunctionSupported);
-fa.FunctionSupported(AudioMusicSetVolume, "mtrAudioMusicSetVolume",
+fa.FunctionSupported(AudioMusicSetVolume, "MTR_AudioMusicSetVolume",
  AudioFunctionSupported);
-fa.FunctionSupported(AudioMusicSetVolume_f, "mtrAudioMusicSetVolume_f",
+fa.FunctionSupported(AudioMusicSetVolume_f, "MTR_AudioMusicSetVolume_f",
  AudioFunctionSupported);
-fa.FunctionSupported(AudioMusicPause, "mtrAudioMusicPause",
+fa.FunctionSupported(AudioMusicPause, "MTR_AudioMusicPause",
  AudioFunctionSupported);
-fa.FunctionSupported(AudioMusicResume, "mtrAudioMusicResume",
+fa.FunctionSupported(AudioMusicResume, "MTR_AudioMusicResume",
  AudioFunctionSupported);
-fa.FunctionSupported(AudioMusicStop, "mtrAudioMusicStop",
+fa.FunctionSupported(AudioMusicStop, "MTR_AudioMusicStop",
  AudioFunctionSupported);
-fa.FunctionSupported(AudioMusicFadeOutStop, "mtrAudioMusicFadeOutStop",
+fa.FunctionSupported(AudioMusicFadeOutStop, "MTR_AudioMusicFadeOutStop",
  AudioFunctionSupported);
-fa.FunctionSupported(AudioSoundFree, "mtrAudioSoundFree",
+fa.FunctionSupported(AudioSoundFree, "MTR_AudioSoundFree",
  AudioFunctionSupported);
-fa.FunctionSupported(AudioMusicFree, "mtrAudioMusicFree",
+fa.FunctionSupported(AudioMusicFree, "MTR_AudioMusicFree",
  AudioFunctionSupported);

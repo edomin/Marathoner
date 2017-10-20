@@ -22,16 +22,16 @@ static bool  mtrPrimitiveInited = false;
 #define MTR_PRIMITIVE_CHECK_IF_NOT_INITED_WITH_LOG(message, returnValue) \
     if (!mtrPrimitiveInited)                                             \
     {                                                                    \
-        mtrLogWrite(                                                     \
+        MTR_LogWrite(                                                    \
          message ". Primitive drawing subsystem are not initialized", 1, \
          MTR_LMT_ERROR);                                                 \
         return returnValue;                                              \
     }
 
 typedef mtrScreen_t *(MTR_CALL * mtrGetScreenFunc)(void);
-mtrGetScreenFunc mtrGetScreen;
+mtrGetScreenFunc MTR_GetScreen;
 
-static inline void mtrColor24ToRgb(uint32_t color, uint8_t *r, uint8_t *g,
+static inline void MTR_Color24ToRgb(uint32_t color, uint8_t *r, uint8_t *g,
  uint8_t *b)
 {
     *r = color >> 16U;
@@ -39,7 +39,7 @@ static inline void mtrColor24ToRgb(uint32_t color, uint8_t *r, uint8_t *g,
     *b = color & 0x0000FFU;
 }
 
-static inline void mtrColor32ToRgba(uint32_t color, uint8_t *r, uint8_t *g,
+static inline void MTR_Color32ToRgba(uint32_t color, uint8_t *r, uint8_t *g,
  uint8_t *b, uint8_t *a)
 {
     *r = color >> 24U;
@@ -48,7 +48,7 @@ static inline void mtrColor32ToRgba(uint32_t color, uint8_t *r, uint8_t *g,
     *a = color & 0x000000FFU;
 }
 
-static inline void mtrRgbToSdlColor(uint8_t r, uint8_t g, uint8_t b,
+static inline void MTR_RgbToSdlColor(uint8_t r, uint8_t g, uint8_t b,
  SDL_Color *sdlColor)
 {
     sdlColor->r = r;
@@ -57,8 +57,8 @@ static inline void mtrRgbToSdlColor(uint8_t r, uint8_t g, uint8_t b,
     sdlColor->a = 0xFFU;
 }
 
-static inline void mtrRgbaToSdlColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a,
- SDL_Color *sdlColor)
+static inline void MTR_RgbaToSdlColor(uint8_t r, uint8_t g, uint8_t b,
+ uint8_t a, SDL_Color *sdlColor)
 {
     sdlColor->r = r;
     sdlColor->g = g;
@@ -66,7 +66,7 @@ static inline void mtrRgbaToSdlColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a,
     sdlColor->a = a;
 }
 
-static inline void mtrColor24ToSdlColor(uint32_t color, SDL_Color *sdlColor)
+static inline void MTR_Color24ToSdlColor(uint32_t color, SDL_Color *sdlColor)
 {
     sdlColor->r = color >> 16U;
     sdlColor->g = (color & 0x00FF00U) >> 8U;
@@ -74,7 +74,7 @@ static inline void mtrColor24ToSdlColor(uint32_t color, SDL_Color *sdlColor)
     sdlColor->a = 0xFFU;
 }
 
-static inline void mtrColor32ToSdlColor(uint32_t color, SDL_Color *sdlColor)
+static inline void MTR_Color32ToSdlColor(uint32_t color, SDL_Color *sdlColor)
 {
     sdlColor->r = color >> 24U;
     sdlColor->g = (color & 0x00FF0000U) >> 16U;

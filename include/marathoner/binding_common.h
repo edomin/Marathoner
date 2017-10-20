@@ -17,43 +17,43 @@
 
 #define _PREREQ1 _SCRIPT_MODULE
 
-#define MTR_FIND_AND_REGISTER_ALL()                                  \
-    MTR_FIND_FUNCTION(mtrScriptsRegisterFunction, _SCRIPT_MODULE);   \
-    MTR_FIND_FUNCTION(mtrScriptsRegisterVariable_b, _SCRIPT_MODULE); \
-    MTR_FIND_FUNCTION(mtrScriptsRegisterVariable_i, _SCRIPT_MODULE); \
-    MTR_FIND_FUNCTION(mtrScriptsRegisterVariable_u, _SCRIPT_MODULE); \
-    MTR_FIND_FUNCTION(mtrScriptsRegisterVariable_f, _SCRIPT_MODULE); \
-    MTR_FIND_FUNCTION(mtrScriptsRegisterVariable_d, _SCRIPT_MODULE); \
-    MTR_FIND_FUNCTION(mtrScriptsRegisterVariable_s, _SCRIPT_MODULE); \
-    MTR_FIND_FUNCTION(mtrScriptsGetVm, _SCRIPT_MODULE);              \
-    if (ok)                                                          \
-        mtrScriptsRegisterAll();
+#define MTR_FIND_AND_REGISTER_ALL()                                   \
+    MTR_FIND_FUNCTION(MTR_ScriptsRegisterFunction, _SCRIPT_MODULE);   \
+    MTR_FIND_FUNCTION(MTR_ScriptsRegisterVariable_b, _SCRIPT_MODULE); \
+    MTR_FIND_FUNCTION(MTR_ScriptsRegisterVariable_i, _SCRIPT_MODULE); \
+    MTR_FIND_FUNCTION(MTR_ScriptsRegisterVariable_u, _SCRIPT_MODULE); \
+    MTR_FIND_FUNCTION(MTR_ScriptsRegisterVariable_f, _SCRIPT_MODULE); \
+    MTR_FIND_FUNCTION(MTR_ScriptsRegisterVariable_d, _SCRIPT_MODULE); \
+    MTR_FIND_FUNCTION(MTR_ScriptsRegisterVariable_s, _SCRIPT_MODULE); \
+    MTR_FIND_FUNCTION(MTR_ScriptsGetVm, _SCRIPT_MODULE);              \
+    if (ok)                                                           \
+        MTR_ScriptsRegisterAll();
 
 #ifdef lua_h
-    #define MTR_PLUGIN_INIT()                                       \
-        MTR_EXPORT void MTR_CALL mtrPluginInit(void)                \
-        {                                                           \
-            bool ok = true;                                         \
-            mtrLogWrite_s("Reporting Lua compile-time version:", 3, \
-             MTR_LMT_INFO, LUA_RELEASE);                            \
-            MTR_FIND_AND_REGISTER_ALL();                            \
+    #define MTR_PLUGIN_INIT()                                        \
+        MTR_EXPORT void MTR_CALL MTR_PluginInit(void)                \
+        {                                                            \
+            bool ok = true;                                          \
+            MTR_LogWrite_s("Reporting Lua compile-time version:", 3, \
+             MTR_LMT_INFO, LUA_RELEASE);                             \
+            MTR_FIND_AND_REGISTER_ALL();                             \
         }
 #endif /* lua_h */
 #ifdef _SQUIRREL_H_
-    #define MTR_PLUGIN_INIT()                                            \
-        MTR_EXPORT void MTR_CALL mtrPluginInit(void)                     \
-        {                                                                \
-            bool ok = true;                                              \
-            mtrLogWrite_s("Reporting Squirrel compile-time version:", 1, \
-             MTR_LMT_INFO, SQUIRREL_VERSION);                            \
-            mtrLogWrite_i("Reporting Squirrel linked version:", 1,       \
-             MTR_LMT_INFO, sq_getversion());                             \
-            MTR_FIND_AND_REGISTER_ALL();                                 \
+    #define MTR_PLUGIN_INIT()                                             \
+        MTR_EXPORT void MTR_CALL MTR_PluginInit(void)                     \
+        {                                                                 \
+            bool ok = true;                                               \
+            MTR_LogWrite_s("Reporting Squirrel compile-time version:", 1, \
+             MTR_LMT_INFO, SQUIRREL_VERSION);                             \
+            MTR_LogWrite_i("Reporting Squirrel linked version:", 1,       \
+             MTR_LMT_INFO, sq_getversion());                              \
+            MTR_FIND_AND_REGISTER_ALL();                                  \
         }
 #endif /* _SQUIRREL_H_ */
 #ifdef DUKTAPE_H_INCLUDED
     #define MTR_PLUGIN_INIT()                                           \
-        MTR_EXPORT void MTR_CALL mtrPluginInit(void)                    \
+        MTR_EXPORT void MTR_CALL MTR_PluginInit(void)                   \
         {                                                               \
             long int verMajor;                                          \
             long int verMinor;                                          \
@@ -62,17 +62,17 @@
             verMajor = DUK_VERSION / 10000;                             \
             verMinor = (DUK_VERSION - verMajor * 10000) / 100;          \
             verPatch = DUK_VERSION - verMajor * 10000 - verMinor * 100; \
-            mtrLogWrite("Reporting Duktape compile-time version:", 3,   \
+            MTR_LogWrite("Reporting Duktape compile-time version:", 3,  \
              MTR_LMT_INFO);                                             \
-            mtrLogWrite_i("Major:", 4, MTR_LMT_INFO, verMajor);         \
-            mtrLogWrite_i("Minor:", 4, MTR_LMT_INFO, verMinor);         \
-            mtrLogWrite_i("Patch:", 4, MTR_LMT_INFO, verPatch);         \
+            MTR_LogWrite_i("Major:", 4, MTR_LMT_INFO, verMajor);        \
+            MTR_LogWrite_i("Minor:", 4, MTR_LMT_INFO, verMinor);        \
+            MTR_LogWrite_i("Patch:", 4, MTR_LMT_INFO, verPatch);        \
             MTR_FIND_AND_REGISTER_ALL();                                \
         }
 #endif /* DUKTAPE_H_INCLUDED */
 
 #define MTR_BINDING_COMMON_CODE(_moduleID, _version, _prereq0)           \
-    MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)                 \
+    MTR_EXPORT mtrReport* MTR_CALL MTR_CreateReport(void)                \
     {                                                                    \
         mtrReport *report;                                               \
         report = malloc(sizeof(mtrReport));                              \
@@ -96,42 +96,42 @@
     }                                                                    \
     MTR_PLUGIN_INIT()
 
-#define MTR_BINDING_COMMON_HEADER()                                      \
-    _VM mtrVm;                                                           \
-    typedef _VM (MTR_CALL * mtrScriptsGetVmFunc)(void);                  \
-    mtrScriptsGetVmFunc mtrScriptsGetVm;                                 \
-    typedef void (MTR_CALL * mtrScriptsRegisterFunctionFunc)(_CFUNCTION, \
-     char *);                                                            \
-    mtrScriptsRegisterFunctionFunc mtrScriptsRegisterFunction;           \
-    typedef void (MTR_CALL * mtrScriptsRegisterVariable_bFunc)(          \
-     const char *name, bool value);                                      \
-    mtrScriptsRegisterVariable_bFunc mtrScriptsRegisterVariable_b;       \
-    typedef void (MTR_CALL * mtrScriptsRegisterVariable_iFunc)(          \
-     const char *name, int value);                                       \
-    mtrScriptsRegisterVariable_iFunc mtrScriptsRegisterVariable_i;       \
-    typedef void (MTR_CALL * mtrScriptsRegisterVariable_uFunc)(          \
-     const char *name, unsigned int value);                              \
-    mtrScriptsRegisterVariable_uFunc mtrScriptsRegisterVariable_u;       \
-    typedef void (MTR_CALL * mtrScriptsRegisterVariable_fFunc)(          \
-     const char *name, float value);                                     \
-    mtrScriptsRegisterVariable_fFunc mtrScriptsRegisterVariable_f;       \
-    typedef void (MTR_CALL * mtrScriptsRegisterVariable_dFunc)(          \
-     const char *name, double value);                                    \
-    mtrScriptsRegisterVariable_dFunc mtrScriptsRegisterVariable_d;       \
-    typedef void (MTR_CALL * mtrScriptsRegisterVariable_sFunc)(          \
-     const char *name, const char *value);                               \
-    mtrScriptsRegisterVariable_sFunc mtrScriptsRegisterVariable_s;
+#define MTR_BINDING_COMMON_HEADER()                                       \
+    _VM mtrVm;                                                            \
+    typedef _VM (MTR_CALL * MTR_ScriptsGetVmFunc)(void);                  \
+    MTR_ScriptsGetVmFunc MTR_ScriptsGetVm;                                \
+    typedef void (MTR_CALL * MTR_ScriptsRegisterFunctionFunc)(_CFUNCTION, \
+     char *);                                                             \
+    MTR_ScriptsRegisterFunctionFunc MTR_ScriptsRegisterFunction;          \
+    typedef void (MTR_CALL * MTR_ScriptsRegisterVariable_bFunc)(          \
+     const char *name, bool value);                                       \
+    MTR_ScriptsRegisterVariable_bFunc MTR_ScriptsRegisterVariable_b;      \
+    typedef void (MTR_CALL * MTR_ScriptsRegisterVariable_iFunc)(          \
+     const char *name, int value);                                        \
+    MTR_ScriptsRegisterVariable_iFunc MTR_ScriptsRegisterVariable_i;      \
+    typedef void (MTR_CALL * MTR_ScriptsRegisterVariable_uFunc)(          \
+     const char *name, unsigned int value);                               \
+    MTR_ScriptsRegisterVariable_uFunc MTR_ScriptsRegisterVariable_u;      \
+    typedef void (MTR_CALL * MTR_ScriptsRegisterVariable_fFunc)(          \
+     const char *name, float value);                                      \
+    MTR_ScriptsRegisterVariable_fFunc MTR_ScriptsRegisterVariable_f;      \
+    typedef void (MTR_CALL * MTR_ScriptsRegisterVariable_dFunc)(          \
+     const char *name, double value);                                     \
+    MTR_ScriptsRegisterVariable_dFunc MTR_ScriptsRegisterVariable_d;      \
+    typedef void (MTR_CALL * MTR_ScriptsRegisterVariable_sFunc)(          \
+     const char *name, const char *value);                                \
+    MTR_ScriptsRegisterVariable_sFunc MTR_ScriptsRegisterVariable_s;
 
-#define MTR_FIND_AND_ADD_FUNCTION(module, function)                         \
-    mtr ## function = (mtr ## function ## Func)mtrFindFunction(module,      \
-     MTR_SRINGIFY(mtr ## function));                              \
-    if (mtr ## function == NULL)                                            \
-    {                                                                       \
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,          \
-         MTR_SRINGIFY(mtr ## function));                          \
-        mtrLogWrite_s("Function not added: ", 3, MTR_LMT_ERROR, #function); \
-    }                                                                       \
-    else                                                                    \
-        mtrScriptsRegisterFunction(mtrSF_ ## function, #function);
+#define MTR_FIND_AND_ADD_FUNCTION(module, function)                          \
+    MTR_ ## function = (MTR_ ## function ## Func)MTR_FindFunction(module,    \
+     MTR_SRINGIFY(MTR_ ## function));                                        \
+    if (MTR_ ## function == NULL)                                            \
+    {                                                                        \
+        MTR_LogWrite_s("Unable to load function", 3, MTR_LMT_ERROR,          \
+         MTR_SRINGIFY(MTR_ ## function));                                    \
+        MTR_LogWrite_s("Function not added: ", 3, MTR_LMT_ERROR, #function); \
+    }                                                                        \
+    else                                                                     \
+        MTR_ScriptsRegisterFunction(MTR_SF_ ## function, #function);
 
 #endif /* MTR_BINDING_COMMON_H */

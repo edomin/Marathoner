@@ -37,7 +37,7 @@ static bool mtrGameControllerInited = false;
 #define MTR_GAME_CONTROLLER_CHECK_IF_NOT_INITED_WITH_LOG(message, returnValue) \
     if (!mtrGameControllerInited)                                              \
     {                                                                          \
-        mtrLogWrite(message ". game controller support are not initialized",   \
+        MTR_LogWrite(message ". game controller support are not initialized",  \
          1, MTR_LMT_ERROR);                                                    \
         return returnValue;                                                    \
     }

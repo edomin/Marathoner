@@ -5,7 +5,7 @@
 
 #include "marathoner/engine.h"
 
-bool MTR_CALL mtrClipboardPutText(const char* text);
-char *MTR_CALL mtrClipboardGetText(void);
+bool MTR_CALL MTR_ClipboardPutText(const char* text);
+char *MTR_CALL MTR_ClipboardGetText(void);
 
 #endif

@@ -3,16 +3,16 @@
 
 #include "marathoner/script_func.h"
 
-MTR_SCRIPT_FUNC_I_S1(mtrSF_TimerFunctionSupported, mtrTimerFunctionSupported)
-MTR_SCRIPT_FUNC_B_V(mtrSF_TimerInit, mtrTimerInit)
-MTR_SCRIPT_FUNC_V_V(mtrSF_TimerStart, mtrTimerStart)
-MTR_SCRIPT_FUNC_I_I1(mtrSF_TimerDelay, mtrTimerDelay)
-MTR_SCRIPT_FUNC_I_I1(mtrSF_TimerDelayForFPS, mtrTimerDelayForFPS)
-MTR_SCRIPT_FUNC_F_F1(mtrSF_TimerDelayForFPS_f, mtrTimerDelayForFPS_f)
+MTR_SCRIPT_FUNC_I_S1(MTR_SF_TimerFunctionSupported, MTR_TimerFunctionSupported)
+MTR_SCRIPT_FUNC_B_V(MTR_SF_TimerInit, MTR_TimerInit)
+MTR_SCRIPT_FUNC_V_V(MTR_SF_TimerStart, MTR_TimerStart)
+MTR_SCRIPT_FUNC_I_I1(MTR_SF_TimerDelay, MTR_TimerDelay)
+MTR_SCRIPT_FUNC_I_I1(MTR_SF_TimerDelayForFPS, MTR_TimerDelayForFPS)
+MTR_SCRIPT_FUNC_F_F1(MTR_SF_TimerDelayForFPS_f, MTR_TimerDelayForFPS_f)
 
-void mtrScriptsRegisterAll(void)
+void MTR_ScriptsRegisterAll(void)
 {
-    mtrVm = mtrScriptsGetVm();
+    mtrVm = MTR_ScriptsGetVm();
 
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TimerFunctionSupported);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TimerInit);

@@ -4,7 +4,7 @@
 
 MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Keyboard, FA_FUNCTIONS_COUNT)
 
-MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
+MTR_EXPORT mtrReport* MTR_CALL MTR_CreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -20,56 +20,56 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
-/*fa mtrKeyboardInit yes */
-MTR_EXPORT bool MTR_CALL mtrKeyboardInit(void)
+/*fa MTR_KeyboardInit yes */
+MTR_EXPORT bool MTR_CALL MTR_KeyboardInit(void)
 {
     SDL_version compiled;
     SDL_version linked;
 
-    mtrLogWrite("Initializing keyboard support", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Initializing keyboard support", 0, MTR_LMT_INFO);
 
-    mtrLogWrite("Reporting SDL compile-time version:", 1, MTR_LMT_INFO);
+    MTR_LogWrite("Reporting SDL compile-time version:", 1, MTR_LMT_INFO);
     SDL_VERSION(&compiled);
-    mtrLogWrite_i("Major:", 2, MTR_LMT_INFO, compiled.major);
-    mtrLogWrite_i("Minor:", 2, MTR_LMT_INFO, compiled.minor);
-    mtrLogWrite_i("Patch:", 2, MTR_LMT_INFO, compiled.patch);
-    mtrLogWrite("Reporting SDL linked version:", 1, MTR_LMT_INFO);
+    MTR_LogWrite_i("Major:", 2, MTR_LMT_INFO, compiled.major);
+    MTR_LogWrite_i("Minor:", 2, MTR_LMT_INFO, compiled.minor);
+    MTR_LogWrite_i("Patch:", 2, MTR_LMT_INFO, compiled.patch);
+    MTR_LogWrite("Reporting SDL linked version:", 1, MTR_LMT_INFO);
     SDL_GetVersion(&linked);
-    mtrLogWrite_i("Major:", 2, MTR_LMT_INFO, linked.major);
-    mtrLogWrite_i("Minor:", 2, MTR_LMT_INFO, linked.minor);
-    mtrLogWrite_i("Patch:", 2, MTR_LMT_INFO, linked.patch);
+    MTR_LogWrite_i("Major:", 2, MTR_LMT_INFO, linked.major);
+    MTR_LogWrite_i("Minor:", 2, MTR_LMT_INFO, linked.minor);
+    MTR_LogWrite_i("Patch:", 2, MTR_LMT_INFO, linked.patch);
 
     if(SDL_WasInit(SDL_INIT_EVENTS) == 0)
         if (SDL_InitSubSystem(SDL_INIT_EVENTS) == 0)
-            mtrLogWrite("SDL events subsystem initialized", 1, MTR_LMT_INFO);
+            MTR_LogWrite("SDL events subsystem initialized", 1, MTR_LMT_INFO);
         else
         {
-             mtrNotify("Unable to initialize SDL events subsystem", 1,
+             MTR_Notify("Unable to initialize SDL events subsystem", 1,
               MTR_LMT_ERROR);
               return false;
         }
     else
-        mtrLogWrite("SDL events subsystem already initialized", 1, MTR_LMT_INFO);
+        MTR_LogWrite("SDL events subsystem already initialized", 1, MTR_LMT_INFO);
 
-    mtrLogWrite("Getting current keyboard state", 1, MTR_LMT_INFO);
+    MTR_LogWrite("Getting current keyboard state", 1, MTR_LMT_INFO);
     mtrKeyboard.currentKeystate = SDL_GetKeyboardState(NULL);
     if (mtrKeyboard.currentKeystate != NULL)
     {
-        mtrLogWrite("Keyboard state get", 1, MTR_LMT_INFO);
+        MTR_LogWrite("Keyboard state get", 1, MTR_LMT_INFO);
     }
     else
     {
-        mtrNotify("Unable to get current keyboard state", 1, MTR_LMT_ERROR);
+        MTR_Notify("Unable to get current keyboard state", 1, MTR_LMT_ERROR);
         return false;
     }
-    mtrLogWrite("Keyboard support initialized", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Keyboard support initialized", 0, MTR_LMT_INFO);
 
     mtrKeyboardInited = true;
     return true;
 }
 
-/*fa mtrKeyboardRefresh yes */
-MTR_EXPORT void MTR_CALL mtrKeyboardRefresh(void)
+/*fa MTR_KeyboardRefresh yes */
+MTR_EXPORT void MTR_CALL MTR_KeyboardRefresh(void)
 {
     int i;
     MTR_KEYBOARD_CHECK_IF_NOT_INITED();
@@ -81,8 +81,8 @@ MTR_EXPORT void MTR_CALL mtrKeyboardRefresh(void)
     SDL_PumpEvents();
 }
 
-/*fa mtrKeyboardPress yes */
-MTR_EXPORT bool MTR_CALL mtrKeyboardPress(int key)
+/*fa MTR_KeyboardPress yes */
+MTR_EXPORT bool MTR_CALL MTR_KeyboardPress(int key)
 {
     MTR_KEYBOARD_CHECK_IF_NOT_INITED(false);
 
@@ -99,8 +99,8 @@ MTR_EXPORT bool MTR_CALL mtrKeyboardPress(int key)
     }
 }
 
-/*fa mtrKeyboardRelease yes */
-MTR_EXPORT bool MTR_CALL mtrKeyboardRelease(int key)
+/*fa MTR_KeyboardRelease yes */
+MTR_EXPORT bool MTR_CALL MTR_KeyboardRelease(int key)
 {
     MTR_KEYBOARD_CHECK_IF_NOT_INITED(false);
 
@@ -117,8 +117,8 @@ MTR_EXPORT bool MTR_CALL mtrKeyboardRelease(int key)
     }
 }
 
-/*fa mtrKeyboardPressed yes */
-MTR_EXPORT bool MTR_CALL mtrKeyboardPressed(int key)
+/*fa MTR_KeyboardPressed yes */
+MTR_EXPORT bool MTR_CALL MTR_KeyboardPressed(int key)
 {
     MTR_KEYBOARD_CHECK_IF_NOT_INITED(false);
 
@@ -134,8 +134,8 @@ MTR_EXPORT bool MTR_CALL mtrKeyboardPressed(int key)
     }
 }
 
-/*fa mtrKeyboardInputChar yes */
-MTR_EXPORT char *MTR_CALL mtrKeyboardInputChar(void)
+/*fa MTR_KeyboardInputChar yes */
+MTR_EXPORT char *MTR_CALL MTR_KeyboardInputChar(void)
 {
     SDL_Event  event;
     int        numEvents;

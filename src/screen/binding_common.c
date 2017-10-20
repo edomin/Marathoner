@@ -3,30 +3,31 @@
 
 #include "marathoner/script_func.h"
 
-MTR_SCRIPT_FUNC_I_S1(mtrSF_ScreenFunctionSupported, mtrScreenFunctionSupported)
-MTR_SCRIPT_FUNC_B_I2B1S1(mtrSF_ScreenInit, mtrScreenInit)
-MTR_SCRIPT_FUNC_V_V(mtrSF_ScreenQuit, mtrScreenQuit)
-MTR_SCRIPT_FUNC_V_V(mtrSF_ScreenFlip, mtrScreenFlip)
+MTR_SCRIPT_FUNC_I_S1(MTR_SF_ScreenFunctionSupported,
+ MTR_ScreenFunctionSupported)
+MTR_SCRIPT_FUNC_B_I2B1S1(MTR_SF_ScreenInit, MTR_ScreenInit)
+MTR_SCRIPT_FUNC_V_V(MTR_SF_ScreenQuit, MTR_ScreenQuit)
+MTR_SCRIPT_FUNC_V_V(MTR_SF_ScreenFlip, MTR_ScreenFlip)
 
 #ifdef lua_h
-MTR_SCRIPT_FUNC(mtrSF_ScreenGetSizes)
+MTR_SCRIPT_FUNC(MTR_SF_ScreenGetSizes)
 {
     int width;
     int height;
-    mtrScreenGetSizes(&width, &height);
+    MTR_ScreenGetSizes(&width, &height);
     MTR_SF_PUSH_INT(width);
     MTR_SF_PUSH_INT(height);
     return 2;
 }
 #endif
 
-MTR_SCRIPT_FUNC_I_V(mtrSF_ScreenGetWidth, mtrScreenGetWidth)
-MTR_SCRIPT_FUNC_I_V(mtrSF_ScreenGetHeight, mtrScreenGetHeight)
-MTR_SCRIPT_FUNC_B_V(mtrSF_ScreenXed, mtrScreenXed)
+MTR_SCRIPT_FUNC_I_V(MTR_SF_ScreenGetWidth, MTR_ScreenGetWidth)
+MTR_SCRIPT_FUNC_I_V(MTR_SF_ScreenGetHeight, MTR_ScreenGetHeight)
+MTR_SCRIPT_FUNC_B_V(MTR_SF_ScreenXed, MTR_ScreenXed)
 
-void mtrScriptsRegisterAll(void)
+void MTR_ScriptsRegisterAll(void)
 {
-    mtrVm = mtrScriptsGetVm();
+    mtrVm = MTR_ScriptsGetVm();
 
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, ScreenFunctionSupported);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, ScreenInit);

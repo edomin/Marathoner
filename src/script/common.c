@@ -3,59 +3,62 @@
 
 #include "marathoner/script_func.h"
 
-MTR_SCRIPT_FUNC_I_S1(mtrSF_ScriptsFunctionSupported,
- mtrScriptsFunctionSupported)
-MTR_SCRIPT_FUNC_S_V(mtrSF_ScriptsGetAutorunPath,
- mtrScriptsGetAutorunPath)
-MTR_SCRIPT_FUNC_B_S1B1(mtrSF_ScriptsRegisterVariable_b,
- mtrScriptsRegisterVariable_b)
-MTR_SCRIPT_FUNC_B_S1I1(mtrSF_ScriptsRegisterVariable_i,
- mtrScriptsRegisterVariable_i)
-MTR_SCRIPT_FUNC_B_S1U1(mtrSF_ScriptsRegisterVariable_u,
- mtrScriptsRegisterVariable_u)
-MTR_SCRIPT_FUNC_B_S1F1(mtrSF_ScriptsRegisterVariable_f,
- mtrScriptsRegisterVariable_f)
-MTR_SCRIPT_FUNC_B_S1D1(mtrSF_ScriptsRegisterVariable_d,
- mtrScriptsRegisterVariable_d)
-MTR_SCRIPT_FUNC_B_S2(mtrSF_ScriptsRegisterVariable_s,
- mtrScriptsRegisterVariable_s)
-MTR_SCRIPT_FUNC_U32t_V(mtrSF_MarathonerGetVersion, mtrMarathonerGetVersion)
-MTR_SCRIPT_FUNC_U32t_S1(mtrSF_MarathonerGetModuleVersion,
- mtrMarathonerGetModuleVersion)
-MTR_SCRIPT_FUNC_S_S2I1(mtrSF_ConfigfileGetKeyName, mtrConfigfileGetKeyName)
-MTR_SCRIPT_FUNC_S_S1I1(mtrSF_ConfigfileGetSectionName,
- mtrConfigfileGetSectionName)
-MTR_SCRIPT_FUNC_B_S3(mtrSF_ConfigfileDeleteKey, mtrConfigfileDeleteKey)
-MTR_SCRIPT_FUNC_B_S2(mtrSF_ConfigfileDeleteSection, mtrConfigfileDeleteSection)
-MTR_SCRIPT_FUNC_B_S3B1(mtrSF_ConfigfileReadBool, mtrConfigfileReadBool)
-MTR_SCRIPT_FUNC_I_S3I1(mtrSF_ConfigfileReadInt, mtrConfigfileReadInt)
-MTR_SCRIPT_FUNC_F_S3F1(mtrSF_ConfigfileReadSingle, mtrConfigfileReadSingle)
-MTR_SCRIPT_FUNC_S_S4(mtrSF_ConfigfileReadString, mtrConfigfileReadString)
-MTR_SCRIPT_FUNC_B_S3B1(mtrSF_ConfigfileWriteBool, mtrConfigfileWriteBool)
-MTR_SCRIPT_FUNC_B_S3I1(mtrSF_ConfigfileWriteInt, mtrConfigfileWriteInt)
-MTR_SCRIPT_FUNC_B_S3F1(mtrSF_ConfigfileWriteSingle, mtrConfigfileWriteSingle)
-MTR_SCRIPT_FUNC_B_S4(mtrSF_ConfigfileWriteString, mtrConfigfileWriteString)
-MTR_SCRIPT_FUNC_B_S2(mtrSF_ConfigfileCreateSection, mtrConfigfileCreateSection)
-MTR_SCRIPT_FUNC_V_S1U8t2(mtrSF_LogWrite, mtrLogWrite)
-MTR_SCRIPT_FUNC_V_S1U8t2S1(mtrSF_LogWrite_s, mtrLogWrite_s)
-MTR_SCRIPT_FUNC_V_S1U8t2I1(mtrSF_LogWrite_i, mtrLogWrite_i)
-MTR_SCRIPT_FUNC_V_S1U8t2D1(mtrSF_LogWrite_d, mtrLogWrite_d)
-MTR_SCRIPT_FUNC_V_U8t1S2(mtrSF_ShowSimpleMessageBox, mtrShowSimpleMessageBox)
-MTR_SCRIPT_FUNC_B_S2(mtrSF_ShowYesNoMessageBox, mtrShowYesNoMessageBox)
-MTR_SCRIPT_FUNC_B_S2(mtrSF_ShowOkCancelMessageBox, mtrShowOkCancelMessageBox)
-MTR_SCRIPT_FUNC_S_S3(mtrSF_ShowInputDialog, mtrShowInputDialog)
-MTR_SCRIPT_FUNC_S_S2(mtrSF_ShowPasswordDialog, mtrShowPasswordDialog)
-MTR_SCRIPT_FUNC_V_S1(mtrSF_AddFileFilter, mtrAddFileFilter)
-MTR_SCRIPT_FUNC_V_V(mtrSF_ClearFileFilters, mtrClearFileFilters)
-MTR_SCRIPT_FUNC_S_S3(mtrSF_ShowSaveFileDialog, mtrShowSaveFileDialog)
-MTR_SCRIPT_FUNC_S_S3(mtrSF_ShowOpenFileDialog, mtrShowOpenFileDialog)
-MTR_SCRIPT_FUNC_S_S2(mtrSF_ShowSelectFolderDialog, mtrShowSelectFolderDialog)
-MTR_SCRIPT_FUNC_V_S1U8t2(mtrSF_Notify, mtrNotify)
-MTR_SCRIPT_FUNC_U32t_S1(mtrSF_EncodingUtf8Codepoints, mtrEncodingUtf8Codepoints)
-MTR_SCRIPT_FUNC_U32t_S1I1(mtrSF_FileOpen, mtrFileOpen)
-MTR_SCRIPT_FUNC_B_U32t1(mtrSF_FileClose, mtrFileClose)
+MTR_SCRIPT_FUNC_I_S1(MTR_SF_ScriptsFunctionSupported,
+ MTR_ScriptsFunctionSupported)
+MTR_SCRIPT_FUNC_S_V(MTR_SF_ScriptsGetAutorunPath,
+ MTR_ScriptsGetAutorunPath)
+MTR_SCRIPT_FUNC_B_S1B1(MTR_SF_ScriptsRegisterVariable_b,
+ MTR_ScriptsRegisterVariable_b)
+MTR_SCRIPT_FUNC_B_S1I1(MTR_SF_ScriptsRegisterVariable_i,
+ MTR_ScriptsRegisterVariable_i)
+MTR_SCRIPT_FUNC_B_S1U1(MTR_SF_ScriptsRegisterVariable_u,
+ MTR_ScriptsRegisterVariable_u)
+MTR_SCRIPT_FUNC_B_S1F1(MTR_SF_ScriptsRegisterVariable_f,
+ MTR_ScriptsRegisterVariable_f)
+MTR_SCRIPT_FUNC_B_S1D1(MTR_SF_ScriptsRegisterVariable_d,
+ MTR_ScriptsRegisterVariable_d)
+MTR_SCRIPT_FUNC_B_S2(MTR_SF_ScriptsRegisterVariable_s,
+ MTR_ScriptsRegisterVariable_s)
+MTR_SCRIPT_FUNC_U32t_V(MTR_SF_MarathonerGetVersion, MTR_MarathonerGetVersion)
+MTR_SCRIPT_FUNC_U32t_S1(MTR_SF_MarathonerGetModuleVersion,
+ MTR_MarathonerGetModuleVersion)
+MTR_SCRIPT_FUNC_S_S2I1(MTR_SF_ConfigfileGetKeyName, MTR_ConfigfileGetKeyName)
+MTR_SCRIPT_FUNC_S_S1I1(MTR_SF_ConfigfileGetSectionName,
+ MTR_ConfigfileGetSectionName)
+MTR_SCRIPT_FUNC_B_S3(MTR_SF_ConfigfileDeleteKey, MTR_ConfigfileDeleteKey)
+MTR_SCRIPT_FUNC_B_S2(MTR_SF_ConfigfileDeleteSection,
+ MTR_ConfigfileDeleteSection)
+MTR_SCRIPT_FUNC_B_S3B1(MTR_SF_ConfigfileReadBool, MTR_ConfigfileReadBool)
+MTR_SCRIPT_FUNC_I_S3I1(MTR_SF_ConfigfileReadInt, MTR_ConfigfileReadInt)
+MTR_SCRIPT_FUNC_F_S3F1(MTR_SF_ConfigfileReadSingle, MTR_ConfigfileReadSingle)
+MTR_SCRIPT_FUNC_S_S4(MTR_SF_ConfigfileReadString, MTR_ConfigfileReadString)
+MTR_SCRIPT_FUNC_B_S3B1(MTR_SF_ConfigfileWriteBool, MTR_ConfigfileWriteBool)
+MTR_SCRIPT_FUNC_B_S3I1(MTR_SF_ConfigfileWriteInt, MTR_ConfigfileWriteInt)
+MTR_SCRIPT_FUNC_B_S3F1(MTR_SF_ConfigfileWriteSingle, MTR_ConfigfileWriteSingle)
+MTR_SCRIPT_FUNC_B_S4(MTR_SF_ConfigfileWriteString, MTR_ConfigfileWriteString)
+MTR_SCRIPT_FUNC_B_S2(MTR_SF_ConfigfileCreateSection,
+ MTR_ConfigfileCreateSection)
+MTR_SCRIPT_FUNC_V_S1U8t2(MTR_SF_LogWrite, MTR_LogWrite)
+MTR_SCRIPT_FUNC_V_S1U8t2S1(MTR_SF_LogWrite_s, MTR_LogWrite_s)
+MTR_SCRIPT_FUNC_V_S1U8t2I1(MTR_SF_LogWrite_i, MTR_LogWrite_i)
+MTR_SCRIPT_FUNC_V_S1U8t2D1(MTR_SF_LogWrite_d, MTR_LogWrite_d)
+MTR_SCRIPT_FUNC_V_U8t1S2(MTR_SF_ShowSimpleMessageBox, MTR_ShowSimpleMessageBox)
+MTR_SCRIPT_FUNC_B_S2(MTR_SF_ShowYesNoMessageBox, MTR_ShowYesNoMessageBox)
+MTR_SCRIPT_FUNC_B_S2(MTR_SF_ShowOkCancelMessageBox, MTR_ShowOkCancelMessageBox)
+MTR_SCRIPT_FUNC_S_S3(MTR_SF_ShowInputDialog, MTR_ShowInputDialog)
+MTR_SCRIPT_FUNC_S_S2(MTR_SF_ShowPasswordDialog, MTR_ShowPasswordDialog)
+MTR_SCRIPT_FUNC_V_S1(MTR_SF_AddFileFilter, MTR_AddFileFilter)
+MTR_SCRIPT_FUNC_V_V(MTR_SF_ClearFileFilters, MTR_ClearFileFilters)
+MTR_SCRIPT_FUNC_S_S3(MTR_SF_ShowSaveFileDialog, MTR_ShowSaveFileDialog)
+MTR_SCRIPT_FUNC_S_S3(MTR_SF_ShowOpenFileDialog, MTR_ShowOpenFileDialog)
+MTR_SCRIPT_FUNC_S_S2(MTR_SF_ShowSelectFolderDialog, MTR_ShowSelectFolderDialog)
+MTR_SCRIPT_FUNC_V_S1U8t2(MTR_SF_Notify, MTR_Notify)
+MTR_SCRIPT_FUNC_U32t_S1(MTR_SF_EncodingUtf8Codepoints,
+ MTR_EncodingUtf8Codepoints)
+MTR_SCRIPT_FUNC_U32t_S1I1(MTR_SF_FileOpen, MTR_FileOpen)
+MTR_SCRIPT_FUNC_B_U32t1(MTR_SF_FileClose, MTR_FileClose)
 
-MTR_SCRIPT_FUNC(mtrSF_FileRead)
+MTR_SCRIPT_FUNC(MTR_SF_FileRead)
 {
     uint32_t   index;
     char      *text;
@@ -65,9 +68,9 @@ MTR_SCRIPT_FUNC(mtrSF_FileRead)
 
     MTR_SF_GET_UINT32(index, 1);
     #ifdef lua_h
-        size = mtrFileRead(index, &text);
+        size = MTR_FileRead(index, &text);
     #else /* lua_h */
-        mtrFileRead(index, &text);
+        MTR_FileRead(index, &text);
     #endif /* lua_h */
 
     if (text != NULL)
@@ -82,153 +85,160 @@ MTR_SCRIPT_FUNC(mtrSF_FileRead)
     #endif /* lua_h */
 }
 
-MTR_SCRIPT_FUNC_B_U32t1S1(mtrSF_FileWrite, mtrFileWrite)
-MTR_SCRIPT_FUNC_B_U32t1S1(mtrSF_FileWriteLine, mtrFileWriteLine)
-MTR_SCRIPT_FUNC_V_S2I1(mtrSF_FileWriteFast, mtrFileWriteFast)
-MTR_SCRIPT_FUNC_V_S2I1(mtrSF_FileWriteLineFast, mtrFileWriteLineFast)
-MTR_SCRIPT_FUNC_B_S1(mtrSF_ClipboardPutText, mtrClipboardPutText)
-MTR_SCRIPT_FUNC_S_V(mtrSF_ClipboardGetText, mtrClipboardGetText)
-MTR_SCRIPT_FUNC_U32t_S1I1(mtrSF_StringBufferAdd, mtrStringBufferAdd)
-MTR_SCRIPT_FUNC_V_U32t1(mtrSF_StringBufferDelete, mtrStringBufferDelete)
-MTR_SCRIPT_FUNC_V_U32t1S1(mtrSF_StringBufferSetString, mtrStringBufferSetString)
-MTR_SCRIPT_FUNC_S_U32t1(mtrSF_StringBufferGetString, mtrStringBufferGetString)
-MTR_SCRIPT_FUNC_I_U32t1(mtrSF_StringBufferGetMaxLen, mtrStringBufferGetMaxLen)
-MTR_SCRIPT_FUNC_B_S2(mtrSF_OptionsAlias, mtrOptionsAlias)
-MTR_SCRIPT_FUNC_S_S1(mtrSF_OptionsGet, mtrOptionsGet)
-MTR_SCRIPT_FUNC_B_S1(mtrSF_OptionsGet_b, mtrOptionsGet_b)
-MTR_SCRIPT_FUNC_I_S1(mtrSF_OptionsGet_i, mtrOptionsGet_i)
-MTR_SCRIPT_FUNC_L_S1(mtrSF_OptionsGet_l, mtrOptionsGet_l)
-MTR_SCRIPT_FUNC_F_S1(mtrSF_OptionsGet_f, mtrOptionsGet_f)
-MTR_SCRIPT_FUNC_D_S1(mtrSF_OptionsGet_d, mtrOptionsGet_d)
-MTR_SCRIPT_FUNC_V_V(mtrSF_ConsoleShow, mtrConsoleShow)
-MTR_SCRIPT_FUNC_V_V(mtrSF_ConsoleHide, mtrConsoleHide)
+MTR_SCRIPT_FUNC_B_U32t1S1(MTR_SF_FileWrite, MTR_FileWrite)
+MTR_SCRIPT_FUNC_B_U32t1S1(MTR_SF_FileWriteLine, MTR_FileWriteLine)
+MTR_SCRIPT_FUNC_V_S2I1(MTR_SF_FileWriteFast, MTR_FileWriteFast)
+MTR_SCRIPT_FUNC_V_S2I1(MTR_SF_FileWriteLineFast, MTR_FileWriteLineFast)
+MTR_SCRIPT_FUNC_B_S1(MTR_SF_ClipboardPutText, MTR_ClipboardPutText)
+MTR_SCRIPT_FUNC_S_V(MTR_SF_ClipboardGetText, MTR_ClipboardGetText)
+MTR_SCRIPT_FUNC_U32t_S1I1(MTR_SF_StringBufferAdd, MTR_StringBufferAdd)
+MTR_SCRIPT_FUNC_V_U32t1(MTR_SF_StringBufferDelete, MTR_StringBufferDelete)
+MTR_SCRIPT_FUNC_V_U32t1S1(MTR_SF_StringBufferSetString,
+ MTR_StringBufferSetString)
+MTR_SCRIPT_FUNC_S_U32t1(MTR_SF_StringBufferGetString, MTR_StringBufferGetString)
+MTR_SCRIPT_FUNC_I_U32t1(MTR_SF_StringBufferGetMaxLen, MTR_StringBufferGetMaxLen)
+MTR_SCRIPT_FUNC_B_S2(MTR_SF_OptionsAlias, MTR_OptionsAlias)
+MTR_SCRIPT_FUNC_S_S1(MTR_SF_OptionsGet, MTR_OptionsGet)
+MTR_SCRIPT_FUNC_B_S1(MTR_SF_OptionsGet_b, MTR_OptionsGet_b)
+MTR_SCRIPT_FUNC_I_S1(MTR_SF_OptionsGet_i, MTR_OptionsGet_i)
+MTR_SCRIPT_FUNC_L_S1(MTR_SF_OptionsGet_l, MTR_OptionsGet_l)
+MTR_SCRIPT_FUNC_F_S1(MTR_SF_OptionsGet_f, MTR_OptionsGet_f)
+MTR_SCRIPT_FUNC_D_S1(MTR_SF_OptionsGet_d, MTR_OptionsGet_d)
+MTR_SCRIPT_FUNC_V_V(MTR_SF_ConsoleShow, MTR_ConsoleShow)
+MTR_SCRIPT_FUNC_V_V(MTR_SF_ConsoleHide, MTR_ConsoleHide)
 
-void mtrScriptsRegisterAll(void)
+void MTR_ScriptsRegisterAll(void)
 {
-    mtrScriptsRegisterVariable_u("IKDM_SMALL", MTR_IKDM_SMALL);
-    mtrScriptsRegisterVariable_u("IKDM_MEDIUM", MTR_IKDM_MEDIUM);
-    mtrScriptsRegisterVariable_u("IKDM_LARGE", MTR_IKDM_LARGE);
-    mtrScriptsRegisterVariable_i("FM_READ", MTR_FM_READ);
-    mtrScriptsRegisterVariable_i("FM_WRITE", MTR_FM_WRITE);
-    mtrScriptsRegisterVariable_i("FM_APPEND", MTR_FM_APPEND);
-    mtrScriptsRegisterVariable_i("LMT_INFO", MTR_LMT_INFO);
-    mtrScriptsRegisterVariable_i("LMT_NOTE", MTR_LMT_NOTE);
-    mtrScriptsRegisterVariable_i("LMT_WARNING", MTR_LMT_WARNING);
-    mtrScriptsRegisterVariable_i("LMT_ERROR", MTR_LMT_ERROR);
-    mtrScriptsRegisterVariable_i("LMT_FATAL", MTR_LMT_FATAL);
-    mtrScriptsRegisterVariable_i("LMT_DEBUG", MTR_LMT_DEBUG);
-    mtrScriptsRegisterVariable_i("DMT_INFO", MTR_DMT_INFO);
-    mtrScriptsRegisterVariable_i("DMT_NOTE", MTR_DMT_NOTE);
-    mtrScriptsRegisterVariable_i("DMT_WARNING", MTR_DMT_WARNING);
-    mtrScriptsRegisterVariable_i("DMT_ERROR", MTR_DMT_ERROR);
-    mtrScriptsRegisterVariable_i("DMT_FATAL", MTR_DMT_FATAL);
-    mtrScriptsRegisterVariable_i("DMT_DEBUG", MTR_DMT_DEBUG);
-    mtrScriptsRegisterVariable_i("FA_NO", MTR_FA_NO);
-    mtrScriptsRegisterVariable_i("FA_DUMMY", MTR_FA_DUMMY);
-    mtrScriptsRegisterVariable_i("FA_BUGGY", MTR_FA_BUGGY);
-    mtrScriptsRegisterVariable_i("FA_PARTIAL", MTR_FA_PARTIAL);
-    mtrScriptsRegisterVariable_i("FA_YES", MTR_FA_YES);
+    MTR_ScriptsRegisterVariable_u("IKDM_SMALL", MTR_IKDM_SMALL);
+    MTR_ScriptsRegisterVariable_u("IKDM_MEDIUM", MTR_IKDM_MEDIUM);
+    MTR_ScriptsRegisterVariable_u("IKDM_LARGE", MTR_IKDM_LARGE);
+    MTR_ScriptsRegisterVariable_i("FM_READ", MTR_FM_READ);
+    MTR_ScriptsRegisterVariable_i("FM_WRITE", MTR_FM_WRITE);
+    MTR_ScriptsRegisterVariable_i("FM_APPEND", MTR_FM_APPEND);
+    MTR_ScriptsRegisterVariable_i("LMT_INFO", MTR_LMT_INFO);
+    MTR_ScriptsRegisterVariable_i("LMT_NOTE", MTR_LMT_NOTE);
+    MTR_ScriptsRegisterVariable_i("LMT_WARNING", MTR_LMT_WARNING);
+    MTR_ScriptsRegisterVariable_i("LMT_ERROR", MTR_LMT_ERROR);
+    MTR_ScriptsRegisterVariable_i("LMT_FATAL", MTR_LMT_FATAL);
+    MTR_ScriptsRegisterVariable_i("LMT_DEBUG", MTR_LMT_DEBUG);
+    MTR_ScriptsRegisterVariable_i("DMT_INFO", MTR_DMT_INFO);
+    MTR_ScriptsRegisterVariable_i("DMT_NOTE", MTR_DMT_NOTE);
+    MTR_ScriptsRegisterVariable_i("DMT_WARNING", MTR_DMT_WARNING);
+    MTR_ScriptsRegisterVariable_i("DMT_ERROR", MTR_DMT_ERROR);
+    MTR_ScriptsRegisterVariable_i("DMT_FATAL", MTR_DMT_FATAL);
+    MTR_ScriptsRegisterVariable_i("DMT_DEBUG", MTR_DMT_DEBUG);
+    MTR_ScriptsRegisterVariable_i("FA_NO", MTR_FA_NO);
+    MTR_ScriptsRegisterVariable_i("FA_DUMMY", MTR_FA_DUMMY);
+    MTR_ScriptsRegisterVariable_i("FA_BUGGY", MTR_FA_BUGGY);
+    MTR_ScriptsRegisterVariable_i("FA_PARTIAL", MTR_FA_PARTIAL);
+    MTR_ScriptsRegisterVariable_i("FA_YES", MTR_FA_YES);
 
-    mtrScriptsRegisterFunction(mtrSF_ScriptsFunctionSupported,
+    MTR_ScriptsRegisterFunction(MTR_SF_ScriptsFunctionSupported,
      "ScriptsFunctionSupported");
-    mtrScriptsRegisterFunction(mtrSF_ScriptsGetAutorunPath,
+    MTR_ScriptsRegisterFunction(MTR_SF_ScriptsGetAutorunPath,
      "ScriptsGetAutorunPath");
-    mtrScriptsRegisterFunction(mtrSF_ScriptsRegisterVariable_b,
+    MTR_ScriptsRegisterFunction(MTR_SF_ScriptsRegisterVariable_b,
      "RegisterVariable_b");
-    mtrScriptsRegisterFunction(mtrSF_ScriptsRegisterVariable_i,
+    MTR_ScriptsRegisterFunction(MTR_SF_ScriptsRegisterVariable_i,
      "RegisterVariable_i");
-    mtrScriptsRegisterFunction(mtrSF_ScriptsRegisterVariable_u,
+    MTR_ScriptsRegisterFunction(MTR_SF_ScriptsRegisterVariable_u,
      "RegisterVariable_u");
-    mtrScriptsRegisterFunction(mtrSF_ScriptsRegisterVariable_f,
+    MTR_ScriptsRegisterFunction(MTR_SF_ScriptsRegisterVariable_f,
      "RegisterVariable_f");
-    mtrScriptsRegisterFunction(mtrSF_ScriptsRegisterVariable_d,
+    MTR_ScriptsRegisterFunction(MTR_SF_ScriptsRegisterVariable_d,
      "RegisterVariable_d");
-    mtrScriptsRegisterFunction(mtrSF_ScriptsRegisterVariable_s,
+    MTR_ScriptsRegisterFunction(MTR_SF_ScriptsRegisterVariable_s,
      "RegisterVariable_s");
 
-    mtrScriptsRegisterFunction(mtrSF_MarathonerGetVersion,
+    MTR_ScriptsRegisterFunction(MTR_SF_MarathonerGetVersion,
      "MarathonerGetVersion");
-    mtrScriptsRegisterFunction(mtrSF_MarathonerGetModuleVersion,
+    MTR_ScriptsRegisterFunction(MTR_SF_MarathonerGetModuleVersion,
      "MarathonerGetModuleVersion");
-    mtrScriptsRegisterFunction(mtrSF_ConfigfileGetKeyName,
+    MTR_ScriptsRegisterFunction(MTR_SF_ConfigfileGetKeyName,
      "ConfigfileGetKeyName");
-    mtrScriptsRegisterFunction(mtrSF_ConfigfileGetSectionName,
+    MTR_ScriptsRegisterFunction(MTR_SF_ConfigfileGetSectionName,
      "ConfigfileGetSectionName");
-    mtrScriptsRegisterFunction(mtrSF_ConfigfileDeleteKey,
+    MTR_ScriptsRegisterFunction(MTR_SF_ConfigfileDeleteKey,
      "ConfigfileDeleteKey");
-    mtrScriptsRegisterFunction(mtrSF_ConfigfileDeleteSection,
+    MTR_ScriptsRegisterFunction(MTR_SF_ConfigfileDeleteSection,
      "ConfigfileDeleteSection");
-    mtrScriptsRegisterFunction(mtrSF_ConfigfileReadBool, "ConfigfileReadBool");
-    mtrScriptsRegisterFunction(mtrSF_ConfigfileReadInt, "ConfigfileReadInt");
-    mtrScriptsRegisterFunction(mtrSF_ConfigfileReadSingle,
+    MTR_ScriptsRegisterFunction(MTR_SF_ConfigfileReadBool,
+     "ConfigfileReadBool");
+    MTR_ScriptsRegisterFunction(MTR_SF_ConfigfileReadInt, "ConfigfileReadInt");
+    MTR_ScriptsRegisterFunction(MTR_SF_ConfigfileReadSingle,
      "ConfigfileReadSingle");
-    mtrScriptsRegisterFunction(mtrSF_ConfigfileReadString,
+    MTR_ScriptsRegisterFunction(MTR_SF_ConfigfileReadString,
      "ConfigfileReadString");
-    mtrScriptsRegisterFunction(mtrSF_ConfigfileWriteBool,
+    MTR_ScriptsRegisterFunction(MTR_SF_ConfigfileWriteBool,
      "ConfigfileWriteBool");
-    mtrScriptsRegisterFunction(mtrSF_ConfigfileWriteInt, "ConfigfileWriteInt");
-    mtrScriptsRegisterFunction(mtrSF_ConfigfileWriteSingle,
+    MTR_ScriptsRegisterFunction(MTR_SF_ConfigfileWriteInt,
+     "ConfigfileWriteInt");
+    MTR_ScriptsRegisterFunction(MTR_SF_ConfigfileWriteSingle,
      "ConfigfileWriteSingle");
-    mtrScriptsRegisterFunction(mtrSF_ConfigfileWriteString,
+    MTR_ScriptsRegisterFunction(MTR_SF_ConfigfileWriteString,
      "ConfigfileWriteString");
-    mtrScriptsRegisterFunction(mtrSF_ConfigfileCreateSection,
+    MTR_ScriptsRegisterFunction(MTR_SF_ConfigfileCreateSection,
      "ConfigfileCreateSection");
 
-    mtrScriptsRegisterFunction(mtrSF_LogWrite, "LogWrite");
-    mtrScriptsRegisterFunction(mtrSF_LogWrite_s, "LogWrite_s");
-    mtrScriptsRegisterFunction(mtrSF_LogWrite_i, "LogWrite_i");
-    mtrScriptsRegisterFunction(mtrSF_LogWrite_d, "LogWrite_d");
+    MTR_ScriptsRegisterFunction(MTR_SF_LogWrite, "LogWrite");
+    MTR_ScriptsRegisterFunction(MTR_SF_LogWrite_s, "LogWrite_s");
+    MTR_ScriptsRegisterFunction(MTR_SF_LogWrite_i, "LogWrite_i");
+    MTR_ScriptsRegisterFunction(MTR_SF_LogWrite_d, "LogWrite_d");
 
-    mtrScriptsRegisterFunction(mtrSF_ShowSimpleMessageBox,
+    MTR_ScriptsRegisterFunction(MTR_SF_ShowSimpleMessageBox,
      "ShowSimpleMessageBox");
-    mtrScriptsRegisterFunction(mtrSF_ShowYesNoMessageBox,
+    MTR_ScriptsRegisterFunction(MTR_SF_ShowYesNoMessageBox,
      "ShowYesNoMessageBox");
-    mtrScriptsRegisterFunction(mtrSF_ShowOkCancelMessageBox,
+    MTR_ScriptsRegisterFunction(MTR_SF_ShowOkCancelMessageBox,
      "ShowOkCancelMessageBox");
-    mtrScriptsRegisterFunction(mtrSF_ShowInputDialog, "ShowInputDialog");
-    mtrScriptsRegisterFunction(mtrSF_ShowPasswordDialog, "ShowPasswordDialog");
-    mtrScriptsRegisterFunction(mtrSF_AddFileFilter, "AddFileFilter");
-    mtrScriptsRegisterFunction(mtrSF_ClearFileFilters, "ClearFileFilters");
-    mtrScriptsRegisterFunction(mtrSF_ShowSaveFileDialog, "ShowSaveFileDialog");
-    mtrScriptsRegisterFunction(mtrSF_ShowOpenFileDialog, "ShowOpenFileDialog");
-    mtrScriptsRegisterFunction(mtrSF_ShowSelectFolderDialog,
+    MTR_ScriptsRegisterFunction(MTR_SF_ShowInputDialog, "ShowInputDialog");
+    MTR_ScriptsRegisterFunction(MTR_SF_ShowPasswordDialog,
+     "ShowPasswordDialog");
+    MTR_ScriptsRegisterFunction(MTR_SF_AddFileFilter, "AddFileFilter");
+    MTR_ScriptsRegisterFunction(MTR_SF_ClearFileFilters, "ClearFileFilters");
+    MTR_ScriptsRegisterFunction(MTR_SF_ShowSaveFileDialog,
+     "ShowSaveFileDialog");
+    MTR_ScriptsRegisterFunction(MTR_SF_ShowOpenFileDialog,
+     "ShowOpenFileDialog");
+    MTR_ScriptsRegisterFunction(MTR_SF_ShowSelectFolderDialog,
      "ShowSelectFolderDialog");
 
-    mtrScriptsRegisterFunction(mtrSF_Notify, "Notify");
+    MTR_ScriptsRegisterFunction(MTR_SF_Notify, "Notify");
 
-    mtrScriptsRegisterFunction(mtrSF_EncodingUtf8Codepoints,
+    MTR_ScriptsRegisterFunction(MTR_SF_EncodingUtf8Codepoints,
      "EncodingUtf8Codepoints");
 
-    mtrScriptsRegisterFunction(mtrSF_FileOpen, "FileOpen");
-    mtrScriptsRegisterFunction(mtrSF_FileClose, "FileClose");
-    mtrScriptsRegisterFunction(mtrSF_FileRead, "FileRead");
-    mtrScriptsRegisterFunction(mtrSF_FileWrite, "FileWrite");
-    mtrScriptsRegisterFunction(mtrSF_FileWriteLine, "FileWriteLine");
-    mtrScriptsRegisterFunction(mtrSF_FileWriteFast, "FileWriteFast");
-    mtrScriptsRegisterFunction(mtrSF_FileWriteLineFast, "FileWriteLineFast");
+    MTR_ScriptsRegisterFunction(MTR_SF_FileOpen, "FileOpen");
+    MTR_ScriptsRegisterFunction(MTR_SF_FileClose, "FileClose");
+    MTR_ScriptsRegisterFunction(MTR_SF_FileRead, "FileRead");
+    MTR_ScriptsRegisterFunction(MTR_SF_FileWrite, "FileWrite");
+    MTR_ScriptsRegisterFunction(MTR_SF_FileWriteLine, "FileWriteLine");
+    MTR_ScriptsRegisterFunction(MTR_SF_FileWriteFast, "FileWriteFast");
+    MTR_ScriptsRegisterFunction(MTR_SF_FileWriteLineFast, "FileWriteLineFast");
 
-    mtrScriptsRegisterFunction(mtrSF_ClipboardPutText, "ClipboardPutText");
-    mtrScriptsRegisterFunction(mtrSF_ClipboardGetText, "ClipboardGetText");
+    MTR_ScriptsRegisterFunction(MTR_SF_ClipboardPutText, "ClipboardPutText");
+    MTR_ScriptsRegisterFunction(MTR_SF_ClipboardGetText, "ClipboardGetText");
 
-    mtrScriptsRegisterFunction(mtrSF_StringBufferAdd, "StringBufferAdd");
-    mtrScriptsRegisterFunction(mtrSF_StringBufferDelete, "StringBufferDelete");
-    mtrScriptsRegisterFunction(mtrSF_StringBufferSetString,
+    MTR_ScriptsRegisterFunction(MTR_SF_StringBufferAdd, "StringBufferAdd");
+    MTR_ScriptsRegisterFunction(MTR_SF_StringBufferDelete,
+     "StringBufferDelete");
+    MTR_ScriptsRegisterFunction(MTR_SF_StringBufferSetString,
      "StringBufferSetString");
-    mtrScriptsRegisterFunction(mtrSF_StringBufferGetString,
+    MTR_ScriptsRegisterFunction(MTR_SF_StringBufferGetString,
      "StringBufferGetString");
-    mtrScriptsRegisterFunction(mtrSF_StringBufferGetMaxLen,
+    MTR_ScriptsRegisterFunction(MTR_SF_StringBufferGetMaxLen,
      "StringBufferGetMaxLen");
 
-    mtrScriptsRegisterFunction(mtrSF_OptionsAlias, "OptionsAlias");
-    mtrScriptsRegisterFunction(mtrSF_OptionsGet, "OptionsGet");
-    mtrScriptsRegisterFunction(mtrSF_OptionsGet_b, "OptionsGet_b");
-    mtrScriptsRegisterFunction(mtrSF_OptionsGet_i, "OptionsGet_i");
-    mtrScriptsRegisterFunction(mtrSF_OptionsGet_l, "OptionsGet_l");
-    mtrScriptsRegisterFunction(mtrSF_OptionsGet_f, "OptionsGet_f");
-    mtrScriptsRegisterFunction(mtrSF_OptionsGet_d, "OptionsGet_d");
+    MTR_ScriptsRegisterFunction(MTR_SF_OptionsAlias, "OptionsAlias");
+    MTR_ScriptsRegisterFunction(MTR_SF_OptionsGet, "OptionsGet");
+    MTR_ScriptsRegisterFunction(MTR_SF_OptionsGet_b, "OptionsGet_b");
+    MTR_ScriptsRegisterFunction(MTR_SF_OptionsGet_i, "OptionsGet_i");
+    MTR_ScriptsRegisterFunction(MTR_SF_OptionsGet_l, "OptionsGet_l");
+    MTR_ScriptsRegisterFunction(MTR_SF_OptionsGet_f, "OptionsGet_f");
+    MTR_ScriptsRegisterFunction(MTR_SF_OptionsGet_d, "OptionsGet_d");
 
-    mtrScriptsRegisterFunction(mtrSF_ConsoleShow, "ConsoleShow");
-    mtrScriptsRegisterFunction(mtrSF_ConsoleHide, "ConsoleHide");
+    MTR_ScriptsRegisterFunction(MTR_SF_ConsoleShow, "ConsoleShow");
+    MTR_ScriptsRegisterFunction(MTR_SF_ConsoleHide, "ConsoleHide");
 }
 
 #endif

@@ -7,8 +7,8 @@
 
 #include "marathoner/engine.h"
 
-size_t MTR_CALL mtrEncodingUtf8ToUcs4(const char *utf8Text,
+size_t MTR_CALL MTR_EncodingUtf8ToUcs4(const char *utf8Text,
  uint32_t **ucs4Text);
-size_t MTR_CALL mtrEncodingUtf8Codepoints(const char *utf8Text);
+size_t MTR_CALL MTR_EncodingUtf8Codepoints(const char *utf8Text);
 
 #endif

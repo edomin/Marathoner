@@ -1,6 +1,6 @@
 #include "log.h"
 
-int mtrLogPrintfCommon(char *format, ...)
+int MTR_LogPrintfCommon(char *format, ...)
 {
     va_list aptr;
     int     ret;
@@ -10,12 +10,12 @@ int mtrLogPrintfCommon(char *format, ...)
     va_end(aptr);
 
     fprintf(mtrLogFile, "%s", mtrLogBuffer);
-    mtrConsolePrint(mtrLogBuffer);
+    MTR_ConsolePrint(mtrLogBuffer);
 
     return ret;
 }
 
-void mtrLogWriteMeta(uint8_t messageType, uint8_t level)
+void MTR_LogWriteMeta(uint8_t messageType, uint8_t level)
 {
     uint8_t i;
 
@@ -24,36 +24,36 @@ void mtrLogWriteMeta(uint8_t messageType, uint8_t level)
     #ifdef __MINGW32__
     mtrLogFile = fopen(logFilename, "a");
     #endif
-    mtrLogPrintfCommon("[%i-%i-%i %i:%i:%i] ",
+    MTR_LogPrintfCommon("[%i-%i-%i %i:%i:%i] ",
      mtrNow->tm_year + 1900, mtrNow->tm_mon + 1, mtrNow->tm_mday,
      mtrNow->tm_hour, mtrNow->tm_min, mtrNow->tm_sec);
     switch (messageType)
     {
         case MTR_LMT_INFO:
-            mtrLogPrintfCommon("%s", "   Info: ");
+            MTR_LogPrintfCommon("%s", "   Info: ");
             break;
         case MTR_LMT_NOTE:
-            mtrLogPrintfCommon("%s", "   Note: ");
+            MTR_LogPrintfCommon("%s", "   Note: ");
             break;
         case MTR_LMT_WARNING:
-            mtrLogPrintfCommon("%s", "Warning: ");
+            MTR_LogPrintfCommon("%s", "Warning: ");
             break;
         case MTR_LMT_ERROR:
-            mtrLogPrintfCommon("%s", "  Error: ");
+            MTR_LogPrintfCommon("%s", "  Error: ");
             break;
         case MTR_LMT_FATAL:
-            mtrLogPrintfCommon("%s", "  Fatal: ");
+            MTR_LogPrintfCommon("%s", "  Fatal: ");
             break;
         case MTR_LMT_DEBUG:
         default:
-            mtrLogPrintfCommon("%s", "  Debug: ");
+            MTR_LogPrintfCommon("%s", "  Debug: ");
             break;
     }
     for (i = 0; i < level; i++)
-        mtrLogPrintfCommon("%s", "-- ");
+        MTR_LogPrintfCommon("%s", "-- ");
 }
 
-void MTR_CALL mtrLogInit(const char *filename)
+void MTR_CALL MTR_LogInit(const char *filename)
 {
     logFilename = filename;
     time(&mtrCurrentTime);
@@ -61,7 +61,7 @@ void MTR_CALL mtrLogInit(const char *filename)
     #ifdef __MINGW32__
     mtrLogFile = fopen(logFilename, "w");
     #endif
-    mtrLogPrintfCommon("[%i-%i-%i %i:%i:%i]          Begin Logging.\n",
+    MTR_LogPrintfCommon("[%i-%i-%i %i:%i:%i]          Begin Logging.\n",
      mtrNow->tm_year + 1900, mtrNow->tm_mon + 1, mtrNow->tm_mday,
      mtrNow->tm_hour, mtrNow->tm_min, mtrNow->tm_sec);
     #ifdef __MINGW32__
@@ -69,45 +69,45 @@ void MTR_CALL mtrLogInit(const char *filename)
     #endif
 }
 
-/*fa mtrLogWrite yes */
-void MTR_CALL mtrLogWrite(const char *message, uint8_t level,
+/*fa MTR_LogWrite yes */
+void MTR_CALL MTR_LogWrite(const char *message, uint8_t level,
  uint8_t messageType)
 {
-    mtrLogWriteMeta(messageType, level);
-    mtrLogPrintfCommon("%s\n", message);
+    MTR_LogWriteMeta(messageType, level);
+    MTR_LogPrintfCommon("%s\n", message);
     #ifdef __MINGW32__
     fclose(mtrLogFile);
     #endif
 }
 
-/*fa mtrLogWrite_s yes */
-void MTR_CALL mtrLogWrite_s(const char *message, uint8_t level,
+/*fa MTR_LogWrite_s yes */
+void MTR_CALL MTR_LogWrite_s(const char *message, uint8_t level,
  uint8_t messageType, const char * argument)
 {
-    mtrLogWriteMeta(messageType, level);
-    mtrLogPrintfCommon("%s %s\n", message, argument);
+    MTR_LogWriteMeta(messageType, level);
+    MTR_LogPrintfCommon("%s %s\n", message, argument);
     #ifdef __MINGW32__
     fclose(mtrLogFile);
     #endif
 }
 
-/*fa mtrLogWrite_i yes */
-void MTR_CALL mtrLogWrite_i(const char *message, uint8_t level,
+/*fa MTR_LogWrite_i yes */
+void MTR_CALL MTR_LogWrite_i(const char *message, uint8_t level,
  uint8_t messageType, int32_t argument)
 {
-    mtrLogWriteMeta(messageType, level);
-    mtrLogPrintfCommon("%s %i\n", message, argument);
+    MTR_LogWriteMeta(messageType, level);
+    MTR_LogPrintfCommon("%s %i\n", message, argument);
     #ifdef __MINGW32__
     fclose(mtrLogFile);
     #endif
 }
 
-/*fa mtrLogWrite_d yes */
-void MTR_CALL mtrLogWrite_d(const char *message, uint8_t level,
+/*fa MTR_LogWrite_d yes */
+void MTR_CALL MTR_LogWrite_d(const char *message, uint8_t level,
  uint8_t messageType, double argument)
 {
-    mtrLogWriteMeta(messageType, level);
-    mtrLogPrintfCommon("%s %f\n", message, argument);
+    MTR_LogWriteMeta(messageType, level);
+    MTR_LogPrintfCommon("%s %f\n", message, argument);
     #ifdef __MINGW32__
     fclose(mtrLogFile);
     #endif

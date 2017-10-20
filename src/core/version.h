@@ -7,7 +7,7 @@
 
 #include "marathoner/engine.h"
 
-uint32_t MTR_CALL mtrMarathonerGetVersion(void);
-uint32_t MTR_CALL mtrMarathonerGetModuleVersion(const char *moduleID);
+uint32_t MTR_CALL MTR_MarathonerGetVersion(void);
+uint32_t MTR_CALL MTR_MarathonerGetModuleVersion(const char *moduleID);
 
 #endif

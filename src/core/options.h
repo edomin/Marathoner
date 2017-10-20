@@ -14,14 +14,14 @@
 
 saneopt_t* mtrArguments;
 
-void MTR_CALL mtrOptionsProcess(int argc, char **argv);
-bool MTR_CALL mtrOptionsAlias(const char *option, const char *alias);
-char *MTR_CALL mtrOptionsGet(const char *option);
-bool MTR_CALL mtrOptionsGet_b(const char *option);
-int MTR_CALL mtrOptionsGet_i(const char *option);
-long int MTR_CALL mtrOptionsGet_l(const char *option);
-float MTR_CALL mtrOptionsGet_f(const char *option);
-double MTR_CALL mtrOptionsGet_d(const char *option);
+void MTR_CALL MTR_OptionsProcess(int argc, char **argv);
+bool MTR_CALL MTR_OptionsAlias(const char *option, const char *alias);
+char *MTR_CALL MTR_OptionsGet(const char *option);
+bool MTR_CALL MTR_OptionsGet_b(const char *option);
+int MTR_CALL MTR_OptionsGet_i(const char *option);
+long int MTR_CALL MTR_OptionsGet_l(const char *option);
+float MTR_CALL MTR_OptionsGet_f(const char *option);
+double MTR_CALL MTR_OptionsGet_d(const char *option);
 
 #endif
 

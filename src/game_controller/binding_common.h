@@ -1,74 +1,74 @@
 #ifndef MTR_GAME_CONTROLLER_BINDING_COMMON_H
 #define MTR_GAME_CONTROLLER_BINDING_COMMON_H
 
-typedef int (MTR_CALL * mtrGameControllerFunctionSupportedFunc)(const char *);
-mtrGameControllerFunctionSupportedFunc mtrGameControllerFunctionSupported;
+typedef int (MTR_CALL * MTR_GameControllerFunctionSupportedFunc)(const char *);
+MTR_GameControllerFunctionSupportedFunc MTR_GameControllerFunctionSupported;
 
-typedef bool (MTR_CALL * mtrGameControllerInitFunc)(void);
-mtrGameControllerInitFunc mtrGameControllerInit;
+typedef bool (MTR_CALL * MTR_GameControllerInitFunc)(void);
+MTR_GameControllerInitFunc MTR_GameControllerInit;
 
-typedef void (MTR_CALL * mtrGameControllerQuitFunc)(void);
-mtrGameControllerQuitFunc mtrGameControllerQuit;
+typedef void (MTR_CALL * MTR_GameControllerQuitFunc)(void);
+MTR_GameControllerQuitFunc MTR_GameControllerQuit;
 
-typedef void (MTR_CALL * mtrGameControllerRefreshFunc)(void);
-mtrGameControllerRefreshFunc mtrGameControllerRefresh;
+typedef void (MTR_CALL * MTR_GameControllerRefreshFunc)(void);
+MTR_GameControllerRefreshFunc MTR_GameControllerRefresh;
 
-typedef bool (MTR_CALL * mtrGameControllerButtonPressFunc)(int, int);
-mtrGameControllerButtonPressFunc mtrGameControllerButtonPress;
+typedef bool (MTR_CALL * MTR_GameControllerButtonPressFunc)(int, int);
+MTR_GameControllerButtonPressFunc MTR_GameControllerButtonPress;
 
-typedef bool (MTR_CALL * mtrGameControllerButtonReleaseFunc)(int, int);
-mtrGameControllerButtonReleaseFunc mtrGameControllerButtonRelease;
+typedef bool (MTR_CALL * MTR_GameControllerButtonReleaseFunc)(int, int);
+MTR_GameControllerButtonReleaseFunc MTR_GameControllerButtonRelease;
 
-typedef bool (MTR_CALL * mtrGameControllerButtonPressedFunc)(int, int);
-mtrGameControllerButtonPressedFunc mtrGameControllerButtonPressed;
+typedef bool (MTR_CALL * MTR_GameControllerButtonPressedFunc)(int, int);
+MTR_GameControllerButtonPressedFunc MTR_GameControllerButtonPressed;
 
-typedef int16_t (MTR_CALL * mtrGameControllerGetAxisFunc)(int, int);
-mtrGameControllerGetAxisFunc mtrGameControllerGetAxis;
+typedef int16_t (MTR_CALL * MTR_GameControllerGetAxisFunc)(int, int);
+MTR_GameControllerGetAxisFunc MTR_GameControllerGetAxis;
 
-typedef float (MTR_CALL * mtrGameControllerGetAxis_fFunc)(int, int);
-mtrGameControllerGetAxis_fFunc mtrGameControllerGetAxis_f;
+typedef float (MTR_CALL * MTR_GameControllerGetAxis_fFunc)(int, int);
+MTR_GameControllerGetAxis_fFunc MTR_GameControllerGetAxis_f;
 
-typedef int (MTR_CALL * mtrGameControllerGetAxisDeltaFunc)(int, int);
-mtrGameControllerGetAxisDeltaFunc mtrGameControllerGetAxisDelta;
+typedef int (MTR_CALL * MTR_GameControllerGetAxisDeltaFunc)(int, int);
+MTR_GameControllerGetAxisDeltaFunc MTR_GameControllerGetAxisDelta;
 
-typedef float (MTR_CALL * mtrGameControllerGetAxisDelta_fFunc)(int, int);
-mtrGameControllerGetAxisDelta_fFunc mtrGameControllerGetAxisDelta_f;
+typedef float (MTR_CALL * MTR_GameControllerGetAxisDelta_fFunc)(int, int);
+MTR_GameControllerGetAxisDelta_fFunc MTR_GameControllerGetAxisDelta_f;
 
-typedef int (MTR_CALL * mtrGameControllerGetTrackballDeltaXFunc)(int, int);
-mtrGameControllerGetTrackballDeltaXFunc mtrGameControllerGetTrackballDeltaX;
+typedef int (MTR_CALL * MTR_GameControllerGetTrackballDeltaXFunc)(int, int);
+MTR_GameControllerGetTrackballDeltaXFunc MTR_GameControllerGetTrackballDeltaX;
 
-typedef int (MTR_CALL * mtrGameControllerGetTrackballDeltaYFunc)(int, int);
-mtrGameControllerGetTrackballDeltaYFunc mtrGameControllerGetTrackballDeltaY;
+typedef int (MTR_CALL * MTR_GameControllerGetTrackballDeltaYFunc)(int, int);
+MTR_GameControllerGetTrackballDeltaYFunc MTR_GameControllerGetTrackballDeltaY;
 
 #ifdef lua_h
-typedef void (MTR_CALL * mtrGameControllerGetTrackballDeltaXYFunc)(int, int,
+typedef void (MTR_CALL * MTR_GameControllerGetTrackballDeltaXYFunc)(int, int,
  int *, int *);
-mtrGameControllerGetTrackballDeltaXYFunc mtrGameControllerGetTrackballDeltaXY;
+MTR_GameControllerGetTrackballDeltaXYFunc MTR_GameControllerGetTrackballDeltaXY;
 #endif
 
-typedef uint8_t (MTR_CALL * mtrGameControllerGetPovHatFunc)(int, int);
-mtrGameControllerGetPovHatFunc mtrGameControllerGetPovHat;
+typedef uint8_t (MTR_CALL * MTR_GameControllerGetPovHatFunc)(int, int);
+MTR_GameControllerGetPovHatFunc MTR_GameControllerGetPovHat;
 
-typedef int (MTR_CALL * mtrGameControllerGetPovHatHorizontalFunc)(int, int);
-mtrGameControllerGetPovHatHorizontalFunc mtrGameControllerGetPovHatHorizontal;
+typedef int (MTR_CALL * MTR_GameControllerGetPovHatHorizontalFunc)(int, int);
+MTR_GameControllerGetPovHatHorizontalFunc MTR_GameControllerGetPovHatHorizontal;
 
-typedef int (MTR_CALL * mtrGameControllerGetPovHatVerticalFunc)(int, int);
-mtrGameControllerGetPovHatVerticalFunc mtrGameControllerGetPovHatVertical;
+typedef int (MTR_CALL * MTR_GameControllerGetPovHatVerticalFunc)(int, int);
+MTR_GameControllerGetPovHatVerticalFunc MTR_GameControllerGetPovHatVertical;
 
-typedef void (MTR_CALL * mtrGameControllerGetPovHatAxesFunc)(int, int, int *,
+typedef void (MTR_CALL * MTR_GameControllerGetPovHatAxesFunc)(int, int, int *,
  int *);
-mtrGameControllerGetPovHatAxesFunc mtrGameControllerGetPovHatAxes;
+MTR_GameControllerGetPovHatAxesFunc MTR_GameControllerGetPovHatAxes;
 
-typedef int (MTR_CALL * mtrGameControllerGetButtonsCountFunc)(int);
-mtrGameControllerGetButtonsCountFunc mtrGameControllerGetButtonsCount;
+typedef int (MTR_CALL * MTR_GameControllerGetButtonsCountFunc)(int);
+MTR_GameControllerGetButtonsCountFunc MTR_GameControllerGetButtonsCount;
 
-typedef int (MTR_CALL * mtrGameControllerGetAxesCountFunc)(int);
-mtrGameControllerGetAxesCountFunc mtrGameControllerGetAxesCount;
+typedef int (MTR_CALL * MTR_GameControllerGetAxesCountFunc)(int);
+MTR_GameControllerGetAxesCountFunc MTR_GameControllerGetAxesCount;
 
-typedef int (MTR_CALL * mtrGameControllerGetTrackballsCountFunc)(int);
-mtrGameControllerGetTrackballsCountFunc mtrGameControllerGetTrackballsCount;
+typedef int (MTR_CALL * MTR_GameControllerGetTrackballsCountFunc)(int);
+MTR_GameControllerGetTrackballsCountFunc MTR_GameControllerGetTrackballsCount;
 
-typedef int (MTR_CALL * mtrGameControllerGetPowHatsCountFunc)(int);
-mtrGameControllerGetPowHatsCountFunc mtrGameControllerGetPowHatsCount;
+typedef int (MTR_CALL * MTR_GameControllerGetPowHatsCountFunc)(int);
+MTR_GameControllerGetPowHatsCountFunc MTR_GameControllerGetPowHatsCount;
 
 #endif

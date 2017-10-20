@@ -9,8 +9,8 @@ HWND mtrConsole;
 static bool mtrConsoleInited __attribute__((used)) = false;
 bool mtrConsoleShowed;
 
-void MTR_CALL mtrConsoleShow(void);
-void MTR_CALL mtrConsoleHide(void);
-void mtrConsolePrint(const char *string);
+void MTR_CALL MTR_ConsoleShow(void);
+void MTR_CALL MTR_ConsoleHide(void);
+void MTR_ConsolePrint(const char *string);
 
 #endif

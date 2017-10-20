@@ -9,27 +9,27 @@
 #include "marathoner/plugin.h"
 
 typedef void (MTR_CALL * mtrPluginInitFunc)(void);
-mtrPluginInitFunc mtrPluginInit;
+mtrPluginInitFunc MTR_PluginInit;
 
 lua_State *mtrVm;
-char *mtrAutorun;
+char      *mtrAutorun;
 
-MTR_EXPORT int MTR_CALL mtrScriptsFunctionSupported(const char *);
+MTR_EXPORT int MTR_CALL MTR_ScriptsFunctionSupported(const char *);
 
-MTR_EXPORT char * MTR_CALL mtrScriptsGetAutorunPath(void);
-MTR_EXPORT void MTR_CALL mtrScriptsRegisterFunction(lua_CFunction func,
+MTR_EXPORT char * MTR_CALL MTR_ScriptsGetAutorunPath(void);
+MTR_EXPORT void MTR_CALL MTR_ScriptsRegisterFunction(lua_CFunction func,
  const char * funcname);
-MTR_EXPORT bool MTR_CALL mtrScriptsRegisterVariable_b(const char *name,
+MTR_EXPORT bool MTR_CALL MTR_ScriptsRegisterVariable_b(const char *name,
  bool value);
-MTR_EXPORT bool MTR_CALL mtrScriptsRegisterVariable_i(const char *name,
+MTR_EXPORT bool MTR_CALL MTR_ScriptsRegisterVariable_i(const char *name,
  int value);
-MTR_EXPORT bool MTR_CALL mtrScriptsRegisterVariable_u(const char *name,
+MTR_EXPORT bool MTR_CALL MTR_ScriptsRegisterVariable_u(const char *name,
  unsigned int value);
-MTR_EXPORT bool MTR_CALL mtrScriptsRegisterVariable_f(const char *name,
+MTR_EXPORT bool MTR_CALL MTR_ScriptsRegisterVariable_f(const char *name,
  float value);
-MTR_EXPORT bool MTR_CALL mtrScriptsRegisterVariable_d(const char *name,
+MTR_EXPORT bool MTR_CALL MTR_ScriptsRegisterVariable_d(const char *name,
  double value);
-MTR_EXPORT bool MTR_CALL mtrScriptsRegisterVariable_s(const char *name,
+MTR_EXPORT bool MTR_CALL MTR_ScriptsRegisterVariable_s(const char *name,
  const char *value);
 
 #endif

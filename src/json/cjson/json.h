@@ -16,12 +16,12 @@ static bool mtrJsonInited = false;
 #define MTR_JSON_CHECK_IF_NOT_INITED(returnValue) \
     if (!mtrJsonInited)                           \
         return returnValue;
-#define MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG(message, returnValue)           \
-    if (!mtrJsonInited)                                                       \
-    {                                                                         \
-        mtrLogWrite(message ". JSON subsystem are not initialized", \
-         1, MTR_LMT_ERROR);                                                   \
-        return returnValue;                                                   \
+#define MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG(message, returnValue)  \
+    if (!mtrJsonInited)                                              \
+    {                                                                \
+        MTR_LogWrite(message ". JSON subsystem are not initialized", \
+         1, MTR_LMT_ERROR);                                          \
+        return returnValue;                                          \
     }
 
 #endif

@@ -33,7 +33,7 @@ HWND GetConsoleWindow(void)
 }
 #endif
 
-bool mtrConsoleInit(void)
+bool MTR_ConsoleInit(void)
 {
     if (AllocConsole() == 0)
     {
@@ -53,27 +53,27 @@ bool mtrConsoleInit(void)
     return true;
 }
 
-void MTR_CALL mtrConsoleShow(void)
+void MTR_CALL MTR_ConsoleShow(void)
 {
     if (!mtrConsoleInited)
-        if (!mtrConsoleInit())
+        if (!MTR_ConsoleInit())
             return;
 
     ShowWindow(mtrConsole, SW_SHOW);
     mtrConsoleShowed = true;
 }
 
-void MTR_CALL mtrConsoleHide(void)
+void MTR_CALL MTR_ConsoleHide(void)
 {
     if (!mtrConsoleInited)
-        if (!mtrConsoleInit())
+        if (!MTR_ConsoleInit())
             return;
 
     ShowWindow(mtrConsole, SW_HIDE);
     mtrConsoleShowed = false;
 }
 
-void mtrConsolePrint(const char *string)
+void MTR_ConsolePrint(const char *string)
 {
     if ((mtrConsoleInited) && (mtrConsoleShowed))
        printf("%s", string);

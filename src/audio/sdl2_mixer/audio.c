@@ -4,7 +4,7 @@
 
 MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Audio, FA_FUNCTIONS_COUNT)
 
-MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
+MTR_EXPORT mtrReport* MTR_CALL MTR_CreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -20,8 +20,8 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
-/*fa mtrAudioInit yes */
-MTR_EXPORT bool MTR_CALL mtrAudioInit(uint32_t sndDmSize,
+/*fa MTR_AudioInit yes */
+MTR_EXPORT bool MTR_CALL MTR_AudioInit(uint32_t sndDmSize,
  uint32_t sndReservedCount, uint32_t musDmSize, uint32_t musReservedCount,
  int freq, int channels, int chunkSize)
 {
@@ -41,33 +41,33 @@ MTR_EXPORT bool MTR_CALL mtrAudioInit(uint32_t sndDmSize,
     channelsConf[0] = channelsMono;
     channelsConf[1] = channelsStereo;
 
-    mtrLogWrite("Initializing audio manager", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Initializing audio manager", 0, MTR_LMT_INFO);
 
-    mtrLogWrite("Reporting SDL compile-time version:", 1, MTR_LMT_INFO);
+    MTR_LogWrite("Reporting SDL compile-time version:", 1, MTR_LMT_INFO);
     SDL_VERSION(&compiled);
-    mtrLogWrite_i("Major:", 2, MTR_LMT_INFO, compiled.major);
-    mtrLogWrite_i("Minor:", 2, MTR_LMT_INFO, compiled.minor);
-    mtrLogWrite_i("Patch:", 2, MTR_LMT_INFO, compiled.patch);
-    mtrLogWrite("Reporting SDL linked version:", 1, MTR_LMT_INFO);
+    MTR_LogWrite_i("Major:", 2, MTR_LMT_INFO, compiled.major);
+    MTR_LogWrite_i("Minor:", 2, MTR_LMT_INFO, compiled.minor);
+    MTR_LogWrite_i("Patch:", 2, MTR_LMT_INFO, compiled.patch);
+    MTR_LogWrite("Reporting SDL linked version:", 1, MTR_LMT_INFO);
     SDL_GetVersion(&sdlLinked);
-    mtrLogWrite_i("Major:", 2, MTR_LMT_INFO, sdlLinked.major);
-    mtrLogWrite_i("Minor:", 2, MTR_LMT_INFO, sdlLinked.minor);
-    mtrLogWrite_i("Patch:", 2, MTR_LMT_INFO, sdlLinked.patch);
-    mtrLogWrite("Reporting SDL_mixer compile-time version:", 1, MTR_LMT_INFO);
+    MTR_LogWrite_i("Major:", 2, MTR_LMT_INFO, sdlLinked.major);
+    MTR_LogWrite_i("Minor:", 2, MTR_LMT_INFO, sdlLinked.minor);
+    MTR_LogWrite_i("Patch:", 2, MTR_LMT_INFO, sdlLinked.patch);
+    MTR_LogWrite("Reporting SDL_mixer compile-time version:", 1, MTR_LMT_INFO);
     SDL_MIXER_VERSION(&compiled);
-    mtrLogWrite_i("Major:", 2, MTR_LMT_INFO, compiled.major);
-    mtrLogWrite_i("Minor:", 2, MTR_LMT_INFO, compiled.minor);
-    mtrLogWrite_i("Patch:", 2, MTR_LMT_INFO, compiled.patch);
-    mtrLogWrite("Reporting SDL_mixer linked version:", 1, MTR_LMT_INFO);
+    MTR_LogWrite_i("Major:", 2, MTR_LMT_INFO, compiled.major);
+    MTR_LogWrite_i("Minor:", 2, MTR_LMT_INFO, compiled.minor);
+    MTR_LogWrite_i("Patch:", 2, MTR_LMT_INFO, compiled.patch);
+    MTR_LogWrite("Reporting SDL_mixer linked version:", 1, MTR_LMT_INFO);
     linked = Mix_Linked_Version();
-    mtrLogWrite_i("Major:", 2, MTR_LMT_INFO, linked->major);
-    mtrLogWrite_i("Minor:", 2, MTR_LMT_INFO, linked->minor);
-    mtrLogWrite_i("Patch:", 2, MTR_LMT_INFO, linked->patch);
+    MTR_LogWrite_i("Major:", 2, MTR_LMT_INFO, linked->major);
+    MTR_LogWrite_i("Minor:", 2, MTR_LMT_INFO, linked->minor);
+    MTR_LogWrite_i("Patch:", 2, MTR_LMT_INFO, linked->patch);
 
     if (SDL_InitSubSystem(SDL_INIT_AUDIO) == 0)
-        mtrLogWrite("SDL audio subsystem initialized", 1, MTR_LMT_INFO);
+        MTR_LogWrite("SDL audio subsystem initialized", 1, MTR_LMT_INFO);
     else
-        mtrLogWrite("Unable to initialize SDL audio subsystem", 1,
+        MTR_LogWrite("Unable to initialize SDL audio subsystem", 1,
          MTR_LMT_INFO);
 
     initFlags = MIX_INIT_FLAC | MIX_INIT_MOD | MIX_INIT_MODPLUG | MIX_INIT_MP3 |
@@ -77,181 +77,179 @@ MTR_EXPORT bool MTR_CALL mtrAudioInit(uint32_t sndDmSize,
     {
         if (initResult == 0)
         {
-            mtrNotify("Unable to load libraries needed by SDL_mixer", 1,
+            MTR_Notify("Unable to load libraries needed by SDL_mixer", 1,
              MTR_LMT_ERROR);
             return false;
         }
 
-        mtrLogWrite("Unable to initialize support of this formats:", 1,
+        MTR_LogWrite("Unable to initialize support of this formats:", 1,
          MTR_LMT_WARNING);
         if ((initResult & MIX_INIT_FLAC) == 0)
-            mtrLogWrite("FLAC", 2, MTR_LMT_WARNING);
+            MTR_LogWrite("FLAC", 2, MTR_LMT_WARNING);
         if ((initResult & MIX_INIT_MOD) == 0)
-            mtrLogWrite("MOD", 2, MTR_LMT_WARNING);
+            MTR_LogWrite("MOD", 2, MTR_LMT_WARNING);
         if ((initResult & MIX_INIT_MODPLUG) == 0)
-            mtrLogWrite("MODPlug", 2, MTR_LMT_WARNING);
+            MTR_LogWrite("MODPlug", 2, MTR_LMT_WARNING);
         if ((initResult & MIX_INIT_MP3) == 0)
-            mtrLogWrite("MP3", 2, MTR_LMT_WARNING);
+            MTR_LogWrite("MP3", 2, MTR_LMT_WARNING);
         if ((initResult & MIX_INIT_OGG) == 0)
-            mtrLogWrite("OGG", 2, MTR_LMT_WARNING);
+            MTR_LogWrite("OGG", 2, MTR_LMT_WARNING);
         if ((initResult & MIX_INIT_FLUIDSYNTH) == 0)
-            mtrLogWrite("FluidSynth", 2, MTR_LMT_WARNING);
+            MTR_LogWrite("FluidSynth", 2, MTR_LMT_WARNING);
     }
     else
-        mtrLogWrite("Support of the every SDL_mixer audio format initialized",
+        MTR_LogWrite("Support of the every SDL_mixer audio format initialized",
          1, MTR_LMT_INFO);
 
-    mtrLogWrite("Preparing parameters for initialize SDL_mixer", 1,
+    MTR_LogWrite("Preparing parameters for initialize SDL_mixer", 1,
      MTR_LMT_INFO);
 
     /* Choosing sampling frequency */
     if (freq == MTR_AU_FREQ_DEFAULT)
     {
         frequency = MIX_DEFAULT_FREQUENCY;
-        mtrLogWrite_i("Choosed default sampling frequency (Hz): ", 2,
+        MTR_LogWrite_i("Choosed default sampling frequency (Hz): ", 2,
          MTR_LMT_INFO, MIX_DEFAULT_FREQUENCY);
     }
     else if (freq < 11025)
     {
         frequency = 11025;
-        mtrLogWrite_i("Choosed sampling frequency not supported. Using minimal "
-         "supported sampling frequency (Hz): ", 2, MTR_LMT_WARNING, 11025);
+        MTR_LogWrite_i("Choosed sampling frequency not supported. Using "
+         "minimal supported sampling frequency (Hz): ", 2, MTR_LMT_WARNING,
+         11025);
     }
     else
     {
         frequency = freq;
-        mtrLogWrite_i("Choosed sampling frequency (Hz): ", 2, MTR_LMT_INFO,
+        MTR_LogWrite_i("Choosed sampling frequency (Hz): ", 2, MTR_LMT_INFO,
          freq);
     }
-    /* */
 
     /* Choosing channels count */
     if (channels == MTR_AU_CHANNELS_DEFAULT)
     {
         channelsCount = MIX_DEFAULT_CHANNELS;
-        mtrLogWrite_s("Choosed default channels count: ", 2, MTR_LMT_INFO,
+        MTR_LogWrite_s("Choosed default channels count: ", 2, MTR_LMT_INFO,
          channelsConf[MIX_DEFAULT_CHANNELS - 1]);
     }
     else if (channels > 2)
     {
         channelsCount = 2;
-        mtrLogWrite_s("Choosed channels count are not supported. Using max "
+        MTR_LogWrite_s("Choosed channels count are not supported. Using max "
          "supported channels count: ", 2, MTR_LMT_WARNING, channelsConf[2 - 1]);
     }
     else
     {
         channelsCount = channels;
-        mtrLogWrite_s("Choosed channels count: ", 2, MTR_LMT_INFO,
+        MTR_LogWrite_s("Choosed channels count: ", 2, MTR_LMT_INFO,
          channelsConf[channels - 1]);
     }
-    /*  */
 
     /* Choosing chunk size */
     if (chunkSize == MTR_AU_CHUNK_SIZE_DEFAULT)
     {
         finalChunkSize = 4096;
-        mtrLogWrite_i("Choosed default chunk size (bytes): ", 2, MTR_LMT_INFO,
+        MTR_LogWrite_i("Choosed default chunk size (bytes): ", 2, MTR_LMT_INFO,
          4096);
     }
     else if (chunkSize > 8192)
     {
         finalChunkSize = 8192;
-        mtrLogWrite_i("Choosed chunk size not supported. Using max supported "
+        MTR_LogWrite_i("Choosed chunk size not supported. Using max supported "
          "chunk size (bytes): ", 2, MTR_LMT_WARNING, 8192);
     }
     else if (chunkSize < 512)
     {
         finalChunkSize = 512;
-        mtrLogWrite_i("Choosed chunk size not supported. Using minimal "
+        MTR_LogWrite_i("Choosed chunk size not supported. Using minimal "
          "supported chunk size (bytes): ", 2, MTR_LMT_WARNING, 512);
     }
     else
     {
         finalChunkSize = chunkSize;
-        mtrLogWrite_i("Choosed chunk size (bytes): ", 2, MTR_LMT_INFO,
+        MTR_LogWrite_i("Choosed chunk size (bytes): ", 2, MTR_LMT_INFO,
          chunkSize);
     }
-    /* */
 
     if (Mix_OpenAudio(frequency, MIX_DEFAULT_FORMAT, channelsCount,
      finalChunkSize) == 0)
     {
-        mtrLogWrite("SDL_mixer initialized", 1, MTR_LMT_INFO);
+        MTR_LogWrite("SDL_mixer initialized", 1, MTR_LMT_INFO);
 
-        mtrLogWrite("Reporting built-in SDL_mixer chunk decoders", 1,
+        MTR_LogWrite("Reporting built-in SDL_mixer chunk decoders", 1,
          MTR_LMT_INFO);
         for (i = 0; i < Mix_GetNumChunkDecoders(); i++)
-            mtrLogWrite_s("Chunk decoder found: ", 2, MTR_LMT_INFO,
+            MTR_LogWrite_s("Chunk decoder found: ", 2, MTR_LMT_INFO,
              Mix_GetChunkDecoder(i));
-        mtrLogWrite("Reporting built-in SDL_mixer music decoders", 1,
+        MTR_LogWrite("Reporting built-in SDL_mixer music decoders", 1,
          MTR_LMT_INFO);
         for (i = 0; i < Mix_GetNumMusicDecoders(); i++)
-            mtrLogWrite_s("Music decoder found: ", 2, MTR_LMT_INFO,
+            MTR_LogWrite_s("Music decoder found: ", 2, MTR_LMT_INFO,
              Mix_GetMusicDecoder(i));
     }
     else
     {
-        mtrNotify("Unable to initialize SDL_mixer", 1, MTR_LMT_ERROR);
+        MTR_Notify("Unable to initialize SDL_mixer", 1, MTR_LMT_ERROR);
         Mix_Quit();
         return false;
     }
     Mix_AllocateChannels(32);
 
-    mtrSoundKeeper = (mtrIndexkeeper_t *)mtrIndexkeeperCreate(sndDmSize,
+    mtrSoundKeeper = (mtrIndexkeeper_t *)MTR_IndexkeeperCreate(sndDmSize,
      sndReservedCount, sizeof(mtrSound_t));
     if (mtrSoundKeeper == NULL)
     {
-        mtrNotify("Unable to initialize indexkeeper structure for sounds", 1,
+        MTR_Notify("Unable to initialize indexkeeper structure for sounds", 1,
          MTR_LMT_ERROR);
         Mix_CloseAudio();
         Mix_Quit();
         return false;
     }
     else
-        mtrLogWrite("Indexkeeper structure for sounds initialized", 1,
+        MTR_LogWrite("Indexkeeper structure for sounds initialized", 1,
          MTR_LMT_INFO);
 
-    mtrMusicKeeper = (mtrIndexkeeper_t *)mtrIndexkeeperCreate(musDmSize,
+    mtrMusicKeeper = (mtrIndexkeeper_t *)MTR_IndexkeeperCreate(musDmSize,
      musReservedCount, sizeof(mtrMusic_t));
     if (mtrMusicKeeper == NULL)
     {
-        mtrNotify("Unable to initialize indexkeeper structure for music", 1,
+        MTR_Notify("Unable to initialize indexkeeper structure for music", 1,
          MTR_LMT_ERROR);
         Mix_CloseAudio();
         Mix_Quit();
         return false;
     }
     else
-        mtrLogWrite("Indexkeeper structure for music initialized", 1,
+        MTR_LogWrite("Indexkeeper structure for music initialized", 1,
          MTR_LMT_INFO);
 
-    mtrLogWrite("Audio manager initialized", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Audio manager initialized", 0, MTR_LMT_INFO);
 
     mtrAudioInited = true;
     return true;
 }
 
-/*fa mtrAudioQuit yes */
-MTR_EXPORT void MTR_CALL mtrAudioQuit(void)
+/*fa MTR_AudioQuit yes */
+MTR_EXPORT void MTR_CALL MTR_AudioQuit(void)
 {
     MTR_AUDIO_CHECK_IF_NOT_INITED_WITH_LOG("Unable to destroy audio manager",);
 
-    mtrLogWrite("Destroying audio manager", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Destroying audio manager", 0, MTR_LMT_INFO);
     Mix_CloseAudio();
     Mix_Quit();
-    mtrLogWrite("Audio manager destroyed", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Audio manager destroyed", 0, MTR_LMT_INFO);
 }
 
-/*fa mtrAudioSoundLoad yes */
-MTR_EXPORT uint32_t MTR_CALL mtrAudioSoundLoad(const char *filename)
+/*fa MTR_AudioSoundLoad yes */
+MTR_EXPORT uint32_t MTR_CALL MTR_AudioSoundLoad(const char *filename)
 {
     uint32_t    freeIndex;
     mtrSound_t *sound;
     MTR_AUDIO_CHECK_IF_NOT_INITED_WITH_LOG("Unable to load sound", 0U);
 
-    mtrLogWrite_s("Loading sound", 0, MTR_LMT_INFO, filename);
-    freeIndex = mtrIndexkeeperGetFreeIndex(mtrSoundKeeper);
-    mtrLogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
+    MTR_LogWrite_s("Loading sound", 0, MTR_LMT_INFO, filename);
+    freeIndex = MTR_IndexkeeperGetFreeIndex(mtrSoundKeeper);
+    MTR_LogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
     sound = (mtrSound_t *)(&((mtrSound_t *)mtrSoundKeeper->data)[freeIndex]);
     sound->sound = Mix_LoadWAV(filename);
     if (sound->sound != NULL)
@@ -261,29 +259,29 @@ MTR_EXPORT uint32_t MTR_CALL mtrAudioSoundLoad(const char *filename)
             sound->name = mtrDefaultSoundName;
         else
             sound->name = strcpy(sound->name, filename);
-        mtrLogWrite_s("Sound loaded", 0, MTR_LMT_INFO, filename);
+        MTR_LogWrite_s("Sound loaded", 0, MTR_LMT_INFO, filename);
         return freeIndex;
     }
     else
     {
-        mtrNotify("Unable to load sound", 1, MTR_LMT_ERROR);
-        mtrIndexkeeperFreeIndex(mtrSoundKeeper, freeIndex);
+        MTR_Notify("Unable to load sound", 1, MTR_LMT_ERROR);
+        MTR_IndexkeeperFreeIndex(mtrSoundKeeper, freeIndex);
         return 0U;
     }
     return 0U;
 }
 
-/*fa mtrAudioMusicLoad yes */
-MTR_EXPORT uint32_t MTR_CALL mtrAudioMusicLoad(const char *filename)
+/*fa MTR_AudioMusicLoad yes */
+MTR_EXPORT uint32_t MTR_CALL MTR_AudioMusicLoad(const char *filename)
 {
     uint32_t     freeIndex;
     mtrMusic_t  *music;
     int          musicType;
     MTR_AUDIO_CHECK_IF_NOT_INITED_WITH_LOG("Unable to load music", 0U);
 
-    mtrLogWrite_s("Loading music file", 0, MTR_LMT_INFO, filename);
-    freeIndex = mtrIndexkeeperGetFreeIndex(mtrMusicKeeper);
-    mtrLogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
+    MTR_LogWrite_s("Loading music file", 0, MTR_LMT_INFO, filename);
+    freeIndex = MTR_IndexkeeperGetFreeIndex(mtrMusicKeeper);
+    MTR_LogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
     music = (mtrMusic_t *)(&((mtrMusic_t *)mtrMusicKeeper->data)[freeIndex]);
     music->music = Mix_LoadMUS(filename);
     if (music->music != NULL)
@@ -293,59 +291,59 @@ MTR_EXPORT uint32_t MTR_CALL mtrAudioMusicLoad(const char *filename)
             music->name = mtrDefaultMusicName;
         else
             music->name = strcpy(music->name, filename);
-        mtrLogWrite_s("Music file loaded", 0, MTR_LMT_INFO, filename);
+        MTR_LogWrite_s("Music file loaded", 0, MTR_LMT_INFO, filename);
         musicType = Mix_GetMusicType(music->music);
         switch(musicType)
         {
             case MUS_NONE:
-                mtrLogWrite_s("Music type:", 2, MTR_LMT_INFO, "unknown");
+                MTR_LogWrite_s("Music type:", 2, MTR_LMT_INFO, "unknown");
                 break;
             case MUS_CMD:
-                mtrLogWrite_s("Music type:", 2, MTR_LMT_INFO,
+                MTR_LogWrite_s("Music type:", 2, MTR_LMT_INFO,
                  "music playing via external music player");
                 break;
             case MUS_WAV:
-                mtrLogWrite_s("Music type:", 2, MTR_LMT_INFO, "WAV");
+                MTR_LogWrite_s("Music type:", 2, MTR_LMT_INFO, "WAV");
                 break;
             case MUS_MOD:
-                mtrLogWrite_s("Music type:", 2, MTR_LMT_INFO, "MOD");
+                MTR_LogWrite_s("Music type:", 2, MTR_LMT_INFO, "MOD");
                 break;
             case MUS_MID:
-                mtrLogWrite_s("Music type:", 2, MTR_LMT_INFO, "MIDI");
+                MTR_LogWrite_s("Music type:", 2, MTR_LMT_INFO, "MIDI");
                 break;
             case MUS_OGG:
-                mtrLogWrite_s("Music type:", 2, MTR_LMT_INFO, "OGG");
+                MTR_LogWrite_s("Music type:", 2, MTR_LMT_INFO, "OGG");
                 break;
             case MUS_MP3:
-                mtrLogWrite_s("Music type:", 2, MTR_LMT_INFO, "MP3");
+                MTR_LogWrite_s("Music type:", 2, MTR_LMT_INFO, "MP3");
                 break;
             case MUS_MP3_MAD:
-                mtrLogWrite_s("Music type:", 2, MTR_LMT_INFO,
+                MTR_LogWrite_s("Music type:", 2, MTR_LMT_INFO,
                  "MP3 playing via MAD audio decoder");
                 break;
             case MUS_FLAC:
-                mtrLogWrite_s("Music type:", 2, MTR_LMT_INFO, "FLAC");
+                MTR_LogWrite_s("Music type:", 2, MTR_LMT_INFO, "FLAC");
                 break;
             case MUS_MODPLUG:
-                mtrLogWrite_s("Music type:", 2, MTR_LMT_INFO, "tracker music");
+                MTR_LogWrite_s("Music type:", 2, MTR_LMT_INFO, "tracker music");
                 break;
             default:
-                mtrLogWrite_s("Music type:", 2, MTR_LMT_INFO, "unknown");
+                MTR_LogWrite_s("Music type:", 2, MTR_LMT_INFO, "unknown");
                 break;
         }
         return freeIndex;
     }
     else
     {
-        mtrNotify("Unable to load music", 1, MTR_LMT_ERROR);
-        mtrIndexkeeperFreeIndex(mtrMusicKeeper, freeIndex);
+        MTR_Notify("Unable to load music", 1, MTR_LMT_ERROR);
+        MTR_IndexkeeperFreeIndex(mtrMusicKeeper, freeIndex);
         return 0U;
     }
     return 0U;
 }
 
-/*fa mtrAudioSoundPlay yes */
-MTR_EXPORT void MTR_CALL mtrAudioSoundPlay(uint32_t soundNum)
+/*fa MTR_AudioSoundPlay yes */
+MTR_EXPORT void MTR_CALL MTR_AudioSoundPlay(uint32_t soundNum)
 {
     mtrSound_t *sound;
     MTR_AUDIO_CHECK_IF_NOT_INITED();
@@ -354,8 +352,8 @@ MTR_EXPORT void MTR_CALL mtrAudioSoundPlay(uint32_t soundNum)
     Mix_PlayChannel(-1, sound->sound, 0);
 }
 
-/*fa mtrAudioSoundFadeInPlay yes */
-MTR_EXPORT void MTR_CALL mtrAudioSoundFadeInPlay(uint32_t soundNum, int ms)
+/*fa MTR_AudioSoundFadeInPlay yes */
+MTR_EXPORT void MTR_CALL MTR_AudioSoundFadeInPlay(uint32_t soundNum, int ms)
 {
     mtrSound_t *sound;
     MTR_AUDIO_CHECK_IF_NOT_INITED();
@@ -364,8 +362,8 @@ MTR_EXPORT void MTR_CALL mtrAudioSoundFadeInPlay(uint32_t soundNum, int ms)
     Mix_FadeInChannel(-1, sound->sound, 0, ms);
 }
 
-/*fa mtrAudioSoundSetVolume yes */
-MTR_EXPORT void MTR_CALL mtrAudioSoundSetVolume(uint32_t soundNum,
+/*fa MTR_AudioSoundSetVolume yes */
+MTR_EXPORT void MTR_CALL MTR_AudioSoundSetVolume(uint32_t soundNum,
  int volume)
 {
     mtrSound_t *sound;
@@ -375,8 +373,8 @@ MTR_EXPORT void MTR_CALL mtrAudioSoundSetVolume(uint32_t soundNum,
     Mix_VolumeChunk(sound->sound, volume);
 }
 
-/*fa mtrAudioSoundSetVolume_f yes */
-MTR_EXPORT void MTR_CALL mtrAudioSoundSetVolume_f(uint32_t soundNum,
+/*fa MTR_AudioSoundSetVolume_f yes */
+MTR_EXPORT void MTR_CALL MTR_AudioSoundSetVolume_f(uint32_t soundNum,
  float volume)
 {
     mtrSound_t *sound;
@@ -386,8 +384,8 @@ MTR_EXPORT void MTR_CALL mtrAudioSoundSetVolume_f(uint32_t soundNum,
     Mix_VolumeChunk(sound->sound, (int)((float)MIX_MAX_VOLUME * volume));
 }
 
-/*fa mtrAudioSoundStop yes */
-MTR_EXPORT void MTR_CALL mtrAudioSoundStop(uint32_t soundNum)
+/*fa MTR_AudioSoundStop yes */
+MTR_EXPORT void MTR_CALL MTR_AudioSoundStop(uint32_t soundNum)
 {
     int         i;
     int         channelsCount;
@@ -407,8 +405,8 @@ MTR_EXPORT void MTR_CALL mtrAudioSoundStop(uint32_t soundNum)
     }
 }
 
-/*fa mtrAudioSoundFadeOutStop yes */
-MTR_EXPORT void MTR_CALL mtrAudioSoundFadeOutStop(uint32_t soundNum, int ms)
+/*fa MTR_AudioSoundFadeOutStop yes */
+MTR_EXPORT void MTR_CALL MTR_AudioSoundFadeOutStop(uint32_t soundNum, int ms)
 {
     int         i;
     int         channelsCount;
@@ -428,24 +426,24 @@ MTR_EXPORT void MTR_CALL mtrAudioSoundFadeOutStop(uint32_t soundNum, int ms)
     }
 }
 
-/*fa mtrAudioChannelsSetVolume yes */
-MTR_EXPORT void MTR_CALL mtrAudioChannelsSetVolume(int volume)
+/*fa MTR_AudioChannelsSetVolume yes */
+MTR_EXPORT void MTR_CALL MTR_AudioChannelsSetVolume(int volume)
 {
     MTR_AUDIO_CHECK_IF_NOT_INITED();
 
     Mix_Volume(-1, volume);
 }
 
-/*fa mtrAudioChannelsSetVolume_f yes */
-MTR_EXPORT void MTR_CALL mtrAudioChannelsSetVolume_f(float volume)
+/*fa MTR_AudioChannelsSetVolume_f yes */
+MTR_EXPORT void MTR_CALL MTR_AudioChannelsSetVolume_f(float volume)
 {
     MTR_AUDIO_CHECK_IF_NOT_INITED();
 
     Mix_Volume(-1, (int)((float)MIX_MAX_VOLUME * volume));
 }
 
-/*fa mtrAudioChannelsPause yes */
-MTR_EXPORT void MTR_CALL mtrAudioChannelsPause(void)
+/*fa MTR_AudioChannelsPause yes */
+MTR_EXPORT void MTR_CALL MTR_AudioChannelsPause(void)
 {
     MTR_AUDIO_CHECK_IF_NOT_INITED();
 
@@ -453,8 +451,8 @@ MTR_EXPORT void MTR_CALL mtrAudioChannelsPause(void)
         Mix_Pause(-1);
 }
 
-/*fa mtrAudioChannelsResume yes */
-MTR_EXPORT void MTR_CALL mtrAudioChannelsResume(void)
+/*fa MTR_AudioChannelsResume yes */
+MTR_EXPORT void MTR_CALL MTR_AudioChannelsResume(void)
 {
     MTR_AUDIO_CHECK_IF_NOT_INITED();
 
@@ -462,24 +460,24 @@ MTR_EXPORT void MTR_CALL mtrAudioChannelsResume(void)
         Mix_Resume(-1);
 }
 
-/*fa mtrAudioChannelsStop yes */
-MTR_EXPORT void MTR_CALL mtrAudioChannelsStop(void)
+/*fa MTR_AudioChannelsStop yes */
+MTR_EXPORT void MTR_CALL MTR_AudioChannelsStop(void)
 {
     MTR_AUDIO_CHECK_IF_NOT_INITED();
 
     Mix_HaltChannel(-1);
 }
 
-/*fa mtrAudioChannelsFadeOutStop yes */
-MTR_EXPORT void MTR_CALL mtrAudioChannelsFadeOutStop(int ms)
+/*fa MTR_AudioChannelsFadeOutStop yes */
+MTR_EXPORT void MTR_CALL MTR_AudioChannelsFadeOutStop(int ms)
 {
     MTR_AUDIO_CHECK_IF_NOT_INITED();
 
     Mix_FadeOutChannel(-1, ms);
 }
 
-/*fa mtrAudioMusicPlay yes */
-MTR_EXPORT void MTR_CALL mtrAudioMusicPlay(uint32_t musicNum)
+/*fa MTR_AudioMusicPlay yes */
+MTR_EXPORT void MTR_CALL MTR_AudioMusicPlay(uint32_t musicNum)
 {
     mtrMusic_t *music;
     MTR_AUDIO_CHECK_IF_NOT_INITED();
@@ -488,8 +486,8 @@ MTR_EXPORT void MTR_CALL mtrAudioMusicPlay(uint32_t musicNum)
     Mix_PlayMusic(music->music, -1);
 }
 
-/*fa mtrAudioMusicFadeInPlay yes */
-MTR_EXPORT void MTR_CALL mtrAudioMusicFadeInPlay(uint32_t musicNum, int ms)
+/*fa MTR_AudioMusicFadeInPlay yes */
+MTR_EXPORT void MTR_CALL MTR_AudioMusicFadeInPlay(uint32_t musicNum, int ms)
 {
     mtrMusic_t *music;
     MTR_AUDIO_CHECK_IF_NOT_INITED();
@@ -498,8 +496,8 @@ MTR_EXPORT void MTR_CALL mtrAudioMusicFadeInPlay(uint32_t musicNum, int ms)
     Mix_FadeInMusic(music->music, -1, ms);
 }
 
-/*fa mtrAudioMusicPause yes */
-MTR_EXPORT void MTR_CALL mtrAudioMusicPause(void)
+/*fa MTR_AudioMusicPause yes */
+MTR_EXPORT void MTR_CALL MTR_AudioMusicPause(void)
 {
     MTR_AUDIO_CHECK_IF_NOT_INITED();
 
@@ -507,8 +505,8 @@ MTR_EXPORT void MTR_CALL mtrAudioMusicPause(void)
         Mix_PauseMusic();
 }
 
-/*fa mtrAudioMusicResume yes */
-MTR_EXPORT void MTR_CALL mtrAudioMusicResume(void)
+/*fa MTR_AudioMusicResume yes */
+MTR_EXPORT void MTR_CALL MTR_AudioMusicResume(void)
 {
     MTR_AUDIO_CHECK_IF_NOT_INITED();
 
@@ -516,8 +514,8 @@ MTR_EXPORT void MTR_CALL mtrAudioMusicResume(void)
         Mix_ResumeMusic();
 }
 
-/*fa mtrAudioMusicStop yes */
-MTR_EXPORT void MTR_CALL mtrAudioMusicStop(void)
+/*fa MTR_AudioMusicStop yes */
+MTR_EXPORT void MTR_CALL MTR_AudioMusicStop(void)
 {
     MTR_AUDIO_CHECK_IF_NOT_INITED();
 
@@ -525,8 +523,8 @@ MTR_EXPORT void MTR_CALL mtrAudioMusicStop(void)
         Mix_HaltMusic();
 }
 
-/*fa mtrAudioMusicFadeOutStop yes */
-MTR_EXPORT void MTR_CALL mtrAudioMusicFadeOutStop(int ms)
+/*fa MTR_AudioMusicFadeOutStop yes */
+MTR_EXPORT void MTR_CALL MTR_AudioMusicFadeOutStop(int ms)
 {
     MTR_AUDIO_CHECK_IF_NOT_INITED();
 
@@ -534,24 +532,24 @@ MTR_EXPORT void MTR_CALL mtrAudioMusicFadeOutStop(int ms)
         Mix_FadeOutMusic(ms);
 }
 
-/*fa mtrAudioMusicSetVolume yes */
-MTR_EXPORT void MTR_CALL mtrAudioMusicSetVolume(int volume)
+/*fa MTR_AudioMusicSetVolume yes */
+MTR_EXPORT void MTR_CALL MTR_AudioMusicSetVolume(int volume)
 {
     MTR_AUDIO_CHECK_IF_NOT_INITED();
 
     Mix_VolumeMusic(volume);
 }
 
-/*fa mtrAudioMusicSetVolume_f yes */
-MTR_EXPORT void MTR_CALL mtrAudioMusicSetVolume_f(float volume)
+/*fa MTR_AudioMusicSetVolume_f yes */
+MTR_EXPORT void MTR_CALL MTR_AudioMusicSetVolume_f(float volume)
 {
     MTR_AUDIO_CHECK_IF_NOT_INITED();
 
     Mix_VolumeMusic((int)((float)MIX_MAX_VOLUME * volume));
 }
 
-/*fa mtrAudioSoundFree yes */
-MTR_EXPORT void MTR_CALL mtrAudioSoundFree(uint32_t soundNum)
+/*fa MTR_AudioSoundFree yes */
+MTR_EXPORT void MTR_CALL MTR_AudioSoundFree(uint32_t soundNum)
 {
     mtrSound_t *sound;
     MTR_AUDIO_CHECK_IF_NOT_INITED_WITH_LOG("Unable to unload sound",);
@@ -559,17 +557,17 @@ MTR_EXPORT void MTR_CALL mtrAudioSoundFree(uint32_t soundNum)
     if (soundNum != 0)
     {
         sound = (mtrSound_t *)(&((mtrSound_t *)mtrSoundKeeper->data)[soundNum]);
-        mtrLogWrite_s("Unloading sound", 0, MTR_LMT_INFO, sound->name);
+        MTR_LogWrite_s("Unloading sound", 0, MTR_LMT_INFO, sound->name);
         if (sound->name != mtrDefaultSoundName)
             free(sound->name);
         Mix_FreeChunk(sound->sound);
-        mtrIndexkeeperFreeIndex(mtrSoundKeeper, soundNum);
-        mtrLogWrite("Sound unloaded", 0, MTR_LMT_INFO);
+        MTR_IndexkeeperFreeIndex(mtrSoundKeeper, soundNum);
+        MTR_LogWrite("Sound unloaded", 0, MTR_LMT_INFO);
     }
 }
 
-/*fa mtrAudioMusicFree yes */
-MTR_EXPORT void MTR_CALL mtrAudioMusicFree(uint32_t musicNum)
+/*fa MTR_AudioMusicFree yes */
+MTR_EXPORT void MTR_CALL MTR_AudioMusicFree(uint32_t musicNum)
 {
     mtrMusic_t *music;
     MTR_AUDIO_CHECK_IF_NOT_INITED_WITH_LOG("Unable to unload music",);
@@ -577,11 +575,11 @@ MTR_EXPORT void MTR_CALL mtrAudioMusicFree(uint32_t musicNum)
     if (musicNum != 0)
     {
         music = (mtrMusic_t *)(&((mtrMusic_t *)mtrMusicKeeper->data)[musicNum]);
-        mtrLogWrite_s("Unloading music", 0, MTR_LMT_INFO, music->name);
+        MTR_LogWrite_s("Unloading music", 0, MTR_LMT_INFO, music->name);
         if (music->name != mtrDefaultMusicName)
             free(music->name);
         Mix_FreeMusic(music->music);
-        mtrIndexkeeperFreeIndex(mtrMusicKeeper, musicNum);
-        mtrLogWrite("Music unloaded", 0, MTR_LMT_INFO);
+        MTR_IndexkeeperFreeIndex(mtrMusicKeeper, musicNum);
+        MTR_LogWrite("Music unloaded", 0, MTR_LMT_INFO);
     }
 }

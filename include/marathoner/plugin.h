@@ -30,103 +30,103 @@ typedef struct mtrPixels_t {
 #define MTR_PF_RGBA         1
 #define MTR_PF_ARGB         2
 
-mtrMarathonerGetVersionFunc_t               mtrMarathonerGetVersion;
-mtrMarathonerGetModuleVersionFunc_t         mtrMarathonerGetModuleVersion;
-mtrConfigfileGetKeyNameFunc_t               mtrConfigfileGetKeyName;
-mtrConfigfileGetSectionNameFunc_t           mtrConfigfileGetSectionName;
-mtrConfigfileDeleteKeyFunc_t                mtrConfigfileDeleteKey;
-mtrConfigfileDeleteSectionFunc_t            mtrConfigfileDeleteSection;
-mtrConfigfileReadBoolFunc_t                 mtrConfigfileReadBool;
-mtrConfigfileReadIntFunc_t                  mtrConfigfileReadInt;
-mtrConfigfileReadSingleFunc_t               mtrConfigfileReadSingle;
-mtrConfigfileReadStringFunc_t               mtrConfigfileReadString;
-mtrConfigfileWriteBoolFunc_t                mtrConfigfileWriteBool;
-mtrConfigfileWriteIntFunc_t                 mtrConfigfileWriteInt;
-mtrConfigfileWriteSingleFunc_t              mtrConfigfileWriteSingle;
-mtrConfigfileWriteStringFunc_t              mtrConfigfileWriteString;
-mtrConfigfileCreateSectionFunc_t            mtrConfigfileCreateSection;
+MTR_MarathonerGetVersionFunc_t               MTR_MarathonerGetVersion;
+MTR_MarathonerGetModuleVersionFunc_t         MTR_MarathonerGetModuleVersion;
+MTR_ConfigfileGetKeyNameFunc_t               MTR_ConfigfileGetKeyName;
+MTR_ConfigfileGetSectionNameFunc_t           MTR_ConfigfileGetSectionName;
+MTR_ConfigfileDeleteKeyFunc_t                MTR_ConfigfileDeleteKey;
+MTR_ConfigfileDeleteSectionFunc_t            MTR_ConfigfileDeleteSection;
+MTR_ConfigfileReadBoolFunc_t                 MTR_ConfigfileReadBool;
+MTR_ConfigfileReadIntFunc_t                  MTR_ConfigfileReadInt;
+MTR_ConfigfileReadSingleFunc_t               MTR_ConfigfileReadSingle;
+MTR_ConfigfileReadStringFunc_t               MTR_ConfigfileReadString;
+MTR_ConfigfileWriteBoolFunc_t                MTR_ConfigfileWriteBool;
+MTR_ConfigfileWriteIntFunc_t                 MTR_ConfigfileWriteInt;
+MTR_ConfigfileWriteSingleFunc_t              MTR_ConfigfileWriteSingle;
+MTR_ConfigfileWriteStringFunc_t              MTR_ConfigfileWriteString;
+MTR_ConfigfileCreateSectionFunc_t            MTR_ConfigfileCreateSection;
 
-mtrLogWriteFunc_t                           mtrLogWrite;
-mtrLogWrite_sFunc_t                         mtrLogWrite_s;
-mtrLogWrite_iFunc_t                         mtrLogWrite_i;
-mtrLogWrite_dFunc_t                         mtrLogWrite_d;
+MTR_LogWriteFunc_t                           MTR_LogWrite;
+MTR_LogWrite_sFunc_t                         MTR_LogWrite_s;
+MTR_LogWrite_iFunc_t                         MTR_LogWrite_i;
+MTR_LogWrite_dFunc_t                         MTR_LogWrite_d;
 
-mtrShowSimpleMessageBoxFunc_t               mtrShowSimpleMessageBox;
-mtrShowYesNoMessageBoxFunc_t                mtrShowYesNoMessageBox;
-mtrShowOkCancelMessageBoxFunc_t             mtrShowOkCancelMessageBox;
-mtrShowInputDialogFunc_t                    mtrShowInputDialog;
-mtrShowPasswordDialogFunc_t                 mtrShowPasswordDialog;
-mtrAddFileFilterFunc_t                      mtrAddFileFilter;
-mtrClearFileFiltersFunc_t                   mtrClearFileFilters;
-mtrShowSaveFileDialogFunc_t                 mtrShowSaveFileDialog;
-mtrShowOpenFileDialogFunc_t                 mtrShowOpenFileDialog;
-mtrShowSelectFolderDialogFunc_t             mtrShowSelectFolderDialog;
+MTR_ShowSimpleMessageBoxFunc_t               MTR_ShowSimpleMessageBox;
+MTR_ShowYesNoMessageBoxFunc_t                MTR_ShowYesNoMessageBox;
+MTR_ShowOkCancelMessageBoxFunc_t             MTR_ShowOkCancelMessageBox;
+MTR_ShowInputDialogFunc_t                    MTR_ShowInputDialog;
+MTR_ShowPasswordDialogFunc_t                 MTR_ShowPasswordDialog;
+MTR_AddFileFilterFunc_t                      MTR_AddFileFilter;
+MTR_ClearFileFiltersFunc_t                   MTR_ClearFileFilters;
+MTR_ShowSaveFileDialogFunc_t                 MTR_ShowSaveFileDialog;
+MTR_ShowOpenFileDialogFunc_t                 MTR_ShowOpenFileDialog;
+MTR_ShowSelectFolderDialogFunc_t             MTR_ShowSelectFolderDialog;
 
-mtrNotifyFunc_t                             mtrNotify;
+MTR_NotifyFunc_t                             MTR_Notify;
 
-mtrIndexkeeperCreateFunc_t                  mtrIndexkeeperCreate;
-mtrIndexkeeperGetFreeIndexFunc_t            mtrIndexkeeperGetFreeIndex;
-mtrIndexkeeperFreeIndexFunc_t               mtrIndexkeeperFreeIndex;
-mtrIndexkeeperIndexIsEmptyFunc_t            mtrIndexkeeperIndexIsEmpty;
-mtrIndexkeeperGetReservedDataCountFunc_t    mtrIndexkeeperGetReservedDataCount;
-mtrIndexkeeperDestroyFunc_t                 mtrIndexkeeperDestroy;
+MTR_IndexkeeperCreateFunc_t                  MTR_IndexkeeperCreate;
+MTR_IndexkeeperGetFreeIndexFunc_t            MTR_IndexkeeperGetFreeIndex;
+MTR_IndexkeeperFreeIndexFunc_t               MTR_IndexkeeperFreeIndex;
+MTR_IndexkeeperIndexIsEmptyFunc_t            MTR_IndexkeeperIndexIsEmpty;
+MTR_IndexkeeperGetReservedDataCountFunc_t    MTR_IndexkeeperGetReservedDataCount;
+MTR_IndexkeeperDestroyFunc_t                 MTR_IndexkeeperDestroy;
 
-mtrEncodingUtf8ToUcs4Func_t                 mtrEncodingUtf8ToUcs4;
-mtrEncodingUtf8CodepointsFunc_t             mtrEncodingUtf8Codepoints;
+MTR_EncodingUtf8ToUcs4Func_t                 MTR_EncodingUtf8ToUcs4;
+MTR_EncodingUtf8CodepointsFunc_t             MTR_EncodingUtf8Codepoints;
 
-mtrFileOpenFunc_t                           mtrFileOpen;
-mtrFileCloseFunc_t                          mtrFileClose;
-mtrFileReadFunc_t                           mtrFileRead;
-mtrFileWriteFunc_t                          mtrFileWrite;
-mtrFileWriteLineFunc_t                      mtrFileWriteLine;
-mtrFileWriteFastFunc_t                      mtrFileWriteFast;
-mtrFileWriteLineFastFunc_t                  mtrFileWriteLineFast;
+MTR_FileOpenFunc_t                           MTR_FileOpen;
+MTR_FileCloseFunc_t                          MTR_FileClose;
+MTR_FileReadFunc_t                           MTR_FileRead;
+MTR_FileWriteFunc_t                          MTR_FileWrite;
+MTR_FileWriteLineFunc_t                      MTR_FileWriteLine;
+MTR_FileWriteFastFunc_t                      MTR_FileWriteFast;
+MTR_FileWriteLineFastFunc_t                  MTR_FileWriteLineFast;
 
-mtrClipboardPutTextFunc_t                   mtrClipboardPutText;
-mtrClipboardGetTextFunc_t                   mtrClipboardGetText;
+MTR_ClipboardPutTextFunc_t                   MTR_ClipboardPutText;
+MTR_ClipboardGetTextFunc_t                   MTR_ClipboardGetText;
 
-mtrStringBufferAddFunc_t                    mtrStringBufferAdd;
-mtrStringBufferDeleteFunc_t                 mtrStringBufferDelete;
-mtrStringBufferSetStringFunc_t              mtrStringBufferSetString;
-mtrStringBufferGetStringFunc_t              mtrStringBufferGetString;
-mtrStringBufferGetMaxLenFunc_t              mtrStringBufferGetMaxLen;
+MTR_StringBufferAddFunc_t                    MTR_StringBufferAdd;
+MTR_StringBufferDeleteFunc_t                 MTR_StringBufferDelete;
+MTR_StringBufferSetStringFunc_t              MTR_StringBufferSetString;
+MTR_StringBufferGetStringFunc_t              MTR_StringBufferGetString;
+MTR_StringBufferGetMaxLenFunc_t              MTR_StringBufferGetMaxLen;
 
-mtrOptionsAliasFunc_t                       mtrOptionsAlias;
-mtrOptionsGetFunc_t                         mtrOptionsGet;
-mtrOptionsGet_bFunc_t                       mtrOptionsGet_b;
-mtrOptionsGet_iFunc_t                       mtrOptionsGet_i;
-mtrOptionsGet_lFunc_t                       mtrOptionsGet_l;
-mtrOptionsGet_fFunc_t                       mtrOptionsGet_f;
-mtrOptionsGet_dFunc_t                       mtrOptionsGet_d;
+MTR_OptionsAliasFunc_t                       MTR_OptionsAlias;
+MTR_OptionsGetFunc_t                         MTR_OptionsGet;
+MTR_OptionsGet_bFunc_t                       MTR_OptionsGet_b;
+MTR_OptionsGet_iFunc_t                       MTR_OptionsGet_i;
+MTR_OptionsGet_lFunc_t                       MTR_OptionsGet_l;
+MTR_OptionsGet_fFunc_t                       MTR_OptionsGet_f;
+MTR_OptionsGet_dFunc_t                       MTR_OptionsGet_d;
 
-mtrConsoleShowFunc_t                        mtrConsoleShow;
-mtrConsoleHideFunc_t                        mtrConsoleHide;
+MTR_ConsoleShowFunc_t                        MTR_ConsoleShow;
+MTR_ConsoleHideFunc_t                        MTR_ConsoleHide;
 
 uint8_t mtrPluginsCount;
 
 
-#define MTR_FIND_FUNCTION(function, module)                        \
-    function = (function ## Func)mtrFindFunction(module,           \
-    #function);                                                    \
-    if (function == NULL)                                          \
-    {                                                              \
-        mtrLogWrite_s("Unable to load function", 3, MTR_LMT_ERROR, \
-         #function);                                               \
-        ok = false;                                                \
+#define MTR_FIND_FUNCTION(function, module)                         \
+    function = (function ## Func)MTR_FindFunction(module,           \
+    #function);                                                     \
+    if (function == NULL)                                           \
+    {                                                               \
+        MTR_LogWrite_s("Unable to load function", 3, MTR_LMT_ERROR, \
+         #function);                                                \
+        ok = false;                                                 \
     }
 
 #define MTR_FIND_FUNCTION_IN_SUBSYSTEM(function, subsystem)             \
-    function = (function ## Func)mtrFindFunctionInSubsystem(subsystem,  \
+    function = (function ## Func)MTR_FindFunctionInSubsystem(subsystem, \
     #function);                                                         \
     if (function == NULL)                                               \
     {                                                                   \
-        mtrLogWrite_s("Unable to load function", 1, MTR_LMT_ERROR,      \
+        MTR_LogWrite_s("Unable to load function", 1, MTR_LMT_ERROR,     \
          #function);                                                    \
         return false;                                                   \
     }
 
 #define MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(subsystemPrefix, functionsCount) \
-    MTR_EXPORT int MTR_CALL mtr ## subsystemPrefix ## FunctionSupported(       \
+    MTR_EXPORT int MTR_CALL MTR_ ## subsystemPrefix ## FunctionSupported(      \
      const char *functionName)                                                 \
     {                                                                          \
         int i;                                                                 \

@@ -2,31 +2,31 @@
 FileWriteLineFast("test/output.txt", "Function Availability", FM_WRITE);
 local fa = dofile("test/common/function_availability.lua");
 
-fa.FunctionSupported(SpriteInit, "mtrSpriteInit", SpriteFunctionSupported);
-fa.FunctionSupported(SpriteLoad, "mtrSpriteLoad", SpriteFunctionSupported);
-fa.FunctionSupported(SpriteLoadSimple, "mtrSpriteLoadSimple",
+fa.FunctionSupported(SpriteInit, "MTR_SpriteInit", SpriteFunctionSupported);
+fa.FunctionSupported(SpriteLoad, "MTR_SpriteLoad", SpriteFunctionSupported);
+fa.FunctionSupported(SpriteLoadSimple, "MTR_SpriteLoadSimple",
  SpriteFunctionSupported);
-fa.FunctionSupported(SpriteFree, "mtrSpriteFree", SpriteFunctionSupported);
-fa.FunctionSupported(SpriteSetModulation_c, "mtrSpriteSetModulation_c",
+fa.FunctionSupported(SpriteFree, "MTR_SpriteFree", SpriteFunctionSupported);
+fa.FunctionSupported(SpriteSetModulation_c, "MTR_SpriteSetModulation_c",
  SpriteFunctionSupported);
-fa.FunctionSupported(SpriteSetModulation_ca, "mtrSpriteSetModulation_ca",
+fa.FunctionSupported(SpriteSetModulation_ca, "MTR_SpriteSetModulation_ca",
  SpriteFunctionSupported);
-fa.FunctionSupported(SpriteSetModulation_rgb, "mtrSpriteSetModulation_rgb",
+fa.FunctionSupported(SpriteSetModulation_rgb, "MTR_SpriteSetModulation_rgb",
  SpriteFunctionSupported);
-fa.FunctionSupported(SpriteSetModulation_rgba, "mtrSpriteSetModulation_rgba",
+fa.FunctionSupported(SpriteSetModulation_rgba, "MTR_SpriteSetModulation_rgba",
  SpriteFunctionSupported);
-fa.FunctionSupported(SpriteSetModulationAlpha, "mtrSpriteSetModulationAlpha",
+fa.FunctionSupported(SpriteSetModulationAlpha, "MTR_SpriteSetModulationAlpha",
  SpriteFunctionSupported);
 fa.FunctionSupported(SpriteSetModulationAlpha_f,
- "mtrSpriteSetModulationAlpha_f", SpriteFunctionSupported);
-fa.FunctionSupported(SpriteDraw_f, "mtrSpriteDraw_f", SpriteFunctionSupported);
-fa.FunctionSupported(SpriteDrawSized_f, "mtrSpriteDrawSized_f",
+ "MTR_SpriteSetModulationAlpha_f", SpriteFunctionSupported);
+fa.FunctionSupported(SpriteDraw_f, "MTR_SpriteDraw_f", SpriteFunctionSupported);
+fa.FunctionSupported(SpriteDrawSized_f, "MTR_SpriteDrawSized_f",
  SpriteFunctionSupported);
-fa.FunctionSupported(SpriteDrawScaled_f, "mtrSpriteDrawScaled_f",
+fa.FunctionSupported(SpriteDrawScaled_f, "MTR_SpriteDrawScaled_f",
  SpriteFunctionSupported);
-fa.FunctionSupported(SpriteDrawAngled_f, "mtrSpriteDrawAngled_f",
+fa.FunctionSupported(SpriteDrawAngled_f, "MTR_SpriteDrawAngled_f",
  SpriteFunctionSupported);
-fa.FunctionSupported(SpriteDrawFlipped_f, "mtrSpriteDrawFlipped_f",
+fa.FunctionSupported(SpriteDrawFlipped_f, "MTR_SpriteDrawFlipped_f",
  SpriteFunctionSupported);
-fa.FunctionSupported(SpriteDrawGeneral_f, "mtrSpriteDrawGeneral_f",
+fa.FunctionSupported(SpriteDrawGeneral_f, "MTR_SpriteDrawGeneral_f",
  SpriteFunctionSupported);

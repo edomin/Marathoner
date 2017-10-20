@@ -24,48 +24,48 @@ static bool mtrFontInited = false;
 #define MTR_FONT_CHECK_IF_NOT_INITED(returnValue) \
     if (!mtrFontInited)                           \
         return returnValue;
-#define MTR_FONT_CHECK_IF_NOT_INITED_WITH_LOG(message, returnValue)           \
-    if (!mtrFontInited)                                                       \
-    {                                                                         \
-        mtrLogWrite(message ". Font abstraction manager are not initialized", \
-         1, MTR_LMT_ERROR);                                                   \
-        return returnValue;                                                   \
+#define MTR_FONT_CHECK_IF_NOT_INITED_WITH_LOG(message, returnValue)            \
+    if (!mtrFontInited)                                                        \
+    {                                                                          \
+        MTR_LogWrite(message ". Font abstraction manager are not initialized", \
+         1, MTR_LMT_ERROR);                                                    \
+        return returnValue;                                                    \
     }
 
-typedef uint32_t (MTR_CALL * mtrTtfLoadFunc)(const char *filename, int size);
-mtrTtfLoadFunc mtrTtfLoad;
+typedef uint32_t (MTR_CALL * MTR_TtfLoadFunc)(const char *filename, int size);
+MTR_TtfLoadFunc MTR_TtfLoad;
 
-typedef void (MTR_CALL * mtrTtfFreeFunc)(uint32_t fontNum);
-mtrTtfFreeFunc mtrTtfFree;
+typedef void (MTR_CALL * MTR_TtfFreeFunc)(uint32_t fontNum);
+MTR_TtfFreeFunc MTR_TtfFree;
 
-typedef int (MTR_CALL * mtrTtfGetFontHeightFunc)(uint32_t fontNum);
-mtrTtfGetFontHeightFunc mtrTtfGetFontHeight;
+typedef int (MTR_CALL * MTR_TtfGetFontHeightFunc)(uint32_t fontNum);
+MTR_TtfGetFontHeightFunc MTR_TtfGetFontHeight;
 
-typedef int (MTR_CALL * mtrTtfGetStringWidthFunc)(uint32_t fontNum,
+typedef int (MTR_CALL * MTR_TtfGetStringWidthFunc)(uint32_t fontNum,
  const char *string);
-mtrTtfGetStringWidthFunc mtrTtfGetStringWidth;
+MTR_TtfGetStringWidthFunc MTR_TtfGetStringWidth;
 
-typedef void (MTR_CALL * mtrTtfSetFontStyleFunc)(uint32_t fontNum, int style);
-mtrTtfSetFontStyleFunc mtrTtfSetFontStyle;
+typedef void (MTR_CALL * MTR_TtfSetFontStyleFunc)(uint32_t fontNum, int style);
+MTR_TtfSetFontStyleFunc MTR_TtfSetFontStyle;
 
-typedef void (MTR_CALL * mtrTtfSetFontOutlineFunc)(uint32_t fontNum,
+typedef void (MTR_CALL * MTR_TtfSetFontOutlineFunc)(uint32_t fontNum,
  int outline);
-mtrTtfSetFontOutlineFunc mtrTtfSetFontOutline;
+MTR_TtfSetFontOutlineFunc MTR_TtfSetFontOutline;
 
-typedef mtrPixels_t *(MTR_CALL * mtrTtfRenderStringFunc)(uint32_t fontNum,
+typedef mtrPixels_t *(MTR_CALL * MTR_TtfRenderStringFunc)(uint32_t fontNum,
  uint8_t r, uint8_t g, uint8_t b, const char *string);
-mtrTtfRenderStringFunc mtrTtfRenderString;
+MTR_TtfRenderStringFunc MTR_TtfRenderString;
 
-typedef void (MTR_CALL * mtrTextureBlit_fFunc)(uint32_t texNum, float x,
+typedef void (MTR_CALL * MTR_TextureBlit_fFunc)(uint32_t texNum, float x,
  float y);
-mtrTextureBlit_fFunc mtrTextureBlit_f;
+MTR_TextureBlit_fFunc MTR_TextureBlit_f;
 
-typedef void (MTR_CALL * mtrTextureBlitRegion_fFunc)(uint32_t texNum, float x,
+typedef void (MTR_CALL * MTR_TextureBlitRegion_fFunc)(uint32_t texNum, float x,
  float y, float rx, float ry, float rw, float rh);
-mtrTextureBlitRegion_fFunc mtrTextureBlitRegion_f;
+MTR_TextureBlitRegion_fFunc MTR_TextureBlitRegion_f;
 
-typedef bool (MTR_CALL * mtrTextureReceivePixelsFunc)(uint32_t texNum,
+typedef bool (MTR_CALL * MTR_TextureReceivePixelsFunc)(uint32_t texNum,
  mtrPixels_t *pixels);
-mtrTextureReceivePixelsFunc mtrTextureReceivePixels;
+MTR_TextureReceivePixelsFunc MTR_TextureReceivePixels;
 
 #endif

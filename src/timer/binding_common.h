@@ -1,22 +1,22 @@
 #ifndef MTR_TIMER_BINDING_COMMON_H
 #define MTR_TIMER_BINDING_COMMON_H
 
-typedef int (MTR_CALL * mtrTimerFunctionSupportedFunc)(const char *);
-mtrTimerFunctionSupportedFunc mtrTimerFunctionSupported;
+typedef int (MTR_CALL * MTR_TimerFunctionSupportedFunc)(const char *);
+MTR_TimerFunctionSupportedFunc MTR_TimerFunctionSupported;
 
-typedef bool (MTR_CALL * mtrTimerInitFunc)(void);
-mtrTimerInitFunc mtrTimerInit;
+typedef bool (MTR_CALL * MTR_TimerInitFunc)(void);
+MTR_TimerInitFunc MTR_TimerInit;
 
-typedef void (MTR_CALL * mtrTimerStartFunc)(void);
-mtrTimerStartFunc mtrTimerStart;
+typedef void (MTR_CALL * MTR_TimerStartFunc)(void);
+MTR_TimerStartFunc MTR_TimerStart;
 
-typedef int (MTR_CALL * mtrTimerDelayFunc)(int);
-mtrTimerDelayFunc mtrTimerDelay;
+typedef int (MTR_CALL * MTR_TimerDelayFunc)(int);
+MTR_TimerDelayFunc MTR_TimerDelay;
 
-typedef int (MTR_CALL * mtrTimerDelayForFPSFunc)(int);
-mtrTimerDelayForFPSFunc mtrTimerDelayForFPS;
+typedef int (MTR_CALL * MTR_TimerDelayForFPSFunc)(int);
+MTR_TimerDelayForFPSFunc MTR_TimerDelayForFPS;
 
-typedef float (MTR_CALL * mtrTimerDelayForFPS_fFunc)(float);
-mtrTimerDelayForFPS_fFunc mtrTimerDelayForFPS_f;
+typedef float (MTR_CALL * MTR_TimerDelayForFPS_fFunc)(float);
+MTR_TimerDelayForFPS_fFunc MTR_TimerDelayForFPS_f;
 
 #endif

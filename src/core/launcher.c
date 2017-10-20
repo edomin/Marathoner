@@ -17,7 +17,7 @@ NK_INTERN void nk_tigr_clipboard_paste(nk_handle usr, struct nk_text_edit *edit)
 {
     char *text;
 
-    text = mtrClipboardGetText();
+    text = MTR_ClipboardGetText();
 
     if (text)
         nk_textedit_paste(edit, text, nk_strlen(text));
@@ -39,7 +39,7 @@ NK_INTERN void nk_tigr_clipboard_copy(nk_handle usr, const char *text, int len)
     memcpy(str, text, (size_t)len);
     str[len] = '\0';
 
-    mtrClipboardPutText(str);
+    MTR_ClipboardPutText(str);
 
     free(str);
 }
@@ -665,18 +665,18 @@ bool ConfigSave(mtrSubsystem *ssScript, char scriptName[64], int pluginsCount,
     bool success;
     int i;
 
-    success = mtrConfigfileWriteString("Marathoner.cfg", "Autorun", "plugin",
+    success = MTR_ConfigfileWriteString("Marathoner.cfg", "Autorun", "plugin",
      ssScript->plugin[ssScript->currentPlugin]);
     if (!success)
         return false;
-    success = mtrConfigfileWriteString("Marathoner.cfg", "Autorun", "script",
+    success = MTR_ConfigfileWriteString("Marathoner.cfg", "Autorun", "script",
      scriptName);
     if (!success)
         return false;
 
     for (i = 0; i < pluginsCount; i++)
     {
-        success = mtrConfigfileWriteBool("Marathoner.cfg", "Module",
+        success = MTR_ConfigfileWriteBool("Marathoner.cfg", "Module",
          pluginData[i].report->moduleID, lchrPluginEnabled[i]);
         if (!success)
             return false;
@@ -684,7 +684,7 @@ bool ConfigSave(mtrSubsystem *ssScript, char scriptName[64], int pluginsCount,
 
     for (i = 0; i < subsystemsCount; i++)
     {
-        success = mtrConfigfileWriteString("Marathoner.cfg", "Subsystem",
+        success = MTR_ConfigfileWriteString("Marathoner.cfg", "Subsystem",
          ssList[i], subsystem[i]->plugin[subsystem[i]->currentPlugin]);
         if (!success)
             return false;
@@ -738,7 +738,7 @@ bool RunEngine()
     appName = malloc(sizeof(wchar_t) * (appNameLen + 1));
     if (appName == NULL)
     {
-        mtrNotify("Unable to allocate memory for Application name.", 0,
+        MTR_Notify("Unable to allocate memory for Application name.", 0,
          MTR_LMT_ERROR);
         return false;
     }
@@ -748,10 +748,10 @@ bool RunEngine()
     {
         error = GetLastError();
         free(appName);
-        mtrNotify("Unable to convert Application name to wide char.", 0,
+        MTR_Notify("Unable to convert Application name to wide char.", 0,
          MTR_LMT_ERROR);
         errorText = WinErrorCodeToText(error);
-        mtrNotify(errorText, 0, MTR_LMT_ERROR);
+        MTR_Notify(errorText, 0, MTR_LMT_ERROR);
         return false;
     }
     appName[appNameLen] = '/0';
@@ -766,7 +766,7 @@ bool RunEngine()
     {
         error = GetLastError();
         errorText = WinErrorCodeToText(error);
-        mtrNotify(errorText, 0, MTR_LMT_ERROR);
+        MTR_Notify(errorText, 0, MTR_LMT_ERROR);
     }
     else
     {
@@ -810,20 +810,20 @@ int main(int argc, char** argv)
 
     headerColor = nk_rgb(0x99, 0x99, 0x00);
 
-    mtrLogInit("Launcher.log");
+    MTR_LogInit("Launcher.log");
 
-    mtrLogWrite("Reporting Launcher version:", 0, MTR_LMT_INFO);
-    mtrLogWrite_i("Majon:", 1, MTR_LMT_INFO,
+    MTR_LogWrite("Reporting Launcher version:", 0, MTR_LMT_INFO);
+    MTR_LogWrite_i("Majon:", 1, MTR_LMT_INFO,
      (MTR_VERSION_LAUNCHER & 0xFF0000) >> 16);
-    mtrLogWrite_i("Minor:", 1, MTR_LMT_INFO,
+    MTR_LogWrite_i("Minor:", 1, MTR_LMT_INFO,
      (MTR_VERSION_LAUNCHER & 0x00FF00) >> 8);
-    mtrLogWrite_i("Patch:", 1, MTR_LMT_INFO,
+    MTR_LogWrite_i("Patch:", 1, MTR_LMT_INFO,
      MTR_VERSION_LAUNCHER & 0x0000FF);
-    mtrLogWrite("Searching available plugins", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Searching available plugins", 0, MTR_LMT_INFO);
 
-    mtrClearFileFilters();
+    MTR_ClearFileFilters();
 
-    error = mtrLoadAllPlugins(NULL);
+    error = MTR_LoadAllPlugins(NULL);
     if (error != 0)
         return error;
 
@@ -835,20 +835,20 @@ int main(int argc, char** argv)
         subsystem = malloc(sizeof(mtrSubsystem *) * subsystemsCount);
         if (subsystem == NULL)
         {
-            mtrNotify("Unable to allocate memory for subsystem's data "
+            MTR_Notify("Unable to allocate memory for subsystem's data "
              "structures", 0, MTR_LMT_FATAL);
             return 5;
         }
     }
     else
     {
-        mtrNotify("Unable to find modules of subsystems",  0, MTR_LMT_FATAL);
+        MTR_Notify("Unable to find modules of subsystems",  0, MTR_LMT_FATAL);
         return 6;
     }
 
     if (ssList == NULL)
     {
-        mtrNotify("Unable to allocate memory for subsystem's list",
+        MTR_Notify("Unable to allocate memory for subsystem's list",
          0, MTR_LMT_FATAL);
         return 7;
     }
@@ -858,7 +858,7 @@ int main(int argc, char** argv)
         subsystem[i] = malloc(sizeof(mtrSubsystem));
         if (subsystem[i] == NULL)
         {
-            mtrNotify("Unable to allocate memory for data of subsystem",
+            MTR_Notify("Unable to allocate memory for data of subsystem",
              0, MTR_LMT_FATAL);
             return 8;
         }
@@ -887,7 +887,7 @@ int main(int argc, char** argv)
          sizeof(char *) * (subsystem[i]->pluginsCount + 1));
         if (subsystem[i]->plugin == NULL)
         {
-            mtrNotify("Unable to allocate memory for names subsystem's plugins",
+            MTR_Notify("Unable to allocate memory for names subsystem's plugins",
              0, MTR_LMT_FATAL);
             return 9;
         }
@@ -919,7 +919,7 @@ int main(int argc, char** argv)
 
     for (i = 0; i < subsystemsCount; i++)
     {
-        temp = mtrConfigfileReadString("Marathoner.cfg", "Subsystem", ssList[i],
+        temp = MTR_ConfigfileReadString("Marathoner.cfg", "Subsystem", ssList[i],
          " ");
         for (j = 0; j < subsystem[i]->pluginsCount; j++)
         {
@@ -935,36 +935,36 @@ int main(int argc, char** argv)
     screen = tigrWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Launcher", TIGR_FIXED);
     if (screen == NULL)
     {
-        mtrNotify("Unable to create window", 0, MTR_LMT_FATAL);
+        MTR_Notify("Unable to create window", 0, MTR_LMT_FATAL);
         return 10;
     }
-    mtrLogWrite("Window created", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Window created", 0, MTR_LMT_INFO);
 
     backdrop = tigrBitmap(screen->w, screen->h);
     if (backdrop == NULL)
     {
-        mtrNotify("Unable to create backbuffer", 0, MTR_LMT_FATAL);
+        MTR_Notify("Unable to create backbuffer", 0, MTR_LMT_FATAL);
         return 11;
     }
-    mtrLogWrite("Backbuffer created", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Backbuffer created", 0, MTR_LMT_INFO);
 
     font = nk_tigr_font_create_from_default();
     if (font == NULL)
     {
-        mtrNotify("Unable to create default font's structure", 0,
+        MTR_Notify("Unable to create default font's structure", 0,
          MTR_LMT_FATAL);
         return 12;
     }
-    mtrLogWrite("Font structure from default font created", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Font structure from default font created", 0, MTR_LMT_INFO);
 
     ctx = nk_tigr_init(font, screen, backdrop, screen->w, screen->h);
     if (ctx == NULL)
     {
-        mtrNotify("Unable to create Nuklear context", 0,
+        MTR_Notify("Unable to create Nuklear context", 0,
          MTR_LMT_FATAL);
         return 13;
     }
-    mtrLogWrite("Nuklear context created", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Nuklear context created", 0, MTR_LMT_INFO);
 
     mouse.x = 0;
     mouse.y = 0;
@@ -977,25 +977,25 @@ int main(int argc, char** argv)
         keysPrevious[i] = false;
     }
 
-    mtrLogWrite("Reading 'Marathoner.cfg' for autorun options", 0,
+    MTR_LogWrite("Reading 'Marathoner.cfg' for autorun options", 0,
       MTR_LMT_INFO);
 
-    temp = mtrConfigfileReadString("Marathoner.cfg", "Autorun", "action",
+    temp = MTR_ConfigfileReadString("Marathoner.cfg", "Autorun", "action",
       "none");
     if (strcmp(temp, "runScript") != 0)
     {
-        mtrNotify("Invalid autorun action command", 1, MTR_LMT_WARNING);
-        if (mtrConfigfileWriteString("Marathoner.cfg", "Autorun", "action",
+        MTR_Notify("Invalid autorun action command", 1, MTR_LMT_WARNING);
+        if (MTR_ConfigfileWriteString("Marathoner.cfg", "Autorun", "action",
          "runScript"))
-            mtrNotify("Autorun action command changed to 'runScript'", 1,
+            MTR_Notify("Autorun action command changed to 'runScript'", 1,
              MTR_LMT_NOTE);
         else
-            mtrNotify("Unable to change action command to 'runScript'", 1,
+            MTR_Notify("Unable to change action command to 'runScript'", 1,
              MTR_LMT_WARNING);
     }
     free(temp);
 
-    temp = mtrConfigfileReadString("Marathoner.cfg", "Autorun", "plugin",
+    temp = MTR_ConfigfileReadString("Marathoner.cfg", "Autorun", "plugin",
      "none");
     ok = false;
     for (i = 0; i < mtrPluginsFound; i++)
@@ -1017,10 +1017,10 @@ int main(int argc, char** argv)
             }
     }
     if (!ok || ssScript == NULL)
-        mtrNotify("Ivalid autorun plugin", 1, MTR_LMT_ERROR);
+        MTR_Notify("Ivalid autorun plugin", 1, MTR_LMT_ERROR);
     free(temp);
 
-    temp = mtrConfigfileReadString("Marathoner.cfg", "Autorun",
+    temp = MTR_ConfigfileReadString("Marathoner.cfg", "Autorun",
      "script", "none");
     if (strcmp(temp, "none") != 0)
     {
@@ -1031,7 +1031,7 @@ int main(int argc, char** argv)
 
     for (i = 0; i < mtrPluginsFound; i++)
     {
-        lchrPluginEnabled[i] = mtrConfigfileReadBool("Marathoner.cfg",
+        lchrPluginEnabled[i] = MTR_ConfigfileReadBool("Marathoner.cfg",
          "Module", mtrPluginData[i].report->moduleID, true);
     }
 
@@ -1054,7 +1054,7 @@ int main(int argc, char** argv)
                 ok = ConfigSave(ssScript, scriptName, mtrPluginsFound,
                  mtrPluginData, subsystemsCount, ssList, subsystem);
                 if (!ok)
-                    mtrNotify("Unable to save preferences to configfile", 0,
+                    MTR_Notify("Unable to save preferences to configfile", 0,
                      MTR_LMT_ERROR);
             }
             if (nk_button_label(ctx, "Save and Exit"))
@@ -1063,7 +1063,7 @@ int main(int argc, char** argv)
                 ok = ConfigSave(ssScript, scriptName, mtrPluginsFound,
                  mtrPluginData, subsystemsCount, ssList, subsystem);
                 if (!ok)
-                    mtrNotify("Unable to save preferences to configfile", 0,
+                    MTR_Notify("Unable to save preferences to configfile", 0,
                      MTR_LMT_ERROR);
                 else
                     quit = true;
@@ -1078,12 +1078,12 @@ int main(int argc, char** argv)
                 ok = ConfigSave(ssScript, scriptName, mtrPluginsFound,
                  mtrPluginData, subsystemsCount, ssList, subsystem);
                 if (!ok)
-                    mtrNotify("Unable to save preferences to configfile", 0,
+                    MTR_Notify("Unable to save preferences to configfile", 0,
                      MTR_LMT_ERROR);
                 else
                 {
                     if (!RunEngine())
-                        mtrNotify("Unable to run Engine", 0, MTR_LMT_ERROR);
+                        MTR_Notify("Unable to run Engine", 0, MTR_LMT_ERROR);
                     else
                         quit = true;
                 }
@@ -1091,7 +1091,7 @@ int main(int argc, char** argv)
             if (nk_button_label(ctx, "Discard and Run"))
             {
                 if (!RunEngine())
-                    mtrNotify("Unable to run Engine", 0, MTR_LMT_ERROR);
+                    MTR_Notify("Unable to run Engine", 0, MTR_LMT_ERROR);
                 else
                     quit = true;
             }
@@ -1121,7 +1121,7 @@ int main(int argc, char** argv)
              nk_filter_default);
             if (nk_button_label(ctx, "Browse"))
             {
-                temp = mtrGetCurrentDirectory();
+                temp = MTR_GetCurrentDirectory();
                 if (temp == NULL)
                 {
                     temp = malloc(sizeof(char) * (scriptNameLen + 3));
@@ -1135,12 +1135,12 @@ int main(int argc, char** argv)
                     strcat(temp, "\\");
                     strcat(temp, scriptName);
                 }
-                ctemp = mtrShowOpenFileDialog("Choose autorun script...", temp,
+                ctemp = MTR_ShowOpenFileDialog("Choose autorun script...", temp,
                  NULL);
                 if (ctemp != NULL)
                 {
                     free(temp);
-                    temp = mtrGetCurrentDirectory();
+                    temp = MTR_GetCurrentDirectory();
                     if (temp == NULL)
                     {
                         temp = realloc(temp,
@@ -1213,10 +1213,6 @@ int main(int argc, char** argv)
                      mtrPluginData[i].report->moduleID, lchrPluginEnabled[i]);
                 nk_group_end(ctx);
             }
-            //if (nk_option_label(ctx, "easy", op == EASY)) op = EASY;
-            //if (nk_option_label(ctx, "hard", op == HARD)) op = HARD;
-            //nk_layout_row_dynamic(ctx, 22, 1);
-            //nk_property_int(ctx, "Compression:", 0, &property, 100, 10, 1);
         }
         nk_end(ctx);
 
@@ -1228,21 +1224,21 @@ int main(int argc, char** argv)
         tigrUpdate(screen);
     }
 
-    mtrLogWrite("Quiting Launcher", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Quiting Launcher", 0, MTR_LMT_INFO);
 
     nk_tigr_shutdown();
-    mtrLogWrite("Nuklear context destroyed", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Nuklear context destroyed", 0, MTR_LMT_INFO);
     tigrFree(backdrop);
-    mtrLogWrite("Backbuffer destroyed", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Backbuffer destroyed", 0, MTR_LMT_INFO);
 	tigrFree(screen);
-	mtrLogWrite("Screen destroyed", 0, MTR_LMT_INFO);
+	MTR_LogWrite("Screen destroyed", 0, MTR_LMT_INFO);
 
     /* Freing allocated structures and unloading libraries */
     for (i = 0; i < mtrPluginsFound; i++)
     {
-        mtrLogWrite_s("Unloading plugin", 0, MTR_LMT_INFO,
+        MTR_LogWrite_s("Unloading plugin", 0, MTR_LMT_INFO,
          mtrPluginData[i].report->moduleID);
-        mtrCloseLibrary(mtrPluginData[i].dll);
+        MTR_CloseLibrary(mtrPluginData[i].dll);
     }
 
     free(mtrPluginData);
@@ -1256,7 +1252,7 @@ int main(int argc, char** argv)
     free(ssList);
     free(subsystem);
 
-    mtrLogWrite("Launcher stopped", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Launcher stopped", 0, MTR_LMT_INFO);
 
     return 0;
 }

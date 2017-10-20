@@ -13,6 +13,6 @@ mtrDirectory_t *pluginDirectory;
 char           *tempFilename;
 uint8_t         currentPlugin;
 
-int mtrLoadAllPlugins(RequireEngineFuncsFunc);
+int MTR_LoadAllPlugins(RequireEngineFuncsFunc);
 
 #endif

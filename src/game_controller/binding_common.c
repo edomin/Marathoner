@@ -3,30 +3,31 @@
 
 #include "marathoner/script_func.h"
 
-MTR_SCRIPT_FUNC_I_S1(mtrSF_GameControllerFunctionSupported,
- mtrGameControllerFunctionSupported)
-MTR_SCRIPT_FUNC_B_V(mtrSF_GameControllerInit, mtrGameControllerInit)
-MTR_SCRIPT_FUNC_V_V(mtrSF_GameControllerQuit, mtrGameControllerQuit)
-MTR_SCRIPT_FUNC_V_V(mtrSF_GameControllerRefresh, mtrGameControllerRefresh)
-MTR_SCRIPT_FUNC_B_I2(mtrSF_GameControllerButtonPress,
- mtrGameControllerButtonPress)
-MTR_SCRIPT_FUNC_B_I2(mtrSF_GameControllerButtonRelease,
- mtrGameControllerButtonRelease)
-MTR_SCRIPT_FUNC_B_I2(mtrSF_GameControllerButtonPressed,
- mtrGameControllerButtonPressed)
-MTR_SCRIPT_FUNC_S16t_I2(mtrSF_GameControllerGetAxis, mtrGameControllerGetAxis)
-MTR_SCRIPT_FUNC_F_I2(mtrSF_GameControllerGetAxis_f, mtrGameControllerGetAxis_f)
-MTR_SCRIPT_FUNC_I_I2(mtrSF_GameControllerGetAxisDelta,
- mtrGameControllerGetAxisDelta)
-MTR_SCRIPT_FUNC_F_I2(mtrSF_GameControllerGetAxisDelta_f,
- mtrGameControllerGetAxisDelta_f)
-MTR_SCRIPT_FUNC_I_I2(mtrSF_GameControllerGetTrackballDeltaX,
- mtrGameControllerGetTrackballDeltaX)
-MTR_SCRIPT_FUNC_I_I2(mtrSF_GameControllerGetTrackballDeltaY,
- mtrGameControllerGetTrackballDeltaY)
+MTR_SCRIPT_FUNC_I_S1(MTR_SF_GameControllerFunctionSupported,
+ MTR_GameControllerFunctionSupported)
+MTR_SCRIPT_FUNC_B_V(MTR_SF_GameControllerInit, MTR_GameControllerInit)
+MTR_SCRIPT_FUNC_V_V(MTR_SF_GameControllerQuit, MTR_GameControllerQuit)
+MTR_SCRIPT_FUNC_V_V(MTR_SF_GameControllerRefresh, MTR_GameControllerRefresh)
+MTR_SCRIPT_FUNC_B_I2(MTR_SF_GameControllerButtonPress,
+ MTR_GameControllerButtonPress)
+MTR_SCRIPT_FUNC_B_I2(MTR_SF_GameControllerButtonRelease,
+ MTR_GameControllerButtonRelease)
+MTR_SCRIPT_FUNC_B_I2(MTR_SF_GameControllerButtonPressed,
+ MTR_GameControllerButtonPressed)
+MTR_SCRIPT_FUNC_S16t_I2(MTR_SF_GameControllerGetAxis, MTR_GameControllerGetAxis)
+MTR_SCRIPT_FUNC_F_I2(MTR_SF_GameControllerGetAxis_f,
+ MTR_GameControllerGetAxis_f)
+MTR_SCRIPT_FUNC_I_I2(MTR_SF_GameControllerGetAxisDelta,
+ MTR_GameControllerGetAxisDelta)
+MTR_SCRIPT_FUNC_F_I2(MTR_SF_GameControllerGetAxisDelta_f,
+ MTR_GameControllerGetAxisDelta_f)
+MTR_SCRIPT_FUNC_I_I2(MTR_SF_GameControllerGetTrackballDeltaX,
+ MTR_GameControllerGetTrackballDeltaX)
+MTR_SCRIPT_FUNC_I_I2(MTR_SF_GameControllerGetTrackballDeltaY,
+ MTR_GameControllerGetTrackballDeltaY)
 
 #ifdef lua_h
-MTR_SCRIPT_FUNC(mtrSF_GameControllerGetTrackballDeltaXY)
+MTR_SCRIPT_FUNC(MTR_SF_GameControllerGetTrackballDeltaXY)
 {
     int controllerNum;
     int trackball;
@@ -35,7 +36,7 @@ MTR_SCRIPT_FUNC(mtrSF_GameControllerGetTrackballDeltaXY)
 
     MTR_SF_GET_INT(controllerNum, 1);
     MTR_SF_GET_INT(trackball, 2);
-    mtrGameControllerGetTrackballDeltaXY(controllerNum, trackball, &deltaX,
+    MTR_GameControllerGetTrackballDeltaXY(controllerNum, trackball, &deltaX,
      &deltaY);
 
     MTR_SF_PUSH_INT(deltaX);
@@ -45,15 +46,15 @@ MTR_SCRIPT_FUNC(mtrSF_GameControllerGetTrackballDeltaXY)
 }
 #endif
 
-MTR_SCRIPT_FUNC_U8t_I2(mtrSF_GameControllerGetPovHat,
- mtrGameControllerGetPovHat)
-MTR_SCRIPT_FUNC_I_I2(mtrSF_GameControllerGetPovHatHorizontal,
- mtrGameControllerGetPovHatHorizontal)
-MTR_SCRIPT_FUNC_I_I2(mtrSF_GameControllerGetPovHatVertical,
- mtrGameControllerGetPovHatVertical)
+MTR_SCRIPT_FUNC_U8t_I2(MTR_SF_GameControllerGetPovHat,
+ MTR_GameControllerGetPovHat)
+MTR_SCRIPT_FUNC_I_I2(MTR_SF_GameControllerGetPovHatHorizontal,
+ MTR_GameControllerGetPovHatHorizontal)
+MTR_SCRIPT_FUNC_I_I2(MTR_SF_GameControllerGetPovHatVertical,
+ MTR_GameControllerGetPovHatVertical)
 
 #ifdef lua_h
-MTR_SCRIPT_FUNC(mtrSF_GameControllerGetPovHatAxes)
+MTR_SCRIPT_FUNC(MTR_SF_GameControllerGetPovHatAxes)
 {
     int controllerNum;
     int povHatNum;
@@ -62,7 +63,7 @@ MTR_SCRIPT_FUNC(mtrSF_GameControllerGetPovHatAxes)
 
     MTR_SF_GET_INT(controllerNum, 1);
     MTR_SF_GET_INT(povHatNum, 2);
-    mtrGameControllerGetPovHatAxes(controllerNum, povHatNum, &horizontal,
+    MTR_GameControllerGetPovHatAxes(controllerNum, povHatNum, &horizontal,
      &vertical);
 
     MTR_SF_PUSH_INT(horizontal);
@@ -72,18 +73,18 @@ MTR_SCRIPT_FUNC(mtrSF_GameControllerGetPovHatAxes)
 }
 #endif
 
-MTR_SCRIPT_FUNC_I_I1(mtrSF_GameControllerGetButtonsCount,
- mtrGameControllerGetButtonsCount)
-MTR_SCRIPT_FUNC_I_I1(mtrSF_GameControllerGetAxesCount,
- mtrGameControllerGetAxesCount)
-MTR_SCRIPT_FUNC_I_I1(mtrSF_GameControllerGetTrackballsCount,
- mtrGameControllerGetTrackballsCount)
-MTR_SCRIPT_FUNC_I_I1(mtrSF_GameControllerGetPowHatsCount,
- mtrGameControllerGetPowHatsCount)
+MTR_SCRIPT_FUNC_I_I1(MTR_SF_GameControllerGetButtonsCount,
+ MTR_GameControllerGetButtonsCount)
+MTR_SCRIPT_FUNC_I_I1(MTR_SF_GameControllerGetAxesCount,
+ MTR_GameControllerGetAxesCount)
+MTR_SCRIPT_FUNC_I_I1(MTR_SF_GameControllerGetTrackballsCount,
+ MTR_GameControllerGetTrackballsCount)
+MTR_SCRIPT_FUNC_I_I1(MTR_SF_GameControllerGetPowHatsCount,
+ MTR_GameControllerGetPowHatsCount)
 
-void mtrScriptsRegisterAll(void)
+void MTR_ScriptsRegisterAll(void)
 {
-    mtrVm = mtrScriptsGetVm();
+    mtrVm = MTR_ScriptsGetVm();
 
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE,
      GameControllerFunctionSupported);
@@ -119,15 +120,15 @@ void mtrScriptsRegisterAll(void)
      GameControllerGetTrackballsCount);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, GameControllerGetPowHatsCount);
 
-    mtrScriptsRegisterVariable_i("POVHAT_CENTER", MTR_POVHAT_CENTER);
-    mtrScriptsRegisterVariable_i("POVHAT_UP", MTR_POVHAT_UP);
-    mtrScriptsRegisterVariable_i("POVHAT_DOWN", MTR_POVHAT_DOWN);
-    mtrScriptsRegisterVariable_i("POVHAT_LEFT", MTR_POVHAT_LEFT);
-    mtrScriptsRegisterVariable_i("POVHAT_RIGHT", MTR_POVHAT_RIGHT);
-    mtrScriptsRegisterVariable_i("POVHAT_UP_LEFT", MTR_POVHAT_UP_LEFT);
-    mtrScriptsRegisterVariable_i("POVHAT_UP_RIGHT", MTR_POVHAT_UP_RIGHT);
-    mtrScriptsRegisterVariable_i("POVHAT_DOWN_LEFT", MTR_POVHAT_DOWN_LEFT);
-    mtrScriptsRegisterVariable_i("POVHAT_DOWN_RIGHT", MTR_POVHAT_DOWN_RIGHT);
+    MTR_ScriptsRegisterVariable_i("POVHAT_CENTER", MTR_POVHAT_CENTER);
+    MTR_ScriptsRegisterVariable_i("POVHAT_UP", MTR_POVHAT_UP);
+    MTR_ScriptsRegisterVariable_i("POVHAT_DOWN", MTR_POVHAT_DOWN);
+    MTR_ScriptsRegisterVariable_i("POVHAT_LEFT", MTR_POVHAT_LEFT);
+    MTR_ScriptsRegisterVariable_i("POVHAT_RIGHT", MTR_POVHAT_RIGHT);
+    MTR_ScriptsRegisterVariable_i("POVHAT_UP_LEFT", MTR_POVHAT_UP_LEFT);
+    MTR_ScriptsRegisterVariable_i("POVHAT_UP_RIGHT", MTR_POVHAT_UP_RIGHT);
+    MTR_ScriptsRegisterVariable_i("POVHAT_DOWN_LEFT", MTR_POVHAT_DOWN_LEFT);
+    MTR_ScriptsRegisterVariable_i("POVHAT_DOWN_RIGHT", MTR_POVHAT_DOWN_RIGHT);
 }
 
 #endif

@@ -4,7 +4,7 @@
 
 MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Screen, FA_FUNCTIONS_COUNT)
 
-MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
+MTR_EXPORT mtrReport* MTR_CALL MTR_CreateReport(void)
 {
     mtrReport *report;
     report = malloc(sizeof(mtrReport));
@@ -20,18 +20,18 @@ MTR_EXPORT mtrReport* MTR_CALL mtrCreateReport(void)
     return report;
 }
 
-/*fa mtrScreenInit partially */
-MTR_EXPORT bool MTR_CALL mtrScreenInit(int width, int height, bool fullscreen,
+/*fa MTR_ScreenInit partially */
+MTR_EXPORT bool MTR_CALL MTR_ScreenInit(int width, int height, bool fullscreen,
  const char *title)
 {
 //    const char *actualTitle;
 //    const char  defaultTitle[] = "Marathoner";
 
-    mtrLogWrite("Creating Window", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Creating Window", 0, MTR_LMT_INFO);
     mtrScreen = malloc(sizeof(mtrScreen_t));
     if (mtrScreen == NULL)
     {
-        mtrNotify("Unable to allocate memory for mtrScreen structure", 1,
+        MTR_Notify("Unable to allocate memory for mtrScreen structure", 1,
          MTR_LMT_ERROR);
         return false;
     }
@@ -39,10 +39,10 @@ MTR_EXPORT bool MTR_CALL mtrScreenInit(int width, int height, bool fullscreen,
 //    mtrScreen->screen = GPU_Init(width, height, GPU_INIT_ENABLE_VSYNC);
     GPU_SetFullscreen(fullscreen, false);
     if (mtrScreen->screen != NULL)
-        mtrLogWrite("Window created", 1, MTR_LMT_INFO);
+        MTR_LogWrite("Window created", 1, MTR_LMT_INFO);
     else
     {
-        mtrNotify("Unable to create window", 1, MTR_LMT_ERROR);
+        MTR_Notify("Unable to create window", 1, MTR_LMT_ERROR);
         free(mtrScreen);
         return false;
     }
@@ -52,26 +52,26 @@ MTR_EXPORT bool MTR_CALL mtrScreenInit(int width, int height, bool fullscreen,
     return true;
 }
 
-/*fa mtrScreenQuit yes */
-MTR_EXPORT void MTR_CALL mtrScreenQuit(void)
+/*fa MTR_ScreenQuit yes */
+MTR_EXPORT void MTR_CALL MTR_ScreenQuit(void)
 {
     MTR_SCREEN_CHECK_IF_NOT_INITED_WITH_LOG("Unable to destroy Screen",);
 
     GPU_Quit();
     free(mtrScreen);
-    mtrLogWrite("Screen destroyed", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Screen destroyed", 0, MTR_LMT_INFO);
 }
 
-/*fa mtrScreenFlip yes */
-MTR_EXPORT void MTR_CALL mtrScreenFlip(void)
+/*fa MTR_ScreenFlip yes */
+MTR_EXPORT void MTR_CALL MTR_ScreenFlip(void)
 {
     MTR_SCREEN_CHECK_IF_NOT_INITED();
 
     GPU_Flip(mtrScreen->screen);
 }
 
-/*fa mtrScreenGetSizes yes */
-MTR_EXPORT void MTR_CALL mtrScreenGetSizes(int *w, int *h)
+/*fa MTR_ScreenGetSizes yes */
+MTR_EXPORT void MTR_CALL MTR_ScreenGetSizes(int *w, int *h)
 {
     uint16_t width;
     uint16_t height;
@@ -90,8 +90,8 @@ MTR_EXPORT void MTR_CALL mtrScreenGetSizes(int *w, int *h)
         *h = height;
 }
 
-/*fa mtrScreenGetWidth yes */
-MTR_EXPORT int MTR_CALL mtrScreenGetWidth(void)
+/*fa MTR_ScreenGetWidth yes */
+MTR_EXPORT int MTR_CALL MTR_ScreenGetWidth(void)
 {
     uint16_t width;
     uint16_t height;
@@ -101,8 +101,8 @@ MTR_EXPORT int MTR_CALL mtrScreenGetWidth(void)
     return width;
 }
 
-/*fa mtrScreenGetHeight yes */
-MTR_EXPORT int MTR_CALL mtrScreenGetHeight(void)
+/*fa MTR_ScreenGetHeight yes */
+MTR_EXPORT int MTR_CALL MTR_ScreenGetHeight(void)
 {
     uint16_t width;
     uint16_t height;
@@ -112,8 +112,8 @@ MTR_EXPORT int MTR_CALL mtrScreenGetHeight(void)
     return height;
 }
 
-/*fa mtrScreenXed yes */
-MTR_EXPORT bool MTR_CALL mtrScreenXed(void)
+/*fa MTR_ScreenXed yes */
+MTR_EXPORT bool MTR_CALL MTR_ScreenXed(void)
 {
     SDL_Event events[32];
     int       numEvents;
@@ -127,7 +127,7 @@ MTR_EXPORT bool MTR_CALL mtrScreenXed(void)
     return true;
 }
 
-MTR_EXPORT mtrScreen_t *MTR_CALL mtrGetScreen(void)
+MTR_EXPORT mtrScreen_t *MTR_CALL MTR_GetScreen(void)
 {
     MTR_SCREEN_CHECK_IF_NOT_INITED(NULL);
 

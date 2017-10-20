@@ -17,113 +17,113 @@
 
 void RequireEngineFuncs(uint8_t plugin)
 {
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireMarathonerGetVersion,
-     mtrMarathonerGetVersion);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireMarathonerGetModuleVersion,
-     mtrMarathonerGetModuleVersion);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireConfigfileGetKeyName,
-     mtrConfigfileGetKeyName);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireConfigfileGetSectionName,
-     mtrConfigfileGetSectionName);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireConfigfileDeleteKey,
-     mtrConfigfileDeleteKey);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireConfigfileDeleteSection,
-     mtrConfigfileDeleteSection);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireConfigfileReadBool,
-     mtrConfigfileReadBool);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireConfigfileReadInt,
-     mtrConfigfileReadInt);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireConfigfileReadSingle,
-     mtrConfigfileReadSingle);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireConfigfileReadString,
-     mtrConfigfileReadString);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireConfigfileWriteBool,
-     mtrConfigfileWriteBool);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireConfigfileWriteInt,
-     mtrConfigfileWriteInt);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireConfigfileWriteSingle,
-     mtrConfigfileWriteSingle);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireConfigfileWriteString,
-     mtrConfigfileWriteString);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireConfigfileCreateSection,
-     mtrConfigfileCreateSection);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireLogWrite, mtrLogWrite);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireLogWrite_s, mtrLogWrite_s);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireLogWrite_i, mtrLogWrite_i);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireLogWrite_d, mtrLogWrite_d);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireShowSimpleMessageBox,
-     mtrShowSimpleMessageBox);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireShowYesNoMessageBox,
-     mtrShowYesNoMessageBox);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireShowOkCancelMessageBox,
-     mtrShowOkCancelMessageBox);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireShowInputDialog, mtrShowInputDialog);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireShowPasswordDialog,
-     mtrShowPasswordDialog);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireAddFileFilter,
-     mtrAddFileFilter);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireClearFileFilters,
-     mtrClearFileFilters);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireShowSaveFileDialog,
-     mtrShowSaveFileDialog);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireShowOpenFileDialog,
-     mtrShowOpenFileDialog);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireShowSelectFolderDialog,
-     mtrShowSelectFolderDialog);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireNotify, mtrNotify);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireIndexkeeperCreate, mtrIndexkeeperCreate);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireIndexkeeperGetFreeIndex,
-     mtrIndexkeeperGetFreeIndex);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireIndexkeeperFreeIndex,
-     mtrIndexkeeperFreeIndex);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireIndexkeeperIndexIsEmpty,
-     mtrIndexkeeperIndexIsEmpty);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireIndexkeeperGetReservedDataCount,
-     mtrIndexkeeperGetReservedDataCount);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireIndexkeeperDestroy,
-     mtrIndexkeeperDestroy);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireEncodingUtf8ToUcs4,
-     mtrEncodingUtf8ToUcs4);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireEncodingUtf8Codepoints,
-     mtrEncodingUtf8Codepoints);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireFileOpen, mtrFileOpen);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireFileClose, mtrFileClose);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireFileRead, mtrFileRead);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireFileWrite, mtrFileWrite);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireFileWriteLine, mtrFileWriteLine);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireFileWriteFast, mtrFileWriteFast);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireFileWriteLineFast, mtrFileWriteLineFast);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireClipboardPutText, mtrClipboardPutText);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireClipboardGetText, mtrClipboardGetText);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireStringBufferAdd, mtrStringBufferAdd);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireStringBufferDelete,
-     mtrStringBufferDelete);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireStringBufferSetString,
-     mtrStringBufferSetString);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireStringBufferGetString,
-     mtrStringBufferGetString);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireStringBufferGetMaxLen,
-     mtrStringBufferGetMaxLen);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireOptionsAlias, mtrOptionsAlias);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireOptionsGet, mtrOptionsGet);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireOptionsGet_b, mtrOptionsGet_b);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireOptionsGet_i, mtrOptionsGet_i);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireOptionsGet_l, mtrOptionsGet_l);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireOptionsGet_f, mtrOptionsGet_f);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireOptionsGet_d, mtrOptionsGet_d);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireConsoleShow, mtrConsoleShow);
-    MTR_REQUIRE_ENGINE_FUNC(mtrRequireConsoleHide, mtrConsoleHide);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireMarathonerGetVersion,
+     MTR_MarathonerGetVersion);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireMarathonerGetModuleVersion,
+     MTR_MarathonerGetModuleVersion);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConfigfileGetKeyName,
+     MTR_ConfigfileGetKeyName);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConfigfileGetSectionName,
+     MTR_ConfigfileGetSectionName);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConfigfileDeleteKey,
+     MTR_ConfigfileDeleteKey);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConfigfileDeleteSection,
+     MTR_ConfigfileDeleteSection);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConfigfileReadBool,
+     MTR_ConfigfileReadBool);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConfigfileReadInt,
+     MTR_ConfigfileReadInt);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConfigfileReadSingle,
+     MTR_ConfigfileReadSingle);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConfigfileReadString,
+     MTR_ConfigfileReadString);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConfigfileWriteBool,
+     MTR_ConfigfileWriteBool);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConfigfileWriteInt,
+     MTR_ConfigfileWriteInt);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConfigfileWriteSingle,
+     MTR_ConfigfileWriteSingle);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConfigfileWriteString,
+     MTR_ConfigfileWriteString);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConfigfileCreateSection,
+     MTR_ConfigfileCreateSection);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireLogWrite, MTR_LogWrite);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireLogWrite_s, MTR_LogWrite_s);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireLogWrite_i, MTR_LogWrite_i);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireLogWrite_d, MTR_LogWrite_d);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireShowSimpleMessageBox,
+     MTR_ShowSimpleMessageBox);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireShowYesNoMessageBox,
+     MTR_ShowYesNoMessageBox);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireShowOkCancelMessageBox,
+     MTR_ShowOkCancelMessageBox);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireShowInputDialog, MTR_ShowInputDialog);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireShowPasswordDialog,
+     MTR_ShowPasswordDialog);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireAddFileFilter,
+     MTR_AddFileFilter);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireClearFileFilters,
+     MTR_ClearFileFilters);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireShowSaveFileDialog,
+     MTR_ShowSaveFileDialog);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireShowOpenFileDialog,
+     MTR_ShowOpenFileDialog);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireShowSelectFolderDialog,
+     MTR_ShowSelectFolderDialog);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireNotify, MTR_Notify);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireIndexkeeperCreate, MTR_IndexkeeperCreate);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireIndexkeeperGetFreeIndex,
+     MTR_IndexkeeperGetFreeIndex);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireIndexkeeperFreeIndex,
+     MTR_IndexkeeperFreeIndex);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireIndexkeeperIndexIsEmpty,
+     MTR_IndexkeeperIndexIsEmpty);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireIndexkeeperGetReservedDataCount,
+     MTR_IndexkeeperGetReservedDataCount);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireIndexkeeperDestroy,
+     MTR_IndexkeeperDestroy);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireEncodingUtf8ToUcs4,
+     MTR_EncodingUtf8ToUcs4);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireEncodingUtf8Codepoints,
+     MTR_EncodingUtf8Codepoints);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileOpen, MTR_FileOpen);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileClose, MTR_FileClose);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileRead, MTR_FileRead);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileWrite, MTR_FileWrite);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileWriteLine, MTR_FileWriteLine);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileWriteFast, MTR_FileWriteFast);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileWriteLineFast, MTR_FileWriteLineFast);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireClipboardPutText, MTR_ClipboardPutText);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireClipboardGetText, MTR_ClipboardGetText);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireStringBufferAdd, MTR_StringBufferAdd);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireStringBufferDelete,
+     MTR_StringBufferDelete);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireStringBufferSetString,
+     MTR_StringBufferSetString);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireStringBufferGetString,
+     MTR_StringBufferGetString);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireStringBufferGetMaxLen,
+     MTR_StringBufferGetMaxLen);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireOptionsAlias, MTR_OptionsAlias);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireOptionsGet, MTR_OptionsGet);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireOptionsGet_b, MTR_OptionsGet_b);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireOptionsGet_i, MTR_OptionsGet_i);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireOptionsGet_l, MTR_OptionsGet_l);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireOptionsGet_f, MTR_OptionsGet_f);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireOptionsGet_d, MTR_OptionsGet_d);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConsoleShow, MTR_ConsoleShow);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConsoleHide, MTR_ConsoleHide);
 }
 
 /* Check if module disabled and process it */
-bool mtrProcessModuleDisabled(int moduleNum)
+bool MTR_ProcessModuleDisabled(int moduleNum)
 {
     int i;
 
-    if (!mtrConfigfileReadBool("Marathoner.cfg", "Module",
+    if (!MTR_ConfigfileReadBool("Marathoner.cfg", "Module",
      mtrPluginData[moduleNum].report->moduleID, true))
     {
-        mtrLogWrite_s("Module are disabled by configfile:", 1,
+        MTR_LogWrite_s("Module are disabled by configfile:", 1,
          MTR_LMT_NOTE, mtrPluginData[moduleNum].report->moduleID);
         free(mtrPluginData[moduleNum].filename);
         for (i = moduleNum; i < mtrPluginsFound - 1; i++)
@@ -134,7 +134,7 @@ bool mtrProcessModuleDisabled(int moduleNum)
     return false;
 }
 
-bool mtrIsSubsystem(int moduleNum)
+bool MTR_IsSubsystem(int moduleNum)
 {
     if ((strcmp(mtrPluginData[moduleNum].report->subsystem, "binding") != 0) &&
      (strcmp(mtrPluginData[moduleNum].report->subsystem, "utils") != 0) &&
@@ -158,79 +158,79 @@ int main(int argc, char** argv)
     char   *currentArgument = NULL;
     bool    showConsole;
 
-    mtrOptionsProcess(argc, argv);
-    mtrOptionsAlias("help", "h");
-    if (strcmp(mtrOptionsGet("help"), "") == 0)
+    MTR_OptionsProcess(argc, argv);
+    MTR_OptionsAlias("help", "h");
+    if (strcmp(MTR_OptionsGet("help"), "") == 0)
     {
         /* Print help to log */
     }
 
-    showConsole = mtrOptionsGet_b("show-console");
+    showConsole = MTR_OptionsGet_b("show-console");
     if (!showConsole)
-        showConsole = mtrConfigfileReadBool("Marathoner.cfg", "Engine",
+        showConsole = MTR_ConfigfileReadBool("Marathoner.cfg", "Engine",
          "show_console", false);
 
     if (showConsole)
-        mtrConsoleShow();
+        MTR_ConsoleShow();
 
-    autorunAction = mtrOptionsGet("autorun-action");
-    autorunPlugin = mtrOptionsGet("autorun-plugin");
-    autorunScript = mtrOptionsGet("autorun-script");
+    autorunAction = MTR_OptionsGet("autorun-action");
+    autorunPlugin = MTR_OptionsGet("autorun-plugin");
+    autorunScript = MTR_OptionsGet("autorun-script");
 
     if (autorunAction == NULL)
-        autorunAction = mtrConfigfileReadString("Marathoner.cfg", "Autorun",
+        autorunAction = MTR_ConfigfileReadString("Marathoner.cfg", "Autorun",
          "action", "none");
     if (autorunPlugin == NULL)
-        autorunPlugin = mtrConfigfileReadString("Marathoner.cfg", "Autorun",
+        autorunPlugin = MTR_ConfigfileReadString("Marathoner.cfg", "Autorun",
          "plugin", "none");
     if (autorunScript == NULL)
-        autorunScript = mtrConfigfileReadString("Marathoner.cfg", "Autorun",
+        autorunScript = MTR_ConfigfileReadString("Marathoner.cfg", "Autorun",
          "script", "none");
 
-    mtrLogInit("Marathoner.log");
+    MTR_LogInit("Marathoner.log");
 
-    mtrLogWrite("Reporting Marathoner version:", 0, MTR_LMT_INFO);
-    mtrLogWrite_i("Majon:", 1, MTR_LMT_INFO,
+    MTR_LogWrite("Reporting Marathoner version:", 0, MTR_LMT_INFO);
+    MTR_LogWrite_i("Majon:", 1, MTR_LMT_INFO,
      (MTR_VERSION_MARATHONER & 0xFF0000) >> 16);
-    mtrLogWrite_i("Minor:", 1, MTR_LMT_INFO,
+    MTR_LogWrite_i("Minor:", 1, MTR_LMT_INFO,
      (MTR_VERSION_MARATHONER & 0x00FF00) >> 8);
-    mtrLogWrite_i("Patch:", 1, MTR_LMT_INFO,
+    MTR_LogWrite_i("Patch:", 1, MTR_LMT_INFO,
      MTR_VERSION_MARATHONER & 0x0000FF);
-    mtrLogWrite("Searching available plugins", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Searching available plugins", 0, MTR_LMT_INFO);
 
-    error = mtrLoadAllPlugins(RequireEngineFuncs);
+    error = MTR_LoadAllPlugins(RequireEngineFuncs);
     if (error != 0)
         return error;
 
-    mtrLogWrite("Processing modules' reports", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Processing modules' reports", 0, MTR_LMT_INFO);
     ok = false;
     i = 0;
     while (i < mtrPluginsFound)
     {
-        if (mtrProcessModuleDisabled(i))
+        if (MTR_ProcessModuleDisabled(i))
         {
             i = 0;
             continue;
         }
         ok = true;
         /* searching conflicting subsystems */
-        if (mtrIsSubsystem(i))
+        if (MTR_IsSubsystem(i))
         {
             for (j = 0; j < mtrPluginsFound; j++)
             {
-                currentArgument = mtrOptionsGet(
+                currentArgument = MTR_OptionsGet(
                  mtrPluginData[i].report->subsystem);
                 if (currentArgument == NULL)
-                    temp = mtrConfigfileReadString("Marathoner.cfg",
+                    temp = MTR_ConfigfileReadString("Marathoner.cfg",
                      "Subsystem", mtrPluginData[i].report->subsystem, "none");
                 else
                     temp = currentArgument;
                 if (strcmp(temp, "none") == 0)
                 {
-                    mtrLogWrite_s("Subsystem of module are disabled by "
+                    MTR_LogWrite_s("Subsystem of module are disabled by "
                      "configfile:", 1, MTR_LMT_NOTE,
                      mtrPluginData[i].report->moduleID);
-                    mtrCloseLibrary(mtrPluginData[i].dll);
+                    MTR_CloseLibrary(mtrPluginData[i].dll);
                     free(mtrPluginData[i].filename);
                     if (temp != currentArgument)
                         free(temp);
@@ -247,19 +247,20 @@ int main(int argc, char** argv)
                 {
                     ok = false;
 
-                    currentArgument = mtrOptionsGet(
+                    currentArgument = MTR_OptionsGet(
                      mtrPluginData[i].report->subsystem);
                     if (currentArgument == NULL)
-                        temp = mtrConfigfileReadString("Marathoner.cfg",
-                         "Subsystem", mtrPluginData[i].report->subsystem, "none");
+                        temp = MTR_ConfigfileReadString("Marathoner.cfg",
+                         "Subsystem", mtrPluginData[i].report->subsystem,
+                         "none");
                     else
                         temp = currentArgument;
 
                     if (strcmp(temp, mtrPluginData[i].report->moduleID) == 0)
                     {
-                        mtrLogWrite_s("Module will not loaded:", 1,
+                        MTR_LogWrite_s("Module will not loaded:", 1,
                          MTR_LMT_NOTE, mtrPluginData[j].report->moduleID);
-                        mtrCloseLibrary(mtrPluginData[j].dll);
+                        MTR_CloseLibrary(mtrPluginData[j].dll);
                         free(mtrPluginData[j].filename);
                         i = j;
                         if (temp != currentArgument)
@@ -269,9 +270,9 @@ int main(int argc, char** argv)
                     }
                     if (strcmp(temp, mtrPluginData[j].report->moduleID) == 0)
                     {
-                        mtrLogWrite_s("Module will not loaded:", 1,
+                        MTR_LogWrite_s("Module will not loaded:", 1,
                          MTR_LMT_NOTE, mtrPluginData[i].report->moduleID);
-                        mtrCloseLibrary(mtrPluginData[i].dll);
+                        MTR_CloseLibrary(mtrPluginData[i].dll);
                         free(mtrPluginData[i].filename);
                         if (temp != currentArgument)
                             free(temp);
@@ -279,15 +280,15 @@ int main(int argc, char** argv)
                         break;
                     }
 
-                    mtrLogWrite_s("Conflicting modules of subsystem:", 1,
+                    MTR_LogWrite_s("Conflicting modules of subsystem:", 1,
                      MTR_LMT_ERROR, mtrPluginData[i].report->subsystem);
-                    mtrLogWrite_s("First module:", 2, MTR_LMT_INFO,
+                    MTR_LogWrite_s("First module:", 2, MTR_LMT_INFO,
                      mtrPluginData[i].report->moduleID);
-                    mtrLogWrite_s("Second module:", 2, MTR_LMT_INFO,
+                    MTR_LogWrite_s("Second module:", 2, MTR_LMT_INFO,
                      mtrPluginData[j].report->moduleID);
-                    mtrLogWrite_s("Module will not loaded:", 1,
+                    MTR_LogWrite_s("Module will not loaded:", 1,
                      MTR_LMT_WARNING, mtrPluginData[i].report->moduleID);
-                    mtrCloseLibrary(mtrPluginData[i].dll);
+                    MTR_CloseLibrary(mtrPluginData[i].dll);
                     free(mtrPluginData[i].filename);
 
                     if (temp != currentArgument)
@@ -323,12 +324,12 @@ int main(int argc, char** argv)
                 }
                 if (!ok)
                 {
-                    mtrLogWrite_s("Missing Prerequired subsystem module:", 1,
+                    MTR_LogWrite_s("Missing Prerequired subsystem module:", 1,
                      MTR_LMT_ERROR,
                      mtrPluginData[i].report->prereqSubsystems[j]);
-                    mtrLogWrite_s("Module will not loaded:", 1,
+                    MTR_LogWrite_s("Module will not loaded:", 1,
                      MTR_LMT_WARNING, mtrPluginData[i].report->moduleID);
-                    mtrCloseLibrary(mtrPluginData[i].dll);
+                    MTR_CloseLibrary(mtrPluginData[i].dll);
                     free(mtrPluginData[i].filename);
                     for (j = i; j < mtrPluginsFound - 1; j++)
                         mtrPluginData[j] = mtrPluginData[j + 1];
@@ -355,11 +356,11 @@ int main(int argc, char** argv)
                 }
                 if (!ok)
                 {
-                    mtrLogWrite_s("Missing Prerequisite module:", 1,
+                    MTR_LogWrite_s("Missing Prerequisite module:", 1,
                      MTR_LMT_ERROR, mtrPluginData[i].report->prereqs[j]);
-                    mtrLogWrite_s("Module will not loaded:", 1,
+                    MTR_LogWrite_s("Module will not loaded:", 1,
                      MTR_LMT_WARNING, mtrPluginData[i].report->moduleID);
-                    mtrCloseLibrary(mtrPluginData[i].dll);
+                    MTR_CloseLibrary(mtrPluginData[i].dll);
                     free(mtrPluginData[i].filename);
                     for (j = i; j < mtrPluginsFound - 1; j++)
                         mtrPluginData[j] = mtrPluginData[j + 1];
@@ -375,20 +376,35 @@ int main(int argc, char** argv)
     /* Plugins updating information about every other plugin */
     for (i = 0; i < mtrPluginsFound; i++)
     {
-        mtrRequirePluginData = (mtrRequirePluginDataFunc)mtrLoadSymbolName(
-         mtrPluginData[i].dll, "mtrRequirePluginData");
-        mtrRequirePluginData(mtrPluginData, mtrPluginsFound);
+        MTR_RequirePluginData = (MTR_RequirePluginDataFunc)MTR_LoadSymbolName(
+         mtrPluginData[i].dll, "MTR_RequirePluginData");
+        if (MTR_RequirePluginData == NULL)
+        {
+            MTR_LogWrite(
+             "Module are not contain function MTR_RequirePluginData", 1,
+             MTR_LMT_ERROR);
+            MTR_LogWrite_s("Module will not loaded:", 1,
+             MTR_LMT_WARNING, mtrPluginData[i].report->moduleID);
+            MTR_CloseLibrary(mtrPluginData[i].dll);
+            free(mtrPluginData[i].filename);
+            for (j = i; j < mtrPluginsFound - 1; j++)
+                mtrPluginData[j] = mtrPluginData[j + 1];
+            mtrPluginsFound--;
+            i = 0;
+            continue;
+        }
+        MTR_RequirePluginData(mtrPluginData, mtrPluginsFound);
     }
 
-    mtrLogWrite("Modules' reports processed", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Modules' reports processed", 0, MTR_LMT_INFO);
 
-    if (!mtrFileInit(MTR_IKDM_SMALL, 32))
+    if (!MTR_FileInit(MTR_IKDM_SMALL, 32))
         return 4;
 
-    if (!mtrStringBufferInit(MTR_IKDM_MEDIUM, 32))
+    if (!MTR_StringBufferInit(MTR_IKDM_MEDIUM, 32))
         return 5;
 
-    mtrLogWrite("Reading 'Marathoner.cfg' for autorun options", 0,
+    MTR_LogWrite("Reading 'Marathoner.cfg' for autorun options", 0,
      MTR_LMT_INFO);
     ok = false;
     if (strcmp(autorunAction, "runScript") == 0)
@@ -406,45 +422,45 @@ int main(int argc, char** argv)
         {
             if (strcmp(autorunScript, "none") != 0)
             {
-                mtrScriptsAutorun = (mtrScriptsAutorunFunc)mtrLoadSymbolName(
-                 mtrPluginData[currentPlugin].dll, "mtrScriptsAutorun");
-                if (mtrScriptsAutorun == NULL)
-                    mtrNotify("Unable to load autorun plugin function", 1,
+                MTR_ScriptsAutorun = (MTR_ScriptsAutorunFunc)MTR_LoadSymbolName(
+                 mtrPluginData[currentPlugin].dll, "MTR_ScriptsAutorun");
+                if (MTR_ScriptsAutorun == NULL)
+                    MTR_Notify("Unable to load autorun plugin function", 1,
                      MTR_LMT_ERROR);
                 else
                 {
-                    mtrLogWrite_s("Running autorun function with file:", 0,
+                    MTR_LogWrite_s("Running autorun function with file:", 0,
                      MTR_LMT_INFO, autorunScript);
-                    mtrScriptsAutorun(autorunScript);
+                    MTR_ScriptsAutorun(autorunScript);
                 }
             }
             else
             {
-                mtrNotify("Unable to read autorun script filename", 1,
+                MTR_Notify("Unable to read autorun script filename", 1,
                  MTR_LMT_ERROR);
             }
         }
         else
         {
-            mtrNotify("Ivalid autorun plugin", 1, MTR_LMT_ERROR);
+            MTR_Notify("Ivalid autorun plugin", 1, MTR_LMT_ERROR);
         }
     }
     else
     {
-        mtrNotify("Invalid autorun action command", 1, MTR_LMT_ERROR);
+        MTR_Notify("Invalid autorun action command", 1, MTR_LMT_ERROR);
     }
 
-    mtrLogWrite("Quiting Engine", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Quiting Engine", 0, MTR_LMT_INFO);
     /* Freing allocated structures and unloading libraries */
     for (i = 0; i < mtrPluginsFound; i++)
     {
-        mtrLogWrite_s("Unloading plugin", 0, MTR_LMT_INFO,
+        MTR_LogWrite_s("Unloading plugin", 0, MTR_LMT_INFO,
          mtrPluginData[i].report->moduleID);
-        mtrCloseLibrary(mtrPluginData[i].dll);
+        MTR_CloseLibrary(mtrPluginData[i].dll);
     }
     free(mtrPluginData);
 
-    mtrLogWrite("Engine stopped", 0, MTR_LMT_INFO);
+    MTR_LogWrite("Engine stopped", 0, MTR_LMT_INFO);
 
     return 0;
 }

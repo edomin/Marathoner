@@ -38,113 +38,114 @@ typedef struct mtrPlugin{
 } mtrPlugin;
 
 /* Pointers to engine functions */
-typedef uint32_t    (MTR_CALL * mtrMarathonerGetVersionFunc_t)(void);
-typedef uint32_t    (MTR_CALL * mtrMarathonerGetModuleVersionFunc_t)(
+typedef uint32_t    (MTR_CALL * MTR_MarathonerGetVersionFunc_t)(void);
+typedef uint32_t    (MTR_CALL * MTR_MarathonerGetModuleVersionFunc_t)(
  const char *);
-typedef char *      (MTR_CALL * mtrConfigfileGetKeyNameFunc_t)(const char *,
+typedef char *      (MTR_CALL * MTR_ConfigfileGetKeyNameFunc_t)(const char *,
  const char *, int);
-typedef char *      (MTR_CALL * mtrConfigfileGetSectionNameFunc_t)(const char*,
+typedef char *      (MTR_CALL * MTR_ConfigfileGetSectionNameFunc_t)(const char*,
  int);
-typedef bool        (MTR_CALL * mtrConfigfileDeleteKeyFunc_t)(const char *,
+typedef bool        (MTR_CALL * MTR_ConfigfileDeleteKeyFunc_t)(const char *,
  const char *, const char *);
-typedef bool        (MTR_CALL * mtrConfigfileDeleteSectionFunc_t)(const char *,
+typedef bool        (MTR_CALL * MTR_ConfigfileDeleteSectionFunc_t)(const char *,
  const char *);
-typedef bool        (MTR_CALL * mtrConfigfileReadBoolFunc_t)(const char *,
+typedef bool        (MTR_CALL * MTR_ConfigfileReadBoolFunc_t)(const char *,
  const char *, const char *, bool);
-typedef int         (MTR_CALL * mtrConfigfileReadIntFunc_t)(const char *,
+typedef int         (MTR_CALL * MTR_ConfigfileReadIntFunc_t)(const char *,
  const char *, const char *, int);
-typedef float       (MTR_CALL * mtrConfigfileReadSingleFunc_t)(const char *,
+typedef float       (MTR_CALL * MTR_ConfigfileReadSingleFunc_t)(const char *,
  const char *, const char *, float);
-typedef char *      (MTR_CALL * mtrConfigfileReadStringFunc_t)(const char *,
+typedef char *      (MTR_CALL * MTR_ConfigfileReadStringFunc_t)(const char *,
  const char *, const char *, const char *);
-typedef bool        (MTR_CALL * mtrConfigfileWriteBoolFunc_t)(const char *,
+typedef bool        (MTR_CALL * MTR_ConfigfileWriteBoolFunc_t)(const char *,
  const char *, const char *, bool);
-typedef bool        (MTR_CALL * mtrConfigfileWriteIntFunc_t)(const char *,
+typedef bool        (MTR_CALL * MTR_ConfigfileWriteIntFunc_t)(const char *,
  const char *, const char *, int);
-typedef bool        (MTR_CALL * mtrConfigfileWriteSingleFunc_t)(const char *,
+typedef bool        (MTR_CALL * MTR_ConfigfileWriteSingleFunc_t)(const char *,
  const char *, const char *, float);
-typedef bool        (MTR_CALL * mtrConfigfileWriteStringFunc_t)(const char *,
+typedef bool        (MTR_CALL * MTR_ConfigfileWriteStringFunc_t)(const char *,
  const char *, const char *, const char *);
-typedef bool        (MTR_CALL * mtrConfigfileCreateSectionFunc_t)(const char *,
+typedef bool        (MTR_CALL * MTR_ConfigfileCreateSectionFunc_t)(const char *,
  const char *);
 
-typedef void        (MTR_CALL * mtrLogWriteFunc_t)(const char *, uint8_t,
+typedef void        (MTR_CALL * MTR_LogWriteFunc_t)(const char *, uint8_t,
  uint8_t);
-typedef void        (MTR_CALL * mtrLogWrite_sFunc_t)(const char *, uint8_t,
+typedef void        (MTR_CALL * MTR_LogWrite_sFunc_t)(const char *, uint8_t,
  uint8_t, const char *);
-typedef void        (MTR_CALL * mtrLogWrite_iFunc_t)(const char *, uint8_t,
+typedef void        (MTR_CALL * MTR_LogWrite_iFunc_t)(const char *, uint8_t,
  uint8_t, int32_t);
-typedef void        (MTR_CALL * mtrLogWrite_dFunc_t)(const char *, uint8_t,
+typedef void        (MTR_CALL * MTR_LogWrite_dFunc_t)(const char *, uint8_t,
  uint8_t, double);
 
-typedef void        (MTR_CALL * mtrShowSimpleMessageBoxFunc_t)(uint8_t,
+typedef void        (MTR_CALL * MTR_ShowSimpleMessageBoxFunc_t)(uint8_t,
  const char *, const char *);
-typedef bool        (MTR_CALL * mtrShowYesNoMessageBoxFunc_t)(const char *,
+typedef bool        (MTR_CALL * MTR_ShowYesNoMessageBoxFunc_t)(const char *,
  const char *);
-typedef bool        (MTR_CALL * mtrShowOkCancelMessageBoxFunc_t)(const char *,
+typedef bool        (MTR_CALL * MTR_ShowOkCancelMessageBoxFunc_t)(const char *,
  const char *);
-typedef const char *(MTR_CALL * mtrShowInputDialogFunc_t)(const char *,
+typedef const char *(MTR_CALL * MTR_ShowInputDialogFunc_t)(const char *,
  const char *, const char *);
-typedef const char *(MTR_CALL * mtrShowPasswordDialogFunc_t)(const char *,
+typedef const char *(MTR_CALL * MTR_ShowPasswordDialogFunc_t)(const char *,
  const char *);
-typedef void        (MTR_CALL * mtrAddFileFilterFunc_t)(const char *);
-typedef void        (MTR_CALL * mtrClearFileFiltersFunc_t)(void);
-typedef const char *(MTR_CALL * mtrShowSaveFileDialogFunc_t)(const char *,
+typedef void        (MTR_CALL * MTR_AddFileFilterFunc_t)(const char *);
+typedef void        (MTR_CALL * MTR_ClearFileFiltersFunc_t)(void);
+typedef const char *(MTR_CALL * MTR_ShowSaveFileDialogFunc_t)(const char *,
  const char *, const char *);
-typedef const char *(MTR_CALL * mtrShowOpenFileDialogFunc_t)(const char *,
+typedef const char *(MTR_CALL * MTR_ShowOpenFileDialogFunc_t)(const char *,
  const char *, const char *);
-typedef const char *(MTR_CALL * mtrShowSelectFolderDialogFunc_t)(const char *,
+typedef const char *(MTR_CALL * MTR_ShowSelectFolderDialogFunc_t)(const char *,
  const char *);
 
-typedef void        (MTR_CALL * mtrNotifyFunc_t)(const char *, uint8_t,
+typedef void        (MTR_CALL * MTR_NotifyFunc_t)(const char *, uint8_t,
  uint8_t);
 
-typedef void *      (MTR_CALL * mtrIndexkeeperCreateFunc_t)(uint32_t, uint32_t,
+typedef void *      (MTR_CALL * MTR_IndexkeeperCreateFunc_t)(uint32_t, uint32_t,
  size_t);
-typedef uint32_t    (MTR_CALL * mtrIndexkeeperGetFreeIndexFunc_t)(void *);
-typedef void        (MTR_CALL * mtrIndexkeeperFreeIndexFunc_t)(void *,
+typedef uint32_t    (MTR_CALL * MTR_IndexkeeperGetFreeIndexFunc_t)(void *);
+typedef void        (MTR_CALL * MTR_IndexkeeperFreeIndexFunc_t)(void *,
  uint32_t);
-typedef bool        (MTR_CALL * mtrIndexkeeperIndexIsEmptyFunc_t)(void *,
+typedef bool        (MTR_CALL * MTR_IndexkeeperIndexIsEmptyFunc_t)(void *,
  uint32_t);
-typedef uint32_t    (MTR_CALL * mtrIndexkeeperGetReservedDataCountFunc_t)(
+typedef uint32_t    (MTR_CALL * MTR_IndexkeeperGetReservedDataCountFunc_t)(
  void *);
-typedef void        (MTR_CALL * mtrIndexkeeperDestroyFunc_t)(void *);
+typedef void        (MTR_CALL * MTR_IndexkeeperDestroyFunc_t)(void *);
 
-typedef size_t      (MTR_CALL * mtrEncodingUtf8ToUcs4Func_t)(const char *,
+typedef size_t      (MTR_CALL * MTR_EncodingUtf8ToUcs4Func_t)(const char *,
  uint32_t **);
-typedef size_t      (MTR_CALL * mtrEncodingUtf8CodepointsFunc_t)(const char *);
+typedef size_t      (MTR_CALL * MTR_EncodingUtf8CodepointsFunc_t)(const char *);
 
-typedef uint32_t    (MTR_CALL * mtrFileOpenFunc_t)(const char *, int);
-typedef bool        (MTR_CALL * mtrFileCloseFunc_t)(uint32_t);
-typedef size_t      (MTR_CALL * mtrFileReadFunc_t)(uint32_t, char **);
-typedef bool        (MTR_CALL * mtrFileWriteFunc_t)(uint32_t, const char *);
-typedef bool        (MTR_CALL * mtrFileWriteLineFunc_t)(uint32_t, const char *);
-typedef void        (MTR_CALL * mtrFileWriteFastFunc_t)(const char *,
- const char *, int);
-typedef void        (MTR_CALL * mtrFileWriteLineFastFunc_t)(const char *,
- const char *, int);
-
-typedef bool        (MTR_CALL * mtrClipboardPutTextFunc_t)(const char *);
-typedef char *      (MTR_CALL * mtrClipboardGetTextFunc_t)(void);
-
-typedef uint32_t    (MTR_CALL * mtrStringBufferAddFunc_t)(const char *, int);
-typedef void        (MTR_CALL * mtrStringBufferDeleteFunc_t)(uint32_t);
-typedef void        (MTR_CALL * mtrStringBufferSetStringFunc_t)(uint32_t,
+typedef uint32_t    (MTR_CALL * MTR_FileOpenFunc_t)(const char *, int);
+typedef bool        (MTR_CALL * MTR_FileCloseFunc_t)(uint32_t);
+typedef size_t      (MTR_CALL * MTR_FileReadFunc_t)(uint32_t, char **);
+typedef bool        (MTR_CALL * MTR_FileWriteFunc_t)(uint32_t, const char *);
+typedef bool        (MTR_CALL * MTR_FileWriteLineFunc_t)(uint32_t,
  const char *);
-typedef char *      (MTR_CALL * mtrStringBufferGetStringFunc_t)(uint32_t);
-typedef int         (MTR_CALL * mtrStringBufferGetMaxLenFunc_t)(uint32_t);
+typedef void        (MTR_CALL * MTR_FileWriteFastFunc_t)(const char *,
+ const char *, int);
+typedef void        (MTR_CALL * MTR_FileWriteLineFastFunc_t)(const char *,
+ const char *, int);
 
-typedef bool        (MTR_CALL * mtrOptionsAliasFunc_t)(const char *,
+typedef bool        (MTR_CALL * MTR_ClipboardPutTextFunc_t)(const char *);
+typedef char *      (MTR_CALL * MTR_ClipboardGetTextFunc_t)(void);
+
+typedef uint32_t    (MTR_CALL * MTR_StringBufferAddFunc_t)(const char *, int);
+typedef void        (MTR_CALL * MTR_StringBufferDeleteFunc_t)(uint32_t);
+typedef void        (MTR_CALL * MTR_StringBufferSetStringFunc_t)(uint32_t,
  const char *);
-typedef char *      (MTR_CALL * mtrOptionsGetFunc_t)(const char *);
-typedef bool        (MTR_CALL * mtrOptionsGet_bFunc_t)(const char *);
-typedef int         (MTR_CALL * mtrOptionsGet_iFunc_t)(const char *);
-typedef long int    (MTR_CALL * mtrOptionsGet_lFunc_t)(const char *);
-typedef float       (MTR_CALL * mtrOptionsGet_fFunc_t)(const char *);
-typedef double      (MTR_CALL * mtrOptionsGet_dFunc_t)(const char *);
+typedef char *      (MTR_CALL * MTR_StringBufferGetStringFunc_t)(uint32_t);
+typedef int         (MTR_CALL * MTR_StringBufferGetMaxLenFunc_t)(uint32_t);
 
-typedef void        (MTR_CALL * mtrConsoleShowFunc_t)(void);
-typedef void        (MTR_CALL * mtrConsoleHideFunc_t)(void);
+typedef bool        (MTR_CALL * MTR_OptionsAliasFunc_t)(const char *,
+ const char *);
+typedef char *      (MTR_CALL * MTR_OptionsGetFunc_t)(const char *);
+typedef bool        (MTR_CALL * MTR_OptionsGet_bFunc_t)(const char *);
+typedef int         (MTR_CALL * MTR_OptionsGet_iFunc_t)(const char *);
+typedef long int    (MTR_CALL * MTR_OptionsGet_lFunc_t)(const char *);
+typedef float       (MTR_CALL * MTR_OptionsGet_fFunc_t)(const char *);
+typedef double      (MTR_CALL * MTR_OptionsGet_dFunc_t)(const char *);
+
+typedef void        (MTR_CALL * MTR_ConsoleShowFunc_t)(void);
+typedef void        (MTR_CALL * MTR_ConsoleHideFunc_t)(void);
 
 /* loaded dll-plugin data */
 mtrPlugin *mtrPluginData;

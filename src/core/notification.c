@@ -1,6 +1,6 @@
 #include "notification.h"
 
-char *mtrMessageTypeToTitle(uint8_t messageType)
+char *MTR_MessageTypeToTitle(uint8_t messageType)
 {
     switch (messageType)
     {
@@ -29,10 +29,11 @@ char *mtrMessageTypeToTitle(uint8_t messageType)
     return " ";
 }
 
-/*fa mtrNotify yes */
-void MTR_CALL mtrNotify(const char *message, uint8_t level, uint8_t messageType)
+/*fa MTR_Notify yes */
+void MTR_CALL MTR_Notify(const char *message, uint8_t level,
+ uint8_t messageType)
 {
-    mtrLogWrite(message, level, messageType);
-    mtrShowSimpleMessageBox(messageType, mtrMessageTypeToTitle(messageType),
-      message);
+    MTR_LogWrite(message, level, messageType);
+    MTR_ShowSimpleMessageBox(messageType, MTR_MessageTypeToTitle(messageType),
+     message);
 }
