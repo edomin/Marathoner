@@ -31,7 +31,6 @@ bool MTR_CALL MTR_SoInit(uint32_t dmSize, uint32_t reservedCount)
     return true;
 }
 
-/*fa MTR_SoOpen yes */
 uint32_t MTR_CALL MTR_SoOpen(const char *filename)
 {
     uint32_t    freeIndex;
@@ -60,7 +59,6 @@ uint32_t MTR_CALL MTR_SoOpen(const char *filename)
     return freeIndex;
 }
 
-/*fa MTR_SoLoadSymbol yes */
 void *MTR_CALL MTR_SoLoadSymbol(uint32_t soNum, const char *sym)
 {
     mtrSo_t *so;
@@ -80,7 +78,6 @@ void *MTR_CALL MTR_SoLoadSymbol(uint32_t soNum, const char *sym)
     #endif
 }
 
-/*fa MTR_SoClose yes */
 void MTR_CALL MTR_SoClose(uint32_t soNum)
 {
     mtrSo_t *so;

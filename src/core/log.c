@@ -69,7 +69,6 @@ void MTR_CALL MTR_LogInit(const char *filename)
     #endif
 }
 
-/*fa MTR_LogWrite yes */
 void MTR_CALL MTR_LogWrite(const char *message, uint8_t level,
  uint8_t messageType)
 {
@@ -80,7 +79,6 @@ void MTR_CALL MTR_LogWrite(const char *message, uint8_t level,
     #endif
 }
 
-/*fa MTR_LogWrite_s yes */
 void MTR_CALL MTR_LogWrite_s(const char *message, uint8_t level,
  uint8_t messageType, const char * argument)
 {
@@ -91,7 +89,6 @@ void MTR_CALL MTR_LogWrite_s(const char *message, uint8_t level,
     #endif
 }
 
-/*fa MTR_LogWrite_i yes */
 void MTR_CALL MTR_LogWrite_i(const char *message, uint8_t level,
  uint8_t messageType, int32_t argument)
 {
@@ -102,7 +99,6 @@ void MTR_CALL MTR_LogWrite_i(const char *message, uint8_t level,
     #endif
 }
 
-/*fa MTR_LogWrite_d yes */
 void MTR_CALL MTR_LogWrite_d(const char *message, uint8_t level,
  uint8_t messageType, double argument)
 {

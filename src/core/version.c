@@ -1,12 +1,10 @@
 #include "version.h"
 
-/*fa MTR_MarathonerGetVersion yes */
 uint32_t MTR_CALL MTR_MarathonerGetVersion(void)
 {
     return MTR_VERSION_MARATHONER;
 }
 
-/*fa MTR_MarathonerGetModuleVersion yes */
 uint32_t MTR_CALL MTR_MarathonerGetModuleVersion(const char *moduleID)
 {
     int i;

@@ -29,7 +29,6 @@ char *MTR_MessageTypeToTitle(uint8_t messageType)
     return " ";
 }
 
-/*fa MTR_Notify yes */
 void MTR_CALL MTR_Notify(const char *message, uint8_t level,
  uint8_t messageType)
 {
