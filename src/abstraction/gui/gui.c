@@ -68,7 +68,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_GuiAddFont(uint32_t fontnum)
     struct nk_user_font *font;
 
     freeIndex = MTR_IndexkeeperGetFreeIndex(mtrGuiFontKeeper);
-    nkFont = (mtrNkFont *)(&((mtrNkFont *)mtrGuiFontKeeper->data)[freeIndex]);
+    nkFont = IK_GET_DATA(mtrNkFont *, mtrGuiFontKeeper, freeIndex);
 
     nkFont->font = fontnum;
     nkFont->height = MTR_FontGetHeight(fontnum);
@@ -91,8 +91,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_GuiAddImage(uint32_t texnum, int x, int y,
     MTR_GUI_CHECK_IF_NOT_INITED(0U);
 
     freeIndex = MTR_IndexkeeperGetFreeIndex(mtrGuiImageKeeper);
-    nkImage = (mtrNkImage *)(
-     &((mtrNkImage *)mtrGuiImageKeeper->data)[freeIndex]);
+    nkImage = IK_GET_DATA(mtrNkImage *, mtrGuiImageKeeper, freeIndex);
 
     nkImage->texture = texnum;
     MTR_TextureGetSizes(texnum, &nkImage->width, &nkImage->height);
@@ -163,7 +162,7 @@ NK_API struct nk_context* MTR_NkInit(uint32_t fontnum, unsigned int width,
     mtrNkFont           *nkFont;
     struct nk_user_font *font;
 
-    nkFont = (mtrNkFont *)(&((mtrNkFont *)mtrGuiFontKeeper->data)[fontnum]);
+    nkFont = IK_GET_DATA(mtrNkFont *, mtrGuiFontKeeper, fontnum);
 
     font = &nkFont->nk;
     font->userdata = nk_handle_ptr(nkFont);
@@ -659,8 +658,7 @@ MTR_DCLSPC bool MTR_CALL MTR_GuiButtonImage(uint32_t imagenum)
     mtrNkImage *nkImage;
     MTR_GUI_CHECK_IF_NOT_INITED(false);
 
-    nkImage = (mtrNkImage *)(
-     &((mtrNkImage *)mtrGuiImageKeeper->data)[imagenum]);
+    nkImage = IK_GET_DATA(mtrNkImage *, mtrGuiImageKeeper, imagenum);
 
     return nk_button_image(&mtrNkGui.ctx, nkImage->nk);
 }
@@ -672,8 +670,7 @@ MTR_DCLSPC bool MTR_CALL MTR_GuiButtonImageLabel(uint32_t imagenum,
     mtrNkImage *nkImage;
     MTR_GUI_CHECK_IF_NOT_INITED(false);
 
-    nkImage = (mtrNkImage *)(
-     &((mtrNkImage *)mtrGuiImageKeeper->data)[imagenum]);
+    nkImage = IK_GET_DATA(mtrNkImage *, mtrGuiImageKeeper, imagenum);
 
     return nk_button_image_label(&mtrNkGui.ctx, nkImage->nk, string, alignment);
 }
@@ -685,8 +682,7 @@ MTR_DCLSPC bool MTR_CALL MTR_GuiButtonImageText(uint32_t imagenum,
     mtrNkImage *nkImage;
     MTR_GUI_CHECK_IF_NOT_INITED(false);
 
-    nkImage = (mtrNkImage *)(
-     &((mtrNkImage *)mtrGuiImageKeeper->data)[imagenum]);
+    nkImage = IK_GET_DATA(mtrNkImage *, mtrGuiImageKeeper, imagenum);
 
     return nk_button_image_text(&mtrNkGui.ctx, nkImage->nk, string, len,
      alignment);
@@ -730,8 +726,7 @@ MTR_DCLSPC bool MTR_CALL MTR_GuiSelectableImageLabel(uint32_t imagenum,
     mtrNkImage *nkImage;
     MTR_GUI_CHECK_IF_NOT_INITED(false);
 
-    nkImage = (mtrNkImage *)(
-     &((mtrNkImage *)mtrGuiImageKeeper->data)[imagenum]);
+    nkImage = IK_GET_DATA(mtrNkImage *, mtrGuiImageKeeper, imagenum);
 
     if (text == NULL)
         return nk_select_image_label(&mtrNkGui.ctx, nkImage->nk, " ",
@@ -747,8 +742,8 @@ MTR_DCLSPC bool MTR_CALL MTR_GuiSelectableImageText(uint32_t imagenum,
 {
     mtrNkImage *nkImage;
     MTR_GUI_CHECK_IF_NOT_INITED(false);
-    nkImage = (mtrNkImage *)(
-     &((mtrNkImage *)mtrGuiImageKeeper->data)[imagenum]);
+
+    nkImage = IK_GET_DATA(mtrNkImage *, mtrGuiImageKeeper, imagenum);
 
     return nk_select_image_text(&mtrNkGui.ctx, nkImage->nk, text, len,
      alignment, selected);

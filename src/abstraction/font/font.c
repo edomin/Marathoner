@@ -73,7 +73,8 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_FontLoadTtf(const char *filename, int size)
 
     freeIndex = MTR_IndexkeeperGetFreeIndex(mtrFontKeeper);
     MTR_LogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
-    font = (mtrFont_t *)(&((mtrFont_t *)mtrFontKeeper->data)[freeIndex]);
+
+    font = IK_GET_DATA(mtrFont_t *, mtrFontKeeper, freeIndex);
 
     font->mbf = NULL;
     font->ttfIndex = MTR_TtfLoad(filename, size);
@@ -101,7 +102,7 @@ MTR_DCLSPC void MTR_CALL MTR_FontFree(uint32_t fontNum)
 
     if (fontNum != 0)
     {
-        font = (mtrFont_t *)(&((mtrFont_t *)mtrFontKeeper->data)[fontNum]);
+        font = IK_GET_DATA(mtrFont_t *, mtrFontKeeper, fontNum);
         MTR_LogWrite_s("Unloading font", 0, MTR_LMT_INFO, font->name);
         if (font->name != mtrDefaultFontName)
             free(font->name);
@@ -117,7 +118,7 @@ MTR_DCLSPC void MTR_CALL MTR_FontSetTtfStyle(uint32_t fontNum, int style)
     mtrFont_t *font;
     MTR_FONT_CHECK_IF_NOT_INITED();
 
-    font = (mtrFont_t *)(&((mtrFont_t *)mtrFontKeeper->data)[fontNum]);
+    font = IK_GET_DATA(mtrFont_t *, mtrFontKeeper, fontNum);
     MTR_TtfSetFontStyle(font->ttfIndex, style);
 }
 
@@ -127,7 +128,7 @@ MTR_DCLSPC void MTR_CALL MTR_FontSetTtfOutline(uint32_t fontNum, int outline)
     mtrFont_t *font;
     MTR_FONT_CHECK_IF_NOT_INITED();
 
-    font = (mtrFont_t *)(&((mtrFont_t *)mtrFontKeeper->data)[fontNum]);
+    font = IK_GET_DATA(mtrFont_t *, mtrFontKeeper, fontNum);
     MTR_TtfSetFontOutline(font->ttfIndex, outline);
 }
 
@@ -139,7 +140,7 @@ MTR_DCLSPC bool MTR_CALL MTR_FontRenderTtfString(uint32_t fontNum,
     mtrPixels_t *pixels;
     MTR_FONT_CHECK_IF_NOT_INITED(false);
 
-    font = (mtrFont_t *)(&((mtrFont_t *)mtrFontKeeper->data)[fontNum]);
+    font = IK_GET_DATA(mtrFont_t *, mtrFontKeeper, fontNum);
 
     pixels = MTR_TtfRenderString(font->ttfIndex, r, g, b, string);
     if (pixels == NULL)
@@ -165,7 +166,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_FontCreateMbf(const char *name,
 
     freeIndex = MTR_IndexkeeperGetFreeIndex(mtrFontKeeper);
     MTR_LogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
-    font = (mtrFont_t *)(&((mtrFont_t *)mtrFontKeeper->data)[freeIndex]);
+    font = IK_GET_DATA(mtrFont_t *, mtrFontKeeper, freeIndex);
 
     font->ttfIndex = 0;
     font->mbf = malloc(sizeof(mtrMbf_t));
@@ -212,7 +213,7 @@ MTR_DCLSPC bool MTR_CALL MTR_FontAddMbfTextureTable(uint32_t fontNum,
     mtrFont_t *font;
     MTR_FONT_CHECK_IF_NOT_INITED(false);
 
-    font = (mtrFont_t *)(&((mtrFont_t *)mtrFontKeeper->data)[fontNum]);
+    font = IK_GET_DATA(mtrFont_t *, mtrFontKeeper, fontNum);
 
     if (font->mbf == NULL ||
      texNum == 0 ||
@@ -238,7 +239,7 @@ MTR_DCLSPC bool MTR_CALL MTR_FontDrawMbfString_f(uint32_t fontNum,
     int          symbolRow;
     MTR_FONT_CHECK_IF_NOT_INITED(false);
 
-    font = (mtrFont_t *)(&((mtrFont_t *)mtrFontKeeper->data)[fontNum]);
+    font = IK_GET_DATA(mtrFont_t *, mtrFontKeeper, fontNum);
 
     if (font->mbf == NULL || string == NULL)
         return false;
@@ -274,7 +275,7 @@ MTR_DCLSPC int MTR_CALL MTR_FontGetHeight(uint32_t fontNum)
     mtrFont_t *font;
     MTR_FONT_CHECK_IF_NOT_INITED(0);
 
-    font = (mtrFont_t *)(&((mtrFont_t *)mtrFontKeeper->data)[fontNum]);
+    font = IK_GET_DATA(mtrFont_t *, mtrFontKeeper, fontNum);
     if (font->ttfIndex > 0)
         return MTR_TtfGetFontHeight(font->ttfIndex);
     if (font->mbf != NULL)
@@ -289,7 +290,7 @@ MTR_DCLSPC int MTR_CALL MTR_FontGetStringWidth(uint32_t fontNum,
     mtrFont_t *font;
     MTR_FONT_CHECK_IF_NOT_INITED(0);
 
-    font = (mtrFont_t *)(&((mtrFont_t *)mtrFontKeeper->data)[fontNum]);
+    font = IK_GET_DATA(mtrFont_t *, mtrFontKeeper, fontNum);
     if (font->ttfIndex > 0)
         return MTR_TtfGetStringWidth(font->ttfIndex, string);
     if (font->mbf != NULL)
@@ -303,6 +304,6 @@ MTR_DCLSPC char *MTR_CALL MTR_FontGetName(uint32_t fontNum)
     mtrFont_t *font;
     MTR_FONT_CHECK_IF_NOT_INITED(NULL);
 
-    font = (mtrFont_t *)(&((mtrFont_t *)mtrFontKeeper->data)[fontNum]);
+    font = IK_GET_DATA(mtrFont_t *, mtrFontKeeper, fontNum);
     return font->name;
 }
