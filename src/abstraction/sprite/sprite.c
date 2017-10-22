@@ -283,7 +283,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_SpriteLoadAtlas(const char *filename,
 
 /*fa MTR_SpriteSetAtlasFrame yes */
 MTR_DCLSPC bool MTR_CALL MTR_SpriteSetAtlasFrame(uint32_t sprNum, int clipNum,
- int x, int y, int w, int h, int anchorX, int anchorY)
+ int x1, int y1, int x2, int y2, int anchorX, int anchorY)
 {
     mtrSprite_t *sprite;
     MTR_SPRITE_CHECK_IF_NOT_INITED(false);
@@ -296,10 +296,13 @@ MTR_DCLSPC bool MTR_CALL MTR_SpriteSetAtlasFrame(uint32_t sprNum, int clipNum,
     if (clipNum > sprite->clipsCount)
         return false;
 
-    sprite->clip[clipNum].x = x;
-    sprite->clip[clipNum].y = y;
-    sprite->clip[clipNum].w = w;
-    sprite->clip[clipNum].h = h;
+    if (((x2 - x1) < 0) || ((y2 - y1) < 0))
+        return false;
+
+    sprite->clip[clipNum].x = x1;
+    sprite->clip[clipNum].y = y1;
+    sprite->clip[clipNum].w = x2 - x1 + 1;
+    sprite->clip[clipNum].h = y2 - y1 + 1;
     sprite->clip[clipNum].anchorX = anchorX;
     sprite->clip[clipNum].anchorY = anchorY;
 
