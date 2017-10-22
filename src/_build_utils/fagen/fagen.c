@@ -71,7 +71,7 @@ char *GetAvailability(char *str, const char **availability)
     return string;
 }
 
-bool CreateEmptyFunction(const char *outputPath)
+bool CreateEmptyFile(const char *outputPath, const char *includeGuard)
 {
     FILE *outputFile;
 
@@ -79,12 +79,13 @@ bool CreateEmptyFunction(const char *outputPath)
     if (outputFile == NULL)
         return false;
 
-    fprintf(outputFile,
-     "%s\n", "MTR_DCLSPC bool MTR_CALL mtrModulePreInit(void)");
-    fprintf(outputFile, "%s\n", "{");
-        fprintf(outputFile, "%s\n", "functionsCount = 0;");
-        fprintf(outputFile, "%s\n", "return true;");
-    fprintf(outputFile, "%s\n", "}");
+    fprintf(outputFile, "#ifndef %s\n", includeGuard);
+    fprintf(outputFile, "#define %s\n", includeGuard);
+    fprintf(outputFile, "%s", "#include \"marathoner/marathoner.h\"\n");
+    fprintf(outputFile, "%s", "#define FA_FUNCTIONS_COUNT 0\n");
+
+    fprintf(outputFile, "%s", "mtrFa_t fa[] = {};\n");
+    fprintf(outputFile, "%s", "#endif\n");
 
     if (fclose(outputFile) == EOF)
         return false;
@@ -168,6 +169,23 @@ int main(int argc, char **argv)
         return 7;
     }
 
+    outputPathLen = strlen(outputPath);
+    includeGuard = malloc(sizeof(char) * outputPathLen + 1);
+    if (includeGuard == NULL) {
+        printf("%s",
+         "Unable to allocate memory for include guard. Using default include"
+         " guard\n");
+        includeGuard = defaultIncludeGuard;
+    } else {
+        strncpy(includeGuard, outputPath, outputPathLen);
+        includeGuard[outputPathLen] = '\0';
+        for (i = 0; i < outputPathLen; i++)
+        {
+            if ((includeGuard[i] == '.') || (includeGuard[i] == '/'))
+                includeGuard[i] = '_';
+        }
+    }
+
     /* counting *fa comments */
     bufPos = inputBuf;
     while (bufPos[0] != '\0') {
@@ -181,7 +199,7 @@ int main(int argc, char **argv)
     {
         free(inputBuf);
         printf("%s\n", "*fa comments not found");
-        if (!CreateEmptyFunction(outputPath))
+        if (!CreateEmptyFile(outputPath, includeGuard))
         {
             printf("Unable to open or close output file: %s\n", outputPath);
             return 8;
@@ -233,49 +251,23 @@ int main(int argc, char **argv)
         return 12;
     }
 
-    outputPathLen = strlen(outputPath);
-
-    includeGuard = malloc(sizeof(char) * outputPathLen + 1);
-    if (includeGuard == NULL) {
-        printf("%s",
-         "Unable to allocate memory for include guard. Using default include"
-         " guard\n");
-        includeGuard = defaultIncludeGuard;
-    } else {
-        strncpy(includeGuard, outputPath, outputPathLen);
-        includeGuard[outputPathLen] = '\0';
-        for (i = 0; i < outputPathLen; i++)
-        {
-            if ((includeGuard[i] == '.') || (includeGuard[i] == '/'))
-                includeGuard[i] = '_';
-        }
-    }
-
     fprintf(outputFile, "#ifndef %s\n", includeGuard);
     fprintf(outputFile, "#define %s\n", includeGuard);
-    fprintf(outputFile, "%s", "#include \"marathoner/common.h\"\n");
+    fprintf(outputFile, "%s", "#include \"marathoner/marathoner.h\"\n");
     fprintf(outputFile, "#define FA_FUNCTIONS_COUNT %i\n", funcsCount);
-    fprintf(outputFile, "%s", "const char *faName[] = {\n");
-        for (i = 0; i < funcsCount; i++)
-        {
-            fprintf(outputFile, "%s", "    \"");
-            fprintf(outputFile,"%s", functionAvailability[i].name);
-            fprintf(outputFile, "%s", "\"");
-            if (i < funcsCount - 1)
-                fprintf(outputFile, "%s", ",");
-            fprintf(outputFile, "%s", "\n");
-        }
-    fprintf(outputFile, "%s\n", "};");
 
-    fprintf(outputFile, "%s", "int faAvailability[] = {\n");
-        for (i = 0; i < funcsCount; i++)
-        {
-            fprintf(outputFile,"    %s", functionAvailability[i].availability);
-            if (i < funcsCount - 1)
-                fprintf(outputFile, "%s", ",");
-            fprintf(outputFile, "%s", "\n");
-        }
-    fprintf(outputFile, "%s\n", "};");
+    fprintf(outputFile, "%s", "mtrFa_t fa[] = {\n");
+    for (i = 0; i < funcsCount; i++)
+    {
+        fprintf(outputFile, "%s", "    {\"");
+        fprintf(outputFile,"%s", functionAvailability[i].name);
+        fprintf(outputFile, "%s", "\", ");
+        fprintf(outputFile,"%s}", functionAvailability[i].availability);
+        if (i < funcsCount - 1)
+            fprintf(outputFile, "%s", ",");
+        fprintf(outputFile, "%s", "\n");
+    }
+    fprintf(outputFile, "%s", "};\n");
     fprintf(outputFile, "%s", "#endif\n");
 
     if (fclose(outputFile) == EOF)

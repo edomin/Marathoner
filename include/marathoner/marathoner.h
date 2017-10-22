@@ -37,6 +37,12 @@ typedef struct mtrPlugin{
     uint32_t     so;
 } mtrPlugin;
 
+/* function availability element */
+typedef struct {
+    const char *name;
+    int         availability;
+} mtrFa_t;
+
 /* Pointers to engine functions */
 typedef uint32_t    (MTR_CALL * MTR_MarathonerGetVersionFunc_t)(void);
 typedef uint32_t    (MTR_CALL * MTR_MarathonerGetModuleVersionFunc_t)(

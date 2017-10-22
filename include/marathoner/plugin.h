@@ -134,8 +134,8 @@ uint8_t mtrPluginsCount;
         int i;                                                                 \
         for (i = 0; i < functionsCount; i++)                                   \
         {                                                                      \
-            if (strcmp(functionName, faName[i]) == 0)                          \
-                return faAvailability[i];                                      \
+            if (strcmp(functionName, fa[i].name) == 0)                         \
+                return fa[i].availability;                                     \
         }                                                                      \
         return MTR_FA_NO;                                                      \
     }
