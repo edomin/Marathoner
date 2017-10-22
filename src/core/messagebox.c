@@ -17,52 +17,31 @@ void MTR_CALL MTR_ShowSimpleMessageBox(uint8_t type, const char *title,
     else
         resultMessage = message;
 
+    #ifdef __MINGW32__
     switch (type)
     {
         case MTR_DMT_INFO:
         case MTR_DMT_NOTE:
         case MTR_DMT_DEBUG:
-            #ifdef __MINGW32__
-                tinyfd_messageBox(resultTitle, resultMessage, "ok", "info", 1);
-            #else
-                EM_ASM_ARGS({
-                    var msg = Pointer_stringify($0);
-                    alert(msg);
-                }, resultMessage);
-            #endif
+            tinyfd_messageBox(resultTitle, resultMessage, "ok", "info", 1);
             break;
         case MTR_DMT_WARNING:
-            #ifdef __MINGW32__
-                tinyfd_messageBox(resultTitle, resultMessage, "ok", "warning", 1);
-            #else
-                EM_ASM_ARGS({
-                    var msg = Pointer_stringify($0);
-                    alert(msg);
-                }, resultMessage);
-            #endif
+            tinyfd_messageBox(resultTitle, resultMessage, "ok", "warning", 1);
             break;
         case MTR_DMT_ERROR:
         case MTR_DMT_FATAL:
-            #ifdef __MINGW32__
-                tinyfd_messageBox(resultTitle, resultMessage, "ok", "error", 1);
-            #else
-                EM_ASM_ARGS({
-                    var msg = Pointer_stringify($0);
-                    alert(msg);
-                }, resultMessage);
-            #endif
+            tinyfd_messageBox(resultTitle, resultMessage, "ok", "error", 1);
             break;
         default: /* Similar MTR_DMT_INFO */
-            #ifdef __MINGW32__
-                tinyfd_messageBox(resultTitle, resultMessage, "ok", "info", 1);
-            #else
-                EM_ASM_ARGS({
-                    var msg = Pointer_stringify($0);
-                    alert(msg);
-                }, resultMessage);
-            #endif
+            tinyfd_messageBox(resultTitle, resultMessage, "ok", "info", 1);
             break;
     }
+    #else
+    EM_ASM_ARGS({
+        var msg = Pointer_stringify($0);
+        alert(msg);
+    }, resultMessage);
+    #endif
 }
 
 bool MTR_CALL MTR_ShowYesNoMessageBox(const char *title, const char *message)
