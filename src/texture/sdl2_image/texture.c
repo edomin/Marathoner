@@ -909,6 +909,7 @@ MTR_DCLSPC void MTR_CALL MTR_TextureBlitRegionGeneral_f(uint32_t texNum,
     }
 }
 
+/*fa MTR_TextureReceivePixels yes */
 MTR_DCLSPC bool MTR_CALL MTR_TextureReceivePixels(uint32_t texNum,
  mtrPixels_t *pixels)
 {

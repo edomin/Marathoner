@@ -139,6 +139,7 @@ MTR_DCLSPC duk_context *MTR_CALL MTR_ScriptsGetVm(void)
     return mtrVm;
 }
 
+/*fa MTR_ScriptsGetAutorunPath yes */
 MTR_DCLSPC char * MTR_CALL MTR_ScriptsGetAutorunPath(void)
 {
     return mtrAutorun;
