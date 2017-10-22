@@ -354,10 +354,115 @@ void nk_tigr_handle_events(void)
 	UpdateKey(TK_TICK);
 }
 
+void SetClippingRectangle(int x, int y, int w, int h)
+{
+    tigr.clipX = x;
+    tigr.clipY = y;
+    tigr.clipW = w;
+    tigr.clipH = h;
+}
+
+void DrawLine(int x1, int y1, int x2, int y2, uint8_t r, uint8_t g, uint8_t b,
+ uint8_t a)
+{
+    TPixel color;
+    int    actualX1 = x1;
+    int    actualY1 = y1;
+    int    actualX2 = x2;
+    int    actualY2 = y2;
+
+    if (actualX1 < tigr.clipX)
+    {
+        actualX2 = actualX2 - (tigr.clipX - actualX1);
+        actualX1 = tigr.clipX;
+    }
+    if (actualY1 < tigr.clipY)
+    {
+        actualY2 = actualY2 - (tigr.clipY - actualY1);
+        actualY1 = tigr.clipY;
+    }
+    if (actualX2 > tigr.clipX + tigr.clipW)
+        actualX2 = tigr.clipX + tigr.clipW;
+    if (actualY2 > tigr.clipY + tigr.clipH)
+        actualY2 = tigr.clipY + tigr.clipH;
+
+    color = tigrRGBA(r, g, b, a);
+    tigrLine(tigr.backdrop, actualX1, actualY1, actualX2, actualY2, color);
+}
+
+void DrawRect(int x, int y, int w, int h, uint8_t r, uint8_t g, uint8_t b,
+ uint8_t a)
+{
+    TPixel color;
+    int    actualX = x;
+    int    actualY = y;
+    int    actualW = w;
+    int    actualH = h;
+
+    if (actualX < tigr.clipX)
+    {
+        actualW = actualW - (tigr.clipX - actualX);
+        actualX = tigr.clipX;
+    }
+    if (actualY < tigr.clipY)
+    {
+        actualH = actualH - (tigr.clipY - actualY);
+        actualY = tigr.clipY;
+    }
+    if (actualX + actualW > tigr.clipX + tigr.clipW)
+        actualW = (tigr.clipX + tigr.clipW) - actualX;
+    if (actualY + actualH > tigr.clipY + tigr.clipH)
+        actualH = (tigr.clipY + tigr.clipH) - actualY;
+
+    color = tigrRGBA(r, g, b, a);
+    tigrRect(tigr.backdrop, actualX, actualY, actualW, actualH, color);
+}
+
+void DrawFilledRect(int x, int y, int w, int h, uint8_t r, uint8_t g, uint8_t b,
+ uint8_t a)
+{
+    TPixel color;
+    int    actualX = x;
+    int    actualY = y;
+    int    actualW = w;
+    int    actualH = h;
+
+    if (actualX < tigr.clipX)
+    {
+        actualW = actualW - (tigr.clipX - actualX);
+        actualX = tigr.clipX;
+    }
+    if (actualY < tigr.clipY)
+    {
+        actualH = actualH - (tigr.clipY - actualY);
+        actualY = tigr.clipY;
+    }
+    if (actualX + actualW > tigr.clipX + tigr.clipW)
+        actualW = (tigr.clipX + tigr.clipW) - actualX;
+    if (actualY + actualH > tigr.clipY + tigr.clipH)
+        actualH = (tigr.clipY + tigr.clipH) - actualY;
+
+    color = tigrRGBA(r, g, b, a);
+    tigrFill(tigr.backdrop, actualX, actualY, actualW, actualH, color);
+}
+
+void DrawString(nkTigrFont *font, int x, int y, uint8_t r, uint8_t g, uint8_t b,
+ uint8_t a, const char *string)
+{
+    TPixel color;
+    int    textWidth = tigrTextWidth(font->font, string);
+
+    if ((x < tigr.clipX) || (x + textWidth > tigr.clipX + tigr.clipW) ||
+     (y < tigr.clipY) || (y + 12 > tigr.clipY + tigr.clipH))
+        return;
+
+    color = tigrRGBA(r, g, b, a);
+    tigrPrint(tigr.backdrop, font->font, x, y, color, string);
+}
+
 NK_API void nk_tigr_render()
 {
     const struct nk_command *cmd;
-    TPixel                   color;
     int                      i;
     float                    points[8];
 
@@ -370,99 +475,91 @@ NK_API void nk_tigr_render()
             case NK_COMMAND_NOP:
                 break;
             case NK_COMMAND_SCISSOR:
-                //const struct nk_command_scissor *s =(const struct nk_command_scissor*)cmd;
-                //al_set_clipping_rectangle((int)s->x, (int)s->y, (int)s->w, (int)s->h);
+                {
+                    const struct nk_command_scissor *s = (
+                     const struct nk_command_scissor*)cmd;
+                    SetClippingRectangle((int)s->x, (int)s->y, (int)s->w,
+                     (int)s->h);
+                }
                 break;
             case NK_COMMAND_LINE:
                 {
                     const struct nk_command_line *l = (
                      const struct nk_command_line *)cmd;
-                    color = tigrRGBA(l->color.r, l->color.g, l->color.b,
-                     l->color.a);
-                    tigrLine(tigr.backdrop, l->begin.x, l->begin.y, l->end.x,
-                     l->end.y, color);
+                    DrawLine(l->begin.x, l->begin.y, l->end.x, l->end.y,
+                     l->color.r, l->color.g, l->color.b, l->color.a);
                 }
                 break;
             case NK_COMMAND_RECT:
                 {
                     const struct nk_command_rect *r = (
                      const struct nk_command_rect *)cmd;
-                    color = tigrRGBA(r->color.r, r->color.g, r->color.b,
-                     r->color.a);
-                    tigrRect(tigr.backdrop, r->x, r->y, r->w, r->h, color);
+                    DrawRect(r->x, r->y, r->w, r->h, r->color.r, r->color.g,
+                     r->color.b, r->color.a);
                 }
                 break;
             case NK_COMMAND_RECT_FILLED:
                 {
                     const struct nk_command_rect_filled *r = (
                      const struct nk_command_rect_filled *)cmd;
-                    color = tigrRGBA(r->color.r, r->color.g, r->color.b,
-                     r->color.a);
-                    tigrFill(tigr.backdrop, r->x, r->y, r->w, r->h, color);
+                    DrawFilledRect(r->x, r->y, r->w, r->h, r->color.r,
+                     r->color.g, r->color.b, r->color.a);
                 }
                 break;
             case NK_COMMAND_CIRCLE:
                 {
                     const struct nk_command_circle *c = (
                      const struct nk_command_circle *)cmd;
-                    color = tigrRGBA(c->color.r, c->color.g, c->color.b,
-                     c->color.a);
-                    tigrRect(tigr.backdrop, c->x, c->y, c->w, c->h, color);
+                    DrawRect(c->x, c->y, c->w, c->h, c->color.r, c->color.g,
+                     c->color.b, c->color.a);
                 }
                 break;
             case NK_COMMAND_CIRCLE_FILLED:
                 {
                     const struct nk_command_circle_filled *c = (
                      const struct nk_command_circle_filled *)cmd;
-                    color = tigrRGBA(c->color.r, c->color.g, c->color.b,
-                     c->color.a);
-                    tigrFill(tigr.backdrop, c->x, c->y, c->w, c->h, color);
+                    DrawFilledRect(c->x, c->y, c->w, c->h, c->color.r,
+                     c->color.g, c->color.b, c->color.a);
                 }
                 break;
             case NK_COMMAND_TRIANGLE:
                 {
                     const struct nk_command_triangle*t = (
                      const struct nk_command_triangle*)cmd;
-                    color = tigrRGBA(t->color.r, t->color.g, t->color.b,
-                     t->color.a);
-                    tigrLine(tigr.backdrop, t->a.x, t->a.y, t->b.x, t->b.y,
-                     color);
-                    tigrLine(tigr.backdrop, t->b.x, t->b.y, t->c.x, t->c.y,
-                     color);
-                    tigrLine(tigr.backdrop, t->c.x, t->c.y, t->a.x, t->a.y,
-                     color);
+                    DrawLine(t->a.x, t->a.y, t->b.x, t->b.y, t->color.r,
+                     t->color.g, t->color.b, t->color.a);
+                    DrawLine(t->b.x, t->b.y, t->c.x, t->c.y, t->color.r,
+                     t->color.g, t->color.b, t->color.a);
+                    DrawLine(t->c.x, t->c.y, t->a.x, t->a.y, t->color.r,
+                     t->color.g, t->color.b, t->color.a);
                 }
                 break;
             case NK_COMMAND_TRIANGLE_FILLED:
                 {
                     const struct nk_command_triangle_filled *t = (
                      const struct nk_command_triangle_filled *)cmd;
-                    color = tigrRGBA(t->color.r, t->color.g, t->color.b,
-                     t->color.a);
-                    tigrLine(tigr.backdrop, t->a.x, t->a.y, t->b.x, t->b.y,
-                     color);
-                    tigrLine(tigr.backdrop, t->b.x, t->b.y, t->c.x, t->c.y,
-                     color);
-                    tigrLine(tigr.backdrop, t->c.x, t->c.y, t->a.x, t->a.y,
-                     color);
+                    DrawLine(t->a.x, t->a.y, t->b.x, t->b.y, t->color.r,
+                     t->color.g, t->color.b, t->color.a);
+                    DrawLine(t->b.x, t->b.y, t->c.x, t->c.y, t->color.r,
+                     t->color.g, t->color.b, t->color.a);
+                    DrawLine(t->c.x, t->c.y, t->a.x, t->a.y, t->color.r,
+                     t->color.g, t->color.b, t->color.a);
                 }
                 break;
             case NK_COMMAND_POLYGON:
                 {
                     const struct nk_command_polygon *p = (
                      const struct nk_command_polygon*)cmd;
-                    color = tigrRGBA(p->color.r, p->color.g, p->color.b,
-                     p->color.a);
                     for (i = 0; i < p->point_count; i++)
                     {
                         if (i == p->point_count - 1)
-                            tigrLine(tigr.backdrop, p->points[i].x,
-                             p->points[i].y, p->points[0].x, p->points[0].y,
-                             color);
+                            DrawLine(p->points[i].x, p->points[i].y,
+                             p->points[0].x, p->points[0].y, p->color.r,
+                             p->color.g, p->color.b, p->color.a);
                         else
-                            tigrLine(tigr.backdrop, p->points[i].x,
-                             p->points[i].y, p->points[i + 1].x,
-                             p->points[i + 1].y, color);
+                            DrawLine(p->points[i].x, p->points[i].y,
+                             p->points[i + 1].x, p->points[i + 1].y, p->color.r,
+                             p->color.g, p->color.b, p->color.a);
                     }
                 }
                 break;
@@ -470,18 +567,16 @@ NK_API void nk_tigr_render()
                 {
                     const struct nk_command_polygon_filled *p = (
                      const struct nk_command_polygon_filled *)cmd;
-                    color = tigrRGBA(p->color.r, p->color.g, p->color.b,
-                     p->color.a);
                     for (i = 0; i < p->point_count; i++)
                     {
                         if (i == p->point_count - 1)
-                            tigrLine(tigr.backdrop, p->points[i].x,
-                             p->points[i].y, p->points[0].x, p->points[0].y,
-                             color);
+                            DrawLine(p->points[i].x, p->points[i].y,
+                             p->points[0].x, p->points[0].y, p->color.r,
+                             p->color.g, p->color.b, p->color.a);
                         else
-                            tigrLine(tigr.backdrop, p->points[i].x,
-                             p->points[i].y, p->points[i + 1].x,
-                             p->points[i + 1].y, color);
+                            DrawLine(p->points[i].x, p->points[i].y,
+                             p->points[i + 1].x, p->points[i + 1].y, p->color.r,
+                             p->color.g, p->color.b, p->color.a);
                     }
                 }
                 break;
@@ -489,11 +584,10 @@ NK_API void nk_tigr_render()
                 {
                     const struct nk_command_polyline *p = (
                      const struct nk_command_polyline *)cmd;
-                    color = tigrRGBA(p->color.r, p->color.g, p->color.b,
-                     p->color.a);
                     for (i = 0; i < p->point_count - 1; i++)
-                        tigrLine(tigr.backdrop, p->points[i].x, p->points[i].y,
-                         p->points[i + 1].x, p->points[i + 1].y, color);
+                        DrawLine(p->points[i].x, p->points[i].y,
+                         p->points[i + 1].x, p->points[i + 1].y, p->color.r,
+                         p->color.g, p->color.b, p->color.a);
                 }
                 break;
             case NK_COMMAND_TEXT:
@@ -501,37 +595,32 @@ NK_API void nk_tigr_render()
                     const struct nk_command_text *t = (
                      const struct nk_command_text*)cmd;
                     nkTigrFont *font = (nkTigrFont*)t->font->userdata.ptr;
-                    color = tigrRGBA(t->foreground.r, t->foreground.g,
-                     t->foreground.b, t->foreground.a);
-                    tigrPrint(tigr.backdrop, font->font, t->x, t->y, color,
-                     (const char*)t->string);
-                    //al_draw_text(font->font,
-                    //    color, (float)t->x, (float)t->y, 0,
-                    //    (const char*)t->string);
+                    DrawString(font, t->x, t->y, t->foreground.r,
+                     t->foreground.g, t->foreground.b, t->foreground.a,
+                     t->string);
                 }
                 break;
             case NK_COMMAND_CURVE:
                 {
                     const struct nk_command_curve *q = (
                      const struct nk_command_curve *)cmd;
-                    color = tigrRGBA(q->color.r, q->color.g, q->color.b,
+
+//                    points[0] = (float)q->begin.x;
+//                    points[1] = (float)q->begin.y;
+//                    points[2] = (float)q->ctrl[0].x;
+//                    points[3] = (float)q->ctrl[0].y;
+//                    points[4] = (float)q->ctrl[1].x;
+//                    points[5] = (float)q->ctrl[1].y;
+//                    points[6] = (float)q->end.x;
+//                    points[7] = (float)q->end.y;
+
+                    DrawLine(q->begin.x, q->begin.y, q->ctrl[0].x, q->ctrl[0].y,
+                     q->color.r, q->color.g, q->color.b, q->color.a);
+                    DrawLine(q->ctrl[0].x, q->ctrl[0].y, q->ctrl[1].x,
+                     q->ctrl[1].y, q->color.r, q->color.g, q->color.b,
                      q->color.a);
-
-                    points[0] = (float)q->begin.x;
-                    points[1] = (float)q->begin.y;
-                    points[2] = (float)q->ctrl[0].x;
-                    points[3] = (float)q->ctrl[0].y;
-                    points[4] = (float)q->ctrl[1].x;
-                    points[5] = (float)q->ctrl[1].y;
-                    points[6] = (float)q->end.x;
-                    points[7] = (float)q->end.y;
-
-                    tigrLine(tigr.backdrop, q->begin.x, q->begin.y,
-                     q->ctrl[0].x, q->ctrl[0].y, color);
-                    tigrLine(tigr.backdrop, q->ctrl[0].x, q->ctrl[0].y,
-                     q->ctrl[1].x, q->ctrl[1].y, color);
-                    tigrLine(tigr.backdrop, q->ctrl[1].x, q->ctrl[1].y,
-                     q->end.x, q->end.y, color);
+                    DrawLine(q->ctrl[1].x, q->ctrl[1].y, q->end.x, q->end.y,
+                     q->color.r, q->color.g, q->color.b, q->color.a);
                 }
                 break;
             case NK_COMMAND_ARC:

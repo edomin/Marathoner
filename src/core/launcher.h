@@ -56,6 +56,10 @@ static struct nk_tigr {
     int               touch_down_id;
     struct nk_context ctx;
     struct nk_buffer  cmds;
+    int               clipX;
+    int               clipY;
+    int               clipW;
+    int               clipH;
 } tigr;
 
 static struct mouse {
