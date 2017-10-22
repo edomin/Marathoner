@@ -181,6 +181,9 @@ MTR_RequireConsoleShowFunc MTR_RequireConsoleShow;
 typedef void (MTR_CALL * MTR_RequireConsoleHideFunc)(MTR_ConsoleHideFunc_t);
 MTR_RequireConsoleHideFunc MTR_RequireConsoleHide;
 
+typedef void (MTR_CALL * MTR_RequireSoLoadSymbolFunc)(MTR_SoLoadSymbolFunc_t);
+MTR_RequireSoLoadSymbolFunc MTR_RequireSoLoadSymbol;
+
 typedef void (MTR_CALL * MTR_RequirePluginDataFunc)(mtrPlugin *, uint8_t);
 MTR_RequirePluginDataFunc MTR_RequirePluginData;
 
@@ -188,8 +191,8 @@ typedef void (MTR_CALL * MTR_ScriptsAutorunFunc)(char *);
 MTR_ScriptsAutorunFunc MTR_ScriptsAutorun;
 
 #define MTR_REQUIRE_ENGINE_FUNC(require_funcname, funcname)                 \
-    require_funcname = (require_funcname ## Func)MTR_LoadSymbolName(        \
-     mtrPluginData[plugin].dll, #require_funcname);                         \
+    require_funcname = (require_funcname ## Func)MTR_SoLoadSymbol(          \
+     mtrPluginData[plugin].so, #require_funcname);                          \
     if (require_funcname != NULL)                                           \
         require_funcname(funcname);                                         \
     else                                                                    \
