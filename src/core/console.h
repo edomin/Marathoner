@@ -2,6 +2,7 @@
 #define MTR_CORE_CONSOLE_H
 
 #include <stdio.h>
+#include <windows.h>
 
 #include "marathoner/engine.h"
 

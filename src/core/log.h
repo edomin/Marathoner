@@ -2,6 +2,7 @@
 #define MTR_CORE_LOG_H
 
 #include <stdio.h>
+#include <stdarg.h>
 #include <time.h>
 
 #include "console.h"

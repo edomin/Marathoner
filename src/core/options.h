@@ -4,6 +4,7 @@
 #include "marathoner/marathoner.h"
 
 #include <limits.h>
+#include <string.h>
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wold-style-declaration"

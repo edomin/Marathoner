@@ -1,6 +1,13 @@
 #ifndef MTR_CORE_DIRECTORY_H
 #define MTR_CORE_DIRECTORY_H
 
+#ifdef __MINGW32__
+    #include <windows.h>
+#else
+    #include <emscripten.h>
+#endif
+#include <string.h>
+
 #include "marathoner/engine.h"
 
 typedef struct mtrDirectory_t{

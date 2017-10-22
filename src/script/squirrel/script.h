@@ -2,6 +2,7 @@
 #define MTR_SCRIPT_SQUIRREL_H
 
 #include <stdio.h>
+#include <stdarg.h>
 
 #include "squirrel.h"
 #include "sqstdblob.h"
