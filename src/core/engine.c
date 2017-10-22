@@ -1,3 +1,4 @@
+#include "so.h"
 #include "log.h"
 #include "messagebox.h"
 #include "notification.h"
@@ -113,6 +114,7 @@ void RequireEngineFuncs(uint8_t plugin)
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireOptionsGet_d, MTR_OptionsGet_d);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConsoleShow, MTR_ConsoleShow);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConsoleHide, MTR_ConsoleHide);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireSoLoadSymbol, MTR_SoLoadSymbol);
 }
 
 /* Check if module disabled and process it */
@@ -198,6 +200,8 @@ int main(int argc, char** argv)
      MTR_VERSION_MARATHONER & 0x0000FF);
     MTR_LogWrite("Searching available plugins", 0, MTR_LMT_INFO);
 
+    MTR_SoInit(MTR_IKDM_SMALL, 256);
+
     error = MTR_LoadAllPlugins(RequireEngineFuncs);
     if (error != 0)
         return error;
@@ -230,7 +234,7 @@ int main(int argc, char** argv)
                     MTR_LogWrite_s("Subsystem of module are disabled by "
                      "configfile:", 1, MTR_LMT_NOTE,
                      mtrPluginData[i].report->moduleID);
-                    MTR_CloseLibrary(mtrPluginData[i].dll);
+                    MTR_SoClose(mtrPluginData[i].so);
                     free(mtrPluginData[i].filename);
                     if (temp != currentArgument)
                         free(temp);
@@ -260,7 +264,7 @@ int main(int argc, char** argv)
                     {
                         MTR_LogWrite_s("Module will not loaded:", 1,
                          MTR_LMT_NOTE, mtrPluginData[j].report->moduleID);
-                        MTR_CloseLibrary(mtrPluginData[j].dll);
+                        MTR_SoClose(mtrPluginData[j].so);
                         free(mtrPluginData[j].filename);
                         i = j;
                         if (temp != currentArgument)
@@ -272,7 +276,7 @@ int main(int argc, char** argv)
                     {
                         MTR_LogWrite_s("Module will not loaded:", 1,
                          MTR_LMT_NOTE, mtrPluginData[i].report->moduleID);
-                        MTR_CloseLibrary(mtrPluginData[i].dll);
+                        MTR_SoClose(mtrPluginData[i].so);
                         free(mtrPluginData[i].filename);
                         if (temp != currentArgument)
                             free(temp);
@@ -288,7 +292,7 @@ int main(int argc, char** argv)
                      mtrPluginData[j].report->moduleID);
                     MTR_LogWrite_s("Module will not loaded:", 1,
                      MTR_LMT_WARNING, mtrPluginData[i].report->moduleID);
-                    MTR_CloseLibrary(mtrPluginData[i].dll);
+                    MTR_SoClose(mtrPluginData[i].so);
                     free(mtrPluginData[i].filename);
 
                     if (temp != currentArgument)
@@ -329,7 +333,7 @@ int main(int argc, char** argv)
                      mtrPluginData[i].report->prereqSubsystems[j]);
                     MTR_LogWrite_s("Module will not loaded:", 1,
                      MTR_LMT_WARNING, mtrPluginData[i].report->moduleID);
-                    MTR_CloseLibrary(mtrPluginData[i].dll);
+                    MTR_SoClose(mtrPluginData[i].so);
                     free(mtrPluginData[i].filename);
                     for (j = i; j < mtrPluginsFound - 1; j++)
                         mtrPluginData[j] = mtrPluginData[j + 1];
@@ -360,7 +364,7 @@ int main(int argc, char** argv)
                      MTR_LMT_ERROR, mtrPluginData[i].report->prereqs[j]);
                     MTR_LogWrite_s("Module will not loaded:", 1,
                      MTR_LMT_WARNING, mtrPluginData[i].report->moduleID);
-                    MTR_CloseLibrary(mtrPluginData[i].dll);
+                    MTR_SoClose(mtrPluginData[i].so);
                     free(mtrPluginData[i].filename);
                     for (j = i; j < mtrPluginsFound - 1; j++)
                         mtrPluginData[j] = mtrPluginData[j + 1];
@@ -376,8 +380,8 @@ int main(int argc, char** argv)
     /* Plugins updating information about every other plugin */
     for (i = 0; i < mtrPluginsFound; i++)
     {
-        MTR_RequirePluginData = (MTR_RequirePluginDataFunc)MTR_LoadSymbolName(
-         mtrPluginData[i].dll, "MTR_RequirePluginData");
+        MTR_RequirePluginData = (MTR_RequirePluginDataFunc)MTR_SoLoadSymbol(
+         mtrPluginData[i].so, "MTR_RequirePluginData");
         if (MTR_RequirePluginData == NULL)
         {
             MTR_LogWrite(
@@ -385,7 +389,7 @@ int main(int argc, char** argv)
              MTR_LMT_ERROR);
             MTR_LogWrite_s("Module will not loaded:", 1,
              MTR_LMT_WARNING, mtrPluginData[i].report->moduleID);
-            MTR_CloseLibrary(mtrPluginData[i].dll);
+            MTR_SoClose(mtrPluginData[i].so);
             free(mtrPluginData[i].filename);
             for (j = i; j < mtrPluginsFound - 1; j++)
                 mtrPluginData[j] = mtrPluginData[j + 1];
@@ -422,8 +426,8 @@ int main(int argc, char** argv)
         {
             if (strcmp(autorunScript, "none") != 0)
             {
-                MTR_ScriptsAutorun = (MTR_ScriptsAutorunFunc)MTR_LoadSymbolName(
-                 mtrPluginData[currentPlugin].dll, "MTR_ScriptsAutorun");
+                MTR_ScriptsAutorun = (MTR_ScriptsAutorunFunc)MTR_SoLoadSymbol(
+                 mtrPluginData[currentPlugin].so, "MTR_ScriptsAutorun");
                 if (MTR_ScriptsAutorun == NULL)
                     MTR_Notify("Unable to load autorun plugin function", 1,
                      MTR_LMT_ERROR);
@@ -456,7 +460,7 @@ int main(int argc, char** argv)
     {
         MTR_LogWrite_s("Unloading plugin", 0, MTR_LMT_INFO,
          mtrPluginData[i].report->moduleID);
-        MTR_CloseLibrary(mtrPluginData[i].dll);
+        MTR_SoClose(mtrPluginData[i].so);
     }
     free(mtrPluginData);
 

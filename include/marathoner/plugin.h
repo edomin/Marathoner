@@ -102,6 +102,8 @@ MTR_OptionsGet_dFunc_t                       MTR_OptionsGet_d;
 MTR_ConsoleShowFunc_t                        MTR_ConsoleShow;
 MTR_ConsoleHideFunc_t                        MTR_ConsoleHide;
 
+MTR_SoLoadSymbolFunc_t                       MTR_SoLoadSymbol;
+
 uint8_t mtrPluginsCount;
 
 

@@ -28,6 +28,7 @@
 #include "configfile.h"
 #include "messagebox.h"
 #include "clipboard.h"
+#include "so.h"
 #include "plugin_loader.h"
 #include "marathoner/marathoner.h"
 

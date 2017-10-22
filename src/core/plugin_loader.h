@@ -4,6 +4,7 @@
 #include "notification.h"
 #include "directory.h"
 #include "log.h"
+#include "so.h"
 #include "marathoner/engine.h"
 
 typedef void (* RequireEngineFuncsFunc)(uint8_t);

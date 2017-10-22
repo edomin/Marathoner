@@ -80,9 +80,9 @@ int MTR_LoadAllPlugins(RequireEngineFuncsFunc RequireEngineFuncs)
                 strcat(fullPluginFileName,
                  mtrPluginData[currentPlugin].filename);
                 /* Loading plugin library */
-                mtrPluginData[currentPlugin].dll = MTR_LoadLibrary(
+                mtrPluginData[currentPlugin].so = MTR_SoOpen(
                  fullPluginFileName);
-                if (mtrPluginData[currentPlugin].dll == NULL)
+                if (mtrPluginData[currentPlugin].so == 0)
                 {
                     MTR_Notify("Library not loaded", 1, MTR_LMT_ERROR);
                     #ifdef __EMSCRIPTEN__
@@ -90,8 +90,8 @@ int MTR_LoadAllPlugins(RequireEngineFuncsFunc RequireEngineFuncs)
                     #endif
                     continue;
                 }
-                MTR_CreateReport = (MTR_ReportFunc)MTR_LoadSymbolName(
-                 mtrPluginData[currentPlugin].dll, "MTR_CreateReport");
+                MTR_CreateReport = (MTR_ReportFunc)MTR_SoLoadSymbol(
+                 mtrPluginData[currentPlugin].so, "MTR_CreateReport");
                 if (MTR_CreateReport == NULL)
                     MTR_Notify("Library not contain MTR_CreateReport function",
                      1, MTR_LMT_ERROR);
@@ -101,7 +101,7 @@ int MTR_LoadAllPlugins(RequireEngineFuncsFunc RequireEngineFuncs)
                     MTR_Notify("Module are not returned report", 1,
                      MTR_LMT_ERROR);
                     free(fullPluginFileName);
-                    MTR_CloseLibrary(mtrPluginData[currentPlugin].dll);
+                    MTR_SoClose(mtrPluginData[currentPlugin].so);
                     continue;
                 }
                 MTR_LogWrite_s("Module ID:", 1, MTR_LMT_INFO,
@@ -132,7 +132,7 @@ int MTR_LoadAllPlugins(RequireEngineFuncsFunc RequireEngineFuncs)
                     RequireEngineFuncs(currentPlugin);
 
                 /* Plugin requiring information about every other plugin */
-                MTR_RequirePluginData = (MTR_RequirePluginDataFunc)MTR_LoadSymbolName(mtrPluginData[currentPlugin].dll,
+                MTR_RequirePluginData = (MTR_RequirePluginDataFunc)MTR_SoLoadSymbol(mtrPluginData[currentPlugin].so,
                  "MTR_RequirePluginData");
                 MTR_RequirePluginData(mtrPluginData, mtrPluginsFound);
 

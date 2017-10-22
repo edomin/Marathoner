@@ -34,7 +34,7 @@ typedef struct mtrReport{
 typedef struct mtrPlugin{
     mtrReport   *report;
     char        *filename;
-    mtr_lhandler dll;
+    uint32_t     so;
 } mtrPlugin;
 
 /* Pointers to engine functions */
@@ -146,6 +146,8 @@ typedef double      (MTR_CALL * MTR_OptionsGet_dFunc_t)(const char *);
 
 typedef void        (MTR_CALL * MTR_ConsoleShowFunc_t)(void);
 typedef void        (MTR_CALL * MTR_ConsoleHideFunc_t)(void);
+
+typedef void *      (MTR_CALL * MTR_SoLoadSymbolFunc_t)(uint32_t, const char *);
 
 /* loaded dll-plugin data */
 mtrPlugin *mtrPluginData;

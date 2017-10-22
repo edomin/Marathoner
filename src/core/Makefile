@@ -25,17 +25,20 @@ MTR_OBJS = $(OBJSDIR)/engine.o \
  $(OBJSDIR)/plugin_loader.o \
  $(OBJSDIR)/options.o \
  $(OBJSDIR)/version.o \
- $(OBJSDIR)/console.o
+ $(OBJSDIR)/console.o \
+ $(OBJSDIR)/so.o
 
 LCHR_OBJS = $(OBJSDIR)/launcher.o \
  $(OBJSDIR)/log.o \
  $(OBJSDIR)/messagebox.o \
  $(OBJSDIR)/notification.o \
  $(OBJSDIR)/configfile.o \
+ $(OBJSDIR)/indexkeeper.o \
  $(OBJSDIR)/directory.o \
  $(OBJSDIR)/clipboard.o \
  $(OBJSDIR)/plugin_loader.o \
- $(OBJSDIR)/console.o
+ $(OBJSDIR)/console.o \
+ $(OBJSDIR)/so.o
 
 ifeq ($(PLATFORM), win32)
   MTR_OBJS += $(OBJSDIR)/engine.res
@@ -151,6 +154,9 @@ $(OBJSDIR)/version.o: version.c version.h
 $(OBJSDIR)/console.o: console.c console.h
 	$(CC) $(CFLAGS) $(INCDIRS) -c console.c -o $(OBJSDIR)/console.o
 
+$(OBJSDIR)/so.o: so.c so.h
+	$(CC) $(CFLAGS) $(INCDIRS) -c so.c -o $(OBJSDIR)/so.o
+
 $(OBJSDIR)/engine.res: $(RCDIR)/engine.rc
 	$(RC) $(RCFLAGS) -i $(RCDIR)/engine.rc -o $(OBJSDIR)/engine.res
 
@@ -201,6 +207,8 @@ options.h: ../../include/marathoner/engine.h
 version.h: ../../include/marathoner/engine.h
 
 console.h: ../../include/marathoner/engine.h
+
+so.h: notification.h log.h ../../include/marathoner/engine.h
 
 ../../include/marathoner/engine.h: ../../include/marathoner/marathoner.h
 

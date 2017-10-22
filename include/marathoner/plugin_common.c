@@ -363,6 +363,12 @@ MTR_DCLSPC void MTR_CALL MTR_RequireConsoleHide(
     MTR_ConsoleHide = ConsoleHideFunc;
 }
 
+MTR_DCLSPC void MTR_CALL MTR_RequireSoLoadSymbol(
+ MTR_SoLoadSymbolFunc_t SoLoadSymbolFunc)
+{
+    MTR_SoLoadSymbol = SoLoadSymbolFunc;
+}
+
 MTR_DCLSPC void MTR_CALL MTR_RequirePluginData(mtrPlugin* pluginData,
  uint8_t pluginsCount)
 {
@@ -377,7 +383,7 @@ void *MTR_FindFunction(char *moduleID, char *functionName)
     {
         if (strcmp(mtrPluginData[i].report->moduleID, moduleID) == 0)
         {
-            return (void *)MTR_LoadSymbolName(mtrPluginData[i].dll,
+            return (void *)MTR_SoLoadSymbol(mtrPluginData[i].so,
              functionName);
         }
     }
@@ -396,7 +402,7 @@ void *MTR_FindFunctionInSubsystem(char *subsystem, char *functionName)
         {
             if (strcmp(mtrPluginData[i].report->subsystem, subsystem) == 0)
             {
-                return (void *)MTR_LoadSymbolName(mtrPluginData[i].dll,
+                return (void *)MTR_SoLoadSymbol(mtrPluginData[i].so,
                  functionName);
             }
         }

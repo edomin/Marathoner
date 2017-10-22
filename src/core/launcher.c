@@ -823,6 +823,8 @@ int main(int argc, char** argv)
 
     MTR_ClearFileFilters();
 
+    MTR_SoInit(MTR_IKDM_SMALL, 256);
+
     error = MTR_LoadAllPlugins(NULL);
     if (error != 0)
         return error;
@@ -1238,7 +1240,7 @@ int main(int argc, char** argv)
     {
         MTR_LogWrite_s("Unloading plugin", 0, MTR_LMT_INFO,
          mtrPluginData[i].report->moduleID);
-        MTR_CloseLibrary(mtrPluginData[i].dll);
+        MTR_SoClose(mtrPluginData[i].so);
     }
 
     free(mtrPluginData);
