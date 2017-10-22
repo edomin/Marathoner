@@ -85,5 +85,7 @@ Domain):
   * "test/media/explosion.wav"
 * License text for font "test/media/Vera.ttf" can be found in file
 "test/media/COPYRIGHT-Vera.TXT". Author - Bitstream, Inc.
+* Images made by [Shepardskin](https://twitter.com/Shepardskin) are under CC0 license (Public Domain):
+  * "test/media/dog.png"
 
 And I am sorry for my bad english.
