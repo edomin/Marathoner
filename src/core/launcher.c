@@ -450,11 +450,11 @@ void DrawString(nkTigrFont *font, int x, int y, uint8_t r, uint8_t g, uint8_t b,
  uint8_t a, const char *string)
 {
     TPixel color;
-    int    textWidth = tigrTextWidth(font->font, string);
+//    int    textWidth = tigrTextWidth(font->font, string);
 
-    if ((x < tigr.clipX) || (x + textWidth > tigr.clipX + tigr.clipW) ||
-     (y < tigr.clipY) || (y + 12 > tigr.clipY + tigr.clipH))
-        return;
+//    if ((x < tigr.clipX) || (x + textWidth > tigr.clipX + tigr.clipW) ||
+//     (y < tigr.clipY) || (y + 12 > tigr.clipY + tigr.clipH))
+//        return;
 
     color = tigrRGBA(r, g, b, a);
     tigrPrint(tigr.backdrop, font->font, x, y, color, string);
