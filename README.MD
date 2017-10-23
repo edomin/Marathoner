@@ -1,5 +1,10 @@
+### General info
 Marathoner - game engine for Game Jams.  
 Work in progress.  
+Supported platforms:
+
+* Windows 32x or 64x
+
 More detailed description will be in v1.0.0.
 
 ### Building
