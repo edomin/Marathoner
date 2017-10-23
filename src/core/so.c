@@ -58,7 +58,7 @@ uint32_t MTR_CALL MTR_SoOpen(const char *filename)
     {
         #ifdef __MINGW32__
         error = GetLastError();
-        errorText = WinErrorCodeToText(error);
+        errorText = MTR_WindowsErrorCodeToText(error);
         MTR_LogWrite(errorText, 0, MTR_LMT_ERROR);
         #endif
         MTR_LogWrite("Unable to open library", 0, MTR_LMT_ERROR);

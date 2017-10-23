@@ -814,7 +814,7 @@ bool RunEngine()
         free(appName);
         MTR_Notify("Unable to convert Application name to wide char.", 0,
          MTR_LMT_ERROR);
-        errorText = WinErrorCodeToText(error);
+        errorText = MTR_WindowsErrorCodeToText(error);
         MTR_Notify(errorText, 0, MTR_LMT_ERROR);
         return false;
     }
@@ -829,7 +829,7 @@ bool RunEngine()
     if (success == false) /* Error occured */
     {
         error = GetLastError();
-        errorText = WinErrorCodeToText(error);
+        errorText = MTR_WindowsErrorCodeToText(error);
         MTR_Notify(errorText, 0, MTR_LMT_ERROR);
     }
     else
