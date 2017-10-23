@@ -3,8 +3,6 @@
 
 #include "duktape.h"
 
-#include "SDL2/SDL.h"
-
 #include "marathoner/plugin.h"
 #include "../binding_common.h"
 

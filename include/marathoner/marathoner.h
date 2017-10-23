@@ -160,6 +160,36 @@ typedef void *      (MTR_CALL * MTR_SoLoadSymbolFunc_t)(uint32_t, const char *);
 /* loaded dll-plugin data */
 mtrPlugin *mtrPluginData;
 
+#ifdef __MINGW32__
+#include <windows.h>
+static inline char *WinErrorCodeToText(uint32_t error)
+{
+    #ifdef UNICODE
+    wchar_t *lpMsgBuf;
+    int textLen;
+    char *result;
+    #else
+    LPTSTR lpMsgBuf;
+    #endif
+
+    FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM |
+     FORMAT_MESSAGE_IGNORE_INSERTS, NULL, error,
+     MAKELANGID(LANG_ENGLISH, SUBLANG_ENGLISH_US), (LPTSTR) &lpMsgBuf, 0, NULL);
+
+    #ifdef UNICODE
+    textLen = wcslen(lpMsgBuf);
+    result = malloc(sizeof(char) * (textLen + 1));
+    WideCharToMultiByte(CP_ACP, WC_COMPOSITECHECK | WC_NO_BEST_FIT_CHARS,
+     lpMsgBuf, textLen, result, textLen, NULL, NULL);
+    result[textLen] = '\0';
+    //free(lpMsgBuf);
+    return result;
+    #else
+    return lpMsgBuf;
+    #endif
+}
+#endif /* __MINGW32__ */
+
 /* Log Message Types */
 #define MTR_LMT_INFO        0
 #define MTR_LMT_NOTE        1

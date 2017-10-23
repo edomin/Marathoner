@@ -1,8 +1,15 @@
 #ifndef MTR_SCREEN_SDL2_GPU_H
 #define MTR_SCREEN_SDL2_GPU_H
 
+#ifdef __MINGW64__
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wswitch-default"
+#endif
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_gpu.h"
+#ifdef __MINGW64__
+    #pragma GCC diagnostic pop
+#endif
 
 #include "fa/Screen_SDL2_gpu.h"
 #include "marathoner/plugin.h"

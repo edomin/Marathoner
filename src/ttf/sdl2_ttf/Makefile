@@ -6,6 +6,9 @@ MODULE_NAME = TTF_SDL2_ttf
 ifeq ($(PLATFORM), win32)
   LIBS = -lSDL2_ttf.dll -lSDL2.dll
 endif
+ifeq ($(PLATFORM), win64)
+  LIBS = -lSDL2_ttf.dll -lSDL2.dll
+endif
 ifeq ($(PLATFORM), html5)
   LIBS = $(PREFIX)/lib/sdl2-ttf.bc
 endif

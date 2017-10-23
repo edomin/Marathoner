@@ -34,7 +34,11 @@ bool MTR_CALL MTR_SoInit(uint32_t dmSize, uint32_t reservedCount)
 uint32_t MTR_CALL MTR_SoOpen(const char *filename)
 {
     uint32_t    freeIndex;
-    mtrSo_t     *so;
+    mtrSo_t    *so;
+    #ifdef __MINGW32__
+    uint32_t    error;
+    char       *errorText;
+    #endif
 
     if (filename == NULL)
     {
@@ -52,7 +56,13 @@ uint32_t MTR_CALL MTR_SoOpen(const char *filename)
     #endif
     if (so->handle == NULL)
     {
+        #ifdef __MINGW32__
+        error = GetLastError();
+        errorText = WinErrorCodeToText(error);
+        MTR_LogWrite(errorText, 0, MTR_LMT_ERROR);
+        #endif
         MTR_LogWrite("Unable to open library", 0, MTR_LMT_ERROR);
+
         MTR_IndexkeeperFreeIndex(mtrSoKeeper, freeIndex);
         return 0;
     }

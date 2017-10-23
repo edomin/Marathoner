@@ -6,6 +6,14 @@ ifeq ($(PLATFORM), win32)
     LDFLAGS = -shared -Wl,--kill-at -L$(PREFIX)/lib
   endif
 endif
+ifeq ($(PLATFORM), win64)
+  ifeq ($(DEBUG), no)
+    LDFLAGS = -s -shared -Wl,--kill-at -L$(PREFIX)/lib
+  endif
+  ifeq ($(DEBUG), yes)
+    LDFLAGS = -shared -Wl,--kill-at -L$(PREFIX)/lib
+  endif
+endif
 ifeq ($(PLATFORM), html5)
   LDFLAGS += -shared -Wl,--kill-at -L$(PREFIX)/lib -s SIDE_MODULE=1 -O2
 endif
@@ -24,6 +32,14 @@ OBJ = $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).o
 RES =
 
 ifeq ($(PLATFORM), win32)
+  RCGEN = $(ROOTDIR)/$(PLATFORM)/rcgen
+  VERSION_H = $(ROOTDIR)/include/marathoner/version.h
+  RCFILE = $(RCDIR)/$(MODULE_NAME).rc
+  RES = $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).res
+  OBJS = $(OBJ) $(RES)
+  PLUGIN_DESCRIPTION = "$(MODULE_NAME) plugin for Marathoner Engine"
+endif
+ifeq ($(PLATFORM), win64)
   RCGEN = $(ROOTDIR)/$(PLATFORM)/rcgen
   VERSION_H = $(ROOTDIR)/include/marathoner/version.h
   RCFILE = $(RCDIR)/$(MODULE_NAME).rc

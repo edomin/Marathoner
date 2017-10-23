@@ -7,6 +7,9 @@ FADIR = $(PLATFORM)/fa
 ifeq ($(PLATFORM), win32)
   RCDIR = $(PLATFORM)/rc
 endif
+ifeq ($(PLATFORM), win64)
+  RCDIR = $(PLATFORM)/rc
+endif
 
 SCREEN_SDL2 = screen/sdl2
 SCREEN_SDL2_LUA = screen/sdl2_lua
@@ -90,9 +93,8 @@ ABSTRACTION_GUI_DUKTAPE = abstraction/gui_duktape
 
 all: $(PLATFORM)
 
-win32: prebuild
+common: prebuild
 	make -j$(CORES) -C src/_build_utils/fagen PREFIX=$(PREFIX)
-	make -j$(CORES) -C src/_build_utils/rcgen PREFIX=$(PREFIX)
 
 	make -j$(CORES) -C src/$(SCREEN_SDL2_GPU) PREFIX=$(PREFIX)
 	make -j$(CORES) -C src/$(SCREEN_SDL2_GPU_LUA) PREFIX=$(PREFIX)
@@ -188,6 +190,13 @@ win32: prebuild
 
 	make -j$(CORES) -C src/core PREFIX=$(PREFIX)
 
+windows_common: prebuild
+	make -j$(CORES) -C src/_build_utils/rcgen PREFIX=$(PREFIX)
+
+win32: prebuild windows_common common
+
+win64: prebuild windows_common common
+
 html5: prebuild
 	make -C src/$(SCREEN_SDL2) PREFIX=$(PREFIX)
 	make -C src/$(SCREEN_SDL2_LUA) PREFIX=$(PREFIX)
@@ -219,6 +228,9 @@ prebuild:
 ifeq ($(PLATFORM), win32)
 	-mkdir $(RCDIR)
 endif
+ifeq ($(PLATFORM), win64)
+	-mkdir $(RCDIR)
+endif
 
 clean:
 	-rm -f -r $(OBJSDIR)
@@ -232,6 +244,11 @@ ifeq ($(PLATFORM), win32)
 	-rm -f -r $(PLATFORM)/rcgen.exe
 	-rm -f -r $(PLATFORM)/Launcher.exe
 endif
+ifeq ($(PLATFORM), win64)
+	-rm -f -r $(RCDIR)
+	-rm -f -r $(PLATFORM)/rcgen.exe
+	-rm -f -r $(PLATFORM)/Launcher.exe
+endif
 ifeq ($(PLATFORM), html5)
 	-rm -f -r $(PLATFORM)/marathoner.html
 	-rm -f -r $(PLATFORM)/marathoner.js
@@ -239,4 +256,4 @@ endif
 
 remake: clean all
 
-.PHONY: prebuild remake clean all
+.PHONY: prebuild common windows_common remake clean all win32 win64

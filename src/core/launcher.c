@@ -782,31 +782,6 @@ bool ConfigSave(mtrSubsystem *ssScript, char scriptName[64], int pluginsCount,
     return true;
 }
 
-char *WinErrorCodeToText(uint32_t error)
-{
-    LPTSTR lpMsgBuf;
-    #ifdef UNICODE
-    int textLen;
-    char *result;
-    #endif
-
-    FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM |
-     FORMAT_MESSAGE_IGNORE_INSERTS, NULL, error,
-     MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPTSTR) &lpMsgBuf, 0, NULL);
-
-    #ifdef UNICODE
-    textLen = wcslen(lpMsgBuf);
-    result = malloc(sizeof(char) * (textLen + 1));
-    WideCharToMultiByte(CP_ACP, WC_COMPOSITECHECK | WC_NO_BEST_FIT_CHARS,
-     lpMsgBuf, textLen, result, textLen, NULL, NULL);
-    result[textLen] = '/0';
-    free(lpMsgBuf);
-    return result;
-    #else
-    return lpMsgBuf;
-    #endif
-}
-
 bool RunEngine()
 {
     #ifdef UNICODE

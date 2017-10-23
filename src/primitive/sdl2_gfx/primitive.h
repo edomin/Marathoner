@@ -1,7 +1,14 @@
 #ifndef MTR_PRIMITIVE_SDL2_GFX_H
 #define MTR_PRIMITIVE_SDL2_GFX_H
 
+#ifdef __MINGW64__
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wswitch-default"
+#endif
 #include "SDL2/SDL.h"
+#ifdef __MINGW64__
+    #pragma GCC diagnostic pop
+#endif
 #include "SDL2/SDL2_gfxPrimitives.h"
 
 #include "fa/Primitive_SDL2_gfx.h"

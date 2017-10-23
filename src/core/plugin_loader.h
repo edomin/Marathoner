@@ -8,7 +8,11 @@
 #include "marathoner/engine.h"
 
 #ifdef __MINGW32__
-    #define MTR_PLUGIN_DIR "win32/plugin/"
+    #ifdef __MINGW64__
+        #define MTR_PLUGIN_DIR "win64/plugin/"
+    #else
+        #define MTR_PLUGIN_DIR "win32/plugin/"
+    #endif
 #endif
 
 typedef void (* RequireEngineFuncsFunc)(uint8_t);

@@ -1,7 +1,14 @@
 #ifndef MTR_AUDIO_SDL2_MIXER_H
 #define MTR_AUDIO_SDL2_MIXER_H
 
+#ifdef __MINGW64__
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wswitch-default"
+#endif
 #include "SDL2/SDL.h"
+#ifdef __MINGW64__
+    #pragma GCC diagnostic pop
+#endif
 #include "SDL2/SDL_mixer.h"
 
 #include "fa/Audio_SDL2_mixer.h"

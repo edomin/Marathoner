@@ -3,6 +3,9 @@ include ../../Build.mk
 ifeq ($(PLATFORM), win32)
   LDEXFLAGS = -L$(PREFIX)/lib
 endif
+ifeq ($(PLATFORM), win64)
+  LDEXFLAGS = -L$(PREFIX)/lib
+endif
 ifeq ($(PLATFORM), html5)
   LDEXFLAGS = -L$(PREFIX)/lib -s MAIN_MODULE=1
 endif
@@ -41,6 +44,10 @@ LCHR_OBJS = $(OBJSDIR)/launcher.o \
  $(OBJSDIR)/so.o
 
 ifeq ($(PLATFORM), win32)
+  MTR_OBJS += $(OBJSDIR)/engine.res
+  LCHR_OBJS += $(OBJSDIR)/launcher.res
+endif
+ifeq ($(PLATFORM), win64)
   MTR_OBJS += $(OBJSDIR)/engine.res
   LCHR_OBJS += $(OBJSDIR)/launcher.res
 endif
@@ -86,6 +93,11 @@ ifeq ($(MOD), plugin)
 	 $(MTR_OBJS) -lminini -Wl,-Bstatic -lutf8 -Wl,-Bstatic -ltinyfiledialogs \
 	 -lole32 -lshlwapi -llazy_winapi -lsaneopt
   endif
+  ifeq ($(PLATFORM), win64)
+	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) \
+	 $(MTR_OBJS) -lminini -Wl,-Bstatic -lutf8 -Wl,-Bstatic -ltinyfiledialogs \
+	 -lole32 -lshlwapi -llazy_winapi -lsaneopt
+  endif
   ifeq ($(PLATFORM), html5)
 	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) \
 	 $(MTR_OBJS) -lminini -lutf8 --preload-file ../../plugin@/plugin \
@@ -97,6 +109,11 @@ endif
 $(BINDIR)/Launcher: $(LCHR_OBJS)
 ifeq ($(MOD), plugin)
   ifeq ($(PLATFORM), win32)
+	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Launcher$(EXE_EXT) \
+	 $(LCHR_OBJS) -lminini -Wl,-Bstatic -ltigr -ld3d9 -llazy_winapi \
+	 -Wl,-Bstatic -ltinyfiledialogs -lole32 -lshlwapi
+  endif
+  ifeq ($(PLATFORM), win64)
 	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Launcher$(EXE_EXT) \
 	 $(LCHR_OBJS) -lminini -Wl,-Bstatic -ltigr -ld3d9 -llazy_winapi \
 	 -Wl,-Bstatic -ltinyfiledialogs -lole32 -lshlwapi

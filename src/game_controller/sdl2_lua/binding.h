@@ -1,7 +1,14 @@
 #ifndef MTR_GAME_CONTROLLER_SDL2_LUA_H
 #define MTR_GAME_CONTROLLER_SDL2_LUA_H
 
+#ifdef __MINGW64__
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wswitch-default"
+#endif
 #include "SDL2/SDL.h"
+#ifdef __MINGW64__
+    #pragma GCC diagnostic pop
+#endif
 
 #include "lua.h"
 #include "lualib.h"
