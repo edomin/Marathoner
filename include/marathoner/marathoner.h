@@ -3,6 +3,7 @@
 
 #include "marathoner/version.h"
 #include "marathoner/types.h"
+#include "marathoner/function_attribute.h"
 #include "marathoner/common.h"
 
 #ifdef __EMSCRIPTEN__
