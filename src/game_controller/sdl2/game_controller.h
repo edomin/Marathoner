@@ -12,7 +12,6 @@
 
 #include "fa/Game_Controller_SDL2.h"
 #include "marathoner/plugin.h"
-#include "../common.h"
 
 typedef struct mtrTrackballDelta_t{
     int dx;

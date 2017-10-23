@@ -457,6 +457,17 @@ mtrPlugin *mtrPluginData;
 #define MTR_MOUSE_X1     4
 #define MTR_MOUSE_X2     5
 
+/* Game controller's pow hat position */
+#define MTR_POVHAT_CENTER               0x00
+#define MTR_POVHAT_UP                   0x01
+#define MTR_POVHAT_RIGHT                0x02
+#define MTR_POVHAT_DOWN                 0x04
+#define MTR_POVHAT_LEFT                 0x08
+#define MTR_POVHAT_UP_RIGHT             (MTR_POVHAT_RIGHT | MTR_POVHAT_UP)
+#define MTR_POVHAT_DOWN_RIGHT           (MTR_POVHAT_RIGHT | MTR_POVHAT_DOWN)
+#define MTR_POVHAT_UP_LEFT              (MTR_POVHAT_LEFT  | MTR_POVHAT_UP)
+#define MTR_POVHAT_DOWN_LEFT            (MTR_POVHAT_LEFT  | MTR_POVHAT_DOWN)
+
 #define MTR_GUI_WINDOW_BORDER           0x0001
 #define MTR_GUI_WINDOW_MOVABLE          0x0002
 #define MTR_GUI_WINDOW_SCALABLE         0x0004
