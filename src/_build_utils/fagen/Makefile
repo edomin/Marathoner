@@ -1,7 +1,7 @@
 include ../../../Build.mk
 
-BINDIR = ../../..
-OBJSDIR = ../../../obj
+BINDIR = ../../../$(PLATFORM)
+OBJSDIR = ../../../$(PLATFORM)/obj
 
 all: $(BINDIR)/fagen
 

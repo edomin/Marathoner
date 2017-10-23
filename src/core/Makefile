@@ -6,9 +6,9 @@ endif
 ifeq ($(PLATFORM), html5)
   LDEXFLAGS = -L$(PREFIX)/lib -s MAIN_MODULE=1
 endif
-OBJSDIR = ../../obj
-BINDIR = ../..
-RCDIR = ../../rc
+OBJSDIR = ../../$(PLATFORM)/obj
+BINDIR = ../../$(PLATFORM)
+RCDIR = ../../$(PLATFORM)/rc
 INCDIRS = -I$(PREFIX)/include -I../../include
 
 MTR_OBJS = $(OBJSDIR)/engine.o \

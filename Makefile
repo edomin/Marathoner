@@ -1,10 +1,12 @@
 include Build.mk
 
-OBJSDIR = obj
-LIBDIR = lib
-BINDIR = plugin
-FADIR = fa
-RCDIR = rc
+OBJSDIR = $(PLATFORM)/obj
+LIBDIR = $(PLATFORM)/lib
+BINDIR = $(PLATFORM)/plugin
+FADIR = $(PLATFORM)/fa
+ifeq ($(PLATFORM), win32)
+  RCDIR = $(PLATFORM)/rc
+endif
 
 SCREEN_SDL2 = screen/sdl2
 SCREEN_SDL2_LUA = screen/sdl2_lua
@@ -209,6 +211,7 @@ html5: prebuild
 	make -C src/core PREFIX=$(PREFIX)
 
 prebuild:
+	-mkdir $(PLATFORM)
 	-mkdir $(OBJSDIR)
 	-mkdir $(LIBDIR)
 	-mkdir $(BINDIR)
@@ -222,14 +225,16 @@ clean:
 	-rm -f -r $(LIBDIR)
 	-rm -f -r $(BINDIR)
 	-rm -f -r $(FADIR)
-	-rm -f -r $(RCDIR)
-	-rm -f -r fagen.exe
-	-rm -f -r marathoner.exe
-	-rm -f -r marathoner.html
-	-rm -f -r marathoner.js
+	-rm -f -r $(PLATFORM)/fagen.exe
+	-rm -f -r $(PLATFORM)/marathoner.exe
 ifeq ($(PLATFORM), win32)
-	-rm -f -r rcgen.exe
-	-rm -f -r Launcher.exe
+	-rm -f -r $(RCDIR)
+	-rm -f -r $(PLATFORM)/rcgen.exe
+	-rm -f -r $(PLATFORM)/Launcher.exe
+endif
+ifeq ($(PLATFORM), html5)
+	-rm -f -r $(PLATFORM)/marathoner.html
+	-rm -f -r $(PLATFORM)/marathoner.js
 endif
 
 remake: clean all

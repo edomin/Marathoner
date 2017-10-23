@@ -1,6 +1,8 @@
 #ifndef MTR_ENGINE_H
 #define MTR_ENGINE_H
 
+#include <unistd.h>
+
 #include "marathoner/marathoner.h"
 
 typedef mtrReport* (MTR_CALL * MTR_ReportFunc)(void);

@@ -10,11 +10,11 @@ ifeq ($(PLATFORM), html5)
   LDFLAGS += -shared -Wl,--kill-at -L$(PREFIX)/lib -s SIDE_MODULE=1 -O2
 endif
 ROOTDIR = ../../..
-OBJSDIR = $(ROOTDIR)/obj
-LIBDIR = $(ROOTDIR)/lib
-BINDIR = $(ROOTDIR)/plugin
+OBJSDIR = $(ROOTDIR)/$(PLATFORM)/obj
+LIBDIR = $(ROOTDIR)/$(PLATFORM)/lib
+BINDIR = $(ROOTDIR)/$(PLATFORM)/plugin
 SRCDIR = $(ROOTDIR)/src
-RCDIR = $(ROOTDIR)/rc
+RCDIR = $(ROOTDIR)/$(PLATFORM)/rc
 INCDIRS = -I$(PREFIX)/include -I$(ROOTDIR)/include $(XINCDIRS)
 
 STATIC_NAME = $(A_PR)mtr_$(MODULE_NAME)$(A_EXT)
@@ -24,7 +24,7 @@ OBJ = $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).o
 RES =
 
 ifeq ($(PLATFORM), win32)
-  RCGEN = $(ROOTDIR)/rcgen
+  RCGEN = $(ROOTDIR)/$(PLATFORM)/rcgen
   VERSION_H = $(ROOTDIR)/include/marathoner/version.h
   RCFILE = $(RCDIR)/$(MODULE_NAME).rc
   RES = $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).res

@@ -7,6 +7,10 @@
 #include "so.h"
 #include "marathoner/engine.h"
 
+#ifdef __MINGW32__
+    #define MTR_PLUGIN_DIR "win32/plugin/"
+#endif
+
 typedef void (* RequireEngineFuncsFunc)(uint8_t);
 
 int             mtrPluginsFound;

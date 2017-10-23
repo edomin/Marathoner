@@ -1,10 +1,10 @@
 include ../../../Build.mk
 include ../../../Module.mk
 
-FADIR = $(ROOTDIR)/fa
-INCDIRS += -I$(ROOTDIR)
+FADIR = $(ROOTDIR)/$(PLATFORM)/fa
+INCDIRS += -I$(ROOTDIR)/$(PLATFORM)
 
-FAGEN = $(ROOTDIR)/fagen
+FAGEN = $(ROOTDIR)/$(PLATFORM)/fagen
 
 $(OBJ): $(SUBSYSTEM).c $(SUBSYSTEM).h $(PREREQS) \
  $(ROOTDIR)/include/marathoner/version.h $(FADIR)/$(MODULE_NAME).h

@@ -28,7 +28,7 @@ int MTR_LoadAllPlugins(RequireEngineFuncsFunc RequireEngineFuncs)
 
     mtrPluginsFound = 0;
     /* Counting available plugins */
-    mtrPluginsFound = CountPlugins("./plugin/");
+    mtrPluginsFound = CountPlugins(MTR_PLUGIN_DIR);
     if (mtrPluginsFound == -1)
     {
         MTR_Notify("Unable to open 'plugin/' directory for counting files",
@@ -52,7 +52,7 @@ int MTR_LoadAllPlugins(RequireEngineFuncsFunc RequireEngineFuncs)
         return 3;
     }
     /* Getting plugins data */
-    pluginDirectory = MTR_DirectoryOpen("./plugin/");
+    pluginDirectory = MTR_DirectoryOpen(MTR_PLUGIN_DIR);
     if (pluginDirectory != NULL)
     {
         currentPlugin = 0;
@@ -67,7 +67,7 @@ int MTR_LoadAllPlugins(RequireEngineFuncsFunc RequireEngineFuncs)
                  strlen(tempFilename) + 1);
                 strcpy(mtrPluginData[currentPlugin].filename, tempFilename);
                 /* temporary plugin file name with relative path */
-                fullPluginFileName = malloc(strlen("plugin/") +
+                fullPluginFileName = malloc(strlen(MTR_PLUGIN_DIR) +
                  strlen(mtrPluginData[currentPlugin].filename) + 1);
                 if (fullPluginFileName == NULL)
                 {
@@ -76,7 +76,7 @@ int MTR_LoadAllPlugins(RequireEngineFuncsFunc RequireEngineFuncs)
                      1, MTR_LMT_ERROR);
                     continue;
                 }
-                strcpy(fullPluginFileName, "plugin/");
+                strcpy(fullPluginFileName, MTR_PLUGIN_DIR);
                 strcat(fullPluginFileName,
                  mtrPluginData[currentPlugin].filename);
                 /* Loading plugin library */

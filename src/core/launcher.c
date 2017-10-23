@@ -754,18 +754,18 @@ bool ConfigSave(mtrSubsystem *ssScript, char scriptName[64], int pluginsCount,
     bool success;
     int i;
 
-    success = MTR_ConfigfileWriteString("Marathoner.cfg", "Autorun", "plugin",
+    success = MTR_ConfigfileWriteString(CONFIGFILE_PATH, "Autorun", "plugin",
      ssScript->plugin[ssScript->currentPlugin]);
     if (!success)
         return false;
-    success = MTR_ConfigfileWriteString("Marathoner.cfg", "Autorun", "script",
+    success = MTR_ConfigfileWriteString(CONFIGFILE_PATH, "Autorun", "script",
      scriptName);
     if (!success)
         return false;
 
     for (i = 0; i < pluginsCount; i++)
     {
-        success = MTR_ConfigfileWriteBool("Marathoner.cfg", "Module",
+        success = MTR_ConfigfileWriteBool(CONFIGFILE_PATH, "Module",
          pluginData[i].report->moduleID, lchrPluginEnabled[i]);
         if (!success)
             return false;
@@ -773,7 +773,7 @@ bool ConfigSave(mtrSubsystem *ssScript, char scriptName[64], int pluginsCount,
 
     for (i = 0; i < subsystemsCount; i++)
     {
-        success = MTR_ConfigfileWriteString("Marathoner.cfg", "Subsystem",
+        success = MTR_ConfigfileWriteString(CONFIGFILE_PATH, "Subsystem",
          ssList[i], subsystem[i]->plugin[subsystem[i]->currentPlugin]);
         if (!success)
             return false;
@@ -893,6 +893,8 @@ int main(int argc, char** argv)
     const float        subsystemRatio[] = {128, 256};
     bool quit;
 
+    chdir("..");
+
     quit = false;
     ssScript = NULL;
     subsystem = NULL;
@@ -1010,7 +1012,7 @@ int main(int argc, char** argv)
 
     for (i = 0; i < subsystemsCount; i++)
     {
-        temp = MTR_ConfigfileReadString("Marathoner.cfg", "Subsystem", ssList[i],
+        temp = MTR_ConfigfileReadString(CONFIGFILE_PATH, "Subsystem", ssList[i],
          " ");
         for (j = 0; j < subsystem[i]->pluginsCount; j++)
         {
@@ -1071,12 +1073,12 @@ int main(int argc, char** argv)
     MTR_LogWrite("Reading 'Marathoner.cfg' for autorun options", 0,
       MTR_LMT_INFO);
 
-    temp = MTR_ConfigfileReadString("Marathoner.cfg", "Autorun", "action",
+    temp = MTR_ConfigfileReadString(CONFIGFILE_PATH, "Autorun", "action",
       "none");
     if (strcmp(temp, "runScript") != 0)
     {
         MTR_Notify("Invalid autorun action command", 1, MTR_LMT_WARNING);
-        if (MTR_ConfigfileWriteString("Marathoner.cfg", "Autorun", "action",
+        if (MTR_ConfigfileWriteString(CONFIGFILE_PATH, "Autorun", "action",
          "runScript"))
             MTR_Notify("Autorun action command changed to 'runScript'", 1,
              MTR_LMT_NOTE);
@@ -1086,7 +1088,7 @@ int main(int argc, char** argv)
     }
     free(temp);
 
-    temp = MTR_ConfigfileReadString("Marathoner.cfg", "Autorun", "plugin",
+    temp = MTR_ConfigfileReadString(CONFIGFILE_PATH, "Autorun", "plugin",
      "none");
     ok = false;
     for (i = 0; i < mtrPluginsFound; i++)
@@ -1111,7 +1113,7 @@ int main(int argc, char** argv)
         MTR_Notify("Ivalid autorun plugin", 1, MTR_LMT_ERROR);
     free(temp);
 
-    temp = MTR_ConfigfileReadString("Marathoner.cfg", "Autorun",
+    temp = MTR_ConfigfileReadString(CONFIGFILE_PATH, "Autorun",
      "script", "none");
     if (strcmp(temp, "none") != 0)
     {
@@ -1122,7 +1124,7 @@ int main(int argc, char** argv)
 
     for (i = 0; i < mtrPluginsFound; i++)
     {
-        lchrPluginEnabled[i] = MTR_ConfigfileReadBool("Marathoner.cfg",
+        lchrPluginEnabled[i] = MTR_ConfigfileReadBool(CONFIGFILE_PATH,
          "Module", mtrPluginData[i].report->moduleID, true);
     }
 
@@ -1185,6 +1187,16 @@ int main(int argc, char** argv)
                     MTR_Notify("Unable to run Engine", 0, MTR_LMT_ERROR);
                 else
                     quit = true;
+            }
+
+            nk_layout_row_dynamic(ctx, 16, 5);
+            if (nk_button_label(ctx, "Import Configuration"))
+            {
+
+            }
+            if (nk_button_label(ctx, "Export Configuration"))
+            {
+
             }
         }
         nk_end(ctx);

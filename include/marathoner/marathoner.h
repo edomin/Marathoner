@@ -19,6 +19,8 @@
 /* Get valid pointer fiven type from indexkeeper data array */
 #define IK_GET_DATA(type, ik, num) (type)(&((type)ik->data)[num])
 
+#define CONFIGFILE_PATH "Marathoner.cfg"
+
 /* Report of loaded dll-plugin */
 typedef struct mtrReport{
     char    *moduleID;
