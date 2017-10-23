@@ -12,7 +12,6 @@ endif
 ifeq ($(PLATFORM), html5)
   LIBS = $(PREFIX)/lib/sdl2-ttf.bc
 endif
-PREREQS = ../common.h
 
 include ../../../Subsystem.mk
 

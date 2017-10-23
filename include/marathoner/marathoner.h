@@ -468,6 +468,13 @@ mtrPlugin *mtrPluginData;
 #define MTR_POVHAT_UP_LEFT              (MTR_POVHAT_LEFT  | MTR_POVHAT_UP)
 #define MTR_POVHAT_DOWN_LEFT            (MTR_POVHAT_LEFT  | MTR_POVHAT_DOWN)
 
+/* Font styles */
+#define MTR_FS_NORMAL                   0x00
+#define MTR_FS_BOLD                     0x01
+#define MTR_FS_ITALIC                   0x02
+#define MTR_FS_UNDERLINE                0x04
+#define MTR_FS_STRIKETHROUGH            0x08
+
 #define MTR_GUI_WINDOW_BORDER           0x0001
 #define MTR_GUI_WINDOW_MOVABLE          0x0002
 #define MTR_GUI_WINDOW_SCALABLE         0x0004

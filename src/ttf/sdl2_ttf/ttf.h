@@ -12,7 +12,6 @@
 
 #include "fa/TTF_SDL2_ttf.h"
 #include "marathoner/plugin.h"
-#include "../common.h"
 
 typedef struct mtrTtf_t {
     TTF_Font *font;
