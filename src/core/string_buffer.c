@@ -97,5 +97,5 @@ int MTR_CALL MTR_StringBufferGetMaxLen(uint32_t sbnum)
         buffer = IK_GET_DATA(mtrStringBuffer_t *, mtrStringBufferKeeper, sbnum);
         return buffer->maxlen;
     }
-    return NULL;
+    return 0;
 }
