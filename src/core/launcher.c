@@ -802,7 +802,7 @@ bool RunEngine()
     appName = malloc(sizeof(wchar_t) * (appNameLen + 1));
     if (appName == NULL)
     {
-        MTR_Notify("Unable to allocate memory for Application name.", 0,
+        MTR_Notify("Unable to allocate memory for Application name", 0,
          MTR_LMT_ERROR);
         return false;
     }
@@ -812,7 +812,7 @@ bool RunEngine()
     {
         error = GetLastError();
         free(appName);
-        MTR_Notify("Unable to convert Application name to wide char.", 0,
+        MTR_Notify("Unable to convert Application name to wide char", 0,
          MTR_LMT_ERROR);
         errorText = MTR_WindowsErrorCodeToText(error);
         MTR_Notify(errorText, 0, MTR_LMT_ERROR);
