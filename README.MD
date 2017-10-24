@@ -5,7 +5,8 @@ Supported platforms:
 
 * Windows 32x or 64x
 
-More detailed description will be in v1.0.0.
+More detailed description will be in v1.0.0.  
+There is [plan](https://trello.com/b/HfeG5Dbo/marathoner-todo) what we need complete till version 1.0.0 on Trello. Completed tasks will be moved to archive. Estimated date of completing plan is August-December 2018.
 
 ### Building
 Will be in v1.0.0
@@ -75,6 +76,10 @@ Choose module for every subsystem. You need to know about compatibility of
 the various standard modules (I need to do documentation for it).
 * "Enabled Modules":  
 check and uncheck modules for force disable (default - all enabled).
+
+### Contributing
+Em... somewho, theach me how to maintain project (and teach me English language and good manners too). I do not familiar with OpenSource culture.  
+I think I will able to do tasks of the plan till version 1.0.0 alone and then I will make complete "Contributing" instructions. If you will have ideas how to help, open issue or write me on e-mail: Vasiliy.Edomin{antispam}gmail{antispam}com.
 
 ### Copying:
 * Source code are under zlib license (for this moment. Read LICENSE).
