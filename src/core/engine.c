@@ -23,6 +23,8 @@ mtrFa_t fa[] = {
 
     {"MTR_ConfigfileGetKeyName", MTR_FA_YES},
     {"MTR_ConfigfileGetSectionName", MTR_FA_YES},
+    {"MTR_ConfigfileKeyExists", MTR_FA_YES},
+    {"MTR_ConfigfileSectionExists", MTR_FA_YES},
     {"MTR_ConfigfileDeleteKey", MTR_FA_YES},
     {"MTR_ConfigfileDeleteSection", MTR_FA_YES},
     {"MTR_ConfigfileReadBool", MTR_FA_YES},
@@ -126,6 +128,10 @@ void RequireEngineFuncs(uint8_t plugin)
      MTR_ConfigfileGetKeyName);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConfigfileGetSectionName,
      MTR_ConfigfileGetSectionName);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConfigfileKeyExists,
+     MTR_ConfigfileKeyExists);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConfigfileSectionExists,
+     MTR_ConfigfileSectionExists);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConfigfileDeleteKey,
      MTR_ConfigfileDeleteKey);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConfigfileDeleteSection,

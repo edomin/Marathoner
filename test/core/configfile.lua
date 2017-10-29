@@ -1,6 +1,46 @@
 -- Positive
 FileWriteLineFast("test/output.txt", "Positive test", FM_WRITE);
 
+if ConfigfileKeyExists("test/core/test_cfg.ini", "section_1", "key_1") then
+    FileWriteLineFast("test/output.txt",
+     "key 'key_1' of section 'section_1' exists", FM_APPEND);
+else
+    FileWriteLineFast("test/output.txt",
+     "key 'key_1' of section 'section_1' is not exists", FM_APPEND);
+end;
+
+if ConfigfileKeyExists("test/core/test_cfg.ini", "section_1", "key_3") then
+    FileWriteLineFast("test/output.txt",
+     "key 'key_3' of section 'section_1' exists", FM_APPEND);
+else
+    FileWriteLineFast("test/output.txt",
+     "key 'key_3' of section 'section_1' is not exists", FM_APPEND);
+end;
+
+if ConfigfileKeyExists("test/core/test_cfg.ini", "section_3", "key_1") then
+    FileWriteLineFast("test/output.txt",
+     "key 'key_1' of section 'section_3' exists", FM_APPEND);
+else
+    FileWriteLineFast("test/output.txt",
+     "key 'key_1' of section 'section_3' is not exists", FM_APPEND);
+end;
+
+if ConfigfileSectionExists("test/core/test_cfg.ini", "section_1") then
+    FileWriteLineFast("test/output.txt", "section 'section_1' exists",
+     FM_APPEND);
+else
+    FileWriteLineFast("test/output.txt", "section 'section_1' is not exists",
+     FM_APPEND);
+end;
+
+if ConfigfileSectionExists("test/core/test_cfg.ini", "section_3") then
+    FileWriteLineFast("test/output.txt", "section 'section_3' exists",
+     FM_APPEND);
+else
+    FileWriteLineFast("test/output.txt", "section 'section_3' is not exists",
+     FM_APPEND);
+end;
+
 local keyname = ConfigfileGetKeyName("test/core/test_cfg.ini", "section_1", 0);
 FileWriteLineFast("test/output.txt", "keyname: " .. keyname, FM_APPEND);
 keyname = ConfigfileGetKeyName("test/core/test_cfg.ini", "section_1", 1);

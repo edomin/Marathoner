@@ -58,6 +58,10 @@ typedef char *      (MTR_CALL * MTR_ConfigfileGetKeyNameFunc_t)(const char *,
  const char *, int);
 typedef char *      (MTR_CALL * MTR_ConfigfileGetSectionNameFunc_t)(const char*,
  int);
+typedef bool        (MTR_CALL * MTR_ConfigfileKeyExistsFunc_t)(const char *,
+ const char *, const char *);
+typedef bool        (MTR_CALL * MTR_ConfigfileSectionExistsFunc_t)(const char*,
+ const char *);
 typedef bool        (MTR_CALL * MTR_ConfigfileDeleteKeyFunc_t)(const char *,
  const char *, const char *);
 typedef bool        (MTR_CALL * MTR_ConfigfileDeleteSectionFunc_t)(const char *,

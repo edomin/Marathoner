@@ -51,6 +51,46 @@ char *MTR_CALL MTR_ConfigfileGetSectionName(const char* filename, int index)
         return NULL;
 }
 
+bool MTR_CALL MTR_ConfigfileKeyExists(const char *filename, const char *section,
+ const char *key)
+{
+    uint16_t valueLength;
+    int      index;
+    if (filename == NULL)
+        return NULL;
+
+    index = 0;
+    do {
+        valueLength = ini_getkey(section, index, mtrConfigfileTempbuf,
+         sizearray(mtrConfigfileTempbuf), filename);
+        if (strcmp(key, mtrConfigfileTempbuf) == 0)
+            return true;
+        index++;
+    } while (valueLength != 0);
+
+    return false;
+}
+
+bool MTR_CALL MTR_ConfigfileSectionExists(const char *filename,
+ const char *section)
+{
+    uint16_t valueLength;
+    int      index;
+    if (filename == NULL)
+        return NULL;
+
+    index = 0;
+    do {
+        valueLength = ini_getsection(index, mtrConfigfileTempbuf,
+         sizearray(mtrConfigfileTempbuf), filename);
+        if (strcmp(section, mtrConfigfileTempbuf) == 0)
+            return true;
+        index++;
+    } while (valueLength != 0);
+
+    return false;
+}
+
 bool MTR_CALL MTR_ConfigfileDeleteKey(const char* filename, const char *section,
  const char *key)
 {

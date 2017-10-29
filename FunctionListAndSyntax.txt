@@ -12,6 +12,8 @@ uint32_t MarathonerGetModuleVersion(const char *moduleID)
 
 char *ConfigfileGetKeyName(const char *filename, const char *section, int index)
 char *ConfigfileGetSectionName(const char *filename, int index)
+bool ConfigfileKeyExists(const char* filename, const char *section, const char *key)
+bool ConfigfileSectionExists(const char* filename, const char *section)
 bool ConfigfileDeleteKey(const char *filename, const char *section, const char *key)
 bool ConfigfileDeleteSection(const char *filename, const char *section)
 bool ConfigfileReadBool(const char *filename, const char *section, const char *key, bool defaultValue)

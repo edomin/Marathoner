@@ -16,6 +16,11 @@ char *MTR_CALL MTR_ConfigfileGetKeyName(const char *filename,
 /* returned value (if not NULL) must be freed after use */
 char *MTR_CALL MTR_ConfigfileGetSectionName(const char *filename, int index);
 
+bool MTR_CALL MTR_ConfigfileKeyExists(const char* filename, const char *section,
+ const char *key);
+bool MTR_CALL MTR_ConfigfileSectionExists(const char* filename,
+ const char *section);
+
 bool MTR_CALL MTR_ConfigfileDeleteKey(const char *filename, const char *section,
  const char *key);
 bool MTR_CALL MTR_ConfigfileDeleteSection(const char *filename,

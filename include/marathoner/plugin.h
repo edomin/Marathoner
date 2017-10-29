@@ -32,8 +32,11 @@ typedef struct mtrPixels_t {
 
 MTR_MarathonerGetVersionFunc_t               MTR_MarathonerGetVersion;
 MTR_MarathonerGetModuleVersionFunc_t         MTR_MarathonerGetModuleVersion;
+
 MTR_ConfigfileGetKeyNameFunc_t               MTR_ConfigfileGetKeyName;
 MTR_ConfigfileGetSectionNameFunc_t           MTR_ConfigfileGetSectionName;
+MTR_ConfigfileKeyExistsFunc_t                MTR_ConfigfileKeyExists;
+MTR_ConfigfileSectionExistsFunc_t            MTR_ConfigfileSectionExists;
 MTR_ConfigfileDeleteKeyFunc_t                MTR_ConfigfileDeleteKey;
 MTR_ConfigfileDeleteSectionFunc_t            MTR_ConfigfileDeleteSection;
 MTR_ConfigfileReadBoolFunc_t                 MTR_ConfigfileReadBool;

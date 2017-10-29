@@ -21,6 +21,12 @@ MTR_RequireConfigfileGetKeyNameFunc MTR_RequireConfigfileGetKeyName;
 typedef void (MTR_CALL * MTR_RequireConfigfileGetSectionNameFunc)(
  MTR_ConfigfileGetSectionNameFunc_t);
 MTR_RequireConfigfileGetSectionNameFunc MTR_RequireConfigfileGetSectionName;
+typedef void (MTR_CALL * MTR_RequireConfigfileKeyExistsFunc)(
+ MTR_ConfigfileKeyExistsFunc_t);
+MTR_RequireConfigfileKeyExistsFunc MTR_RequireConfigfileKeyExists;
+typedef void (MTR_CALL * MTR_RequireConfigfileSectionExistsFunc)(
+ MTR_ConfigfileSectionExistsFunc_t);
+MTR_RequireConfigfileSectionExistsFunc MTR_RequireConfigfileSectionExists;
 typedef void (MTR_CALL * MTR_RequireConfigfileDeleteKeyFunc)(
  MTR_ConfigfileDeleteKeyFunc_t);
 MTR_RequireConfigfileDeleteKeyFunc MTR_RequireConfigfileDeleteKey;

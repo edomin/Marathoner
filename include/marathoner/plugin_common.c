@@ -27,6 +27,18 @@ MTR_DCLSPC void MTR_CALL MTR_RequireConfigfileGetSectionName(
     MTR_ConfigfileGetSectionName = ConfigfileGetSectionNameFunc;
 }
 
+MTR_DCLSPC void MTR_CALL MTR_RequireConfigfileKeyExists(
+ MTR_ConfigfileKeyExistsFunc_t ConfigfileKeyExistsFunc)
+{
+    MTR_ConfigfileKeyExists = ConfigfileKeyExistsFunc;
+}
+
+MTR_DCLSPC void MTR_CALL MTR_RequireConfigfileSectionExists(
+ MTR_ConfigfileSectionExistsFunc_t ConfigfileSectionExistsFunc)
+{
+    MTR_ConfigfileSectionExists = ConfigfileSectionExistsFunc;
+}
+
 MTR_DCLSPC void MTR_CALL MTR_RequireConfigfileDeleteKey(
  MTR_ConfigfileDeleteKeyFunc_t ConfigfileDeleteKeyFunc)
 {
