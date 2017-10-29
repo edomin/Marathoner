@@ -955,8 +955,8 @@ int main(int argc, char** argv)
          sizeof(char *) * (subsystem[i]->pluginsCount + 1));
         if (subsystem[i]->plugin == NULL)
         {
-            MTR_Notify("Unable to allocate memory for names subsystem's plugins",
-             0, MTR_LMT_FATAL);
+            MTR_Notify("Unable to allocate memory for names subsystem's "
+             "plugins", 0, MTR_LMT_FATAL);
             return 9;
         }
         subsystem[i]->plugin[0] = pluginInvalid;
@@ -1045,8 +1045,14 @@ int main(int argc, char** argv)
         keysPrevious[i] = false;
     }
 
-    MTR_LogWrite("Reading 'Marathoner.cfg' for autorun options", 0,
+    MTR_LogWrite("Reading '" CONFIGFILE_PATH "' for autorun options", 0,
       MTR_LMT_INFO);
+
+    if (!MTR_ConfigfileKeyExists(CONFIGFILE_PATH, "Autorun", "action"))
+    {
+        MTR_ConfigfileWriteString(CONFIGFILE_PATH, "Autorun", "action",
+         "runScript");
+    }
 
     temp = MTR_ConfigfileReadString(CONFIGFILE_PATH, "Autorun", "action",
       "none");
@@ -1063,6 +1069,12 @@ int main(int argc, char** argv)
     }
     free(temp);
 
+    if (!MTR_ConfigfileKeyExists(CONFIGFILE_PATH, "Autorun", "plugin"))
+    {
+        MTR_ConfigfileWriteString(CONFIGFILE_PATH, "Autorun", "plugin",
+         "none");
+    }
+
     temp = MTR_ConfigfileReadString(CONFIGFILE_PATH, "Autorun", "plugin",
      "none");
     ok = false;
@@ -1077,12 +1089,14 @@ int main(int argc, char** argv)
     if (ssScript != NULL)
     {
         ssScript->currentPlugin = 0;
-        for (i = 0; i <= ssScript->pluginsCount; i++)
+        for (i = 0; i <= ssScript->pluginsCount - 1; i++)
+        {
             if (strcmp(ssScript->plugin[i], temp) == 0)
             {
                 ssScript->currentPlugin = i;
                 break;
             }
+        }
     }
     if (!ok || ssScript == NULL)
         MTR_Notify("Ivalid autorun plugin", 1, MTR_LMT_ERROR);
@@ -1099,6 +1113,12 @@ int main(int argc, char** argv)
 
     for (i = 0; i < mtrPluginsFound; i++)
     {
+        if (!MTR_ConfigfileKeyExists(CONFIGFILE_PATH, "Module",
+         mtrPluginData[i].report->moduleID))
+        {
+            MTR_ConfigfileWriteBool(CONFIGFILE_PATH, "Module",
+             mtrPluginData[i].report->moduleID, true);
+        }
         lchrPluginEnabled[i] = MTR_ConfigfileReadBool(CONFIGFILE_PATH,
          "Module", mtrPluginData[i].report->moduleID, true);
     }
