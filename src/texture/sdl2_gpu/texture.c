@@ -338,7 +338,7 @@ MTR_DCLSPC bool MTR_CALL MTR_TextureSave(uint32_t texNum, const char *filename)
     return false;
 }
 
-/*fa MTR_TextureSave buggy */
+/*fa MTR_TextureCreateAlias buggy */
 MTR_DCLSPC uint32_t MTR_CALL MTR_TextureCreateAlias(uint32_t texNum)
 {
     uint32_t      freeIndex;
