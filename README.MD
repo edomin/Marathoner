@@ -8,19 +8,37 @@ Supported platforms:
 More detailed description will be in v1.0.0.  
 There is [plan](https://trello.com/b/HfeG5Dbo/marathoner-todo) what we need complete till version 1.0.0 on Trello. Completed tasks will be moved to archive. Estimated date of completing plan is August-December 2018.
 
+###Phylosophy of the Project
+Some general features of this project. This project is only my hobby. This is why some of features can be a bit unreasonably. I just do what I like and no more.
+
+* Using available solutions for everything. I do not want to write so many low-level routines. This is why project using so many third-party libraries as possible.
+* Writing alternative modules if unable to build some modules on target platform. For example if needed third-party libraries does not support target platforms.
+* Writing alternative modules if we need some more possibilities of other third-party libraries not exists in libraries used by current modules.
+* Main Programming Language of this project is C without specific standard. It is possible to use C++ or Pascal in cases if I will need to use other language library or if I will want to do API for C++ or other language.
+* Making so many abstraction levels as possible. I think it makes minimum limitations for game programmer.
+
+I can consider some ideas conflicting with current phylosophy if that ideas will not something as "Use pure OpenGL", "Use modern C++ as main programming language" or something similar.
+
 ### Building
-Build for default platform:  
+Path to all needed toolchains' binaries must be in PATH varisble.  
+Directories "bin", "include" and "lib" of all prerequired libraries must be placed in "usr/local/toolchain_name" else you need build engine with parameter "PREFIX=\<path_to_libraries\>". In this case "bin" folder of third party libraries will be in directory "\<path_to_libraries\>/bin", "include" folder will be in "\<path_to_libraries\>/include" etc. On MSYS2 root "/" directory placed in MSYS2 folder, "/usr" directory in "\<path_to_msys2\>/usr" etc.  
+
+Build for default platform (currently Windows 32bit) with default options:  
 ```
 make
 ```  
-Build for Windows 32bit:  
+Build with custom options:
 ```
-make PLATFORM=win32
+make [PLATFORM=<platform>] [<option1>=<value>] [<option2>=<value>] ...
 ```  
-Build for Windows 64bit:  
-```
-make PLATFORM=win64
-```  
+Additional options:  
+
+* PLATFORM=\<platform\> - Choose target platform: win32 or win64. Default - PLATFORM=win32
+* MOD=static, MOD=plugin - Build monolythic or plugin-based application. Currently implemented only plugin-based. Default - MOD=plugin
+* DEBUG=no, DEBUG=yes - Add or not add debug information in executables and plugins. Default - DEBUG=yes
+* MORE_WARNINGS=no, MORE_WARNINGS=yes - Enable or disable some more warnings in compiletime. Default - MORE_WARNINGS=yes
+
+Default options can be changed in file "Build.mk"  
 Builded executables can be found in directories "win32", "win64" etc.  
 More detailed building instructions will be in v1.0.0
 
