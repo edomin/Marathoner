@@ -9,10 +9,23 @@ More detailed description will be in v1.0.0.
 There is [plan](https://trello.com/b/HfeG5Dbo/marathoner-todo) what we need complete till version 1.0.0 on Trello. Completed tasks will be moved to archive. Estimated date of completing plan is August-December 2018.
 
 ### Building
-Will be in v1.0.0
+Build for default platform:  
+```
+make
+```  
+Build for Windows 32bit:  
+```
+make PLATFORM=win32
+```  
+Build for Windows 64bit:  
+```
+make PLATFORM=win64
+```  
+Builded executables can be found in directories "win32", "win64" etc.  
+More detailed building instructions will be in v1.0.0
 
 ### General usage
-See function syntax without description in file "FunctionListAndSyntax.txt"
+See function syntax without description in file "FunctionListAndSyntax.txt"  
 More detailed will be in v1.0.0
 
 ### Commandline API (See first Configfile usage and Launcher usage)
@@ -31,7 +44,7 @@ Autorun options. This options have priority higher than configfile options:
 Choose module of subsystem:  
 "--\<subsystem\> \<module\>" - Example "--script Script_Lua"  
 Force disable modules via commandline not implemented now.  
-More examples in tests' bat-files. See "test" directory.
+More examples in tests' bat-files. See "\<platform\>/test_launch" directory.
 
 ### Configfile usage (Not recommended for use. Read Launcher usage)
 ##### "Engine" section
