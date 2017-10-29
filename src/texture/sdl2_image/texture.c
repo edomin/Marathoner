@@ -512,9 +512,9 @@ MTR_DCLSPC void MTR_CALL MTR_TextureSetModulation_c(uint32_t texNum,
     uint8_t       b;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
-    r = (uint8_t)(color >> 16);
-    g = (uint8_t)((color >> 8) - ((uint32_t)r << 8));
-    b = (uint8_t)(color - ((uint32_t)r << 16) - ((uint32_t)g << 8));
+    r = color >> 16;
+    g = (color & 0x00FF00) >> 8;
+    b = color & 0x0000FF;
     if (texNum != 0)
     {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
@@ -533,11 +533,10 @@ MTR_DCLSPC void MTR_CALL MTR_TextureSetModulation_ca(uint32_t texNum,
     uint8_t       a;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
-    r = (uint8_t)(color >> 24);
-    g = (uint8_t)((color >> 16) - ((uint32_t)r << 8));
-    b = (uint8_t)((color >> 8) - ((uint32_t)r << 16) - ((uint32_t)g << 8));
-    a = (uint8_t)(color  - ((uint32_t)r << 24) - ((uint32_t)g << 16) -
-     ((uint32_t)b << 8));
+    r = color >> 24;
+    g = (color & 0x00FF0000) >> 16;
+    b = (color & 0x0000FF00) >> 8;
+    a = color & 0x000000FF;
     if (texNum != 0)
     {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
