@@ -1860,6 +1860,19 @@
         return 1;                           \
     }
 
+#define MTR_SCRIPT_FUNC_B_S1P1(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)                  \
+    {                                       \
+        const char *s1;                     \
+        void *p1;                           \
+        bool result;                        \
+        MTR_SF_GET_STRING(s1, 1);           \
+        MTR_SF_GET_POINTER(p1, 2);          \
+        result = func(s1, p1);              \
+        MTR_SF_PUSH_BOOL(result);           \
+        return 1;                           \
+    }
+
 #define MTR_SCRIPT_FUNC_I_V(sfunc, func) \
     MTR_SCRIPT_FUNC(sfunc)               \
     {                                    \
@@ -2631,6 +2644,20 @@
         else                                        \
             MTR_SF_PUSH_NIL();                      \
         return 1;                                   \
+    }
+
+#define MTR_SCRIPT_FUNC_P_S1(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)                \
+    {                                     \
+        const char *s1;                   \
+        void *result;                     \
+        MTR_SF_GET_STRING(s1, 1);         \
+        result = func(s1);                \
+        if (result != NULL)               \
+            MTR_SF_PUSH_POINTER(result);  \
+        else                              \
+            MTR_SF_PUSH_NIL();            \
+        return 1;                         \
     }
 
 #endif

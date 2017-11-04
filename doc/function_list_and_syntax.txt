@@ -113,6 +113,11 @@ void TextureBlitRegionFlipped_f(uint32_t texNum, float x, float y, float rx, flo
 void TextureBlitRegionGeneral_f(uint32_t texNum, float x, float y, float hscale, float vscale, float rx, float ry, float rw, float rh, float angle, float pivotX, float pivotY, int flip)
 bool TextureReceivePixels(uint32_t texNum, void *pixels)
 
+int PngFunctionSupported(const char *functionName)
+void PngInit()
+void *PngLoadFast(const char *filename)
+bool PngSaveFast(const char *filename, void *pixels)
+
 int TtfFunctionSupported(const char *functionName)
 bool TtfInit(uint32_t dmSize, uint32_t reservedCount)
 void TtfQuit()

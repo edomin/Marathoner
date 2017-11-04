@@ -39,6 +39,10 @@ PRIMITIVE_SDL2_GFX = primitive/sdl2_gfx
 PRIMITIVE_SDL2_GFX_LUA = primitive/sdl2_gfx_lua
 PRIMITIVE_SDL2_GFX_SQUIRREL = primitive/sdl2_gfx_squirrel
 PRIMITIVE_SDL2_GFX_DUKTAPE = primitive/sdl2_gfx_duktape
+PNG_LIBPNG = png/libpng
+PNG_LIBPNG_LUA = png/libpng_lua
+PNG_LIBPNG_SQUIRREL = png/libpng_squirrel
+PNG_LIBPNG_DUKTAPE = png/libpng_duktape
 TTF_SDL2_TTF = ttf/sdl2_ttf
 TTF_SDL2_TTF_LUA = ttf/sdl2_ttf_lua
 TTF_SDL2_TTF_SQUIRREL = ttf/sdl2_ttf_squirrel
@@ -126,6 +130,11 @@ common: prebuild
 	make -j$(CORES) -C src/$(PRIMITIVE_SDL2_GFX_LUA) PREFIX=$(PREFIX)
 	make -j$(CORES) -C src/$(PRIMITIVE_SDL2_GFX_SQUIRREL) PREFIX=$(PREFIX)
 	make -j$(CORES) -C src/$(PRIMITIVE_SDL2_GFX_DUKTAPE) PREFIX=$(PREFIX)
+
+	make -j$(CORES) -C src/$(PNG_LIBPNG) PREFIX=$(PREFIX)
+	make -j$(CORES) -C src/$(PNG_LIBPNG_LUA) PREFIX=$(PREFIX)
+	make -j$(CORES) -C src/$(PNG_LIBPNG_SQUIRREL) PREFIX=$(PREFIX)
+	make -j$(CORES) -C src/$(PNG_LIBPNG_DUKTAPE) PREFIX=$(PREFIX)
 
 	make -j$(CORES) -C src/$(TTF_SDL2_TTF) PREFIX=$(PREFIX)
 	make -j$(CORES) -C src/$(TTF_SDL2_TTF_LUA) PREFIX=$(PREFIX)
