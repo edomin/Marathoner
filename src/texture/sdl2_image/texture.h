@@ -45,6 +45,7 @@ char              mtrDefaultTextureName[] = "Unnamed_Texture";
 mtrScreen_t      *mtrScreen; /* this will imported from screen plugin */
 mtrIndexkeeper_t *mtrTextureKeeper;
 static bool       mtrTextureInited = false;
+mtrPixels_t      *tempPixels;
 #define MTR_TEXTURE_CHECK_IF_NOT_INITED(returnValue) \
     if (!mtrTextureInited)                           \
         return returnValue;
@@ -58,6 +59,12 @@ static bool       mtrTextureInited = false;
 
 typedef mtrScreen_t *(MTR_CALL * mtrGetScreenFunc)(void);
 mtrGetScreenFunc MTR_GetScreen;
+
+typedef void (MTR_CALL * MTR_PngInitFunc)(void);
+MTR_PngInitFunc MTR_PngInit;
+
+typedef bool (MTR_CALL * MTR_PngSaveFastFunc)(const char *, mtrPixels_t *);
+MTR_PngSaveFastFunc MTR_PngSaveFast;
 
 MTR_DCLSPC void MTR_CALL MTR_TextureFree(uint32_t texNum);
 

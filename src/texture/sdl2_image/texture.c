@@ -21,8 +21,15 @@ MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
         return NULL;
     }
     report->prereqs[0] = "Screen_SDL2";
-    report->prereqSubsystemsCount = 0;
-    report->prereqSubsystems = NULL;
+    report->prereqSubsystemsCount = 1;
+    report->prereqSubsystems = malloc(
+     sizeof(char *) * report->prereqSubsystemsCount);
+    if (report->prereqSubsystems == NULL)
+    {
+        free(report);
+        return NULL;
+    }
+    report->prereqSubsystems[0] = "png";
     return report;
 }
 
@@ -87,6 +94,9 @@ MTR_DCLSPC bool MTR_CALL MTR_TextureInit(uint32_t dmSize, uint32_t reservedCount
          MTR_LMT_FATAL);
         return false;
     }
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_PngInit, "png");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_PngSaveFast, "png");
+
     mtrScreen = MTR_GetScreen();
 
     mtrTextureKeeper = (mtrIndexkeeper_t *)MTR_IndexkeeperCreate(dmSize,
@@ -109,6 +119,9 @@ MTR_DCLSPC bool MTR_CALL MTR_TextureInit(uint32_t dmSize, uint32_t reservedCount
         MTR_LogWrite(IMG_GetError(), 1, MTR_LMT_FATAL);
         return false;
     }
+
+    MTR_PngInit();
+    tempPixels = NULL;
 
     MTR_LogWrite("Texture manager initialized", 0, MTR_LMT_INFO);
 
@@ -402,7 +415,58 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_TextureCopy(uint32_t texNum)
     return 0U;
 }
 
-/*fa MTR_TextureSave buggy */
+bool MTR_TextureCheckExtension(const char *filename, const char *ext)
+{
+    uint16_t fnLength;
+    uint16_t extLength;
+    uint16_t diff;
+    uint16_t i;
+
+    fnLength = strlen (filename);
+    extLength = strlen (ext);
+
+    if (extLength < fnLength)
+        return false;
+
+    diff = fnLength - extLength;
+    for (i = 0; i < extLength; i++)
+    {
+        if (ext[i] != filename[i + diff])
+            return false;
+    }
+    return true;
+}
+
+bool MTR_TextureSaveSurface(SDL_Surface *surface, const char *filename)
+{
+    bool success;
+
+    if (tempPixels != NULL)
+        free(tempPixels);
+
+    if (filename == NULL)
+        return false;
+
+    if (!MTR_TextureCheckExtension(filename, "png") ||
+     !MTR_TextureCheckExtension(filename, "PNG"))
+        return false;
+
+    tempPixels = malloc(sizeof(mtrPixels_t));
+    if (tempPixels == NULL)
+        return false;
+
+    tempPixels->data = surface->pixels;
+    tempPixels->w = surface->w;
+    tempPixels->h = surface->h;
+    tempPixels->pitch = surface->pitch;
+    tempPixels->pixelformat = MTR_PF_RGBA;
+
+    success = MTR_PngSaveFast(filename, tempPixels);
+
+    return success;
+}
+
+/*fa MTR_TextureSave partial */
 MTR_DCLSPC bool MTR_CALL MTR_TextureSave(uint32_t texNum, const char *filename)
 {
     mtrTexture_t *texture;
@@ -413,66 +477,65 @@ MTR_DCLSPC bool MTR_CALL MTR_TextureSave(uint32_t texNum, const char *filename)
     uint32_t      pixFormat;
     MTR_TEXTURE_CHECK_IF_NOT_INITED(false);
 
-    if (texNum != 0)
-    {
-        texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
-        MTR_LogWrite_s("Saving texture", 0, MTR_LMT_INFO, texture->name);
-
-        if (texture->surface != NULL)
-            IMG_SavePNG(texture->surface, filename);
-        else
-        {
-            if (SDL_QueryTexture(texture->texture, &pixFormat, NULL, &w, &h) <
-             0)
-            {
-                MTR_Notify("Unable to query texture", 1, MTR_LMT_ERROR);
-                MTR_LogWrite(SDL_GetError(), 1, MTR_LMT_ERROR);
-                return false;
-            }
-
-            if (SDL_SetRenderTarget(mtrScreen->renderer, texture->texture) < 0)
-            {
-                MTR_Notify("Unable to set target texture for reading pixels", 1,
-                 MTR_LMT_ERROR);
-                MTR_LogWrite(SDL_GetError(), 1, MTR_LMT_ERROR);
-                return false;
-            }
-            if (SDL_RenderReadPixels(mtrScreen->renderer, NULL, pixFormat,
-             pixels, w * 4) == -1)
-            {
-                MTR_Notify("Unable to read pixels", 1, MTR_LMT_ERROR);
-                MTR_LogWrite(SDL_GetError(), 1, MTR_LMT_ERROR);
-                return false;
-            }
-            if (pixels == NULL)
-            {
-                MTR_Notify("Pixels are not readed", 1, MTR_LMT_ERROR);
-                return false;
-            }
-            if (SDL_SetRenderTarget(mtrScreen->renderer, NULL) == -1)
-            {
-                MTR_Notify("Unable to unset render target", 1, MTR_LMT_ERROR);
-                return false;
-            }
-
-            surface = SDL_CreateRGBSurfaceFrom(pixels, w, h, 32, w * 4,
-             0xFF000000, 0x00FF0000, 0x0000FF00, 0x000000FF);
-            if (surface == NULL)
-            {
-                MTR_Notify("Unable to create temp surface from readed pixels", 1,
-                 MTR_LMT_ERROR);
-                return false;
-            }
-            IMG_SavePNG(surface, filename);
-            SDL_FreeSurface(surface);
-        }
-        MTR_LogWrite("Texture saved", 0, MTR_LMT_INFO);
-        return true;
-    }
-    else
+    if (texNum == 0) {
         MTR_LogWrite("Unable to save texture. Incorrect texture index", 0,
          MTR_LMT_ERROR);
-    return false;
+        return false;
+    }
+
+    texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
+    MTR_LogWrite_s("Saving texture", 0, MTR_LMT_INFO, texture->name);
+
+    if (texture->surface != NULL)
+        MTR_TextureSaveSurface(texture->surface, filename);
+    else
+    {
+        if (SDL_QueryTexture(texture->texture, &pixFormat, NULL, &w, &h) <
+         0)
+        {
+            MTR_Notify("Unable to query texture", 1, MTR_LMT_ERROR);
+            MTR_LogWrite(SDL_GetError(), 1, MTR_LMT_ERROR);
+            return false;
+        }
+
+        if (SDL_SetRenderTarget(mtrScreen->renderer, texture->texture) < 0)
+        {
+            MTR_Notify("Unable to set target texture for reading pixels", 1,
+             MTR_LMT_ERROR);
+            MTR_LogWrite(SDL_GetError(), 1, MTR_LMT_ERROR);
+            return false;
+        }
+        if (SDL_RenderReadPixels(mtrScreen->renderer, NULL, pixFormat,
+         pixels, w * 4) == -1)
+        {
+            MTR_Notify("Unable to read pixels", 1, MTR_LMT_ERROR);
+            MTR_LogWrite(SDL_GetError(), 1, MTR_LMT_ERROR);
+            return false;
+        }
+        if (pixels == NULL)
+        {
+            MTR_Notify("Pixels are not readed", 1, MTR_LMT_ERROR);
+            return false;
+        }
+        if (SDL_SetRenderTarget(mtrScreen->renderer, NULL) == -1)
+        {
+            MTR_Notify("Unable to unset render target", 1, MTR_LMT_ERROR);
+            return false;
+        }
+
+        surface = SDL_CreateRGBSurfaceFrom(pixels, w, h, 32, w * 4,
+         0xFF000000, 0x00FF0000, 0x0000FF00, 0x000000FF);
+        if (surface == NULL)
+        {
+            MTR_Notify("Unable to create temp surface from readed pixels", 1,
+             MTR_LMT_ERROR);
+            return false;
+        }
+        MTR_TextureSaveSurface(surface, filename);
+        SDL_FreeSurface(surface);
+    }
+    MTR_LogWrite("Texture saved", 0, MTR_LMT_INFO);
+    return true;
 }
 
 /*fa MTR_TextureCreateAlias dummy */
