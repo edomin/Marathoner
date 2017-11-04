@@ -16,6 +16,13 @@ Some general features of this project. This project is only my hobby. This is wh
 * Writing alternative modules if we need some more possibilities of other third-party libraries not exists in libraries used by current modules.
 * Main Programming Language of this project is C without specific standard. It is possible to use C++ or Pascal in cases if I will need to use other language library or if I will want to do API for C++ or other language.
 * Making so many abstraction levels as possible. I think it makes minimum limitations for game programmer.
+* Not needed to support every file format. This file formats must be supported. Other formats are optional (for example extra file formats support in addition to mandatory can be provided by some third-party libraries).
+  * Images - png
+  * Sounds - wav
+  * Music - ogg
+  * Fonts - ttf and png-fonts
+  * Text - uft-8
+  * Config - ini
 
 I can consider some ideas conflicting with current phylosophy if that ideas will not something as "Use pure OpenGL", "Use modern C++ as main programming language" or something similar.
 
