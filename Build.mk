@@ -18,7 +18,7 @@ ifeq ($(PLATFORM), win32)
 	CC = mingw32-gcc
 	LD = mingw32-gcc
 	AR = mingw32-gcc-ar
-	RC = windres
+	RC = mingw32-windres
 	CFLAGS = -Wall -Wextra -Wno-unused-parameter -Wshadow -Werror -mmmx \
 	 -mfpmath=387
 	ifeq ($(MORE_WARNINGS), yes)
@@ -33,7 +33,7 @@ ifeq ($(PLATFORM), win32)
         LDFLAGS += -s
 	endif
 	ifeq ($(DEBUG), yes)
-        CFLAGS += -ggdb3 -fvar-tracking
+        CFLAGS += -O0 -ggdb3 -fvar-tracking
 	endif
 	ARFLAGS = rcs
 	RCFLAGS = -O coff
@@ -48,7 +48,7 @@ ifeq ($(PLATFORM), win64)
 	CC = x86_64-w64-mingw32-gcc
 	LD = x86_64-w64-mingw32-gcc
 	AR = x86_64-w64-mingw32-gcc-ar
-	RC = windres
+	RC = x86_64-w64-mingw32-windres
 	CFLAGS = -Wall -Wextra -Wno-unused-parameter -Wshadow -Werror -mmmx -msse \
 	 -msse2 -mfpmath=sse
 	ifeq ($(MORE_WARNINGS), yes)
@@ -63,7 +63,7 @@ ifeq ($(PLATFORM), win64)
         LDFLAGS += -s
 	endif
 	ifeq ($(DEBUG), yes)
-        CFLAGS += -ggdb3 -fvar-tracking
+        CFLAGS += -O0 -ggdb3 -fvar-tracking
 	endif
 	ARFLAGS = rcs
 	RCFLAGS = -O coff
