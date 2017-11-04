@@ -248,6 +248,13 @@ MTR_DCLSPC bool MTR_CALL MTR_ScriptsRegisterVariable_s(const char *name,
 void MTR_ScriptsDoFile(const char * filename)
 {
     SQRESULT error;
+
+    if (filename == NULL) {
+        MTR_Notify("Unable to run script. Filename is is not valid", 0,
+         MTR_LMT_ERROR);
+        return;
+    }
+
     error = sqstd_dofile(mtrVm, filename, 0, 1);
     if (SQ_FAILED(error))
     {
@@ -265,6 +272,12 @@ void MTR_ScriptsQuit(void)
 
 MTR_DCLSPC void MTR_CALL MTR_ScriptsAutorun(char * filename)
 {
+    if (filename == NULL) {
+        MTR_Notify("Unable to autorun script. Filename is is not valid", 0,
+         MTR_LMT_ERROR);
+        return;
+    }
+
     MTR_ScriptsInit();
     mtrAutorun = filename;
     MTR_ScriptsDoFile(filename);

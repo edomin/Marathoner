@@ -76,6 +76,12 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_SpriteLoad(const char *filename, int clipWidth,
     int          i;
     MTR_SPRITE_CHECK_IF_NOT_INITED_WITH_LOG("Unable to load sprite", 0U);
 
+    if (filename == NULL) {
+        MTR_Notify("Unable to load sprite. Filename is is not valid", 0,
+         MTR_LMT_ERROR);
+        return 0U;
+    }
+
     MTR_LogWrite_s("Loading sprite", 0, MTR_LMT_INFO, filename);
 
     freeIndex = MTR_IndexkeeperGetFreeIndex(mtrSpriteKeeper);
@@ -166,6 +172,12 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_SpriteLoadSimple(const char *filename,
     int          textureHeight;
     MTR_SPRITE_CHECK_IF_NOT_INITED_WITH_LOG("Unable to load sprite", 0U);
 
+    if (filename == NULL) {
+        MTR_Notify("Unable to load sprite. Filename is is not valid", 0,
+         MTR_LMT_ERROR);
+        return 0U;
+    }
+
     MTR_LogWrite_s("Loading sprite", 0, MTR_LMT_INFO, filename);
 
     freeIndex = MTR_IndexkeeperGetFreeIndex(mtrSpriteKeeper);
@@ -226,6 +238,12 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_SpriteLoadAtlas(const char *filename,
     int          textureHeight;
     int          i;
     MTR_SPRITE_CHECK_IF_NOT_INITED_WITH_LOG("Unable to load sprite", 0U);
+
+    if (filename == NULL) {
+        MTR_Notify("Unable to load texture atlas. Filename is is not valid", 0,
+         MTR_LMT_ERROR);
+        return 0U;
+    }
 
     MTR_LogWrite_s("Loading texture atlas", 0, MTR_LMT_INFO, filename);
 

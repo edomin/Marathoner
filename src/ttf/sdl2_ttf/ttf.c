@@ -80,6 +80,12 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_TtfLoad(const char *filename, int size)
     mtrTtf_t *font;
     MTR_TTF_CHECK_IF_NOT_INITED_WITH_LOG("Unable to load TTF font", 0U);
 
+    if (filename == NULL) {
+        MTR_Notify("Unable to load ttf-font. Filename is is not valid", 0,
+         MTR_LMT_ERROR);
+        return 0U;
+    }
+
     MTR_LogWrite_s("Loading TTF font", 0, MTR_LMT_INFO, filename);
     freeIndex = MTR_IndexkeeperGetFreeIndex(mtrTtfKeeper);
     MTR_LogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
@@ -211,6 +217,9 @@ MTR_DCLSPC mtrPixels_t *MTR_CALL MTR_TtfRenderString(uint32_t fontNum, uint8_t r
     SDL_Surface     *renderedSurface;
     int              success;
     MTR_TTF_CHECK_IF_NOT_INITED(NULL);
+
+    if (string == NULL)
+        return NULL;
 
     if (tempSurface != NULL)
     {

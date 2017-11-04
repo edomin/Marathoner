@@ -69,6 +69,12 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_FontLoadTtf(const char *filename, int size)
     mtrFont_t *font;
     MTR_FONT_CHECK_IF_NOT_INITED_WITH_LOG("Unable to load font", 0U);
 
+    if (filename == NULL) {
+        MTR_Notify("Unable to load font. Filename is is not valid", 0,
+         MTR_LMT_ERROR);
+        return 0U;
+    }
+
     MTR_LogWrite_s("Loading font", 0, MTR_LMT_INFO, filename);
 
     freeIndex = MTR_IndexkeeperGetFreeIndex(mtrFontKeeper);

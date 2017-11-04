@@ -257,6 +257,12 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_TextureLoad(const char *filename)
     mtrTexture_t *texture;
     MTR_TEXTURE_CHECK_IF_NOT_INITED(0U);
 
+    if (filename == NULL) {
+        MTR_Notify("Unable to load texture. Filename is is not valid", 0,
+         MTR_LMT_ERROR);
+        return 0U;
+    }
+
     MTR_LogWrite_s("Loading texture", 0, MTR_LMT_INFO, filename);
     freeIndex = MTR_IndexkeeperGetFreeIndex(mtrTextureKeeper);
     MTR_LogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
@@ -476,6 +482,12 @@ MTR_DCLSPC bool MTR_CALL MTR_TextureSave(uint32_t texNum, const char *filename)
     int           h;
     uint32_t      pixFormat;
     MTR_TEXTURE_CHECK_IF_NOT_INITED(false);
+
+    if (filename == NULL) {
+        MTR_Notify("Unable to save texture to file. Filename is is not valid",
+         0, MTR_LMT_ERROR);
+        return false;
+    }
 
     if (texNum == 0) {
         MTR_LogWrite("Unable to save texture. Incorrect texture index", 0,

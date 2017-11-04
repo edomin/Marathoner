@@ -247,6 +247,12 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_AudioSoundLoad(const char *filename)
     mtrSound_t *sound;
     MTR_AUDIO_CHECK_IF_NOT_INITED_WITH_LOG("Unable to load sound", 0U);
 
+    if (filename == NULL) {
+        MTR_Notify("Unable to load sound. Filename is is not valid", 0,
+         MTR_LMT_ERROR);
+        return 0U;
+    }
+
     MTR_LogWrite_s("Loading sound", 0, MTR_LMT_INFO, filename);
     freeIndex = MTR_IndexkeeperGetFreeIndex(mtrSoundKeeper);
     MTR_LogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
@@ -278,6 +284,12 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_AudioMusicLoad(const char *filename)
     mtrMusic_t  *music;
     int          musicType;
     MTR_AUDIO_CHECK_IF_NOT_INITED_WITH_LOG("Unable to load music", 0U);
+
+    if (filename == NULL) {
+        MTR_Notify("Unable to load music. Filename is is not valid", 0,
+         MTR_LMT_ERROR);
+        return 0U;
+    }
 
     MTR_LogWrite_s("Loading music file", 0, MTR_LMT_INFO, filename);
     freeIndex = MTR_IndexkeeperGetFreeIndex(mtrMusicKeeper);

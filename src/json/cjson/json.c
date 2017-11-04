@@ -112,6 +112,12 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_JsonParseFile(const char *filename)
     size_t     size;
     MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG("Unable to parse JSON file", 0U);
 
+    if (filename == NULL) {
+        MTR_Notify("Unable to open JSON file. Filename is is not valid", 0,
+         MTR_LMT_ERROR);
+        return 0U;
+    }
+
     file = MTR_FileOpen(filename, MTR_FM_READ);
     if (file == 0)
     {
@@ -577,6 +583,13 @@ MTR_DCLSPC bool MTR_CALL MTR_JsonToFile(uint32_t entity, const char *filename)
     MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG("Unable to print JSON entity to file",
      false);
 
+    if (filename == NULL) {
+        MTR_Notify(
+         "Unable to print JSON Entity to file. Filename is is not valid", 0,
+         MTR_LMT_ERROR);
+        return false;
+    }
+
     json = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, entity);
     if (json->json == NULL)
     {
@@ -609,6 +622,13 @@ MTR_DCLSPC bool MTR_CALL MTR_JsonToFileFormatted(uint32_t entity,
     char      *text;
     MTR_JSON_CHECK_IF_NOT_INITED_WITH_LOG("Unable to print JSON entity to file",
      false);
+
+    if (filename == NULL) {
+        MTR_Notify(
+         "Unable to print JSON Entity to file. Filename is is not valid", 0,
+         MTR_LMT_ERROR);
+        return false;
+    }
 
     json = IK_GET_DATA(mtrJson_t *, mtrJsonKeeper, entity);
     if (json->json == NULL)

@@ -196,6 +196,13 @@ MTR_DCLSPC bool MTR_CALL MTR_ScriptsRegisterVariable_s(const char *name,
 void MTR_ScriptsDoFile(const char * filename)
 {
     bool error;
+
+    if (filename == NULL) {
+        MTR_Notify("Unable to run script. Filename is is not valid", 0,
+         MTR_LMT_ERROR);
+        return;
+    }
+
     error = luaL_dofile(mtrVm, filename);
     if (error)
     {
@@ -213,6 +220,12 @@ void MTR_ScriptsQuit(void)
 
 MTR_DCLSPC void MTR_CALL MTR_ScriptsAutorun(char * filename)
 {
+    if (filename == NULL) {
+        MTR_Notify("Unable to autorun script. Filename is is not valid", 0,
+         MTR_LMT_ERROR);
+        return;
+    }
+
     MTR_ScriptsInit();
     mtrAutorun = filename;
     MTR_ScriptsDoFile(filename);

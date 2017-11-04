@@ -55,7 +55,10 @@ void MTR_LogWriteMeta(uint8_t messageType, uint8_t level)
 
 void MTR_CALL MTR_LogInit(const char *filename)
 {
-    logFilename = filename;
+    if (filename != NULL)
+        logFilename = filename;
+    else
+        logFilename = "Marathoner.log";
     time(&mtrCurrentTime);
     mtrNow = localtime(&mtrCurrentTime);
     #ifdef __MINGW32__
