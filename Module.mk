@@ -65,6 +65,7 @@ $(BINDIR)/$(PLUGIN_NAME): $(OBJS)
 	$(LD) $(LDFLAGS) -o $(BINDIR)/$(PLUGIN_NAME) $(OBJS) $(LIBS)
 
 $(RES): $(RCFILE)
+	-mkdir $(OBJSDIR)/$(SUBSYSTEM)
 	$(RC) $(RCFLAGS) -i $(RCFILE) -o $(RES)
 
 $(RCFILE): $(ROOTDIR)/include/marathoner/version.h
