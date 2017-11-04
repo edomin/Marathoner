@@ -93,7 +93,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_SpriteLoad(const char *filename, int clipWidth,
     {
         MTR_Notify("Unable to load sprite", 1, MTR_LMT_ERROR);
         MTR_IndexkeeperFreeIndex(mtrSpriteKeeper, freeIndex);
-        return 0;
+        return 0U;
     }
     sprite->name = malloc(sizeof(char) * (strlen(filename) + 1));
     if (sprite->name == NULL)
@@ -144,7 +144,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_SpriteLoad(const char *filename, int clipWidth,
         MTR_IndexkeeperFreeIndex(mtrSpriteKeeper, freeIndex);
         if (sprite->name != mtrDefaultSpriteName)
             free(sprite->name);
-        return 0;
+        return 0U;
     }
 
     for (i = 0; i < sprite->clipsCount; i++)
@@ -189,7 +189,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_SpriteLoadSimple(const char *filename,
     {
         MTR_Notify("Unable to load sprite", 1, MTR_LMT_ERROR);
         MTR_IndexkeeperFreeIndex(mtrSpriteKeeper, freeIndex);
-        return 0;
+        return 0U;
     }
     sprite->name = malloc(sizeof(char) * (strlen(filename) + 1));
     if (sprite->name == NULL)
@@ -256,7 +256,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_SpriteLoadAtlas(const char *filename,
     {
         MTR_Notify("Unable to load sprite", 1, MTR_LMT_ERROR);
         MTR_IndexkeeperFreeIndex(mtrSpriteKeeper, freeIndex);
-        return 0;
+        return 0U;
     }
     sprite->name = malloc(sizeof(char) * (strlen(filename) + 1));
     if (sprite->name == NULL)
@@ -282,7 +282,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_SpriteLoadAtlas(const char *filename,
         MTR_IndexkeeperFreeIndex(mtrSpriteKeeper, freeIndex);
         if (sprite->name != mtrDefaultSpriteName)
             free(sprite->name);
-        return 0;
+        return 0U;
     }
 
     for (i = 0; i < sprite->clipsCount; i++)
