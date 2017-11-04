@@ -125,13 +125,13 @@ MTR_DCLSPC void MTR_CALL MTR_ScriptsRegisterFunction(SQFUNCTION func,
     return;
 }
 
-/*fa MTR_ScriptsRegisterVariable_b buggy */
+/*fa MTR_ScriptsRegisterVariable_b yes */
 MTR_DCLSPC bool MTR_CALL MTR_ScriptsRegisterVariable_b(const char *name,
  bool value)
 {
     if ((name != NULL) && (strcmp(name, "") != 0))
     {
-        sq_pushconsttable(mtrVm);
+        sq_pushroottable(mtrVm);
         sq_pushstring(mtrVm, name, -1);
         sq_pushbool(mtrVm, value);
         sq_rawset(mtrVm, -3);
@@ -145,13 +145,13 @@ MTR_DCLSPC bool MTR_CALL MTR_ScriptsRegisterVariable_b(const char *name,
     return false;
 }
 
-/*fa MTR_ScriptsRegisterVariable_i buggy */
+/*fa MTR_ScriptsRegisterVariable_i yes */
 MTR_DCLSPC bool MTR_CALL MTR_ScriptsRegisterVariable_i(const char *name,
  int value)
 {
     if ((name != NULL) && (strcmp(name, "") != 0))
     {
-        sq_pushconsttable(mtrVm);
+        sq_pushroottable(mtrVm);
         sq_pushstring(mtrVm, name, -1);
         sq_pushinteger(mtrVm, value);
         sq_rawset(mtrVm, -3);
@@ -165,13 +165,13 @@ MTR_DCLSPC bool MTR_CALL MTR_ScriptsRegisterVariable_i(const char *name,
     return false;
 }
 
-/*fa MTR_ScriptsRegisterVariable_u buggy */
+/*fa MTR_ScriptsRegisterVariable_u yes */
 MTR_DCLSPC bool MTR_CALL MTR_ScriptsRegisterVariable_u(const char *name,
  unsigned int value)
 {
     if ((name != NULL) && (strcmp(name, "") != 0))
     {
-        sq_pushconsttable(mtrVm);
+        sq_pushroottable(mtrVm);
         sq_pushstring(mtrVm, name, -1);
         sq_pushfloat(mtrVm, value);
         sq_rawset(mtrVm, -3);
@@ -185,13 +185,13 @@ MTR_DCLSPC bool MTR_CALL MTR_ScriptsRegisterVariable_u(const char *name,
     return false;
 }
 
-/*fa MTR_ScriptsRegisterVariable_f buggy */
+/*fa MTR_ScriptsRegisterVariable_f yes */
 MTR_DCLSPC bool MTR_CALL MTR_ScriptsRegisterVariable_f(const char *name,
  float value)
 {
     if ((name != NULL) && (strcmp(name, "") != 0))
     {
-        sq_pushconsttable(mtrVm);
+        sq_pushroottable(mtrVm);
         sq_pushstring(mtrVm, name, -1);
         sq_pushfloat(mtrVm, value);
         sq_rawset(mtrVm, -3);
@@ -205,13 +205,13 @@ MTR_DCLSPC bool MTR_CALL MTR_ScriptsRegisterVariable_f(const char *name,
     return false;
 }
 
-/*fa MTR_ScriptsRegisterVariable_d buggy */
+/*fa MTR_ScriptsRegisterVariable_d yes */
 MTR_DCLSPC bool MTR_CALL MTR_ScriptsRegisterVariable_d(const char *name,
  double value)
 {
     if ((name != NULL) && (strcmp(name, "") != 0))
     {
-        sq_pushconsttable(mtrVm);
+        sq_pushroottable(mtrVm);
         sq_pushstring(mtrVm, name, -1);
         sq_pushfloat(mtrVm, value);
         sq_rawset(mtrVm, -3);
@@ -225,13 +225,13 @@ MTR_DCLSPC bool MTR_CALL MTR_ScriptsRegisterVariable_d(const char *name,
     return false;
 }
 
-/*fa MTR_ScriptsRegisterVariable_s buggy */
+/*fa MTR_ScriptsRegisterVariable_s yes */
 MTR_DCLSPC bool MTR_CALL MTR_ScriptsRegisterVariable_s(const char *name,
  const char *value)
 {
     if ((name != NULL) && (strcmp(name, "") != 0))
     {
-        sq_pushconsttable(mtrVm);
+        sq_pushroottable(mtrVm);
         sq_pushstring(mtrVm, name, -1);
         sq_pushstring(mtrVm, value, -1);
         sq_rawset(mtrVm, -3);
