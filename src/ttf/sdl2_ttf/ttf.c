@@ -209,8 +209,8 @@ MTR_DCLSPC void MTR_CALL MTR_TtfFree(uint32_t fontNum)
 }
 
 /*fa MTR_TtfRenderString yes */
-MTR_DCLSPC mtrPixels_t *MTR_CALL MTR_TtfRenderString(uint32_t fontNum, uint8_t r,
- uint8_t g, uint8_t b, const char *string)
+MTR_DCLSPC mtrPixels_t *MTR_CALL MTR_TtfRenderString(uint32_t fontNum,
+ uint8_t r, uint8_t g, uint8_t b, const char *string)
 {
     mtrTtf_t        *font;
     SDL_Color        textcolor;
