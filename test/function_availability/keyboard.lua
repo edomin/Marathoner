@@ -12,5 +12,11 @@ fa.FunctionSupported(KeyboardRelease, "MTR_KeyboardRelease",
  KeyboardFunctionSupported);
 fa.FunctionSupported(KeyboardPressed, "MTR_KeyboardPressed",
  KeyboardFunctionSupported);
+fa.FunctionSupported(KeyboardArrowsGetAxes, "MTR_KeyboardArrowsGetAxes",
+ KeyboardFunctionSupported);
+fa.FunctionSupported(KeyboardArrowsGetHorAxis, "MTR_KeyboardArrowsGetHorAxis",
+ KeyboardFunctionSupported);
+fa.FunctionSupported(KeyboardArrowsGetVerAxis, "MTR_KeyboardArrowsGetVerAxis",
+ KeyboardFunctionSupported);
 fa.FunctionSupported(KeyboardInputChar, "MTR_KeyboardInputChar",
  KeyboardFunctionSupported);

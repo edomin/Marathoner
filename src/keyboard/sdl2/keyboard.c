@@ -134,6 +134,96 @@ MTR_DCLSPC bool MTR_CALL MTR_KeyboardPressed(int key)
     }
 }
 
+/*fa MTR_KeyboardArrowsGetAxes yes */
+MTR_DCLSPC void MTR_CALL MTR_KeyboardArrowsGetAxes(int keyUp, int keyDown,
+ int keyLeft, int keyRight, int *hsign, int *vsign)
+{
+    MTR_KEYBOARD_CHECK_IF_NOT_INITED();
+    bool upPressed;
+    bool downPressed;
+    bool leftPressed;
+    bool rightPressed;
+
+    upPressed = MTR_KeyboardPressed(keyUp);
+    downPressed = MTR_KeyboardPressed(keyDown);
+    leftPressed = MTR_KeyboardPressed(keyLeft);
+    rightPressed = MTR_KeyboardPressed(keyRight);
+
+    if (upPressed) {
+        if (downPressed)
+            *vsign = 0;
+        else
+            *vsign = -1;
+    } else {
+        if (downPressed)
+            *vsign = 1;
+        else
+            *vsign = 0;
+    }
+
+    if (leftPressed) {
+        if (rightPressed)
+            *hsign = 0;
+        else
+            *hsign = -1;
+    } else {
+        if (rightPressed)
+            *hsign = 1;
+        else
+            *hsign = 0;
+    }
+}
+
+/*fa MTR_KeyboardArrowsGetHorAxis yes */
+MTR_DCLSPC int MTR_CALL MTR_KeyboardArrowsGetHorAxis(int keyLeft, int keyRight)
+{
+    MTR_KEYBOARD_CHECK_IF_NOT_INITED(0);
+    bool leftPressed;
+    bool rightPressed;
+
+    leftPressed = MTR_KeyboardPressed(keyLeft);
+    rightPressed = MTR_KeyboardPressed(keyRight);
+
+    if (leftPressed) {
+        if (rightPressed)
+            return 0;
+        else
+            return -1;
+    } else {
+        if (rightPressed)
+            return 1;
+        else
+            return 0;
+    }
+
+    return 0;
+}
+
+/*fa MTR_KeyboardArrowsGetVerAxis yes */
+MTR_DCLSPC int MTR_CALL MTR_KeyboardArrowsGetVerAxis(int keyUp, int keyDown)
+{
+    MTR_KEYBOARD_CHECK_IF_NOT_INITED(0);
+    bool upPressed;
+    bool downPressed;
+
+    upPressed = MTR_KeyboardPressed(keyUp);
+    downPressed = MTR_KeyboardPressed(keyDown);
+
+    if (upPressed) {
+        if (downPressed)
+            return 0;
+        else
+            return -1;
+    } else {
+        if (downPressed)
+            return 1;
+        else
+            return 0;
+    }
+
+    return 0;
+}
+
 /*fa MTR_KeyboardInputChar yes */
 MTR_DCLSPC char *MTR_CALL MTR_KeyboardInputChar(void)
 {

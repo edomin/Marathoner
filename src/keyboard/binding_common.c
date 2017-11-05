@@ -11,6 +11,35 @@ MTR_SCRIPT_FUNC_B_I1(MTR_SF_KeyboardPress, MTR_KeyboardPress)
 MTR_SCRIPT_FUNC_B_I1(MTR_SF_KeyboardRelease, MTR_KeyboardRelease)
 MTR_SCRIPT_FUNC_B_I1(MTR_SF_KeyboardPressed, MTR_KeyboardPressed)
 
+#ifdef lua_h
+MTR_SCRIPT_FUNC(MTR_SF_KeyboardArrowsGetAxes)
+{
+    int keyUp;
+    int keyDown;
+    int keyLeft;
+    int keyRight;
+    int hsign;
+    int vsign;
+
+    MTR_SF_GET_INT(keyUp, 1);
+    MTR_SF_GET_INT(keyDown, 2);
+    MTR_SF_GET_INT(keyLeft, 3);
+    MTR_SF_GET_INT(keyRight, 4);
+    MTR_KeyboardArrowsGetAxes(keyUp, keyDown, keyLeft, keyRight, &hsign,
+     &vsign);
+
+    MTR_SF_PUSH_INT(hsign);
+    MTR_SF_PUSH_INT(vsign);
+
+    return 2;
+}
+#endif
+
+MTR_SCRIPT_FUNC_I_I2(MTR_SF_KeyboardArrowsGetHorAxis,
+ MTR_KeyboardArrowsGetHorAxis)
+MTR_SCRIPT_FUNC_I_I2(MTR_SF_KeyboardArrowsGetVerAxis,
+ MTR_KeyboardArrowsGetVerAxis)
+
 MTR_SCRIPT_FUNC(MTR_SF_KeyboardInputChar)
 {
     char *utf8char;
@@ -34,6 +63,11 @@ void MTR_ScriptsRegisterAll(void)
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, KeyboardPress);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, KeyboardRelease);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, KeyboardPressed);
+    #ifdef lua_h
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, KeyboardArrowsGetAxes);
+    #endif
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, KeyboardArrowsGetHorAxis);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, KeyboardArrowsGetVerAxis);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, KeyboardInputChar);
 
     MTR_ScriptsRegisterVariable_i("KEY_A", MTR_KEY_A);

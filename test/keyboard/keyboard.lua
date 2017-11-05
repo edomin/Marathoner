@@ -27,6 +27,14 @@ cube2.y = 64;
 local cube3 = {};
 cube3.x = 192;
 cube3.y = 64;
+local cube4 = {};
+cube4.x = 256;
+cube4.y = 64;
+local cube5 = {};
+cube5.x = 320;
+cube5.y = 64;
+local hsign;
+local vsign;
 
 while not quit do
     TimerStart();
@@ -70,6 +78,11 @@ while not quit do
     if KeyboardRelease(KEY_RIGHT) then
         cube3.x = 224;
     end;
+    cube4.x = 256 + KeyboardArrowsGetHorAxis(KEY_LEFT, KEY_RIGHT) * 32;
+    cube4.y = 64 + KeyboardArrowsGetVerAxis(KEY_UP, KEY_DOWN) * 32;
+    hsign, vsign = KeyboardArrowsGetAxes(KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT);
+    cube5.x = 320 + hsign * 32;
+    cube5.y = 64 + vsign * 32;
 
     if cube1.y > 64 then
         cube1.y = cube1.y - 1;
@@ -110,6 +123,32 @@ while not quit do
         cube3.x = cube3.x + 1;
     end;
 
+    if cube4.y > 64 then
+        cube4.y = cube4.y - 1;
+    end;
+    if cube4.y < 64 then
+        cube4.y = cube4.y + 1;
+    end;
+    if cube4.x > 256 then
+        cube4.x = cube4.x - 1;
+    end;
+    if cube4.x < 256 then
+        cube4.x = cube4.x + 1;
+    end;
+
+    if cube5.y > 64 then
+        cube5.y = cube5.y - 1;
+    end;
+    if cube5.y < 64 then
+        cube5.y = cube5.y + 1;
+    end;
+    if cube5.x > 320 then
+        cube5.x = cube5.x - 1;
+    end;
+    if cube5.x < 320 then
+        cube5.x = cube5.x + 1;
+    end;
+
     PrimitiveFill_c(0x000000);
     PrimitiveRectangle_c_f(cube1.x - 8, cube1.y - 8, cube1.x + 8, cube1.y + 8,
      0xFF0000);
@@ -117,6 +156,10 @@ while not quit do
      0x00FF00);
     PrimitiveRectangle_c_f(cube3.x - 8, cube3.y - 8, cube3.x + 8, cube3.y + 8,
      0x0000FF);
+    PrimitiveRectangle_c_f(cube4.x - 8, cube4.y - 8, cube4.x + 8, cube4.y + 8,
+     0xFFFF00);
+    PrimitiveRectangle_c_f(cube5.x - 8, cube5.y - 8, cube5.x + 8, cube5.y + 8,
+     0xFFFFFF);
 
     char = KeyboardInputChar();
     if char ~= nil then
