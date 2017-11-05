@@ -66,7 +66,6 @@ Additional options:
 
 Default options can be changed in file "Build.mk"  
 Builded executables can be found in directories "win32", "win64" etc.  
-More detailed building instructions will be in v1.0.0
 
 ### General usage
 See function syntax without description in file "FunctionListAndSyntax.txt"  
