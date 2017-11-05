@@ -1,5 +1,5 @@
 ### General info
-Marathoner - game engine for Game Jams.  
+[Marathoner](https://github.com/edomin/Marathoner) - game engine for Game Jams.  
 Work in progress.  
 Supported platforms:
 
@@ -8,7 +8,7 @@ Supported platforms:
 More detailed description will be in v1.0.0.  
 There is [plan](https://trello.com/b/HfeG5Dbo/marathoner-todo) what we need complete till version 1.0.0 on Trello. Completed tasks will be moved to archive. Estimated date of completing plan is August-December 2018.
 
-###Phylosophy of the Project
+### Phylosophy of the Project
 Some general features of this project. This project is only my hobby. This is why some of features can be a bit unreasonably. I just do what I like and no more.
 
 * Using available solutions for everything. I do not want to write so many low-level routines. This is why project using so many third-party libraries as possible.
@@ -27,17 +27,36 @@ Some general features of this project. This project is only my hobby. This is wh
 I can consider some ideas conflicting with current phylosophy if that ideas will not something as "Use pure OpenGL", "Use modern C++ as main programming language" or something similar.
 
 ### Building
+Instructions for building third-party libraries can be found in:
+
+* [doc/building_third_party_libraries_win32.md](https://github.com/edomin/Marathoner/blob/master/doc/building_third_party_libraries_win32.md)
+* [doc/building_third_party_libraries_win64.md](https://github.com/edomin/Marathoner/blob/master/doc/building_third_party_libraries_win64.md)
+
 Path to all needed toolchains' binaries must be in PATH varisble.  
+Used compilers:  
+
+* Windows 32bit - TDM GCC 5.1.0
+* Windows 64bit - MinGW-W64 x86_64 based on GCC 6.3.0
+
+Before building you need to resolve conflicting names for windres utility in windows toolchains. My solution for every toolchain:  
+
+* Copy file windres.exe
+* Rename copyed file to mingw32-windres.exe or x86_64-w64-mingw32-windres.exe
+
 Directories "bin", "include" and "lib" of all prerequired libraries must be placed in "usr/local/toolchain_name" else you need build engine with parameter "PREFIX=\<path_to_libraries\>". In this case "bin" folder of third party libraries will be in directory "\<path_to_libraries\>/bin", "include" folder will be in "\<path_to_libraries\>/include" etc. On MSYS2 root "/" directory placed in MSYS2 folder, "/usr" directory in "\<path_to_msys2\>/usr" etc.  
 
-Build for default platform (currently Windows 32bit) with default options:  
+Build for default platform (currently Windows 32bit) with default options: 
+ 
 ```
-make
+$ make
 ```  
+
 Build with custom options:
+
 ```
-make [PLATFORM=<platform>] [<option1>=<value>] [<option2>=<value>] ...
+$ make [PLATFORM=<platform>] [<option1>=<value>] [<option2>=<value>] ...
 ```  
+
 Additional options:  
 
 * PLATFORM=\<platform\> - Choose target platform: win32 or win64. Default - PLATFORM=win32
