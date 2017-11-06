@@ -40,7 +40,7 @@ MTR_DCLSPC void MTR_CALL MTR_PngInit(void)
 }
 
 /*fa MTR_PngLoadFast yes */
-MTR_DCLSPC mtrPixels_t *MTR_CALL MTR_PngLoadFast(const char *filename)
+MTR_DCLSPC mtrPixels_t *MTR_CALL MTR_PngLoadSimple(const char *filename)
 {
     FILE         *file;
     unsigned char singature[8];
@@ -249,7 +249,7 @@ MTR_DCLSPC mtrPixels_t *MTR_CALL MTR_PngLoadFast(const char *filename)
 }
 
 /*fa MTR_PngSaveFast yes */
-MTR_DCLSPC bool MTR_CALL MTR_PngSaveFast(const char *filename,
+MTR_DCLSPC bool MTR_CALL MTR_PngSaveSimple(const char *filename,
  mtrPixels_t *pixels)
 {
     FILE        *file;

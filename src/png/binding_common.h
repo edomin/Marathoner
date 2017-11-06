@@ -7,10 +7,10 @@ MTR_PngFunctionSupportedFunc MTR_PngFunctionSupported;
 typedef void (MTR_CALL * MTR_PngInitFunc)(void);
 MTR_PngInitFunc MTR_PngInit;
 
-typedef mtrPixels_t *(MTR_CALL * MTR_PngLoadFastFunc)(const char *);
-MTR_PngLoadFastFunc MTR_PngLoadFast;
+typedef mtrPixels_t *(MTR_CALL * MTR_PngLoadSimpleFunc)(const char *);
+MTR_PngLoadSimpleFunc MTR_PngLoadSimple;
 
-typedef bool (MTR_CALL * MTR_PngSaveFastFunc)(const char *, mtrPixels_t *);
-MTR_PngSaveFastFunc MTR_PngSaveFast;
+typedef bool (MTR_CALL * MTR_PngSaveSimpleFunc)(const char *, mtrPixels_t *);
+MTR_PngSaveSimpleFunc MTR_PngSaveSimple;
 
 #endif

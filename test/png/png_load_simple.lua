@@ -14,7 +14,7 @@ PngInit();
 TextureInit(IKDM_SMALL, 32);
 MouseInit();
 helicopter = TextureCreate("helicopter", 96, 32);
-loadedHelicopter = PngLoadFast("test/media/helicopter.png");
+loadedHelicopter = PngLoadSimple("test/media/helicopter.png");
 success = TextureReceivePixels(helicopter, loadedHelicopter);
 if success then
     FileWriteLineFast("test/output.txt", "Texture created from PNG", FM_APPEND);

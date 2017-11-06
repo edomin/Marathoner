@@ -63,8 +63,8 @@ mtrGetScreenFunc MTR_GetScreen;
 typedef void (MTR_CALL * MTR_PngInitFunc)(void);
 MTR_PngInitFunc MTR_PngInit;
 
-typedef bool (MTR_CALL * MTR_PngSaveFastFunc)(const char *, mtrPixels_t *);
-MTR_PngSaveFastFunc MTR_PngSaveFast;
+typedef bool (MTR_CALL * MTR_PngSaveSimpleFunc)(const char *, mtrPixels_t *);
+MTR_PngSaveSimpleFunc MTR_PngSaveSimple;
 
 MTR_DCLSPC void MTR_CALL MTR_TextureFree(uint32_t texNum);
 

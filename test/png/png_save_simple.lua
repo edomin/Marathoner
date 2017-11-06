@@ -13,7 +13,7 @@ TimerInit();
 
 local ttf = TtfLoad("test/media/Vera.ttf", 24);
 local textPixels = TtfRenderString(ttf, 0xFF, 0x00, 0x00, "Hello World");
-success = PngSaveFast("test/output.png", textPixels);
+success = PngSaveSimple("test/output.png", textPixels);
 if not success then
     FileWriteLineFast("test/output.txt", "Pixels not saved to png-file",
      FM_APPEND);

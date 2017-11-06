@@ -95,7 +95,7 @@ MTR_DCLSPC bool MTR_CALL MTR_TextureInit(uint32_t dmSize, uint32_t reservedCount
         return false;
     }
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_PngInit, "png");
-    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_PngSaveFast, "png");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_PngSaveSimple, "png");
 
     mtrScreen = MTR_GetScreen();
 
@@ -467,7 +467,7 @@ bool MTR_TextureSaveSurface(SDL_Surface *surface, const char *filename)
     tempPixels->pitch = surface->pitch;
     tempPixels->pixelformat = MTR_PF_RGBA;
 
-    success = MTR_PngSaveFast(filename, tempPixels);
+    success = MTR_PngSaveSimple(filename, tempPixels);
 
     return success;
 }

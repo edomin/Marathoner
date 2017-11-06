@@ -115,8 +115,8 @@ bool TextureReceivePixels(uint32_t texNum, void *pixels)
 
 int PngFunctionSupported(const char *functionName)
 void PngInit()
-void *PngLoadFast(const char *filename)
-bool PngSaveFast(const char *filename, void *pixels)
+void *PngLoadSimple(const char *filename)
+bool PngSaveSimple(const char *filename, void *pixels)
 
 int TtfFunctionSupported(const char *functionName)
 bool TtfInit(uint32_t dmSize, uint32_t reservedCount)
