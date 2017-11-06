@@ -8,7 +8,7 @@ Supported platforms:
 More detailed description will be in v1.0.0.  
 There is [plan](https://trello.com/b/HfeG5Dbo/marathoner-todo) what we need complete till version 1.0.0 on Trello. Completed tasks will be moved to archive. Estimated date of completing plan is August-December 2018.
 
-### Phylosophy of the Project
+### Philosophy of the Project
 Some general features of this project. This project is only my hobby. This is why some of features can be a bit unreasonably. I just do what I like and no more.
 
 * Using available solutions for everything. I do not want to write so many low-level routines. This is why project using so many third-party libraries as possible.
@@ -27,11 +27,13 @@ Some general features of this project. This project is only my hobby. This is wh
 I can consider some ideas conflicting with current phylosophy if that ideas will not something as "Use pure OpenGL", "Use modern C++ as main programming language" or something similar.
 
 ### Building
+##### Building third-party libraries
 Instructions for building third-party libraries can be found in:
 
 * [doc/building_third_party_libraries_win32.md](https://github.com/edomin/Marathoner/blob/master/doc/building_third_party_libraries_win32.md)
 * [doc/building_third_party_libraries_win64.md](https://github.com/edomin/Marathoner/blob/master/doc/building_third_party_libraries_win64.md)
 
+##### Building Engine
 Path to all needed toolchains' binaries must be in PATH varisble.  
 Used compilers:  
 
@@ -66,6 +68,12 @@ Additional options:
 
 Default options can be changed in file "Build.mk"  
 Builded executables can be found in directories "win32", "win64" etc.  
+
+##### Running tests
+Scripts (Bat-files on Windows) for running tests plased in directory "\<platform_name\>/test_launch". Valid platform names - win32 and win64.  
+Text output of each test will be writed in file "test/output.txt".  
+Scripts with prefix "fa_" are launching Lua-scripts generating list of supported functions of that module.  
+Lua-scripts of tests placed in "test/\<subsystem\>" folder.
 
 ### General usage
 See function syntax without description in file "FunctionListAndSyntax.txt"  
