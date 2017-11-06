@@ -4,11 +4,11 @@
 #include "marathoner/script_func.h"
 
 MTR_SCRIPT_FUNC_I_S1(MTR_SF_ColorFunctionSupported, MTR_ColorFunctionSupported)
-MTR_SCRIPT_FUNC_U32t_U8t3(MTR_SF_ColorAssembleRGB, MTR_ColorAssembleRGB)
-MTR_SCRIPT_FUNC_U32t_U8t4(MTR_SF_ColorAssembleRGBA, MTR_ColorAssembleRGBA)
+MTR_SCRIPT_FUNC_U32t_U8t3(MTR_SF_ColorRgbAssemble, MTR_ColorRgbAssemble)
+MTR_SCRIPT_FUNC_U32t_U8t4(MTR_SF_ColorRgbaAssemble, MTR_ColorRgbaAssemble)
 
 #ifdef lua_h
-MTR_SCRIPT_FUNC(MTR_SF_ColorSplitRGB)
+MTR_SCRIPT_FUNC(MTR_SF_ColorRgbSplit)
 {
     uint8_t r;
     uint8_t g;
@@ -16,7 +16,7 @@ MTR_SCRIPT_FUNC(MTR_SF_ColorSplitRGB)
     uint32_t rgb;
 
     MTR_SF_GET_UINT32(rgb, 1);
-    MTR_ColorSplitRGB(rgb, &r, &g, &b);
+    MTR_ColorRgbSplit(rgb, &r, &g, &b);
 
     MTR_SF_PUSH_UINT8(r);
     MTR_SF_PUSH_UINT8(g);
@@ -25,7 +25,7 @@ MTR_SCRIPT_FUNC(MTR_SF_ColorSplitRGB)
     return 3;
 }
 
-MTR_SCRIPT_FUNC(MTR_SF_ColorSplitRGBA)
+MTR_SCRIPT_FUNC(MTR_SF_ColorRgbaSplit)
 {
     uint8_t r;
     uint8_t g;
@@ -34,7 +34,7 @@ MTR_SCRIPT_FUNC(MTR_SF_ColorSplitRGBA)
     uint32_t rgba;
 
     MTR_SF_GET_UINT32(rgba, 1);
-    MTR_ColorSplitRGBA(rgba, &r, &g, &b, &a);
+    MTR_ColorRgbaSplit(rgba, &r, &g, &b, &a);
 
     MTR_SF_PUSH_UINT8(r);
     MTR_SF_PUSH_UINT8(g);
@@ -45,50 +45,50 @@ MTR_SCRIPT_FUNC(MTR_SF_ColorSplitRGBA)
 }
 #endif
 
-MTR_SCRIPT_FUNC_U8t_U32t1(MTR_SF_ColorRGBGetR, MTR_ColorRGBGetR)
-MTR_SCRIPT_FUNC_U8t_U32t1(MTR_SF_ColorRGBGetG, MTR_ColorRGBGetG)
-MTR_SCRIPT_FUNC_U8t_U32t1(MTR_SF_ColorRGBGetB, MTR_ColorRGBGetB)
-MTR_SCRIPT_FUNC_U32t_U32t1U8t1(MTR_SF_ColorRGBSetR, MTR_ColorRGBSetR)
-MTR_SCRIPT_FUNC_U32t_U32t1U8t1(MTR_SF_ColorRGBSetG, MTR_ColorRGBSetG)
-MTR_SCRIPT_FUNC_U32t_U32t1U8t1(MTR_SF_ColorRGBSetB, MTR_ColorRGBSetB)
-MTR_SCRIPT_FUNC_U8t_U32t1(MTR_SF_ColorRGBAGetR, MTR_ColorRGBAGetR)
-MTR_SCRIPT_FUNC_U8t_U32t1(MTR_SF_ColorRGBAGetG, MTR_ColorRGBAGetG)
-MTR_SCRIPT_FUNC_U8t_U32t1(MTR_SF_ColorRGBAGetB, MTR_ColorRGBAGetB)
-MTR_SCRIPT_FUNC_U8t_U32t1(MTR_SF_ColorRGBAGetA, MTR_ColorRGBAGetA)
-MTR_SCRIPT_FUNC_U32t_U32t1U8t1(MTR_SF_ColorRGBASetR, MTR_ColorRGBASetR)
-MTR_SCRIPT_FUNC_U32t_U32t1U8t1(MTR_SF_ColorRGBASetG, MTR_ColorRGBASetG)
-MTR_SCRIPT_FUNC_U32t_U32t1U8t1(MTR_SF_ColorRGBASetB, MTR_ColorRGBASetB)
-MTR_SCRIPT_FUNC_U32t_U32t1U8t1(MTR_SF_ColorRGBASetA, MTR_ColorRGBASetA)
-MTR_SCRIPT_FUNC_U32t_U32t1(MTR_SF_ColorRGBtoRGBA, MTR_ColorRGBtoRGBA)
-MTR_SCRIPT_FUNC_U32t_U32t1(MTR_SF_ColorRGBAtoRGB, MTR_ColorRGBAtoRGB)
+MTR_SCRIPT_FUNC_U8t_U32t1(MTR_SF_ColorRgbGetRed, MTR_ColorRgbGetRed)
+MTR_SCRIPT_FUNC_U8t_U32t1(MTR_SF_ColorRgbGetGreen, MTR_ColorRgbGetGreen)
+MTR_SCRIPT_FUNC_U8t_U32t1(MTR_SF_ColorRgbGetBlue, MTR_ColorRgbGetBlue)
+MTR_SCRIPT_FUNC_U32t_U32t1U8t1(MTR_SF_ColorRgbSetRed, MTR_ColorRgbSetRed)
+MTR_SCRIPT_FUNC_U32t_U32t1U8t1(MTR_SF_ColorRgbSetGreen, MTR_ColorRgbSetGreen)
+MTR_SCRIPT_FUNC_U32t_U32t1U8t1(MTR_SF_ColorRgbSetBlue, MTR_ColorRgbSetBlue)
+MTR_SCRIPT_FUNC_U8t_U32t1(MTR_SF_ColorRgbaGetRed, MTR_ColorRgbaGetRed)
+MTR_SCRIPT_FUNC_U8t_U32t1(MTR_SF_ColorRgbaGetGreen, MTR_ColorRgbaGetGreen)
+MTR_SCRIPT_FUNC_U8t_U32t1(MTR_SF_ColorRgbaGetBlue, MTR_ColorRgbaGetBlue)
+MTR_SCRIPT_FUNC_U8t_U32t1(MTR_SF_ColorRgbaGetAlpha, MTR_ColorRgbaGetAlpha)
+MTR_SCRIPT_FUNC_U32t_U32t1U8t1(MTR_SF_ColorRgbaSetRed, MTR_ColorRgbaSetRed)
+MTR_SCRIPT_FUNC_U32t_U32t1U8t1(MTR_SF_ColorRgbaSetGreen, MTR_ColorRgbaSetGreen)
+MTR_SCRIPT_FUNC_U32t_U32t1U8t1(MTR_SF_ColorRgbaSetBlue, MTR_ColorRgbaSetBlue)
+MTR_SCRIPT_FUNC_U32t_U32t1U8t1(MTR_SF_ColorRgbaSetAlpha, MTR_ColorRgbaSetAlpha)
+MTR_SCRIPT_FUNC_U32t_U32t1(MTR_SF_ColorRgbToRgba, MTR_ColorRgbToRgba)
+MTR_SCRIPT_FUNC_U32t_U32t1(MTR_SF_ColorRgbaToRgb, MTR_ColorRgbaToRgb)
 
 void MTR_ScriptsRegisterAll(void)
 {
     mtrVm = MTR_ScriptsGetVm();
 
     MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorFunctionSupported);
-    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorAssembleRGB);
-    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorAssembleRGBA);
+    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRgbAssemble);
+    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRgbaAssemble);
     #ifdef lua_h
-    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorSplitRGB);
-    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorSplitRGBA);
+    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRgbSplit);
+    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRgbaSplit);
     #endif
-    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRGBGetR);
-    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRGBGetG);
-    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRGBGetB);
-    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRGBSetR);
-    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRGBSetG);
-    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRGBSetB);
-    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRGBAGetR);
-    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRGBAGetG);
-    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRGBAGetB);
-    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRGBAGetA);
-    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRGBASetR);
-    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRGBASetG);
-    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRGBASetB);
-    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRGBASetA);
-    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRGBtoRGBA);
-    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRGBAtoRGB);
+    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRgbGetRed);
+    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRgbGetGreen);
+    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRgbGetBlue);
+    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRgbSetRed);
+    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRgbSetGreen);
+    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRgbSetBlue);
+    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRgbaGetRed);
+    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRgbaGetGreen);
+    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRgbaGetBlue);
+    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRgbaGetAlpha);
+    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRgbaSetRed);
+    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRgbaSetGreen);
+    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRgbaSetBlue);
+    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRgbaSetAlpha);
+    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRgbToRgba);
+    MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRgbaToRgb);
 
     MTR_ScriptsRegisterVariable_u("WEB_WHITE", MTR_CLR_WEB_WHITE);
     MTR_ScriptsRegisterVariable_u("WEB_SILVER", MTR_CLR_WEB_SILVER);

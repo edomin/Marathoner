@@ -2,37 +2,43 @@
 FileWriteLineFast("test/output.txt", "Function Availability", FM_WRITE);
 local fa = dofile("test/common/function_availability.lua");
 
-fa.FunctionSupported(ColorAssembleRGB, "MTR_ColorAssembleRGB",
+fa.FunctionSupported(ColorRgbAssemble, "MTR_ColorRgbAssemble",
  ColorFunctionSupported);
-fa.FunctionSupported(ColorAssembleRGBA, "MTR_ColorAssembleRGBA",
+fa.FunctionSupported(ColorRgbaAssemble, "MTR_ColorRgbaAssemble",
  ColorFunctionSupported);
-fa.FunctionSupported(ColorSplitRGB, "MTR_ColorSplitRGB",
+fa.FunctionSupported(ColorRgbSplit, "MTR_ColorRgbSplit",
  ColorFunctionSupported);
-fa.FunctionSupported(ColorRGBGetR, "MTR_ColorRGBGetR", ColorFunctionSupported);
-fa.FunctionSupported(ColorRGBGetG, "MTR_ColorRGBGetG", ColorFunctionSupported);
-fa.FunctionSupported(ColorRGBGetB, "MTR_ColorRGBGetB", ColorFunctionSupported);
-fa.FunctionSupported(ColorRGBSetR, "MTR_ColorRGBSetR", ColorFunctionSupported);
-fa.FunctionSupported(ColorRGBSetG, "MTR_ColorRGBSetG", ColorFunctionSupported);
-fa.FunctionSupported(ColorRGBSetB, "MTR_ColorRGBSetB", ColorFunctionSupported);
-fa.FunctionSupported(ColorSplitRGBA, "MTR_ColorSplitRGBA",
+fa.FunctionSupported(ColorRgbGetRed, "MTR_ColorRgbGetRed",
  ColorFunctionSupported);
-fa.FunctionSupported(ColorRGBAGetR, "MTR_ColorRGBAGetR",
+fa.FunctionSupported(ColorRgbGetGreen, "MTR_ColorRgbGetGreen",
  ColorFunctionSupported);
-fa.FunctionSupported(ColorRGBAGetG, "MTR_ColorRGBAGetG",
+fa.FunctionSupported(ColorRgbGetBlue, "MTR_ColorRgbGetBlue",
  ColorFunctionSupported);
-fa.FunctionSupported(ColorRGBAGetB, "MTR_ColorRGBAGetB",
+fa.FunctionSupported(ColorRgbSetRed, "MTR_ColorRgbSetRed",
  ColorFunctionSupported);
-fa.FunctionSupported(ColorRGBAGetA, "MTR_ColorRGBAGetA",
+fa.FunctionSupported(ColorRgbSetGreen, "MTR_ColorRgbSetGreen",
  ColorFunctionSupported);
-fa.FunctionSupported(ColorRGBASetR, "MTR_ColorRGBASetR",
+fa.FunctionSupported(ColorRgbSetBlue, "MTR_ColorRgbSetBlue",
  ColorFunctionSupported);
-fa.FunctionSupported(ColorRGBASetG, "MTR_ColorRGBASetG",
+fa.FunctionSupported(ColorRgbaSplit, "MTR_ColorRgbaSplit",
  ColorFunctionSupported);
-fa.FunctionSupported(ColorRGBASetB, "MTR_ColorRGBASetB",
+fa.FunctionSupported(ColorRgbaGetRed, "MTR_ColorRgbaGetRed",
  ColorFunctionSupported);
-fa.FunctionSupported(ColorRGBASetA, "MTR_ColorRGBASetA",
+fa.FunctionSupported(ColorRgbaGetGreen, "MTR_ColorRgbaGetGreen",
  ColorFunctionSupported);
-fa.FunctionSupported(ColorRGBtoRGBA, "MTR_ColorRGBtoRGBA",
+fa.FunctionSupported(ColorRgbaGetBlue, "MTR_ColorRgbaGetBlue",
  ColorFunctionSupported);
-fa.FunctionSupported(ColorRGBAtoRGB, "MTR_ColorRGBAtoRGB",
+fa.FunctionSupported(ColorRgbaGetAlpha, "MTR_ColorRgbaGetAlpha",
+ ColorFunctionSupported);
+fa.FunctionSupported(ColorRgbaSetRed, "MTR_ColorRgbaSetRed",
+ ColorFunctionSupported);
+fa.FunctionSupported(ColorRgbaSetGreen, "MTR_ColorRgbaSetGreen",
+ ColorFunctionSupported);
+fa.FunctionSupported(ColorRgbaSetBlue, "MTR_ColorRgbaSetBlue",
+ ColorFunctionSupported);
+fa.FunctionSupported(ColorRgbaSetAlpha, "MTR_ColorRgbaSetAlpha",
+ ColorFunctionSupported);
+fa.FunctionSupported(ColorRgbToRgba, "MTR_ColorRgbToRgba",
+ ColorFunctionSupported);
+fa.FunctionSupported(ColorRgbaToRgb, "MTR_ColorRgbaToRgb",
  ColorFunctionSupported);
