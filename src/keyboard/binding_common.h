@@ -19,9 +19,11 @@ MTR_KeyboardReleaseFunc MTR_KeyboardRelease;
 typedef bool (MTR_CALL * MTR_KeyboardPressedFunc)(int);
 MTR_KeyboardPressedFunc MTR_KeyboardPressed;
 
+#ifdef lua_h
 typedef void (MTR_CALL * MTR_KeyboardArrowsGetAxesFunc)(int, int, int, int,
  int *, int *);
 MTR_KeyboardArrowsGetAxesFunc MTR_KeyboardArrowsGetAxes;
+#endif
 
 typedef int (MTR_CALL * MTR_KeyboardArrowsGetHorAxisFunc)(int, int);
 MTR_KeyboardArrowsGetHorAxisFunc MTR_KeyboardArrowsGetHorAxis;
