@@ -16,4 +16,4 @@ $(MODULE).c: $(ROOTDIR)/include/marathoner/plugin_common.c
 $(MODULE).h: $(ROOTDIR)/include/marathoner/plugin.h
 
 $(FADIR)/$(MODULE_NAME).h: $(FAGEN)$(EXE_EXT) $(MODULE).c
-	$(FAGEN) $(MODULE).c $(FADIR)/$(MODULE_NAME).h $(PLATFORM)
+	$(FAGEN) $(FADIR)/$(MODULE_NAME).h $(PLATFORM) $(MODULE).c

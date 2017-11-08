@@ -1,21 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdbool.h>
+#include "fagen.h"
 
-#include "marathoner/common.h"
-
-typedef struct functionAvailability_t {
-    char *name;
-    const char *availability;
-} functionAvailability_t;
-
-char *availabilityConst[] = {"MTR_FA_NO", "MTR_FA_DUMMY", "MTR_FA_BUGGY",
- "MTR_FA_PARTIAL", "MTR_FA_YES"};
-
-char defaultIncludeGuard[] = "FA_GENERATED_H";
-
-char *CountSymbols(char *str, int *len)
+char *FagenCountSymbols(char *str, int *len)
 {
     char *string = str;
     char *wordBegin;
@@ -35,7 +20,7 @@ char *CountSymbols(char *str, int *len)
     return wordBegin;
 }
 
-char *GetAvailability(char *str, const char **availability)
+char *FagenGetAvailability(char *str, const char **availability)
 {
     char *string = str;
 
@@ -71,7 +56,7 @@ char *GetAvailability(char *str, const char **availability)
     return string;
 }
 
-bool CreateEmptyFile(const char *outputPath, const char *includeGuard)
+bool FagenCreateEmptyFile(const char *outputPath, const char *includeGuard)
 {
     FILE *outputFile;
 
@@ -93,81 +78,151 @@ bool CreateEmptyFile(const char *outputPath, const char *includeGuard)
     return true;
 }
 
-int main(int argc, char **argv)
+int FagenGetFileLength(const char *filename)
 {
-    FILE                   *inputFile;
-    FILE                   *outputFile;
-    int                     fileChar;
-    char                   *inputBuf = NULL;
-    int                     bufLength;
-    int                     i;
-    int                     funcsCount = 0;
-    char                   *bufPos = NULL;
-    functionAvailability_t *functionAvailability;
-    int                     funcNameLen;
-    char                   *inputPath = argv[1];
-    char                   *outputPath = argv[2];
-    char                   *platform = argv[3];
-    char                   *includeGuard = NULL;
-    int                     outputPathLen;
+    FILE *inputFile;
+    int   bufLength;
 
-    UNUSED(platform);
-
-    if (argc < 2)
-    {
-        printf("%s\n", "TODO: Usage.");
-        return 1;
-    }
-
-    inputFile = fopen(inputPath, "r");
-    if (inputFile == NULL)
-    {
-        printf("Unable to open input file: %s\n", inputPath);
-        return 2;
+    inputFile = fopen(filename, "r");
+    if (inputFile == NULL) {
+        printf("Unable to open input file: %s\n", filename);
+        return 0;
     }
     bufLength = 0;
     while (fgetc(inputFile) != EOF)
-    {
         bufLength++;
+    if (fclose(inputFile) == EOF) {
+        printf("Unable to close input file: %s\n", filename);
+        return 0;
     }
-    if (fclose(inputFile) == EOF)
-    {
-        printf("Unable to close input file: %s\n", inputPath);
-        return 3;
-    }
+
+    return bufLength;
+}
+
+char *FagenLoadFile(const char *inputPath, int bufLength)
+{
+    char *inputBuf = NULL;
+    int   i;
+    FILE *inputFile;
+    int   fileChar;
 
     inputFile = fopen(inputPath, "r");
-    if (inputFile == NULL)
-    {
+    if (inputFile == NULL) {
         printf("Unable to open input file: %s\n", inputPath);
-        return 4;
+        return NULL;
     }
     inputBuf = malloc(sizeof(char* ) * (bufLength + 1));
-    if (inputBuf == NULL)
-    {
+    if (inputBuf == NULL) {
         printf("%s\n", "Unable to allocate memory for input file's buffer");
-        return 5;
+        return NULL;
     }
 
-    for (i = 0; i < bufLength; i++)
-    {
+    for (i = 0; i < bufLength; i++) {
         fileChar = fgetc(inputFile);
-        if (fileChar == EOF)
-        {
+        if (fileChar == EOF) {
             printf("Unexpected end of file: %s\n", inputPath);
             free(inputBuf);
-            return 6;
+            return NULL;
         }
         inputBuf[i] = (char)fileChar;
     }
     inputBuf[bufLength] = '\0';
 
-    if (fclose(inputFile) == EOF)
-    {
+    if (fclose(inputFile) == EOF) {
         printf("Unable to close input file: %s\n", inputPath);
         free(inputBuf);
-        return 7;
+        return NULL;
     }
+
+    return inputBuf;
+}
+
+int FagenProcessInputFile(const char *inputPath,
+ functionAvailability_t **functionAvailability)
+{
+    int   bufLength;
+    char *inputBuf = NULL;
+    char *bufPos = NULL;
+    int   funcsCount = 0;
+    int   i;
+    int   funcNameLen;
+
+    bufLength = FagenGetFileLength(inputPath);
+    inputBuf = FagenLoadFile(inputPath, bufLength);
+
+    /* counting *fa comments */
+    bufPos = inputBuf;
+    while (bufPos[0] != '\0') {
+        bufPos = strstr(bufPos, "/*fa ");
+        if (bufPos == NULL)
+            break;
+        bufPos++;
+        funcsCount++;
+    }
+    if (funcsCount == 0) {
+        free(inputBuf);
+        printf("%s\n", "*fa comments not found");
+        return 0;
+    }
+
+    *functionAvailability = malloc(sizeof(functionAvailability_t) * funcsCount);
+    if (*functionAvailability == NULL) {
+        printf("%s\n", "Unable to allocate memory for functions' availability "
+         "data array");
+        free(inputBuf);
+        return 0;
+    }
+
+    bufPos = inputBuf;
+    for (i = 0; i < funcsCount; i++) {
+        bufPos = strstr(bufPos, "/*fa ");
+        bufPos += sizeof(char) * 5;
+        bufPos = FagenCountSymbols(bufPos, &funcNameLen);
+        (*functionAvailability)[i].name = malloc(sizeof(char) * funcNameLen + 1);
+        if ((*functionAvailability)[i].name == NULL) {
+            printf("%s\n", "Unable to allocate memory for function name");
+            free(inputBuf);
+            free(*functionAvailability);
+            return 0;
+        }
+        strncpy((*functionAvailability)[i].name, bufPos, funcNameLen);
+        (*functionAvailability)[i].name[funcNameLen] = '\0';
+        bufPos += sizeof(char) * funcNameLen;
+
+        bufPos = FagenGetAvailability(bufPos,
+         &(*functionAvailability)[i].availability);
+        if (strcmp((*functionAvailability)[i].availability, "MTR_FA_NO") == 0) {
+            printf("Error: Incorrect availability for function %s\n",
+             (*functionAvailability)[i].name);
+            return 0;
+        }
+
+        bufPos++;
+    }
+
+    return funcsCount;
+}
+
+int main(int argc, char **argv)
+{
+    FILE                    *outputFile;
+    char                    *inputBuf = NULL;
+    int                      i;
+    int                      j;
+    int                     *funcsCount;
+    int                      allFuncsCount = 0;
+    functionAvailability_t **functionAvailability;
+    char                    *inputPath;
+    char                    *outputPath;
+    char                    *platform;
+    char                    *includeGuard = NULL;
+    int                      outputPathLen;
+    int                      inputFilesCount;
+
+    UNUSED(platform);
+
+    outputPath = argv[1];
+    platform = argv[2];
 
     outputPathLen = strlen(outputPath);
     includeGuard = malloc(sizeof(char) * outputPathLen + 1);
@@ -186,99 +241,79 @@ int main(int argc, char **argv)
         }
     }
 
-    /* counting *fa comments */
-    bufPos = inputBuf;
-    while (bufPos[0] != '\0') {
-        bufPos = strstr(bufPos, "/*fa ");
-        if (bufPos == NULL)
-            break;
-        bufPos++;
-        funcsCount++;
+    inputFilesCount = argc - 3;
+
+    functionAvailability = malloc(
+     sizeof(functionAvailability_t *) * inputFilesCount);
+    if (functionAvailability == NULL) {
+        printf("%s",
+         "Error: Unable to allocate memory for functions' availability data\n");
+        return 1;
     }
-    if (funcsCount == 0)
-    {
-        free(inputBuf);
-        printf("%s\n", "*fa comments not found");
-        if (!CreateEmptyFile(outputPath, includeGuard))
-        {
-            printf("Unable to open or close output file: %s\n", outputPath);
-            return 8;
+
+    funcsCount = malloc(sizeof(int) * inputFilesCount);
+
+    for (i = 0; i < inputFilesCount; i++) {
+        inputPath = argv[i + 3];
+        funcsCount[i] = 0;
+        funcsCount[i] = FagenProcessInputFile(inputPath,
+         &functionAvailability[i]);
+        allFuncsCount = allFuncsCount + funcsCount[i];
+    }
+    if (allFuncsCount == 0) {
+        if (!FagenCreateEmptyFile(outputPath, includeGuard)) {
+            printf("Error: Unable to open or close output file: %s\n",
+             outputPath);
+            return 2;
         }
         return 0;
     }
 
-    functionAvailability = malloc(sizeof(functionAvailability_t) * funcsCount);
-    if (functionAvailability == NULL) {
-        printf("%s\n", "Unable to allocate memory for functions' availability "
-         "data array");
-        free(inputBuf);
-        return 9;
-    }
-
-    bufPos = inputBuf;
-    for (i = 0; i < funcsCount; i++)
-    {
-        bufPos = strstr(bufPos, "/*fa ");
-        bufPos += sizeof(char) * 5;
-        bufPos = CountSymbols(bufPos, &funcNameLen);
-        functionAvailability[i].name = malloc(sizeof(char) * funcNameLen + 1);
-        if (functionAvailability[i].name == NULL)
-        {
-            printf("%s\n", "Unable to allocate memory for function name");
-            free(inputBuf);
-            free(functionAvailability);
-            return 10;
-        }
-        strncpy(functionAvailability[i].name, bufPos, funcNameLen);
-        functionAvailability[i].name[funcNameLen] = '\0';
-        bufPos += sizeof(char) * funcNameLen;
-
-        bufPos = GetAvailability(bufPos, &functionAvailability[i].availability);
-        if (strcmp(functionAvailability[i].availability, "MTR_FA_NO") == 0)
-        {
-            printf("Error: Incorrect availability for function %s\n",
-             functionAvailability[i].name);
-            return 11;
-        }
-
-        bufPos++;
-    }
-
     outputFile = fopen(outputPath, "w");
-    if (outputFile == NULL)
-    {
-        printf("Unable to open output file: %s\n", outputPath);
-        return 12;
+    if (outputFile == NULL) {
+        printf("Error: Unable to open output file: %s\n", outputPath);
+        return 3;
     }
 
     fprintf(outputFile, "#ifndef %s\n", includeGuard);
     fprintf(outputFile, "#define %s\n", includeGuard);
     fprintf(outputFile, "%s", "#include \"marathoner/marathoner.h\"\n");
-    fprintf(outputFile, "#define FA_FUNCTIONS_COUNT %i\n", funcsCount);
+    fprintf(outputFile, "#define FA_FUNCTIONS_COUNT %i\n", allFuncsCount);
 
     fprintf(outputFile, "%s", "mtrFa_t fa[] = {\n");
-    for (i = 0; i < funcsCount; i++)
-    {
-        fprintf(outputFile, "%s", "    {\"");
-        fprintf(outputFile,"%s", functionAvailability[i].name);
-        fprintf(outputFile, "%s", "\", ");
-        fprintf(outputFile,"%s}", functionAvailability[i].availability);
-        if (i < funcsCount - 1)
-            fprintf(outputFile, "%s", ",");
-        fprintf(outputFile, "%s", "\n");
+
+    for (j = 0; j < inputFilesCount; j++) {
+        for (i = 0; i < funcsCount[j]; i++) {
+            fprintf(outputFile, "%s", "    {\"");
+            fprintf(outputFile,"%s", functionAvailability[j][i].name);
+            fprintf(outputFile, "%s", "\", ");
+            fprintf(outputFile,"%s}", functionAvailability[j][i].availability);
+            if (j == inputFilesCount - 1) {
+                if (i == funcsCount[j] - 1)
+                    ;
+                else
+                    fprintf(outputFile, "%s", ",");
+            } else
+                fprintf(outputFile, "%s", ",");
+
+            fprintf(outputFile, "%s", "\n");
+        }
     }
     fprintf(outputFile, "%s", "};\n");
     fprintf(outputFile, "%s", "#endif\n");
 
-    if (fclose(outputFile) == EOF)
-    {
-        printf("Unable to close output file: %s\n", outputPath);
-        return 13;
+    if (fclose(outputFile) == EOF) {
+        printf("Error: Unable to close output file: %s\n", outputPath);
+        return 4;
     }
 
-    for (i = 0; i < funcsCount; i++)
-        free(functionAvailability[i].name);
+    for (j = 0; j < inputFilesCount; j++) {
+        for (i = 0; i < funcsCount[j]; i++)
+            free(functionAvailability[j][i].name);
+        free(functionAvailability[j]);
+    }
     free(inputBuf);
     free(functionAvailability);
+
     return 0;
 }

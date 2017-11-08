@@ -20,4 +20,4 @@ $(SUBSYSTEM).c: $(ROOTDIR)/include/marathoner/plugin_common.c
 $(MODULE_H): $(ROOTDIR)/include/marathoner/plugin.h
 
 $(FADIR)/$(MODULE_NAME).h: $(FAGEN)$(EXE_EXT) $(SUBSYSTEM).c
-	$(FAGEN) $(SUBSYSTEM).c $(FADIR)/$(MODULE_NAME).h $(PLATFORM)
+	$(FAGEN) $(FADIR)/$(MODULE_NAME).h $(PLATFORM) $(SUBSYSTEM).c
