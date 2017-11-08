@@ -19,6 +19,8 @@ MTR_SCRIPT_FUNC_B_S1D1(MTR_SF_ScriptsRegisterVariable_d,
  MTR_ScriptsRegisterVariable_d)
 MTR_SCRIPT_FUNC_B_S2(MTR_SF_ScriptsRegisterVariable_s,
  MTR_ScriptsRegisterVariable_s)
+MTR_SCRIPT_FUNC_I_S1(MTR_SF_MarathonerFunctionSupported,
+ MTR_MarathonerFunctionSupported)
 MTR_SCRIPT_FUNC_U32t_V(MTR_SF_MarathonerGetVersion, MTR_MarathonerGetVersion)
 MTR_SCRIPT_FUNC_U32t_S1(MTR_SF_MarathonerGetModuleVersion,
  MTR_MarathonerGetModuleVersion)
@@ -153,6 +155,8 @@ void MTR_ScriptsRegisterAll(void)
     MTR_ScriptsRegisterFunction(MTR_SF_ScriptsRegisterVariable_s,
      "RegisterVariable_s");
 
+    MTR_ScriptsRegisterFunction(MTR_SF_MarathonerFunctionSupported,
+     "MarathonerFunctionSupported");
     MTR_ScriptsRegisterFunction(MTR_SF_MarathonerGetVersion,
      "MarathonerGetVersion");
     MTR_ScriptsRegisterFunction(MTR_SF_MarathonerGetModuleVersion,
