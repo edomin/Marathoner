@@ -20,6 +20,7 @@ bool MTR_CALL MTR_StringBufferInit(uint32_t dmSize, uint32_t reservedCount)
     return true;
 }
 
+/*fa MTR_StringBufferAdd yes */
 uint32_t MTR_CALL MTR_StringBufferAdd(const char *initialString, int maxlen)
 {
     uint32_t           freeIndex;
@@ -48,6 +49,7 @@ uint32_t MTR_CALL MTR_StringBufferAdd(const char *initialString, int maxlen)
     return freeIndex;
 }
 
+/*fa MTR_StringBufferDelete yes */
 void MTR_CALL MTR_StringBufferDelete(uint32_t sbnum)
 {
     mtrStringBuffer_t *buffer;
@@ -60,6 +62,7 @@ void MTR_CALL MTR_StringBufferDelete(uint32_t sbnum)
     }
 }
 
+/*fa MTR_StringBufferSetString yes */
 void MTR_CALL MTR_StringBufferSetString(uint32_t sbnum, const char* string)
 {
     mtrStringBuffer_t *buffer;
@@ -76,6 +79,7 @@ void MTR_CALL MTR_StringBufferSetString(uint32_t sbnum, const char* string)
     }
 }
 
+/*fa MTR_StringBufferGetString yes */
 char *MTR_CALL MTR_StringBufferGetString(uint32_t sbnum)
 {
     mtrStringBuffer_t *buffer;
@@ -88,6 +92,7 @@ char *MTR_CALL MTR_StringBufferGetString(uint32_t sbnum)
     return NULL;
 }
 
+/*fa MTR_StringBufferGetMaxLen yes */
 int MTR_CALL MTR_StringBufferGetMaxLen(uint32_t sbnum)
 {
     mtrStringBuffer_t *buffer;

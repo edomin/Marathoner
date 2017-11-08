@@ -5,6 +5,7 @@ void MTR_CALL MTR_OptionsProcess(int argc, char **argv)
     mtrArguments = saneopt_init(argc, argv);
 }
 
+/*fa MTR_OptionsAlias yes */
 bool MTR_CALL MTR_OptionsAlias(const char *option, const char *alias)
 {
     int result = -1;
@@ -52,6 +53,7 @@ char *MTR_CharOption(const char *option)
     return charOption;
 }
 
+/*fa MTR_OptionsGet yes */
 char *MTR_CALL MTR_OptionsGet(const char *option)
 {
     char *charOption;
@@ -66,6 +68,7 @@ char *MTR_CALL MTR_OptionsGet(const char *option)
     return result;
 }
 
+/*fa MTR_OptionsGet_b yes */
 bool MTR_CALL MTR_OptionsGet_b(const char *option)
 {
     char *charOption;
@@ -90,6 +93,7 @@ bool MTR_CALL MTR_OptionsGet_b(const char *option)
     return false;
 }
 
+/*fa MTR_OptionsGet_i yes */
 int MTR_CALL MTR_OptionsGet_i(const char *option)
 {
     char *charOption;
@@ -122,6 +126,7 @@ int MTR_CALL MTR_OptionsGet_i(const char *option)
     #endif
 }
 
+/*fa MTR_OptionsGet_l yes */
 long int MTR_CALL MTR_OptionsGet_l(const char *option)
 {
     char *charOption;
@@ -138,6 +143,7 @@ long int MTR_CALL MTR_OptionsGet_l(const char *option)
     return resultNum;
 }
 
+/*fa MTR_OptionsGet_f yes */
 float MTR_CALL MTR_OptionsGet_f(const char *option)
 {
     char *charOption;
@@ -154,6 +160,7 @@ float MTR_CALL MTR_OptionsGet_f(const char *option)
     return resultNum;
 }
 
+/*fa MTR_OptionsGet_d yes */
 double MTR_CALL MTR_OptionsGet_d(const char *option)
 {
     char *charOption;
