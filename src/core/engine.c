@@ -13,113 +13,14 @@
 #include "options.h"
 #include "version.h"
 #include "console.h"
+#include "fa.h"
 
 #include "marathoner/engine.h"
 
-#define FA_FUNCTIONS_COUNT 54
-mtrFa_t fa[] = {
-    {"MTR_MarathonerGetVersion", MTR_FA_YES},
-    {"MTR_MarathonerGetModuleVersion", MTR_FA_YES},
-
-    {"MTR_ConfigfileGetKeyName", MTR_FA_YES},
-    {"MTR_ConfigfileGetSectionName", MTR_FA_YES},
-    {"MTR_ConfigfileKeyExists", MTR_FA_YES},
-    {"MTR_ConfigfileSectionExists", MTR_FA_YES},
-    {"MTR_ConfigfileDeleteKey", MTR_FA_YES},
-    {"MTR_ConfigfileDeleteSection", MTR_FA_YES},
-    {"MTR_ConfigfileReadBool", MTR_FA_YES},
-    {"MTR_ConfigfileReadInt", MTR_FA_YES},
-    {"MTR_ConfigfileReadSingle", MTR_FA_YES},
-    {"MTR_ConfigfileReadString", MTR_FA_YES},
-    {"MTR_ConfigfileWriteBool", MTR_FA_YES},
-    {"MTR_ConfigfileWriteInt", MTR_FA_YES},
-    {"MTR_ConfigfileWriteSingle", MTR_FA_YES},
-    {"MTR_ConfigfileWriteString", MTR_FA_YES},
-    {"MTR_ConfigfileCreateSection", MTR_FA_YES},
-
-    {"MTR_LogWrite", MTR_FA_YES},
-    {"MTR_LogWrite_s", MTR_FA_YES},
-    {"MTR_LogWrite_i", MTR_FA_YES},
-    {"MTR_LogWrite_d", MTR_FA_YES},
-
-    #ifdef __MINGW32__
-        {"MTR_ShowSimpleMessageBox", MTR_FA_YES},
-    #else
-        {"MTR_ShowSimpleMessageBox", MTR_FA_PARTIALLY},
-    #endif
-    {"MTR_ShowYesNoMessageBox", MTR_FA_YES},
-    #ifdef __MINGW32__
-        {"MTR_ShowOkCancelMessageBox", MTR_FA_YES},
-        {"MTR_ShowInputDialog", MTR_FA_YES},
-        {"MTR_ShowPasswordDialog", MTR_FA_YES},
-        {"MTR_AddFileFilter", MTR_FA_YES},
-        {"MTR_ClearFileFilters", MTR_FA_YES},
-        {"MTR_ShowSaveFileDialog", MTR_FA_YES},
-        {"MTR_ShowOpenFileDialog", MTR_FA_YES},
-        {"MTR_ShowSelectFolderDialog", MTR_FA_YES},
-    #else
-        {"MTR_ShowOkCancelMessageBox", MTR_FA_DUMMY},
-        {"MTR_ShowInputDialog", MTR_FA_DUMMY},
-        {"MTR_ShowPasswordDialog", MTR_FA_DUMMY},
-        {"MTR_AddFileFilter", MTR_FA_DUMMY},
-        {"MTR_ClearFileFilters", MTR_FA_DUMMY},
-        {"MTR_ShowSaveFileDialog", MTR_FA_DUMMY},
-        {"MTR_ShowOpenFileDialog", MTR_FA_DUMMY},
-        {"MTR_ShowSelectFolderDialog", MTR_FA_DUMMY},
-    #endif
-
-    {"MTR_Notify", MTR_FA_YES},
-
-    {"MTR_FileInit", MTR_FA_YES},
-    {"MTR_FileOpen", MTR_FA_YES},
-    {"MTR_FileClose", MTR_FA_YES},
-    {"MTR_FileRead", MTR_FA_YES},
-    {"MTR_FileWrite", MTR_FA_YES},
-    {"MTR_FileWriteLine", MTR_FA_YES},
-    {"MTR_FileWriteFast", MTR_FA_YES},
-    {"MTR_FileWriteLineFast", MTR_FA_YES},
-
-    #ifdef __MINGW32__
-        {"MTR_ClipboardPutText", MTR_FA_YES},
-        {"MTR_ClipboardGetText", MTR_FA_YES},
-    #else
-        {"MTR_ClipboardPutText", MTR_FA_DUMMY},
-        {"MTR_ClipboardGetText", MTR_FA_DUMMY},
-    #endif
-
-    {"MTR_StringBufferAdd", MTR_FA_YES},
-    {"MTR_StringBufferDelete", MTR_FA_YES},
-    {"MTR_StringBufferSetString", MTR_FA_YES},
-    {"MTR_StringBufferGetString", MTR_FA_YES},
-    {"MTR_StringBufferGetMaxLen", MTR_FA_YES},
-
-     #ifdef __MINGW32__
-        {"MTR_OptionsAlias", MTR_FA_YES},
-        {"MTR_OptionsGet", MTR_FA_YES},
-        {"MTR_OptionsGet_b", MTR_FA_YES},
-        {"MTR_OptionsGet_i", MTR_FA_YES},
-        {"MTR_OptionsGet_l", MTR_FA_YES},
-        {"MTR_OptionsGet_f", MTR_FA_YES},
-        {"MTR_OptionsGet_d", MTR_FA_YES},
-
-        {"MTR_ConsoleShow", MTR_FA_YES},
-        {"MTR_ConsoleHide", MTR_FA_YES},
-    #else
-        {"MTR_OptionsAlias", MTR_FA_DUMMY},
-        {"MTR_OptionsGet", MTR_FA_DUMMY},
-        {"MTR_OptionsGet_b", MTR_FA_DUMMY},
-        {"MTR_OptionsGet_i", MTR_FA_DUMMY},
-        {"MTR_OptionsGet_l", MTR_FA_DUMMY},
-        {"MTR_OptionsGet_f", MTR_FA_DUMMY},
-        {"MTR_OptionsGet_d", MTR_FA_DUMMY},
-
-        {"MTR_ConsoleShow", MTR_FA_DUMMY},
-        {"MTR_ConsoleHide", MTR_FA_DUMMY},
-    #endif
-};
-
 void RequireEngineFuncs(uint8_t plugin)
 {
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireMarathonerFunctionSupported,
+     MTR_MarathonerFunctionSupported);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireMarathonerGetVersion,
      MTR_MarathonerGetVersion);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireMarathonerGetModuleVersion,

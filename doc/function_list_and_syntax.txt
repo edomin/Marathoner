@@ -7,6 +7,7 @@ bool RegisterVariable_f(const char *varName, float value)
 bool RegisterVariable_d(const char *varName, double value)
 bool RegisterVariable_s(const char *varName, const char *value)
 
+int MarathonerFunctionSupported(const char *functionName)
 uint32_t MarathonerGetVersion()
 uint32_t MarathonerGetModuleVersion(const char *moduleID)
 

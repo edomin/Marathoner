@@ -53,6 +53,7 @@ bool MTR_ConsoleInit(void)
     return true;
 }
 
+/*fa MTR_ConsoleShow yes */
 void MTR_CALL MTR_ConsoleShow(void)
 {
     if (!mtrConsoleInited)
@@ -63,6 +64,7 @@ void MTR_CALL MTR_ConsoleShow(void)
     mtrConsoleShowed = true;
 }
 
+/*fa MTR_ConsoleHide yes */
 void MTR_CALL MTR_ConsoleHide(void)
 {
     if (!mtrConsoleInited)

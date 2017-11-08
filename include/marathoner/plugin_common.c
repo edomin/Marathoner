@@ -3,6 +3,12 @@
 
 #include <string.h>
 
+MTR_DCLSPC void MTR_CALL MTR_RequireMarathonerFunctionSupported(
+ MTR_MarathonerFunctionSupportedFunc_t MarathonerFunctionSupportedFunc)
+{
+    MTR_MarathonerFunctionSupported = MarathonerFunctionSupportedFunc;
+}
+
 MTR_DCLSPC void MTR_CALL MTR_RequireMarathonerGetVersion(
  MTR_MarathonerGetVersionFunc_t MarathonerGetVersionFunc)
 {

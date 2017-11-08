@@ -30,6 +30,7 @@ typedef struct mtrPixels_t {
 #define MTR_PF_RGBA         1
 #define MTR_PF_ARGB         2
 
+MTR_MarathonerFunctionSupportedFunc_t        MTR_MarathonerFunctionSupported;
 MTR_MarathonerGetVersionFunc_t               MTR_MarathonerGetVersion;
 MTR_MarathonerGetModuleVersionFunc_t         MTR_MarathonerGetModuleVersion;
 

@@ -51,6 +51,8 @@ typedef struct {
 } mtrFa_t;
 
 /* Pointers to engine functions */
+typedef int         (MTR_CALL * MTR_MarathonerFunctionSupportedFunc_t)(
+ const char *);
 typedef uint32_t    (MTR_CALL * MTR_MarathonerGetVersionFunc_t)(void);
 typedef uint32_t    (MTR_CALL * MTR_MarathonerGetModuleVersionFunc_t)(
  const char *);

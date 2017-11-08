@@ -9,6 +9,9 @@ typedef mtrReport* (MTR_CALL * MTR_ReportFunc)(void);
 MTR_ReportFunc MTR_CreateReport;
 
 /* Engine funcs exported to every plugin */
+typedef void (MTR_CALL * MTR_RequireMarathonerFunctionSupportedFunc)(
+ MTR_MarathonerFunctionSupportedFunc_t);
+MTR_RequireMarathonerFunctionSupportedFunc MTR_RequireMarathonerFunctionSupported;
 typedef void (MTR_CALL * MTR_RequireMarathonerGetVersionFunc)(
  MTR_MarathonerGetVersionFunc_t);
 MTR_RequireMarathonerGetVersionFunc MTR_RequireMarathonerGetVersion;

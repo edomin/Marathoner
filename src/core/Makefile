@@ -9,10 +9,14 @@ endif
 ifeq ($(PLATFORM), html5)
   LDEXFLAGS = -L$(PREFIX)/lib -s MAIN_MODULE=1
 endif
-OBJSDIR = ../../$(PLATFORM)/obj
-BINDIR = ../../$(PLATFORM)
-RCDIR = ../../$(PLATFORM)/rc
-INCDIRS = -I$(PREFIX)/include -I../../include
+ROOTDIR = ../..
+OBJSDIR = $(ROOTDIR)/$(PLATFORM)/obj
+BINDIR = $(ROOTDIR)/$(PLATFORM)
+FADIR = $(ROOTDIR)/$(PLATFORM)/fa
+RCDIR = $(ROOTDIR)/$(PLATFORM)/rc
+INCDIRS = -I$(PREFIX)/include -I$(ROOTDIR)/include -I$(ROOTDIR)/$(PLATFORM)
+
+FAGEN = $(ROOTDIR)/$(PLATFORM)/fagen
 
 MTR_OBJS = $(OBJSDIR)/engine.o \
  $(OBJSDIR)/log.o \
@@ -29,7 +33,8 @@ MTR_OBJS = $(OBJSDIR)/engine.o \
  $(OBJSDIR)/options.o \
  $(OBJSDIR)/version.o \
  $(OBJSDIR)/console.o \
- $(OBJSDIR)/so.o
+ $(OBJSDIR)/so.o \
+ $(OBJSDIR)/fa.o
 
 LCHR_OBJS = $(OBJSDIR)/launcher.o \
  $(OBJSDIR)/log.o \
@@ -125,8 +130,9 @@ $(OBJSDIR)/launcher.o: launcher.c launcher.h
 	 -o $(OBJSDIR)/launcher.o
 
 $(OBJSDIR)/engine.o: engine.c log.h notification.h configfile.h messagebox.h \
- indexkeeper.h file.h directory.h encoding.h clipboard.h string_buffer.h \
- plugin_loader.h ../../include/marathoner/engine.h
+ indexkeeper.h file.h directory.h encoding.h clipboard.h string_buffer.h so.h \
+ fa.h plugin_loader.h options.h version.h console.h \
+ $(ROOTDIR)/include/marathoner/engine.h
 	$(CC) $(CFLAGS) $(INCDIRS) -c engine.c -o $(OBJSDIR)/engine.o
 
 $(OBJSDIR)/log.o: log.c log.h
@@ -174,14 +180,17 @@ $(OBJSDIR)/console.o: console.c console.h
 $(OBJSDIR)/so.o: so.c so.h
 	$(CC) $(CFLAGS) $(INCDIRS) -c so.c -o $(OBJSDIR)/so.o
 
+$(OBJSDIR)/fa.o: fa.c fa.h
+	$(CC) $(CFLAGS) $(INCDIRS) -c fa.c -o $(OBJSDIR)/fa.o
+
 $(OBJSDIR)/engine.res: $(RCDIR)/engine.rc
 	$(RC) $(RCFLAGS) -i $(RCDIR)/engine.rc -o $(OBJSDIR)/engine.res
 
 $(OBJSDIR)/launcher.res: $(RCDIR)/launcher.rc
 	$(RC) $(RCFLAGS) -i $(RCDIR)/launcher.rc -o $(OBJSDIR)/launcher.res
 
-$(RCDIR)/engine.rc: ../../include/marathoner/version.h
-	$(BINDIR)/rcgen ../../include/marathoner/version.h $(RCDIR)/engine.rc \
+$(RCDIR)/engine.rc: $(ROOTDIR)/include/marathoner/version.h
+	$(BINDIR)/rcgen $(ROOTDIR)/include/marathoner/version.h $(RCDIR)/engine.rc \
 	 MTR_VERSION_MARATHONER Marathoner \
 	 "Marathoner Game Engine core application" Marathoner.exe
 
@@ -190,42 +199,50 @@ $(RCDIR)/launcher.rc: ../../include/marathoner/version.h
 	MTR_VERSION_LAUNCHER Launcher "Marathoner launcher" Launcher.exe
 
 launcher.h: log.h notification.h configfile.h messagebox.h clipboard.h \
- plugin_loader.h ../../include/marathoner/marathoner.h
+ plugin_loader.h $(ROOTDIR)/include/marathoner/marathoner.h
 
-log.h: ../../include/marathoner/engine.h
+log.h: $(ROOTDIR)/include/marathoner/engine.h
 
-messagebox.h: ../../include/marathoner/marathoner.h \
- ../../include/marathoner/engine.h
+messagebox.h: $(ROOTDIR)/include/marathoner/marathoner.h \
+ $(ROOTDIR)/include/marathoner/engine.h
 
-notification.h: log.h messagebox.h ../../include/marathoner/marathoner.h \
- ../../include/marathoner/engine.h
+notification.h: log.h messagebox.h $(ROOTDIR)/include/marathoner/marathoner.h \
+ $(ROOTDIR)/include/marathoner/engine.h
 
-configfile.h: ../../include/marathoner/engine.h
+configfile.h: $(ROOTDIR)/include/marathoner/engine.h
 
-indexkeeper.h: log.h notification.h ../../include/marathoner/marathoner.h \
- ../../include/marathoner/engine.h
+indexkeeper.h: log.h notification.h $(ROOTDIR)/include/marathoner/marathoner.h \
+ $(ROOTDIR)/include/marathoner/engine.h
 
-encoding.h: ../../include/marathoner/engine.h
+encoding.h: $(ROOTDIR)/include/marathoner/engine.h
 
-file.h: indexkeeper.h ../../include/marathoner/marathoner.h \
- ../../include/marathoner/engine.h
+file.h: indexkeeper.h $(ROOTDIR)/include/marathoner/marathoner.h \
+ $(ROOTDIR)/include/marathoner/engine.h
 
-directory.h: ../../include/marathoner/engine.h
+directory.h: $(ROOTDIR)/include/marathoner/engine.h
 
-clipboard.h: ../../include/marathoner/engine.h
+clipboard.h: $(ROOTDIR)/include/marathoner/engine.h
 
-string_buffer.h: indexkeeper.h ../../include/marathoner/engine.h
+string_buffer.h: indexkeeper.h $(ROOTDIR)/include/marathoner/engine.h
 
 plugin_loader.h: notification.h directory.h log.h \
- ../../include/marathoner/engine.h
+ $(ROOTDIR)/include/marathoner/engine.h
 
-options.h: ../../include/marathoner/engine.h
+options.h: $(ROOTDIR)/include/marathoner/engine.h
 
-version.h: ../../include/marathoner/engine.h
+version.h: $(ROOTDIR)/include/marathoner/engine.h
 
-console.h: ../../include/marathoner/engine.h
+console.h: $(ROOTDIR)/include/marathoner/engine.h
 
-so.h: notification.h log.h ../../include/marathoner/engine.h
+so.h: notification.h log.h $(ROOTDIR)/include/marathoner/engine.h
+
+fa.h: $(FADIR)/core.h
+
+$(FADIR)/core.h: $(FAGEN)$(EXE_EXT) log.c notification.c configfile.c \
+ messagebox.c file.c clipboard.c string_buffer.c options.c console.c version.c
+	$(FAGEN) $(FADIR)/core.h $(PLATFORM) log.c notification.c configfile.c \
+     messagebox.c file.c clipboard.c string_buffer.c options.c console.c \
+     version.c
 
 ../../include/marathoner/engine.h: ../../include/marathoner/marathoner.h
 
