@@ -76,7 +76,7 @@ Scripts with prefix "fa_" are launching Lua-scripts generating list of supported
 Lua-scripts of tests placed in "test/\<subsystem\>" folder.
 
 ### General usage
-See function syntax without description in file "FunctionListAndSyntax.txt"  
+See function syntax without description in file [doc/function_list_and_syntax.txt](https://github.com/edomin/Marathoner/tree/master/doc)  
 More detailed will be in v1.0.0
 
 ### Commandline API (See first Configfile usage and Launcher usage)
