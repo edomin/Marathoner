@@ -22,10 +22,11 @@ ifeq ($(PLATFORM), win32)
 	CFLAGS = -Wall -Wextra -Wno-unused-parameter -Wshadow -Werror -mmmx \
 	 -mfpmath=387
 	ifeq ($(MORE_WARNINGS), yes)
-        CFLAGS += -Wdouble-promotion -Wformat-security -Wformat-signedness \
-         -Wswitch-default -Wuninitialized -Wfloat-equal \
-         -Wdeclaration-after-statement -Wundef -Wbad-function-cast -Wcast-qual \
-         -Wlogical-op -Wredundant-decls -Wvla
+	    CFLAGS += -Wbad-function-cast -Wcast-qual \
+         -Wdeclaration-after-statement -Wdouble-promotion -Wfloat-equal \
+         -Wformat-nonliteral -Wformat-security -Wformat-signedness -Winit-self \
+         -Wlogical-op -Wredundant-decls -Wswitch-default -Wuninitialized \
+         -Wundef -Wvla
 	endif
 	LDFLAGS = -mwindows
 	ifeq ($(DEBUG), no)
@@ -52,10 +53,13 @@ ifeq ($(PLATFORM), win64)
 	CFLAGS = -Wall -Wextra -Wno-unused-parameter -Wshadow -Werror -mmmx -msse \
 	 -msse2 -mfpmath=sse
 	ifeq ($(MORE_WARNINGS), yes)
-        CFLAGS += -Wdouble-promotion -Wformat-security -Wformat-signedness \
-         -Wswitch-default -Wuninitialized -Wsuggest-attribute=const \
-         -Wfloat-equal -Wdeclaration-after-statement -Wundef \
-         -Wbad-function-cast -Wcast-qual -Wlogical-op -Wredundant-decls -Wvla
+        CFLAGS += -Wbad-function-cast -Wcast-qual \
+         -Wdeclaration-after-statement -Wdouble-promotion \
+         -Wduplicated-cond -Wfloat-equal \
+         -Wformat-nonliteral -Wformat-security -Wformat-signedness -Winit-self \
+         -Wlogical-op -Wmisleading-indentation -Wnull-dereference \
+         -Wredundant-decls -Wshift-overflow=2 -Wswitch-default -Wuninitialized \
+         -Wundef -Wvla
 	endif
 	LDFLAGS = -mwindows
 	ifeq ($(DEBUG), no)
