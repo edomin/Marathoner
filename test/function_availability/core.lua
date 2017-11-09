@@ -6,6 +6,8 @@ fa.FunctionSupported(MarathonerGetVersion, "MTR_MarathonerGetVersion",
  MarathonerFunctionSupported);
 fa.FunctionSupported(MarathonerGetModuleVersion,
  "MTR_MarathonerGetModuleVersion", MarathonerFunctionSupported);
+fa.FunctionSupported(MarathonerGetSubsystemModuleId,
+ "MTR_MarathonerGetSubsystemModuleId", MarathonerFunctionSupported);
 
 fa.FunctionSupported(ConfigfileGetKeyName, "MTR_ConfigfileGetKeyName",
  MarathonerFunctionSupported);

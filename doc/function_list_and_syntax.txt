@@ -10,6 +10,7 @@ bool RegisterVariable_s(const char *varName, const char *value)
 int MarathonerFunctionSupported(const char *functionName)
 uint32_t MarathonerGetVersion()
 uint32_t MarathonerGetModuleVersion(const char *moduleID)
+char *MarathonerGetSubsystemModuleId(char *subsystem)
 
 char *ConfigfileGetKeyName(const char *filename, const char *section, int index)
 char *ConfigfileGetSectionName(const char *filename, int index)

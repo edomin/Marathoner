@@ -56,6 +56,8 @@ typedef int         (MTR_CALL * MTR_MarathonerFunctionSupportedFunc_t)(
 typedef uint32_t    (MTR_CALL * MTR_MarathonerGetVersionFunc_t)(void);
 typedef uint32_t    (MTR_CALL * MTR_MarathonerGetModuleVersionFunc_t)(
  const char *);
+typedef char *      (MTR_CALL * MTR_MarathonerGetSubsystemModuleIdFunc_t)(
+ const char *);
 typedef char *      (MTR_CALL * MTR_ConfigfileGetKeyNameFunc_t)(const char *,
  const char *, int);
 typedef char *      (MTR_CALL * MTR_ConfigfileGetSectionNameFunc_t)(

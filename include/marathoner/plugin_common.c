@@ -21,6 +21,12 @@ MTR_DCLSPC void MTR_CALL MTR_RequireMarathonerGetModuleVersion(
     MTR_MarathonerGetModuleVersion = MarathonerGetModuleVersionFunc;
 }
 
+MTR_DCLSPC void MTR_CALL MTR_RequireMarathonerGetSubsystemModuleId(
+ MTR_MarathonerGetSubsystemModuleIdFunc_t MarathonerGetSubsystemModuleIdFunc)
+{
+    MTR_MarathonerGetSubsystemModuleId = MarathonerGetSubsystemModuleIdFunc;
+}
+
 MTR_DCLSPC void MTR_CALL MTR_RequireConfigfileGetKeyName(
  MTR_ConfigfileGetKeyNameFunc_t ConfigfileGetKeyNameFunc)
 {

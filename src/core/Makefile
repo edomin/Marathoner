@@ -34,7 +34,8 @@ MTR_OBJS = $(OBJSDIR)/engine.o \
  $(OBJSDIR)/version.o \
  $(OBJSDIR)/console.o \
  $(OBJSDIR)/so.o \
- $(OBJSDIR)/fa.o
+ $(OBJSDIR)/fa.o \
+ $(OBJSDIR)/module.o
 
 LCHR_OBJS = $(OBJSDIR)/launcher.o \
  $(OBJSDIR)/log.o \
@@ -131,7 +132,7 @@ $(OBJSDIR)/launcher.o: launcher.c launcher.h
 
 $(OBJSDIR)/engine.o: engine.c log.h notification.h configfile.h messagebox.h \
  indexkeeper.h file.h directory.h encoding.h clipboard.h string_buffer.h so.h \
- fa.h plugin_loader.h options.h version.h console.h \
+ fa.h plugin_loader.h options.h version.h console.h module.h \
  $(ROOTDIR)/include/marathoner/engine.h
 	$(CC) $(CFLAGS) $(INCDIRS) -c engine.c -o $(OBJSDIR)/engine.o
 
@@ -183,6 +184,10 @@ $(OBJSDIR)/so.o: so.c so.h
 $(OBJSDIR)/fa.o: fa.c fa.h
 	$(CC) $(CFLAGS) $(INCDIRS) -c fa.c -o $(OBJSDIR)/fa.o
 
+
+$(OBJSDIR)/module.o: module.c module.h
+	$(CC) $(CFLAGS) $(INCDIRS) -c module.c -o $(OBJSDIR)/module.o
+
 $(OBJSDIR)/engine.res: $(RCDIR)/engine.rc
 	$(RC) $(RCFLAGS) -i $(RCDIR)/engine.rc -o $(OBJSDIR)/engine.res
 
@@ -230,19 +235,22 @@ plugin_loader.h: notification.h directory.h log.h \
 
 options.h: $(ROOTDIR)/include/marathoner/engine.h
 
-version.h: $(ROOTDIR)/include/marathoner/engine.h
+version.h: plugin_loader.h $(ROOTDIR)/include/marathoner/engine.h
 
 console.h: $(ROOTDIR)/include/marathoner/engine.h
 
 so.h: notification.h log.h $(ROOTDIR)/include/marathoner/engine.h
 
+module.h: plugin_loader.h $(ROOTDIR)/include/marathoner/engine.h
+
 fa.h: $(FADIR)/core.h
 
 $(FADIR)/core.h: $(FAGEN)$(EXE_EXT) log.c notification.c configfile.c \
- messagebox.c file.c clipboard.c string_buffer.c options.c console.c version.c
+ messagebox.c file.c clipboard.c string_buffer.c options.c console.c version.c \
+ module.c
 	$(FAGEN) $(FADIR)/core.h $(PLATFORM) log.c notification.c configfile.c \
      messagebox.c file.c clipboard.c string_buffer.c options.c console.c \
-     version.c
+     version.c module.c
 
 ../../include/marathoner/engine.h: ../../include/marathoner/marathoner.h
 

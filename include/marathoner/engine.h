@@ -18,6 +18,9 @@ MTR_RequireMarathonerGetVersionFunc MTR_RequireMarathonerGetVersion;
 typedef void (MTR_CALL * MTR_RequireMarathonerGetModuleVersionFunc)(
  MTR_MarathonerGetModuleVersionFunc_t);
 MTR_RequireMarathonerGetModuleVersionFunc MTR_RequireMarathonerGetModuleVersion;
+typedef void (MTR_CALL * MTR_RequireMarathonerGetSubsystemModuleIdFunc)(
+ MTR_MarathonerGetSubsystemModuleIdFunc_t);
+MTR_RequireMarathonerGetSubsystemModuleIdFunc MTR_RequireMarathonerGetSubsystemModuleId;
 typedef void (MTR_CALL * MTR_RequireConfigfileGetKeyNameFunc)(
  MTR_ConfigfileGetKeyNameFunc_t);
 MTR_RequireConfigfileGetKeyNameFunc MTR_RequireConfigfileGetKeyName;

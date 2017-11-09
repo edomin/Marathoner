@@ -107,6 +107,7 @@ MTR_ConsoleShowFunc_t                        MTR_ConsoleShow;
 MTR_ConsoleHideFunc_t                        MTR_ConsoleHide;
 
 MTR_SoLoadSymbolFunc_t                       MTR_SoLoadSymbol;
+MTR_MarathonerGetSubsystemModuleIdFunc_t  MTR_MarathonerGetSubsystemModuleId;
 
 uint8_t mtrPluginsCount;
 

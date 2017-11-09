@@ -14,6 +14,7 @@
 #include "version.h"
 #include "console.h"
 #include "fa.h"
+#include "module.h"
 
 #include "marathoner/engine.h"
 
@@ -25,6 +26,8 @@ void RequireEngineFuncs(uint8_t plugin)
      MTR_MarathonerGetVersion);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireMarathonerGetModuleVersion,
      MTR_MarathonerGetModuleVersion);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireMarathonerGetSubsystemModuleId,
+     MTR_MarathonerGetSubsystemModuleId);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConfigfileGetKeyName,
      MTR_ConfigfileGetKeyName);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConfigfileGetSectionName,
