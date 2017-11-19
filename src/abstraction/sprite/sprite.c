@@ -1,8 +1,7 @@
 #include "sprite.h"
 
+#ifdef MTR_MOD_PLUGIN
 #include "marathoner/plugin_common.c"
-
-MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Sprite, FA_FUNCTIONS_COUNT)
 
 MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
 {
@@ -25,12 +24,16 @@ MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
     report->prereqSubsystems[0] = "texture";
     return report;
 }
+#endif
+
+MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Sprite, FA_FUNCTIONS_COUNT)
 
 /*fa MTR_SpriteInit yes */
 MTR_DCLSPC bool MTR_CALL MTR_SpriteInit(uint32_t dmSize, uint32_t reservedCount)
 {
     MTR_LogWrite("Initializing sprite abstraction manager", 0, MTR_LMT_INFO);
 
+    #ifdef MTR_MOD_PLUGIN
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TextureLoad, "texture");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TextureFree, "texture");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TextureGetSizes, "texture");
@@ -46,6 +49,7 @@ MTR_DCLSPC bool MTR_CALL MTR_SpriteInit(uint32_t dmSize, uint32_t reservedCount)
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TextureBlitRegionAngled_f, "texture");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TextureBlitRegionFlipped_f, "texture");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TextureBlitRegionGeneral_f, "texture");
+    #endif
 
     mtrSpriteKeeper = (mtrIndexkeeper_t *)MTR_IndexkeeperCreate(dmSize,
      reservedCount, sizeof(mtrSprite_t));

@@ -62,7 +62,9 @@ MTR_SCRIPT_FUNC_V_I1(MTR_SF_GuiSpacing, MTR_GuiSpacing)
 
 void MTR_ScriptsRegisterAll(void)
 {
+    #ifdef MTR_MOD_PLUGIN
     mtrVm = MTR_ScriptsGetVm();
+    #endif
 
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiFunctionSupported);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_gui", GuiInit);

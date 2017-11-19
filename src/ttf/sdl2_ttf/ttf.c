@@ -1,8 +1,7 @@
 #include "ttf.h"
 
+#ifdef MTR_MOD_PLUGIN
 #include "marathoner/plugin_common.c"
-
-MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Ttf, FA_FUNCTIONS_COUNT)
 
 MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
 {
@@ -19,6 +18,9 @@ MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
     report->prereqSubsystems = NULL;
     return report;
 }
+#endif
+
+MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Ttf, FA_FUNCTIONS_COUNT)
 
 /*fa MTR_TtfInit yes */
 MTR_DCLSPC bool MTR_CALL MTR_TtfInit(uint32_t dmSize, uint32_t reservedCount)

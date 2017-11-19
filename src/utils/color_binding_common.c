@@ -64,7 +64,9 @@ MTR_SCRIPT_FUNC_U32t_U32t1(MTR_SF_ColorRgbaToRgb, MTR_ColorRgbaToRgb)
 
 void MTR_ScriptsRegisterAll(void)
 {
+    #ifdef MTR_MOD_PLUGIN
     mtrVm = MTR_ScriptsGetVm();
+    #endif
 
     MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorFunctionSupported);
     MTR_FIND_AND_ADD_FUNCTION("Utils_color", ColorRgbAssemble);

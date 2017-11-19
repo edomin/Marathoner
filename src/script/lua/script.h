@@ -5,8 +5,15 @@
 #include "lualib.h"
 #include "lauxlib.h"
 
-#include "fa/Script_Lua.h"
 #include "marathoner/plugin.h"
+#ifdef MTR_MOD_STATIC
+    #define fa faScripts
+#endif
+#include "fa/Script_Lua.h"
+
+#ifdef MTR_MOD_STATIC
+    #include "binding_init_func/bindings_init.h"
+#endif
 
 typedef void (MTR_CALL * mtrPluginInitFunc)(void);
 mtrPluginInitFunc MTR_PluginInit;

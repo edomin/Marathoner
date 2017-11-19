@@ -4,8 +4,12 @@
 #include "duktape.h"
 
 #include "marathoner/plugin.h"
-#include "../gui_binding_common.h"
+#ifdef MTR_MOD_STATIC
+    #define MTR_BINDING
+    #define MTR_ScriptsRegisterAll MTR_Abstraction_gui_DuktapeRegisterAll
+#endif
 #include "marathoner/binding_common.h"
+#include "../gui_binding_common.h"
 
 MTR_BINDING_COMMON_HEADER()
 

@@ -4,8 +4,15 @@
 #include "duktape.h"
 #include "duk_module_node.h"
 
-#include "fa/Script_Duktape.h"
 #include "marathoner/plugin.h"
+#ifdef MTR_MOD_STATIC
+    #define fa faScripts
+#endif
+#include "fa/Script_Duktape.h"
+
+#ifdef MTR_MOD_STATIC
+    #include "binding_init_func/bindings_init.h"
+#endif
 
 typedef void (MTR_CALL * mtrPluginInitFunc)(void);
 mtrPluginInitFunc MTR_PluginInit;

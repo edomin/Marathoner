@@ -22,10 +22,12 @@ MTR_SCRIPT_FUNC_B_S2(MTR_SF_ScriptsRegisterVariable_s,
 MTR_SCRIPT_FUNC_I_S1(MTR_SF_MarathonerFunctionSupported,
  MTR_MarathonerFunctionSupported)
 MTR_SCRIPT_FUNC_U32t_V(MTR_SF_MarathonerGetVersion, MTR_MarathonerGetVersion)
+#ifdef MTR_MOD_PLUGIN
 MTR_SCRIPT_FUNC_U32t_S1(MTR_SF_MarathonerGetModuleVersion,
  MTR_MarathonerGetModuleVersion)
 MTR_SCRIPT_FUNC_S_S1(MTR_SF_MarathonerGetSubsystemModuleId,
  MTR_MarathonerGetSubsystemModuleId)
+#endif
 MTR_SCRIPT_FUNC_S_S2I1(MTR_SF_ConfigfileGetKeyName, MTR_ConfigfileGetKeyName)
 MTR_SCRIPT_FUNC_S_S1I1(MTR_SF_ConfigfileGetSectionName,
  MTR_ConfigfileGetSectionName)
@@ -145,26 +147,28 @@ void MTR_ScriptsRegisterAll(void)
     MTR_ScriptsRegisterFunction(MTR_SF_ScriptsGetAutorunPath,
      "ScriptsGetAutorunPath");
     MTR_ScriptsRegisterFunction(MTR_SF_ScriptsRegisterVariable_b,
-     "RegisterVariable_b");
+     "ScriptsRegisterVariable_b");
     MTR_ScriptsRegisterFunction(MTR_SF_ScriptsRegisterVariable_i,
-     "RegisterVariable_i");
+     "ScriptsRegisterVariable_i");
     MTR_ScriptsRegisterFunction(MTR_SF_ScriptsRegisterVariable_u,
-     "RegisterVariable_u");
+     "ScriptsRegisterVariable_u");
     MTR_ScriptsRegisterFunction(MTR_SF_ScriptsRegisterVariable_f,
-     "RegisterVariable_f");
+     "ScriptsRegisterVariable_f");
     MTR_ScriptsRegisterFunction(MTR_SF_ScriptsRegisterVariable_d,
-     "RegisterVariable_d");
+     "ScriptsRegisterVariable_d");
     MTR_ScriptsRegisterFunction(MTR_SF_ScriptsRegisterVariable_s,
-     "RegisterVariable_s");
+     "ScriptsRegisterVariable_s");
 
     MTR_ScriptsRegisterFunction(MTR_SF_MarathonerFunctionSupported,
      "MarathonerFunctionSupported");
     MTR_ScriptsRegisterFunction(MTR_SF_MarathonerGetVersion,
      "MarathonerGetVersion");
+    #ifdef MTR_MOD_PLUGIN
     MTR_ScriptsRegisterFunction(MTR_SF_MarathonerGetModuleVersion,
      "MarathonerGetModuleVersion");
     MTR_ScriptsRegisterFunction(MTR_SF_MarathonerGetSubsystemModuleId,
      "MarathonerGetSubsystemModuleId");
+    #endif
     MTR_ScriptsRegisterFunction(MTR_SF_ConfigfileGetKeyName,
      "ConfigfileGetKeyName");
     MTR_ScriptsRegisterFunction(MTR_SF_ConfigfileKeyExists,

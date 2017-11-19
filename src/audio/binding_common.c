@@ -37,7 +37,9 @@ MTR_SCRIPT_FUNC_V_U32t1(MTR_SF_AudioMusicFree, MTR_AudioMusicFree)
 
 void MTR_ScriptsRegisterAll(void)
 {
+    #ifdef MTR_MOD_PLUGIN
     mtrVm = MTR_ScriptsGetVm();
+    #endif
 
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, AudioFunctionSupported);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, AudioInit);

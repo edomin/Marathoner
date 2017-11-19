@@ -1,10 +1,11 @@
 #include "script.h"
 
-#include "marathoner/plugin_common.c"
+#ifdef MTR_MOD_PLUGIN
+    #include "marathoner/plugin_common.c"
+#endif
 #include "../common.c"
 
-MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Scripts, FA_FUNCTIONS_COUNT)
-
+#ifdef MTR_MOD_PLUGIN
 MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
 {
     mtrReport *report;
@@ -20,11 +21,16 @@ MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
     report->prereqSubsystems = NULL;
     return report;
 }
+#endif
+
+MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Scripts, FA_FUNCTIONS_COUNT)
 
 void MTR_ScriptsInit(void)
 {
-    uint8_t i;
-    uint8_t j;
+    #ifdef MTR_MOD_PLUGIN
+    int i;
+    int j;
+    #endif
 
     MTR_LogWrite("Initializing script subsystem", 0, MTR_LMT_INFO);
 
@@ -49,6 +55,7 @@ void MTR_ScriptsInit(void)
     /* Registering functions and constants from all binding plugins */
     MTR_LogWrite("Registering functions and constants of bindings", 1,
      MTR_LMT_INFO);
+    #ifdef MTR_MOD_PLUGIN
     for (i = 0; i < mtrPluginsCount; i++)
     {
         for (j = 0; j < mtrPluginData[i].report->prereqsCount; j++)
@@ -67,6 +74,9 @@ void MTR_ScriptsInit(void)
             }
         }
     }
+    #else
+        MTR_BifInitAll();
+    #endif
 
     MTR_LogWrite("Script functions and constants of bindings registered",
      1, MTR_LMT_INFO);

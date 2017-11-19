@@ -3,8 +3,11 @@
 
 #include "cjson/cJSON.h"
 
-#include "fa/JSON_cJSON.h"
 #include "marathoner/plugin.h"
+#ifdef MTR_MOD_STATIC
+    #define fa faJson
+#endif
+#include "fa/JSON_cJSON.h"
 
 typedef struct mtrJson_t {
     cJSON   *json;

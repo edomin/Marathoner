@@ -1,8 +1,7 @@
 #include "gui.h"
 
+#ifdef MTR_MOD_PLUGIN
 #include "marathoner/plugin_common.c"
-
-MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Gui, FA_FUNCTIONS_COUNT)
 
 MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
 {
@@ -39,6 +38,9 @@ MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
     report->prereqSubsystems[4] = "mouse";
     return report;
 }
+#endif
+
+MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Gui, FA_FUNCTIONS_COUNT)
 
 static float MTR_NkGetTextWidth(nk_handle handle, float height,
  const char *text, int len)
@@ -292,11 +294,13 @@ MTR_DCLSPC bool MTR_CALL MTR_GuiInit(uint32_t fontDmSize,
     uint32_t nkFontNum;
     int screenWidth;
     int screenHeight;
-    bool ok;
+    #ifdef MTR_MOD_PLUGIN
+    bool ok = true;
+    #endif
 
-    ok = true;
     MTR_LogWrite("Initializing GUI abstraction subsystem", 0, MTR_LMT_INFO);
 
+    #ifdef MTR_MOD_PLUGIN
     MTR_FIND_FUNCTION(MTR_FontDrawMbfString_f, "Abstraction_font");
     MTR_FIND_FUNCTION(MTR_FontGetHeight, "Abstraction_font");
     MTR_FIND_FUNCTION(MTR_FontGetStringWidth, "Abstraction_font");
@@ -327,12 +331,13 @@ MTR_DCLSPC bool MTR_CALL MTR_GuiInit(uint32_t fontDmSize,
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_MouseGetWheelRelative, "mouse");
 
     if (ok)
-        MTR_LogWrite("Added dependently functions", 1, MTR_LMT_INFO);
+        MTR_LogWrite("Added dependent functions", 1, MTR_LMT_INFO);
     else
     {
         MTR_Notify("Functions not added", 1, MTR_LMT_FATAL);
         return false;
     }
+    #endif
 
     mtrGuiFontKeeper = (mtrIndexkeeper_t *)MTR_IndexkeeperCreate(fontDmSize,
      fontReservedCount, sizeof(mtrNkFont));

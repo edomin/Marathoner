@@ -10,8 +10,11 @@
     #pragma GCC diagnostic pop
 #endif
 
-#include "fa/Mouse_SDL2.h"
 #include "marathoner/plugin.h"
+#ifdef MTR_MOD_STATIC
+    #define fa faMouse
+#endif
+#include "fa/Mouse_SDL2.h"
 
 typedef struct mtrMouse_t{
     int  currentMousestate[5];

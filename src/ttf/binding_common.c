@@ -36,7 +36,9 @@ MTR_SCRIPT_FUNC_V_U32t1I1(MTR_SF_TtfSetFontOutline, MTR_TtfSetFontOutline)
 
 void MTR_ScriptsRegisterAll(void)
 {
+    #ifdef MTR_MOD_PLUGIN
     mtrVm = MTR_ScriptsGetVm();
+    #endif
 
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TtfFunctionSupported);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TtfInit);

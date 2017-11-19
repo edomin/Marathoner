@@ -3,10 +3,18 @@
 
 #ifdef __MINGW32__
     #define MTR_CALL   __stdcall
-    #define MTR_DCLSPC __declspec(dllexport)
+    #ifdef MTR_MOD_PLUGIN
+        #define MTR_DCLSPC __declspec(dllexport)
+    #endif
 #else
     #define MTR_CALL
-    #define MTR_DCLSPC EMSCRIPTEN_KEEPALIVE
+    #ifdef MTR_MOD_PLUGIN
+        #define MTR_DCLSPC EMSCRIPTEN_KEEPALIVE
+    #endif
+#endif
+
+#ifdef MTR_MOD_STATIC
+    #define MTR_DCLSPC
 #endif
 
 #endif

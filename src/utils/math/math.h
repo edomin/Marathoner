@@ -1,8 +1,11 @@
 #ifndef MTR_UTILS_MATH_H
 #define MTR_UTILS_MATH_H
 
-#include "fa/Utils_math.h"
 #include "marathoner/plugin.h"
+#ifdef MTR_MOD_STATIC
+    #define fa faMath
+#endif
+#include "fa/Utils_math.h"
 
 #include <math.h>
 #include <time.h>

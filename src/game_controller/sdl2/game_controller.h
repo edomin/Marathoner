@@ -10,8 +10,11 @@
     #pragma GCC diagnostic pop
 #endif
 
-#include "fa/Game_Controller_SDL2.h"
 #include "marathoner/plugin.h"
+#ifdef MTR_MOD_STATIC
+    #define fa faGameController
+#endif
+#include "fa/Game_Controller_SDL2.h"
 
 typedef struct mtrTrackballDelta_t{
     int dx;

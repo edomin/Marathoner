@@ -11,8 +11,11 @@
     #pragma GCC diagnostic pop
 #endif
 
-#include "fa/Texture_SDL2_gpu.h"
 #include "marathoner/plugin.h"
+#ifdef MTR_MOD_STATIC
+    #define fa faTexture
+#endif
+#include "fa/Texture_SDL2_gpu.h"
 
 #define MTR_BLEND_ZERO                  GPU_FUNC_ZERO
 #define MTR_BLEND_ONE                   GPU_FUNC_ONE
@@ -35,10 +38,10 @@ typedef struct mtrTexture_t {
     char      *name;
 } mtrTexture_t;
 
-char              mtrDefaultTextureName[] = "Unnamed_Texture";
-mtrScreen_t      *mtrScreen; /* this will imported from screen plugin */
-mtrIndexkeeper_t *mtrTextureKeeper;
-static bool       mtrTextureInited = false;
+char                    mtrDefaultTextureName[] = "Unnamed_Texture";
+MTR_EXTERN mtrScreen_t *mtrScreen; /* this will imported from screen plugin */
+mtrIndexkeeper_t       *mtrTextureKeeper;
+static bool             mtrTextureInited = false;
 #define MTR_TEXTURE_CHECK_IF_NOT_INITED(returnValue) \
     if (!mtrTextureInited)                           \
         return returnValue;
@@ -50,7 +53,6 @@ static bool       mtrTextureInited = false;
         return returnValue;                                            \
     }
 
-typedef mtrScreen_t *(MTR_CALL * mtrGetScreenFunc)(void);
-mtrGetScreenFunc MTR_GetScreen;
+MTR_FUNC(mtrScreen_t *, MTR_GetScreen, void);
 
 #endif

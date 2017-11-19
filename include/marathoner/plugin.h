@@ -1,6 +1,9 @@
 #ifndef MTR_PLUGIN_H
 #define MTR_PLUGIN_H
 
+#ifdef MTR_MOD_STATIC
+    #define MTR_MODULE
+#endif
 #include "marathoner/marathoner.h"
 
 typedef struct mtrIndexkeeper_t {
@@ -20,6 +23,12 @@ typedef struct mtrPixels_t {
     int   pixelformat;
 } mtrPixels_t;
 
+#if defined(MTR_MOD_PLUGIN)
+    #define MTR_EXTERN
+#else
+    #define MTR_EXTERN extern
+#endif
+
 /* Texture flipping constants */
 #define MTR_FLIP_NONE       0
 #define MTR_FLIP_HORIZONTAL 1
@@ -30,6 +39,7 @@ typedef struct mtrPixels_t {
 #define MTR_PF_RGBA         1
 #define MTR_PF_ARGB         2
 
+#ifdef MTR_MOD_PLUGIN
 MTR_MarathonerFunctionSupportedFunc_t     MTR_MarathonerFunctionSupported;
 MTR_MarathonerGetVersionFunc_t            MTR_MarathonerGetVersion;
 MTR_MarathonerGetModuleVersionFunc_t      MTR_MarathonerGetModuleVersion;
@@ -111,7 +121,6 @@ MTR_SoLoadSymbolFunc_t                    MTR_SoLoadSymbol;
 
 uint8_t mtrPluginsCount;
 
-
 #define MTR_FIND_FUNCTION(function, module)                         \
     function = (function ## Func)MTR_FindFunction(module,           \
     #function);                                                     \
@@ -132,6 +141,14 @@ uint8_t mtrPluginsCount;
         return false;                                                   \
     }
 
+#endif /* MTR_MOD_PLUGIN */
+
+#if defined(MTR_MOD_STATIC)
+    #define FA(subsystemPrefix) fa ## subsystemPrefix
+#else
+    #define FA(subsystemPrefix) fa
+#endif
+
 #define MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(subsystemPrefix, functionsCount) \
     MTR_DCLSPC int MTR_CALL MTR_ ## subsystemPrefix ## FunctionSupported(      \
      const char *functionName)                                                 \
@@ -139,8 +156,8 @@ uint8_t mtrPluginsCount;
         int i;                                                                 \
         for (i = 0; i < functionsCount; i++)                                   \
         {                                                                      \
-            if (strcmp(functionName, fa[i].name) == 0)                         \
-                return fa[i].availability;                                     \
+            if (strcmp(functionName, FA(subsystemPrefix)[i].name) == 0)        \
+                return FA(subsystemPrefix)[i].availability;                    \
         }                                                                      \
         return MTR_FA_NO;                                                      \
     }

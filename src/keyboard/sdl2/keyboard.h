@@ -10,8 +10,11 @@
     #pragma GCC diagnostic pop
 #endif
 
-#include "fa/Keyboard_SDL2.h"
 #include "marathoner/plugin.h"
+#ifdef MTR_MOD_STATIC
+    #define fa faKeyboard
+#endif
+#include "fa/Keyboard_SDL2.h"
 
 typedef struct mtrKeyboard_t{
     const uint8_t *currentKeystate;

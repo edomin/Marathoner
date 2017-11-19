@@ -49,7 +49,9 @@ MTR_SCRIPT_FUNC(MTR_SF_MouseGetDeltaXY)
 
 void MTR_ScriptsRegisterAll(void)
 {
+    #ifdef MTR_MOD_PLUGIN
     mtrVm = MTR_ScriptsGetVm();
+    #endif
 
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, MouseFunctionSupported);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, MouseInit);

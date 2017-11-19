@@ -1,8 +1,11 @@
 #ifndef MTR_ABSTRACTION_SPRITE_H
 #define MTR_ABSTRACTION_SPRITE_H
 
-#include "fa/Abstraction_sprite.h"
 #include "marathoner/plugin.h"
+#ifdef MTR_MOD_STATIC
+    #define fa faSprite
+#endif
+#include "fa/Abstraction_sprite.h"
 
 #include <math.h>
 
@@ -42,57 +45,42 @@ static bool mtrSpriteInited = false;
         return returnValue;                                           \
     }
 
-typedef uint32_t (MTR_CALL * MTR_TextureLoadFunc)(const char *);
-MTR_TextureLoadFunc MTR_TextureLoad;
+MTR_FUNC(uint32_t, MTR_TextureLoad, const char *);
 
-typedef void (MTR_CALL * MTR_TextureFreeFunc)(uint32_t);
-MTR_TextureFreeFunc MTR_TextureFree;
+MTR_FUNC(void, MTR_TextureFree, uint32_t);
 
-typedef void (MTR_CALL * MTR_TextureGetSizesFunc)(uint32_t, int *, int *);
-MTR_TextureGetSizesFunc MTR_TextureGetSizes;
+MTR_FUNC(void, MTR_TextureGetSizes, uint32_t, int *, int *);
 
-typedef void (MTR_CALL * MTR_TextureSetModulation_cFunc)(uint32_t, uint32_t);
-MTR_TextureSetModulation_cFunc MTR_TextureSetModulation_c;
+MTR_FUNC(void, MTR_TextureSetModulation_c, uint32_t, uint32_t);
 
-typedef void (MTR_CALL * MTR_TextureSetModulation_caFunc)(uint32_t, uint32_t);
-MTR_TextureSetModulation_caFunc MTR_TextureSetModulation_ca;
+MTR_FUNC(void, MTR_TextureSetModulation_ca, uint32_t, uint32_t);
 
-typedef void (MTR_CALL * MTR_TextureSetModulation_rgbFunc)(uint32_t, uint8_t,
+MTR_FUNC(void, MTR_TextureSetModulation_rgb, uint32_t, uint8_t, uint8_t,
+ uint8_t);
+
+MTR_FUNC(void, MTR_TextureSetModulation_rgba, uint32_t, uint8_t, uint8_t,
  uint8_t, uint8_t);
-MTR_TextureSetModulation_rgbFunc MTR_TextureSetModulation_rgb;
 
-typedef void (MTR_CALL * MTR_TextureSetModulation_rgbaFunc)(uint32_t, uint8_t,
- uint8_t, uint8_t, uint8_t);
-MTR_TextureSetModulation_rgbaFunc MTR_TextureSetModulation_rgba;
+MTR_FUNC(void, MTR_TextureSetModulationAlpha, uint32_t, uint8_t);
 
-typedef void (MTR_CALL * MTR_TextureSetModulationAlphaFunc)(uint32_t, uint8_t);
-MTR_TextureSetModulationAlphaFunc MTR_TextureSetModulationAlpha;
+MTR_FUNC(void, MTR_TextureSetModulationAlpha_f, uint32_t, float);
 
-typedef void (MTR_CALL * MTR_TextureSetModulationAlpha_fFunc)(uint32_t, float);
-MTR_TextureSetModulationAlpha_fFunc MTR_TextureSetModulationAlpha_f;
+MTR_FUNC(void, MTR_TextureBlitRegion_f, uint32_t, float, float, float, float,
+ float, float);
 
-typedef void (MTR_CALL * MTR_TextureBlitRegion_fFunc)(uint32_t, float, float,
- float, float, float, float);
-MTR_TextureBlitRegion_fFunc MTR_TextureBlitRegion_f;
+MTR_FUNC(void, MTR_TextureBlitRegionSized_f, uint32_t, float, float, float,
+ float, float, float, float, float);
 
-typedef void (MTR_CALL * MTR_TextureBlitRegionSized_fFunc)(uint32_t, float,
- float, float, float, float, float, float, float);
-MTR_TextureBlitRegionSized_fFunc MTR_TextureBlitRegionSized_f;
+MTR_FUNC(void, MTR_TextureBlitRegionScaled_f, uint32_t, float, float, float,
+ float, float, float, float, float);
 
-typedef void (MTR_CALL * MTR_TextureBlitRegionScaled_fFunc)(uint32_t, float,
- float, float, float, float, float, float, float);
-MTR_TextureBlitRegionScaled_fFunc MTR_TextureBlitRegionScaled_f;
+MTR_FUNC(void, MTR_TextureBlitRegionAngled_f, uint32_t, float, float, float,
+ float, float, float, float, float, float);
 
-typedef void (MTR_CALL * MTR_TextureBlitRegionAngled_fFunc)(uint32_t, float,
- float, float, float, float, float, float, float, float);
-MTR_TextureBlitRegionAngled_fFunc MTR_TextureBlitRegionAngled_f;
+MTR_FUNC(void, MTR_TextureBlitRegionFlipped_f, uint32_t, float, float, float,
+ float, float, float, int);
 
-typedef void (MTR_CALL * MTR_TextureBlitRegionFlipped_fFunc)(uint32_t, float,
- float, float, float, float, float, int);
-MTR_TextureBlitRegionFlipped_fFunc MTR_TextureBlitRegionFlipped_f;
-
-typedef void (MTR_CALL * MTR_TextureBlitRegionGeneral_fFunc)(uint32_t, float,
- float, float, float, float, float, float, float, float, float, float, int);
-MTR_TextureBlitRegionGeneral_fFunc MTR_TextureBlitRegionGeneral_f;
+MTR_FUNC(void, MTR_TextureBlitRegionGeneral_f, uint32_t, float, float, float,
+ float, float, float, float, float, float, float, float, int);
 
 #endif

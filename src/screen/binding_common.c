@@ -27,7 +27,9 @@ MTR_SCRIPT_FUNC_B_V(MTR_SF_ScreenXed, MTR_ScreenXed)
 
 void MTR_ScriptsRegisterAll(void)
 {
+    #ifdef MTR_MOD_PLUGIN
     mtrVm = MTR_ScriptsGetVm();
+    #endif
 
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, ScreenFunctionSupported);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, ScreenInit);

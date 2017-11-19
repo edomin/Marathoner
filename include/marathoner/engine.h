@@ -5,6 +5,7 @@
 
 #include "marathoner/marathoner.h"
 
+#ifdef MTR_MOD_PLUGIN
 typedef mtrReport* (MTR_CALL * MTR_ReportFunc)(void);
 MTR_ReportFunc MTR_CreateReport;
 
@@ -213,5 +214,7 @@ MTR_ScriptsAutorunFunc MTR_ScriptsAutorun;
         MTR_LogWrite(                                                       \
          "Module are not contain declaration for '" #funcname" ' function", \
          1, MTR_LMT_WARNING);
+
+#endif /* MTR_MOD_PLUGIN */
 
 #endif

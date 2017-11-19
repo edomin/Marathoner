@@ -12,8 +12,15 @@
 #include "sqstdstring.h"
 #include "sqstdaux.h"
 
-#include "fa/Script_Squirrel.h"
 #include "marathoner/plugin.h"
+#ifdef MTR_MOD_STATIC
+    #define fa faScripts
+#endif
+#include "fa/Script_Squirrel.h"
+
+#ifdef MTR_MOD_STATIC
+    #include "binding_init_func/bindings_init.h"
+#endif
 
 typedef void (MTR_CALL * mtrPluginInitFunc)(void);
 mtrPluginInitFunc MTR_PluginInit;

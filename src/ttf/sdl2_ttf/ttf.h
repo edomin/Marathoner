@@ -10,8 +10,11 @@
     #pragma GCC diagnostic pop
 #endif
 
-#include "fa/TTF_SDL2_ttf.h"
 #include "marathoner/plugin.h"
+#ifdef MTR_MOD_STATIC
+    #define fa faTtf
+#endif
+#include "fa/TTF_SDL2_ttf.h"
 
 typedef struct mtrTtf_t {
     TTF_Font *font;

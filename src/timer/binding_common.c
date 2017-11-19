@@ -12,7 +12,9 @@ MTR_SCRIPT_FUNC_F_F1(MTR_SF_TimerDelayForFPS_f, MTR_TimerDelayForFPS_f)
 
 void MTR_ScriptsRegisterAll(void)
 {
+    #ifdef MTR_MOD_PLUGIN
     mtrVm = MTR_ScriptsGetVm();
+    #endif
 
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TimerFunctionSupported);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TimerInit);

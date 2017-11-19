@@ -8,6 +8,8 @@
 #include "marathoner/engine.h"
 
 uint32_t MTR_CALL MTR_MarathonerGetVersion(void);
+#ifdef MTR_MOD_PLUGIN
 uint32_t MTR_CALL MTR_MarathonerGetModuleVersion(const char *moduleID);
+#endif
 
 #endif

@@ -10,19 +10,22 @@
     #pragma GCC diagnostic pop
 #endif
 
-#include "fa/Primitive_SDL2_gpu.h"
 #include "marathoner/plugin.h"
+#ifdef MTR_MOD_STATIC
+    #define fa faPrimitive
+#endif
+#include "fa/Primitive_SDL2_gpu.h"
 
 typedef struct mtrScreen_t {
     GPU_Target* screen;
     GPU_Target* target;
 } mtrScreen_t;
 
-mtrScreen_t *mtrScreen; /* this will imported from screen plugin */
-float        mtrLinePointX_f;
-float        mtrLinePointY_f;
-bool         mtrLineDrawing;
-static bool  mtrPrimitiveInited = false;
+MTR_EXTERN mtrScreen_t *mtrScreen; /* this will imported from screen plugin */
+float                   mtrLinePointX_f;
+float                   mtrLinePointY_f;
+bool                    mtrLineDrawing;
+static bool             mtrPrimitiveInited = false;
 #define MTR_PRIMITIVE_CHECK_IF_NOT_INITED(returnValue) \
     if (!mtrPrimitiveInited)                           \
         return returnValue;
@@ -35,8 +38,7 @@ static bool  mtrPrimitiveInited = false;
         return returnValue;                                              \
     }
 
-typedef mtrScreen_t *(MTR_CALL * mtrGetScreenFunc)(void);
-mtrGetScreenFunc MTR_GetScreen;
+MTR_FUNC(mtrScreen_t *, MTR_GetScreen, void);
 
 static inline void MTR_Color24ToRgb(uint32_t color, uint8_t *r, uint8_t *g,
  uint8_t *b)

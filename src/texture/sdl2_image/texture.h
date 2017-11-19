@@ -11,8 +11,11 @@
 #endif
 #include "SDL2/SDL_image.h"
 
-#include "fa/Texture_SDL2_image.h"
 #include "marathoner/plugin.h"
+#ifdef MTR_MOD_STATIC
+    #define fa faTexture
+#endif
+#include "fa/Texture_SDL2_image.h"
 
 /*
 #define MTR_BLEND_ZERO                  GPU_FUNC_ZERO
@@ -41,11 +44,11 @@ typedef struct mtrTexture_t {
     char        *name;
 } mtrTexture_t;
 
-char              mtrDefaultTextureName[] = "Unnamed_Texture";
-mtrScreen_t      *mtrScreen; /* this will imported from screen plugin */
-mtrIndexkeeper_t *mtrTextureKeeper;
-static bool       mtrTextureInited = false;
-mtrPixels_t      *tempPixels;
+char                    mtrDefaultTextureName[] = "Unnamed_Texture";
+MTR_EXTERN mtrScreen_t *mtrScreen; /* this will imported from screen plugin */
+mtrIndexkeeper_t       *mtrTextureKeeper;
+static bool             mtrTextureInited = false;
+mtrPixels_t            *tempPixels;
 #define MTR_TEXTURE_CHECK_IF_NOT_INITED(returnValue) \
     if (!mtrTextureInited)                           \
         return returnValue;
@@ -57,14 +60,9 @@ mtrPixels_t      *tempPixels;
         return returnValue;                                            \
     }
 
-typedef mtrScreen_t *(MTR_CALL * mtrGetScreenFunc)(void);
-mtrGetScreenFunc MTR_GetScreen;
-
-typedef void (MTR_CALL * MTR_PngInitFunc)(void);
-MTR_PngInitFunc MTR_PngInit;
-
-typedef bool (MTR_CALL * MTR_PngSaveSimpleFunc)(const char *, mtrPixels_t *);
-MTR_PngSaveSimpleFunc MTR_PngSaveSimple;
+MTR_FUNC(mtrScreen_t *, MTR_GetScreen, void);
+MTR_FUNC(void, MTR_PngInit, void);
+MTR_FUNC(bool, MTR_PngSaveSimple, const char *, mtrPixels_t *);
 
 MTR_DCLSPC void MTR_CALL MTR_TextureFree(uint32_t texNum);
 

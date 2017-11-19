@@ -1,21 +1,24 @@
-#include "so.h"
 #include "log.h"
 #include "messagebox.h"
 #include "notification.h"
 #include "configfile.h"
 #include "indexkeeper.h"
 #include "file.h"
-#include "directory.h"
 #include "encoding.h"
 #include "clipboard.h"
 #include "string_buffer.h"
-#include "plugin_loader.h"
+#ifdef MTR_MOD_PLUGIN
+    #include "directory.h"
+    #include "so.h"
+    #include "plugin_loader.h"
+#endif
 #include "options.h"
 #include "version.h"
 #include "console.h"
 #include "fa.h"
 #include "module.h"
 
+#if defined(MTR_MOD_PLUGIN)
 #include "marathoner/engine.h"
 
 void RequireEngineFuncs(uint8_t plugin)
@@ -133,8 +136,7 @@ bool MTR_ProcessModuleDisabled(int moduleNum)
     int i;
 
     if (!MTR_ConfigfileReadBool(CONFIGFILE_PATH, "Module",
-     mtrPluginData[moduleNum].report->moduleID, true))
-    {
+     mtrPluginData[moduleNum].report->moduleID, true)) {
         MTR_LogWrite_s("Module are disabled by configfile:", 1,
          MTR_LMT_NOTE, mtrPluginData[moduleNum].report->moduleID);
         free(mtrPluginData[moduleNum].filename);
@@ -155,27 +157,33 @@ bool MTR_IsSubsystem(int moduleNum)
     else
         return false;
 }
+#else /* MTR_MOD_PLUGIN */
+/* I need to think how to remove it. This actually makes Script module hard
+ * attached to engine */
+MTR_DCLSPC void MTR_CALL MTR_ScriptsAutorun(char * filename);
+#endif /* MTR_MOD_PLUGIN */
 
 int main(int argc, char** argv)
 {
+    char   *autorunAction = NULL;
+    char   *autorunScript = NULL;
+    #ifdef MTR_MOD_PLUGIN
     uint8_t i;
     uint8_t j;
     uint8_t k;
     char   *temp; /* Read config result */
     bool    ok;
     int     error;
-    char   *autorunAction = NULL;
     char   *autorunPlugin = NULL;
-    char   *autorunScript = NULL;
     char   *currentArgument = NULL;
+    #endif
     bool    showConsole;
 
     chdir("..");
 
     MTR_OptionsProcess(argc, argv);
     MTR_OptionsAlias("help", "h");
-    if (strcmp(MTR_OptionsGet("help"), "") == 0)
-    {
+    if (strcmp(MTR_OptionsGet("help"), "") == 0) {
         /* Print help to log */
     }
 
@@ -188,15 +196,19 @@ int main(int argc, char** argv)
         MTR_ConsoleShow();
 
     autorunAction = MTR_OptionsGet("autorun-action");
+    #ifdef MTR_MOD_PLUGIN
     autorunPlugin = MTR_OptionsGet("autorun-plugin");
+    #endif
     autorunScript = MTR_OptionsGet("autorun-script");
 
     if (autorunAction == NULL)
         autorunAction = MTR_ConfigfileReadString(CONFIGFILE_PATH, "Autorun",
          "action", "none");
+    #ifdef MTR_MOD_PLUGIN
     if (autorunPlugin == NULL)
         autorunPlugin = MTR_ConfigfileReadString(CONFIGFILE_PATH, "Autorun",
          "plugin", "none");
+    #endif
     if (autorunScript == NULL)
         autorunScript = MTR_ConfigfileReadString(CONFIGFILE_PATH, "Autorun",
          "script", "none");
@@ -210,6 +222,8 @@ int main(int argc, char** argv)
      (MTR_VERSION_MARATHONER & 0x00FF00) >> 8);
     MTR_LogWrite_i("Patch:", 1, MTR_LMT_INFO,
      MTR_VERSION_MARATHONER & 0x0000FF);
+
+    #ifdef MTR_MOD_PLUGIN
     MTR_LogWrite("Searching available plugins", 0, MTR_LMT_INFO);
 
     MTR_SoInit(MTR_IKDM_SMALL, 256);
@@ -221,19 +235,15 @@ int main(int argc, char** argv)
     MTR_LogWrite("Processing modules' reports", 0, MTR_LMT_INFO);
     ok = false;
     i = 0;
-    while (i < mtrPluginsFound)
-    {
-        if (MTR_ProcessModuleDisabled(i))
-        {
+    while (i < mtrPluginsFound) {
+        if (MTR_ProcessModuleDisabled(i)) {
             i = 0;
             continue;
         }
         ok = true;
         /* searching conflicting subsystems */
-        if (MTR_IsSubsystem(i))
-        {
-            for (j = 0; j < mtrPluginsFound; j++)
-            {
+        if (MTR_IsSubsystem(i)) {
+            for (j = 0; j < mtrPluginsFound; j++) {
                 currentArgument = MTR_OptionsGet(
                  mtrPluginData[i].report->subsystem);
                 if (currentArgument == NULL)
@@ -241,8 +251,7 @@ int main(int argc, char** argv)
                      "Subsystem", mtrPluginData[i].report->subsystem, "none");
                 else
                     temp = currentArgument;
-                if (strcmp(temp, "none") == 0)
-                {
+                if (strcmp(temp, "none") == 0) {
                     MTR_LogWrite_s("Subsystem of module are disabled by "
                      "configfile:", 1, MTR_LMT_NOTE,
                      mtrPluginData[i].report->moduleID);
@@ -259,8 +268,7 @@ int main(int argc, char** argv)
                     (strcmp(mtrPluginData[i].report->subsystem,
                      mtrPluginData[j].report->subsystem) == 0) &&
                     (i != j)
-                   )
-                {
+                   ) {
                     ok = false;
 
                     currentArgument = MTR_OptionsGet(
@@ -272,8 +280,7 @@ int main(int argc, char** argv)
                     else
                         temp = currentArgument;
 
-                    if (strcmp(temp, mtrPluginData[i].report->moduleID) == 0)
-                    {
+                    if (strcmp(temp, mtrPluginData[i].report->moduleID) == 0) {
                         MTR_LogWrite_s("Module will not loaded:", 1,
                          MTR_LMT_NOTE, mtrPluginData[j].report->moduleID);
                         MTR_SoClose(mtrPluginData[j].so);
@@ -284,8 +291,7 @@ int main(int argc, char** argv)
                         currentArgument = NULL;
                         break;
                     }
-                    if (strcmp(temp, mtrPluginData[j].report->moduleID) == 0)
-                    {
+                    if (strcmp(temp, mtrPluginData[j].report->moduleID) == 0) {
                         MTR_LogWrite_s("Module will not loaded:", 1,
                          MTR_LMT_NOTE, mtrPluginData[i].report->moduleID);
                         MTR_SoClose(mtrPluginData[i].so);
@@ -313,8 +319,7 @@ int main(int argc, char** argv)
                     break;
                 }
             }
-            if (!ok)
-            {
+            if (!ok) {
 
                 for (j = i; j < mtrPluginsFound - 1; j++)
                     mtrPluginData[j] = mtrPluginData[j + 1];
@@ -324,22 +329,18 @@ int main(int argc, char** argv)
             }
         }
         /* searching existing of prerequied subsystems */
-        if (mtrPluginData[i].report->prereqSubsystemsCount > 0)
-        {
-            for (j = 0; j < mtrPluginData[i].report->prereqSubsystemsCount; j++)
-            {
+        if (mtrPluginData[i].report->prereqSubsystemsCount > 0) {
+            for (j = 0; j < mtrPluginData[i].report->prereqSubsystemsCount;
+             j++) {
                 ok = false;
-                for (k = 0; k < mtrPluginsFound; k++)
-                {
+                for (k = 0; k < mtrPluginsFound; k++) {
                     if (strcmp(mtrPluginData[i].report->prereqSubsystems[j],
-                     mtrPluginData[k].report->subsystem) == 0)
-                    {
+                     mtrPluginData[k].report->subsystem) == 0) {
                         ok = true;
                         break;
                     }
                 }
-                if (!ok)
-                {
+                if (!ok) {
                     MTR_LogWrite_s("Missing Prerequired subsystem module:", 1,
                      MTR_LMT_ERROR,
                      mtrPluginData[i].report->prereqSubsystems[j]);
@@ -356,22 +357,17 @@ int main(int argc, char** argv)
             }
         }
         /* checking existing of prerequisites */
-        if (mtrPluginData[i].report->prereqsCount > 0)
-        {
-            for (j = 0; j < mtrPluginData[i].report->prereqsCount; j++)
-            {
+        if (mtrPluginData[i].report->prereqsCount > 0) {
+            for (j = 0; j < mtrPluginData[i].report->prereqsCount; j++) {
                 ok = false;
-                for (k = 0; k < mtrPluginsFound; k++)
-                {
+                for (k = 0; k < mtrPluginsFound; k++) {
                     if (strcmp(mtrPluginData[i].report->prereqs[j],
-                     mtrPluginData[k].report->moduleID) == 0)
-                    {
+                     mtrPluginData[k].report->moduleID) == 0) {
                         ok = true;
                         break;
                     }
                 }
-                if (!ok)
-                {
+                if (!ok) {
                     MTR_LogWrite_s("Missing Prerequisite module:", 1,
                      MTR_LMT_ERROR, mtrPluginData[i].report->prereqs[j]);
                     MTR_LogWrite_s("Module will not loaded:", 1,
@@ -390,12 +386,10 @@ int main(int argc, char** argv)
     }
 
     /* Plugins updating information about every other plugin */
-    for (i = 0; i < mtrPluginsFound; i++)
-    {
+    for (i = 0; i < mtrPluginsFound; i++) {
         MTR_RequirePluginData = (MTR_RequirePluginDataFunc)MTR_SoLoadSymbol(
          mtrPluginData[i].so, "MTR_RequirePluginData");
-        if (MTR_RequirePluginData == NULL)
-        {
+        if (MTR_RequirePluginData == NULL) {
             MTR_LogWrite(
              "Module are not contain function MTR_RequirePluginData", 1,
              MTR_LMT_ERROR);
@@ -413,6 +407,7 @@ int main(int argc, char** argv)
     }
 
     MTR_LogWrite("Modules' reports processed", 0, MTR_LMT_INFO);
+    #endif /* MTR_MOD_PLUGIN */
 
     if (!MTR_FileInit(MTR_IKDM_SMALL, 32))
         return 4;
@@ -422,60 +417,55 @@ int main(int argc, char** argv)
 
     MTR_LogWrite("Reading 'Marathoner.cfg' for autorun options", 0,
      MTR_LMT_INFO);
+    #ifdef MTR_MOD_PLUGIN
     ok = false;
-    if (strcmp(autorunAction, "runScript") == 0)
-    {
-        for (i = 0; i < mtrPluginsFound; i++)
-        {
-            if (strcmp(mtrPluginData[i].report->moduleID, autorunPlugin) == 0)
-            {
+    #endif
+    if (strcmp(autorunAction, "runScript") == 0) {
+        #if defined(MTR_MOD_PLUGIN)
+        for (i = 0; i < mtrPluginsFound; i++) {
+            if (strcmp(mtrPluginData[i].report->moduleID, autorunPlugin) == 0) {
                 ok = true;
                 currentPlugin = i;
                 break;
             }
         }
-        if (ok)
-        {
-            if (strcmp(autorunScript, "none") != 0)
-            {
+        if (ok) {
+            if (strcmp(autorunScript, "none") != 0) {
                 MTR_ScriptsAutorun = (MTR_ScriptsAutorunFunc)MTR_SoLoadSymbol(
                  mtrPluginData[currentPlugin].so, "MTR_ScriptsAutorun");
                 if (MTR_ScriptsAutorun == NULL)
                     MTR_Notify("Unable to load autorun plugin function", 1,
                      MTR_LMT_ERROR);
-                else
-                {
+                else {
                     MTR_LogWrite_s("Running autorun function with file:", 0,
                      MTR_LMT_INFO, autorunScript);
                     MTR_ScriptsAutorun(autorunScript);
 //                    MTR_ScriptsAutorun(strcat("../", autorunScript));
                 }
-            }
-            else
-            {
+            } else {
                 MTR_Notify("Unable to read autorun script filename", 1,
                  MTR_LMT_ERROR);
             }
-        }
-        else
-        {
+        } else {
             MTR_Notify("Ivalid autorun plugin", 1, MTR_LMT_ERROR);
         }
-    }
-    else
-    {
+        #else /* MTR_MOD_PLUGIN */
+        MTR_ScriptsAutorun(autorunScript);
+        #endif /* MTR_MOD_PLUGIN */
+    } else
         MTR_Notify("Invalid autorun action command", 1, MTR_LMT_ERROR);
-    }
 
     MTR_LogWrite("Quiting Engine", 0, MTR_LMT_INFO);
+
+    #ifdef MTR_MOD_PLUGIN
     /* Freing allocated structures and unloading libraries */
-    for (i = 0; i < mtrPluginsFound; i++)
-    {
+    for (i = 0; i < mtrPluginsFound; i++) {
         MTR_LogWrite_s("Unloading plugin", 0, MTR_LMT_INFO,
          mtrPluginData[i].report->moduleID);
         MTR_SoClose(mtrPluginData[i].so);
     }
     free(mtrPluginData);
+    #endif
 
     MTR_LogWrite("Engine stopped", 0, MTR_LMT_INFO);
 

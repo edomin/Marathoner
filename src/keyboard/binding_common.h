@@ -1,37 +1,17 @@
 #ifndef MTR_KEYBOARD_BINDING_COMMON_H
 #define MTR_KEYBOARD_BINDING_COMMON_H
 
-typedef int (MTR_CALL * MTR_KeyboardFunctionSupportedFunc)(const char *);
-MTR_KeyboardFunctionSupportedFunc MTR_KeyboardFunctionSupported;
-
-typedef bool (MTR_CALL * MTR_KeyboardInitFunc)(void);
-MTR_KeyboardInitFunc MTR_KeyboardInit;
-
-typedef void (MTR_CALL * MTR_KeyboardRefreshFunc)(void);
-MTR_KeyboardRefreshFunc MTR_KeyboardRefresh;
-
-typedef bool (MTR_CALL * MTR_KeyboardPressFunc)(int);
-MTR_KeyboardPressFunc MTR_KeyboardPress;
-
-typedef bool (MTR_CALL * MTR_KeyboardReleaseFunc)(int);
-MTR_KeyboardReleaseFunc MTR_KeyboardRelease;
-
-typedef bool (MTR_CALL * MTR_KeyboardPressedFunc)(int);
-MTR_KeyboardPressedFunc MTR_KeyboardPressed;
-
+MTR_FUNC(int, MTR_KeyboardFunctionSupported, const char *);
+MTR_FUNC(bool, MTR_KeyboardInit, void);
+MTR_FUNC(void, MTR_KeyboardRefresh, void);
+MTR_FUNC(bool, MTR_KeyboardPress, int);
+MTR_FUNC(bool, MTR_KeyboardRelease, int);
+MTR_FUNC(bool, MTR_KeyboardPressed, int);
 #ifdef lua_h
-typedef void (MTR_CALL * MTR_KeyboardArrowsGetAxesFunc)(int, int, int, int,
- int *, int *);
-MTR_KeyboardArrowsGetAxesFunc MTR_KeyboardArrowsGetAxes;
+MTR_FUNC(void, MTR_KeyboardArrowsGetAxes, int, int, int, int, int *, int *);
 #endif
-
-typedef int (MTR_CALL * MTR_KeyboardArrowsGetHorAxisFunc)(int, int);
-MTR_KeyboardArrowsGetHorAxisFunc MTR_KeyboardArrowsGetHorAxis;
-
-typedef int (MTR_CALL * MTR_KeyboardArrowsGetVerAxisFunc)(int, int);
-MTR_KeyboardArrowsGetVerAxisFunc MTR_KeyboardArrowsGetVerAxis;
-
-typedef char *(MTR_CALL * MTR_KeyboardInputCharFunc)(void);
-MTR_KeyboardInputCharFunc MTR_KeyboardInputChar;
+MTR_FUNC(int, MTR_KeyboardArrowsGetHorAxis, int, int);
+MTR_FUNC(int, MTR_KeyboardArrowsGetVerAxis, int, int);
+MTR_FUNC(char *, MTR_KeyboardInputChar, void);
 
 #endif

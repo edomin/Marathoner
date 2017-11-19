@@ -46,7 +46,9 @@ MTR_SCRIPT_FUNC_I_U32t1(MTR_SF_JsonLength, MTR_JsonLength)
 
 void MTR_ScriptsRegisterAll(void)
 {
+    #ifdef MTR_MOD_PLUGIN
     mtrVm = MTR_ScriptsGetVm();
+    #endif
 
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, JsonFunctionSupported);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, JsonInit);

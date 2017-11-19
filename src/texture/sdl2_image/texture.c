@@ -1,8 +1,7 @@
 #include "texture.h"
 
+#ifdef MTR_MOD_PLUGIN
 #include "marathoner/plugin_common.c"
-
-MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Texture, FA_FUNCTIONS_COUNT)
 
 MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
 {
@@ -32,6 +31,9 @@ MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
     report->prereqSubsystems[0] = "png";
     return report;
 }
+#endif
+
+MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Texture, FA_FUNCTIONS_COUNT)
 
 int MTR_FlipToActualFlip(int flip)
 {
@@ -85,7 +87,8 @@ MTR_DCLSPC bool MTR_CALL MTR_TextureInit(uint32_t dmSize, uint32_t reservedCount
     MTR_LogWrite_i("Minor:", 2, MTR_LMT_INFO, sdlImageLinked->minor);
     MTR_LogWrite_i("Patch:", 2, MTR_LMT_INFO, sdlImageLinked->patch);
 
-    MTR_GetScreen = (mtrGetScreenFunc)MTR_FindFunction("Screen_SDL2",
+    #ifdef MTR_MOD_PLUGIN
+    MTR_GetScreen = (MTR_GetScreenFunc)MTR_FindFunction("Screen_SDL2",
      "MTR_GetScreen");
     if (MTR_GetScreen == NULL)
     {
@@ -98,6 +101,7 @@ MTR_DCLSPC bool MTR_CALL MTR_TextureInit(uint32_t dmSize, uint32_t reservedCount
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_PngSaveSimple, "png");
 
     mtrScreen = MTR_GetScreen();
+    #endif
 
     mtrTextureKeeper = (mtrIndexkeeper_t *)MTR_IndexkeeperCreate(dmSize,
      reservedCount, sizeof(mtrTexture_t));

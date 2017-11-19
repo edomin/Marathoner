@@ -10,8 +10,11 @@
     #pragma GCC diagnostic pop
 #endif
 
-#include "fa/Timer_SDL2.h"
 #include "marathoner/plugin.h"
+#ifdef MTR_MOD_STATIC
+    #define fa faTimer
+#endif
+#include "fa/Timer_SDL2.h"
 
 typedef struct mtrTimer_t{
     uint32_t startTime;

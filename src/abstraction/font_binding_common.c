@@ -20,7 +20,9 @@ MTR_SCRIPT_FUNC_S_U32t1(MTR_SF_FontGetName, MTR_FontGetName)
 
 void MTR_ScriptsRegisterAll(void)
 {
+    #ifdef MTR_MOD_PLUGIN
     mtrVm = MTR_ScriptsGetVm();
+    #endif
 
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_font", FontFunctionSupported);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_font", FontInit);

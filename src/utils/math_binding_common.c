@@ -181,7 +181,9 @@ MTR_SCRIPT_FUNC_D_D2(MTR_SF_Max_d, MTR_Max_d)
 
 void MTR_ScriptsRegisterAll(void)
 {
+    #ifdef MTR_MOD_PLUGIN
     mtrVm = MTR_ScriptsGetVm();
+    #endif
 
     MTR_FIND_AND_ADD_FUNCTION("Utils_math", MathFunctionSupported);
     MTR_FIND_AND_ADD_FUNCTION("Utils_math", Sin_f);

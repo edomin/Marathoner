@@ -10,7 +10,9 @@ MTR_SCRIPT_FUNC_B_S1P1(MTR_SF_PngSaveSimple, MTR_PngSaveSimple)
 
 void MTR_ScriptsRegisterAll(void)
 {
+    #ifdef MTR_MOD_PLUGIN
     mtrVm = MTR_ScriptsGetVm();
+    #endif
 
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, PngFunctionSupported);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, PngInit);

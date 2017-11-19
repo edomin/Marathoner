@@ -72,7 +72,9 @@ MTR_SCRIPT_FUNC_B_U32t1P1(MTR_SF_TextureReceivePixels, MTR_TextureReceivePixels)
 
 void MTR_ScriptsRegisterAll(void)
 {
+    #ifdef MTR_MOD_PLUGIN
     mtrVm = MTR_ScriptsGetVm();
+    #endif
 
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureFunctionSupported);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureInit);

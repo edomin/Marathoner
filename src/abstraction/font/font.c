@@ -1,8 +1,7 @@
 #include "font.h"
 
+#ifdef MTR_MOD_PLUGIN
 #include "marathoner/plugin_common.c"
-
-MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Font, FA_FUNCTIONS_COUNT)
 
 MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
 {
@@ -27,12 +26,16 @@ MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
     report->prereqSubsystems[1] = "ttf";
     return report;
 }
+#endif
+
+MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Font, FA_FUNCTIONS_COUNT)
 
 /*fa MTR_FontInit yes */
 MTR_DCLSPC bool MTR_CALL MTR_FontInit(uint32_t dmSize, uint32_t reservedCount)
 {
     MTR_LogWrite("Initializing font abstraction manager", 0, MTR_LMT_INFO);
 
+    #ifdef MTR_MOD_PLUGIN
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TtfLoad, "ttf");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TtfFree, "ttf");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TtfGetFontHeight, "ttf");
@@ -43,6 +46,7 @@ MTR_DCLSPC bool MTR_CALL MTR_FontInit(uint32_t dmSize, uint32_t reservedCount)
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TextureBlit_f, "texture");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TextureBlitRegion_f, "texture");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TextureReceivePixels, "texture");
+    #endif
 
     mtrFontKeeper = (mtrIndexkeeper_t *)MTR_IndexkeeperCreate(dmSize,
      reservedCount, sizeof(mtrFont_t));

@@ -1,8 +1,11 @@
 #ifndef MTR_ABSTRACTION_FONT_H
 #define MTR_ABSTRACTION_FONT_H
 
-#include "fa/Abstraction_font.h"
 #include "marathoner/plugin.h"
+#ifdef MTR_MOD_STATIC
+    #define fa faFont
+#endif
+#include "fa/Abstraction_font.h"
 
 /* Monospace bitmap font */
 typedef struct mtrMbf_t {
@@ -32,40 +35,17 @@ static bool mtrFontInited = false;
         return returnValue;                                                    \
     }
 
-typedef uint32_t (MTR_CALL * MTR_TtfLoadFunc)(const char *filename, int size);
-MTR_TtfLoadFunc MTR_TtfLoad;
-
-typedef void (MTR_CALL * MTR_TtfFreeFunc)(uint32_t fontNum);
-MTR_TtfFreeFunc MTR_TtfFree;
-
-typedef int (MTR_CALL * MTR_TtfGetFontHeightFunc)(uint32_t fontNum);
-MTR_TtfGetFontHeightFunc MTR_TtfGetFontHeight;
-
-typedef int (MTR_CALL * MTR_TtfGetStringWidthFunc)(uint32_t fontNum,
- const char *string);
-MTR_TtfGetStringWidthFunc MTR_TtfGetStringWidth;
-
-typedef void (MTR_CALL * MTR_TtfSetFontStyleFunc)(uint32_t fontNum, int style);
-MTR_TtfSetFontStyleFunc MTR_TtfSetFontStyle;
-
-typedef void (MTR_CALL * MTR_TtfSetFontOutlineFunc)(uint32_t fontNum,
- int outline);
-MTR_TtfSetFontOutlineFunc MTR_TtfSetFontOutline;
-
-typedef mtrPixels_t *(MTR_CALL * MTR_TtfRenderStringFunc)(uint32_t fontNum,
- uint8_t r, uint8_t g, uint8_t b, const char *string);
-MTR_TtfRenderStringFunc MTR_TtfRenderString;
-
-typedef void (MTR_CALL * MTR_TextureBlit_fFunc)(uint32_t texNum, float x,
- float y);
-MTR_TextureBlit_fFunc MTR_TextureBlit_f;
-
-typedef void (MTR_CALL * MTR_TextureBlitRegion_fFunc)(uint32_t texNum, float x,
- float y, float rx, float ry, float rw, float rh);
-MTR_TextureBlitRegion_fFunc MTR_TextureBlitRegion_f;
-
-typedef bool (MTR_CALL * MTR_TextureReceivePixelsFunc)(uint32_t texNum,
- mtrPixels_t *pixels);
-MTR_TextureReceivePixelsFunc MTR_TextureReceivePixels;
+MTR_FUNC(uint32_t, MTR_TtfLoad, const char *, int);
+MTR_FUNC(void, MTR_TtfFree, uint32_t);
+MTR_FUNC(int, MTR_TtfGetFontHeight, uint32_t);
+MTR_FUNC(int, MTR_TtfGetStringWidth, uint32_t, const char *);
+MTR_FUNC(void, MTR_TtfSetFontStyle, uint32_t, int);
+MTR_FUNC(void, MTR_TtfSetFontOutline, uint32_t, int);
+MTR_FUNC(mtrPixels_t *, MTR_TtfRenderString, uint32_t, uint8_t, uint8_t,
+ uint8_t, const char *);
+MTR_FUNC(void, MTR_TextureBlit_f, uint32_t, float, float);
+MTR_FUNC(void, MTR_TextureBlitRegion_f, uint32_t, float, float, float, float,
+ float, float);
+MTR_FUNC(bool, MTR_TextureReceivePixels, uint32_t, mtrPixels_t *);
 
 #endif

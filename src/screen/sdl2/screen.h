@@ -10,8 +10,11 @@
     #pragma GCC diagnostic pop
 #endif
 
-#include "fa/Screen_SDL2.h"
 #include "marathoner/plugin.h"
+#ifdef MTR_MOD_STATIC
+    #define fa faScreen
+#endif
+#include "fa/Screen_SDL2.h"
 
 typedef struct mtrScreen_t {
     SDL_Window   *screen;

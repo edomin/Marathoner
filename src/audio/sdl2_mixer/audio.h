@@ -11,8 +11,11 @@
 #endif
 #include "SDL2/SDL_mixer.h"
 
-#include "fa/Audio_SDL2_mixer.h"
 #include "marathoner/plugin.h"
+#ifdef MTR_MOD_STATIC
+    #define fa faAudio
+#endif
+#include "fa/Audio_SDL2_mixer.h"
 #include "../common.h"
 
 typedef struct mtrSound_t {

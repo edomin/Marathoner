@@ -135,7 +135,9 @@ MTR_SCRIPT_FUNC_V_V(MTR_SF_PrimitiveLineEnd, MTR_PrimitiveLineEnd)
 
 void MTR_ScriptsRegisterAll(void)
 {
+    #ifdef MTR_MOD_PLUGIN
     mtrVm = MTR_ScriptsGetVm();
+    #endif
 
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, PrimitiveFunctionSupported);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, PrimitiveInit);

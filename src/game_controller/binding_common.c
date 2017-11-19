@@ -84,7 +84,9 @@ MTR_SCRIPT_FUNC_I_I1(MTR_SF_GameControllerGetPowHatsCount,
 
 void MTR_ScriptsRegisterAll(void)
 {
+    #ifdef MTR_MOD_PLUGIN
     mtrVm = MTR_ScriptsGetVm();
+    #endif
 
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE,
      GameControllerFunctionSupported);

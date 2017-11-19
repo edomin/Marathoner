@@ -4,7 +4,6 @@
 #include "squirrel.h"
 
 #include "marathoner/plugin.h"
-#include "../binding_common.h"
 
 #define MTR_SOURCE_MODULE "Texture_SDL2_image"
 
@@ -20,7 +19,12 @@
 #define MTR_BLEND_ONE_MINUS_SRC_ALPHA   8
 #define MTR_BLEND_ONE_MINUS_DST_ALPHA   9
 */
+#ifdef MTR_MOD_STATIC
+    #define MTR_BINDING
+    #define MTR_ScriptsRegisterAll MTR_Texture_SDL2_image_SquirrelRegisterAll
+#endif
 #include "marathoner/binding_common.h"
+#include "../binding_common.h"
 
 MTR_BINDING_COMMON_HEADER()
 
