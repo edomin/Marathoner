@@ -89,10 +89,10 @@ Engine options:
 Autorun options. This options have priority higher than configfile options:
 
 * "--autorun-action \<action\>" - running way. Valid values: "runScript"
-* "--autorun-plugin \<pluginname\>" - ID of plugin that will be run VM
+* "--autorun-plugin \<pluginname\>" - ID of plugin that will be run VM. Option is valid only if engine built as plugin-based
 * "--autorun-script \<filename\>" - autorun script filename
 
-Choose module of subsystem:  
+Choose module of subsystem. This option are valid only if engine built as plugin-based:  
 "--\<subsystem\> \<module\>" - Example "--script Script_Lua"  
 Force disable modules via commandline not implemented now.  
 More examples in tests' bat-files. See "\<platform\>/test_launch" directory.
@@ -105,18 +105,18 @@ More examples in tests' bat-files. See "\<platform\>/test_launch" directory.
 Game starting settings
 
 * "action" key - running way. Valid values: "runScript"
-* "plugin" key (if "action = runScript") - ID of plugin that will be run VM
+* "plugin" key (if "action = runScript") - ID of plugin that will be run VM. Key is valid only if engine built as plugin-based  
 * "script" key (if "action = runScript") - autorun script filename
 
 ##### "Module" section
-Mark modules for forced disable.  
-key-value format: "<plugin_ID> = 0|1"  
+Mark modules for forced disable. Keys are valid only if engine built as plugin-based.  
+key-value format: "\<plugin_ID\> = 0|1"  
 0 - disabled  
 1 - enabled (default)
 ##### "Subsystem" section
 Specify plugin ID of each subsystem for solve conflicts
 of several plugins responsible for one subsystem or completely disable
-subsystem:  
+subsystem. Keys are valid only if engine built as plugin-based:  
 key-value format: "\<subsystem_name\> = \<plugin_ID\> | none"  
 
 * \<plugin_ID\> for assign plugin  
