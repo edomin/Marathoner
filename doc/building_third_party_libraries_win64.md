@@ -38,14 +38,11 @@ $ ar rcs tmp/output/libduktape.a tmp/output/duktape.o
 $ x86_64-w64-mingw32-gcc -Wall -mmmx -msse -msse2 -mfpmath=sse -O2 \
 -o tmp/output/duk_module_node.o -c extras/module-node/duk_module_node.c \
 -Itmp/output
-$ x86_64-w64-mingw32-gcc -o tmp/output/duk_module_node.dll -s -shared \
-tmp/output/duk_module_node.o \
--Wl,--out-implib,tmp/output/libduk_module_node.dll.a -Ltmp/output -lduktape
 $ ar rcs tmp/output/libduk_module_node.a tmp/output/duk_module_node.o
 $ cp tmp/output/*.h /usr/local/x86_64-w64-mingw32/include
 $ cp extras/module-node/duk_module_node.h /usr/local/x86_64-w64-mingw32/include
 $ cp tmp/output/*.a /usr/local/x86_64-w64-mingw32/lib
-$ cp tmp/output/*.dll /usr/local/x86_64-w64-mingw32/bin
+$ cp tmp/output/duktape.dll /usr/local/x86_64-w64-mingw32/bin
 $ rm -r -f tmp
 ```
 

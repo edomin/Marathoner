@@ -23,10 +23,6 @@ $ cmake -G "MSYS Makefiles" -DCMAKE_INSTALL_PREFIX="/usr/local/mingw32" \
 -DENABLE_CJSON_TEST=Off -DBUILD_SHARED_LIBS=Off
 $ make
 $ make install
-$ cmake -G "MSYS Makefiles" -DCMAKE_INSTALL_PREFIX="/usr/local/mingw32" \
--DENABLE_CJSON_TEST=Off
-$ make
-$ make install
 ```
 
 [duktape](http://duktape.org/)
@@ -41,13 +37,11 @@ $ gcc -o tmp/output/duktape.dll -s -shared tmp/output/duktape.o \
 $ ar rcs tmp/output/libduktape.a tmp/output/duktape.o
 $ gcc -Wall -mmmx -mfpmath=387 -O2 -o tmp/output/duk_module_node.o \
 -c extras/module-node/duk_module_node.c -Itmp/output
-$ gcc -o tmp/output/duk_module_node.dll -s -shared tmp/output/duk_module_node.o \
--Wl,--out-implib,tmp/output/libduk_module_node.dll.a -Ltmp/output -lduktape
 $ ar rcs tmp/output/libduk_module_node.a tmp/output/duk_module_node.o
 $ cp tmp/output/*.h /usr/local/mingw32/include
 $ cp extras/module-node/duk_module_node.h /usr/local/mingw32/include
 $ cp tmp/output/*.a /usr/local/mingw32/lib
-$ cp tmp/output/*.dll /usr/local/mingw32/bin
+$ cp tmp/output/duktape.dll /usr/local/mingw32/bin
 $ rm -r -f tmp
 ```
 
@@ -269,7 +263,7 @@ $ make install
 [SDL2_mixer](https://www.libsdl.org/projects/SDL_mixer/)
 
 ```
-$ ./configure --prefix=/usr/local/mingw32 --disable-smpegtest \
+$ ./configure --prefix=/usr/local/mingw32 --build=mingw32 --disable-smpegtest \
 CFLAGS="-O2 -Wall -I/usr/local/mingw32/include" \
 CPPFLAGS="-I/usr/local/mingw32/include" \
 LDFLAGS="-s -L/usr/local/mingw32/lib" --with-smpeg-prefix=/usr/local/mingw32 \
