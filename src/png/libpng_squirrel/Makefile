@@ -1,7 +1,11 @@
 SUBSYSTEM = png
 MODULE = libpng_squirrel
 MODULE_NAME = PNG_libpng_Squirrel
-LIBS = -lsquirrel
+ifeq ($(MOD), plugin)
+  LIBS = -lsquirrel
+else
+  LIBS = -lsquirrel_static
+endif
 PREREQS = ../binding_common.h ../binding_common.c
 
-include ../../../Binding.mk
+include ../../../makefiles/Binding.mk

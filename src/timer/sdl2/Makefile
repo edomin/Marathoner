@@ -1,16 +1,24 @@
-include ../../../Build.mk
+include ../../../makefiles/Build.mk
 
 SUBSYSTEM = timer
 MODULE = sdl2
 MODULE_NAME = Timer_SDL2
 ifeq ($(PLATFORM), win32)
-  LIBS = -lSDL2.dll
+  ifeq ($(MOD), plugin)
+    LIBS = -lSDL2.dll
+  else
+    LIBS = -lSDL2 -lwinmm -limm32 -lole32 -loleaut32 -lversion -luuid
+  endif
 endif
 ifeq ($(PLATFORM), win64)
-  LIBS = -lSDL2.dll
+  ifeq ($(MOD), plugin)
+    LIBS = -lSDL2.dll
+  else
+    LIBS = -lSDL2 -lwinmm -limm32 -lole32 -loleaut32 -lversion -luuid
+  endif
 endif
 ifeq ($(PLATFORM), html5)
   LIBS = $(PREFIX)/lib/sdl2.bc $(PREFIX)/lib/gl.bc
 endif
 
-include ../../../Subsystem.mk
+include ../../../makefiles/Subsystem.mk

@@ -1,7 +1,11 @@
 SUBSYSTEM = abstraction
 MODULE = gui_duktape
 MODULE_NAME = Abstraction_gui_Duktape
-LIBS = -lduktape.dll
+ifeq ($(MOD), plugin)
+  LIBS = -lduktape.dll
+else
+  LIBS = -lduktape
+endif
 PREREQS = ../gui_binding_common.h ../gui_binding_common.c
 
-include ../../../Binding.mk
+include ../../../makefiles/Binding.mk

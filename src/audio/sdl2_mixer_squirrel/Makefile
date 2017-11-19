@@ -1,7 +1,11 @@
 SUBSYSTEM = audio
 MODULE = sdl2_mixer_squirrel
 MODULE_NAME = Audio_SDL2_mixer_Squirrel
-LIBS = -lsquirrel
+ifeq ($(MOD), plugin)
+  LIBS = -lsquirrel
+else
+  LIBS = -lsquirrel_static
+endif
 PREREQS = ../binding_common.h ../binding_common.c ../common.h
 
-include ../../../Binding.mk
+include ../../../makefiles/Binding.mk

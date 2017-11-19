@@ -3,4 +3,4 @@ MODULE = sprite
 MODULE_NAME = Abstraction_sprite
 LIBS =
 
-include ../../../Abstraction.mk
+include ../../../makefiles/Abstraction.mk

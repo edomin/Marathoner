@@ -1,7 +1,11 @@
 SUBSYSTEM = timer
 MODULE = sdl2_duktape
 MODULE_NAME = Timer_SDL2_Duktape
-LIBS = -lduktape.dll
+ifeq ($(MOD), plugin)
+  LIBS = -lduktape.dll
+else
+  LIBS = -lduktape
+endif
 PREREQS = ../binding_common.h ../binding_common.c
 
-include ../../../Binding.mk
+include ../../../makefiles/Binding.mk

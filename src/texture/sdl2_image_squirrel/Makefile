@@ -1,7 +1,11 @@
 SUBSYSTEM = texture
 MODULE = sdl2_image_squirrel
 MODULE_NAME = Texture_SDL2_image_Squirrel
-LIBS = -lsquirrel
+ifeq ($(MOD), plugin)
+  LIBS = -lsquirrel
+else
+  LIBS = -lsquirrel_static
+endif
 PREREQS = ../binding_common.h ../binding_common.c
 
-include ../../../Binding.mk
+include ../../../makefiles/Binding.mk

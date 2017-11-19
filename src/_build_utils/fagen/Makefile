@@ -1,4 +1,4 @@
-include ../../../Build.mk
+include ../../../makefiles/Build.mk
 
 BINDIR = ../../../$(PLATFORM)
 OBJSDIR = ../../../$(PLATFORM)/obj

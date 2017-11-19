@@ -1,7 +1,7 @@
 SUBSYSTEM = abstraction
 MODULE = font_lua
 MODULE_NAME = Abstraction_font_Lua
-LIBS = -llua
+include ../../../makefiles/Lua_libs.mk
 PREREQS = ../font_binding_common.h ../font_binding_common.c
 
-include ../../../Binding.mk
+include ../../../makefiles/Binding.mk

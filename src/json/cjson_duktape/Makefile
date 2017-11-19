@@ -1,7 +1,11 @@
 SUBSYSTEM = json
 MODULE = cjson_duktape
 MODULE_NAME = JSON_cJSON_Duktape
-LIBS = -lduktape.dll
+ifeq ($(MOD), plugin)
+  LIBS = -lduktape.dll
+else
+  LIBS = -lduktape
+endif
 PREREQS = ../binding_common.h ../binding_common.c
 
-include ../../../Binding.mk
+include ../../../makefiles/Binding.mk

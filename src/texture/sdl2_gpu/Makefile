@@ -1,8 +1,12 @@
 SUBSYSTEM = texture
 MODULE = sdl2_gpu
 MODULE_NAME = Texture_SDL2_gpu
-LIBS = -lSDL2.dll -lSDL2_gpu.dll
+ifeq ($(MOD), plugin)
+  LIBS = -lSDL2.dll -lSDL2_gpu.dll
+else
+  LIBS = -lSDL2_gpu -lSDL2 -lwinmm -limm32 -lole32 -loleaut32 -lversion -luuid
+endif
 
 XINCDIRS = -I$(PREFIX)/include/SDL2
 
-include ../../../Subsystem.mk
+include ../../../makefiles/Subsystem.mk

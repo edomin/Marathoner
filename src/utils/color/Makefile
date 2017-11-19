@@ -4,4 +4,4 @@ MODULE_NAME = Utils_color
 LIBS =
 PREREQS = ../color_common.h
 
-include ../../../Utility.mk
+include ../../../makefiles/Utility.mk

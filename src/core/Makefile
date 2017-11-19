@@ -1,4 +1,4 @@
-include ../../Build.mk
+include ../../makefiles/Build.mk
 
 ifeq ($(PLATFORM), win32)
   LDEXFLAGS = -L$(PREFIX)/lib
@@ -12,9 +12,13 @@ endif
 ROOTDIR = ../..
 OBJSDIR = $(ROOTDIR)/$(PLATFORM)/obj
 BINDIR = $(ROOTDIR)/$(PLATFORM)
+LIBDIR = $(ROOTDIR)/$(PLATFORM)/lib
 FADIR = $(ROOTDIR)/$(PLATFORM)/fa
 RCDIR = $(ROOTDIR)/$(PLATFORM)/rc
 INCDIRS = -I$(PREFIX)/include -I$(ROOTDIR)/include -I$(ROOTDIR)/$(PLATFORM)
+ifeq ($(MOD), static)
+  LDEXFLAGS += -L$(LIBDIR)
+endif
 
 FAGEN = $(ROOTDIR)/$(PLATFORM)/fagen
 
@@ -26,16 +30,19 @@ MTR_OBJS = $(OBJSDIR)/engine.o \
  $(OBJSDIR)/indexkeeper.o \
  $(OBJSDIR)/encoding.o \
  $(OBJSDIR)/file.o \
- $(OBJSDIR)/directory.o \
  $(OBJSDIR)/clipboard.o \
  $(OBJSDIR)/string_buffer.o \
- $(OBJSDIR)/plugin_loader.o \
  $(OBJSDIR)/options.o \
  $(OBJSDIR)/version.o \
  $(OBJSDIR)/console.o \
- $(OBJSDIR)/so.o \
- $(OBJSDIR)/fa.o \
+ $(OBJSDIR)/fa.o
+
+ifeq ($(MOD), plugin)
+  MTR_OBJS += $(OBJSDIR)/directory.o \
+   $(OBJSDIR)/so.o \
+   $(OBJSDIR)/plugin_loader.o \
  $(OBJSDIR)/module.o
+endif
 
 LCHR_OBJS = $(OBJSDIR)/launcher.o \
  $(OBJSDIR)/log.o \
@@ -58,40 +65,44 @@ ifeq ($(PLATFORM), win64)
   LCHR_OBJS += $(OBJSDIR)/launcher.res
 endif
 
-all: $(BINDIR)/Marathoner $(BINDIR)/Launcher
+ifeq ($(MOD), static)
+  LIBS_TXT = $(shell ls $(LIBDIR) | grep 'txt$$' | grep '^Script' | sed -e 's%^%$(LIBDIR)/%')
+  LIBS_TXT += $(shell ls $(LIBDIR) | grep 'txt$$' | grep -v '^Script' | sed -e 's%^%$(LIBDIR)/%')
+  LIBS_WITH_DUPLICARES = $(shell cat $(LIBS_TXT))
+  nullstring :=
+  space := $(nullstring)
+  LIBS = $(shell cat $(LIBS_TXT) | grep -E -o '(\+|\.|\w)*' | sed -e 's%^%-%' | tr '$(space)' '\n' | awk '!x[$$0]++')
+  MOD_OBJS = $(shell cat $(OBJSDIR)/objs.txt)
+#  LIBS = $(LIBS_WITH_DUPLICARES)
+#  LIBS = $(shell $(LIBS_WITH_DUPLICARES))
+endif
+
+TARGETS = $(BINDIR)/Marathoner
+ifeq ($(MOD), plugin)
+  TARGETS += $(BINDIR)/Launcher
+endif
+
+all: $(TARGETS)
 
 $(BINDIR)/Marathoner: $(MTR_OBJS)
 ifeq ($(MOD), static)
   ifeq ($(PLATFORM), win32)
+#	echo $(LIBS) >> $(OBJSDIR)/libs.txt
 	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) \
-	 $(MTR_OBJS) -lminini -lutf8 -L../../lib -lmtr_Audio_SDL2_mixer \
-	 -lmtr_Audio_SDL2_mixer_Lua52 \
-	 -lmtr_Game_Controller_SDL2 \
-	 -lmtr_Game_Controller_SDL2_Lua52 \
-	 -lmtr_Keyboard_SDL2 \
-	 -lmtr_Keyboard_SDL2_Lua52 \
-	 -lmtr_Mouse_SDL2 \
-	 -lmtr_Mouse_SDL2_Lua52 \
-	 -lmtr_Primitive_SDL2 \
-	 -lmtr_Primitive_SDL2_Lua52 \
-	 -lmtr_Screen_SDL2 \
-	 -lmtr_Screen_SDL2_Lua52 \
-	 -lmtr_Script_Lua52 \
-	 -lmtr_Texture_SDL2_image \
-	 -lmtr_Texture_SDL2_image_Lua52 \
-	 -lmtr_Timer_SDL2 \
-	 -lmtr_Timer_SDL2_Lua52 \
-	 -lmtr_TTF_SDL2_ttf \
-	 -lmtr_TTF_SDL2_ttf_Lua52 \
-	 -lmtr_Utils_color \
-	 -lmtr_Utils_color_Lua52
+	 $(MTR_OBJS) $(MOD_OBJS) -lminini -lutf8 -ltinyfiledialogs -lole32 \
+	 -lshlwapi -llazy_winapi -lsaneopt $(LIBS)
   endif
-  ifeq ($(PLATFORM), html5)
+  ifeq ($(PLATFORM), win64)
 	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) \
-	 $(MTR_OBJS) -lminini -lutf8 --preload-file ../../plugin@/plugin \
-	 --preload-file ../../Marathoner.cfg@/ \
-	 --preload-file ../../autorun@/autorun -s TOTAL_MEMORY=134217728
+	 $(MTR_OBJS) $(MOD_OBJS) -lminini -lutf8 -ltinyfiledialogs -lole32 \
+	 -lshlwapi -llazy_winapi -lsaneopt $(LIBS)
   endif
+#  ifeq ($(PLATFORM), html5)
+#	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) \
+#	 $(MTR_OBJS) -lminini -lutf8 --preload-file ../../plugin@/plugin \
+#	 --preload-file ../../Marathoner.cfg@/ \
+#	 --preload-file ../../autorun@/autorun -s TOTAL_MEMORY=134217728
+#  endif
 endif
 ifeq ($(MOD), plugin)
   ifeq ($(PLATFORM), win32)

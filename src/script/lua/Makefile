@@ -1,7 +1,8 @@
 SUBSYSTEM = script
 MODULE = lua
 MODULE_NAME = Script_Lua
-LIBS = -llua
+include ../../../makefiles/Lua_libs.mk
 PREREQS = ../common.c ../../../include/marathoner/script_func.h
+SCRIPT = yes
 
-include ../../../Subsystem.mk
+include ../../../makefiles/Subsystem.mk

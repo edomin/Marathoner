@@ -1,7 +1,11 @@
 SUBSYSTEM = utils
 MODULE = math_duktape
 MODULE_NAME = Utils_math_Duktape
-LIBS = -lduktape.dll
+ifeq ($(MOD), plugin)
+  LIBS = -lduktape.dll
+else
+  LIBS = -lduktape
+endif
 PREREQS = ../math_binding_common.h ../math_binding_common.c
 
-include ../../../Binding.mk
+include ../../../makefiles/Binding.mk

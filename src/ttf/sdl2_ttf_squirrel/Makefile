@@ -1,7 +1,11 @@
 SUBSYSTEM = ttf
 MODULE = sdl2_ttf_squirrel
 MODULE_NAME = TTF_SDL2_ttf_Squirrel
-LIBS = -lsquirrel
+ifeq ($(MOD), plugin)
+  LIBS = -lsquirrel
+else
+  LIBS = -lsquirrel_static
+endif
 PREREQS = ../binding_common.h ../binding_common.c
 
-include ../../../Binding.mk
+include ../../../makefiles/Binding.mk

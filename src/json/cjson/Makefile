@@ -1,6 +1,6 @@
 SUBSYSTEM = json
 MODULE = cjson
 MODULE_NAME = JSON_cJSON
-LIBS = -Wl,-Bstatic -lcjson -Wl,-Bstatic -lssp
+LIBS = -lcjson -lssp
 
-include ../../../Subsystem.mk
+include ../../../makefiles/Subsystem.mk
