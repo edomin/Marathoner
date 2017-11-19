@@ -1,4 +1,4 @@
-include Build.mk
+include makefiles/Build.mk
 
 OBJSDIR = $(PLATFORM)/obj
 LIBDIR = $(PLATFORM)/lib
@@ -95,11 +95,18 @@ ABSTRACTION_GUI_LUA = abstraction/gui_lua
 ABSTRACTION_GUI_SQUIRREL = abstraction/gui_squirrel
 ABSTRACTION_GUI_DUKTAPE = abstraction/gui_duktape
 
+ifeq ($(MOD), plugin)
 all: $(PLATFORM)
+endif
+ifeq ($(MOD), static)
+include makefiles/Monolythic.mk
+endif
 
-common: prebuild
+fagen:
 	make -j$(CORES) -C src/_build_utils/fagen PREFIX=$(PREFIX)
 
+plugins: prebuild
+ifeq ($(MOD), plugin)
 	make -j$(CORES) -C src/$(SCREEN_SDL2_GPU) PREFIX=$(PREFIX)
 	make -j$(CORES) -C src/$(SCREEN_SDL2_GPU_LUA) PREFIX=$(PREFIX)
 	make -j$(CORES) -C src/$(SCREEN_SDL2_GPU_SQUIRREL) PREFIX=$(PREFIX)
@@ -196,15 +203,19 @@ common: prebuild
 	make -j$(CORES) -C src/$(ABSTRACTION_GUI_LUA) PREFIX=$(PREFIX)
 	make -j$(CORES) -C src/$(ABSTRACTION_GUI_SQUIRREL) PREFIX=$(PREFIX)
 	make -j$(CORES) -C src/$(ABSTRACTION_GUI_DUKTAPE) PREFIX=$(PREFIX)
+endif
 
+engine:
+ifeq ($(MOD), plugin)
 	make -j$(CORES) -C src/core PREFIX=$(PREFIX)
+endif
 
 windows_common: prebuild
 	make -j$(CORES) -C src/_build_utils/rcgen PREFIX=$(PREFIX)
 
-win32: prebuild windows_common common
+win32: prebuild windows_common fagen plugins engine
 
-win64: prebuild windows_common common
+win64: prebuild windows_common fagen plugins engine
 
 html5: prebuild
 	make -C src/$(SCREEN_SDL2) PREFIX=$(PREFIX)
@@ -240,6 +251,10 @@ endif
 ifeq ($(PLATFORM), win64)
 	-mkdir $(RCDIR)
 endif
+ifeq ($(MOD), static)
+	-mkdir $(PLATFORM)/binding_init_func
+	-mkdir $(PLATFORM)/binding_init_func_call
+endif
 
 clean:
 	-rm -f -r $(OBJSDIR)
@@ -261,6 +276,11 @@ endif
 ifeq ($(PLATFORM), html5)
 	-rm -f -r $(PLATFORM)/marathoner.html
 	-rm -f -r $(PLATFORM)/marathoner.js
+endif
+ifeq ($(MOD), static)
+	-rm -f -r $(PLATFORM)/binding_init_func
+	-rm -f -r $(PLATFORM)/binding_init_func_call
+	-rm -f $(PLATFORM)/obj/objs.txt
 endif
 
 remake: clean all

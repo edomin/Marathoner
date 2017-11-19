@@ -1,5 +1,5 @@
-include ../../../Build.mk
-include ../../../Module.mk
+include ../../../makefiles/Build.mk
+include ../../../makefiles/Module.mk
 
 FADIR = $(ROOTDIR)/$(PLATFORM)/fa
 INCDIRS += -I$(ROOTDIR)/$(PLATFORM)
@@ -9,7 +9,7 @@ FAGEN = $(ROOTDIR)/$(PLATFORM)/fagen
 $(OBJ): $(MODULE).c $(MODULE).h $(PREREQS) \
  $(ROOTDIR)/include/marathoner/version.h $(FADIR)/$(MODULE_NAME).h
 	-mkdir $(OBJSDIR)/$(SUBSYSTEM)
-	$(CC) $(CFLAGS) $(INCDIRS) -c $(MODULE).c -o $(OBJ)
+	$(CC) $(CFLAGS) $(CEXFLAGS) $(INCDIRS) -c $(MODULE).c -o $(OBJ)
 
 $(MODULE).c: $(ROOTDIR)/include/marathoner/plugin_common.c
 

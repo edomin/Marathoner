@@ -1,5 +1,6 @@
-include ../../../Build.mk
-include ../../../Module.mk
+include ../../../makefiles/Build.mk
+BINDING = yes
+include ../../../makefiles/Module.mk
 
 $(OBJ): binding.c binding.h $(PREREQS) \
  $(ROOTDIR)/include/marathoner/script_func.h \

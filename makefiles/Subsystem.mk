@@ -1,5 +1,5 @@
-include ../../../Build.mk
-include ../../../Module.mk
+include ../../../makefiles/Build.mk
+include ../../../makefiles/Module.mk
 
 FADIR = $(ROOTDIR)/$(PLATFORM)/fa
 INCDIRS += -I$(ROOTDIR)/$(PLATFORM)
