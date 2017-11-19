@@ -15,4 +15,12 @@ GDG/*
 Marathoner.cfg
 test/output*
 win32/fa/*
+win32/binding_init_func/*
+win32/binding_init_func_call/*
+win32/lib/*.txt
+win32/obj/objs.txt
 win64/fa/*
+win64/binding_init_func/*
+win64/binding_init_func_call/*
+win64/lib/*.txt
+win64/obj/objs.txt
