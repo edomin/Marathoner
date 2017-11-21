@@ -4,7 +4,7 @@ MODULE_NAME = Screen_SDL2_gpu
 ifeq ($(MOD), plugin)
   LIBS = -lSDL2.dll -lSDL2_gpu.dll
 else
-  LIBS = -lSDL2_gpu-Wl,-Bstatic -lSDL2 -lwinmm -limm32 -lole32 -loleaut32 \
+  LIBS = -lSDL2_gpu -lopengl32 -lSDL2 -lwinmm -limm32 -lole32 -loleaut32 \
    -lversion -luuid
 endif
 

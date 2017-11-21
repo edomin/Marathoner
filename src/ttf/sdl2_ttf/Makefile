@@ -16,7 +16,7 @@ ifeq ($(PLATFORM), win64)
     LIBS = -lSDL2_ttf.dll -lSDL2.dll
   else
     LIBS = -lSDL2_ttf -lSDL2 -lwinmm -limm32 -lole32 -loleaut32 -lversion \
-     -luuid -lfreetype -lbz2
+     -luuid -lfreetype -lpng -lz -lbz2
   endif
 endif
 ifeq ($(PLATFORM), html5)
