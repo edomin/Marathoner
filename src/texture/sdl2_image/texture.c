@@ -14,8 +14,7 @@ MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
     report->subsystem = "texture";
     report->prereqsCount = 1;
     report->prereqs = malloc(sizeof(char *) * report->prereqsCount);
-    if (report->prereqs == NULL)
-    {
+    if (report->prereqs == NULL) {
         free(report);
         return NULL;
     }
@@ -23,8 +22,7 @@ MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
     report->prereqSubsystemsCount = 1;
     report->prereqSubsystems = malloc(
      sizeof(char *) * report->prereqSubsystemsCount);
-    if (report->prereqSubsystems == NULL)
-    {
+    if (report->prereqSubsystems == NULL) {
         free(report);
         return NULL;
     }
@@ -37,8 +35,7 @@ MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Texture, FA_FUNCTIONS_COUNT)
 
 int MTR_FlipToActualFlip(int flip)
 {
-    switch (flip)
-    {
+    switch (flip) {
         case MTR_FLIP_NONE:
             return SDL_FLIP_NONE;
             break;
@@ -90,8 +87,7 @@ MTR_DCLSPC bool MTR_CALL MTR_TextureInit(uint32_t dmSize, uint32_t reservedCount
     #ifdef MTR_MOD_PLUGIN
     MTR_GetScreen = (MTR_GetScreenFunc)MTR_FindFunction("Screen_SDL2",
      "MTR_GetScreen");
-    if (MTR_GetScreen == NULL)
-    {
+    if (MTR_GetScreen == NULL) {
         MTR_Notify(
          "Unable to load 'MTR_GetScreen' function from 'Screen_SDL2' module", 1,
          MTR_LMT_FATAL);
@@ -105,20 +101,17 @@ MTR_DCLSPC bool MTR_CALL MTR_TextureInit(uint32_t dmSize, uint32_t reservedCount
 
     mtrTextureKeeper = (mtrIndexkeeper_t *)MTR_IndexkeeperCreate(dmSize,
      reservedCount, sizeof(mtrTexture_t));
-    if (mtrTextureKeeper == NULL)
-    {
+    if (mtrTextureKeeper == NULL) {
         MTR_Notify("Unable to create indexkeeper structure for textures", 1,
          MTR_LMT_FATAL);
         return false;
-    }
-    else
+    } else
         MTR_LogWrite("Indexkeeper structure for textures created", 1,
          MTR_LMT_INFO);
 
     if (IMG_Init(IMG_INIT_PNG) == IMG_INIT_PNG)
         MTR_LogWrite("SDL_image initialized", 1, MTR_LMT_INFO);
-    else
-    {
+    else {
         MTR_Notify("Unable to initialize SDL_image", 1, MTR_LMT_FATAL);
         MTR_LogWrite(IMG_GetError(), 1, MTR_LMT_FATAL);
         return false;
@@ -139,8 +132,7 @@ MTR_DCLSPC void MTR_CALL MTR_TextureBeginTarget(uint32_t texNum)
     mtrTexture_t *texture;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
-    if (texNum != 0)
-    {
+    if (texNum != 0) {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         SDL_SetRenderTarget(mtrScreen->renderer, texture->texture);
     }
@@ -161,13 +153,11 @@ MTR_DCLSPC int MTR_CALL MTR_TextureGetWidth(uint32_t texNum)
     int           w;
     MTR_TEXTURE_CHECK_IF_NOT_INITED(0);
 
-    if (texNum != 0)
-    {
+    if (texNum != 0) {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         SDL_QueryTexture(texture->texture, NULL, NULL, &w, NULL);
         return w;
-    }
-    else
+    } else
         return 0;
 }
 
@@ -178,13 +168,11 @@ MTR_DCLSPC int MTR_CALL MTR_TextureGetHeight(uint32_t texNum)
     int           h;
     MTR_TEXTURE_CHECK_IF_NOT_INITED(0);
 
-    if (texNum != 0)
-    {
+    if (texNum != 0) {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         SDL_QueryTexture(texture->texture, NULL, NULL, NULL, &h);
         return h;
-    }
-    else
+    } else
         return 0;
 }
 
@@ -194,20 +182,16 @@ MTR_DCLSPC void MTR_CALL MTR_TextureGetSizes(uint32_t texNum, int *width,
 {
     mtrTexture_t *texture;
 
-    if (!mtrTextureInited)
-    {
+    if (!mtrTextureInited) {
         *width = 0;
         *height = 0;
         return;
     }
 
-    if (texNum != 0)
-    {
+    if (texNum != 0) {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         SDL_QueryTexture(texture->texture, NULL, NULL, width, height);
-    }
-    else
-    {
+    } else {
         *width = 0;
         *height = 0;
     }
@@ -229,8 +213,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_TextureCreate(const char *name, int width,
     texture->texture = SDL_CreateTexture(mtrScreen->renderer,
      SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, width, height);
 
-    if (texture->texture != NULL)
-    {
+    if (texture->texture != NULL) {
         texture->name = malloc(sizeof(char) * (strlen(name) + 1));
         if (texture->name == NULL)
             texture->name = mtrDefaultTextureName;
@@ -243,9 +226,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_TextureCreate(const char *name, int width,
         MTR_LogWrite_s("Texture created", 0, MTR_LMT_INFO, name);
         texture->surface = NULL;
         return freeIndex;
-    }
-    else
-    {
+    } else {
         MTR_Notify("Unable to create texture", 1, MTR_LMT_ERROR);
         MTR_LogWrite(SDL_GetError(), 1, MTR_LMT_ERROR);
         MTR_IndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
@@ -274,8 +255,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_TextureLoad(const char *filename)
     texture->surface = IMG_Load(filename);
     if (texture->surface != NULL)
         MTR_LogWrite("Image loaded", 1, MTR_LMT_INFO);
-    else
-    {
+    else {
         MTR_Notify("Unable to load image", 1, MTR_LMT_ERROR);
         MTR_LogWrite(IMG_GetError(), 1, MTR_LMT_ERROR);
         MTR_IndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
@@ -284,8 +264,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_TextureLoad(const char *filename)
     texture->texture = SDL_CreateTextureFromSurface(mtrScreen->renderer,
      texture->surface);
     //SDL_FreeSurface(loadedImage);
-    if (texture->texture != NULL)
-    {
+    if (texture->texture != NULL) {
         texture->name = malloc(sizeof(char) * (strlen(filename) + 1));
         if (texture->name == NULL)
             texture->name = mtrDefaultTextureName;
@@ -297,9 +276,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_TextureLoad(const char *filename)
         SDL_SetTextureAlphaMod(texture->texture, 0xFF);
         MTR_LogWrite_s("Texture loaded", 0, MTR_LMT_INFO, filename);
         return freeIndex;
-    }
-    else
-    {
+    } else {
         MTR_Notify("Unable to create texture", 1, MTR_LMT_ERROR);
         MTR_LogWrite(SDL_GetError(), 1, MTR_LMT_ERROR);
         MTR_IndexkeeperFreeIndex(mtrTextureKeeper, freeIndex);
@@ -321,12 +298,10 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_TextureCopy(uint32_t texNum)
     MTR_TEXTURE_CHECK_IF_NOT_INITED(0U);
 
     MTR_LogWrite("Copying texture", 0, MTR_LMT_INFO);
-    if (texNum != 0)
-    {
+    if (texNum != 0) {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
 
-        if (texture->surface == NULL)
-        {
+        if (texture->surface == NULL) {
             if (SDL_QueryTexture(texture->texture, &pixFormat, NULL, &w, &h) <
              0)
             {
@@ -363,9 +338,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_TextureCopy(uint32_t texNum)
                 MTR_TextureFree(newIndex);
                 return 0U;
             }
-        }
-        else /* texture->surface == NULL */
-        {
+        } else { /* texture->surface == NULL */
             newIndex = MTR_IndexkeeperGetFreeIndex(mtrTextureKeeper);
             MTR_LogWrite_i("Found free index: ", 1, MTR_LMT_INFO, newIndex);
             newTexture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper,
@@ -374,8 +347,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_TextureCopy(uint32_t texNum)
              mtrScreen->renderer, texture->surface);
 
             if (SDL_MUSTLOCK(texture->surface))
-                if (SDL_LockSurface(texture->surface) == -1)
-                {
+                if (SDL_LockSurface(texture->surface) == -1) {
                     MTR_Notify("Unable to lock surface for reading pixels", 1,
                      MTR_LMT_ERROR);
                     MTR_TextureFree(newIndex);
@@ -386,8 +358,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_TextureCopy(uint32_t texNum)
              texture->surface->pixels, texture->surface->w, texture->surface->h,
              32, texture->surface->pitch, 0xFF000000, 0x00FF0000, 0x0000FF00,
              0x000000FF);
-            if (newTexture->surface == NULL)
-            {
+            if (newTexture->surface == NULL) {
                 MTR_Notify("Unable to create new surface", 1, MTR_LMT_ERROR);
                 MTR_TextureFree(newIndex);
                 return 0U;
@@ -396,8 +367,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_TextureCopy(uint32_t texNum)
             if (SDL_MUSTLOCK(texture->surface))
                 SDL_UnlockSurface(texture->surface);
 
-            if (newTexture->texture == NULL)
-            {
+            if (newTexture->texture == NULL) {
                 MTR_Notify("Unable to create texture from old texture's surface",
                  1, MTR_LMT_ERROR);
                 MTR_TextureFree(newIndex);
@@ -415,9 +385,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_TextureCopy(uint32_t texNum)
 
         MTR_LogWrite("Texture copy created", 0, MTR_LMT_INFO);
         return newIndex;
-    }
-    else
-    {
+    } else {
         MTR_Notify("Unable to copy texture. Incorrect texture for copy", 0,
          MTR_LMT_ERROR);
         return 0U;
@@ -439,8 +407,7 @@ bool MTR_TextureCheckExtension(const char *filename, const char *ext)
         return false;
 
     diff = fnLength - extLength;
-    for (i = 0; i < extLength; i++)
-    {
+    for (i = 0; i < extLength; i++) {
         if (ext[i] != filename[i + diff])
             return false;
     }
@@ -504,18 +471,14 @@ MTR_DCLSPC bool MTR_CALL MTR_TextureSave(uint32_t texNum, const char *filename)
 
     if (texture->surface != NULL)
         MTR_TextureSaveSurface(texture->surface, filename);
-    else
-    {
-        if (SDL_QueryTexture(texture->texture, &pixFormat, NULL, &w, &h) <
-         0)
-        {
+    else {
+        if (SDL_QueryTexture(texture->texture, &pixFormat, NULL, &w, &h) < 0) {
             MTR_Notify("Unable to query texture", 1, MTR_LMT_ERROR);
             MTR_LogWrite(SDL_GetError(), 1, MTR_LMT_ERROR);
             return false;
         }
 
-        if (SDL_SetRenderTarget(mtrScreen->renderer, texture->texture) < 0)
-        {
+        if (SDL_SetRenderTarget(mtrScreen->renderer, texture->texture) < 0) {
             MTR_Notify("Unable to set target texture for reading pixels", 1,
              MTR_LMT_ERROR);
             MTR_LogWrite(SDL_GetError(), 1, MTR_LMT_ERROR);
@@ -528,21 +491,18 @@ MTR_DCLSPC bool MTR_CALL MTR_TextureSave(uint32_t texNum, const char *filename)
             MTR_LogWrite(SDL_GetError(), 1, MTR_LMT_ERROR);
             return false;
         }
-        if (pixels == NULL)
-        {
+        if (pixels == NULL) {
             MTR_Notify("Pixels are not readed", 1, MTR_LMT_ERROR);
             return false;
         }
-        if (SDL_SetRenderTarget(mtrScreen->renderer, NULL) == -1)
-        {
+        if (SDL_SetRenderTarget(mtrScreen->renderer, NULL) == -1) {
             MTR_Notify("Unable to unset render target", 1, MTR_LMT_ERROR);
             return false;
         }
 
         surface = SDL_CreateRGBSurfaceFrom(pixels, w, h, 32, w * 4,
          0xFF000000, 0x00FF0000, 0x0000FF00, 0x000000FF);
-        if (surface == NULL)
-        {
+        if (surface == NULL) {
             MTR_Notify("Unable to create temp surface from readed pixels", 1,
              MTR_LMT_ERROR);
             return false;
@@ -567,8 +527,7 @@ MTR_DCLSPC void MTR_CALL MTR_TextureFree(uint32_t texNum)
     mtrTexture_t *texture;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
-    if (texNum != 0)
-    {
+    if (texNum != 0) {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         MTR_LogWrite_s("Unloading texture", 0, MTR_LMT_INFO, texture->name);
         if (texture->name != mtrDefaultTextureName)
@@ -594,8 +553,7 @@ MTR_DCLSPC void MTR_CALL MTR_TextureSetModulation_c(uint32_t texNum,
     r = color >> 16;
     g = (color & 0x00FF00) >> 8;
     b = color & 0x0000FF;
-    if (texNum != 0)
-    {
+    if (texNum != 0) {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         SDL_SetTextureColorMod(texture->texture, r, g, b);
     }
@@ -616,8 +574,7 @@ MTR_DCLSPC void MTR_CALL MTR_TextureSetModulation_ca(uint32_t texNum,
     g = (color & 0x00FF0000) >> 16;
     b = (color & 0x0000FF00) >> 8;
     a = color & 0x000000FF;
-    if (texNum != 0)
-    {
+    if (texNum != 0) {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         SDL_SetTextureColorMod(texture->texture, r, g, b);
         SDL_SetTextureAlphaMod(texture->texture, a);
@@ -631,8 +588,7 @@ MTR_DCLSPC void MTR_CALL MTR_TextureSetModulation_rgb(uint32_t texNum,
     mtrTexture_t *texture;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
-    if (texNum != 0)
-    {
+    if (texNum != 0) {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         SDL_SetTextureColorMod(texture->texture, r, g, b);
     }
@@ -645,8 +601,7 @@ MTR_DCLSPC void MTR_CALL MTR_TextureSetModulation_rgba(uint32_t texNum,
     mtrTexture_t *texture;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
-    if (texNum != 0)
-    {
+    if (texNum != 0) {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         SDL_SetTextureColorMod(texture->texture, r, g, b);
         SDL_SetTextureAlphaMod(texture->texture, a);
@@ -660,8 +615,7 @@ MTR_DCLSPC void MTR_CALL MTR_TextureSetModulationAlpha(uint32_t texNum,
     mtrTexture_t *texture;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
-    if (texNum != 0)
-    {
+    if (texNum != 0) {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         SDL_SetTextureAlphaMod(texture->texture, alpha);
     }
@@ -675,8 +629,7 @@ MTR_DCLSPC void MTR_CALL MTR_TextureSetModulationAlpha_f(uint32_t texNum,
     uint8_t       alpha8;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
-    if (texNum != 0)
-    {
+    if (texNum != 0) {
         alpha8 = (alpha * 255);
         alpha8 %= 256;
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
@@ -706,8 +659,7 @@ MTR_DCLSPC void MTR_CALL MTR_TextureBlit_f(uint32_t texNum, float x, float y)
     SDL_Rect      clip;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
-    if (texNum != 0)
-    {
+    if (texNum != 0) {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         offset.x = x;
         offset.y = y;
@@ -727,8 +679,7 @@ MTR_DCLSPC void MTR_CALL MTR_TextureBlitSized_f(uint32_t texNum, float x,
     SDL_Rect      offset;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
-    if (texNum != 0)
-    {
+    if (texNum != 0) {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         offset.x = x;
         offset.y = y;
@@ -746,8 +697,7 @@ MTR_DCLSPC void MTR_CALL MTR_TextureBlitScaled_f(uint32_t texNum, float x,
     SDL_Rect      offset;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
-    if (texNum != 0)
-    {
+    if (texNum != 0) {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         offset.x = x;
         offset.y = y;
@@ -767,8 +717,7 @@ MTR_DCLSPC void MTR_CALL MTR_TextureBlitAngled_f(uint32_t texNum, float x,
     SDL_Point     pivot;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
-    if (texNum != 0)
-    {
+    if (texNum != 0) {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         offset.x = x;
         offset.y = y;
@@ -789,8 +738,7 @@ MTR_DCLSPC void MTR_CALL MTR_TextureBlitFlipped_f(uint32_t texNum, float x,
     int           actualFlip;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
-    if (texNum != 0)
-    {
+    if (texNum != 0) {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         actualFlip = MTR_FlipToActualFlip(flip);
         offset.x = x;
@@ -812,8 +760,7 @@ MTR_DCLSPC void MTR_CALL MTR_TextureBlitGeneral_f(uint32_t texNum, float x,
     int           actualFlip;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
-    if (texNum != 0)
-    {
+    if (texNum != 0) {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         actualFlip = MTR_FlipToActualFlip(flip);
         offset.x = x;
@@ -837,8 +784,7 @@ MTR_DCLSPC void MTR_CALL MTR_TextureBlitRegion_f(uint32_t texNum, float x,
     SDL_Rect      clip;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
-    if (texNum != 0)
-    {
+    if (texNum != 0) {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         offset.x = x;
         offset.y = y;
@@ -861,8 +807,7 @@ MTR_DCLSPC void MTR_CALL MTR_TextureBlitRegionSized_f(uint32_t texNum, float x,
     SDL_Rect      clip;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
-    if (texNum != 0)
-    {
+    if (texNum != 0) {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         offset.x = x;
         offset.y = y;
@@ -885,8 +830,7 @@ MTR_DCLSPC void MTR_CALL MTR_TextureBlitRegionScaled_f(uint32_t texNum, float x,
     SDL_Rect      clip;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
-    if (texNum != 0)
-    {
+    if (texNum != 0) {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         offset.x = x;
         offset.y = y;
@@ -911,8 +855,7 @@ MTR_DCLSPC void MTR_CALL MTR_TextureBlitRegionAngled_f(uint32_t texNum, float x,
     SDL_Point     pivot;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
-    if (texNum != 0)
-    {
+    if (texNum != 0) {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         offset.x = x;
         offset.y = y;
@@ -939,8 +882,7 @@ MTR_DCLSPC void MTR_CALL MTR_TextureBlitRegionFlipped_f(uint32_t texNum, float x
     int           actualFlip;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
-    if (texNum != 0)
-    {
+    if (texNum != 0) {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         actualFlip = MTR_FlipToActualFlip(flip);
         offset.x = x;
@@ -968,8 +910,7 @@ MTR_DCLSPC void MTR_CALL MTR_TextureBlitRegionGeneral_f(uint32_t texNum,
     int           actualFlip;
     MTR_TEXTURE_CHECK_IF_NOT_INITED();
 
-    if (texNum != 0)
-    {
+    if (texNum != 0) {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
         actualFlip = MTR_FlipToActualFlip(flip);
         offset.x = x;
@@ -1000,23 +941,20 @@ MTR_DCLSPC bool MTR_CALL MTR_TextureReceivePixels(uint32_t texNum,
     MTR_TEXTURE_CHECK_IF_NOT_INITED(false);
 
 
-    if (texNum != 0)
-    {
+    if (texNum != 0) {
         texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
 
         if (SDL_QueryTexture(texture->texture, &textureFormat, &textureAccess,
          &textureW, &textureH) == -1)
             return false;
 
-        if (textureW != pixels->w || textureH != pixels->h)
-        {
+        if (textureW != pixels->w || textureH != pixels->h) {
             SDL_DestroyTexture(texture->texture);
             texture->texture = SDL_CreateTexture(mtrScreen->renderer,
              SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, pixels->w,
              pixels->h);
 
-            if (texture->texture == NULL)
-            {
+            if (texture->texture == NULL) {
                 MTR_IndexkeeperFreeIndex(mtrTextureKeeper, texNum);
                 return false;
             }

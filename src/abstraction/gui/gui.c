@@ -15,8 +15,7 @@ MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
 
     report->prereqsCount = 1;
     report->prereqs = malloc(sizeof(char *) * report->prereqsCount);
-    if (report->prereqs == NULL)
-    {
+    if (report->prereqs == NULL) {
         free(report);
         return NULL;
     }
@@ -25,8 +24,7 @@ MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
     report->prereqSubsystemsCount = 5;
     report->prereqSubsystems = malloc(sizeof(char *)
      * report->prereqSubsystemsCount);
-    if (report->prereqSubsystems == NULL)
-    {
+    if (report->prereqSubsystems == NULL) {
         free(report);
         free(report->prereqs);
         return NULL;
@@ -251,13 +249,11 @@ void MTR_NkHandleEvents(void)
     MTR_NkUpdateKey(ctx, MTR_KEY_PAGEUP, NK_KEY_SCROLL_UP);
     MTR_NkUpdateKey(ctx, MTR_KEY_PAGEDOWN, NK_KEY_SCROLL_DOWN);
 
-    if (MTR_KeyboardPress(MTR_KEY_HOME))
-    {
+    if (MTR_KeyboardPress(MTR_KEY_HOME)) {
         nk_input_key(ctx, NK_KEY_TEXT_START, 1);
         nk_input_key(ctx, NK_KEY_SCROLL_START, 1);
     }
-    if (MTR_KeyboardRelease(MTR_KEY_END))
-    {
+    if (MTR_KeyboardRelease(MTR_KEY_END)) {
         nk_input_key(ctx, NK_KEY_TEXT_END, 0);
         nk_input_key(ctx, NK_KEY_SCROLL_END, 0);
     }
@@ -278,8 +274,7 @@ void MTR_NkHandleEvents(void)
         nk_input_key(ctx, NK_KEY_TEXT_REDO, 1);
     else if (MTR_KeyboardPress(MTR_KEY_A) && controlPressed)
         nk_input_key(ctx, NK_KEY_TEXT_SELECT_ALL, 1);
-    else
-    {
+    else {
         utf8char = MTR_KeyboardInputChar();
         if (utf8char != NULL)
             nk_input_glyph(ctx, utf8char);
@@ -332,8 +327,7 @@ MTR_DCLSPC bool MTR_CALL MTR_GuiInit(uint32_t fontDmSize,
 
     if (ok)
         MTR_LogWrite("Added dependent functions", 1, MTR_LMT_INFO);
-    else
-    {
+    else {
         MTR_Notify("Functions not added", 1, MTR_LMT_FATAL);
         return false;
     }
@@ -341,33 +335,28 @@ MTR_DCLSPC bool MTR_CALL MTR_GuiInit(uint32_t fontDmSize,
 
     mtrGuiFontKeeper = (mtrIndexkeeper_t *)MTR_IndexkeeperCreate(fontDmSize,
      fontReservedCount, sizeof(mtrNkFont));
-    if (mtrGuiFontKeeper == NULL)
-    {
+    if (mtrGuiFontKeeper == NULL) {
         MTR_Notify("Unable to create indexkeeper structure for gui fonts", 1,
          MTR_LMT_FATAL);
         return false;
-    }
-    else
+    } else
         MTR_LogWrite("Indexkeeper structure for gui fonts created", 1,
          MTR_LMT_INFO);
 
     mtrGuiImageKeeper = (mtrIndexkeeper_t *)MTR_IndexkeeperCreate(imageDmSize,
      imageReservedCount, sizeof(mtrNkImage));
-    if (mtrGuiImageKeeper == NULL)
-    {
+    if (mtrGuiImageKeeper == NULL) {
         MTR_Notify("Unable to create indexkeeper structure for gui images", 1,
          MTR_LMT_FATAL);
         return false;
-    }
-    else
+    } else
         MTR_LogWrite("Indexkeeper structure for gui images created", 1,
          MTR_LMT_INFO);
 
     nkFontNum = MTR_GuiAddFont(fontnum);
 
     MTR_ScreenGetSizes(&screenWidth, &screenHeight);
-    if (MTR_NkInit(nkFontNum, screenWidth, screenHeight) == NULL)
-    {
+    if (MTR_NkInit(nkFontNum, screenWidth, screenHeight) == NULL) {
         MTR_Notify("Unable to create nuklear context", 1, MTR_LMT_FATAL);
         return false;
     }
@@ -406,10 +395,8 @@ MTR_DCLSPC void MTR_CALL MTR_GuiRender(void)
     MTR_GUI_CHECK_IF_NOT_INITED();
     UNUSED(points);
 
-    nk_foreach(cmd, &mtrNkGui.ctx)
-    {
-        switch (cmd->type)
-        {
+    nk_foreach(cmd, &mtrNkGui.ctx) {
+        switch (cmd->type) {
             case NK_COMMAND_NOP:
                 break;
             case NK_COMMAND_SCISSOR:
@@ -482,8 +469,7 @@ MTR_DCLSPC void MTR_CALL MTR_GuiRender(void)
                 {
                     const struct nk_command_polygon *p = (
                      const struct nk_command_polygon*)cmd;
-                    for (i = 0; i < p->point_count; i++)
-                    {
+                    for (i = 0; i < p->point_count; i++) {
                         if (i == p->point_count - 1)
                             MTR_PrimitiveLine_rgba_f(p->points[i].x,
                              p->points[i].y, p->points[0].x, p->points[0].y,
@@ -500,8 +486,7 @@ MTR_DCLSPC void MTR_CALL MTR_GuiRender(void)
                 {
                     const struct nk_command_polygon_filled *p = (
                      const struct nk_command_polygon_filled *)cmd;
-                    for (i = 0; i < p->point_count; i++)
-                    {
+                    for (i = 0; i < p->point_count; i++) {
                         if (i == p->point_count - 1)
                             MTR_PrimitiveLine_rgba_f(p->points[i].x,
                              p->points[i].y, p->points[0].x, p->points[0].y,

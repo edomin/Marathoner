@@ -53,8 +53,7 @@ mtrPixels_t            *tempPixels;
     if (!mtrTextureInited)                           \
         return returnValue;
 #define MTR_TEXTURE_CHECK_IF_NOT_INITED_WITH_LOG(message, returnValue) \
-    if (!mtrTextureInited)                                             \
-    {                                                                  \
+    if (!mtrTextureInited) {                                           \
         MTR_LogWrite(message ". Texture manager are not initialized",  \
          1, MTR_LMT_ERROR);                                            \
         return returnValue;                                            \
