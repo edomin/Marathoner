@@ -1,0 +1,35 @@
+bzip2           BSD-like
+cJSON           MIT
+duktape         MIT
+Freetype        BSD-like
+giflib          X Consortium-like (MIT-like)
+glew            Modified BSD License && Mesa 3-D License (MIT) && Khronos License (MIT)
+glfw            Zlib
+lazy-winapi     MIT
+libflac         BSD-like
+libjpeg         BSD-like
+libmodplug      Public Domain
+libogg          BSD-like
+libpng          libpng (Zlib)
+libtiff         BSD-like
+libvorbis       BSD-like
+libwebp         BSD-3-clause
+lua             MIT
+minIni          Apache 2
+nuklear         Public Domain
+saneopt         MIT
+SDL_gpu         MIT
+SDL2            Zlib
+SDL2_gfx        Zlib
+SDL2_image      Zlib
+SDL2_mixer      Zlib
+SDL2_ttf        Zlib
+smpeg2          LGPL 2
+Squirrel        MIT
+stb_image       Public Domain
+stb_image_write Public Domain
+tigr            Public Domain
+tinyfiledialogs Zlib
+utf8            Public Domain
+xz (liblzma)    Public Domain
+zlib            Zlib
