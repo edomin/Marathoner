@@ -109,28 +109,10 @@ $ make
 $ make install
 ```
 
-[libjbigkit](http://www.cl.cam.ac.uk/~mgk25/jbigkit/)
-
-```
-$ make
-$ mkdir /usr/local/x86_64-w64-mingw32/include/jbigkit
-$ cp libjbig/*.h /usr/local/x86_64-w64-mingw32/include/jbigkit
-$ cp libjbig/*.a /usr/local/x86_64-w64-mingw32/lib
-```
-
 [libjpeg](http://www.ijg.org/files/)
 
 ```
 $ ./configure --prefix=/usr/local/x86_64-w64-mingw32 --build=x86_64-w64-mingw32
-$ make
-$ make install
-```
-
-[libmikmod](http://mikmod.sourceforge.net/)
-
-```
-$ ./configure --prefix=/usr/local/x86_64-w64-mingw32 --enable-sdl=no \
---enable-sdl2=no --disable-esdtest --disable-sdltest
 $ make
 $ make install
 ```
@@ -169,8 +151,7 @@ $ ./configure --prefix=/usr/local/x86_64-w64-mingw32 \
 --with-zlib-lib-dir=/usr/localx86_64-w64-mingw32/lib \
 --with-jpeg-include-dir=/usr/local/x86_64-w64-mingw32/include \
 --with-jpeg-lib-dir=/usr/local/x86_64-w64-mingw32/lib --build=x86_64-w64-mingw32 \
---with-jbig-include-dir=/usr/local/x86_64-w64-mingw32/include/jbigkit \
---with-jbig-lib-dir=/usr/local/x86_64-w64-mingw32/lib
+--disable-jbig
 $ make
 $ make install
 ```
@@ -263,8 +244,8 @@ $ make install
 ```
 $ ./configure --prefix=/usr/local/x86_64-w64-mingw32 \
 CFLAGS="-Wall -O2 -I/usr/local/x86_64-w64-mingw32/include" \
-CPPFLAGS="-I/usr/local/x86_64-w64-mingw32/include" \
-LDFLAGS="-L/usr/local/x86_64-w64-mingw32/lib" --build=x86_64-w64-mingw32 \
+CPPFLAGS="-Wall -O2 -I/usr/local/x86_64-w64-mingw32/include" \
+LDFLAGS="-s -L/usr/local/x86_64-w64-mingw32/lib" --build=x86_64-w64-mingw32 \
 --disable-sdltest
 $ make
 $ make install
@@ -274,15 +255,27 @@ $ make install
 
 ```
 $ ./configure --prefix=/usr/local/x86_64-w64-mingw32 --build=x86_64-w64-mingw32 \
---disable-sdltest --disable-smpegtest \
+--disable-static --disable-sdltest --disable-smpegtest \
 CFLAGS="-O2 -Wall -I/usr/local/x86_64-w64-mingw32/include" \
 CPPFLAGS="-I/usr/local/x86_64-w64-mingw32/include" \
 LDFLAGS="-s -L/usr/local/x86_64-w64-mingw32/lib" \
 --with-smpeg-prefix=/usr/local/x86_64-w64-mingw32 \
 MODPLUG_CFLAGS="-O2 -Wall -I/usr/local/x86_64-w64-mingw32/include" \
-MODPLUG_LIBS="-L/usr/local/x86_64-w64-mingw32/lib -lmodplug"
+MODPLUG_LIBS="-L/usr/local/x86_64-w64-mingw32/lib -lmodplug.dll"
 $ make
 $ make install
+$ make clean
+$ ./configure --prefix=/usr/local/x86_64-w64-mingw32 --build=x86_64-w64-mingw32 \
+--disable-shared --disable-music-mod-modplug-shared --disable-music-ogg-shared \
+--disable-music-flac-shared --enable-music-mp3-smpeg-shared --disable-sdltest \
+--disable-smpegtest CFLAGS="-O2 -Wall -I/usr/local/x86_64-w64-mingw32/include" \
+CPPFLAGS="-I/usr/local/x86_64-w64-mingw32/include" \
+LDFLAGS="-s -L/usr/local/x86_64-w64-mingw32/lib" \
+--with-smpeg-prefix=/usr/local/x86_64-w64-mingw32 \
+MODPLUG_CFLAGS="-O2 -Wall -I/usr/local/x86_64-w64-mingw32/include" \
+MODPLUG_LIBS="-L/usr/local/x86_64-w64-mingw32/lib"
+$ make
+$ cp build/.libs/libSDL2_mixer.a /usr/local/x86_64-w64-mingw32/lib
 ```
 
 [SDL2_ttf](https://www.libsdl.org/projects/SDL_ttf/)
@@ -301,7 +294,7 @@ $ make install
 
 ```
 $ ./configure --prefix=/usr/local/x86_64-w64-mingw32 --disable-sdltest \
---build=x86_64-w64-mingw32 --enable-mmx
+--build=x86_64-w64-mingw32 --enable-mmx --disable-static
 $ make CXX="g++ -w"
 $ make install
 ```

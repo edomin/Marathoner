@@ -103,28 +103,10 @@ $ make
 $ make install
 ```
 
-[libjbigkit](http://www.cl.cam.ac.uk/~mgk25/jbigkit/)
-
-```
-$ make
-$ mkdir /usr/local/<...>/include/jbigkit
-$ cp libjbig/*.h /usr/local/mingw32/include/jbigkit
-$ cp libjbig/*.a /usr/local/mingw32/lib
-```
-
 [libjpeg](http://www.ijg.org/files/)
 
 ```
 $ ./configure --prefix=/usr/local/mingw32
-$ make
-$ make install
-```
-
-[libmikmod](http://mikmod.sourceforge.net/)
-
-```
-$ ./configure --prefix=/usr/local/mingw32 --enable-sdl=no --enable-sdl2=no \
---disable-esd-test --disable-sdl-test
 $ make
 $ make install
 ```
@@ -159,11 +141,11 @@ $ make install
 [libtiff](http://simplesystems.org/libtiff/)
 
 ```
-$ ./configure --prefix=/usr/local/mingw32 \
+$ ./configure --prefix=/usr/local/mingw32 --build=mingw32 \
 --with-zlib-include-dir=/usr/local/mingw32/include \
 --with-zlib-lib-dir=/usr/local/mingw32/lib \
 --with-jpeg-include-dir=/usr/local/mingw32/include \
---with-jpeg-lib-dir=/usr/local/mingw32/lib
+--with-jpeg-lib-dir=/usr/local/mingw32/lib --disable-jbig
 $ make
 $ make install
 ```
@@ -253,9 +235,10 @@ $ cp .libs/libSDL2_gfx.a /usr/local/mingw32/lib
 [SDL2_image](https://www.libsdl.org/projects/SDL_image/)
 
 ```
-$ ./configure --prefix=/usr/local/mingw32 CC=mingw32-gcc \
+$ ./configure --prefix=/usr/local/mingw32 --build=mingw32 CC=mingw32-gcc \
 CFLAGS="-Wall -O2 -I/usr/local/mingw32/include" \
-CPPFLAGS="-I/usr/local/mingw32/include" LDFLAGS="-L/usr/local/mingw32/lib"
+CPPFLAGS="-Wall -O2 -I/usr/local/mingw32/include" \
+LDFLAGS="-s -L/usr/local/mingw32/lib"
 $ make
 $ make install
 ```
@@ -263,7 +246,8 @@ $ make install
 [SDL2_mixer](https://www.libsdl.org/projects/SDL_mixer/)
 
 ```
-$ ./configure --prefix=/usr/local/mingw32 --build=mingw32 --disable-smpegtest \
+$ ./configure --prefix=/usr/local/mingw32 --build=mingw32 --disable-static \
+--disable-sdltest --disable-smpegtest \
 CFLAGS="-O2 -Wall -I/usr/local/mingw32/include" \
 CPPFLAGS="-I/usr/local/mingw32/include" \
 LDFLAGS="-s -L/usr/local/mingw32/lib" --with-smpeg-prefix=/usr/local/mingw32 \
@@ -271,6 +255,18 @@ MODPLUG_CFLAGS="-O2 -Wall -I/usr/local/mingw32/include" \
 MODPLUG_LIBS="-L/usr/local/mingw32/lib -lmodplug"
 $ make
 $ make install
+$ make clean
+$ ./configure --prefix=/usr/local/mingw32 --build=mingw32 \
+--disable-shared --disable-music-mod-modplug-shared --disable-music-ogg-shared \
+--disable-music-flac-shared --enable-music-mp3-smpeg-shared --disable-sdltest \
+--disable-smpegtest CFLAGS="-O2 -Wall -I/usr/local/mingw32/include" \
+CPPFLAGS="-I/usr/local/mingw32/include" \
+LDFLAGS="-s -L/usr/local/mingw32/lib" \
+--with-smpeg-prefix=/usr/local/mingw32 \
+MODPLUG_CFLAGS="-O2 -Wall -I/usr/local/mingw32/include" \
+MODPLUG_LIBS="-L/usr/local/mingw32/lib"
+$ make
+$ cp build/.libs/libSDL2_mixer.a /usr/local/mingw32/lib
 ```
 
 [SDL2_ttf](https://www.libsdl.org/projects/SDL_ttf/)
@@ -285,7 +281,7 @@ $ make install
 [smpeg2](https://www.libsdl.org/projects/smpeg/release/)
 
 ```
-$ ./configure --prefix=/usr/local/mingw32 --disable-sdltest
+$ ./configure --prefix=/usr/local/mingw32 --disable-sdltest --disable-static
 $ make
 $ make install
 ```
