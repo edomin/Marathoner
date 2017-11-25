@@ -4,10 +4,23 @@ SUBSYSTEM = png
 MODULE = libpng
 MODULE_NAME = PNG_libpng
 MODULE_H = png_include.h
-ifeq ($(MOD), plugin)
-  LIBS = -lpng.dll -lz.dll
-else
-  LIBS = -lpng -lz
+ifeq ($(PLATFORM), win32)
+  ifeq ($(MOD), plugin)
+    LIBS = -lpng.dll -lz.dll
+  else
+    LIBS = -lpng -lz
+  endif
+endif
+ifeq ($(PLATFORM), win64)
+  ifeq ($(MOD), plugin)
+    LIBS = -lpng.dll -lz.dll
+  else
+    LIBS = -lpng -lz
+  endif
+endif
+ifeq ($(PLATFORM), html5)
+  CEXFLAGS = -s USE_LIBPNG=1 -s USE_ZLIB=1
+  LIBS = -s USE_LIBPNG=1 -s USE_ZLIB=1
 endif
 
 include ../../../makefiles/Subsystem.mk

@@ -20,11 +20,13 @@ ifeq ($(PLATFORM), win64)
   endif
 endif
 ifeq ($(PLATFORM), html5)
-  LIBS = $(PREFIX)/lib/sdl2-image-bmp-gif-lbm-pcx-png-pnm-tga-xcf-xpm-xv.bc \
-   $(PREFIX)/lib/libpng.bc \
-   $(PREFIX)/lib/zlib.bc \
-   $(PREFIX)/lib/sdl2.bc \
-   $(PREFIX)/lib/gl.bc
+  CEXFLAGS = -s USE_SDL=2 -s USE_SDL_IMAGE=2 \
+   -s SDL2_IMAGE_FORMATS="['bmp','gif','lbm','pcx','png','pnm','tga','xcf','xpm','xv']"
+  LIBS = -s USE_SDL_IMAGE=2 -s USE_SDL=2 \
+   -s SDL2_IMAGE_FORMATS=\"[\'bmp\',\'gif\',\'lbm\',\'pcx\',\'png\',\'pnm\',\'tga\',\'xcf\',\'xpm\',\'xv\']\" \
+   -s USE_LIBPNG=1 -s USE_ZLIB=1
 endif
 
 include ../../../makefiles/Subsystem.mk
+
+#-s SDL2_IMAGE_FORMATS=\'["bmp","gif","lbm","pcx","png","pnm","tga","xcf","xpm","xv"]\'

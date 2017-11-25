@@ -107,7 +107,7 @@ include makefiles/Monolythic.mk
 endif
 
 fagen:
-	make -j$(CORES) -C src/_build_utils/fagen PREFIX=$(PREFIX)
+	make -j$(CORES) -C src/_build_utils/fagen PREFIX=$(PREFIX) HOST_BUILD=yes
 
 plugins: prebuild
 ifeq ($(MOD), plugin)
@@ -221,38 +221,19 @@ win32: prebuild windows_common fagen plugins engine
 
 win64: prebuild windows_common fagen plugins engine
 
-html5: prebuild
-	make -C src/$(SCREEN_SDL2) PREFIX=$(PREFIX)
-	make -C src/$(SCREEN_SDL2_LUA) PREFIX=$(PREFIX)
-	make -C src/$(TEXTURE_SDL2_IMAGE) PREFIX=$(PREFIX)
-	make -C src/$(TEXTURE_SDL2_IMAGE_LUA) PREFIX=$(PREFIX)
-	make -C src/$(PRIMITIVE_SDL2) PREFIX=$(PREFIX)
-	make -C src/$(PRIMITIVE_SDL2_LUA) PREFIX=$(PREFIX)
-	make -C src/$(TTF_SDL2_TTF) PREFIX=$(PREFIX)
-	make -C src/$(TTF_SDL2_TTF_LUA) PREFIX=$(PREFIX)
-	make -C src/$(KEYBOARD_SDL2) PREFIX=$(PREFIX)
-	make -C src/$(KEYBOARD_SDL2_LUA) PREFIX=$(PREFIX)
-	make -C src/$(MOUSE_SDL2) PREFIX=$(PREFIX)
-	make -C src/$(MOUSE_SDL2_LUA) PREFIX=$(PREFIX)
-	make -C src/$(GAME_CONTROLLER_SDL2) PREFIX=$(PREFIX)
-	make -C src/$(GAME_CONTROLLER_SDL2_LUA) PREFIX=$(PREFIX)
-	make -C src/$(TIMER_SDL2) PREFIX=$(PREFIX)
-	make -C src/$(TIMER_SDL2_LUA) PREFIX=$(PREFIX)
-	make -C src/$(UTILS_COLOR) PREFIX=$(PREFIX)
-	make -C src/$(UTILS_COLOR_LUA) PREFIX=$(PREFIX)
-	make -C src/$(SCRIPT_LUA) PREFIX=$(PREFIX)
-	make -C src/core PREFIX=$(PREFIX)
+html5: prebuild fagen
 
 prebuild:
 	-mkdir $(PLATFORM)
 	-mkdir $(OBJSDIR)
 	-mkdir $(LIBDIR)
-	-mkdir $(BINDIR)
 	-mkdir $(FADIR)
 ifeq ($(PLATFORM), win32)
+	-mkdir $(BINDIR)
 	-mkdir $(RCDIR)
 endif
 ifeq ($(PLATFORM), win64)
+	-mkdir $(BINDIR)
 	-mkdir $(RCDIR)
 endif
 ifeq ($(MOD), static)
@@ -263,16 +244,17 @@ endif
 clean:
 	-rm -f -r $(OBJSDIR)
 	-rm -f -r $(LIBDIR)
-	-rm -f -r $(BINDIR)
 	-rm -f -r $(FADIR)
-	-rm -f -r $(PLATFORM)/fagen.exe
+	-rm -f -r $(HOST)/fagen.exe
 	-rm -f -r $(PLATFORM)/marathoner.exe
 ifeq ($(PLATFORM), win32)
+	-rm -f -r $(BINDIR)
 	-rm -f -r $(RCDIR)
 	-rm -f -r $(PLATFORM)/rcgen.exe
 	-rm -f -r $(PLATFORM)/Launcher.exe
 endif
 ifeq ($(PLATFORM), win64)
+	-rm -f -r $(BINDIR)
 	-rm -f -r $(RCDIR)
 	-rm -f -r $(PLATFORM)/rcgen.exe
 	-rm -f -r $(PLATFORM)/Launcher.exe

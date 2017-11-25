@@ -7,7 +7,8 @@ ifeq ($(PLATFORM), win64)
   LDEXFLAGS = -L$(PREFIX)/lib
 endif
 ifeq ($(PLATFORM), html5)
-  LDEXFLAGS = -L$(PREFIX)/lib -s MAIN_MODULE=1
+  LDEXFLAGS = -L$(PREFIX)/lib
+#  LDEXFLAGS = -L$(PREFIX)/lib -s MAIN_MODULE=1
 endif
 ROOTDIR = ../..
 OBJSDIR = $(ROOTDIR)/$(PLATFORM)/obj
@@ -20,7 +21,7 @@ ifeq ($(MOD), static)
   LDEXFLAGS += -L$(LIBDIR)
 endif
 
-FAGEN = $(ROOTDIR)/$(PLATFORM)/fagen
+FAGEN = $(ROOTDIR)/$(HOST)/fagen
 
 MTR_OBJS = $(OBJSDIR)/engine.o \
  $(OBJSDIR)/log.o \
@@ -32,16 +33,19 @@ MTR_OBJS = $(OBJSDIR)/engine.o \
  $(OBJSDIR)/file.o \
  $(OBJSDIR)/clipboard.o \
  $(OBJSDIR)/string_buffer.o \
- $(OBJSDIR)/options.o \
  $(OBJSDIR)/version.o \
  $(OBJSDIR)/console.o \
  $(OBJSDIR)/fa.o
+
+ifneq ($(PLATFORM), html5)
+  MTR_OBJS += $(OBJSDIR)/options.o
+endif
 
 ifeq ($(MOD), plugin)
   MTR_OBJS += $(OBJSDIR)/directory.o \
    $(OBJSDIR)/so.o \
    $(OBJSDIR)/plugin_loader.o \
- $(OBJSDIR)/module.o
+   $(OBJSDIR)/module.o
 endif
 
 LCHR_OBJS = $(OBJSDIR)/launcher.o \
@@ -68,13 +72,15 @@ endif
 ifeq ($(MOD), static)
   LIBS_TXT = $(shell ls $(LIBDIR) | grep 'txt$$' | grep '^Script' | sed -e 's%^%$(LIBDIR)/%')
   LIBS_TXT += $(shell ls $(LIBDIR) | grep 'txt$$' | grep -v '^Script' | sed -e 's%^%$(LIBDIR)/%')
-  LIBS_WITH_DUPLICARES = $(shell cat $(LIBS_TXT))
   nullstring :=
   space := $(nullstring)
-  LIBS = $(shell cat $(LIBS_TXT) | grep -E -o '(\+|\.|\w)*' | sed -e 's%^%-%' | tr '$(space)' '\n' | awk '!x[$$0]++')
+  ifneq ($(PLATFORM), html5)
+  LIBS = $(shell cat $(LIBS_TXT) | grep -E -o "(\+|\.|\=|\,|\[|\]|'|\w)*" | sed -e 's%^%-%' | tr '$(space)' '\n' | awk '!x[$$0]++')
+  endif
+  ifeq ($(PLATFORM), html5)
+  LIBS = $(shell cat $(LIBS_TXT))
+  endif
   MOD_OBJS = $(shell cat $(OBJSDIR)/objs.txt)
-#  LIBS = $(LIBS_WITH_DUPLICARES)
-#  LIBS = $(shell $(LIBS_WITH_DUPLICARES))
 endif
 
 TARGETS = $(BINDIR)/Marathoner
@@ -87,7 +93,6 @@ all: $(TARGETS)
 $(BINDIR)/Marathoner: $(MTR_OBJS)
 ifeq ($(MOD), static)
   ifeq ($(PLATFORM), win32)
-#	echo $(LIBS) >> $(OBJSDIR)/libs.txt
 	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) \
 	 $(MTR_OBJS) $(MOD_OBJS) -lminini -lutf8 -ltinyfiledialogs -lole32 \
 	 -lshlwapi -llazy_winapi -lsaneopt $(LIBS)
@@ -97,12 +102,12 @@ ifeq ($(MOD), static)
 	 $(MTR_OBJS) $(MOD_OBJS) -lminini -lutf8 -ltinyfiledialogs -lole32 \
 	 -lshlwapi -llazy_winapi -lsaneopt $(LIBS)
   endif
-#  ifeq ($(PLATFORM), html5)
-#	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) \
-#	 $(MTR_OBJS) -lminini -lutf8 --preload-file ../../plugin@/plugin \
-#	 --preload-file ../../Marathoner.cfg@/ \
-#	 --preload-file ../../autorun@/autorun -s TOTAL_MEMORY=134217728
-#  endif
+  ifeq ($(PLATFORM), html5)
+	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) \
+	 $(MTR_OBJS) $(MOD_OBJS) -lminini -lutf8 $(LIBS) \
+	 --preload-file ../../Marathoner.cfg@/ \
+	 --preload-file ../../autorun@/autorun
+  endif
 endif
 ifeq ($(MOD), plugin)
   ifeq ($(PLATFORM), win32)
@@ -115,12 +120,12 @@ ifeq ($(MOD), plugin)
 	 $(MTR_OBJS) -lminini -Wl,-Bstatic -lutf8 -Wl,-Bstatic -ltinyfiledialogs \
 	 -lole32 -lshlwapi -llazy_winapi -lsaneopt
   endif
-  ifeq ($(PLATFORM), html5)
-	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) \
-	 $(MTR_OBJS) -lminini -lutf8 --preload-file ../../plugin@/plugin \
-	 --preload-file ../../Marathoner.cfg@/ \
-	 --preload-file ../../autorun@/autorun -s TOTAL_MEMORY=134217728
-  endif
+#  ifeq ($(PLATFORM), html5)
+#	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) \
+#	 $(MTR_OBJS) -lminini -lutf8 \
+#	 --preload-file ../../Marathoner.cfg@/ \
+#	 --preload-file ../../autorun@/autorun
+#  endif
 endif
 
 $(BINDIR)/Launcher: $(LCHR_OBJS)
@@ -256,7 +261,7 @@ module.h: plugin_loader.h $(ROOTDIR)/include/marathoner/engine.h
 
 fa.h: $(FADIR)/core.h
 
-$(FADIR)/core.h: $(FAGEN)$(EXE_EXT) log.c notification.c configfile.c \
+$(FADIR)/core.h: $(FAGEN)$(HOST_EXE_EXT) log.c notification.c configfile.c \
  messagebox.c file.c clipboard.c string_buffer.c options.c console.c version.c \
  module.c
 	$(FAGEN) $(FADIR)/core.h $(PLATFORM) log.c notification.c configfile.c \

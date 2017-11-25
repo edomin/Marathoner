@@ -1,3 +1,8 @@
+include ../../../makefiles/Build.mk
+
+ifeq ($(PLATFORM), html5)
+  $(error SDL2_gpu-based screen module can not be compiler for html5 platform)
+endif
 SUBSYSTEM = screen
 MODULE = sdl2_gpu
 MODULE_NAME = Screen_SDL2_gpu

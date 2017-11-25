@@ -20,7 +20,8 @@ ifeq ($(PLATFORM), win64)
   endif
 endif
 ifeq ($(PLATFORM), html5)
-  LIBS = $(PREFIX)/lib/sdl2-ttf.bc
+  CEXFLAGS = -s USE_SDL=2 -s USE_SDL_TTF=2
+  LIBS = -s USE_SDL=2 -s USE_SDL_TTF=2 -s USE_FREETYPE=2
 endif
 
 include ../../../makefiles/Subsystem.mk

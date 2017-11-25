@@ -1,3 +1,8 @@
+include ../../../makefiles/Build.mk
+
+ifeq ($(PLATFORM), html5)
+  $(error SDL2_gpu-based primitive module can not be compiler for html5 platform)
+endif
 SUBSYSTEM = primitive
 MODULE = sdl2_gpu
 MODULE_NAME = Primitive_SDL2_gpu

@@ -18,7 +18,8 @@ ifeq ($(PLATFORM), win64)
   endif
 endif
 ifeq ($(PLATFORM), html5)
-  LIBS = $(PREFIX)/lib/sdl2.bc $(PREFIX)/lib/gl.bc
+  CEXFLAGS = -s USE_SDL=2
+  LIBS = -lSDL2_gfx -s USE_SDL=2
 endif
 
 include ../../../makefiles/Subsystem.mk

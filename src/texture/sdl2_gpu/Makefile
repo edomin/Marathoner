@@ -1,3 +1,8 @@
+include ../../../makefiles/Build.mk
+
+ifeq ($(PLATFORM), html5)
+  $(error SDL2_gpu-based texture module can not be compiler for html5 platform)
+endif
 SUBSYSTEM = texture
 MODULE = sdl2_gpu
 MODULE_NAME = Texture_SDL2_gpu
