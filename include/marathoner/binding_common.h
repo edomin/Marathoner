@@ -125,17 +125,17 @@
     MTR_EXTERN _VM mtrVm;                                            \
     MTR_FUNC(_VM, MTR_ScriptsGetVm, void);                           \
     MTR_FUNC(void, MTR_ScriptsRegisterFunction, _CFUNCTION, char *); \
-    MTR_FUNC(void, MTR_ScriptsRegisterVariable_b, const char *name,  \
+    MTR_FUNC(bool, MTR_ScriptsRegisterVariable_b, const char *name,  \
      bool value);                                                    \
-    MTR_FUNC(void, MTR_ScriptsRegisterVariable_i, const char *name,  \
+    MTR_FUNC(bool, MTR_ScriptsRegisterVariable_i, const char *name,  \
      int value);                                                     \
-    MTR_FUNC(void, MTR_ScriptsRegisterVariable_u, const char *name,  \
+    MTR_FUNC(bool, MTR_ScriptsRegisterVariable_u, const char *name,  \
      unsigned int value);                                            \
-    MTR_FUNC(void, MTR_ScriptsRegisterVariable_f, const char *name,  \
+    MTR_FUNC(bool, MTR_ScriptsRegisterVariable_f, const char *name,  \
      float value);                                                   \
-    MTR_FUNC(void, MTR_ScriptsRegisterVariable_d, const char *name,  \
+    MTR_FUNC(bool, MTR_ScriptsRegisterVariable_d, const char *name,  \
      double value);                                                  \
-    MTR_FUNC(void, MTR_ScriptsRegisterVariable_s, const char *name,  \
+    MTR_FUNC(bool, MTR_ScriptsRegisterVariable_s, const char *name,  \
      const char *value);
 
 #if defined(MTR_MOD_PLUGIN)
