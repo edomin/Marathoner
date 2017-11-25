@@ -18,13 +18,13 @@ MTR_FUNC(void, MTR_SpriteSetModulation_rgba, uint32_t, uint8_t, uint8_t,
  uint8_t, uint8_t);
 MTR_FUNC(void, MTR_SpriteSetModulationAlpha, uint32_t, uint8_t);
 MTR_FUNC(void, MTR_SpriteSetModulationAlpha_f, uint32_t, float);
-MTR_FUNC(bool, MTR_SpriteDraw_f, uint32_t, int, float, float);
-MTR_FUNC(bool, MTR_SpriteDrawSized_f, uint32_t, int, float, float, float,
+MTR_FUNC(void, MTR_SpriteDraw_f, uint32_t, int, float, float);
+MTR_FUNC(void, MTR_SpriteDrawSized_f, uint32_t, int, float, float, float,
  float);
-MTR_FUNC(bool, MTR_SpriteDrawScaled_f, uint32_t, int, float, float, float,
+MTR_FUNC(void, MTR_SpriteDrawScaled_f, uint32_t, int, float, float, float,
  float);
-MTR_FUNC(bool, MTR_SpriteDrawAngled_f, uint32_t, int, float, float, float);
-MTR_FUNC(bool, MTR_SpriteDrawFlipped_f, uint32_t, int, float, float, int);
-MTR_FUNC(bool, MTR_SpriteDrawGeneral_f, uint32_t, int, float, float, float,
+MTR_FUNC(void, MTR_SpriteDrawAngled_f, uint32_t, int, float, float, float);
+MTR_FUNC(void, MTR_SpriteDrawFlipped_f, uint32_t, int, float, float, int);
+MTR_FUNC(void, MTR_SpriteDrawGeneral_f, uint32_t, int, float, float, float,
  float, float, int);
 #endif
