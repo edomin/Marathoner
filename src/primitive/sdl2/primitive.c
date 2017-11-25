@@ -222,7 +222,7 @@ MTR_DCLSPC void MTR_CALL MTR_PrimitiveArc_rgb_f(float x, float y, float radius,
     int   segmentsCount;
     MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
-    segmentsCount = fabs(endAngle - startAngle) / 360 * MTR_ARC_SEGMENTS_COUNT;
+    segmentsCount = fabsf(endAngle - startAngle) / 360 * MTR_ARC_SEGMENTS_COUNT;
 
     currentAngle = (startAngle * MTR_PI_180_F);
     for (i = 0; i < segmentsCount; i++)
@@ -256,7 +256,7 @@ MTR_DCLSPC void MTR_CALL MTR_PrimitiveArc_rgba_f(float x, float y, float radius,
     int   segmentsCount;
     MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
-    segmentsCount = fabs(endAngle - startAngle) / 360 * MTR_ARC_SEGMENTS_COUNT;
+    segmentsCount = fabsf(endAngle - startAngle) / 360 * MTR_ARC_SEGMENTS_COUNT;
 
     currentAngle = (startAngle * MTR_PI_180_F);
     for (i = 0; i < segmentsCount; i++)
@@ -290,7 +290,7 @@ MTR_DCLSPC void MTR_CALL MTR_PrimitiveArc_c_f(float x, float y, float radius,
     int   segmentsCount;
     MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
-    segmentsCount = fabs(endAngle - startAngle) / 360 * MTR_ARC_SEGMENTS_COUNT;
+    segmentsCount = fabsf(endAngle - startAngle) / 360 * MTR_ARC_SEGMENTS_COUNT;
 
     currentAngle = (startAngle * MTR_PI_180_F);
     for (i = 0; i < segmentsCount; i++)
@@ -324,7 +324,7 @@ MTR_DCLSPC void MTR_CALL MTR_PrimitiveArc_ca_f(float x, float y, float radius,
     int   segmentsCount;
     MTR_PRIMITIVE_CHECK_IF_NOT_INITED();
 
-    segmentsCount = fabs(endAngle - startAngle) / 360 * MTR_ARC_SEGMENTS_COUNT;
+    segmentsCount = fabsf(endAngle - startAngle) / 360 * MTR_ARC_SEGMENTS_COUNT;
 
     currentAngle = (startAngle * MTR_PI_180_F);
     for (i = 0; i < segmentsCount; i++)
