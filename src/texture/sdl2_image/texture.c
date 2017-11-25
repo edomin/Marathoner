@@ -725,7 +725,7 @@ MTR_DCLSPC void MTR_CALL MTR_TextureBlitAngled_f(uint32_t texNum, float x,
         pivot.x = pivotX;
         pivot.y = pivotY;
         SDL_RenderCopyEx(mtrScreen->renderer, texture->texture, NULL, &offset,
-         -angle, &pivot, MTR_FLIP_NONE);
+         (double)(-angle), &pivot, MTR_FLIP_NONE);
     }
 }
 
@@ -771,7 +771,7 @@ MTR_DCLSPC void MTR_CALL MTR_TextureBlitGeneral_f(uint32_t texNum, float x,
         pivot.x = pivotX;
         pivot.y = pivotY;
         SDL_RenderCopyEx(mtrScreen->renderer, texture->texture, NULL, &offset,
-         -angle, &pivot, actualFlip);
+         (double)(-angle), &pivot, actualFlip);
     }
 }
 
@@ -868,7 +868,7 @@ MTR_DCLSPC void MTR_CALL MTR_TextureBlitRegionAngled_f(uint32_t texNum, float x,
         pivot.x = pivotX;
         pivot.y = pivotY;
         SDL_RenderCopyEx(mtrScreen->renderer, texture->texture, &clip, &offset,
-         -angle, &pivot, MTR_FLIP_NONE);
+         (double)(-angle), &pivot, MTR_FLIP_NONE);
     }
 }
 
@@ -924,7 +924,7 @@ MTR_DCLSPC void MTR_CALL MTR_TextureBlitRegionGeneral_f(uint32_t texNum,
         pivot.x = pivotX;
         pivot.y = pivotY;
         SDL_RenderCopyEx(mtrScreen->renderer, texture->texture, &clip, &offset,
-         -angle, &pivot, actualFlip);
+         (double)(-angle), &pivot, actualFlip);
     }
 }
 

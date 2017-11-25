@@ -158,7 +158,7 @@ MTR_DCLSPC bool MTR_CALL MTR_ScriptsRegisterVariable_f(const char *name,
 {
     if ((name != NULL) && (strcmp(name, "") != 0))
     {
-        lua_pushnumber(mtrVm, value);
+        lua_pushnumber(mtrVm, (double)value);
         lua_setglobal(mtrVm, name);
         MTR_LogWrite_s("Script const added:", 3, MTR_LMT_INFO, name);
         return true;
