@@ -60,9 +60,11 @@ void *MTR_CALL MTR_IndexkeeperCreate(uint32_t dmSize, uint32_t reservedCount,
     if (newDmSize >= MTR_IKDM_MEDIUM)
         indexkeeper->reservedData = indexkeeper->reservedData |
          (indexkeeper->reservedData >> 16);
+    #ifndef __EMSCRIPTEN__
     if (newDmSize == MTR_IKDM_LARGE)
         indexkeeper->reservedData = indexkeeper->reservedData |
          (indexkeeper->reservedData >> 32);
+    #endif
     indexkeeper->reservedData = indexkeeper->reservedData -
      (indexkeeper->reservedData >> 1);
     indexkeeper->dataCount = 0;

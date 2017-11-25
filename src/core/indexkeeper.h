@@ -11,7 +11,11 @@
 typedef struct mtrIndexkeeper_t {
     void *data;
     size_t dataSize;
+    #if !defined(__EMSCRIPTEN__)
     uint64_t reservedData;
+    #else
+    uint32_t reservedData;
+    #endif
     uint32_t dataCount;
     uint32_t dmSize;
     uint32_t *dataMap;

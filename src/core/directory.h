@@ -4,7 +4,8 @@
 #ifdef __MINGW32__
     #include <windows.h>
 #else
-    #include <emscripten.h>
+//    #include <emscripten.h>
+    #include <dirent.h>
 #endif
 #include <string.h>
 

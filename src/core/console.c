@@ -1,5 +1,6 @@
 #include "console.h"
 
+#ifdef WINVER
 #if WINVER < 0x0500
 /* https://support.microsoft.com/en-us/help/124103/how-to-obtain-a-console-window-handle-hwnd */
 HWND GetConsoleWindow(void)
@@ -31,10 +32,12 @@ HWND GetConsoleWindow(void)
 
     return(hwndFound);
 }
-#endif
+#endif /* WINVER < 0x0500 */
+#endif /* WINVER */
 
 bool MTR_ConsoleInit(void)
 {
+    #ifdef __MINGW32__
     if (AllocConsole() == 0)
     {
         mtrConsoleInited = false;
@@ -48,6 +51,7 @@ bool MTR_ConsoleInit(void)
     SetConsoleTitle("Marathoner Log");
 
     mtrConsole = GetConsoleWindow();
+    #endif
 
     mtrConsoleInited = true;
     return true;
@@ -60,7 +64,9 @@ void MTR_CALL MTR_ConsoleShow(void)
         if (!MTR_ConsoleInit())
             return;
 
+    #ifdef __MINGW32__
     ShowWindow(mtrConsole, SW_SHOW);
+    #endif
     mtrConsoleShowed = true;
 }
 
@@ -71,7 +77,9 @@ void MTR_CALL MTR_ConsoleHide(void)
         if (!MTR_ConsoleInit())
             return;
 
+    #ifdef __MINGW32__
     ShowWindow(mtrConsole, SW_HIDE);
+    #endif
     mtrConsoleShowed = false;
 }
 

@@ -106,6 +106,7 @@ MTR_SCRIPT_FUNC_V_U32t1S1(MTR_SF_StringBufferSetString,
  MTR_StringBufferSetString)
 MTR_SCRIPT_FUNC_S_U32t1(MTR_SF_StringBufferGetString, MTR_StringBufferGetString)
 MTR_SCRIPT_FUNC_I_U32t1(MTR_SF_StringBufferGetMaxLen, MTR_StringBufferGetMaxLen)
+#ifndef __EMSCRIPTEN__
 MTR_SCRIPT_FUNC_B_S2(MTR_SF_OptionsAlias, MTR_OptionsAlias)
 MTR_SCRIPT_FUNC_S_S1(MTR_SF_OptionsGet, MTR_OptionsGet)
 MTR_SCRIPT_FUNC_B_S1(MTR_SF_OptionsGet_b, MTR_OptionsGet_b)
@@ -113,6 +114,7 @@ MTR_SCRIPT_FUNC_I_S1(MTR_SF_OptionsGet_i, MTR_OptionsGet_i)
 MTR_SCRIPT_FUNC_L_S1(MTR_SF_OptionsGet_l, MTR_OptionsGet_l)
 MTR_SCRIPT_FUNC_F_S1(MTR_SF_OptionsGet_f, MTR_OptionsGet_f)
 MTR_SCRIPT_FUNC_D_S1(MTR_SF_OptionsGet_d, MTR_OptionsGet_d)
+#endif
 MTR_SCRIPT_FUNC_V_V(MTR_SF_ConsoleShow, MTR_ConsoleShow)
 MTR_SCRIPT_FUNC_V_V(MTR_SF_ConsoleHide, MTR_ConsoleHide)
 
@@ -248,6 +250,7 @@ void MTR_ScriptsRegisterAll(void)
     MTR_ScriptsRegisterFunction(MTR_SF_StringBufferGetMaxLen,
      "StringBufferGetMaxLen");
 
+    #ifndef __EMSCRIPTEN__
     MTR_ScriptsRegisterFunction(MTR_SF_OptionsAlias, "OptionsAlias");
     MTR_ScriptsRegisterFunction(MTR_SF_OptionsGet, "OptionsGet");
     MTR_ScriptsRegisterFunction(MTR_SF_OptionsGet_b, "OptionsGet_b");
@@ -255,6 +258,7 @@ void MTR_ScriptsRegisterAll(void)
     MTR_ScriptsRegisterFunction(MTR_SF_OptionsGet_l, "OptionsGet_l");
     MTR_ScriptsRegisterFunction(MTR_SF_OptionsGet_f, "OptionsGet_f");
     MTR_ScriptsRegisterFunction(MTR_SF_OptionsGet_d, "OptionsGet_d");
+    #endif
 
     MTR_ScriptsRegisterFunction(MTR_SF_ConsoleShow, "ConsoleShow");
     MTR_ScriptsRegisterFunction(MTR_SF_ConsoleHide, "ConsoleHide");

@@ -12,7 +12,9 @@
     #include "so.h"
     #include "plugin_loader.h"
 #endif
-#include "options.h"
+#ifndef __EMSCRIPTEN__
+    #include "options.h"
+#endif
 #include "version.h"
 #include "console.h"
 #include "fa.h"
@@ -181,6 +183,7 @@ int main(int argc, char** argv)
 
     chdir("..");
 
+    #ifndef __EMSCRIPTEN__
     MTR_OptionsProcess(argc, argv);
     MTR_OptionsAlias("help", "h");
     if (strcmp(MTR_OptionsGet("help"), "") == 0) {
@@ -188,6 +191,7 @@ int main(int argc, char** argv)
     }
 
     showConsole = MTR_OptionsGet_b("show-console");
+    #endif
     if (!showConsole)
         showConsole = MTR_ConfigfileReadBool(CONFIGFILE_PATH, "Engine",
          "show_console", false);
@@ -195,11 +199,13 @@ int main(int argc, char** argv)
     if (showConsole)
         MTR_ConsoleShow();
 
-    autorunAction = MTR_OptionsGet("autorun-action");
-    #ifdef MTR_MOD_PLUGIN
-    autorunPlugin = MTR_OptionsGet("autorun-plugin");
+    #ifndef __EMSCRIPTEN__
+        autorunAction = MTR_OptionsGet("autorun-action");
+        #ifdef MTR_MOD_PLUGIN
+        autorunPlugin = MTR_OptionsGet("autorun-plugin");
+        #endif
+        autorunScript = MTR_OptionsGet("autorun-script");
     #endif
-    autorunScript = MTR_OptionsGet("autorun-script");
 
     if (autorunAction == NULL)
         autorunAction = MTR_ConfigfileReadString(CONFIGFILE_PATH, "Autorun",

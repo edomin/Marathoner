@@ -154,6 +154,7 @@ MTR_ENGINE_FUNC(void, MTR_StringBufferSetString, uint32_t, const char *);
 MTR_ENGINE_FUNC(char *, MTR_StringBufferGetString, uint32_t);
 MTR_ENGINE_FUNC(int, MTR_StringBufferGetMaxLen, uint32_t);
 
+#ifndef __EMSCRIPTEN__
 MTR_ENGINE_FUNC(bool, MTR_OptionsAlias, const char *, const char *);
 MTR_ENGINE_FUNC(char *, MTR_OptionsGet, const char *);
 MTR_ENGINE_FUNC(bool, MTR_OptionsGet_b, const char *);
@@ -161,6 +162,7 @@ MTR_ENGINE_FUNC(int, MTR_OptionsGet_i, const char *);
 MTR_ENGINE_FUNC(long int, MTR_OptionsGet_l, const char *);
 MTR_ENGINE_FUNC(float, MTR_OptionsGet_f, const char *);
 MTR_ENGINE_FUNC(double, MTR_OptionsGet_d, const char *);
+#endif
 
 MTR_ENGINE_FUNC(void, MTR_ConsoleShow, void);
 MTR_ENGINE_FUNC(void, MTR_ConsoleHide, void);
@@ -192,7 +194,11 @@ mtrPlugin *mtrPluginData;
 /* Indexkeeper datamap size */
 #define MTR_IKDM_SMALL                  8
 #define MTR_IKDM_MEDIUM                 2048
-#define MTR_IKDM_LARGE                  134217728
+#if !defined(__EMSCRIPTEN__)
+    #define MTR_IKDM_LARGE              134217728
+#else
+    #define MTR_IKDM_LARGE              67108864
+#endif
 
 /* File opening modes */
 #define MTR_FM_READ                     0

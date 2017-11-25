@@ -1,5 +1,6 @@
 #include "log.h"
 
+__attribute__((__format__ (__printf__, 1, 2)))
 int MTR_LogPrintfCommon(char *format, ...)
 {
     va_list aptr;
@@ -9,7 +10,9 @@ int MTR_LogPrintfCommon(char *format, ...)
     ret = vsprintf(mtrLogBuffer, format, aptr);
     va_end(aptr);
 
+    #ifdef __MINGW32__
     fprintf(mtrLogFile, "%s", mtrLogBuffer);
+    #endif
     MTR_ConsolePrint(mtrLogBuffer);
 
     return ret;

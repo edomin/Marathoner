@@ -6,7 +6,11 @@
     #pragma GCC diagnostic push
     #pragma GCC diagnostic ignored "-Wswitch-default"
 #endif
-#include "SDL2/SDL_ttf.h"
+#if defined(__EMSCRIPTEN__)
+    #include "SDL/SDL_ttf.h"
+#else
+    #include "SDL2/SDL_ttf.h"
+#endif
 #ifdef __MINGW64__
     #pragma GCC diagnostic pop
 #endif

@@ -3,6 +3,7 @@
 /*fa MTR_ClipboardPutText yes */
 bool MTR_CALL MTR_ClipboardPutText(const char* text)
 {
+    #if !defined(__EMSCRIPTEN__)
     bool success;
     success = true;
     if (!Clipboard_open())
@@ -13,11 +14,15 @@ bool MTR_CALL MTR_ClipboardPutText(const char* text)
         return success;
     else
         return false;
+    #else
+        return false;
+    #endif
 }
 
 /*fa MTR_ClipboardGetText yes */
 char *MTR_CALL MTR_ClipboardGetText(void)
 {
+    #if !defined(__EMSCRIPTEN__)
     size_t size;
     char  *text;
     bool   success;
@@ -47,4 +52,7 @@ char *MTR_CALL MTR_ClipboardGetText(void)
     }
     else
         return NULL;
+    #else
+    return NULL;
+    #endif
 }

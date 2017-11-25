@@ -1,7 +1,9 @@
 #ifndef MTR_CORE_CLIPBOARD_H
 #define MTR_CORE_CLIPBOARD_H
 
-#include "lazy_winapi.h"
+#ifdef __MINGW32__
+    #include "lazy_winapi.h"
+#endif
 
 #include "marathoner/engine.h"
 

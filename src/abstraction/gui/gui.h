@@ -11,6 +11,9 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wcast-qual"
 #pragma GCC diagnostic ignored "-Wfloat-equal"
+#ifdef __EMSCRIPTEN__
+    #pragma GCC diagnostic ignored "-Wformat-nonliteral"
+#endif
 #include "nuklear.h"
 #pragma GCC diagnostic pop
 
