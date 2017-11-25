@@ -179,7 +179,7 @@ int main(int argc, char** argv)
     char   *autorunPlugin = NULL;
     char   *currentArgument = NULL;
     #endif
-    bool    showConsole;
+    bool    showConsole = false;
 
     chdir("..");
 
