@@ -182,8 +182,8 @@ $ make mingw install INSTALL_TOP=/usr/local/mingw32 TO_BIN=lua53.dll
 ```
 $ mingw32-gcc -O2 -Wall -c minIni.c -o minIni.o
 $ ar rcs libminini.a minIni.o
-$ mkdir /usr/local/mingw32/include/minIni
-$ cp *.h /usr/local/mingw32/include/minIni
+$ mkdir /usr/local/mingw32/include/minINI
+$ cp *.h /usr/local/mingw32/include/minINI
 $ cp libminini.a /usr/local/mingw32/lib
 ```
 
