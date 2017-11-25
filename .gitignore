@@ -24,3 +24,14 @@ win64/binding_init_func/*
 win64/binding_init_func_call/*
 win64/lib/*.txt
 win64/obj/objs.txt
+html5/fa/*
+html5/binding_init_func/*
+html5/binding_init_func_call/*
+html5/lib/*.txt
+html5/obj/objs.txt
+html5/*.bin
+html5/*.data
+html5/*.html
+html5/*.map
+html5/*.mem
+html5/*.js
