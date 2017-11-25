@@ -47,40 +47,26 @@ static bool mtrSpriteInited = false;
     }
 
 MTR_FUNC(uint32_t, MTR_TextureLoad, const char *);
-
 MTR_FUNC(void, MTR_TextureFree, uint32_t);
-
 MTR_FUNC(void, MTR_TextureGetSizes, uint32_t, int *, int *);
-
 MTR_FUNC(void, MTR_TextureSetModulation_c, uint32_t, uint32_t);
-
 MTR_FUNC(void, MTR_TextureSetModulation_ca, uint32_t, uint32_t);
-
 MTR_FUNC(void, MTR_TextureSetModulation_rgb, uint32_t, uint8_t, uint8_t,
  uint8_t);
-
 MTR_FUNC(void, MTR_TextureSetModulation_rgba, uint32_t, uint8_t, uint8_t,
  uint8_t, uint8_t);
-
 MTR_FUNC(void, MTR_TextureSetModulationAlpha, uint32_t, uint8_t);
-
 MTR_FUNC(void, MTR_TextureSetModulationAlpha_f, uint32_t, float);
-
 MTR_FUNC(void, MTR_TextureBlitRegion_f, uint32_t, float, float, float, float,
  float, float);
-
 MTR_FUNC(void, MTR_TextureBlitRegionSized_f, uint32_t, float, float, float,
  float, float, float, float, float);
-
 MTR_FUNC(void, MTR_TextureBlitRegionScaled_f, uint32_t, float, float, float,
  float, float, float, float, float);
-
 MTR_FUNC(void, MTR_TextureBlitRegionAngled_f, uint32_t, float, float, float,
  float, float, float, float, float, float);
-
 MTR_FUNC(void, MTR_TextureBlitRegionFlipped_f, uint32_t, float, float, float,
  float, float, float, int);
-
 MTR_FUNC(void, MTR_TextureBlitRegionGeneral_f, uint32_t, float, float, float,
  float, float, float, float, float, float, float, float, int);
 
