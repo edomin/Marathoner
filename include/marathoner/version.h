@@ -74,6 +74,10 @@
 #define MTR_VERSION_TIMER_SDL2_LUA                  0x000100U /* inc patch */
 #define MTR_VERSION_TIMER_SDL2_SQUIRREL             0x000000U /* inc patch */
 #define MTR_VERSION_TIMER_SDL2_DUKTAPE              0x000000U /* inc patch */
+#define MTR_VERSION_TIMER_EMSCRIPTEN                0x000000U /* initial */
+#define MTR_VERSION_TIMER_EMSCRIPTEN_LUA            0x000000U /* initial */
+#define MTR_VERSION_TIMER_EMSCRIPTEN_SQUIRREL       0x000000U /* initial */
+#define MTR_VERSION_TIMER_EMSCRIPTEN_DUKTAPE        0x000000U /* initial */
 
 #define MTR_VERSION_TTF_SDL2_TTF                    0x000200U /* inc minor */
 #define MTR_VERSION_TTF_SDL2_TTF_LUA                0x000200U /* inc minor */
