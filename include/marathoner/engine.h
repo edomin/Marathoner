@@ -2,6 +2,7 @@
 #define MTR_ENGINE_H
 
 #include <unistd.h>
+#include <string.h>
 
 #include "marathoner/marathoner.h"
 

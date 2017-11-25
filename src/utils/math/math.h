@@ -9,6 +9,7 @@
 
 #include <math.h>
 #include <time.h>
+#include <string.h>
 
 #define MTR_DEGREE_F 0.017453292519943295769236907684886f
 #define MTR_DEGREE_D 0.017453292519943295769236907684886

@@ -8,6 +8,7 @@
 #include "fa/Abstraction_sprite.h"
 
 #include <math.h>
+#include <string.h>
 
 typedef struct mtrClip_t {
     int x;

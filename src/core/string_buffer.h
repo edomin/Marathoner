@@ -1,6 +1,8 @@
 #ifndef MTR_CORE_STRING_BUFFER_H
 #define MTR_CORE_STRING_BUFFER_H
 
+#include <string.h>
+
 #include "marathoner/engine.h"
 #include "indexkeeper.h"
 

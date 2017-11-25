@@ -1,6 +1,7 @@
 #ifndef MTR_JSON_CJSON_H
 #define MTR_JSON_CJSON_H
 
+#include <string.h>
 #include "cjson/cJSON.h"
 
 #include "marathoner/plugin.h"

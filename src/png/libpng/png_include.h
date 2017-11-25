@@ -1,6 +1,8 @@
 #ifndef MTR_PNG_LIBPNG_H
 #define MTR_PNG_LIBPNG_H
 
+#include <string.h>
+
 #include "zlib.h"
 #include "png.h"
 

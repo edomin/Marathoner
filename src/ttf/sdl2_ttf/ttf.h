@@ -1,6 +1,7 @@
 #ifndef MTR_TTF_SDL2_TTF_H
 #define MTR_TTF_SDL2_TTF_H
 
+#include <string.h>
 #ifdef __MINGW64__
     #pragma GCC diagnostic push
     #pragma GCC diagnostic ignored "-Wswitch-default"

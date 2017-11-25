@@ -1,6 +1,8 @@
 #ifndef MTR_ABSTRACTION_FONT_H
 #define MTR_ABSTRACTION_FONT_H
 
+#include <string.h>
+
 #include "marathoner/plugin.h"
 #ifdef MTR_MOD_STATIC
     #define fa faFont

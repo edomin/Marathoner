@@ -1,6 +1,7 @@
 #ifndef MTR_SCRIPT_LUA_H
 #define MTR_SCRIPT_LUA_H
 
+#include <string.h>
 #include "lua.h"
 #include "lualib.h"
 #include "lauxlib.h"
