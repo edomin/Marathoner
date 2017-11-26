@@ -130,7 +130,7 @@ void MTR_ScriptsInit(void)
                 if (MTR_PluginInit != NULL)
                     MTR_PluginInit();
                 else
-                    MTR_Notify("Library not contain MTR_PluginInit function", 1,
+                    MTR_Notify("Library not contain MTR_PluginInit function", 3,
                      MTR_LMT_ERROR);
             }
         }
