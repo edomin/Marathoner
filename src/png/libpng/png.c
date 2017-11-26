@@ -27,18 +27,22 @@ MTR_DCLSPC void MTR_CALL MTR_PngInit(void)
 {
     MTR_LogWrite("Initializing PNG format support", 0, MTR_LMT_INFO);
 
-    MTR_LogWrite_s("Reporting libpng compile-time version:", 1, MTR_LMT_INFO,
-     PNG_LIBPNG_VER_STRING);
-    MTR_LogWrite_s("Reporting libpng linked version:", 1, MTR_LMT_INFO,
-     png_libpng_ver);
-    MTR_LogWrite_s("Reporting zlib compile-time version:", 1, MTR_LMT_INFO,
-     ZLIB_VERSION);
-    MTR_LogWrite_s("Reporting zlib linked version:", 1, MTR_LMT_INFO,
-     zlib_version);
+    if (!mtrPngInited) {
+        MTR_LogWrite_s("Reporting libpng compile-time version:", 1,
+         MTR_LMT_INFO, PNG_LIBPNG_VER_STRING);
+        MTR_LogWrite_s("Reporting libpng linked version:", 1, MTR_LMT_INFO,
+         png_libpng_ver);
+        MTR_LogWrite_s("Reporting zlib compile-time version:", 1, MTR_LMT_INFO,
+         ZLIB_VERSION);
+        MTR_LogWrite_s("Reporting zlib linked version:", 1, MTR_LMT_INFO,
+         zlib_version);
 
-    tempPixels = NULL;
+        tempPixels = NULL;
 
-    MTR_LogWrite("PNG format support initialized", 0, MTR_LMT_INFO);
+        MTR_LogWrite("PNG format support initialized", 0, MTR_LMT_INFO);
+    } else
+        MTR_LogWrite("PNG format support already initialized", 0, MTR_LMT_INFO);
+
 }
 
 /*fa MTR_PngLoadFast yes */
