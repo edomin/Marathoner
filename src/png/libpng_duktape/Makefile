@@ -1,3 +1,5 @@
+include ../../../makefiles/Build.mk
+
 SUBSYSTEM = png
 MODULE = libpng_duktape
 MODULE_NAME = PNG_libpng_Duktape

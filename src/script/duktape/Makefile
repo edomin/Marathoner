@@ -1,3 +1,5 @@
+include ../../../makefiles/Build.mk
+
 SUBSYSTEM = script
 MODULE = duktape
 MODULE_NAME = Script_Duktape

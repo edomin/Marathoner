@@ -1,3 +1,5 @@
+include ../../../makefiles/Build.mk
+
 SUBSYSTEM = abstraction
 MODULE = font_duktape
 MODULE_NAME = Abstraction_font_Duktape

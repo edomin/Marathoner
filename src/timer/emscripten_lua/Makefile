@@ -1,3 +1,5 @@
+include ../../../makefiles/Build.mk
+
 SUBSYSTEM = timer
 MODULE = emscripten_lua
 MODULE_NAME = Timer_Emscripten_Lua

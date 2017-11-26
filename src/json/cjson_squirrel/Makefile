@@ -1,3 +1,5 @@
+include ../../../makefiles/Build.mk
+
 SUBSYSTEM = json
 MODULE = cjson_squirrel
 MODULE_NAME = JSON_cJSON_Squirrel

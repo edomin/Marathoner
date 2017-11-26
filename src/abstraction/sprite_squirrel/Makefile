@@ -1,3 +1,5 @@
+include ../../../makefiles/Build.mk
+
 SUBSYSTEM = abstraction
 MODULE = sprite_squirrel
 MODULE_NAME = Abstraction_sprite_Squirrel

@@ -1,3 +1,5 @@
+include ../../../makefiles/Build.mk
+
 SUBSYSTEM = png
 MODULE = libpng_lua
 MODULE_NAME = PNG_libpng_Lua

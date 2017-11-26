@@ -1,3 +1,5 @@
+include ../../../makefiles/Build.mk
+
 SUBSYSTEM = screen
 MODULE = sdl2_duktape
 MODULE_NAME = Screen_SDL2_Duktape

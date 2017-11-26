@@ -1,3 +1,5 @@
+include ../../../makefiles/Build.mk
+
 SUBSYSTEM = utils
 MODULE = math_duktape
 MODULE_NAME = Utils_math_Duktape

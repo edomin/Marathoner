@@ -1,3 +1,5 @@
+include ../../../makefiles/Build.mk
+
 SUBSYSTEM = abstraction
 MODULE = gui_lua
 MODULE_NAME = Abstraction_gui_Lua

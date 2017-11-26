@@ -1,3 +1,5 @@
+include ../../../makefiles/Build.mk
+
 SUBSYSTEM = texture
 MODULE = sdl2_gpu_lua
 MODULE_NAME = Texture_SDL2_gpu_Lua

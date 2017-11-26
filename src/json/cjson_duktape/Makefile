@@ -1,3 +1,5 @@
+include ../../../makefiles/Build.mk
+
 SUBSYSTEM = json
 MODULE = cjson_duktape
 MODULE_NAME = JSON_cJSON_Duktape

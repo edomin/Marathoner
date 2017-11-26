@@ -1,3 +1,5 @@
+include ../../../makefiles/Build.mk
+
 SUBSYSTEM = script
 MODULE = lua
 MODULE_NAME = Script_Lua

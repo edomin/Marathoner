@@ -1,3 +1,5 @@
+include ../../../makefiles/Build.mk
+
 SUBSYSTEM = utils
 MODULE = math_lua
 MODULE_NAME = Utils_math_Lua

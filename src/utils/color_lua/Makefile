@@ -1,3 +1,5 @@
+include ../../../makefiles/Build.mk
+
 SUBSYSTEM = utils
 MODULE = color_lua
 MODULE_NAME = Utils_color_Lua

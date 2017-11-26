@@ -1,3 +1,5 @@
+include ../../../makefiles/Build.mk
+
 SUBSYSTEM = script
 MODULE = squirrel
 MODULE_NAME = Script_Squirrel

@@ -1,3 +1,5 @@
+include ../../../makefiles/Build.mk
+
 SUBSYSTEM = utils
 MODULE = math_squirrel
 MODULE_NAME = Utils_math_Squirrel

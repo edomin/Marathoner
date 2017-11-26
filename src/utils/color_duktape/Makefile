@@ -1,3 +1,5 @@
+include ../../../makefiles/Build.mk
+
 SUBSYSTEM = utils
 MODULE = color_duktape
 MODULE_NAME = Utils_color_Duktape

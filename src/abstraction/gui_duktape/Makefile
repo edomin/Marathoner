@@ -1,3 +1,5 @@
+include ../../../makefiles/Build.mk
+
 SUBSYSTEM = abstraction
 MODULE = gui_duktape
 MODULE_NAME = Abstraction_gui_Duktape

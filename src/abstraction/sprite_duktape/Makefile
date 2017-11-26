@@ -1,3 +1,5 @@
+include ../../../makefiles/Build.mk
+
 SUBSYSTEM = abstraction
 MODULE = sprite_duktape
 MODULE_NAME = Abstraction_sprite_Duktape

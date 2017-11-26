@@ -1,3 +1,5 @@
+include ../../../makefiles/Build.mk
+
 SUBSYSTEM = primitive
 MODULE = sdl2_duktape
 MODULE_NAME = Primitive_SDL2_Duktape
