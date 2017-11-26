@@ -2554,7 +2554,7 @@
     MTR_SCRIPT_FUNC(sfunc)                \
     {                                     \
         const char *s1;                   \
-        const char *result;               \
+        char *result;                     \
         MTR_SF_GET_STRING(s1, 1);         \
         result = func(s1);                \
         if (result != NULL)               \
