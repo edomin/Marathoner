@@ -110,6 +110,41 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_TtfLoad(const char *filename, int size)
         return 0U;
     }
     return 0U;
+/*fa MTR_TtfSetSizes yes */
+MTR_DCLSPC bool MTR_CALL MTR_TtfSetSizes(uint32_t fontNum, int width,
+ int height)
+{
+    mtrTtf_t *font;
+    int       i;
+    int       oldMaxHeight;
+    MTR_TTF_CHECK_IF_NOT_INITED(0);
+
+    font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
+    if (font->font == NULL)
+        return false;
+
+    if (height > font->maxHeight) {
+        oldMaxHeight = font->maxHeight;
+        font->maxHeight = height;
+        font->font = realloc(font->font,
+         sizeof(TTF_Font *) * (font->maxHeight + 1));
+        if (font->font == NULL)
+            return false;
+        for (i = oldMaxHeight + 1; i <= font->maxHeight; i++) {
+            font->font[i] = NULL;
+        }
+    }
+
+    if (font->font[height] == NULL) {
+        font->font[height] = TTF_OpenFont(font->filename, height);
+        if (font->font[height] == NULL)
+            return false;
+    }
+
+    font->width = width;
+    font->height = height;
+
+    return true;
 }
 
 /*fa MTR_TtfGetFontHeight yes */
@@ -174,6 +209,24 @@ MTR_DCLSPC int MTR_CALL MTR_TtfGetStringWidth(uint32_t fontNum,
 
 /*fa MTR_TtfSetFontStyle yes */
 MTR_DCLSPC void MTR_CALL MTR_TtfSetFontStyle(uint32_t fontNum, int style)
+/*fa MTR_TtfGetGlyphWidth yes */
+MTR_DCLSPC int MTR_CALL MTR_TtfGetGlyphWidth(uint32_t fontNum, uint32_t glyph)
+{
+    mtrTtf_t *font;
+    int       width;
+    MTR_TTF_CHECK_IF_NOT_INITED(0);
+
+    font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
+    if (font->font == NULL) {
+        return 0;
+    }
+    if (TTF_GlyphMetrics(font->font[font->height], glyph, NULL, NULL, NULL,
+     NULL, &width) == 0)
+        return width;
+    else
+        return 0;
+}
+
 {
     mtrTtf_t *font;
     MTR_TTF_CHECK_IF_NOT_INITED();
@@ -208,6 +261,65 @@ MTR_DCLSPC void MTR_CALL MTR_TtfFree(uint32_t fontNum)
         MTR_IndexkeeperFreeIndex(mtrTtfKeeper, fontNum);
         MTR_LogWrite("TTF font unloaded", 0, MTR_LMT_INFO);
     }
+}
+
+/*fa MTR_TtfRenderGlyph yes */
+MTR_DCLSPC mtrPixels_t *MTR_CALL MTR_TtfRenderGlyph(uint32_t fontNum,
+ uint8_t r, uint8_t g, uint8_t b, uint32_t glyph)
+{
+    mtrTtf_t        *font;
+    SDL_Color        textcolor;
+    SDL_Surface     *renderedSurface;
+    int              success;
+    MTR_TTF_CHECK_IF_NOT_INITED(NULL);
+
+    if (tempSurface != NULL)
+    {
+        SDL_FreeSurface(tempSurface);
+        tempSurface = NULL;
+    }
+    if (tempPixels != NULL) {
+        free(tempPixels);
+        tempPixels = NULL;
+    }
+
+    if (fontNum == 0)
+        return NULL;
+
+    font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
+
+    textcolor.r = r;
+    textcolor.g = g;
+    textcolor.b = b;
+    renderedSurface = TTF_RenderGlyph_Blended(font->font[font->height],
+     glyph, textcolor);
+    if (renderedSurface == NULL)
+        return NULL;
+
+    tempSurface = SDL_CreateRGBSurface(SDL_SWSURFACE, renderedSurface->w,
+     renderedSurface->h, 32, 0xFF000000, 0x00FF0000, 0x0000FF00,
+     0x000000FF);
+    if (tempSurface == NULL)
+    {
+        SDL_FreeSurface(renderedSurface);
+        return NULL;
+    }
+
+    success = SDL_UpperBlit(renderedSurface, NULL, tempSurface, NULL);
+
+    SDL_FreeSurface(renderedSurface);
+
+    if (success == -1)
+        return NULL;
+
+    tempPixels = malloc(sizeof(mtrPixels_t));
+
+    tempPixels->data = tempSurface->pixels;
+    tempPixels->w = tempSurface->w;
+    tempPixels->h = tempSurface->h;
+    tempPixels->pitch = tempSurface->pitch;
+    tempPixels->pixelformat = MTR_PF_RGBA;
+    return tempPixels;
 }
 
 /*fa MTR_TtfRenderString yes */

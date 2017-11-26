@@ -21,12 +21,17 @@
 #endif
 #include "fa/TTF_SDL2_ttf.h"
 
+#define MTR_TTF_INITIAL_MAX_HEIGHT 128
+
 typedef struct mtrTtf_t {
-    TTF_Font *font;
-    char     *name;
+    TTF_Font **font; /* same fonts of various sizes. Font height are index of
+                      * array */
+    int        width;
+    int        height;
+    int        maxHeight;
+    char      *filename;
 } mtrTtf_t;
 
-char              mtrDefaultTTFName[] = "Unnamed_TTF";
 mtrIndexkeeper_t *mtrTtfKeeper;
 SDL_Surface      *tempSurface;
 mtrPixels_t      *tempPixels;
