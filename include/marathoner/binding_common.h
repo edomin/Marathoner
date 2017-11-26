@@ -42,13 +42,17 @@
 
 #if defined(MTR_MOD_PLUGIN)
     #define MTR_BINDING_OK_VAR() bool ok = true;
+    #define MTR_PLUGIN_INIT_FUNC(_moduleID) \
+     MTR_DCLSPC void MTR_CALL MTR_PluginInit(void)
 #else
     #define MTR_BINDING_OK_VAR()
+    #define MTR_PLUGIN_INIT_FUNC(_moduleID) \
+     MTR_DCLSPC void MTR_CALL MTR_ ## _moduleID ## PluginInit(void)
 #endif
 
 #ifdef lua_h
     #define MTR_PLUGIN_INIT(_moduleID)                                 \
-        MTR_DCLSPC void MTR_CALL MTR_ ## _moduleID ## PluginInit(void) \
+        MTR_PLUGIN_INIT_FUNC(_moduleID)                                \
         {                                                              \
             MTR_BINDING_OK_VAR();                                      \
             MTR_LogWrite_s("Reporting Lua compile-time version:", 3,   \
@@ -58,7 +62,7 @@
 #endif /* lua_h */
 #ifdef _SQUIRREL_H_
     #define MTR_PLUGIN_INIT(_moduleID)                                    \
-        MTR_DCLSPC void MTR_CALL MTR_ ## _moduleID ## PluginInit(void)    \
+        MTR_PLUGIN_INIT_FUNC(_moduleID)                                   \
         {                                                                 \
             MTR_BINDING_OK_VAR();                                         \
             MTR_LogWrite_s("Reporting Squirrel compile-time version:", 1, \
@@ -70,7 +74,7 @@
 #endif /* _SQUIRREL_H_ */
 #ifdef DUKTAPE_H_INCLUDED
     #define MTR_PLUGIN_INIT(_moduleID)                                  \
-        MTR_DCLSPC void MTR_CALL MTR_ ## _moduleID ## PluginInit(void)  \
+        MTR_PLUGIN_INIT_FUNC(_moduleID)                                 \
         {                                                               \
             long int verMajor;                                          \
             long int verMinor;                                          \
