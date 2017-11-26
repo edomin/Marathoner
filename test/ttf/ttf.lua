@@ -9,14 +9,14 @@ TtfInit(IKDM_SMALL, 32);
 PrimitiveInit();
 TimerInit();
 
-local ttf = TtfLoad("test/media/Vera.ttf", 24);
+local ttf = TtfLoad("test/media/Vera.ttf");
 if TtfSetSizes(ttf, 24, 24) then
     FileWriteLineFast("test/output.txt", "TTF size set", FM_APPEND);
 else
     FileWriteLineFast("test/output.txt", "Unable to set TTF size", FM_APPEND);
 end;
 local rtWidth = TtfGetStringWidth(ttf, "Hello World");
-local rtHeight = TtfGetFontHeight(ttf);
+local rtHeight = TtfGetHeight(ttf);
 FileWriteLineFast("test/output.txt", "rtWidth: " .. rtWidth, FM_APPEND);
 FileWriteLineFast("test/output.txt", "rtHeight: " .. rtHeight, FM_APPEND);
 rtWidth, trHeight = TtfGetStringSizes(ttf, "Hello World");
@@ -35,9 +35,9 @@ for i = 0, 60, 1 do
 end;
 
 TextureFree(renderedText);
-TtfSetFontOutline(ttf, 4);
+TtfSetOutline(ttf, 4);
 rtWidth = TtfGetStringWidth(ttf, "Hello World");
-rtHeight = TtfGetFontHeight(ttf);
+rtHeight = TtfGetHeight(ttf);
 renderedText = TextureCreate("rendered text texture", rtWidth, rtHeight);
 textPixels = TtfRenderString(ttf, 0xFF, 0x00, 0x00, "Hello World");
 TextureReceivePixels(renderedText, textPixels);
@@ -50,10 +50,10 @@ for i = 0, 60, 1 do
 end;
 
 TextureFree(renderedText);
-TtfSetFontOutline(ttf, 0);
-TtfSetFontStyle(ttf, FS_BOLD);
+TtfSetOutline(ttf, 0);
+TtfSetStyle(ttf, FS_BOLD);
 rtWidth = TtfGetStringWidth(ttf, "Hello World");
-rtHeight = TtfGetFontHeight(ttf);
+rtHeight = TtfGetHeight(ttf);
 renderedText = TextureCreate("rendered text texture", rtWidth, rtHeight);
 textPixels = TtfRenderString(ttf, 0xFF, 0x00, 0x00, "Hello World");
 TextureReceivePixels(renderedText, textPixels);
@@ -66,9 +66,9 @@ for i = 0, 60, 1 do
 end;
 
 TextureFree(renderedText);
-TtfSetFontStyle(ttf, FS_ITALIC);
+TtfSetStyle(ttf, FS_ITALIC);
 rtWidth = TtfGetStringWidth(ttf, "Hello World");
-rtHeight = TtfGetFontHeight(ttf);
+rtHeight = TtfGetHeight(ttf);
 renderedText = TextureCreate("rendered text texture", rtWidth, rtHeight);
 textPixels = TtfRenderString(ttf, 0xFF, 0x00, 0x00, "Hello World");
 TextureReceivePixels(renderedText, textPixels);
@@ -81,9 +81,9 @@ for i = 0, 60, 1 do
 end;
 
 TextureFree(renderedText);
-TtfSetFontStyle(ttf, FS_UNDERLINE);
+TtfSetStyle(ttf, FS_UNDERLINE);
 rtWidth = TtfGetStringWidth(ttf, "Hello World");
-rtHeight = TtfGetFontHeight(ttf);
+rtHeight = TtfGetHeight(ttf);
 renderedText = TextureCreate("rendered text texture", rtWidth, rtHeight);
 textPixels = TtfRenderString(ttf, 0xFF, 0x00, 0x00, "Hello World");
 TextureReceivePixels(renderedText, textPixels);
@@ -96,9 +96,9 @@ for i = 0, 60, 1 do
 end;
 
 TextureFree(renderedText);
-TtfSetFontStyle(ttf, FS_STRIKETHROUGH);
+TtfSetStyle(ttf, FS_STRIKETHROUGH);
 rtWidth = TtfGetStringWidth(ttf, "Hello World");
-rtHeight = TtfGetFontHeight(ttf);
+rtHeight = TtfGetHeight(ttf);
 renderedText = TextureCreate("rendered text texture", rtWidth, rtHeight);
 textPixels = TtfRenderString(ttf, 0xFF, 0x00, 0x00, "Hello World");
 TextureReceivePixels(renderedText, textPixels);

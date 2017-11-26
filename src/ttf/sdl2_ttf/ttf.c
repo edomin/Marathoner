@@ -76,10 +76,11 @@ MTR_DCLSPC void MTR_CALL MTR_TtfQuit(void)
 }
 
 /*fa MTR_TtfLoad yes */
-MTR_DCLSPC uint32_t MTR_CALL MTR_TtfLoad(const char *filename, int size)
+MTR_DCLSPC uint32_t MTR_CALL MTR_TtfLoad(const char *filename)
 {
     uint32_t  freeIndex;
     mtrTtf_t *font;
+    int       i;
     MTR_TTF_CHECK_IF_NOT_INITED_WITH_LOG("Unable to load TTF font", 0U);
 
     if (filename == NULL) {
@@ -92,24 +93,32 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_TtfLoad(const char *filename, int size)
     freeIndex = MTR_IndexkeeperGetFreeIndex(mtrTtfKeeper);
     MTR_LogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, freeIndex);
-    font->font = TTF_OpenFont(filename, size);
-    if (font->font != NULL)
-    {
-        font->name = malloc(sizeof(char) * (strlen(filename) + 1));
-        if (font->name == NULL)
-            font->name = mtrDefaultTTFName;
-        else
-            font->name = strcpy(font->name, filename);
-        MTR_LogWrite_s("TTF font loaded", 0, MTR_LMT_INFO, filename);
-        return freeIndex;
-    }
-    else
-    {
-        MTR_Notify("Unable to load TTF font", 1, MTR_LMT_ERROR);
-        MTR_IndexkeeperFreeIndex(mtrTtfKeeper, freeIndex);
+
+    font->filename = malloc(sizeof(char) * (strlen(filename) + 1));
+    if (font->filename == NULL) {
+        MTR_LogWrite(
+         "Unable to allocate memory for TTF's filename", 0, MTR_LMT_INFO);
         return 0U;
     }
-    return 0U;
+    font->filename = strcpy(font->filename, filename);
+
+    font->maxHeight = MTR_TTF_INITIAL_MAX_HEIGHT;
+    font->font = malloc(sizeof(TTF_Font *) * (font->maxHeight + 1));
+    if (font->font == NULL) {
+        MTR_LogWrite(
+         "Unable to allocate memory for array of various TTF's sizes", 0,
+          MTR_LMT_INFO);
+        free(font->filename);
+        return 0U;
+    }
+    for (i = 0; i <= font->maxHeight; i++) {
+        font->font[i] = NULL;
+    }
+
+    MTR_LogWrite_s("TTF font loaded", 0, MTR_LMT_INFO, filename);
+    return freeIndex;
+}
+
 /*fa MTR_TtfSetSizes yes */
 MTR_DCLSPC bool MTR_CALL MTR_TtfSetSizes(uint32_t fontNum, int width,
  int height)
@@ -147,15 +156,15 @@ MTR_DCLSPC bool MTR_CALL MTR_TtfSetSizes(uint32_t fontNum, int width,
     return true;
 }
 
-/*fa MTR_TtfGetFontHeight yes */
-MTR_DCLSPC int MTR_CALL MTR_TtfGetFontHeight(uint32_t fontNum)
+/*fa MTR_TtfGetHeight yes */
+MTR_DCLSPC int MTR_CALL MTR_TtfGetHeight(uint32_t fontNum)
 {
     mtrTtf_t *font;
     MTR_TTF_CHECK_IF_NOT_INITED(0);
 
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
     if (font->font != NULL)
-        return TTF_FontHeight(font->font);
+        return TTF_FontHeight(font->font[font->height]);
     else
         return 0;
 }
@@ -182,7 +191,7 @@ MTR_DCLSPC bool MTR_CALL MTR_TtfGetStringSizes(uint32_t fontNum,
             *h = 0;
         return false;
     }
-    if (TTF_SizeUTF8(font->font, string, w, h) == 0)
+    if (TTF_SizeUTF8(font->font[font->height], string, w, h) == 0)
         return true;
     else
         return false;
@@ -197,18 +206,15 @@ MTR_DCLSPC int MTR_CALL MTR_TtfGetStringWidth(uint32_t fontNum,
     MTR_TTF_CHECK_IF_NOT_INITED(0);
 
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
-    if (font->font == NULL || string == NULL)
-    {
+    if (font->font == NULL || string == NULL) {
         return 0;
     }
-    if (TTF_SizeUTF8(font->font, string, &width, NULL) == 0)
+    if (TTF_SizeUTF8(font->font[font->height], string, &width, NULL) == 0)
         return width;
     else
         return 0;
 }
 
-/*fa MTR_TtfSetFontStyle yes */
-MTR_DCLSPC void MTR_CALL MTR_TtfSetFontStyle(uint32_t fontNum, int style)
 /*fa MTR_TtfGetGlyphWidth yes */
 MTR_DCLSPC int MTR_CALL MTR_TtfGetGlyphWidth(uint32_t fontNum, uint32_t glyph)
 {
@@ -227,37 +233,44 @@ MTR_DCLSPC int MTR_CALL MTR_TtfGetGlyphWidth(uint32_t fontNum, uint32_t glyph)
         return 0;
 }
 
+/*fa MTR_TtfSetStyle yes */
+MTR_DCLSPC void MTR_CALL MTR_TtfSetStyle(uint32_t fontNum, int style)
 {
     mtrTtf_t *font;
     MTR_TTF_CHECK_IF_NOT_INITED();
 
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
-    TTF_SetFontStyle(font->font, style);
+    TTF_SetFontStyle(font->font[font->height], style);
 }
 
-/*fa MTR_TtfSetFontOutline yes */
-MTR_DCLSPC void MTR_CALL MTR_TtfSetFontOutline(uint32_t fontNum, int outline)
+/*fa MTR_TtfSetOutline yes */
+MTR_DCLSPC void MTR_CALL MTR_TtfSetOutline(uint32_t fontNum, int outline)
 {
     mtrTtf_t *font;
     MTR_TTF_CHECK_IF_NOT_INITED();
 
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
-    TTF_SetFontOutline(font->font, outline);
+    TTF_SetFontOutline(font->font[font->height], outline);
 }
 
 /*fa MTR_TtfFree yes */
 MTR_DCLSPC void MTR_CALL MTR_TtfFree(uint32_t fontNum)
 {
     mtrTtf_t *font;
+    int       i;
     MTR_TTF_CHECK_IF_NOT_INITED_WITH_LOG("Unable to unload TTF font",);
 
     if (fontNum != 0)
     {
         font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
-        MTR_LogWrite_s("Unloading TTF font", 0, MTR_LMT_INFO, font->name);
-        if (font->name != mtrDefaultTTFName)
-            free(font->name);
-        TTF_CloseFont(font->font);
+        MTR_LogWrite_s("Unloading TTF font", 0, MTR_LMT_INFO, font->filename);
+        free(font->filename);
+        for (i = 0; i <= font->maxHeight; i++) {
+            if (font->font[i] != NULL) {
+                TTF_CloseFont(font->font[i]);
+                font->font[i] = NULL;
+            }
+        }
         MTR_IndexkeeperFreeIndex(mtrTtfKeeper, fontNum);
         MTR_LogWrite("TTF font unloaded", 0, MTR_LMT_INFO);
     }
@@ -340,8 +353,10 @@ MTR_DCLSPC mtrPixels_t *MTR_CALL MTR_TtfRenderString(uint32_t fontNum,
         SDL_FreeSurface(tempSurface);
         tempSurface = NULL;
     }
-    if (tempPixels != NULL)
+    if (tempPixels != NULL) {
         free(tempPixels);
+        tempPixels = NULL;
+    }
 
     if (fontNum != 0)
     {
@@ -350,7 +365,8 @@ MTR_DCLSPC mtrPixels_t *MTR_CALL MTR_TtfRenderString(uint32_t fontNum,
         textcolor.r = r;
         textcolor.g = g;
         textcolor.b = b;
-        renderedSurface = TTF_RenderUTF8_Blended(font->font, string, textcolor);
+        renderedSurface = TTF_RenderUTF8_Blended(font->font[font->height],
+         string, textcolor);
         if (renderedSurface == NULL)
             return NULL;
 
