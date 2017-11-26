@@ -1,7 +1,7 @@
 #win32, win64, html5
 PLATFORM = win32
 #static, plugin
-MOD = static
+MOD = plugin
 # yes, no
 DEBUG = yes
 # yes, no
