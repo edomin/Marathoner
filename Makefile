@@ -47,6 +47,10 @@ TTF_SDL2_TTF = ttf/sdl2_ttf
 TTF_SDL2_TTF_LUA = ttf/sdl2_ttf_lua
 TTF_SDL2_TTF_SQUIRREL = ttf/sdl2_ttf_squirrel
 TTF_SDL2_TTF_DUKTAPE = ttf/sdl2_ttf_duktape
+TTF_FREETYPE2 = ttf/freetype2
+TTF_FREETYPE2_LUA = ttf/freetype2_lua
+TTF_FREETYPE2_SQUIRREL = ttf/freetype2_squirrel
+TTF_FREETYPE2_DUKTAPE = ttf/freetype2_duktape
 AUDIO_SDL2_MIXER = audio/sdl2_mixer
 AUDIO_SDL2_MIXER_LUA = audio/sdl2_mixer_lua
 AUDIO_SDL2_MIXER_SQUIRREL = audio/sdl2_mixer_squirrel
@@ -151,6 +155,10 @@ ifeq ($(MOD), plugin)
 	make -j$(CORES) -C src/$(TTF_SDL2_TTF_LUA) PREFIX=$(PREFIX)
 	make -j$(CORES) -C src/$(TTF_SDL2_TTF_SQUIRREL) PREFIX=$(PREFIX)
 	make -j$(CORES) -C src/$(TTF_SDL2_TTF_DUKTAPE) PREFIX=$(PREFIX)
+	make -j$(CORES) -C src/$(TTF_FREETYPE2) PREFIX=$(PREFIX)
+	make -j$(CORES) -C src/$(TTF_FREETYPE2_LUA) PREFIX=$(PREFIX)
+	make -j$(CORES) -C src/$(TTF_FREETYPE2_SQUIRREL) PREFIX=$(PREFIX)
+	make -j$(CORES) -C src/$(TTF_FREETYPE2_DUKTAPE) PREFIX=$(PREFIX)
 
 	make -j$(CORES) -C src/$(AUDIO_SDL2_MIXER) PREFIX=$(PREFIX)
 	make -j$(CORES) -C src/$(AUDIO_SDL2_MIXER_LUA) PREFIX=$(PREFIX)
