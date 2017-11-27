@@ -139,9 +139,59 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_TtfLoad(const char *filename)
             continue;
     }
     font->currentFace = 0;
+    font->style = 0;
+    font->outline = 0;
+    font->width = 0;
+    font->height = 0;
 
     MTR_LogWrite_s("TTF font loaded", 0, MTR_LMT_INFO, filename);
     return freeIndex;
+}
+
+/*fa MTR_TtfGetWidth yes */
+MTR_DCLSPC int MTR_CALL MTR_TtfGetWidth(uint32_t fontNum)
+{
+    mtrTtf_t *font;
+    int       i;
+    MTR_TTF_CHECK_IF_NOT_INITED(0);
+
+    font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
+    if (font->font == NULL)
+        return 0;
+
+    return font->width;
+}
+
+/*fa MTR_TtfGetHeight yes */
+MTR_DCLSPC int MTR_CALL MTR_TtfGetHeight(uint32_t fontNum)
+{
+    mtrTtf_t *font;
+    int       i;
+    MTR_TTF_CHECK_IF_NOT_INITED(0);
+
+    font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
+    if (font->font == NULL)
+        return 0;
+
+    return font->height;
+}
+
+/*fa MTR_TtfGetSizes yes */
+MTR_DCLSPC void MTR_CALL MTR_TtfGetSizes(uint32_t fontNum, int *width,
+ int *height)
+{
+    mtrTtf_t *font;
+    int       i;
+    MTR_TTF_CHECK_IF_NOT_INITED(0);
+
+    font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
+    if (font->font == NULL) {
+        *width = 0;
+        *height = 0;
+    }
+
+    *width = font->width;
+    *height = font->height;
 }
 
 /*fa MTR_TtfSetSizes yes */
@@ -153,28 +203,54 @@ MTR_DCLSPC bool MTR_CALL MTR_TtfSetSizes(uint32_t fontNum, int width,
 
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
     FT_Set_Pixel_Sizes(font->face[font->currentFace].face, width, height);
+    font->width = width;
+    font->height = height;
 
     return true;
+}
+
+/*fa MTR_TtfGetStyle yes */
+MTR_DCLSPC int MTR_CALL MTR_TtfGetStyle(uint32_t fontNum)
+{
+    mtrTtf_t *font;
+    MTR_TTF_CHECK_IF_NOT_INITED();
+
+    font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
+
+    return font->style;
+}
+
+/*fa MTR_TtfGetOutline yes */
+MTR_DCLSPC int MTR_CALL MTR_TtfGetOutline(uint32_t fontNum)
+{
+    mtrTtf_t *font;
+    MTR_TTF_CHECK_IF_NOT_INITED();
+
+    font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
+
+    return font->outline;
 }
 
 /*fa MTR_TtfSetStyle yes */
 MTR_DCLSPC void MTR_CALL MTR_TtfSetStyle(uint32_t fontNum, int style)
 {
-//    mtrTtf_t *font;
-//    MTR_TTF_CHECK_IF_NOT_INITED();
-//
-//    font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
+    mtrTtf_t *font;
+    MTR_TTF_CHECK_IF_NOT_INITED();
+
+    font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
 //    TTF_SetFontStyle(font->font, style);
+    font->style = style;
 }
 
 /*fa MTR_TtfSetOutline yes */
 MTR_DCLSPC void MTR_CALL MTR_TtfSetOutline(uint32_t fontNum, int outline)
 {
-//    mtrTtf_t *font;
-//    MTR_TTF_CHECK_IF_NOT_INITED();
-//
-//    font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
+    mtrTtf_t *font;
+    MTR_TTF_CHECK_IF_NOT_INITED();
+
+    font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
 //    TTF_SetFontOutline(font->font, outline);
+    font->outline = outline;
 }
 
 /*fa MTR_TtfFree yes */
