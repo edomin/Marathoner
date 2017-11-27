@@ -1,4 +1,6 @@
 local i;
+local renderedGlyph;
+local glyphPixels;
 
 -- Positive
 FileWriteLineFast("test/output.txt", "Positive test", FM_WRITE);
@@ -15,239 +17,59 @@ if TtfSetSizes(ttf, 24, 24) then
 else
     FileWriteLineFast("test/output.txt", "Unable to set TTF size", FM_APPEND);
 end;
-local rtWidth = TtfGetStringWidth(ttf, "Hello World");
-local rtHeight = TtfGetHeight(ttf);
-FileWriteLineFast("test/output.txt", "rtWidth: " .. rtWidth, FM_APPEND);
-FileWriteLineFast("test/output.txt", "rtHeight: " .. rtHeight, FM_APPEND);
-rtWidth, trHeight = TtfGetStringSizes(ttf, "Hello World");
-FileWriteLineFast("test/output.txt", "rtWidth: " .. rtWidth, FM_APPEND);
-FileWriteLineFast("test/output.txt", "rtHeight: " .. rtHeight, FM_APPEND);
 
-local renderedText = TextureCreate("rendered text texture", rtWidth, rtHeight);
-local textPixels = TtfRenderString(ttf, 0xFF, 0x00, 0x00, "Hello World");
-TextureReceivePixels(renderedText, textPixels);
-for i = 0, 60, 1 do
-    TimerStart();
-    PrimitiveFill_c(0x000000);
-    TextureBlit_f(renderedText, 32, 32);
-    ScreenFlip();
-    TimerDelayForFPS(30);
-end;
-
-TextureFree(renderedText);
-TtfSetOutline(ttf, 4);
-rtWidth = TtfGetStringWidth(ttf, "Hello World");
-rtHeight = TtfGetHeight(ttf);
-renderedText = TextureCreate("rendered text texture", rtWidth, rtHeight);
-textPixels = TtfRenderString(ttf, 0xFF, 0x00, 0x00, "Hello World");
-TextureReceivePixels(renderedText, textPixels);
-for i = 0, 60, 1 do
-    TimerStart();
-    PrimitiveFill_c(0x000000);
-    TextureBlit_f(renderedText, 32, 32);
-    ScreenFlip();
-    TimerDelayForFPS(30);
-end;
-
-TextureFree(renderedText);
-TtfSetOutline(ttf, 0);
-TtfSetStyle(ttf, FS_BOLD);
-rtWidth = TtfGetStringWidth(ttf, "Hello World");
-rtHeight = TtfGetHeight(ttf);
-renderedText = TextureCreate("rendered text texture", rtWidth, rtHeight);
-textPixels = TtfRenderString(ttf, 0xFF, 0x00, 0x00, "Hello World");
-TextureReceivePixels(renderedText, textPixels);
-for i = 0, 60, 1 do
-    TimerStart();
-    PrimitiveFill_c(0x000000);
-    TextureBlit_f(renderedText, 32, 32);
-    ScreenFlip();
-    TimerDelayForFPS(30);
-end;
-
-TextureFree(renderedText);
-TtfSetStyle(ttf, FS_ITALIC);
-rtWidth = TtfGetStringWidth(ttf, "Hello World");
-rtHeight = TtfGetHeight(ttf);
-renderedText = TextureCreate("rendered text texture", rtWidth, rtHeight);
-textPixels = TtfRenderString(ttf, 0xFF, 0x00, 0x00, "Hello World");
-TextureReceivePixels(renderedText, textPixels);
-for i = 0, 60, 1 do
-    TimerStart();
-    PrimitiveFill_c(0x000000);
-    TextureBlit_f(renderedText, 32, 32);
-    ScreenFlip();
-    TimerDelayForFPS(30);
-end;
-
-TextureFree(renderedText);
-TtfSetStyle(ttf, FS_UNDERLINE);
-rtWidth = TtfGetStringWidth(ttf, "Hello World");
-rtHeight = TtfGetHeight(ttf);
-renderedText = TextureCreate("rendered text texture", rtWidth, rtHeight);
-textPixels = TtfRenderString(ttf, 0xFF, 0x00, 0x00, "Hello World");
-TextureReceivePixels(renderedText, textPixels);
-for i = 0, 60, 1 do
-    TimerStart();
-    PrimitiveFill_c(0x000000);
-    TextureBlit_f(renderedText, 32, 32);
-    ScreenFlip();
-    TimerDelayForFPS(30);
-end;
-
-TextureFree(renderedText);
-TtfSetStyle(ttf, FS_STRIKETHROUGH);
-rtWidth = TtfGetStringWidth(ttf, "Hello World");
-rtHeight = TtfGetHeight(ttf);
-renderedText = TextureCreate("rendered text texture", rtWidth, rtHeight);
-textPixels = TtfRenderString(ttf, 0xFF, 0x00, 0x00, "Hello World");
-TextureReceivePixels(renderedText, textPixels);
-for i = 0, 60, 1 do
-    TimerStart();
-    PrimitiveFill_c(0x000000);
-    TextureBlit_f(renderedText, 32, 32);
-    ScreenFlip();
-    TimerDelayForFPS(30);
-end;
-
-TextureFree(renderedText);
-TtfSetStyle(ttf, FS_NORMAL);
 TtfSetSizes(ttf, 12, 12);
-rtWidth = TtfGetStringWidth(ttf, "Hello World");
-rtHeight = TtfGetHeight(ttf);
-renderedText = TextureCreate("rendered text texture", rtWidth, rtHeight);
-textPixels = TtfRenderString(ttf, 0xFF, 0x00, 0x00, "Hello World");
-TextureReceivePixels(renderedText, textPixels);
+renderedGlyph = TextureCreate("rendered glyph texture", rtWidth, rtHeight);
+glyphPixels = TtfRenderGlyph(ttf, 0xFF, 0x00, 0x00, 0x00000041);
+TextureReceivePixels(renderedGlyph, glyphPixels);
 for i = 0, 15, 1 do
     TimerStart();
     PrimitiveFill_c(0x000000);
-    TextureBlit_f(renderedText, 32, 32);
+    TextureBlit_f(renderedGlyph, 32, 32);
     ScreenFlip();
     TimerDelayForFPS(30);
 end;
 
-TextureFree(renderedText);
+TextureFree(renderedGlyph);
 TtfSetSizes(ttf, 24, 24);
-rtWidth = TtfGetStringWidth(ttf, "Hello World");
-rtHeight = TtfGetHeight(ttf);
-renderedText = TextureCreate("rendered text texture", rtWidth, rtHeight);
-textPixels = TtfRenderString(ttf, 0xFF, 0x00, 0x00, "Hello World");
-TextureReceivePixels(renderedText, textPixels);
+renderedGlyph = TextureCreate("rendered glyph texture", rtWidth, rtHeight);
+glyphPixels = TtfRenderGlyph(ttf, 0xFF, 0x00, 0x00, 0x00000042);
+TextureReceivePixels(renderedGlyph, glyphPixels);
 for i = 0, 15, 1 do
     TimerStart();
     PrimitiveFill_c(0x000000);
-    TextureBlit_f(renderedText, 32, 32);
+    TextureBlit_f(renderedGlyph, 32, 32);
     ScreenFlip();
     TimerDelayForFPS(30);
 end;
 
-TextureFree(renderedText);
+TextureFree(renderedGlyph);
 TtfSetSizes(ttf, 36, 36);
-rtWidth = TtfGetStringWidth(ttf, "Hello World");
-rtHeight = TtfGetHeight(ttf);
-renderedText = TextureCreate("rendered text texture", rtWidth, rtHeight);
-textPixels = TtfRenderString(ttf, 0xFF, 0x00, 0x00, "Hello World");
-TextureReceivePixels(renderedText, textPixels);
+renderedGlyph = TextureCreate("rendered glyph texture", rtWidth, rtHeight);
+glyphPixels = TtfRenderGlyph(ttf, 0xFF, 0x00, 0x00, 0x00000043);
+TextureReceivePixels(renderedGlyph, glyphPixels);
 for i = 0, 15, 1 do
     TimerStart();
     PrimitiveFill_c(0x000000);
-    TextureBlit_f(renderedText, 32, 32);
+    TextureBlit_f(renderedGlyph, 32, 32);
     ScreenFlip();
     TimerDelayForFPS(30);
 end;
 
-TextureFree(renderedText);
+TextureFree(renderedGlyph);
 TtfSetSizes(ttf, 48, 48);
-rtWidth = TtfGetStringWidth(ttf, "Hello World");
-rtHeight = TtfGetHeight(ttf);
-renderedText = TextureCreate("rendered text texture", rtWidth, rtHeight);
-textPixels = TtfRenderString(ttf, 0xFF, 0x00, 0x00, "Hello World");
-TextureReceivePixels(renderedText, textPixels);
+renderedGlyph = TextureCreate("rendered glyph texture", rtWidth, rtHeight);
+glyphPixels = TtfRenderGlyph(ttf, 0xFF, 0x00, 0x00, 0x00000044);
+TextureReceivePixels(renderedGlyph, glyphPixels);
 for i = 0, 15, 1 do
     TimerStart();
     PrimitiveFill_c(0x000000);
-    TextureBlit_f(renderedText, 32, 32);
+    TextureBlit_f(renderedGlyph, 32, 32);
     ScreenFlip();
     TimerDelayForFPS(30);
 end;
 
-TextureFree(renderedText);
-TtfSetSizes(ttf, 48, 48);
-rtWidth = TtfGetGlyphWidth(ttf, 0x00000041);
-rtHeight = TtfGetHeight(ttf);
-renderedText = TextureCreate("rendered glyph texture", rtWidth, rtHeight);
-textPixels = TtfRenderGlyph(ttf, 0xFF, 0x00, 0x00, 0x00000041);
-TextureReceivePixels(renderedText, textPixels);
-FileWriteLineFast("test/output.txt", "rtWidth: " .. rtWidth, FM_APPEND);
-FileWriteLineFast("test/output.txt",
- "TextureGetWidth(renderedText): " .. TextureGetWidth(renderedText), FM_APPEND);
-for i = 0, 15, 1 do
-    TimerStart();
-    PrimitiveFill_c(0x000000);
-    TextureBlit_f(renderedText, 32, 32);
-    PrimitiveRectangle_c_f(32, 32, 32 + rtWidth, 32 + rtHeight, 0x0000FF);
-    ScreenFlip();
-    TimerDelayForFPS(30);
-end;
-
-TextureFree(renderedText);
-TtfSetSizes(ttf, 48, 48);
-rtWidth = TtfGetGlyphWidth(ttf, 0x00000042);
-rtHeight = TtfGetHeight(ttf);
-renderedText = TextureCreate("rendered glyph texture", rtWidth, rtHeight);
-textPixels = TtfRenderGlyph(ttf, 0xFF, 0x00, 0x00, 0x00000042);
-TextureReceivePixels(renderedText, textPixels);
-FileWriteLineFast("test/output.txt", "rtWidth: " .. rtWidth, FM_APPEND);
-FileWriteLineFast("test/output.txt",
- "TextureGetWidth(renderedText): " .. TextureGetWidth(renderedText), FM_APPEND);
-for i = 0, 15, 1 do
-    TimerStart();
-    PrimitiveFill_c(0x000000);
-    TextureBlit_f(renderedText, 32, 32);
-    PrimitiveRectangle_c_f(32, 32, 32 + rtWidth, 32 + rtHeight, 0x0000FF);
-    ScreenFlip();
-    TimerDelayForFPS(30);
-end;
-
-TextureFree(renderedText);
-TtfSetSizes(ttf, 48, 48);
-rtWidth = TtfGetGlyphWidth(ttf, 0x00000043);
-rtHeight = TtfGetHeight(ttf);
-renderedText = TextureCreate("rendered glyph texture", rtWidth, rtHeight);
-textPixels = TtfRenderGlyph(ttf, 0xFF, 0x00, 0x00, 0x00000043);
-TextureReceivePixels(renderedText, textPixels);
-FileWriteLineFast("test/output.txt", "rtWidth: " .. rtWidth, FM_APPEND);
-FileWriteLineFast("test/output.txt",
- "TextureGetWidth(renderedText): " .. TextureGetWidth(renderedText), FM_APPEND);
-for i = 0, 15, 1 do
-    TimerStart();
-    PrimitiveFill_c(0x000000);
-    TextureBlit_f(renderedText, 32, 32);
-    PrimitiveRectangle_c_f(32, 32, 32 + rtWidth, 32 + rtHeight, 0x0000FF);
-    ScreenFlip();
-    TimerDelayForFPS(30);
-end;
-
-TextureFree(renderedText);
-TtfSetSizes(ttf, 48, 48);
-rtWidth = TtfGetGlyphWidth(ttf, 0x00000044);
-rtHeight = TtfGetHeight(ttf);
-renderedText = TextureCreate("rendered glyph texture", rtWidth, rtHeight);
-textPixels = TtfRenderGlyph(ttf, 0xFF, 0x00, 0x00, 0x00000044);
-TextureReceivePixels(renderedText, textPixels);
-FileWriteLineFast("test/output.txt", "rtWidth: " .. rtWidth, FM_APPEND);
-FileWriteLineFast("test/output.txt",
- "TextureGetWidth(renderedText): " .. TextureGetWidth(renderedText), FM_APPEND);
-for i = 0, 15, 1 do
-    TimerStart();
-    PrimitiveFill_c(0x000000);
-    TextureBlit_f(renderedText, 32, 32);
-    PrimitiveRectangle_c_f(32, 32, 32 + rtWidth, 32 + rtHeight, 0x0000FF);
-    ScreenFlip();
-    TimerDelayForFPS(30);
-end;
-
-TextureFree(renderedText);
+TextureFree(renderedGlyph);
 TtfFree(ttf);
 TtfQuit();
 ScreenQuit();
