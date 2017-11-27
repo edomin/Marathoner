@@ -219,7 +219,7 @@ MTR_DCLSPC mtrPixels_t *MTR_CALL MTR_TtfRenderGlyph(uint32_t fontNum,
         tempPixels = NULL;
     }
 
-    if (fontNum == 0)
+    if ((fontNum == 0) || (glyph >= UINT16_MAX))
         return NULL;
 
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
