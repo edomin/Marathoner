@@ -1650,6 +1650,23 @@
         return 1;                              \
     }
 
+#define MTR_SCRIPT_FUNC_B_U32t1P1I2(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)                       \
+    {                                            \
+        uint32_t u32_1;                          \
+        void *p1;                                \
+        int i1;                                  \
+        int i2;                                  \
+        bool result;                             \
+        MTR_SF_GET_UINT32(u32_1, 1);             \
+        MTR_SF_GET_POINTER(p1, 2);               \
+        MTR_SF_GET_INT(i1, 3);                   \
+        MTR_SF_GET_INT(i2, 4);                   \
+        result = func(u32_1, p1, i1, i2);        \
+        MTR_SF_PUSH_BOOL(result);                \
+        return 1;                                \
+    }
+
 #define MTR_SCRIPT_FUNC_B_S1(sfunc, func) \
     MTR_SCRIPT_FUNC(sfunc)                \
     {                                     \
@@ -1943,6 +1960,19 @@
         result = func(u32_1, u32_2);         \
         MTR_SF_PUSH_INT(result);             \
         return 1;                            \
+    }
+
+#define MTR_SCRIPT_FUNC_I_U32t1I1(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)                     \
+    {                                          \
+        uint32_t u32_1;                        \
+        int i1;                                \
+        int result;                            \
+        MTR_SF_GET_UINT32(u32_1, 1);           \
+        MTR_SF_GET_INT(i1, 2);                 \
+        result = func(u32_1, i1);              \
+        MTR_SF_PUSH_INT(result);               \
+        return 1;                              \
     }
 
 #define MTR_SCRIPT_FUNC_I_U32t1S1(sfunc, func) \
@@ -2409,6 +2439,36 @@
         result = func(s1, u32_1);                 \
         MTR_SF_PUSH_UINT32(result);               \
         return 1;                                 \
+    }
+
+#define MTR_SCRIPT_FUNC_U32t_S1U32t1I1(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)                          \
+    {                                               \
+        const char *s1;                             \
+        uint32_t u32_1;                             \
+        int i1;                                     \
+        uint32_t result;                            \
+        MTR_SF_GET_STRING(s1, 1);                   \
+        MTR_SF_GET_UINT32(u32_1, 2);                \
+        MTR_SF_GET_INT(i1, 3);                      \
+        result = func(s1, u32_1, i1);               \
+        MTR_SF_PUSH_UINT32(result);                 \
+        return 1;                                   \
+    }
+
+#define MTR_SCRIPT_FUNC_U32t_S1U32t1UI1(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)                          \
+    {                                               \
+        const char *s1;                             \
+        uint32_t u32_1;                             \
+        unsigned int ui1;                           \
+        uint32_t result;                            \
+        MTR_SF_GET_STRING(s1, 1);                   \
+        MTR_SF_GET_UINT32(u32_1, 2);                \
+        MTR_SF_GET_UINT(ui1, 3);                    \
+        result = func(s1, u32_1, ui1);              \
+        MTR_SF_PUSH_UINT32(result);                 \
+        return 1;                                   \
     }
 
 #define MTR_SCRIPT_FUNC_U32t_S1D1(sfunc, func) \
