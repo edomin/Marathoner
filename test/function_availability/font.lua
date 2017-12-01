@@ -3,18 +3,14 @@ FileWriteLineFast("test/output.txt", "Function Availability", FM_WRITE);
 local fa = dofile("test/common/function_availability.lua");
 
 fa.FunctionSupported(FontInit, "MTR_FontInit", FontFunctionSupported);
-fa.FunctionSupported(FontLoadTtf, "MTR_FontLoadTtf", FontFunctionSupported);
+fa.FunctionSupported(FontCreate, "MTR_FontCreate", FontFunctionSupported);
+fa.FunctionSupported(FontAddAtlas, "MTR_FontAddAtlas", FontFunctionSupported);
+fa.FunctionSupported(FontCacheTtf, "MTR_FontCacheTtf", FontFunctionSupported);
 fa.FunctionSupported(FontFree, "MTR_FontFree", FontFunctionSupported);
-fa.FunctionSupported(FontSetTtfStyle, "MTR_FontSetTtfStyle",
+fa.FunctionSupported(FontSetStyle, "MTR_FontSetStyle", FontFunctionSupported);
+fa.FunctionSupported(FontSetOutline, "MTR_FontSetOutline",
  FontFunctionSupported);
-fa.FunctionSupported(FontSetTtfOutline, "MTR_FontSetTtfOutline",
- FontFunctionSupported);
-fa.FunctionSupported(FontRenderTtfString, "MTR_FontRenderTtfString",
- FontFunctionSupported);
-fa.FunctionSupported(FontCreateMbf, "MTR_FontCreateMbf", FontFunctionSupported);
-fa.FunctionSupported(FontAddMbfTextureTable, "MTR_FontAddMbfTextureTable",
- FontFunctionSupported);
-fa.FunctionSupported(FontDrawMbfString_f, "MTR_FontDrawMbfString_f",
+fa.FunctionSupported(FontDrawString_f, "MTR_FontDrawString_f",
  FontFunctionSupported);
 fa.FunctionSupported(FontGetHeight, "MTR_FontGetHeight", FontFunctionSupported);
 fa.FunctionSupported(FontGetStringWidth, "MTR_FontGetStringWidth",
