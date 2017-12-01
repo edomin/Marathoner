@@ -1,6 +1,10 @@
 local i;
 local renderedGlyph;
 local glyphPixels;
+local ttfWidth;
+local ttfHeight;
+local glyphWidth;
+local glyphHeight;
 
 -- Positive
 FileWriteLineFast("test/output.txt", "Positive test", FM_WRITE);
@@ -17,12 +21,31 @@ if TtfSetSizes(ttf, 24, 24) then
 else
     FileWriteLineFast("test/output.txt", "Unable to set TTF size", FM_APPEND);
 end;
+ttfWidth, ttfHeight = TtfGetSizes(ttf);
+FileWriteLineFast("test/output.txt", "ttfWidth: " .. ttfWidth, FM_APPEND);
+FileWriteLineFast("test/output.txt", "ttfHeight: " .. ttfHeight, FM_APPEND);
+FileWriteLineFast("test/output.txt", "TtfGetWidth(ttf): " .. TtfGetWidth(ttf),
+ FM_APPEND);
+FileWriteLineFast("test/output.txt", "TtfGetHeight(ttf): " .. TtfGetHeight(ttf),
+ FM_APPEND);
+
+glyphWidth, glyphHeight = TtfGetGlyphSizes(ttf, 0x00000041);
+FileWriteLineFast("test/output.txt", "glyphWidth: " .. glyphWidth, FM_APPEND);
+FileWriteLineFast("test/output.txt", "glyphHeight: " .. glyphHeight, FM_APPEND);
+FileWriteLineFast("test/output.txt",
+ "TtfGetGlyphWidth(ttf, 0x00000041): " .. TtfGetGlyphWidth(ttf, 0x00000041),
+ FM_APPEND);
+FileWriteLineFast("test/output.txt",
+ "TtfGetGlyphHeight(ttf, 0x00000041): " .. TtfGetGlyphHeight(ttf, 0x00000041),
+ FM_APPEND);
 
 TtfSetSizes(ttf, 12, 12);
-renderedGlyph = TextureCreate("rendered glyph texture", rtWidth, rtHeight);
 glyphPixels = TtfRenderGlyph(ttf, 0xFF, 0x00, 0x00, 0x00000041);
+glyphWidth, glyphHeight = TtfGetGlyphSizes(ttf, 0x00000041);
+renderedGlyph = TextureCreate("rendered glyph texture", glyphWidth,
+ glyphHeight);
 TextureReceivePixels(renderedGlyph, glyphPixels);
-for i = 0, 15, 1 do
+for i = 0, 30, 1 do
     TimerStart();
     PrimitiveFill_c(0x000000);
     TextureBlit_f(renderedGlyph, 32, 32);
@@ -30,12 +53,13 @@ for i = 0, 15, 1 do
     TimerDelayForFPS(30);
 end;
 
-TextureFree(renderedGlyph);
 TtfSetSizes(ttf, 24, 24);
-renderedGlyph = TextureCreate("rendered glyph texture", rtWidth, rtHeight);
-glyphPixels = TtfRenderGlyph(ttf, 0xFF, 0x00, 0x00, 0x00000042);
+glyphPixels = TtfRenderGlyph(ttf, 0xFF, 0x00, 0x00, 0x00000041);
+glyphWidth, glyphHeight = TtfGetGlyphSizes(ttf, 0x00000041);
+renderedGlyph = TextureCreate("rendered glyph texture", glyphWidth,
+ glyphHeight);
 TextureReceivePixels(renderedGlyph, glyphPixels);
-for i = 0, 15, 1 do
+for i = 0, 30, 1 do
     TimerStart();
     PrimitiveFill_c(0x000000);
     TextureBlit_f(renderedGlyph, 32, 32);
@@ -43,12 +67,13 @@ for i = 0, 15, 1 do
     TimerDelayForFPS(30);
 end;
 
-TextureFree(renderedGlyph);
 TtfSetSizes(ttf, 36, 36);
-renderedGlyph = TextureCreate("rendered glyph texture", rtWidth, rtHeight);
-glyphPixels = TtfRenderGlyph(ttf, 0xFF, 0x00, 0x00, 0x00000043);
+glyphPixels = TtfRenderGlyph(ttf, 0xFF, 0x00, 0x00, 0x00000041);
+glyphWidth, glyphHeight = TtfGetGlyphSizes(ttf, 0x00000041);
+renderedGlyph = TextureCreate("rendered glyph texture", glyphWidth,
+ glyphHeight);
 TextureReceivePixels(renderedGlyph, glyphPixels);
-for i = 0, 15, 1 do
+for i = 0, 30, 1 do
     TimerStart();
     PrimitiveFill_c(0x000000);
     TextureBlit_f(renderedGlyph, 32, 32);
@@ -56,12 +81,13 @@ for i = 0, 15, 1 do
     TimerDelayForFPS(30);
 end;
 
-TextureFree(renderedGlyph);
 TtfSetSizes(ttf, 48, 48);
-renderedGlyph = TextureCreate("rendered glyph texture", rtWidth, rtHeight);
-glyphPixels = TtfRenderGlyph(ttf, 0xFF, 0x00, 0x00, 0x00000044);
+glyphPixels = TtfRenderGlyph(ttf, 0xFF, 0x00, 0x00, 0x00000041);
+glyphWidth, glyphHeight = TtfGetGlyphSizes(ttf, 0x00000041);
+renderedGlyph = TextureCreate("rendered glyph texture", glyphWidth,
+ glyphHeight);
 TextureReceivePixels(renderedGlyph, glyphPixels);
-for i = 0, 15, 1 do
+for i = 0, 30, 1 do
     TimerStart();
     PrimitiveFill_c(0x000000);
     TextureBlit_f(renderedGlyph, 32, 32);

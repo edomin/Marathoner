@@ -17,7 +17,6 @@ MTR_SCRIPT_FUNC(MTR_SF_TtfGetSizes)
     uint32_t fontNum;
     int      width;
     int      height;
-    bool result;
     MTR_SF_GET_UINT32(fontNum, 1);
     MTR_TtfGetSizes(fontNum, &width, &height);
     MTR_SF_PUSH_INT(width);
@@ -31,6 +30,25 @@ MTR_SCRIPT_FUNC_I_U32t1(MTR_SF_TtfGetStyle, MTR_TtfGetStyle)
 MTR_SCRIPT_FUNC_I_U32t1(MTR_SF_TtfGetOutline, MTR_TtfGetOutline)
 MTR_SCRIPT_FUNC_V_U32t1I1(MTR_SF_TtfSetStyle, MTR_TtfSetStyle)
 MTR_SCRIPT_FUNC_V_U32t1I1(MTR_SF_TtfSetOutline, MTR_TtfSetOutline)
+
+#ifdef lua_h
+MTR_SCRIPT_FUNC(MTR_SF_TtfGetGlyphSizes)
+{
+    uint32_t fontNum;
+    uint32_t glyph;
+    int      width;
+    int      height;
+    MTR_SF_GET_UINT32(fontNum, 1);
+    MTR_SF_GET_UINT32(glyph, 2);
+    MTR_TtfGetGlyphSizes(fontNum, glyph, &width, &height);
+    MTR_SF_PUSH_INT(width);
+    MTR_SF_PUSH_INT(height);
+    return 2;
+}
+#endif
+
+MTR_SCRIPT_FUNC_I_U32t2(MTR_SF_TtfGetGlyphWidth, MTR_TtfGetGlyphWidth)
+MTR_SCRIPT_FUNC_I_U32t2(MTR_SF_TtfGetGlyphHeight, MTR_TtfGetGlyphHeight)
 MTR_SCRIPT_FUNC_P_U32t1U8t3U32t1(MTR_SF_TtfRenderGlyph, MTR_TtfRenderGlyph)
 
 void MTR_ScriptsRegisterAll(void)
@@ -54,6 +72,11 @@ void MTR_ScriptsRegisterAll(void)
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TtfGetOutline);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TtfSetStyle);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TtfSetOutline);
+    #ifdef lua_h
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TtfGetGlyphSizes);
+    #endif
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TtfGetGlyphWidth);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TtfGetGlyphHeight);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TtfRenderGlyph);
 
     MTR_ScriptsRegisterVariable_i("FS_NORMAL", MTR_FS_NORMAL);

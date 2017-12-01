@@ -148,16 +148,40 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_TtfLoad(const char *filename)
     return freeIndex;
 }
 
+/*fa MTR_TtfFree yes */
+MTR_DCLSPC void MTR_CALL MTR_TtfFree(uint32_t fontNum)
+{
+    mtrTtf_t *font;
+    int       i;
+    MTR_TTF_CHECK_IF_NOT_INITED_WITH_LOG("Unable to unload TTF font",);
+
+    if (fontNum == 0)
+        return;
+    font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
+    MTR_LogWrite_s("Unloading TTF font", 0, MTR_LMT_INFO, font->name);
+    if (font->name != mtrDefaultTTFName)
+        free(font->name);
+    for (i = 0; i < font->facesCount; i++) {
+        mtrFtError = FT_Done_Face(font->face[i].face);
+        if (mtrFtError) {
+            MTR_LogWrite_i("Error occured while unloading TTF face with index",
+             1, MTR_LMT_ERROR, i);
+            MTR_LogWrite_i("FreeType2 errorcode:", 1, MTR_LMT_ERROR,
+             mtrFtError);
+        }
+    }
+    free(font->face);
+    MTR_IndexkeeperFreeIndex(mtrTtfKeeper, fontNum);
+    MTR_LogWrite("TTF font unloaded", 0, MTR_LMT_INFO);
+}
+
 /*fa MTR_TtfGetWidth yes */
 MTR_DCLSPC int MTR_CALL MTR_TtfGetWidth(uint32_t fontNum)
 {
     mtrTtf_t *font;
-    int       i;
     MTR_TTF_CHECK_IF_NOT_INITED(0);
 
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
-    if (font->font == NULL)
-        return 0;
 
     return font->width;
 }
@@ -166,12 +190,9 @@ MTR_DCLSPC int MTR_CALL MTR_TtfGetWidth(uint32_t fontNum)
 MTR_DCLSPC int MTR_CALL MTR_TtfGetHeight(uint32_t fontNum)
 {
     mtrTtf_t *font;
-    int       i;
     MTR_TTF_CHECK_IF_NOT_INITED(0);
 
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
-    if (font->font == NULL)
-        return 0;
 
     return font->height;
 }
@@ -181,14 +202,9 @@ MTR_DCLSPC void MTR_CALL MTR_TtfGetSizes(uint32_t fontNum, int *width,
  int *height)
 {
     mtrTtf_t *font;
-    int       i;
-    MTR_TTF_CHECK_IF_NOT_INITED(0);
+    MTR_TTF_CHECK_IF_NOT_INITED();
 
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
-    if (font->font == NULL) {
-        *width = 0;
-        *height = 0;
-    }
 
     *width = font->width;
     *height = font->height;
@@ -199,7 +215,7 @@ MTR_DCLSPC bool MTR_CALL MTR_TtfSetSizes(uint32_t fontNum, int width,
  int height)
 {
     mtrTtf_t *font;
-    MTR_TTF_CHECK_IF_NOT_INITED(0);
+    MTR_TTF_CHECK_IF_NOT_INITED(false);
 
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
     FT_Set_Pixel_Sizes(font->face[font->currentFace].face, width, height);
@@ -213,7 +229,7 @@ MTR_DCLSPC bool MTR_CALL MTR_TtfSetSizes(uint32_t fontNum, int width,
 MTR_DCLSPC int MTR_CALL MTR_TtfGetStyle(uint32_t fontNum)
 {
     mtrTtf_t *font;
-    MTR_TTF_CHECK_IF_NOT_INITED();
+    MTR_TTF_CHECK_IF_NOT_INITED(0);
 
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
 
@@ -224,7 +240,7 @@ MTR_DCLSPC int MTR_CALL MTR_TtfGetStyle(uint32_t fontNum)
 MTR_DCLSPC int MTR_CALL MTR_TtfGetOutline(uint32_t fontNum)
 {
     mtrTtf_t *font;
-    MTR_TTF_CHECK_IF_NOT_INITED();
+    MTR_TTF_CHECK_IF_NOT_INITED(0);
 
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
 
@@ -253,31 +269,105 @@ MTR_DCLSPC void MTR_CALL MTR_TtfSetOutline(uint32_t fontNum, int outline)
     font->outline = outline;
 }
 
-/*fa MTR_TtfFree yes */
-MTR_DCLSPC void MTR_CALL MTR_TtfFree(uint32_t fontNum)
+/*fa MTR_TtfGetGlyphSizes yes */
+MTR_DCLSPC void MTR_CALL MTR_TtfGetGlyphSizes(uint32_t fontNum,
+ uint32_t glyph, int *w, int *h)
 {
-    mtrTtf_t *font;
-    int       i;
-    MTR_TTF_CHECK_IF_NOT_INITED_WITH_LOG("Unable to unload TTF font",);
+    mtrTtf_t        *font;
+    FT_UInt          glyph_index;
+    FT_GlyphSlot     faceGlyph;
+    MTR_TTF_CHECK_IF_NOT_INITED();
 
-    if (fontNum == 0)
+    if (fontNum == 0) {
+        *w = 0;
+        *h = 0;
         return;
+    }
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
-    MTR_LogWrite_s("Unloading TTF font", 0, MTR_LMT_INFO, font->name);
-    if (font->name != mtrDefaultTTFName)
-        free(font->name);
-    for (i = 0; i < font->facesCount; i++) {
-        mtrFtError = FT_Done_Face(font->face[i].face);
+
+    glyph_index = FT_Get_Char_Index(font->face[font->currentFace].face, glyph);
+    mtrFtError = FT_Load_Glyph(font->face[font->currentFace].face, glyph_index,
+     FT_LOAD_DEFAULT);
+    if (mtrFtError) {
+        *w = 0;
+        *h = 0;
+        return;
+    }
+    faceGlyph = font->face[font->currentFace].face->glyph;
+
+    if (faceGlyph->format != FT_GLYPH_FORMAT_BITMAP)
+    {
+        mtrFtError = FT_Render_Glyph(faceGlyph,
+         FT_RENDER_MODE_NORMAL);
         if (mtrFtError) {
-            MTR_LogWrite_i("Error occured while unloading TTF face with index",
-             1, MTR_LMT_ERROR, i);
-            MTR_LogWrite_i("FreeType2 errorcode:", 1, MTR_LMT_ERROR,
-             mtrFtError);
+            *w = 0;
+            *h = 0;
+            return;
         }
     }
-    free(font->face);
-    MTR_IndexkeeperFreeIndex(mtrTtfKeeper, fontNum);
-    MTR_LogWrite("TTF font unloaded", 0, MTR_LMT_INFO);
+
+    *w = faceGlyph->bitmap.width;
+    *h = faceGlyph->bitmap.rows;
+}
+
+/*fa MTR_TtfGetGlyphWidth yes */
+MTR_DCLSPC int MTR_CALL MTR_TtfGetGlyphWidth(uint32_t fontNum, uint32_t glyph)
+{
+    mtrTtf_t        *font;
+    FT_UInt          glyph_index;
+    FT_GlyphSlot     faceGlyph;
+    MTR_TTF_CHECK_IF_NOT_INITED(0);
+
+    if (fontNum == 0)
+        return 0;
+    font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
+
+    glyph_index = FT_Get_Char_Index(font->face[font->currentFace].face, glyph);
+    mtrFtError = FT_Load_Glyph(font->face[font->currentFace].face, glyph_index,
+     FT_LOAD_DEFAULT);
+    if (mtrFtError)
+        return 0;
+    faceGlyph = font->face[font->currentFace].face->glyph;
+
+    if (faceGlyph->format != FT_GLYPH_FORMAT_BITMAP)
+    {
+        mtrFtError = FT_Render_Glyph(faceGlyph,
+         FT_RENDER_MODE_NORMAL);
+        if (mtrFtError)
+            return 0;
+    }
+
+    return faceGlyph->bitmap.width;
+}
+
+/*fa MTR_TtfGetGlyphHeight yes */
+MTR_DCLSPC int MTR_CALL MTR_TtfGetGlyphHeight(uint32_t fontNum, uint32_t glyph)
+{
+    mtrTtf_t        *font;
+    FT_UInt          glyph_index;
+    FT_GlyphSlot     faceGlyph;
+    MTR_TTF_CHECK_IF_NOT_INITED(0);
+
+    if (fontNum == 0)
+        return 0;
+    font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
+
+    glyph_index = FT_Get_Char_Index(font->face[font->currentFace].face, glyph);
+    mtrFtError = FT_Load_Glyph(font->face[font->currentFace].face, glyph_index,
+     FT_LOAD_DEFAULT);
+    if (mtrFtError)
+        return 0;
+    faceGlyph = font->face[font->currentFace].face->glyph;
+
+    if (faceGlyph->format != FT_GLYPH_FORMAT_BITMAP)
+    {
+        mtrFtError = FT_Render_Glyph(faceGlyph,
+         FT_RENDER_MODE_NORMAL);
+        if (mtrFtError)
+            return 0;
+    }
+
+    return faceGlyph->bitmap.rows;
 }
 
 /*fa MTR_TtfRenderGlyph yes */
@@ -291,6 +381,7 @@ MTR_DCLSPC mtrPixels_t *MTR_CALL MTR_TtfRenderGlyph(uint32_t fontNum,
     unsigned int     i;
     unsigned int     j;
     uint8_t         *tempPixelsData;
+    unsigned int     glyphWidth;
     MTR_TTF_CHECK_IF_NOT_INITED(NULL);
 
     if (tempPixels != NULL)
@@ -323,22 +414,29 @@ MTR_DCLSPC mtrPixels_t *MTR_CALL MTR_TtfRenderGlyph(uint32_t fontNum,
     if (tempPixels == NULL)
         return NULL;
 
+    glyphWidth = faceGlyph->bitmap.width;
+
     tempPixelsData = malloc(
-     sizeof(uint8_t) * 4 * faceGlyph->bitmap.rows * faceGlyph->bitmap.width);
+     sizeof(uint8_t) * 4 * faceGlyph->bitmap.rows * glyphWidth);
     if (tempPixelsData == NULL)
         return NULL;
 
-    for (i = 0; i < faceGlyph->bitmap.width; i++) {
+    for (i = 0; i < glyphWidth; i++) {
         for (j = 0; j < faceGlyph->bitmap.rows; j++) {
-            tempPixelsData[i * 4 + j * faceGlyph->bitmap.width * 4] = r;
-            tempPixelsData[i * 4 + j * faceGlyph->bitmap.width * 4 + 1] = g;
-            tempPixelsData[i * 4 + j * faceGlyph->bitmap.width * 4 + 2] = b;
-            tempPixelsData[i * 4 + j * faceGlyph->bitmap.width * 4 + 3] = faceGlyph->bitmap.buffer[i + j * faceGlyph->bitmap.width];
+            int redByte = i * 4 + j * glyphWidth * 4;
+            int greenByte = i * 4 + j * glyphWidth * 4 + 1;
+            int blueByte = i * 4 + j * glyphWidth * 4 + 2;
+            int alphaByte = i * 4 + j * glyphWidth * 4 + 3;
+            tempPixelsData[redByte] = r;
+            tempPixelsData[greenByte] = g;
+            tempPixelsData[blueByte] = b;
+            tempPixelsData[alphaByte] = faceGlyph->bitmap.buffer[
+             i + j * glyphWidth];
         }
     }
     tempPixels->data = tempPixelsData;
 
-    tempPixels->w = faceGlyph->bitmap.width;
+    tempPixels->w = glyphWidth;
     tempPixels->h = faceGlyph->bitmap.rows;
     tempPixels->pitch = faceGlyph->bitmap.pitch * 4;
     tempPixels->pixelformat = MTR_PF_RGBA;

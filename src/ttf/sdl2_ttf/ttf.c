@@ -121,11 +121,33 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_TtfLoad(const char *filename)
     return freeIndex;
 }
 
+/*fa MTR_TtfFree yes */
+MTR_DCLSPC void MTR_CALL MTR_TtfFree(uint32_t fontNum)
+{
+    mtrTtf_t *font;
+    int       i;
+    MTR_TTF_CHECK_IF_NOT_INITED_WITH_LOG("Unable to unload TTF font",);
+
+    if (fontNum != 0)
+    {
+        font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
+        MTR_LogWrite_s("Unloading TTF font", 0, MTR_LMT_INFO, font->filename);
+        free(font->filename);
+        for (i = 0; i <= font->maxHeight; i++) {
+            if (font->font[i] != NULL) {
+                TTF_CloseFont(font->font[i]);
+                font->font[i] = NULL;
+            }
+        }
+        MTR_IndexkeeperFreeIndex(mtrTtfKeeper, fontNum);
+        MTR_LogWrite("TTF font unloaded", 0, MTR_LMT_INFO);
+    }
+}
+
 /*fa MTR_TtfGetWidth yes */
 MTR_DCLSPC int MTR_CALL MTR_TtfGetWidth(uint32_t fontNum)
 {
     mtrTtf_t *font;
-    int       i;
     MTR_TTF_CHECK_IF_NOT_INITED(0);
 
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
@@ -139,7 +161,6 @@ MTR_DCLSPC int MTR_CALL MTR_TtfGetWidth(uint32_t fontNum)
 MTR_DCLSPC int MTR_CALL MTR_TtfGetHeight(uint32_t fontNum)
 {
     mtrTtf_t *font;
-    int       i;
     MTR_TTF_CHECK_IF_NOT_INITED(0);
 
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
@@ -154,8 +175,7 @@ MTR_DCLSPC void MTR_CALL MTR_TtfGetSizes(uint32_t fontNum, int *width,
  int *height)
 {
     mtrTtf_t *font;
-    int       i;
-    MTR_TTF_CHECK_IF_NOT_INITED(0);
+    MTR_TTF_CHECK_IF_NOT_INITED();
 
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
     if (font->font == NULL) {
@@ -174,7 +194,7 @@ MTR_DCLSPC bool MTR_CALL MTR_TtfSetSizes(uint32_t fontNum, int width,
     mtrTtf_t *font;
     int       i;
     int       oldMaxHeight;
-    MTR_TTF_CHECK_IF_NOT_INITED(0);
+    MTR_TTF_CHECK_IF_NOT_INITED(false);
 
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
     if (font->font == NULL)
@@ -208,7 +228,7 @@ MTR_DCLSPC bool MTR_CALL MTR_TtfSetSizes(uint32_t fontNum, int width,
 MTR_DCLSPC int MTR_CALL MTR_TtfGetStyle(uint32_t fontNum)
 {
     mtrTtf_t *font;
-    MTR_TTF_CHECK_IF_NOT_INITED();
+    MTR_TTF_CHECK_IF_NOT_INITED(0);
 
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
 
@@ -219,7 +239,7 @@ MTR_DCLSPC int MTR_CALL MTR_TtfGetStyle(uint32_t fontNum)
 MTR_DCLSPC int MTR_CALL MTR_TtfGetOutline(uint32_t fontNum)
 {
     mtrTtf_t *font;
-    MTR_TTF_CHECK_IF_NOT_INITED();
+    MTR_TTF_CHECK_IF_NOT_INITED(0);
 
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
 
@@ -246,27 +266,78 @@ MTR_DCLSPC void MTR_CALL MTR_TtfSetOutline(uint32_t fontNum, int outline)
     TTF_SetFontOutline(font->font[font->height], outline);
 }
 
-/*fa MTR_TtfFree yes */
-MTR_DCLSPC void MTR_CALL MTR_TtfFree(uint32_t fontNum)
+/*fa MTR_TtfGetGlyphSizes yes */
+MTR_DCLSPC void MTR_CALL MTR_TtfGetGlyphSizes(uint32_t fontNum,
+ uint32_t glyph, int *w, int *h)
 {
     mtrTtf_t *font;
-    int       i;
-    MTR_TTF_CHECK_IF_NOT_INITED_WITH_LOG("Unable to unload TTF font",);
+    int       miny;
+    int       maxy;
+    int       advance;
+    int       glyphMetricsGet;
+    MTR_TTF_CHECK_IF_NOT_INITED();
 
-    if (fontNum != 0)
-    {
-        font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
-        MTR_LogWrite_s("Unloading TTF font", 0, MTR_LMT_INFO, font->filename);
-        free(font->filename);
-        for (i = 0; i <= font->maxHeight; i++) {
-            if (font->font[i] != NULL) {
-                TTF_CloseFont(font->font[i]);
-                font->font[i] = NULL;
-            }
-        }
-        MTR_IndexkeeperFreeIndex(mtrTtfKeeper, fontNum);
-        MTR_LogWrite("TTF font unloaded", 0, MTR_LMT_INFO);
+    if ((fontNum == 0) || (glyph >= UINT16_MAX)) {
+        *w = 0;
+        *h = 0;
+        return;
     }
+
+    font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
+
+    glyphMetricsGet = TTF_GlyphMetrics(font->font[font->height], glyph, NULL,
+     NULL, &miny, &maxy, &advance);
+    if(glyphMetricsGet == -1) {
+        *w = 0;
+        *h = 0;
+        return;
+    }
+
+    *w = advance;
+    *h = maxy - miny;
+}
+
+/*fa MTR_TtfGetGlyphWidth yes */
+MTR_DCLSPC int MTR_CALL MTR_TtfGetGlyphWidth(uint32_t fontNum, uint32_t glyph)
+{
+    mtrTtf_t *font;
+    int       advance;
+    int       glyphMetricsGet;
+    MTR_TTF_CHECK_IF_NOT_INITED(0);
+
+    if ((fontNum == 0) || (glyph >= UINT16_MAX))
+        return 0;
+
+    font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
+
+    glyphMetricsGet = TTF_GlyphMetrics(font->font[font->height], glyph, NULL,
+     NULL, NULL, NULL, &advance);
+    if(glyphMetricsGet == -1)
+        return 0;
+
+    return advance;
+}
+
+/*fa MTR_TtfGetGlyphHeight yes */
+MTR_DCLSPC int MTR_CALL MTR_TtfGetGlyphHeight(uint32_t fontNum, uint32_t glyph)
+{
+    mtrTtf_t *font;
+    int       miny;
+    int       maxy;
+    int       glyphMetricsGet;
+    MTR_TTF_CHECK_IF_NOT_INITED(0);
+
+    if ((fontNum == 0) || (glyph >= UINT16_MAX))
+        return 0;
+
+    font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
+
+    glyphMetricsGet = TTF_GlyphMetrics(font->font[font->height], glyph, NULL,
+     NULL, &miny, &maxy, NULL);
+    if(glyphMetricsGet == -1)
+        return 0;
+
+    return maxy - miny;
 }
 
 /*fa MTR_TtfRenderGlyph yes */

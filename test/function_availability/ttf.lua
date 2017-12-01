@@ -9,5 +9,11 @@ fa.FunctionSupported(TtfFree, "MTR_TtfFree", TtfFunctionSupported);
 fa.FunctionSupported(TtfSetSizes, "MTR_TtfSetSizes", TtfFunctionSupported);
 fa.FunctionSupported(TtfSetStyle, "MTR_TtfSetStyle", TtfFunctionSupported);
 fa.FunctionSupported(TtfSetOutline, "MTR_TtfSetOutline", TtfFunctionSupported);
+fa.FunctionSupported(TtfGetGlyphSizes, "MTR_TtfGetGlyphSizes",
+ TtfFunctionSupported);
+fa.FunctionSupported(TtfGetGlyphWidth, "MTR_TtfGetGlyphWidth",
+ TtfFunctionSupported);
+fa.FunctionSupported(TtfGetGlyphHeight, "MTR_TtfGetGlyphHeight",
+ TtfFunctionSupported);
 fa.FunctionSupported(TtfRenderGlyph, "MTR_TtfRenderGlyph",
  TtfFunctionSupported);

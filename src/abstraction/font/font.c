@@ -46,6 +46,7 @@ MTR_DCLSPC bool MTR_CALL MTR_FontInit(uint32_t dmSize, uint32_t reservedCount)
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TextureBlit_f, "texture");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TextureBlitRegion_f, "texture");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TextureReceivePixels, "texture");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TtfGetGlyphSizes, "ttf");
     #endif
 
     mtrFontKeeper = (mtrIndexkeeper_t *)MTR_IndexkeeperCreate(dmSize,
