@@ -6,6 +6,32 @@ fa.FunctionSupported(SpriteInit, "MTR_SpriteInit", SpriteFunctionSupported);
 fa.FunctionSupported(SpriteLoad, "MTR_SpriteLoad", SpriteFunctionSupported);
 fa.FunctionSupported(SpriteLoadSimple, "MTR_SpriteLoadSimple",
  SpriteFunctionSupported);
+fa.FunctionSupported(SpriteLoadAtlas, "MTR_SpriteLoadAtlas",
+ SpriteFunctionSupported);
+fa.FunctionSupported(SpriteCreateFromTexture, "MTR_SpriteCreateFromTexture",
+ SpriteFunctionSupported);
+fa.FunctionSupported(SpriteSetAtlasFrame, "MTR_SpriteSetAtlasFrame",
+ SpriteFunctionSupported);
+fa.FunctionSupported(SpriteGetFrameSizes, "MTR_SpriteGetFrameSizes",
+ SpriteFunctionSupported);
+fa.FunctionSupported(SpriteGetFrameWidth, "MTR_SpriteGetFrameWidth",
+ SpriteFunctionSupported);
+fa.FunctionSupported(SpriteGetFrameHeight, "MTR_SpriteGetFrameHeight",
+ SpriteFunctionSupported);
+fa.FunctionSupported(SpriteGetFrameCoords, "MTR_SpriteGetFrameCoords",
+ SpriteFunctionSupported);
+fa.FunctionSupported(SpriteGetFrameX, "MTR_SpriteGetFrameX",
+ SpriteFunctionSupported);
+fa.FunctionSupported(SpriteGetFrameY, "MTR_SpriteGetFrameY",
+ SpriteFunctionSupported);
+fa.FunctionSupported(SpriteGetFrameAnchors, "MTR_SpriteGetFrameAnchors",
+ SpriteFunctionSupported);
+fa.FunctionSupported(SpriteGetFrameAnchorX, "MTR_SpriteGetFrameAnchorX",
+ SpriteFunctionSupported);
+fa.FunctionSupported(SpriteGetFrameAnchorY, "MTR_SpriteGetFrameAnchorY",
+ SpriteFunctionSupported);
+fa.FunctionSupported(SpriteGetTexture, "MTR_SpriteGetTexture",
+ SpriteFunctionSupported);
 fa.FunctionSupported(SpriteFree, "MTR_SpriteFree", SpriteFunctionSupported);
 fa.FunctionSupported(SpriteSetModulation_c, "MTR_SpriteSetModulation_c",
  SpriteFunctionSupported);

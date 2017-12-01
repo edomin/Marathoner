@@ -303,6 +303,81 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_SpriteLoadAtlas(const char *filename,
     return freeIndex;
 }
 
+/*fa MTR_SpriteCreateFromTexture yes */
+MTR_DCLSPC uint32_t MTR_CALL MTR_SpriteCreateFromTexture(const char *name,
+ uint32_t texNum, int clipsCount)
+{
+    uint32_t     freeIndex;
+    mtrSprite_t *sprite;
+    int          textureWidth;
+    int          textureHeight;
+    int          i;
+    MTR_SPRITE_CHECK_IF_NOT_INITED_WITH_LOG(
+     "Unable to create sprite from texture", 0U);
+
+    if (texNum == 0U) {
+        MTR_Notify(
+         "Unable to create sprite from texture. incorrect texture index", 0,
+         MTR_LMT_ERROR);
+        return 0U;
+    }
+
+    if (name == NULL) {
+        MTR_Notify(
+         "Unable to create sprite from texture. Filename is is not valid", 0,
+         MTR_LMT_ERROR);
+        return 0U;
+    }
+
+    MTR_LogWrite_s("Creating sprite from texture", 0, MTR_LMT_INFO, name);
+
+    freeIndex = MTR_IndexkeeperGetFreeIndex(mtrSpriteKeeper);
+    MTR_LogWrite_i("Found free index: ", 1, MTR_LMT_INFO, freeIndex);
+    sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, freeIndex);
+
+    sprite->textureIndex = texNum;
+
+    sprite->name = malloc(sizeof(char) * (strlen(name) + 1));
+    if (sprite->name == NULL)
+        sprite->name = mtrDefaultSpriteName;
+    else
+        sprite->name = strcpy(sprite->name, name);
+    MTR_TextureGetSizes(sprite->textureIndex, &textureWidth, &textureHeight);
+    MTR_LogWrite_i("Texture width:", 1, MTR_LMT_INFO, textureWidth);
+    MTR_LogWrite_i("Texture height:", 1, MTR_LMT_INFO, textureHeight);
+
+    sprite->clipWidth = 0;
+    sprite->clipHeight = 0;
+    sprite->rowsCount = 0;
+    sprite->colsCount = 0;
+    sprite->clipsCount = clipsCount;
+    MTR_LogWrite_i("Clips count:", 1, MTR_LMT_INFO, sprite->clipsCount);
+
+    sprite->clip = malloc(sizeof(mtrClip_t) * sprite->clipsCount);
+    if (sprite->clip == NULL)
+    {
+        MTR_Notify("Unable to allocate memory for clips' coords array", 1,
+         MTR_LMT_ERROR);
+        MTR_IndexkeeperFreeIndex(mtrSpriteKeeper, freeIndex);
+        if (sprite->name != mtrDefaultSpriteName)
+            free(sprite->name);
+        return 0U;
+    }
+
+    for (i = 0; i < sprite->clipsCount; i++)
+    {
+        sprite->clip[i].x = 0;
+        sprite->clip[i].y = 0;
+        sprite->clip[i].w = 0;
+        sprite->clip[i].h = 0;
+        sprite->clip[i].anchorX = 0;
+        sprite->clip[i].anchorY = 0;
+    }
+    sprite->atlas = true;
+
+    return freeIndex;
+}
+
 /*fa MTR_SpriteSetAtlasFrame yes */
 MTR_DCLSPC bool MTR_CALL MTR_SpriteSetAtlasFrame(uint32_t sprNum, int clipNum,
  int x1, int y1, int x2, int y2, int anchorX, int anchorY)
@@ -329,6 +404,190 @@ MTR_DCLSPC bool MTR_CALL MTR_SpriteSetAtlasFrame(uint32_t sprNum, int clipNum,
     sprite->clip[clipNum].anchorY = anchorY;
 
     return true;
+}
+
+/*fa MTR_SpriteGetFrameSizes yes */
+MTR_DCLSPC void MTR_CALL MTR_SpriteGetFrameSizes(uint32_t sprNum, int clipNum,
+ int *width, int *height)
+{
+    mtrSprite_t *sprite;
+    MTR_SPRITE_CHECK_IF_NOT_INITED();
+
+    if (sprNum == 0)
+        return;
+
+    sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+
+    if (clipNum > sprite->clipsCount) {
+        *width = 0;
+        *height = 0;
+        return;
+    }
+
+    *width = sprite->clip[clipNum].w;
+    *height = sprite->clip[clipNum].h;
+}
+
+/*fa MTR_SpriteGetFrameWidth yes */
+MTR_DCLSPC int MTR_CALL MTR_SpriteGetFrameWidth(uint32_t sprNum, int clipNum)
+{
+    mtrSprite_t *sprite;
+    MTR_SPRITE_CHECK_IF_NOT_INITED(0);
+
+    if (sprNum == 0)
+        return 0;
+
+    sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+
+    if (clipNum > sprite->clipsCount)
+        return 0;
+
+    return sprite->clip[clipNum].w;
+}
+
+/*fa MTR_SpriteGetFrameHeight yes */
+MTR_DCLSPC int MTR_CALL MTR_SpriteGetFrameHeight(uint32_t sprNum, int clipNum)
+{
+    mtrSprite_t *sprite;
+    MTR_SPRITE_CHECK_IF_NOT_INITED(0);
+
+    if (sprNum == 0)
+        return 0;
+
+    sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+
+    MTR_LogWrite_i("Sprite index", 0, MTR_LMT_DEBUG, sprNum);
+
+    if (clipNum > sprite->clipsCount)
+        return 0;
+
+    return sprite->clip[clipNum].h;
+}
+
+/*fa MTR_SpriteGetFrameCoords yes */
+MTR_DCLSPC void MTR_CALL MTR_SpriteGetFrameCoords(uint32_t sprNum, int clipNum,
+ int *x, int *y)
+{
+    mtrSprite_t *sprite;
+    MTR_SPRITE_CHECK_IF_NOT_INITED();
+
+    if (sprNum == 0)
+        return;
+
+    sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+
+    if (clipNum > sprite->clipsCount) {
+        *x = 0;
+        *y = 0;
+        return;
+    }
+
+    *x = sprite->clip[clipNum].x;
+    *y = sprite->clip[clipNum].y;
+}
+
+/*fa MTR_SpriteGetFrameX yes */
+MTR_DCLSPC int MTR_CALL MTR_SpriteGetFrameX(uint32_t sprNum, int clipNum)
+{
+    mtrSprite_t *sprite;
+    MTR_SPRITE_CHECK_IF_NOT_INITED(0);
+
+    if (sprNum == 0)
+        return 0;
+
+    sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+
+    if (clipNum > sprite->clipsCount)
+        return 0;
+
+    return sprite->clip[clipNum].x;
+}
+
+/*fa MTR_SpriteGetFrameY yes */
+MTR_DCLSPC int MTR_CALL MTR_SpriteGetFrameY(uint32_t sprNum, int clipNum)
+{
+    mtrSprite_t *sprite;
+    MTR_SPRITE_CHECK_IF_NOT_INITED(0);
+
+    if (sprNum == 0)
+        return 0;
+
+    sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+
+    if (clipNum > sprite->clipsCount)
+        return 0;
+
+    return sprite->clip[clipNum].y;
+}
+
+/*fa MTR_SpriteGetFrameAnchors yes */
+MTR_DCLSPC void MTR_CALL MTR_SpriteGetFrameAnchors(uint32_t sprNum, int clipNum,
+ int *anchorX, int *anchorY)
+{
+    mtrSprite_t *sprite;
+    MTR_SPRITE_CHECK_IF_NOT_INITED();
+
+    if (sprNum == 0)
+        return;
+
+    sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+
+    if (clipNum > sprite->clipsCount) {
+        *anchorX = 0;
+        *anchorY = 0;
+        return;
+    }
+
+    *anchorX = sprite->clip[clipNum].anchorX;
+    *anchorY = sprite->clip[clipNum].anchorY;
+}
+
+/*fa MTR_SpriteGetFrameAnchorX yes */
+MTR_DCLSPC int MTR_CALL MTR_SpriteGetFrameAnchorX(uint32_t sprNum, int clipNum)
+{
+    mtrSprite_t *sprite;
+    MTR_SPRITE_CHECK_IF_NOT_INITED(0);
+
+    if (sprNum == 0)
+        return 0;
+
+    sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+
+    if (clipNum > sprite->clipsCount)
+        return 0;
+
+    return sprite->clip[clipNum].anchorX;
+}
+
+/*fa MTR_SpriteGetFrameAnchorY yes */
+MTR_DCLSPC int MTR_CALL MTR_SpriteGetFrameAnchorY(uint32_t sprNum, int clipNum)
+{
+    mtrSprite_t *sprite;
+    MTR_SPRITE_CHECK_IF_NOT_INITED(0);
+
+    if (sprNum == 0)
+        return 0;
+
+    sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+
+    if (clipNum > sprite->clipsCount)
+        return 0;
+
+    return sprite->clip[clipNum].anchorY;
+}
+
+/*fa MTR_SpriteGetTexture yes */
+MTR_DCLSPC uint32_t MTR_CALL MTR_SpriteGetTexture(uint32_t sprNum)
+{
+    mtrSprite_t *sprite;
+    MTR_SPRITE_CHECK_IF_NOT_INITED(0U);
+
+    if (sprNum == 0)
+        return 0U;
+
+    sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+
+    return sprite->textureIndex;
 }
 
 /*fa MTR_SpriteFree yes */
