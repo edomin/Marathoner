@@ -307,6 +307,12 @@ $ cp stb_image.h /usr/local/mingw32/include
 $ cp stb_image_write.h /usr/local/mingw32/include
 ```
 
+[stb_rect_pack](https://github.com/nothings/stb)
+
+```
+$ cp stb_rect_pack.h /usr/local/mingw32/include
+```
+
 [tigr](https://bitbucket.org/rmitton/tigr/overview)
 
 ```

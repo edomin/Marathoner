@@ -165,6 +165,12 @@ $ cp stb_image.h /usr/local/emscripten/include
 $ cp stb_image_write.h /usr/local/emscripten/include
 ```
 
+[stb_rect_pack](https://github.com/nothings/stb)
+
+```
+$ cp stb_rect_pack.h /usr/local/emscripten/include
+```
+
 [utf8](https://github.com/haipome/utf8)
 
 ```
