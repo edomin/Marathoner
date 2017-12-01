@@ -55,3 +55,7 @@ fa.FunctionSupported(TextureBlitRegionFlipped_f,
  "MTR_TextureBlitRegionFlipped_f", TextureFunctionSupported);
 fa.FunctionSupported(TextureBlitRegionGeneral_f,
  "MTR_TextureBlitRegionGeneral_f", TextureFunctionSupported);
+fa.FunctionSupported(TextureReceivePixels, "MTR_TextureReceivePixels",
+ TextureFunctionSupported);
+fa.FunctionSupported(TextureReceivePixelsToPos, "MTR_TextureReceivePixelsToPos",
+ TextureFunctionSupported);

@@ -46,5 +46,7 @@ MTR_FUNC(void, MTR_TextureBlitRegionFlipped_f, uint32_t, float, float, float,
 MTR_FUNC(void, MTR_TextureBlitRegionGeneral_f, uint32_t, float, float, float,
  float, float, float, float, float, float, float, float, int);
 MTR_FUNC(bool, MTR_TextureReceivePixels, uint32_t, mtrPixels_t *);
+MTR_FUNC(bool, MTR_TextureReceivePixelsToPos, uint32_t, mtrPixels_t *, int,
+ int);
 
 #endif

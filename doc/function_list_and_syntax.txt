@@ -114,6 +114,7 @@ void TextureBlitRegionAngled_f(uint32_t texNum, float x, float y, float rx, floa
 void TextureBlitRegionFlipped_f(uint32_t texNum, float x, float y, float rx, float ry, float rw, float rh, int flip)
 void TextureBlitRegionGeneral_f(uint32_t texNum, float x, float y, float hscale, float vscale, float rx, float ry, float rw, float rh, float angle, float pivotX, float pivotY, int flip)
 bool TextureReceivePixels(uint32_t texNum, void *pixels)
+bool TextureReceivePixelsToPos(uint32_t texNum, void *pixels, int x, int y)
 
 int PngFunctionSupported(const char *functionName)
 void PngInit()

@@ -856,3 +856,26 @@ MTR_DCLSPC bool MTR_CALL MTR_TextureReceivePixels(uint32_t texNum,
 
     return true;
 }
+
+/*fa MTR_TextureReceivePixelsToPos yes */
+MTR_DCLSPC bool MTR_CALL MTR_TextureReceivePixelsToPos(uint32_t texNum,
+ mtrPixels_t *pixels, int x, int y)
+{
+    mtrTexture_t *texture;
+    GPU_Rect      rect;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED(false);
+
+    if (texNum == 0)
+        return false;
+
+    texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
+
+    rect.x = x;
+    rect.y = y;
+    rect.w = pixels->w;
+    rect.h = pixels->h;
+
+    GPU_UpdateImageBytes(texture->texture, &rect, pixels->data, pixels->pitch);
+
+    return true;
+}
