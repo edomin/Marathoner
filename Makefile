@@ -111,7 +111,7 @@ include makefiles/Monolythic.mk
 endif
 
 fagen:
-	make -j$(CORES) -C src/_build_utils/fagen PREFIX=$(PREFIX) HOST_BUILD=yes
+	make -j$(CORES) -C src/_build_utils/fagen HOST_BUILD=yes
 
 plugins: prebuild
 ifeq ($(MOD), plugin)
@@ -254,6 +254,7 @@ clean:
 	-rm -f -r $(LIBDIR)
 	-rm -f -r $(FADIR)
 	-rm -f -r $(HOST)/fagen.exe
+	-rm -f -r $(HOST)/obj/fagen.o
 	-rm -f -r $(PLATFORM)/marathoner.exe
 ifeq ($(PLATFORM), win32)
 	-rm -f -r $(BINDIR)
