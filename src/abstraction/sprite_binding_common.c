@@ -107,6 +107,16 @@ void MTR_ScriptsRegisterAll(void)
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteCreateFromTexture);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteSetAtlasFrame);
     #ifdef lua_h
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteGetFrameSizes);
+    #endif
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteGetFrameWidth);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteGetFrameHeight);
+    #ifdef lua_h
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteGetFrameCoords);
+    #endif
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteGetFrameX);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteGetFrameY);
+    #ifdef lua_h
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteGetFrameAnchors);
     #endif
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteGetFrameAnchorX);
