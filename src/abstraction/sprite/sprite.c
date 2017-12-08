@@ -812,7 +812,6 @@ MTR_DCLSPC void MTR_CALL MTR_SpriteDrawGeneral_f(uint32_t sprNum, int clipNum,
         MTR_TextureBlitRegionGeneral_f(sprite->textureIndex,
          offsetX, offsetY, hscale, vscale, sprite->clip[clipNum].x,
          sprite->clip[clipNum].y, sprite->clip[clipNum].w,
-         sprite->clip[clipNum].h, angle, sprite->clip[clipNum].anchorX,
-         sprite->clip[clipNum].anchorY, flip);
+         sprite->clip[clipNum].h, angle, offsetX, offsetY, flip);
     }
 }
