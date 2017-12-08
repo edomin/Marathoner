@@ -49,6 +49,7 @@ MTR_DCLSPC bool MTR_CALL MTR_FontInit(uint32_t dmSize, uint32_t reservedCount)
     #ifdef MTR_MOD_PLUGIN
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TtfLoad, "ttf");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TtfFree, "ttf");
+    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TtfGetGlyphHeight, "ttf");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TtfGetGlyphSizes, "ttf");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TtfRenderGlyph, "ttf");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TextureCreate, "texture");
@@ -91,6 +92,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_FontCreate(const char *name,
 {
     uint32_t   freeIndex;
     mtrFont_t *font;
+    int        i;
     MTR_FONT_CHECK_IF_NOT_INITED_WITH_LOG("Unable to create font", 0U);
 
     MTR_LogWrite_s("Creating font", 0, MTR_LMT_INFO, name);
@@ -112,6 +114,10 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_FontCreate(const char *name,
             free(font->name);
         MTR_IndexkeeperFreeIndex(mtrFontKeeper, freeIndex);
         return 0U;
+    }
+
+    for (i = 0; i < reservedAtlases; i++) {
+        font->spriteAtlas[i] = 0;
     }
 
     return freeIndex;
@@ -216,6 +222,9 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_FontCacheTtf(const char *name, uint32_t ttfNum,
     bool         packed;
     stbrp_rect   glyph[256];
     mtrPixels_t *renderedGlyph;
+    int          ttfCurrentGlyphHeight;
+    int          ttfMaxHeight = 0;
+    int          yOffset;
     MTR_FONT_CHECK_IF_NOT_INITED_WITH_LOG("Unable to cache TTF", 0U);
 
     MTR_LogWrite_s("Caching TTF", 0, MTR_LMT_INFO, name);
@@ -229,6 +238,14 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_FontCacheTtf(const char *name, uint32_t ttfNum,
     if (font->spriteAtlas == NULL) {
         MTR_IndexkeeperFreeIndex(mtrFontKeeper, freeIndex);
         return 0U;
+    }
+
+    for (i = 0; i < font->reservedAtlases; i++) {
+        for (j = 0; j < 256; j++) {
+            ttfCurrentGlyphHeight = MTR_TtfGetGlyphHeight(ttfNum, (i << 8) | j);
+            if (ttfCurrentGlyphHeight > ttfMaxHeight)
+                ttfMaxHeight = ttfCurrentGlyphHeight;
+        }
     }
 
     for (i = 0; i < font->reservedAtlases; i++) {
@@ -269,8 +286,10 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_FontCacheTtf(const char *name, uint32_t ttfNum,
                 MTR_TextureReceivePixelsToPos(textureIndex, renderedGlyph,
                  glyph[j].x, glyph[j].y);
             }
+            yOffset = glyph[j].h - ttfMaxHeight;
             MTR_SpriteSetAtlasFrame(spriteIndex, j, glyph[j].x, glyph[j].y,
-             glyph[j].x + glyph[j].w - 1, glyph[j].y + glyph[j].h - 1, 0, 0);
+             glyph[j].x + glyph[j].w - 1, glyph[j].y + glyph[j].h - 1, 0,
+             yOffset);
         }
     }
 
@@ -300,45 +319,6 @@ MTR_DCLSPC void MTR_CALL MTR_FontFree(uint32_t fontNum)
     MTR_LogWrite("Font unloaded", 0, MTR_LMT_INFO);
 }
 
-
-/*fa MTR_FontDrawString_f yes */
-MTR_DCLSPC bool MTR_CALL MTR_FontDrawString_f(uint32_t fontNum,
- float x, float y, const char *string)
-{
-    mtrFont_t   *font;
-    uint32_t    *ucs4Text = NULL;
-    size_t       ucs4Length;
-    unsigned int i;
-    uint32_t     glyphAtlas;
-    int          symbolNum;
-    int          xOffset = 0;
-    uint32_t     sprNum;
-    MTR_FONT_CHECK_IF_NOT_INITED(false);
-
-    if (string == NULL || fontNum == 0)
-        return false;
-
-    font = IK_GET_DATA(mtrFont_t *, mtrFontKeeper, fontNum);
-
-    ucs4Length = MTR_EncodingUtf8ToUcs4(string, &ucs4Text);
-
-    for (i = 0; i < ucs4Length; i++) {
-        glyphAtlas = ucs4Text[i] >> 8;
-        if (glyphAtlas >= font->reservedAtlases)
-            continue;
-        symbolNum = ucs4Text[i] - (glyphAtlas << 8);
-
-        sprNum = font->spriteAtlas[glyphAtlas];
-
-        MTR_SpriteDraw_f(sprNum, symbolNum, x + xOffset, y);
-        xOffset += MTR_SpriteGetFrameWidth(sprNum, symbolNum);
-    }
-
-    free(ucs4Text);
-
-    return true;
-}
-
 /*fa MTR_FontGetHeight yes */
 MTR_DCLSPC int MTR_CALL MTR_FontGetHeight(uint32_t fontNum)
 {
@@ -346,7 +326,7 @@ MTR_DCLSPC int MTR_CALL MTR_FontGetHeight(uint32_t fontNum)
     unsigned int i;
     int          j;
     int          maxHeight = 0;
-    int          currentSymbolHeight;
+    int          currentSymbolHeight = 0;
     MTR_FONT_CHECK_IF_NOT_INITED(0);
 
     if (fontNum == 0)
@@ -355,8 +335,11 @@ MTR_DCLSPC int MTR_CALL MTR_FontGetHeight(uint32_t fontNum)
     font = IK_GET_DATA(mtrFont_t *, mtrFontKeeper, fontNum);
 
     for (i = 0; i < font->reservedAtlases; i++) {
+        if (font->spriteAtlas[i] == 0)
+            continue;
         for (j = 0; j < 256; j++) {
-            currentSymbolHeight = MTR_SpriteGetFrameHeight(font->spriteAtlas[i], j);
+            currentSymbolHeight = MTR_SpriteGetFrameHeight(font->spriteAtlas[i],
+             j);
             if (currentSymbolHeight > maxHeight)
                 maxHeight = currentSymbolHeight;
         }
@@ -399,6 +382,44 @@ MTR_DCLSPC int MTR_CALL MTR_FontGetStringWidth(uint32_t fontNum,
     }
 
     return xOffset;
+}
+
+/*fa MTR_FontDrawString_f yes */
+MTR_DCLSPC bool MTR_CALL MTR_FontDrawString_f(uint32_t fontNum,
+ float x, float y, const char *string)
+{
+    mtrFont_t   *font;
+    uint32_t    *ucs4Text = NULL;
+    size_t       ucs4Length;
+    unsigned int i;
+    uint32_t     glyphAtlas;
+    int          symbolNum;
+    int          xOffset = 0;
+    uint32_t     sprNum;
+    MTR_FONT_CHECK_IF_NOT_INITED(false);
+
+    if (string == NULL || fontNum == 0)
+        return false;
+
+    font = IK_GET_DATA(mtrFont_t *, mtrFontKeeper, fontNum);
+
+    ucs4Length = MTR_EncodingUtf8ToUcs4(string, &ucs4Text);
+
+    for (i = 0; i < ucs4Length; i++) {
+        glyphAtlas = ucs4Text[i] >> 8;
+        if (glyphAtlas >= font->reservedAtlases)
+            continue;
+        symbolNum = ucs4Text[i] - (glyphAtlas << 8);
+
+        sprNum = font->spriteAtlas[glyphAtlas];
+
+        MTR_SpriteDraw_f(sprNum, symbolNum, x + xOffset, y);
+        xOffset += MTR_SpriteGetFrameWidth(sprNum, symbolNum);
+    }
+
+    free(ucs4Text);
+
+    return true;
 }
 
 /*fa MTR_FontGetName yes */
