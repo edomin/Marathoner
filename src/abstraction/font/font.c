@@ -49,8 +49,6 @@ MTR_DCLSPC bool MTR_CALL MTR_FontInit(uint32_t dmSize, uint32_t reservedCount)
     #ifdef MTR_MOD_PLUGIN
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TtfLoad, "ttf");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TtfFree, "ttf");
-    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TtfSetStyle, "ttf");
-    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TtfSetOutline, "ttf");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TtfGetGlyphSizes, "ttf");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TtfRenderGlyph, "ttf");
     MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_TextureCreate, "texture");
@@ -302,27 +300,6 @@ MTR_DCLSPC void MTR_CALL MTR_FontFree(uint32_t fontNum)
     MTR_LogWrite("Font unloaded", 0, MTR_LMT_INFO);
 }
 
-/*fa MTR_FontSetStyle yes */
-MTR_DCLSPC void MTR_CALL MTR_FontSetStyle(uint32_t fontNum, int style)
-{
-//    mtrFont_t *font;
-//    MTR_FONT_CHECK_IF_NOT_INITED();
-//
-//    font = IK_GET_DATA(mtrFont_t *, mtrFontKeeper, fontNum);
-//    if (font->ttfIndex != 0)
-//        MTR_TtfSetFontStyle(font->ttfIndex, style);
-}
-
-/*fa MTR_FontSetOutline yes */
-MTR_DCLSPC void MTR_CALL MTR_FontSetOutline(uint32_t fontNum, int outline)
-{
-//    mtrFont_t *font;
-//    MTR_FONT_CHECK_IF_NOT_INITED();
-//
-//    font = IK_GET_DATA(mtrFont_t *, mtrFontKeeper, fontNum);
-//    if (font->ttfIndex != 0)
-//        MTR_TtfSetFontOutline(font->ttfIndex, outline);
-}
 
 /*fa MTR_FontDrawString_f yes */
 MTR_DCLSPC bool MTR_CALL MTR_FontDrawString_f(uint32_t fontNum,

@@ -21,8 +21,6 @@ typedef struct mtrTtf_t {
     mtrTtfFace_t *face;
     int           currentFace;
     char         *name;
-    int           outline;
-    int           style;
     int           width;
     int           height;
 } mtrTtf_t;

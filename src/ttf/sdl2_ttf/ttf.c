@@ -224,48 +224,6 @@ MTR_DCLSPC bool MTR_CALL MTR_TtfSetSizes(uint32_t fontNum, int width,
     return true;
 }
 
-/*fa MTR_TtfGetStyle yes */
-MTR_DCLSPC int MTR_CALL MTR_TtfGetStyle(uint32_t fontNum)
-{
-    mtrTtf_t *font;
-    MTR_TTF_CHECK_IF_NOT_INITED(0);
-
-    font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
-
-    return TTF_GetFontStyle(font->font[font->height]);
-}
-
-/*fa MTR_TtfGetOutline yes */
-MTR_DCLSPC int MTR_CALL MTR_TtfGetOutline(uint32_t fontNum)
-{
-    mtrTtf_t *font;
-    MTR_TTF_CHECK_IF_NOT_INITED(0);
-
-    font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
-
-    return TTF_GetFontOutline(font->font[font->height]);
-}
-
-/*fa MTR_TtfSetStyle yes */
-MTR_DCLSPC void MTR_CALL MTR_TtfSetStyle(uint32_t fontNum, int style)
-{
-    mtrTtf_t *font;
-    MTR_TTF_CHECK_IF_NOT_INITED();
-
-    font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
-    TTF_SetFontStyle(font->font[font->height], style);
-}
-
-/*fa MTR_TtfSetOutline yes */
-MTR_DCLSPC void MTR_CALL MTR_TtfSetOutline(uint32_t fontNum, int outline)
-{
-    mtrTtf_t *font;
-    MTR_TTF_CHECK_IF_NOT_INITED();
-
-    font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
-    TTF_SetFontOutline(font->font[font->height], outline);
-}
-
 /*fa MTR_TtfGetGlyphSizes yes */
 MTR_DCLSPC void MTR_CALL MTR_TtfGetGlyphSizes(uint32_t fontNum,
  uint32_t glyph, int *w, int *h)

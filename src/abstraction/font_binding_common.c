@@ -9,8 +9,6 @@ MTR_SCRIPT_FUNC_U32t_S1I1(MTR_SF_FontCreate, MTR_FontCreate)
 MTR_SCRIPT_FUNC_B_U32t2UI1(MTR_SF_FontAddAtlas, MTR_FontAddAtlas)
 MTR_SCRIPT_FUNC_U32t_S1U32t1UI1(MTR_SF_FontCacheTtf, MTR_FontCacheTtf)
 MTR_SCRIPT_FUNC_V_U32t1(MTR_SF_FontFree, MTR_FontFree)
-MTR_SCRIPT_FUNC_V_U32t1I1(MTR_SF_FontSetStyle, MTR_FontSetStyle)
-MTR_SCRIPT_FUNC_V_U32t1I1(MTR_SF_FontSetOutline, MTR_FontSetOutline)
 MTR_SCRIPT_FUNC_B_U32t1F2S1(MTR_SF_FontDrawString_f, MTR_FontDrawString_f)
 MTR_SCRIPT_FUNC_I_U32t1(MTR_SF_FontGetHeight, MTR_FontGetHeight)
 MTR_SCRIPT_FUNC_I_U32t1S1(MTR_SF_FontGetStringWidth, MTR_FontGetStringWidth)
@@ -28,8 +26,6 @@ void MTR_ScriptsRegisterAll(void)
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_font", FontAddAtlas);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_font", FontCacheTtf);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_font", FontFree);
-    MTR_FIND_AND_ADD_FUNCTION("Abstraction_font", FontSetStyle);
-    MTR_FIND_AND_ADD_FUNCTION("Abstraction_font", FontSetOutline);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_font", FontDrawString_f);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_font", FontGetHeight);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_font", FontGetStringWidth);
