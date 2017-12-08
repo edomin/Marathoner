@@ -14,6 +14,9 @@
 #ifdef __EMSCRIPTEN__
     #pragma GCC diagnostic ignored "-Wformat-nonliteral"
 #endif
+#ifdef __MINGW64__
+    #pragma GCC diagnostic ignored "-Wnull-dereference"
+#endif
 #include "nuklear.h"
 #pragma GCC diagnostic pop
 
@@ -61,7 +64,7 @@ static bool mtrGuiInited = false;
         return returnValue;                                                    \
     }
 
-MTR_FUNC(bool, MTR_FontDrawMbfString_f, uint32_t fontNum, float x, float y,
+MTR_FUNC(bool, MTR_FontDrawString_f, uint32_t fontNum, float x, float y,
  const char *string);
 MTR_FUNC(int, MTR_FontGetHeight, uint32_t fontNum);
 MTR_FUNC(int, MTR_FontGetStringWidth, uint32_t fontNum, const char *string);

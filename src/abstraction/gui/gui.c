@@ -296,7 +296,7 @@ MTR_DCLSPC bool MTR_CALL MTR_GuiInit(uint32_t fontDmSize,
     MTR_LogWrite("Initializing GUI abstraction subsystem", 0, MTR_LMT_INFO);
 
     #ifdef MTR_MOD_PLUGIN
-    MTR_FIND_FUNCTION(MTR_FontDrawMbfString_f, "Abstraction_font");
+    MTR_FIND_FUNCTION(MTR_FontDrawString_f, "Abstraction_font");
     MTR_FIND_FUNCTION(MTR_FontGetHeight, "Abstraction_font");
     MTR_FIND_FUNCTION(MTR_FontGetStringWidth, "Abstraction_font");
     MTR_FIND_FUNCTION(MTR_FontGetName, "Abstraction_font");
@@ -515,7 +515,7 @@ MTR_DCLSPC void MTR_CALL MTR_GuiRender(void)
                     const struct nk_command_text *t = (
                      const struct nk_command_text*)cmd;
                     mtrNkFont *font = (mtrNkFont*)t->font->userdata.ptr;
-                    MTR_FontDrawMbfString_f(font->font, t->x, t->y, t->string);
+                    MTR_FontDrawString_f(font->font, t->x, t->y, t->string);
                 }
                 break;
             case NK_COMMAND_CURVE:
