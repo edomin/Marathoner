@@ -229,8 +229,6 @@ MTR_DCLSPC void MTR_CALL MTR_TtfGetGlyphSizes(uint32_t fontNum,
  uint32_t glyph, int *w, int *h)
 {
     mtrTtf_t *font;
-    int       miny;
-    int       maxy;
     int       advance;
     int       glyphMetricsGet;
     MTR_TTF_CHECK_IF_NOT_INITED();
@@ -244,7 +242,7 @@ MTR_DCLSPC void MTR_CALL MTR_TtfGetGlyphSizes(uint32_t fontNum,
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
 
     glyphMetricsGet = TTF_GlyphMetrics(font->font[font->height], glyph, NULL,
-     NULL, &miny, &maxy, &advance);
+     NULL, NULL, NULL, &advance);
     if(glyphMetricsGet == -1) {
         *w = 0;
         *h = 0;
@@ -252,7 +250,7 @@ MTR_DCLSPC void MTR_CALL MTR_TtfGetGlyphSizes(uint32_t fontNum,
     }
 
     *w = advance;
-    *h = maxy - miny;
+    *h = font->height;
 }
 
 /*fa MTR_TtfGetGlyphWidth yes */
@@ -280,9 +278,6 @@ MTR_DCLSPC int MTR_CALL MTR_TtfGetGlyphWidth(uint32_t fontNum, uint32_t glyph)
 MTR_DCLSPC int MTR_CALL MTR_TtfGetGlyphHeight(uint32_t fontNum, uint32_t glyph)
 {
     mtrTtf_t *font;
-    int       miny;
-    int       maxy;
-    int       glyphMetricsGet;
     MTR_TTF_CHECK_IF_NOT_INITED(0);
 
     if ((fontNum == 0) || (glyph >= UINT16_MAX))
@@ -290,12 +285,7 @@ MTR_DCLSPC int MTR_CALL MTR_TtfGetGlyphHeight(uint32_t fontNum, uint32_t glyph)
 
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
 
-    glyphMetricsGet = TTF_GlyphMetrics(font->font[font->height], glyph, NULL,
-     NULL, &miny, &maxy, NULL);
-    if(glyphMetricsGet == -1)
-        return 0;
-
-    return maxy - miny;
+    return font->height;
 }
 
 /*fa MTR_TtfRenderGlyph yes */
