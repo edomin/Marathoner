@@ -8,7 +8,7 @@ ifeq ($(PLATFORM), win32)
     LIBS = -lSDL2.dll -lSDL2_image.dll
   else
     LIBS = -lSDL2_image -lSDL2 -lwinmm -limm32 -lole32 -loleaut32 -lversion \
-     -luuid -ltiff -ljpeg -lwebp
+     -luuid -ltiff -llzma -ljpeg -lwebp
   endif
 endif
 ifeq ($(PLATFORM), win64)
@@ -28,5 +28,3 @@ ifeq ($(PLATFORM), html5)
 endif
 
 include ../../../makefiles/Subsystem.mk
-
-#-s SDL2_IMAGE_FORMATS=\'["bmp","gif","lbm","pcx","png","pnm","tga","xcf","xpm","xv"]\'

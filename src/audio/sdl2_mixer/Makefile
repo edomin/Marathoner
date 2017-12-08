@@ -7,17 +7,16 @@ ifeq ($(PLATFORM), win32)
   ifeq ($(MOD), plugin)
     LIBS = -lSDL2_mixer.dll -lSDL2.dll
   else
-    LIBS = -lSDL2_mixer -lSDL2 -lwinmm -limm32 -lole32 -loleaut32 -lversion \
-     -luuid -lvorbisfile.dll -lFLAC.dll -lmodplug.dll -lsmpeg2.dll \
-     -lvorbis.dll -logg.dll -lstdc++
+    LIBS = -lSDL2_mixer -lsmpeg2.dll -lSDL2 -lwinmm -limm32 -lole32 -loleaut32 \
+     -lversion -luuid -lvorbisfile -lFLAC -lmodplug.dll -lvorbis -logg -lstdc++
   endif
 endif
 ifeq ($(PLATFORM), win64)
   ifeq ($(MOD), plugin)
     LIBS = -lSDL2_mixer.dll -lSDL2.dll
   else
-    LIBS = -lSDL2_mixer -lSDL2 -lwinmm -limm32 -lole32 -loleaut32 -lversion \
-     -luuid -lvorbisfile -lFLAC -lmodplug -lsmpeg2.dll -lvorbis -logg -lstdc++
+    LIBS = -lSDL2_mixer -lsmpeg2.dll -lSDL2 -lwinmm -limm32 -lole32 -loleaut32 \
+     -lversion -luuid -lvorbisfile -lFLAC -lmodplug.dll -lvorbis -logg -lstdc++
   endif
 endif
 ifeq ($(PLATFORM), html5)
