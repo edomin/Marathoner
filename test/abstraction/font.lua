@@ -1,4 +1,6 @@
 local i;
+local rtWidth;
+local rtHeight;
 
 -- Positive
 FileWriteLineFast("test/output.txt", "Positive test", FM_WRITE);
@@ -14,17 +16,41 @@ FontInit(IKDM_SMALL, 32);
 local ttf = TtfLoad("test/media/Vera.ttf");
 TtfSetSizes(ttf, 24, 24);
 local font = FontCacheTtf("Font", ttf, 1);
-local rtWidth = FontGetStringWidth(font, "Hello World");
-local rtHeight = FontGetHeight(font);
+rtWidth = FontGetStringWidth(font, "Hello World");
+rtHeight = FontGetHeight(font);
 FileWriteLineFast("test/output.txt", "rtWidth: " .. rtWidth, FM_APPEND);
 FileWriteLineFast("test/output.txt", "rtHeight: " .. rtHeight, FM_APPEND);
 for i = 0, 60, 1 do
     TimerStart();
     PrimitiveFill_c(0x000000);
-    FontDrawString_f(ttf, 32, 32, "Hello World");
+    FontDrawString_f(font, 32, 32, "Hello World");
     ScreenFlip();
     TimerDelayForFPS(30);
 end;
+
+TtfFree(ttf);
+FontFree(font);
+
+local sprMbf_00 = SpriteLoad("test/media/mbf_big_00.png", 10, 12, 16,
+ 16, 256, 0, 0);
+local sprMbf_04 = SpriteLoad("test/media/mbf_big_04.png", 10, 12, 16,
+ 16, 256, 0, 0);
+local fontMbf = FontCreate("MBF", 5);
+FontAddAtlas(fontMbf, sprMbf_00, 0);
+FontAddAtlas(fontMbf, sprMbf_00, 4);
+rtWidth = FontGetStringWidth(font, "Hello World");
+rtHeight = FontGetHeight(font);
+FileWriteLineFast("test/output.txt", "rtWidth: " .. rtWidth, FM_APPEND);
+FileWriteLineFast("test/output.txt", "rtHeight: " .. rtHeight, FM_APPEND);
+for i = 0, 60, 1 do
+    TimerStart();
+    PrimitiveFill_c(0x000000);
+    FontDrawString_f(fontMbf, 32, 32, "Hello World");
+    ScreenFlip();
+    TimerDelayForFPS(30);
+end;
+
+FontFree(fontMbf);
 
 --TextureFree(renderedText);
 --FontSetTtfOutline(ttf, 4);

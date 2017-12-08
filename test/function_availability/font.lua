@@ -7,9 +7,6 @@ fa.FunctionSupported(FontCreate, "MTR_FontCreate", FontFunctionSupported);
 fa.FunctionSupported(FontAddAtlas, "MTR_FontAddAtlas", FontFunctionSupported);
 fa.FunctionSupported(FontCacheTtf, "MTR_FontCacheTtf", FontFunctionSupported);
 fa.FunctionSupported(FontFree, "MTR_FontFree", FontFunctionSupported);
-fa.FunctionSupported(FontSetStyle, "MTR_FontSetStyle", FontFunctionSupported);
-fa.FunctionSupported(FontSetOutline, "MTR_FontSetOutline",
- FontFunctionSupported);
 fa.FunctionSupported(FontDrawString_f, "MTR_FontDrawString_f",
  FontFunctionSupported);
 fa.FunctionSupported(FontGetHeight, "MTR_FontGetHeight", FontFunctionSupported);

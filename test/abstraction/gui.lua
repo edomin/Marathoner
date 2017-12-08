@@ -29,15 +29,18 @@ TextureInit(IKDM_SMALL, 32);
 PrimitiveInit();
 TimerInit();
 TtfInit(IKDM_SMALL, 32);
+SpriteInit(IKDM_SMALL, 32);
 FontInit(IKDM_SMALL, 32);
 KeyboardInit();
 MouseInit();
 
-local mbf_big_00 = TextureLoad("test/media/mbf_big_00.png");
-local mbf_big_04 = TextureLoad("test/media/mbf_big_04.png");
-local mbf = FontCreateMbf("MBF font", 5, 10, 12);
-FontAddMbfTextureTable(mbf, mbf_big_00, 0);
-FontAddMbfTextureTable(mbf, mbf_big_04, 4);
+local mbf_big_00 = SpriteLoad("test/media/mbf_big_00.png", 10, 12, 16, 16, 256,
+ 0, 0);
+local mbf_big_04 = SpriteLoad("test/media/mbf_big_04.png", 10, 12, 16, 16, 256,
+ 0, 0);
+local mbf = FontCreate("MBF font", 5);
+FontAddAtlas(mbf, mbf_big_00, 0);
+FontAddAtlas(mbf, mbf_big_04, 4);
 GuiInit(IKDM_SMALL, 32, IKDM_SMALL, 32, mbf);
 
 local helicopter = TextureLoad("test/media/helicopter.png");

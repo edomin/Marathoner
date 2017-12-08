@@ -14,6 +14,7 @@ TextureInit(IKDM_SMALL, 32);
 TtfInit(IKDM_SMALL, 32);
 PrimitiveInit();
 TimerInit();
+MouseInit();
 
 local ttf = TtfLoad("test/media/Vera.ttf");
 if TtfSetSizes(ttf, 24, 24) then
@@ -46,6 +47,7 @@ renderedGlyph = TextureCreate("rendered glyph texture", glyphWidth,
  glyphHeight);
 TextureReceivePixels(renderedGlyph, glyphPixels);
 for i = 0, 30, 1 do
+    MouseRefresh();
     TimerStart();
     PrimitiveFill_c(0x000000);
     TextureBlit_f(renderedGlyph, 32, 32);
@@ -60,6 +62,7 @@ renderedGlyph = TextureCreate("rendered glyph texture", glyphWidth,
  glyphHeight);
 TextureReceivePixels(renderedGlyph, glyphPixels);
 for i = 0, 30, 1 do
+    MouseRefresh();
     TimerStart();
     PrimitiveFill_c(0x000000);
     TextureBlit_f(renderedGlyph, 32, 32);
@@ -74,6 +77,7 @@ renderedGlyph = TextureCreate("rendered glyph texture", glyphWidth,
  glyphHeight);
 TextureReceivePixels(renderedGlyph, glyphPixels);
 for i = 0, 30, 1 do
+    MouseRefresh();
     TimerStart();
     PrimitiveFill_c(0x000000);
     TextureBlit_f(renderedGlyph, 32, 32);
@@ -88,6 +92,7 @@ renderedGlyph = TextureCreate("rendered glyph texture", glyphWidth,
  glyphHeight);
 TextureReceivePixels(renderedGlyph, glyphPixels);
 for i = 0, 30, 1 do
+    MouseRefresh();
     TimerStart();
     PrimitiveFill_c(0x000000);
     TextureBlit_f(renderedGlyph, 32, 32);
