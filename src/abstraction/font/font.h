@@ -26,8 +26,6 @@ typedef struct mtrFont_t {
 } mtrFont_t;
 
 char              mtrDefaultFontName[] = "Unnamed_Font";
-uint8_t           mtrTtfMagic1[] = {0x00, 0x01, 0x00, 0x00, 0x00};
-uint8_t           mtrTtfMagic2[] = {0x74, 0x72, 0x75, 0x65, 0x00};
 mtrIndexkeeper_t *mtrFontKeeper;
 static bool       mtrFontInited = false;
 int               mtrTextureSides[] = {256, 512, 1024, 2048, 4096, 8192};
