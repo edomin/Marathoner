@@ -20,6 +20,9 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wcast-qual"
 #pragma GCC diagnostic ignored "-Wfloat-equal"
+#ifdef __MINGW64__
+    #pragma GCC diagnostic ignored "-Wnull-dereference"
+#endif
 #include "nuklear.h"
 #pragma GCC diagnostic pop
 #include "tigr.h"
