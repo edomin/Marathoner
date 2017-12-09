@@ -62,12 +62,55 @@ $ make [PLATFORM=<platform>] [<option1>=<value>] [<option2>=<value>] ...
 Additional options:  
 
 * PLATFORM=\<platform\> - Choose target platform: win32 or win64. Default - PLATFORM=win32
-* MOD=static, MOD=plugin - Build monolythic or plugin-based application. Currently implemented only plugin-based. Default - MOD=plugin
+* MOD=static, MOD=plugin - Build monolythic or plugin-based application. Default - MOD=plugin
 * DEBUG=no, DEBUG=yes - Add or not add debug information in executables and plugins. Default - DEBUG=yes
 * MORE_WARNINGS=no, MORE_WARNINGS=yes - Enable or disable some more warnings in compiletime. Default - MORE_WARNINGS=yes
 
 Default options can be changed in file "Build.mk"  
 Builded executables can be found in directories "win32", "win64" etc.  
+
+##### Building Engine as Monolythic application
+Before building you need open file "makefiles/Monolythik.mk" and edit variable MODULES. It contain list of directories where modules' makefiles are placed. Listed modules will be builded with engine in monolythic application.  
+Example list:
+
+```  
+MODULES = src/$(SCREEN_SDL2) \
+ src/$(SCREEN_SDL2_LUA) \
+ src/$(TEXTURE_SDL2_IMAGE) \
+ src/$(TEXTURE_SDL2_IMAGE_LUA) \
+ src/$(PRIMITIVE_SDL2) \
+ src/$(PRIMITIVE_SDL2_LUA) \
+ src/$(PNG_LIBPNG) \
+ src/$(PNG_LIBPNG_LUA) \
+ src/$(TTF_SDL2_TTF) \
+ src/$(TTF_SDL2_TTF_LUA) \
+ src/$(AUDIO_SDL2_MIXER) \
+ src/$(AUDIO_SDL2_MIXER_LUA) \
+ src/$(KEYBOARD_SDL2) \
+ src/$(KEYBOARD_SDL2_LUA) \
+ src/$(MOUSE_SDL2) \
+ src/$(MOUSE_SDL2_LUA) \
+ src/$(GAME_CONTROLLER_SDL2) \
+ src/$(GAME_CONTROLLER_SDL2_LUA) \
+ src/$(TIMER_SDL2) \
+ src/$(TIMER_SDL2_LUA) \
+ src/$(JSON_CJSON) \
+ src/$(JSON_CJSON_LUA) \
+ src/$(UTILS_COLOR) \
+ src/$(UTILS_COLOR_LUA) \
+ src/$(UTILS_MATH) \
+ src/$(UTILS_MATH_LUA) \
+ src/$(ABSTRACTION_SPRITE) \
+ src/$(ABSTRACTION_SPRITE_LUA) \
+ src/$(ABSTRACTION_FONT) \
+ src/$(ABSTRACTION_FONT_LUA) \
+ src/$(ABSTRACTION_GUI) \
+ src/$(ABSTRACTION_GUI_LUA) \
+ src/$(SCRIPT_LUA)
+```  
+
+Note: Script module must be in list and must be latest in list.  
+Variables like SCREEN_SDL2 and SCREEN_SDL2_LUA are consists path to module's makefile from "src" directory. Full list of path variables can be found in main Makefile.
 
 ##### Running tests
 Scripts (Bat-files on Windows) for running tests plased in directory "\<platform_name\>/test_launch". Valid platform names - win32 and win64.  
