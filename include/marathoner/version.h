@@ -71,9 +71,9 @@
 #define MTR_VERSION_TEXTURE_SDL2_GPU_DUKTAPE        0x000100U /* inc minor */
 
 #define MTR_VERSION_TIMER_SDL2                      0x000200U /* inc minor */
-#define MTR_VERSION_TIMER_SDL2_LUA                  0x000100U /* inc patch */
-#define MTR_VERSION_TIMER_SDL2_SQUIRREL             0x000000U /* inc patch */
-#define MTR_VERSION_TIMER_SDL2_DUKTAPE              0x000000U /* inc patch */
+#define MTR_VERSION_TIMER_SDL2_LUA                  0x000200U /* inc minor */
+#define MTR_VERSION_TIMER_SDL2_SQUIRREL             0x000100U /* inc minor */
+#define MTR_VERSION_TIMER_SDL2_DUKTAPE              0x000100U /* inc minor */
 #define MTR_VERSION_TIMER_EMSCRIPTEN                0x000000U /* initial */
 #define MTR_VERSION_TIMER_EMSCRIPTEN_LUA            0x000000U /* initial */
 #define MTR_VERSION_TIMER_EMSCRIPTEN_SQUIRREL       0x000000U /* initial */
