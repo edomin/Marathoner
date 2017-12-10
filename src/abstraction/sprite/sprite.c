@@ -582,7 +582,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_SpriteGetTexture(uint32_t sprNum)
     mtrSprite_t *sprite;
     MTR_SPRITE_CHECK_IF_NOT_INITED(0U);
 
-    if (sprNum == 0)
+    if (sprNum == 0U)
         return 0U;
 
     sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
@@ -596,17 +596,40 @@ MTR_DCLSPC void MTR_CALL MTR_SpriteFree(uint32_t sprNum)
     mtrSprite_t *sprite;
     MTR_SPRITE_CHECK_IF_NOT_INITED_WITH_LOG("Unable to unload sprite",);
 
-    if (sprNum != 0)
-    {
-        sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
-        MTR_LogWrite_s("Unloading sprite", 0, MTR_LMT_INFO, sprite->name);
-        if (sprite->name != mtrDefaultSpriteName)
-            free(sprite->name);
-        free(sprite->clip);
-        MTR_TextureFree(sprite->textureIndex);
-        MTR_IndexkeeperFreeIndex(mtrSpriteKeeper, sprNum);
-        MTR_LogWrite("Sprite unloaded", 0, MTR_LMT_INFO);
+    if (sprNum == 0U) {
+        MTR_LogWrite("Unable to unload sprite. Incorrect sprite index", 0,
+         MTR_LMT_ERROR);
+        return;
     }
+    sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+    MTR_LogWrite_s("Unloading sprite", 0, MTR_LMT_INFO, sprite->name);
+    if (sprite->name != mtrDefaultSpriteName)
+        free(sprite->name);
+    free(sprite->clip);
+    if (sprite->textureIndex != 0U)
+        MTR_TextureFree(sprite->textureIndex);
+    MTR_IndexkeeperFreeIndex(mtrSpriteKeeper, sprNum);
+    MTR_LogWrite("Sprite unloaded", 0, MTR_LMT_INFO);
+}
+
+/*fa MTR_SpriteDetachTexture yes */
+MTR_DCLSPC void MTR_CALL MTR_SpriteDetachTexture(uint32_t sprNum)
+{
+    mtrSprite_t *sprite;
+    MTR_SPRITE_CHECK_IF_NOT_INITED_WITH_LOG(
+     "Unable to detach texture from sprite",);
+
+    if (sprNum == 0U) {
+        MTR_LogWrite(
+         "Unable to detach texture from sprite. Incorrect sprite index", 0,
+         MTR_LMT_ERROR);
+        return;
+    }
+    sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+    MTR_LogWrite_s("Detaching texture from sprite", 0, MTR_LMT_INFO,
+     sprite->name);
+    sprite->textureIndex = 0U;
+    MTR_LogWrite("Texture detached", 0, MTR_LMT_INFO);
 }
 
 /*fa MTR_SpriteSetModulation_c yes */
@@ -616,11 +639,12 @@ MTR_DCLSPC void MTR_CALL MTR_SpriteSetModulation_c(uint32_t sprNum,
     mtrSprite_t *sprite;
     MTR_SPRITE_CHECK_IF_NOT_INITED();
 
-    if (sprNum != 0)
-    {
-        sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
-        MTR_TextureSetModulation_c(sprite->textureIndex, color);
-    }
+    if (sprNum == 0U)
+        return;
+    sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+    if (sprite->textureIndex == 0U)
+        return;
+    MTR_TextureSetModulation_c(sprite->textureIndex, color);
 }
 
 /*fa MTR_SpriteSetModulation_ca yes */
@@ -630,11 +654,12 @@ MTR_DCLSPC void MTR_CALL MTR_SpriteSetModulation_ca(uint32_t sprNum,
     mtrSprite_t *sprite;
     MTR_SPRITE_CHECK_IF_NOT_INITED();
 
-    if (sprNum != 0)
-    {
-        sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
-        MTR_TextureSetModulation_ca(sprite->textureIndex, color);
-    }
+    if (sprNum == 0U)
+        return;
+    sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+    if (sprite->textureIndex == 0U)
+        return;
+    MTR_TextureSetModulation_ca(sprite->textureIndex, color);
 }
 
 /*fa MTR_SpriteSetModulation_rgb yes */
@@ -644,11 +669,12 @@ MTR_DCLSPC void MTR_CALL MTR_SpriteSetModulation_rgb(uint32_t sprNum,
     mtrSprite_t *sprite;
     MTR_SPRITE_CHECK_IF_NOT_INITED();
 
-    if (sprNum != 0)
-    {
-        sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
-        MTR_TextureSetModulation_rgb(sprite->textureIndex, r, g, b);
-    }
+    if (sprNum == 0U)
+        return;
+    sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+    if (sprite->textureIndex == 0U)
+        return;
+    MTR_TextureSetModulation_rgb(sprite->textureIndex, r, g, b);
 }
 
 /*fa MTR_SpriteSetModulation_rgba yes */
@@ -658,11 +684,12 @@ MTR_DCLSPC void MTR_CALL MTR_SpriteSetModulation_rgba(uint32_t sprNum,
     mtrSprite_t *sprite;
     MTR_SPRITE_CHECK_IF_NOT_INITED();
 
-    if (sprNum != 0)
-    {
-        sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
-        MTR_TextureSetModulation_rgba(sprite->textureIndex, r, g, b, a);
-    }
+    if (sprNum == 0U)
+        return;
+    sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+    if (sprite->textureIndex == 0U)
+        return;
+    MTR_TextureSetModulation_rgba(sprite->textureIndex, r, g, b, a);
 }
 
 /*fa MTR_SpriteSetModulationAlpha yes */
@@ -672,11 +699,12 @@ MTR_DCLSPC void MTR_CALL MTR_SpriteSetModulationAlpha(uint32_t sprNum,
     mtrSprite_t *sprite;
     MTR_SPRITE_CHECK_IF_NOT_INITED();
 
-    if (sprNum != 0)
-    {
-        sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
-        MTR_TextureSetModulationAlpha(sprite->textureIndex, alpha);
-    }
+    if (sprNum == 0U)
+        return;
+    sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+    if (sprite->textureIndex == 0U)
+        return;
+    MTR_TextureSetModulationAlpha(sprite->textureIndex, alpha);
 }
 
 /*fa MTR_SpriteSetModulationAlpha_f yes */
@@ -686,11 +714,12 @@ MTR_DCLSPC void MTR_CALL MTR_SpriteSetModulationAlpha_f(uint32_t sprNum,
     mtrSprite_t *sprite;
     MTR_SPRITE_CHECK_IF_NOT_INITED();
 
-    if (sprNum != 0)
-    {
-        sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
-        MTR_TextureSetModulationAlpha_f(sprite->textureIndex, alpha);
-    }
+    if (sprNum == 0U)
+        return;
+    sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+    if (sprite->textureIndex == 0U)
+        return;
+    MTR_TextureSetModulationAlpha_f(sprite->textureIndex, alpha);
 }
 
 /*fa MTR_SpriteDraw_f yes */
@@ -700,14 +729,15 @@ MTR_DCLSPC void MTR_CALL MTR_SpriteDraw_f(uint32_t sprNum, int clipNum, float x,
     mtrSprite_t *sprite;
     MTR_SPRITE_CHECK_IF_NOT_INITED();
 
-    if (sprNum != 0)
-    {
-        sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
-        MTR_TextureBlitRegion_f(sprite->textureIndex,
-         x - sprite->clip[clipNum].anchorX, y - sprite->clip[clipNum].anchorY,
-         sprite->clip[clipNum].x, sprite->clip[clipNum].y,
-         sprite->clip[clipNum].w, sprite->clip[clipNum].h);
-    }
+    if (sprNum == 0U)
+        return;
+    sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+    if (sprite->textureIndex == 0U)
+        return;
+    MTR_TextureBlitRegion_f(sprite->textureIndex,
+     x - sprite->clip[clipNum].anchorX, y - sprite->clip[clipNum].anchorY,
+     sprite->clip[clipNum].x, sprite->clip[clipNum].y, sprite->clip[clipNum].w,
+     sprite->clip[clipNum].h);
 }
 
 /*fa MTR_SpriteDrawSized_f yes */
@@ -719,20 +749,20 @@ MTR_DCLSPC void MTR_CALL MTR_SpriteDrawSized_f(uint32_t sprNum, int clipNum,
     float        offsetY;
     MTR_SPRITE_CHECK_IF_NOT_INITED();
 
-    if (sprNum != 0)
-    {
-        sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+    if (sprNum == 0U)
+        return;
+    sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+    if (sprite->textureIndex == 0U)
+        return;
 
-        offsetX = x - (float)sprite->clip[clipNum].anchorX /
-         (float)sprite->clip[clipNum].w * w;
-        offsetY = y - (float)sprite->clip[clipNum].anchorY /
-         (float)sprite->clip[clipNum].h * h;
+    offsetX = x - (float)sprite->clip[clipNum].anchorX /
+     (float)sprite->clip[clipNum].w * w;
+    offsetY = y - (float)sprite->clip[clipNum].anchorY /
+     (float)sprite->clip[clipNum].h * h;
 
-        MTR_TextureBlitRegionSized_f(sprite->textureIndex,
-         offsetX, offsetY, w, h, sprite->clip[clipNum].x,
-         sprite->clip[clipNum].y, sprite->clip[clipNum].w,
-         sprite->clip[clipNum].h);
-    }
+    MTR_TextureBlitRegionSized_f(sprite->textureIndex, offsetX, offsetY, w, h,
+     sprite->clip[clipNum].x, sprite->clip[clipNum].y, sprite->clip[clipNum].w,
+     sprite->clip[clipNum].h);
 }
 
 /*fa MTR_SpriteDrawScaled_f yes */
@@ -744,18 +774,18 @@ MTR_DCLSPC void MTR_CALL MTR_SpriteDrawScaled_f(uint32_t sprNum, int clipNum,
     float        offsetY;
     MTR_SPRITE_CHECK_IF_NOT_INITED();
 
-    if (sprNum != 0)
-    {
-        sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+    if (sprNum == 0U)
+        return;
+    sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+    if (sprite->textureIndex == 0U)
+        return;
 
-        offsetX = x - (float)sprite->clip[clipNum].anchorX * hscale;
-        offsetY = y - (float)sprite->clip[clipNum].anchorY * vscale;
+    offsetX = x - (float)sprite->clip[clipNum].anchorX * hscale;
+    offsetY = y - (float)sprite->clip[clipNum].anchorY * vscale;
 
-        MTR_TextureBlitRegionScaled_f(sprite->textureIndex,
-         offsetX, offsetY,
-         hscale, vscale, sprite->clip[clipNum].x, sprite->clip[clipNum].y,
-         sprite->clip[clipNum].w, sprite->clip[clipNum].h);
-    }
+    MTR_TextureBlitRegionScaled_f(sprite->textureIndex, offsetX, offsetY,
+     hscale, vscale, sprite->clip[clipNum].x, sprite->clip[clipNum].y,
+     sprite->clip[clipNum].w, sprite->clip[clipNum].h);
 }
 
 /*fa MTR_SpriteDrawAngled_f yes */
@@ -765,15 +795,16 @@ MTR_DCLSPC void MTR_CALL MTR_SpriteDrawAngled_f(uint32_t sprNum, int clipNum,
     mtrSprite_t *sprite;
     MTR_SPRITE_CHECK_IF_NOT_INITED();
 
-    if (sprNum != 0)
-    {
-        sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
-        MTR_TextureBlitRegionAngled_f(sprite->textureIndex,
-         x - sprite->clip[clipNum].anchorX, y - sprite->clip[clipNum].anchorY,
-         sprite->clip[clipNum].x, sprite->clip[clipNum].y,
-         sprite->clip[clipNum].w, sprite->clip[clipNum].h, angle,
-         sprite->clip[clipNum].anchorX, sprite->clip[clipNum].anchorY);
-    }
+    if (sprNum == 0U)
+        return;
+    sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+    if (sprite->textureIndex == 0U)
+        return;
+    MTR_TextureBlitRegionAngled_f(sprite->textureIndex,
+     x - sprite->clip[clipNum].anchorX, y - sprite->clip[clipNum].anchorY,
+     sprite->clip[clipNum].x, sprite->clip[clipNum].y, sprite->clip[clipNum].w,
+     sprite->clip[clipNum].h, angle, sprite->clip[clipNum].anchorX,
+     sprite->clip[clipNum].anchorY);
 }
 
 /*fa MTR_SpriteDrawFlipped_f yes */
@@ -783,14 +814,15 @@ MTR_DCLSPC void MTR_CALL MTR_SpriteDrawFlipped_f(uint32_t sprNum, int clipNum,
     mtrSprite_t *sprite;
     MTR_SPRITE_CHECK_IF_NOT_INITED();
 
-    if (sprNum != 0)
-    {
-        sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
-        MTR_TextureBlitRegionFlipped_f(sprite->textureIndex,
-         x - sprite->clip[clipNum].anchorX, y - sprite->clip[clipNum].anchorY,
-         sprite->clip[clipNum].x, sprite->clip[clipNum].y,
-         sprite->clip[clipNum].w, sprite->clip[clipNum].h, flip);
-    }
+    if (sprNum == 0U)
+        return;
+    sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+    if (sprite->textureIndex == 0U)
+        return;
+    MTR_TextureBlitRegionFlipped_f(sprite->textureIndex,
+     x - sprite->clip[clipNum].anchorX, y - sprite->clip[clipNum].anchorY,
+     sprite->clip[clipNum].x, sprite->clip[clipNum].y, sprite->clip[clipNum].w,
+     sprite->clip[clipNum].h, flip);
 }
 
 /*fa MTR_SpriteDrawGeneral_f yes */
@@ -802,16 +834,17 @@ MTR_DCLSPC void MTR_CALL MTR_SpriteDrawGeneral_f(uint32_t sprNum, int clipNum,
     float        offsetY;
     MTR_SPRITE_CHECK_IF_NOT_INITED();
 
-    if (sprNum != 0)
-    {
-        sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+    if (sprNum == 0U)
+        return;
+    sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+    if (sprite->textureIndex == 0U)
+        return;
 
-        offsetX = x - (float)sprite->clip[clipNum].anchorX * hscale;
-        offsetY = y - (float)sprite->clip[clipNum].anchorY * vscale;
+    offsetX = x - (float)sprite->clip[clipNum].anchorX * hscale;
+    offsetY = y - (float)sprite->clip[clipNum].anchorY * vscale;
 
-        MTR_TextureBlitRegionGeneral_f(sprite->textureIndex,
-         offsetX, offsetY, hscale, vscale, sprite->clip[clipNum].x,
-         sprite->clip[clipNum].y, sprite->clip[clipNum].w,
-         sprite->clip[clipNum].h, angle, offsetX, offsetY, flip);
-    }
+    MTR_TextureBlitRegionGeneral_f(sprite->textureIndex, offsetX, offsetY,
+     hscale, vscale, sprite->clip[clipNum].x, sprite->clip[clipNum].y,
+     sprite->clip[clipNum].w, sprite->clip[clipNum].h, angle, offsetX, offsetY,
+     flip);
 }
