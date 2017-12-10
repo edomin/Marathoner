@@ -73,6 +73,7 @@ MTR_SCRIPT_FUNC_I_U32t1I1(MTR_SF_SpriteGetFrameAnchorY,
  MTR_SpriteGetFrameAnchorY)
 MTR_SCRIPT_FUNC_U32t_U32t1(MTR_SF_SpriteGetTexture, MTR_SpriteGetTexture)
 MTR_SCRIPT_FUNC_V_U32t1(MTR_SF_SpriteFree, MTR_SpriteFree)
+MTR_SCRIPT_FUNC_V_U32t1(MTR_SF_SpriteDetachTexture, MTR_SpriteDetachTexture)
 MTR_SCRIPT_FUNC_V_U32t2(MTR_SF_SpriteSetModulation_c, MTR_SpriteSetModulation_c)
 MTR_SCRIPT_FUNC_V_U32t2(MTR_SF_SpriteSetModulation_ca,
  MTR_SpriteSetModulation_ca)
@@ -123,6 +124,7 @@ void MTR_ScriptsRegisterAll(void)
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteGetFrameAnchorY);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteGetTexture);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteFree);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteDetachTexture);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteSetModulation_c);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteSetModulation_ca);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteSetModulation_rgb);

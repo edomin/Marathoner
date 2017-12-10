@@ -33,6 +33,8 @@ fa.FunctionSupported(SpriteGetFrameAnchorY, "MTR_SpriteGetFrameAnchorY",
 fa.FunctionSupported(SpriteGetTexture, "MTR_SpriteGetTexture",
  SpriteFunctionSupported);
 fa.FunctionSupported(SpriteFree, "MTR_SpriteFree", SpriteFunctionSupported);
+fa.FunctionSupported(SpriteDetachTexture, "MTR_SpriteDetachTexture",
+ SpriteFunctionSupported);
 fa.FunctionSupported(SpriteSetModulation_c, "MTR_SpriteSetModulation_c",
  SpriteFunctionSupported);
 fa.FunctionSupported(SpriteSetModulation_ca, "MTR_SpriteSetModulation_ca",

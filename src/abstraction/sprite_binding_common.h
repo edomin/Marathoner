@@ -21,6 +21,7 @@ MTR_FUNC(int, MTR_SpriteGetFrameAnchorX, uint32_t, int);
 MTR_FUNC(int, MTR_SpriteGetFrameAnchorY, uint32_t, int);
 MTR_FUNC(uint32_t, MTR_SpriteGetTexture, uint32_t);
 MTR_FUNC(void, MTR_SpriteFree, uint32_t);
+MTR_FUNC(void, MTR_SpriteDetachTexture, uint32_t);
 MTR_FUNC(void, MTR_SpriteSetModulation_c, uint32_t, uint32_t);
 MTR_FUNC(void, MTR_SpriteSetModulation_ca, uint32_t, uint32_t);
 MTR_FUNC(void, MTR_SpriteSetModulation_rgb, uint32_t, uint8_t, uint8_t,
