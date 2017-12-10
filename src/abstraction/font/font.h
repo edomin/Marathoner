@@ -20,9 +20,9 @@
 #define MTR_FONT_INITIAL_RESERVED_ATLASES 32
 
 typedef struct mtrFont_t {
-    uint32_t    *spriteAtlas;
-    unsigned int reservedAtlases;
-    char        *name;
+    uint32_t *spriteAtlas;
+    int       reservedAtlases;
+    char     *name;
 } mtrFont_t;
 
 char              mtrDefaultFontName[] = "Unnamed_Font";
@@ -55,5 +55,6 @@ MTR_FUNC(void, MTR_SpriteDraw_f, uint32_t, int, float, float);
 MTR_FUNC(uint32_t, MTR_SpriteCreateFromTexture, const char *, uint32_t, int);
 MTR_FUNC(bool, MTR_SpriteSetAtlasFrame, uint32_t, int, int, int, int, int, int,
  int);
+MTR_FUNC(void, MTR_SpriteFree, uint32_t);
 
 #endif

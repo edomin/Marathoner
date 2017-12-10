@@ -59,6 +59,7 @@ MTR_DCLSPC bool MTR_CALL MTR_FontInit(uint32_t dmSize, uint32_t reservedCount)
     MTR_FIND_FUNCTION(MTR_SpriteDraw_f, "Abstraction_sprite");
     MTR_FIND_FUNCTION(MTR_SpriteCreateFromTexture, "Abstraction_sprite");
     MTR_FIND_FUNCTION(MTR_SpriteSetAtlasFrame, "Abstraction_sprite");
+    MTR_FIND_FUNCTION(MTR_SpriteFree, "Abstraction_sprite");
 
     if (ok)
         MTR_LogWrite("Added dependent functions", 1, MTR_LMT_INFO);
@@ -125,7 +126,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_FontCreate(const char *name,
 
 /*fa MTR_FontAddAtlas yes */
 MTR_DCLSPC bool MTR_CALL MTR_FontAddAtlas(uint32_t fontNum, uint32_t sprNum,
- unsigned int atlasNum)
+ int atlasNum)
 {
     mtrFont_t *font;
     uint32_t  *oldSpriteAtlas;
@@ -212,8 +213,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_FontCacheTtf(const char *name, uint32_t ttfNum,
 {
     uint32_t     freeIndex;
     mtrFont_t   *font;
-//    bool         success;
-    unsigned int i;
+    int          i;
     int          j;
     int          currentTexSide;
     int          texSideNum;
@@ -306,27 +306,158 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_FontCacheTtf(const char *name, uint32_t ttfNum,
 MTR_DCLSPC void MTR_CALL MTR_FontFree(uint32_t fontNum)
 {
     mtrFont_t *font;
+    int        i;
     MTR_FONT_CHECK_IF_NOT_INITED_WITH_LOG("Unable to unload font",);
 
-    if (fontNum == 0)
+    if (fontNum == 0U) {
+        MTR_LogWrite("Unable to unload font. Incorrect font index", 0,
+         MTR_LMT_ERROR);
         return;
+    }
 
     font = IK_GET_DATA(mtrFont_t *, mtrFontKeeper, fontNum);
     MTR_LogWrite_s("Unloading font", 0, MTR_LMT_INFO, font->name);
     if (font->name != mtrDefaultFontName)
         free(font->name);
+    for (i = 0; i < font->reservedAtlases; i++) {
+        if (font->spriteAtlas[i] != 0U)
+            MTR_SpriteFree(font->spriteAtlas[i]);
+    }
     MTR_IndexkeeperFreeIndex(mtrFontKeeper, fontNum);
     MTR_LogWrite("Font unloaded", 0, MTR_LMT_INFO);
+}
+
+/*fa MTR_FontDeleteAtlas yes */
+MTR_DCLSPC void MTR_CALL MTR_FontDeleteAtlas(uint32_t fontNum,
+ int atlasNum)
+{
+    mtrFont_t *font;
+    MTR_FONT_CHECK_IF_NOT_INITED_WITH_LOG("Unable to delete atlas from font",);
+
+    if (fontNum == 0U) {
+        MTR_LogWrite("Unable to delete atlas from font. Incorrect font index",
+         0, MTR_LMT_ERROR);
+        return;
+    }
+
+    font = IK_GET_DATA(mtrFont_t *, mtrFontKeeper, fontNum);
+    if (atlasNum >= font->reservedAtlases) {
+        MTR_LogWrite("Unable to delete atlas from font. Atlas with this index "
+         "is not exists", 0, MTR_LMT_ERROR);
+        return;
+    }
+    if (font->spriteAtlas[atlasNum] != 0U) {
+        MTR_SpriteFree(font->spriteAtlas[atlasNum]);
+        font->spriteAtlas[atlasNum] = 0U;
+    }
+}
+
+/*fa MTR_FontDeleteAllAtlases yes */
+MTR_DCLSPC void MTR_CALL MTR_FontDeleteAllAtlases(uint32_t fontNum)
+{
+    mtrFont_t *font;
+    int        i;
+    MTR_FONT_CHECK_IF_NOT_INITED_WITH_LOG(
+     "Unable to delete all atlases from font",);
+
+    if (fontNum == 0U) {
+        MTR_LogWrite(
+         "Unable to delete all atlases from font. Incorrect font index", 0,
+         MTR_LMT_ERROR);
+        return;
+    }
+
+    font = IK_GET_DATA(mtrFont_t *, mtrFontKeeper, fontNum);
+    for (i = 0; i < font->reservedAtlases; i++) {
+        if (font->spriteAtlas[i] != 0U) {
+            MTR_SpriteFree(font->spriteAtlas[i]);
+            font->spriteAtlas[i] = 0U;
+        }
+    }
+}
+
+/*fa MTR_FontDetachAtlas yes */
+MTR_DCLSPC void MTR_CALL MTR_FontDetachAtlas(uint32_t fontNum,
+ int atlasNum)
+{
+    mtrFont_t *font;
+    MTR_FONT_CHECK_IF_NOT_INITED_WITH_LOG("Unable to detach atlas from font",);
+
+    if (fontNum == 0U) {
+        MTR_LogWrite("Unable to detach atlas from font. Incorrect font index",
+         0, MTR_LMT_ERROR);
+        return;
+    }
+
+    font = IK_GET_DATA(mtrFont_t *, mtrFontKeeper, fontNum);
+    if (atlasNum >= font->reservedAtlases) {
+        MTR_LogWrite("Unable to detach atlas from font. Atlas with this index "
+         "is not exists", 0, MTR_LMT_ERROR);
+        return;
+    }
+    if (font->spriteAtlas[atlasNum] != 0U)
+        font->spriteAtlas[atlasNum] = 0U;
+}
+
+/*fa MTR_FontDetachAllAtlases yes */
+MTR_DCLSPC void MTR_CALL MTR_FontDetachAllAtlases(uint32_t fontNum)
+{
+    mtrFont_t *font;
+    int        i;
+    MTR_FONT_CHECK_IF_NOT_INITED_WITH_LOG(
+     "Unable to detach all atlases from font",);
+
+    if (fontNum == 0U) {
+        MTR_LogWrite(
+         "Unable to detach all atlases from font. Incorrect font index", 0,
+         MTR_LMT_ERROR);
+        return;
+    }
+
+    font = IK_GET_DATA(mtrFont_t *, mtrFontKeeper, fontNum);
+    for (i = 0; i < font->reservedAtlases; i++) {
+        if (font->spriteAtlas[i] != 0U)
+            font->spriteAtlas[i] = 0U;
+    }
+}
+
+/*fa MTR_FontGetAtlasSprite yes */
+MTR_DCLSPC uint32_t MTR_CALL MTR_FontGetAtlasSprite(uint32_t fontNum,
+ int atlasNum)
+{
+    mtrFont_t *font;
+    MTR_FONT_CHECK_IF_NOT_INITED(0U);
+
+    if (fontNum == 0U)
+        return 0U;
+
+    font = IK_GET_DATA(mtrFont_t *, mtrFontKeeper, fontNum);
+    if (atlasNum >= font->reservedAtlases)
+        return 0U;
+    return font->spriteAtlas[atlasNum];
+}
+
+/*fa MTR_FontGetAtlasesCount yes */
+MTR_DCLSPC int MTR_CALL MTR_FontGetAtlasesCount(uint32_t fontNum)
+{
+    mtrFont_t *font;
+    MTR_FONT_CHECK_IF_NOT_INITED(0);
+
+    if (fontNum == 0)
+        return 0;
+
+    font = IK_GET_DATA(mtrFont_t *, mtrFontKeeper, fontNum);
+    return font->reservedAtlases;
 }
 
 /*fa MTR_FontGetHeight yes */
 MTR_DCLSPC int MTR_CALL MTR_FontGetHeight(uint32_t fontNum)
 {
-    mtrFont_t   *font;
-    unsigned int i;
-    int          j;
-    int          maxHeight = 0;
-    int          currentSymbolHeight = 0;
+    mtrFont_t *font;
+    int        i;
+    int        j;
+    int        maxHeight = 0;
+    int        currentSymbolHeight = 0;
     MTR_FONT_CHECK_IF_NOT_INITED(0);
 
     if (fontNum == 0)
@@ -355,7 +486,7 @@ MTR_DCLSPC int MTR_CALL MTR_FontGetStringWidth(uint32_t fontNum,
     uint32_t    *ucs4Text = NULL;
     size_t       ucs4Length;
     unsigned int i;
-    unsigned int glyphAtlas;
+    int          glyphAtlas;
     int          symbolNum;
     uint32_t     sprNum;
     int          xOffset = 0;
@@ -396,6 +527,7 @@ MTR_DCLSPC bool MTR_CALL MTR_FontDrawString_f(uint32_t fontNum,
     int          symbolNum;
     int          xOffset = 0;
     uint32_t     sprNum;
+    unsigned int reservedAtlases;
     MTR_FONT_CHECK_IF_NOT_INITED(false);
 
     if (string == NULL || fontNum == 0)
@@ -407,7 +539,8 @@ MTR_DCLSPC bool MTR_CALL MTR_FontDrawString_f(uint32_t fontNum,
 
     for (i = 0; i < ucs4Length; i++) {
         glyphAtlas = ucs4Text[i] >> 8;
-        if (glyphAtlas >= font->reservedAtlases)
+        reservedAtlases = font->reservedAtlases;
+        if (glyphAtlas >= reservedAtlases)
             continue;
         symbolNum = ucs4Text[i] - (glyphAtlas << 8);
 
