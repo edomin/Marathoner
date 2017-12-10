@@ -28,6 +28,14 @@ for i = 0, 60, 1 do
     TimerDelayForFPS(30);
 end;
 
+for i = 0, FontGetAtlasesCount(font) - 1, 1 do
+    local sprite = FontGetAtlasSprite(font, i);
+    if sprite ~= 0 then
+        local texture = SpriteGetTexture(sprite);
+        TextureSave(texture, "test/output_" .. i .. ".png");
+    end;
+end;
+
 TtfFree(ttf);
 FontFree(font);
 
