@@ -28,6 +28,7 @@ smpeg2          LGPL 2
 Squirrel        MIT
 stb_image       Public Domain
 stb_image_write Public Domain
+stb_rect_pack   Public Domain
 tigr            Public Domain
 tinyfiledialogs Zlib
 utf8            Public Domain
