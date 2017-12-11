@@ -87,6 +87,32 @@ MTR_DCLSPC bool MTR_CALL MTR_FontInit(uint32_t dmSize, uint32_t reservedCount)
     return true;
 }
 
+MTR_DCLSPC void MTR_CALL MTR_FontRecountHeight(uint32_t fontNum)
+{
+    mtrFont_t *font;
+    int        i;
+    int        j;
+    int        maxHeight = 0;
+    int        currentSymbolHeight = 0;
+
+    if (fontNum == 0U)
+        return;
+
+    font = IK_GET_DATA(mtrFont_t *, mtrFontKeeper, fontNum);
+
+    for (i = 0; i < font->reservedAtlases; i++) {
+        if (font->spriteAtlas[i] == 0)
+            continue;
+        for (j = 0; j < 256; j++) {
+            currentSymbolHeight = MTR_SpriteGetFrameHeight(font->spriteAtlas[i],
+             j);
+            if (currentSymbolHeight > maxHeight)
+                maxHeight = currentSymbolHeight;
+        }
+    }
+    font->height = maxHeight;
+}
+
 /*fa MTR_FontCreate yes */
 MTR_DCLSPC uint32_t MTR_CALL MTR_FontCreate(const char *name,
  int reservedAtlases)
@@ -152,6 +178,7 @@ MTR_DCLSPC bool MTR_CALL MTR_FontAddAtlas(uint32_t fontNum, uint32_t sprNum,
     }
 
     font->spriteAtlas[atlasNum] = sprNum;
+    MTR_FontRecountHeight(fontNum);
 
     return true;
 }
@@ -299,6 +326,8 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_FontCacheTtf(const char *name, uint32_t ttfNum,
     else
         font->name = strcpy(font->name, name);
 
+    MTR_FontRecountHeight(freeIndex);
+
     return freeIndex;
 }
 
@@ -350,6 +379,7 @@ MTR_DCLSPC void MTR_CALL MTR_FontDeleteAtlas(uint32_t fontNum,
         MTR_SpriteFree(font->spriteAtlas[atlasNum]);
         font->spriteAtlas[atlasNum] = 0U;
     }
+    MTR_FontRecountHeight(fontNum);
 }
 
 /*fa MTR_FontDeleteAllAtlases yes */
@@ -374,6 +404,7 @@ MTR_DCLSPC void MTR_CALL MTR_FontDeleteAllAtlases(uint32_t fontNum)
             font->spriteAtlas[i] = 0U;
         }
     }
+    MTR_FontRecountHeight(fontNum);
 }
 
 /*fa MTR_FontDetachAtlas yes */
@@ -397,6 +428,7 @@ MTR_DCLSPC void MTR_CALL MTR_FontDetachAtlas(uint32_t fontNum,
     }
     if (font->spriteAtlas[atlasNum] != 0U)
         font->spriteAtlas[atlasNum] = 0U;
+    MTR_FontRecountHeight(fontNum);
 }
 
 /*fa MTR_FontDetachAllAtlases yes */
@@ -419,6 +451,7 @@ MTR_DCLSPC void MTR_CALL MTR_FontDetachAllAtlases(uint32_t fontNum)
         if (font->spriteAtlas[i] != 0U)
             font->spriteAtlas[i] = 0U;
     }
+    MTR_FontRecountHeight(fontNum);
 }
 
 /*fa MTR_FontGetAtlasSprite yes */
@@ -454,10 +487,6 @@ MTR_DCLSPC int MTR_CALL MTR_FontGetAtlasesCount(uint32_t fontNum)
 MTR_DCLSPC int MTR_CALL MTR_FontGetHeight(uint32_t fontNum)
 {
     mtrFont_t *font;
-    int        i;
-    int        j;
-    int        maxHeight = 0;
-    int        currentSymbolHeight = 0;
     MTR_FONT_CHECK_IF_NOT_INITED(0);
 
     if (fontNum == 0)
@@ -465,17 +494,7 @@ MTR_DCLSPC int MTR_CALL MTR_FontGetHeight(uint32_t fontNum)
 
     font = IK_GET_DATA(mtrFont_t *, mtrFontKeeper, fontNum);
 
-    for (i = 0; i < font->reservedAtlases; i++) {
-        if (font->spriteAtlas[i] == 0)
-            continue;
-        for (j = 0; j < 256; j++) {
-            currentSymbolHeight = MTR_SpriteGetFrameHeight(font->spriteAtlas[i],
-             j);
-            if (currentSymbolHeight > maxHeight)
-                maxHeight = currentSymbolHeight;
-        }
-    }
-    return maxHeight;
+    return font->height;
 }
 
 /*fa MTR_FontGetStringWidth yes */

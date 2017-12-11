@@ -23,6 +23,7 @@ typedef struct mtrFont_t {
     uint32_t *spriteAtlas;
     int       reservedAtlases;
     char     *name;
+    int       height;
 } mtrFont_t;
 
 char              mtrDefaultFontName[] = "Unnamed_Font";
