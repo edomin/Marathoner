@@ -192,12 +192,12 @@ mtrPlugin *mtrPluginData;
 #define MTR_DMT_DEBUG                   5
 
 /* Indexkeeper datamap size */
-#define MTR_IKDM_SMALL                  8
-#define MTR_IKDM_MEDIUM                 2048
+#define MTR_IKDM_SMALL                  8U
+#define MTR_IKDM_MEDIUM                 2048U
 #if !defined(__EMSCRIPTEN__)
-    #define MTR_IKDM_LARGE              134217728
+    #define MTR_IKDM_LARGE              134217728UL
 #else
-    #define MTR_IKDM_LARGE              67108864
+    #define MTR_IKDM_LARGE              67108864UL
 #endif
 
 /* File opening modes */
