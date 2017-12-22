@@ -29,7 +29,7 @@ int MTR_ButtonToActualButton(int button)
         case MTR_MOUSE_LEFT:
             return SDL_BUTTON_LEFT;
         case MTR_MOUSE_RIGHT:
-            return  SDL_BUTTON_LEFT;
+            return  SDL_BUTTON_RIGHT;
         case MTR_MOUSE_MIDDLE:
             return SDL_BUTTON_MIDDLE;
         case MTR_MOUSE_X1:
@@ -256,4 +256,20 @@ MTR_DCLSPC void MTR_CALL MTR_MouseGetDeltaXY(int *deltaX, int *deltaY)
     }
     *deltaX = mtrMouse.deltaX;
     *deltaY = mtrMouse.deltaY;
+}
+
+/*fa MTR_MouseCursorShow yes */
+MTR_DCLSPC void MTR_CALL MTR_MouseCursorShow(void)
+{
+    MTR_MOUSE_CHECK_IF_NOT_INITED();
+
+    SDL_ShowCursor(SDL_ENABLE);
+}
+
+/*fa MTR_MouseCursorHide yes */
+MTR_DCLSPC void MTR_CALL MTR_MouseCursorHide(void)
+{
+    MTR_MOUSE_CHECK_IF_NOT_INITED();
+
+    SDL_ShowCursor(SDL_DISABLE);
 }

@@ -19,5 +19,7 @@ MTR_FUNC(int, MTR_MouseGetDeltaY, void);
 #ifdef lua_h
 MTR_FUNC(void, MTR_MouseGetDeltaXY, int *, int *);
 #endif
+MTR_FUNC(void, MTR_MouseCursorShow, void);
+MTR_FUNC(void, MTR_MouseCursorHide, void);
 
 #endif

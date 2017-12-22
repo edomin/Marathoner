@@ -47,6 +47,9 @@ MTR_SCRIPT_FUNC(MTR_SF_MouseGetDeltaXY)
 }
 #endif
 
+MTR_SCRIPT_FUNC_V_V(MTR_SF_MouseCursorShow, MTR_MouseCursorShow)
+MTR_SCRIPT_FUNC_V_V(MTR_SF_MouseCursorHide, MTR_MouseCursorHide)
+
 void MTR_ScriptsRegisterAll(void)
 {
     #ifdef MTR_MOD_PLUGIN
@@ -71,6 +74,8 @@ void MTR_ScriptsRegisterAll(void)
     #ifdef lua_h
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, MouseGetDeltaXY);
     #endif
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, MouseCursorShow);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, MouseCursorHide);
 
     MTR_ScriptsRegisterVariable_i("MOUSE_LEFT", MTR_MOUSE_LEFT);
     MTR_ScriptsRegisterVariable_i("MOUSE_RIGHT", MTR_MOUSE_RIGHT);
