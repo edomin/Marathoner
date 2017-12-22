@@ -16,10 +16,6 @@
 #define MTR_VERSION_JSON_CJSON_SQUIRREL             0x000100U /* not incremented */
 #define MTR_VERSION_JSON_CJSON_DUKTAPE              0x000100U /* not incremented */
 
-#define MTR_VERSION_KEYBOARD_SDL2                   0x000200U /* not incremented */
-#define MTR_VERSION_KEYBOARD_SDL2_LUA               0x000200U /* not incremented */
-#define MTR_VERSION_KEYBOARD_SDL2_SQUIRREL          0x000100U /* not incremented */
-#define MTR_VERSION_KEYBOARD_SDL2_DUKTAPE           0x000100U /* not incremented */
 
 #define MTR_VERSION_MOUSE_SDL2                      0x000200U /* not incremented */
 #define MTR_VERSION_MOUSE_SDL2_LUA                  0x000200U /* not incremented */
@@ -113,4 +109,8 @@
 #define MTR_VERSION_AUDIO_SDL2_MIXER_SQUIRREL           0x000101U /* inc patch */
 #define MTR_VERSION_AUDIO_SDL2_MIXER_DUKTAPE            0x000101U /* inc patch */
 
+#define MTR_VERSION_KEYBOARD_SDL2                       0x000300U /* inc minor */
+#define MTR_VERSION_KEYBOARD_SDL2_LUA                   0x000201U /* inc patch */
+#define MTR_VERSION_KEYBOARD_SDL2_SQUIRREL              0x000101U /* inc patch */
+#define MTR_VERSION_KEYBOARD_SDL2_DUKTAPE               0x000101U /* inc patch */
 #endif

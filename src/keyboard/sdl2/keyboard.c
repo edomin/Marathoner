@@ -226,6 +226,76 @@ MTR_DCLSPC int MTR_CALL MTR_KeyboardArrowsGetVerAxis(int keyUp, int keyDown)
     return 0;
 }
 
+/*fa MTR_KeyboardArrowsGetDirection yes */
+MTR_DCLSPC int MTR_CALL MTR_KeyboardArrowsGetDirection(int keyUp, int keyDown,
+ int keyLeft, int keyRight)
+{
+    MTR_KEYBOARD_CHECK_IF_NOT_INITED(0);
+    bool upPressed;
+    bool downPressed;
+    bool leftPressed;
+    bool rightPressed;
+
+    upPressed = MTR_KeyboardPressed(keyUp);
+    downPressed = MTR_KeyboardPressed(keyDown);
+    leftPressed = MTR_KeyboardPressed(keyLeft);
+    rightPressed = MTR_KeyboardPressed(keyRight);
+
+    if (rightPressed) {
+        if (leftPressed) {
+            if (upPressed) {
+                if (downPressed)
+                    return 0; /* dummy */
+                else
+                    return 90;
+            } else {
+                if (downPressed)
+                    return 270;
+                else
+                    return 0; /* dummy */
+            }
+        } else {
+            if (upPressed) {
+                if (downPressed)
+                    return 0;
+                else
+                    return 45;
+            } else {
+                if (downPressed)
+                    return 315;
+                else
+                    return 0;
+            }
+        }
+    } else {
+        if (leftPressed) {
+            if (upPressed) {
+                if (downPressed)
+                    return 180;
+                else
+                    return 135;
+            } else {
+                if (downPressed)
+                    return 225;
+                else
+                    return 180;
+            }
+        } else {
+            if (upPressed) {
+                if (downPressed)
+                    return 0; /* dummy */
+                else
+                    return 90;
+            } else {
+                if (downPressed)
+                    return 270;
+                else
+                    return 0; /* dummy */
+            }
+        }
+    }
+}
+
 /*fa MTR_KeyboardInputChar yes */
 MTR_DCLSPC char *MTR_CALL MTR_KeyboardInputChar(void)
 {

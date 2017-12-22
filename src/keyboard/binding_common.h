@@ -12,6 +12,7 @@ MTR_FUNC(void, MTR_KeyboardArrowsGetAxes, int, int, int, int, int *, int *);
 #endif
 MTR_FUNC(int, MTR_KeyboardArrowsGetHorAxis, int, int);
 MTR_FUNC(int, MTR_KeyboardArrowsGetVerAxis, int, int);
+MTR_FUNC(int, MTR_KeyboardArrowsGetDirection, int, int, int, int);
 MTR_FUNC(char *, MTR_KeyboardInputChar, void);
 
 #endif
