@@ -35,6 +35,9 @@ MTR_DCLSPC bool MTR_CALL MTR_ScreenInit(int width, int height, bool fullscreen,
     const char         *actualTitle;
     const char          defaultTitle[] = "Marathoner";
     int                 fullscreenFlag;
+    SDL_DisplayMode     desktopDisplayMode;
+    bool                getDesktopDisplayMode;
+    float               aspectRatio;
 
     MTR_LogWrite("Creating Screen", 0, MTR_LMT_INFO);
 
@@ -116,9 +119,21 @@ MTR_DCLSPC bool MTR_CALL MTR_ScreenInit(int width, int height, bool fullscreen,
         fullscreenFlag = SDL_WINDOW_FULLSCREEN;
     else
         fullscreenFlag = 0;
-    mtrScreen->screen = SDL_CreateWindow(actualTitle, SDL_WINDOWPOS_UNDEFINED,
-     SDL_WINDOWPOS_UNDEFINED, width, height,
-     SDL_WINDOW_OPENGL | fullscreenFlag);
+
+    aspectRatio = (float)width / (float)height;
+
+    if (SDL_GetDesktopDisplayMode(0, &desktopDisplayMode) == 0) {
+        getDesktopDisplayMode = true;
+        mtrScreen->screen = SDL_CreateWindow(actualTitle,
+         SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+         desktopDisplayMode.h * aspectRatio, desktopDisplayMode.h,
+         SDL_WINDOW_OPENGL | fullscreenFlag);
+    } else {
+        getDesktopDisplayMode = false;
+        mtrScreen->screen = SDL_CreateWindow(actualTitle,
+         SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height,
+         SDL_WINDOW_OPENGL | fullscreenFlag);
+    }
 
     if (mtrScreen->screen != NULL)
         MTR_LogWrite("Window created", 1, MTR_LMT_INFO);
@@ -184,6 +199,11 @@ MTR_DCLSPC bool MTR_CALL MTR_ScreenInit(int width, int height, bool fullscreen,
         MTR_Notify("Screen not initialized", 0, MTR_LMT_ERROR);
         return false;
     }
+
+    if (getDesktopDisplayMode) {
+        SDL_RenderSetLogicalSize(mtrScreen->renderer, width, height);
+    }
+
     MTR_LogWrite("Screen initialized", 0, MTR_LMT_INFO);
 
     mtrScreenInited = true;
