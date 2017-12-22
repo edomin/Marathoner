@@ -445,12 +445,14 @@ MTR_DCLSPC int16_t MTR_CALL MTR_GameControllerGetAxis(int controllerNum,
 
     gameController = IK_GET_DATA(mtrGameController_t *,
      mtrGameControllerKeeper, controllerNum);
-    if (!MTR_IndexkeeperIndexIsEmpty(mtrGameControllerKeeper, controllerNum))
-        if (axisNum < gameController->axesCount)
+    if (!MTR_IndexkeeperIndexIsEmpty(mtrGameControllerKeeper, controllerNum)) {
+        if (axisNum < gameController->axesCount) {
+            if (abs(gameController->currentAxis[axisNum] <= 255))
+                return 0;
             return gameController->currentAxis[axisNum];
-        else
+        } else
             return 0;
-    else
+    } else
         return 0;
 }
 
@@ -463,17 +465,19 @@ MTR_DCLSPC float MTR_CALL MTR_GameControllerGetAxis_f(int controllerNum,
 
     gameController = IK_GET_DATA(mtrGameController_t *,
      mtrGameControllerKeeper, controllerNum);
-    if (!MTR_IndexkeeperIndexIsEmpty(mtrGameControllerKeeper, controllerNum))
-        if (axisNum < gameController->axesCount)
+    if (!MTR_IndexkeeperIndexIsEmpty(mtrGameControllerKeeper, controllerNum)) {
+        if (axisNum < gameController->axesCount) {
+            if (abs(gameController->currentAxis[axisNum] <= 255))
+                return 0.0f;
             if (gameController->currentAxis[axisNum] > 0)
                 return ((float)gameController->currentAxis[axisNum] /
                  (float)(INT16_MAX));
             else
                 return ((float)gameController->currentAxis[axisNum] /
                  (float)(-INT16_MIN));
-        else
+        } else
             return 0.0f;
-    else
+    } else
         return 0.0f;
 }
 
