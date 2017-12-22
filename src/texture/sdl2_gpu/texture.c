@@ -186,8 +186,8 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_TextureCreate(const char *name, int width,
     texture->texture = GPU_CreateImage(width, height, GPU_FORMAT_RGBA);
     if (texture->texture != NULL)
     {
-//        GPU_SetImageFilter(texture->texture, GPU_FILTER_NEAREST);
-//        GPU_SetSnapMode(texture->texture, GPU_SNAP_POSITION_AND_DIMENSIONS);
+        GPU_SetImageFilter(texture->texture, GPU_FILTER_NEAREST);
+        GPU_SetSnapMode(texture->texture, GPU_SNAP_NONE);
 
         texture->name = malloc(sizeof(char) * (strlen(name) + 1));
         if (texture->name == NULL)
@@ -234,8 +234,8 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_TextureLoad(const char *filename)
     texture->texture = GPU_LoadImage(filename);
     if (texture->texture != NULL)
     {
-//        GPU_SetImageFilter(texture->texture, GPU_FILTER_NEAREST);
-//        GPU_SetSnapMode(texture->texture, GPU_SNAP_POSITION_AND_DIMENSIONS);
+        GPU_SetImageFilter(texture->texture, GPU_FILTER_NEAREST);
+        GPU_SetSnapMode(texture->texture, GPU_SNAP_NONE);
 
         texture->name = malloc(sizeof(char) * (strlen(filename) + 1));
         if (texture->name == NULL)
@@ -282,6 +282,8 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_TextureCopy(uint32_t texNum)
         if (newTexture->texture != NULL)
         {
             MTR_LogWrite_s("Copying texture", 0, MTR_LMT_INFO, texture->name);
+            GPU_SetImageFilter(texture->texture, GPU_FILTER_NEAREST);
+            GPU_SetSnapMode(texture->texture, GPU_SNAP_NONE);
             newTexture->name = malloc(
              sizeof(char) * (strlen(texture->name) + 1));
             if (newTexture->name == NULL)
