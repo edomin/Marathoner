@@ -24,7 +24,10 @@ MTR_SCRIPT_FUNC_V_V(MTR_SF_AudioChannelsResume, MTR_AudioChannelsResume)
 MTR_SCRIPT_FUNC_V_V(MTR_SF_AudioChannelsStop, MTR_AudioChannelsStop)
 MTR_SCRIPT_FUNC_V_I1(MTR_SF_AudioChannelsFadeOutStop,
  MTR_AudioChannelsFadeOutStop)
-MTR_SCRIPT_FUNC_V_U32t1(MTR_SF_AudioMusicPlay, MTR_AudioMusicPlay)
+MTR_SCRIPT_FUNC_B_U32t1(MTR_SF_AudioMusicPlaying, MTR_AudioMusicPlaying)
+MTR_SCRIPT_FUNC_B_V(MTR_SF_AudioMusicFadingIn, MTR_AudioMusicFadingIn)
+MTR_SCRIPT_FUNC_B_V(MTR_SF_AudioMusicFadingOut, MTR_AudioMusicFadingOut)
+MTR_SCRIPT_FUNC_V_U32t1I1(MTR_SF_AudioMusicPlay, MTR_AudioMusicPlay)
 MTR_SCRIPT_FUNC_V_U32t1I1(MTR_SF_AudioMusicFadeInPlay, MTR_AudioMusicFadeInPlay)
 MTR_SCRIPT_FUNC_V_I1(MTR_SF_AudioMusicSetVolume, MTR_AudioMusicSetVolume)
 MTR_SCRIPT_FUNC_V_F1(MTR_SF_AudioMusicSetVolume_f, MTR_AudioMusicSetVolume_f)
@@ -58,6 +61,9 @@ void MTR_ScriptsRegisterAll(void)
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, AudioChannelsResume);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, AudioChannelsStop);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, AudioChannelsFadeOutStop);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, AudioMusicPlaying);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, AudioMusicFadingIn);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, AudioMusicFadingOut);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, AudioMusicPlay);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, AudioMusicFadeInPlay);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, AudioMusicSetVolume);
