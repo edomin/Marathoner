@@ -830,7 +830,12 @@ MTR_DCLSPC void MTR_CALL MTR_SpriteDrawGeneral_f(uint32_t sprNum, int clipNum,
     mtrSprite_t *sprite;
     float        offsetX;
     float        offsetY;
+    float        pivotX;
+    float        pivotY;
     MTR_SPRITE_CHECK_IF_NOT_INITED();
+
+    UNUSED(pivotX);
+    UNUSED(pivotY);
 
     if (sprNum == 0U)
         return;
@@ -841,8 +846,11 @@ MTR_DCLSPC void MTR_CALL MTR_SpriteDrawGeneral_f(uint32_t sprNum, int clipNum,
     offsetX = x - (float)sprite->clip[clipNum].anchorX * hscale;
     offsetY = y - (float)sprite->clip[clipNum].anchorY * vscale;
 
+    pivotX = (float)sprite->clip[clipNum].anchorX;
+    pivotY = (float)sprite->clip[clipNum].anchorY;
+
     MTR_TextureBlitRegionGeneral_f(sprite->textureIndex, offsetX, offsetY,
      hscale, vscale, sprite->clip[clipNum].x, sprite->clip[clipNum].y,
-     sprite->clip[clipNum].w, sprite->clip[clipNum].h, angle, offsetX, offsetY,
+     sprite->clip[clipNum].w, sprite->clip[clipNum].h, angle, pivotX, pivotY,
      flip);
 }
