@@ -5,7 +5,7 @@ MODULE = sdl2_mixer
 MODULE_NAME = Audio_SDL2_mixer
 ifeq ($(PLATFORM), win32)
   ifeq ($(MOD), plugin)
-    LIBS = -lSDL2_mixer.dll -lSDL2.dll
+    LIBS = -lSDL2_mixer.dll -lSDL2.dll -Wl,-Bstatic -lstdc++
   else
     LIBS = -lSDL2_mixer -lsmpeg2.dll -lSDL2 -lwinmm -limm32 -lole32 -loleaut32 \
      -lversion -luuid -lvorbisfile -lFLAC -lmodplug.dll -lvorbis -logg -lstdc++
@@ -13,7 +13,7 @@ ifeq ($(PLATFORM), win32)
 endif
 ifeq ($(PLATFORM), win64)
   ifeq ($(MOD), plugin)
-    LIBS = -lSDL2_mixer.dll -lSDL2.dll
+    LIBS = -lSDL2_mixer.dll -lSDL2.dll -Wl,-Bstatic -lstdc++
   else
     LIBS = -lSDL2_mixer -lsmpeg2.dll -lSDL2 -lwinmm -limm32 -lole32 -loleaut32 \
      -lversion -luuid -lvorbisfile -lFLAC -lmodplug.dll -lvorbis -logg -lstdc++

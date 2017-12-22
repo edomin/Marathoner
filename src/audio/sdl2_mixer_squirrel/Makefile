@@ -4,7 +4,7 @@ SUBSYSTEM = audio
 MODULE = sdl2_mixer_squirrel
 MODULE_NAME = Audio_SDL2_mixer_Squirrel
 ifeq ($(MOD), plugin)
-  LIBS = -lsquirrel
+  LIBS = -lsquirrel.dll
 else
   LIBS = -lsquirrel_static
 endif

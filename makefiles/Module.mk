@@ -1,16 +1,17 @@
-LDFLAGS = -shared -Wl,--kill-at -L$(PREFIX)/lib -L$(PREFIX)/bin
-ifeq ($(PLATFORM), win32)
-  ifeq ($(DEBUG), no)
-    LDFLAGS += -s
-  endif
-endif
-ifeq ($(PLATFORM), win64)
-  ifeq ($(DEBUG), no)
-    LDFLAGS += -s
-  endif
-endif
+LDFLAGS += -shared -Wl,--kill-at -L$(PREFIX)/lib -L$(PREFIX)/bin
+#ifeq ($(PLATFORM), win32)
+#  ifeq ($(DEBUG), no)
+#    LDFLAGS += -s
+#  endif
+#endif
+#ifeq ($(PLATFORM), win64)
+#  ifeq ($(DEBUG), no)
+#    LDFLAGS += -s
+#  endif
+#endif
 ifeq ($(PLATFORM), html5)
-  LDFLAGS += -s SIDE_MODULE=1 -O2
+#  LDFLAGS += -s SIDE_MODULE=1 -O2
+  LDFLAGS += SIDE_MODULE=1
 endif
 ROOTDIR = ../../..
 OBJSDIR = $(ROOTDIR)/$(PLATFORM)/obj

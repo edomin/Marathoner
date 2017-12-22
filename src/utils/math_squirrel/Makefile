@@ -4,7 +4,7 @@ SUBSYSTEM = utils
 MODULE = math_squirrel
 MODULE_NAME = Utils_math_Squirrel
 ifeq ($(MOD), plugin)
-  LIBS = -lsquirrel
+  LIBS = -lsquirrel.dll
 else
   LIBS = -lsquirrel_static
 endif

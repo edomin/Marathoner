@@ -11,7 +11,8 @@ ifeq ($(MOD), plugin)
     LUA_VERSION_SPACES = $(subst ., ,$(LUA_VERSION_STRING))
     LUA_VERSION_MAJOR = $(word 1,$(LUA_VERSION_SPACES))
     LUA_VERSION_MINOR = $(word 2,$(LUA_VERSION_SPACES))
-    LIBS = $(shell \
+    LIBS = -Wl,-Bdynamic
+    LIBS += $(shell \
      if [ -a $(PREFIX)/bin/lua$(LUA_VERSION_MAJOR)$(LUA_VERSION_MINOR).dll ]; \
      then \
        echo -llua$(LUA_VERSION_MAJOR)$(LUA_VERSION_MINOR); \
@@ -21,7 +22,8 @@ ifeq ($(MOD), plugin)
   else
     LUA_SO_NAME = $(shell ls $(PREFIX)/bin | grep '^lua' | grep 'dll$$')
     LUA_SO_NAME_SPACES = $(subst ., ,$(LUA_SO_NAME))
-    LIBS = -l$(word 1,$(LUA_SO_NAME_SPACES))
+    LIBS = -Wl,-Bdynamic
+    LIBS += -l$(word 1,$(LUA_SO_NAME_SPACES))
   endif
 else
   LIBS = -llua

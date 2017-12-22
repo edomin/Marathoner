@@ -55,13 +55,14 @@ ifeq ($(PLATFORM), win32)
      -Wlogical-op -Wredundant-decls -Wswitch-default -Wuninitialized \
      -Wundef -Wvla
   endif
-  LDFLAGS = -mwindows
+  LDFLAGS = -mwindows -Wl,-Bstatic
   ifeq ($(DEBUG), no)
     CFLAGS += -O2 -Wdisabled-optimization
     LDFLAGS += -s
   endif
   ifeq ($(DEBUG), yes)
     CFLAGS += -O0 -ggdb3 -fvar-tracking
+    LDFLAGS += -lssp
   endif
   ARFLAGS = rcs
   RCFLAGS = -O coff
@@ -88,13 +89,14 @@ ifeq ($(PLATFORM), win64)
      -Wredundant-decls -Wshift-overflow=2 -Wswitch-default -Wuninitialized \
      -Wundef -Wvla
   endif
-  LDFLAGS = -mwindows
+  LDFLAGS = -mwindows -Wl,-Bstatic
   ifeq ($(DEBUG), no)
     CFLAGS += -O2 -Wdisabled-optimization
     LDFLAGS += -s
   endif
   ifeq ($(DEBUG), yes)
     CFLAGS += -O0 -ggdb3 -fvar-tracking
+    LDFLAGS += -lssp
   endif
   ARFLAGS = rcs
   RCFLAGS = -O coff
@@ -139,7 +141,6 @@ endif
 
 ifeq ($(MOD), static)
   CFLAGS += -DMTR_MOD_STATIC
-  LDFLAGS += -Wl,-Bstatic
 endif
 ifeq ($(MOD), plugin)
   CFLAGS += -DMTR_MOD_PLUGIN

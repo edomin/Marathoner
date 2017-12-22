@@ -4,7 +4,7 @@ SUBSYSTEM = script
 MODULE = squirrel
 MODULE_NAME = Script_Squirrel
 ifeq ($(MOD), plugin)
-  LIBS = -lsqstdlib_static -lsquirrel -lstdc++
+  LIBS = -lsqstdlib_static -lsquirrel.dll -Wl,-Bstatic -lstdc++
 else
   LIBS = -lsqstdlib_static -lsquirrel_static -lstdc++
 endif
