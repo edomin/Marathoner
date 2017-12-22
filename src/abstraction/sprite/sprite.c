@@ -456,8 +456,6 @@ MTR_DCLSPC int MTR_CALL MTR_SpriteGetFrameHeight(uint32_t sprNum, int clipNum)
 
     sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
 
-    MTR_LogWrite_i("Sprite index", 0, MTR_LMT_DEBUG, sprNum);
-
     if (clipNum > sprite->clipsCount)
         return 0;
 
