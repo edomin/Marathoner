@@ -518,7 +518,6 @@ MTR_DCLSPC int MTR_CALL MTR_FontGetStringWidth(uint32_t fontNum,
 
     ucs4Length = MTR_EncodingUtf8ToUcs4(string, &ucs4Text);
 
-    MTR_LogWrite_i("ucs4Length", 0, MTR_LMT_DEBUG, ucs4Length);
     for (i = 0; i < ucs4Length; i++) {
         glyphAtlas = ucs4Text[i] >> 8;
         if (glyphAtlas >= font->reservedAtlases)
@@ -528,7 +527,6 @@ MTR_DCLSPC int MTR_CALL MTR_FontGetStringWidth(uint32_t fontNum,
         sprNum = font->spriteAtlas[glyphAtlas];
 
         xOffset += MTR_SpriteGetFrameWidth(sprNum, symbolNum);
-        MTR_LogWrite_i("xOffset", 0, MTR_LMT_DEBUG, xOffset);
     }
 
     return xOffset;
