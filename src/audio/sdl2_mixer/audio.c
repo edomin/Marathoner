@@ -195,7 +195,7 @@ MTR_DCLSPC bool MTR_CALL MTR_AudioInit(uint32_t sndDmSize,
         Mix_Quit();
         return false;
     }
-    Mix_AllocateChannels(32);
+    Mix_AllocateChannels(64);
 
     mtrSoundKeeper = (mtrIndexkeeper_t *)MTR_IndexkeeperCreate(sndDmSize,
      sndReservedCount, sizeof(mtrSound_t));
@@ -227,6 +227,7 @@ MTR_DCLSPC bool MTR_CALL MTR_AudioInit(uint32_t sndDmSize,
 
     MTR_LogWrite("Audio manager initialized", 0, MTR_LMT_INFO);
 
+    mtrCurrentMusic = 0U;
     mtrAudioInited = true;
     return true;
 }
@@ -490,14 +491,48 @@ MTR_DCLSPC void MTR_CALL MTR_AudioChannelsFadeOutStop(int ms)
     Mix_FadeOutChannel(-1, ms);
 }
 
+/*fa MTR_AudioMusicPlaying yes */
+MTR_DCLSPC bool MTR_CALL MTR_AudioMusicPlaying(uint32_t musicNum)
+{
+    MTR_AUDIO_CHECK_IF_NOT_INITED(false);
+
+    if ((musicNum == 0) || (musicNum != mtrCurrentMusic))
+        return false;
+
+    return Mix_PlayingMusic();
+}
+
+/*fa MTR_AudioMusicFadingIn yes */
+MTR_DCLSPC bool MTR_CALL MTR_AudioMusicFadingIn()
+{
+    MTR_AUDIO_CHECK_IF_NOT_INITED(false);
+
+    if (Mix_FadingMusic() == MIX_FADING_IN)
+        return true;
+    else
+        return false;
+}
+
+/*fa MTR_AudioMusicFadingOut yes */
+MTR_DCLSPC bool MTR_CALL MTR_AudioMusicFadingOut()
+{
+    MTR_AUDIO_CHECK_IF_NOT_INITED(false);
+
+    if (Mix_FadingMusic() == MIX_FADING_OUT)
+        return true;
+    else
+        return false;
+}
+
 /*fa MTR_AudioMusicPlay yes */
-MTR_DCLSPC void MTR_CALL MTR_AudioMusicPlay(uint32_t musicNum)
+MTR_DCLSPC void MTR_CALL MTR_AudioMusicPlay(uint32_t musicNum, int loops)
 {
     mtrMusic_t *music;
     MTR_AUDIO_CHECK_IF_NOT_INITED();
 
     music = (mtrMusic_t *)(&((mtrMusic_t *)mtrMusicKeeper->data)[musicNum]);
-    Mix_PlayMusic(music->music, -1);
+    Mix_PlayMusic(music->music, loops);
+    mtrCurrentMusic = musicNum;
 }
 
 /*fa MTR_AudioMusicFadeInPlay yes */
@@ -508,6 +543,7 @@ MTR_DCLSPC void MTR_CALL MTR_AudioMusicFadeInPlay(uint32_t musicNum, int ms)
 
     music = (mtrMusic_t *)(&((mtrMusic_t *)mtrMusicKeeper->data)[musicNum]);
     Mix_FadeInMusic(music->music, -1, ms);
+    mtrCurrentMusic = musicNum;
 }
 
 /*fa MTR_AudioMusicPause yes */
@@ -535,6 +571,7 @@ MTR_DCLSPC void MTR_CALL MTR_AudioMusicStop(void)
 
     if (Mix_PlayingMusic() == 1)
         Mix_HaltMusic();
+    mtrCurrentMusic = 0U;
 }
 
 /*fa MTR_AudioMusicFadeOutStop yes */
@@ -544,6 +581,7 @@ MTR_DCLSPC void MTR_CALL MTR_AudioMusicFadeOutStop(int ms)
 
     if (Mix_PlayingMusic() == 1)
         Mix_FadeOutMusic(ms);
+    mtrCurrentMusic = 0U;
 }
 
 /*fa MTR_AudioMusicSetVolume yes */

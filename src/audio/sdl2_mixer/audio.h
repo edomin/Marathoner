@@ -28,11 +28,12 @@ typedef struct mtrMusic_t {
     char      *name;
 } mtrMusic_t;
 
-char mtrDefaultSoundName[] = "Unnamed_Sound";
-char mtrDefaultMusicName[] = "Unnamed_Music";
+char              mtrDefaultSoundName[] = "Unnamed_Sound";
+char              mtrDefaultMusicName[] = "Unnamed_Music";
 mtrIndexkeeper_t *mtrSoundKeeper;
 mtrIndexkeeper_t *mtrMusicKeeper;
-static bool mtrAudioInited = false;
+uint32_t          mtrCurrentMusic;
+static bool       mtrAudioInited = false;
 #define MTR_AUDIO_CHECK_IF_NOT_INITED(returnValue) \
     if (!mtrAudioInited)                           \
         return returnValue;
