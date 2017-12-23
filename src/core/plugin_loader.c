@@ -23,8 +23,9 @@ int CountPlugins(char *directoryName)
 
 int MTR_LoadAllPlugins(RequireEngineFuncsFunc RequireEngineFuncs)
 {
-    char   *fullPluginFileName;
-    uint8_t i;
+    char        *fullPluginFileName;
+    uint8_t      i;
+    unsigned int verHotfix;
 
     mtrPluginsFound = 0;
     /* Counting available plugins */
@@ -108,11 +109,15 @@ int MTR_LoadAllPlugins(RequireEngineFuncsFunc RequireEngineFuncs)
                   mtrPluginData[currentPlugin].report->moduleID);
                 MTR_LogWrite("Version:", 1, MTR_LMT_INFO);
                 MTR_LogWrite_i("Majon:", 2, MTR_LMT_INFO,
-                  (mtrPluginData[currentPlugin].report->version & 0xFF0000) >> 16);
+                  (mtrPluginData[currentPlugin].report->version & 0x00FF0000) >> 16);
                 MTR_LogWrite_i("Minor:", 2, MTR_LMT_INFO,
-                  (mtrPluginData[currentPlugin].report->version & 0x00FF00) >> 8);
+                  (mtrPluginData[currentPlugin].report->version & 0x0000FF00) >> 8);
                 MTR_LogWrite_i("Patch:", 2, MTR_LMT_INFO,
-                  mtrPluginData[currentPlugin].report->version & 0x0000FF);
+                  mtrPluginData[currentPlugin].report->version & 0x000000FF);
+                verHotfix = (mtrPluginData[currentPlugin].report->version & 0xFF000000) >> 24;
+                if (verHotfix != 0U) {
+                    MTR_LogWrite_i("Hotfix:", 2, MTR_LMT_INFO, verHotfix);
+                }
                 if (mtrPluginData[currentPlugin].report->prereqSubsystemsCount > 0)
                 {
                     MTR_LogWrite("Requirement subsystems:", 1, MTR_LMT_INFO);

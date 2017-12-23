@@ -19,6 +19,7 @@ int main(int argc, char **argv)
     unsigned int verMajor;
     unsigned int verMinor;
     unsigned int verPatch;
+    unsigned int verHotfix;
 
     char        *inputPath = argv[1];
     char        *outputPath = argv[2];
@@ -131,9 +132,10 @@ int main(int argc, char **argv)
             }
         }
 
-        verMajor = version >> 16;
-        verMinor = (version >> 8) - (verMajor << 8);
-        verPatch = version - (verMajor << 16) - (verMinor << 8);
+        verMajor = (version &  0x00FF0000) >> 16;
+        verMinor = (version &  0x0000FF00) >> 8;
+        verPatch = version &   0x000000FF;
+        verHotfix = (version & 0xFF000000) >> 24;
 
         outputFile = fopen(outputPath, "w");
         if (outputFile == NULL)
@@ -144,10 +146,10 @@ int main(int argc, char **argv)
 
         fprintf(outputFile, "%s\n", "#include <winver.h>");
         fprintf(outputFile, "%s\n", "VS_VERSION_INFO VERSIONINFO");
-        fprintf(outputFile, "FILEVERSION %u,%u,%u,0\n", verMajor, verMinor,
-         verPatch);
-        fprintf(outputFile, "PRODUCTVERSION %u,%u,%u,0\n", verMajor, verMinor,
-         verPatch);
+        fprintf(outputFile, "FILEVERSION %u,%u,%u,%u\n", verMajor, verMinor,
+         verPatch, verHotfix);
+        fprintf(outputFile, "PRODUCTVERSION %u,%u,%u,%u\n", verMajor, verMinor,
+         verPatch, verHotfix);
         fprintf(outputFile, "%s\n", "FILEFLAGSMASK  	VS_FFI_FILEFLAGSMASK");
         fprintf(outputFile, "%s\n", "FILEFLAGS      	VS_FF_PRERELEASE");
         fprintf(outputFile, "%s\n", "FILEOS         	VOS_NT_WINDOWS32");
@@ -168,8 +170,8 @@ int main(int argc, char **argv)
                     fprintf(outputFile, "VALUE \"FileDescription\", \"%s\"\n",
                      description);
                     fprintf(outputFile,
-                     "VALUE \"FileVersion\", \"%u,%u,%u,0\"\n", verMajor,
-                     verMinor, verPatch);
+                     "VALUE \"FileVersion\", \"%u,%u,%u,%u\"\n", verMajor,
+                     verMinor, verPatch, verHotfix);
                     fprintf(outputFile, "VALUE \"InternalName\", \"%s\"\n",
                      name);
                     fprintf(outputFile, "%s\n",
@@ -180,8 +182,8 @@ int main(int argc, char **argv)
                     fprintf(outputFile, "VALUE \"ProductName\", \"%s\"\n",
                      name);
                     fprintf(outputFile,
-                     "VALUE \"ProductVersion\", \"%u,%u,%u,0\"\n", verMajor,
-                     verMinor, verPatch);
+                     "VALUE \"ProductVersion\", \"%u,%u,%u,%u\"\n", verMajor,
+                     verMinor, verPatch, verHotfix);
                 fprintf(outputFile, "%s\n", "END");
             fprintf(outputFile, "%s\n", "END");
 
