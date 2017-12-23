@@ -14,9 +14,9 @@ fa.FunctionSupported(KeyboardPressed, "MTR_KeyboardPressed",
  KeyboardFunctionSupported);
 fa.FunctionSupported(KeyboardArrowsGetAxes, "MTR_KeyboardArrowsGetAxes",
  KeyboardFunctionSupported);
-fa.FunctionSupported(KeyboardArrowsGetHorAxis, "MTR_KeyboardArrowsGetHorAxis",
+fa.FunctionSupported(KeyboardArrowsGetAxis, "MTR_KeyboardArrowsGetAxis",
  KeyboardFunctionSupported);
-fa.FunctionSupported(KeyboardArrowsGetVerAxis, "MTR_KeyboardArrowsGetVerAxis",
- KeyboardFunctionSupported);
+fa.FunctionSupported(KeyboardArrowsGetDirection,
+ "MTR_KeyboardArrowsGetDirection", KeyboardFunctionSupported);
 fa.FunctionSupported(KeyboardInputChar, "MTR_KeyboardInputChar",
  KeyboardFunctionSupported);

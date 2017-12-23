@@ -19,3 +19,7 @@ fa.FunctionSupported(MouseGetDeltaY, "MTR_MouseGetDeltaY",
  MouseFunctionSupported);
 fa.FunctionSupported(MouseGetDeltaXY, "MTR_MouseGetDeltaXY",
  MouseFunctionSupported);
+fa.FunctionSupported(MouseCursorShow, "MTR_MouseCursorShow",
+ MouseFunctionSupported);
+fa.FunctionSupported(MouseCursorHide, "MTR_MouseCursorHide",
+ MouseFunctionSupported);

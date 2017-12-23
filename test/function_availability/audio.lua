@@ -32,6 +32,12 @@ fa.FunctionSupported(AudioChannelsStop, "MTR_AudioChannelsStop",
  AudioFunctionSupported);
 fa.FunctionSupported(AudioChannelsFadeOutStop, "MTR_AudioChannelsFadeOutStop",
  AudioFunctionSupported);
+fa.FunctionSupported(AudioMusicPlaying, "MTR_AudioMusicPlaying",
+ AudioFunctionSupported);
+fa.FunctionSupported(AudioMusicFadingIn, "MTR_AudioMusicFadingIn",
+ AudioFunctionSupported);
+fa.FunctionSupported(AudioMusicFadingOut, "MTR_AudioMusicFadingOut",
+ AudioFunctionSupported);
 fa.FunctionSupported(AudioMusicPlay, "MTR_AudioMusicPlay",
  AudioFunctionSupported);
 fa.FunctionSupported(AudioMusicFadeInPlay, "MTR_AudioMusicFadeInPlay",

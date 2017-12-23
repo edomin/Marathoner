@@ -27,6 +27,14 @@ while not quit do
         quit = true;
     end;
 
+    if KeyboardPress(KEY_1) then
+        MouseCursorShow();
+    end;
+
+    if KeyboardPress(KEY_2) then
+        MouseCursorHide();
+    end;
+
     if MousePressed(MOUSE_LEFT) then
         cube1_y = 32;
     end;

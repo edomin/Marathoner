@@ -132,7 +132,7 @@ while not quit do
         AudioChannelsFadeOutStop(200);
     end;
     if KeyboardPress(KEY_7) then
-        AudioMusicPlay(music);
+        AudioMusicPlay(music, -1);
     end;
     if KeyboardPress(KEY_8) then
         AudioMusicPause();
