@@ -1295,6 +1295,16 @@ int main(int argc, char** argv)
             nk_label_colored(ctx, "Enabled modules:", NK_TEXT_LEFT,
              headerColor);
 
+            nk_layout_row_static(ctx, 16, 128, 2);
+            if (nk_button_label(ctx, "Enable all")) {
+                for (i = 0; i < mtrPluginsFound; i++)
+                    lchrPluginEnabled[i] = true;
+            }
+            if (nk_button_label(ctx, "Disable all")) {
+                for (i = 0; i < mtrPluginsFound; i++)
+                    lchrPluginEnabled[i] = false;
+            }
+
             nk_layout_row_dynamic(ctx, mtrPluginsFound * 16, 2);
 
             if (nk_group_begin(ctx, "left", NK_WINDOW_NO_SCROLLBAR)) {

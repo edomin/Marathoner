@@ -3,7 +3,7 @@
 
 #define MTR_VERSION_MARATHONER                      0x000301U /* inc patch */
 
-#define MTR_VERSION_LAUNCHER                        0x000002U /* not incremented */
+#define MTR_VERSION_LAUNCHER                        0x000100U /* inc minor */
 
 #define MTR_VERSION_SCREEN_SDL2                     0x000301U /* inc patch */
 #define MTR_VERSION_SCREEN_SDL2_LUA                 0x000200U /* not incremented */
