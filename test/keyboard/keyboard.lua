@@ -10,13 +10,14 @@ PrimitiveInit();
 KeyboardInit();
 TimerInit();
 TextureInit(IKDM_SMALL, 32);
+SpriteInit(IKDM_SMALL, 32);
 TtfInit(IKDM_SMALL, 32);
 FontInit(IKDM_SMALL, 32);
-local mbf_big_00 = TextureLoad("test/media/mbf_big_00.png");
-local mbf_big_04 = TextureLoad("test/media/mbf_big_04.png");
-local mbf = FontCreateMbf("MBF font", 5, 10, 12);
-FontAddMbfTextureTable(mbf, mbf_big_00, 0);
-FontAddMbfTextureTable(mbf, mbf_big_04, 4);
+local mbf_big_00 = SpriteLoad("test/media/mbf_big_00.png", 10, 12, 16, 16, 256, 0, 0);
+local mbf_big_04 = SpriteLoad("test/media/mbf_big_04.png", 10, 12, 16, 16, 256, 0, 0);
+local mbf = FontCreate("MBF font", 5);
+FontAddAtlas(mbf, mbf_big_00, 0);
+FontAddAtlas(mbf, mbf_big_04, 4);
 
 local cube1 = {};
 cube1.x = 64;
@@ -35,6 +36,7 @@ cube5.x = 320;
 cube5.y = 64;
 local hsign;
 local vsign;
+local direction;
 
 while not quit do
     TimerStart();
@@ -78,8 +80,8 @@ while not quit do
     if KeyboardRelease(KEY_RIGHT) then
         cube3.x = 224;
     end;
-    cube4.x = 256 + KeyboardArrowsGetHorAxis(KEY_LEFT, KEY_RIGHT) * 32;
-    cube4.y = 64 + KeyboardArrowsGetVerAxis(KEY_UP, KEY_DOWN) * 32;
+    cube4.x = 256 + KeyboardArrowsGetAxis(KEY_LEFT, KEY_RIGHT) * 32;
+    cube4.y = 64 + KeyboardArrowsGetAxis(KEY_UP, KEY_DOWN) * 32;
     hsign, vsign = KeyboardArrowsGetAxes(KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT);
     cube5.x = 320 + hsign * 32;
     cube5.y = 64 + vsign * 32;
@@ -165,7 +167,12 @@ while not quit do
     if char ~= nil then
         lastChar = char;
     end;
-    FontDrawMbfString_f(mbf, 64, 128, lastChar);
+    FontDrawString_f(mbf, 64, 128, lastChar);
+
+    direction = KeyboardArrowsGetDirection(KEY_UP, KEY_DOWN, KEY_LEFT,
+     KEY_RIGHT);
+
+    FontDrawString_f(mbf, 64, 140, "Key arrows direction: " .. direction);
 
     ScreenFlip();
 

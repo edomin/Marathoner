@@ -176,48 +176,23 @@ MTR_DCLSPC void MTR_CALL MTR_KeyboardArrowsGetAxes(int keyUp, int keyDown,
     }
 }
 
-/*fa MTR_KeyboardArrowsGetHorAxis yes */
-MTR_DCLSPC int MTR_CALL MTR_KeyboardArrowsGetHorAxis(int keyLeft, int keyRight)
+/*fa MTR_KeyboardArrowsGetAxis yes */
+MTR_DCLSPC int MTR_CALL MTR_KeyboardArrowsGetAxis(int keyMin, int keyMax)
 {
     MTR_KEYBOARD_CHECK_IF_NOT_INITED(0);
-    bool leftPressed;
-    bool rightPressed;
+    bool minPressed;
+    bool maxPressed;
 
-    leftPressed = MTR_KeyboardPressed(keyLeft);
-    rightPressed = MTR_KeyboardPressed(keyRight);
+    minPressed = MTR_KeyboardPressed(keyMin);
+    maxPressed = MTR_KeyboardPressed(keyMax);
 
-    if (leftPressed) {
-        if (rightPressed)
+    if (minPressed) {
+        if (maxPressed)
             return 0;
         else
             return -1;
     } else {
-        if (rightPressed)
-            return 1;
-        else
-            return 0;
-    }
-
-    return 0;
-}
-
-/*fa MTR_KeyboardArrowsGetVerAxis yes */
-MTR_DCLSPC int MTR_CALL MTR_KeyboardArrowsGetVerAxis(int keyUp, int keyDown)
-{
-    MTR_KEYBOARD_CHECK_IF_NOT_INITED(0);
-    bool upPressed;
-    bool downPressed;
-
-    upPressed = MTR_KeyboardPressed(keyUp);
-    downPressed = MTR_KeyboardPressed(keyDown);
-
-    if (upPressed) {
-        if (downPressed)
-            return 0;
-        else
-            return -1;
-    } else {
-        if (downPressed)
+        if (maxPressed)
             return 1;
         else
             return 0;

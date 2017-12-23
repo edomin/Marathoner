@@ -35,10 +35,8 @@ MTR_SCRIPT_FUNC(MTR_SF_KeyboardArrowsGetAxes)
 }
 #endif
 
-MTR_SCRIPT_FUNC_I_I2(MTR_SF_KeyboardArrowsGetHorAxis,
- MTR_KeyboardArrowsGetHorAxis)
-MTR_SCRIPT_FUNC_I_I2(MTR_SF_KeyboardArrowsGetVerAxis,
- MTR_KeyboardArrowsGetVerAxis)
+MTR_SCRIPT_FUNC_I_I2(MTR_SF_KeyboardArrowsGetAxis,
+ MTR_KeyboardArrowsGetAxis)
 MTR_SCRIPT_FUNC_I_I4(MTR_SF_KeyboardArrowsGetDirection,
  MTR_KeyboardArrowsGetDirection)
 
@@ -70,8 +68,7 @@ void MTR_ScriptsRegisterAll(void)
     #ifdef lua_h
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, KeyboardArrowsGetAxes);
     #endif
-    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, KeyboardArrowsGetHorAxis);
-    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, KeyboardArrowsGetVerAxis);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, KeyboardArrowsGetAxis);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, KeyboardArrowsGetDirection);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, KeyboardInputChar);
 
