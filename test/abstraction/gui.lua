@@ -46,6 +46,32 @@ GuiInit(IKDM_SMALL, 32, IKDM_SMALL, 32, mbf);
 local helicopter = TextureLoad("test/media/helicopter.png");
 local guiCopter = GuiAddImage(helicopter, 0, 0, 96, 32);
 
+local windowTitle = "Intest Window";
+local guiButtonText = "B_Text";
+local guiButtonLabel = "B_Label";
+local guiButtonSymbolLabel = "Sym";
+local guiButtonImageLabel = "Img";
+local guiCheckLabel = "Chk_1";
+local guiCheckText = "Chk_2";
+local guiSelectableLabel = "S_1";
+local guiSelectableText = "S_2";
+local guiSelectableImageLabel = "S_3";
+local guiSelectableImageText = "S_4";
+local guiTreeTabLabels = "Labels";
+local guiLabel1 = "Label_1";
+local guiLabel2 = "Label_2";
+local guiLabel3 = "Label_3";
+local guiLabel4 = "Label_4";
+local guiLabel5 = "Label_5";
+local guiTreeTabLabelsWrapped = "Labels Wrapped";
+local guiLabelWrapped1 = "First very very very very very long label";
+local guiLabelWrapped2 = "Second very very very very very long label";
+local guiLabelWrapped3 = "Third very very very very very long label";
+local guiLabelWrapped4 = "Fourth very very very very very long label";
+local guiLabelWrapped5 = "Fifth very very very very very long label";
+local guiGroup1 = "Group_1";
+local guiGroup2 = "Group_2";
+
 while not quit do
     TimerStart();
     KeyboardRefresh();
@@ -54,12 +80,12 @@ while not quit do
         quit = true;
     end;
 
-    if GuiBegin("Intest Window", 100, 100, 320, 240, windowFlags) then
+    if GuiBegin(windowTitle, 100, 100, 320, 240, windowFlags) then
         GuiLayoutRowDynamic(30, 2);
-        if GuiButtonText("B_Text", 6) then
+        if GuiButtonText(guiButtonText, 6) then
             ShowSimpleMessageBox(DMT_INFO, "info", "GuiButtonText pressed");
         end;
-        if GuiButtonLabel("B_Label") then
+        if GuiButtonLabel(guiButtonLabel) then
             ShowSimpleMessageBox(DMT_INFO, "info", "GuiButtonLabel pressed");
         end;
 
@@ -83,12 +109,12 @@ while not quit do
         if GuiButtonSymbol(GUI_SYMBOL_X) then
             ShowSimpleMessageBox(DMT_INFO, "info", "GuiButtonSymbol pressed");
         end;
-        if GuiButtonSymbolLabel(GUI_SYMBOL_CIRCLE_OUTLINE, "Sym",
+        if GuiButtonSymbolLabel(GUI_SYMBOL_CIRCLE_OUTLINE, guiButtonSymbolLabel,
          buttonAlignFlags) then
             ShowSimpleMessageBox(DMT_INFO, "info",
              "GuiButtonSymbolLabel pressed");
         end;
-        if GuiButtonSymbolText(GUI_SYMBOL_TRIANGLE_RIGHT, "Sym", 3,
+        if GuiButtonSymbolText(GUI_SYMBOL_TRIANGLE_RIGHT, guiButtonSymbolLabel, 3,
          buttonAlignFlags) then
             ShowSimpleMessageBox(DMT_INFO, "info",
              "GuiButtonSymbolText pressed");
@@ -97,28 +123,28 @@ while not quit do
         if GuiButtonImage(guiCopter) then
             ShowSimpleMessageBox(DMT_INFO, "info", "GuiButtonImage pressed");
         end;
-        if GuiButtonImageLabel(guiCopter, "Img", buttonAlignFlags) then
+        if GuiButtonImageLabel(guiCopter, guiButtonImageLabel, buttonAlignFlags) then
             ShowSimpleMessageBox(DMT_INFO, "info",
              "GuiButtonImageLabel pressed");
         end;
-        if GuiButtonImageText(guiCopter, "Img", 3, buttonAlignFlags) then
+        if GuiButtonImageText(guiCopter, guiButtonImageLabel, 3, buttonAlignFlags) then
             ShowSimpleMessageBox(DMT_INFO, "info",
              "GuiButtonImageText pressed");
         end;
 
         GuiLayoutRowDynamic(30, 4);
-        check_1 = GuiCheckLabel("Chk_1", check_1);
+        check_1 = GuiCheckLabel(guiCheckLabel, check_1);
         GuiSpacing(2);
-        check_2 = GuiCheckText("Chk_2", 5, check_2);
+        check_2 = GuiCheckText(guiCheckText, 5, check_2);
 
         GuiLayoutRowDynamic(30, 4);
-        selectable_1 = GuiSelectableLabel("S_1", buttonAlignFlags,
+        selectable_1 = GuiSelectableLabel(guiSelectableLabel, buttonAlignFlags,
          selectable_1);
-        selectable_2 = GuiSelectableText("S_2", 3, buttonAlignFlags,
+        selectable_2 = GuiSelectableText(guiSelectableText, 3, buttonAlignFlags,
          selectable_2);
-        selectable_3 = GuiSelectableImageLabel(guiCopter, "S_3",
+        selectable_3 = GuiSelectableImageLabel(guiCopter, guiSelectableImageLabel,
          buttonAlignFlags, selectable_3);
-        selectable_4 = GuiSelectableImageText(guiCopter, "S_4", 3,
+        selectable_4 = GuiSelectableImageText(guiCopter, guiSelectableImageText, 3,
          buttonAlignFlags, selectable_4);
 
         GuiLayoutRowDynamic(30, 1);
@@ -126,42 +152,42 @@ while not quit do
         GuiEditInteger(sbInt);
         GuiEditFloat(sbFloat);
 
-        if GuiTreeTabBegin("Labels", false) then
+        if GuiTreeTabBegin(guiTreeTabLabels, false) then
             GuiLayoutRowDynamic(30, 1);
-            GuiLabel("Label_1", labelAlignFlags);
-            GuiLabelColored_c("Label_2", labelAlignFlags, 0xFF0000);
-            GuiLabelColored_ca("Label_3", labelAlignFlags, 0x00FF00FF);
-            GuiLabelColored_rgb("Label_4", labelAlignFlags, 0x00, 0x00, 0xFF);
-            GuiLabelColored_rgba("Label_5", labelAlignFlags, 0xFF, 0xFF, 0x00,
+            GuiLabel(guiLabel1, labelAlignFlags);
+            GuiLabelColored_c(guiLabel2, labelAlignFlags, 0xFF0000);
+            GuiLabelColored_ca(guiLabel3, labelAlignFlags, 0x00FF00FF);
+            GuiLabelColored_rgb(guiLabel4, labelAlignFlags, 0x00, 0x00, 0xFF);
+            GuiLabelColored_rgba(guiLabel5, labelAlignFlags, 0xFF, 0xFF, 0x00,
              0xFF);
             GuiTreeTabEnd();
         end;
-        treeTabMax2 = GuiTreeTabBegin("Labels Wrapped", treeTabMax2);
+        treeTabMax2 = GuiTreeTabBegin(guiTreeTabLabelsWrapped, treeTabMax2);
         if treeTabMax2 then
             GuiLayoutRowStatic(40, 1, 200);
-            GuiLabelWrap("First very very very very very long label",
+            GuiLabelWrap(guiLabelWrapped1,
              labelAlignFlags);
-            GuiLabelColoredWrap_c("Second very very very very very long label",
+            GuiLabelColoredWrap_c(guiLabelWrapped2,
              labelAlignFlags, 0xFF0000);
-            GuiLabelColoredWrap_ca("Third very very very very very long label",
+            GuiLabelColoredWrap_ca(guiLabelWrapped3,
              labelAlignFlags, 0x00FF00FF);
             GuiLabelColoredWrap_rgb(
-             "Fourth very very very very very long label", labelAlignFlags,
+             guiLabelWrapped4, labelAlignFlags,
              0x00, 0x00, 0xFF);
             GuiLabelColoredWrap_rgba(
-             "Fifth very very very very very long label", labelAlignFlags,
+             guiLabelWrapped5, labelAlignFlags,
              0xFF, 0xFF, 0x00, 0xFF);
             GuiTreeTabEnd();
         end;
 
         GuiLayoutRowDynamic(128, 2);
-        if GuiGroupBegin("Group_1", groupFlags) then
+        if GuiGroupBegin(guiGroup1, groupFlags) then
             GuiEditText(sbText);
             GuiEditInteger(sbInt);
             GuiEditFloat(sbFloat);
             GuiGroupEnd();
         end;
-        if GuiGroupBegin("Group_2", groupFlags) then
+        if GuiGroupBegin(guiGroup2, groupFlags) then
             GuiEditText(sbText);
             GuiEditInteger(sbInt);
             GuiEditFloat(sbFloat);

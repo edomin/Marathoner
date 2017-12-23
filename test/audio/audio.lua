@@ -164,6 +164,15 @@ while not quit do
 
     PrimitiveFill_c(0x000000);
 
+    if AudioMusicPlaying(music) then
+        PrimitiveRectangleFilled_c_f(32, 32, 64, 64, 0xFF0000);
+    end;
+    if AudioMusicFadingIn() then
+        PrimitiveRectangleFilled_c_f(32, 32, 64, 64, 0x00FF00);
+    end;
+    if AudioMusicFadingOut() then
+        PrimitiveRectangleFilled_c_f(32, 32, 64, 64, 0x0000FF);
+    end;
 
     ScreenFlip();
     TimerDelayForFPS(30);
