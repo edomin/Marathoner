@@ -1,12 +1,10 @@
 #ifndef MTR_VERSION_H
 #define MTR_VERSION_H
 
-#define MTR_VERSION_MARATHONER                      0x000300U /* not incremented */
 
 #define MTR_VERSION_LAUNCHER                        0x000002U /* not incremented */
 
 
-#define MTR_VERSION_GAME_CONTROLLER_SDL2            0x000300U /* not incremented */
 #define MTR_VERSION_GAME_CONTROLLER_SDL2_LUA        0x000200U /* not incremented */
 #define MTR_VERSION_GAME_CONTROLLER_SDL2_SQUIRREL   0x000100U /* not incremented */
 #define MTR_VERSION_GAME_CONTROLLER_SDL2_DUKTAPE    0x000100U /* not incremented */
@@ -17,10 +15,6 @@
 #define MTR_VERSION_JSON_CJSON_DUKTAPE              0x000100U /* not incremented */
 
 
-#define MTR_VERSION_MOUSE_SDL2                      0x000200U /* not incremented */
-#define MTR_VERSION_MOUSE_SDL2_LUA                  0x000200U /* not incremented */
-#define MTR_VERSION_MOUSE_SDL2_SQUIRREL             0x000100U /* not incremented */
-#define MTR_VERSION_MOUSE_SDL2_DUKTAPE              0x000100U /* not incremented */
 
 #define MTR_VERSION_PNG_LIBPNG                      0x000000U /* not incremented */
 #define MTR_VERSION_PNG_LIBPNG_LUA                  0x000000U /* not incremented */
@@ -102,15 +96,21 @@
 #define MTR_VERSION_ABSTRACTION_GUI_LUA             0x000100U /* not incremented */
 #define MTR_VERSION_ABSTRACTION_GUI_SQUIRREL        0x000100U /* not incremented */
 #define MTR_VERSION_ABSTRACTION_GUI_DUKTAPE         0x000100U /* not incremented */
+#define MTR_VERSION_MARATHONER                          0x000301U /* inc patch */
 #define MTR_VERSION_AUDIO_SDL2_MIXER                    0x000300U /* inc minor */
 #define MTR_VERSION_AUDIO_SDL2_MIXER_LUA                0x000201U /* inc patch */
 #define MTR_VERSION_AUDIO_SDL2_MIXER_SQUIRREL           0x000101U /* inc patch */
 #define MTR_VERSION_AUDIO_SDL2_MIXER_DUKTAPE            0x000101U /* inc patch */
 
+#define MTR_VERSION_GAME_CONTROLLER_SDL2                0x000301U /* inc patch */
 #define MTR_VERSION_KEYBOARD_SDL2                       0x000300U /* inc minor */
 #define MTR_VERSION_KEYBOARD_SDL2_LUA                   0x000201U /* inc patch */
 #define MTR_VERSION_KEYBOARD_SDL2_SQUIRREL              0x000101U /* inc patch */
 #define MTR_VERSION_KEYBOARD_SDL2_DUKTAPE               0x000101U /* inc patch */
+#define MTR_VERSION_MOUSE_SDL2                          0x000300U /* inc minor */
+#define MTR_VERSION_MOUSE_SDL2_LUA                      0x000201U /* inc patch */
+#define MTR_VERSION_MOUSE_SDL2_SQUIRREL                 0x000101U /* inc patch */
+#define MTR_VERSION_MOUSE_SDL2_DUKTAPE                  0x000101U /* inc patch */
 #define MTR_VERSION_SCREEN_SDL2                         0x000301U /* inc patch */
 #define MTR_VERSION_TEXTURE_SDL2_GPU                    0x000301U /* inc patch */
 #endif
