@@ -53,6 +53,14 @@ MTR_SCRIPT_FUNC_V_U32t1F2(MTR_SF_TextureBlit_f, MTR_TextureBlit_f);
 MTR_SCRIPT_FUNC_V_U32t1F4(MTR_SF_TextureBlitSized_f, MTR_TextureBlitSized_f);
 MTR_SCRIPT_FUNC_V_U32t1F4(MTR_SF_TextureBlitScaled_f, MTR_TextureBlitScaled_f);
 MTR_SCRIPT_FUNC_V_U32t1F5(MTR_SF_TextureBlitAngled_f, MTR_TextureBlitAngled_f);
+MTR_SCRIPT_FUNC_V_U32t1F4(MTR_SF_TextureBlitHorSheared_f,
+ MTR_TextureBlitHorSheared_f);
+MTR_SCRIPT_FUNC_V_U32t1F4(MTR_SF_TextureBlitHorShearedByAngle_f,
+ MTR_TextureBlitHorShearedByAngle_f);
+MTR_SCRIPT_FUNC_V_U32t1F4(MTR_SF_TextureBlitVerSheared_f,
+ MTR_TextureBlitVerSheared_f);
+MTR_SCRIPT_FUNC_V_U32t1F4(MTR_SF_TextureBlitVerShearedByAngle_f,
+ MTR_TextureBlitVerShearedByAngle_f);
 MTR_SCRIPT_FUNC_V_U32t1F2I1(MTR_SF_TextureBlitFlipped_f,
  MTR_TextureBlitFlipped_f);
 MTR_SCRIPT_FUNC_V_U32t1F7I1(MTR_SF_TextureBlitGeneral_f,
@@ -105,6 +113,12 @@ void MTR_ScriptsRegisterAll(void)
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureBlitSized_f);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureBlitScaled_f);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureBlitAngled_f);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureBlitHorSheared_f);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE,
+     TextureBlitHorShearedByAngle_f);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureBlitVerSheared_f);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE,
+     TextureBlitVerShearedByAngle_f);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureBlitFlipped_f);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureBlitGeneral_f);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TextureBlitRegion_f);

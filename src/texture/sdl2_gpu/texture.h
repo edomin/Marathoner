@@ -42,6 +42,10 @@ char                    mtrDefaultTextureName[] = "Unnamed_Texture";
 MTR_EXTERN mtrScreen_t *mtrScreen; /* this will imported from screen plugin */
 mtrIndexkeeper_t       *mtrTextureKeeper;
 static bool             mtrTextureInited = false;
+float                   blitShearedValues[24];
+
+#define MTR_DEGREE_F 0.017453292519943295769236907684886f
+
 #define MTR_TEXTURE_CHECK_IF_NOT_INITED(returnValue) \
     if (!mtrTextureInited)                           \
         return returnValue;

@@ -30,6 +30,14 @@ MTR_FUNC(void, MTR_TextureBlitSized_f, uint32_t, float, float, float, float);
 MTR_FUNC(void, MTR_TextureBlitScaled_f, uint32_t, float, float, float, float);
 MTR_FUNC(void, MTR_TextureBlitAngled_f, uint32_t, float, float, float, float,
  float);
+MTR_FUNC(void, MTR_TextureBlitHorSheared_f, uint32_t, float, float, float,
+ float);
+MTR_FUNC(void, MTR_TextureBlitHorShearedByAngle_f, uint32_t, float, float,
+ float, float);
+MTR_FUNC(void, MTR_TextureBlitVerSheared_f, uint32_t, float, float, float,
+ float);
+MTR_FUNC(void, MTR_TextureBlitVerShearedByAngle_f, uint32_t, float, float,
+ float, float);
 MTR_FUNC(void, MTR_TextureBlitFlipped_f, uint32_t, float, float, int);
 MTR_FUNC(void, MTR_TextureBlitGeneral_f, uint32_t, float, float, float, float,
  float, float, float, int);
