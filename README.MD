@@ -194,6 +194,7 @@ I think I will able to do tasks of the plan till version 1.0.0 alone and then I 
 Domain):
   * "test/media/helicopter.png"
   * "test/media/helicopter_anim.png"
+  * "test/media/castleFloor.png"
   * "test/media/mbf_big_00.png"
   * "test/media/mbf_big_04.png"
   * "test/media/bu-a-ninja-and-shields.ogg"
