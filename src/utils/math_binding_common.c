@@ -16,6 +16,10 @@ MTR_SCRIPT_FUNC_F_F1(MTR_SF_Tan_f, MTR_Tan_f)
 MTR_SCRIPT_FUNC_D_D1(MTR_SF_Tan_d, MTR_Tan_d)
 MTR_SCRIPT_FUNC_F_F1(MTR_SF_TanFast_f, MTR_TanFast_f)
 MTR_SCRIPT_FUNC_D_D1(MTR_SF_TanFast_d, MTR_TanFast_d)
+MTR_SCRIPT_FUNC_F_F1(MTR_SF_Cot_f, MTR_Tan_f)
+MTR_SCRIPT_FUNC_D_D1(MTR_SF_Cot_d, MTR_Tan_d)
+MTR_SCRIPT_FUNC_F_F1(MTR_SF_CotFast_f, MTR_TanFast_f)
+MTR_SCRIPT_FUNC_D_D1(MTR_SF_CotFast_d, MTR_TanFast_d)
 MTR_SCRIPT_FUNC_F_F1(MTR_SF_Asin_f, MTR_Asin_f)
 MTR_SCRIPT_FUNC_D_D1(MTR_SF_Asin_d, MTR_Asin_d)
 MTR_SCRIPT_FUNC_F_F1(MTR_SF_AsinFast_f, MTR_AsinFast_f)
@@ -28,6 +32,10 @@ MTR_SCRIPT_FUNC_F_F1(MTR_SF_Atan_f, MTR_Atan_f)
 MTR_SCRIPT_FUNC_D_D1(MTR_SF_Atan_d, MTR_Atan_d)
 MTR_SCRIPT_FUNC_F_F1(MTR_SF_AtanFast_f, MTR_AtanFast_f)
 MTR_SCRIPT_FUNC_D_D1(MTR_SF_AtanFast_d, MTR_AtanFast_d)
+MTR_SCRIPT_FUNC_F_F1(MTR_SF_Acot_f, MTR_Atan_f)
+MTR_SCRIPT_FUNC_D_D1(MTR_SF_Acot_d, MTR_Atan_d)
+MTR_SCRIPT_FUNC_F_F1(MTR_SF_AcotFast_f, MTR_AtanFast_f)
+MTR_SCRIPT_FUNC_D_D1(MTR_SF_AcotFast_d, MTR_AtanFast_d)
 MTR_SCRIPT_FUNC_F_F1(MTR_SF_Loge_f, MTR_Loge_f)
 MTR_SCRIPT_FUNC_D_D1(MTR_SF_Loge_d, MTR_Loge_d)
 MTR_SCRIPT_FUNC_F_F1(MTR_SF_LogeFast_f, MTR_LogeFast_f)
@@ -198,6 +206,10 @@ void MTR_ScriptsRegisterAll(void)
     MTR_FIND_AND_ADD_FUNCTION("Utils_math", Tan_d);
     MTR_FIND_AND_ADD_FUNCTION("Utils_math", TanFast_f);
     MTR_FIND_AND_ADD_FUNCTION("Utils_math", TanFast_d);
+    MTR_FIND_AND_ADD_FUNCTION("Utils_math", Cot_f);
+    MTR_FIND_AND_ADD_FUNCTION("Utils_math", Cot_d);
+    MTR_FIND_AND_ADD_FUNCTION("Utils_math", CotFast_f);
+    MTR_FIND_AND_ADD_FUNCTION("Utils_math", CotFast_d);
     MTR_FIND_AND_ADD_FUNCTION("Utils_math", Asin_f);
     MTR_FIND_AND_ADD_FUNCTION("Utils_math", Asin_d);
     MTR_FIND_AND_ADD_FUNCTION("Utils_math", AsinFast_f);
@@ -210,6 +222,10 @@ void MTR_ScriptsRegisterAll(void)
     MTR_FIND_AND_ADD_FUNCTION("Utils_math", Atan_d);
     MTR_FIND_AND_ADD_FUNCTION("Utils_math", AtanFast_f);
     MTR_FIND_AND_ADD_FUNCTION("Utils_math", AtanFast_d);
+    MTR_FIND_AND_ADD_FUNCTION("Utils_math", Acot_f);
+    MTR_FIND_AND_ADD_FUNCTION("Utils_math", Acot_d);
+    MTR_FIND_AND_ADD_FUNCTION("Utils_math", AcotFast_f);
+    MTR_FIND_AND_ADD_FUNCTION("Utils_math", AcotFast_d);
     MTR_FIND_AND_ADD_FUNCTION("Utils_math", Loge_f);
     MTR_FIND_AND_ADD_FUNCTION("Utils_math", Loge_d);
     MTR_FIND_AND_ADD_FUNCTION("Utils_math", LogeFast_f);

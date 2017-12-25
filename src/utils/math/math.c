@@ -172,6 +172,30 @@ MTR_DCLSPC double MTR_CALL MTR_TanFast_d(double num)
     return tan(num * MTR_DEGREE_D);
 }
 
+/*fa MTR_Cot_f yes */
+MTR_DCLSPC float MTR_CALL MTR_Cot_f(float num)
+{
+    return 1.0f / tanf(num * MTR_DEGREE_F);
+}
+
+/*fa MTR_Cot_d yes */
+MTR_DCLSPC double MTR_CALL MTR_Cot_d(double num)
+{
+    return 1.0 / tan(num * MTR_DEGREE_D);
+}
+
+/*fa MTR_CotFast_f yes */
+MTR_DCLSPC float MTR_CALL MTR_CotFast_f(float num)
+{
+    return 1.0f / tanf(num * MTR_DEGREE_F);
+}
+
+/*fa MTR_CotFast_d yes */
+MTR_DCLSPC double MTR_CALL MTR_CotFast_d(double num)
+{
+    return 1.0 / tan(num * MTR_DEGREE_D);
+}
+
 /*fa MTR_Asin_f yes */
 MTR_DCLSPC float MTR_CALL MTR_Asin_f(float num)
 {
@@ -242,6 +266,30 @@ MTR_DCLSPC float MTR_CALL MTR_AtanFast_f(float num)
 MTR_DCLSPC double MTR_CALL MTR_AtanFast_d(double num)
 {
     return atan(num) * MTR_RADIAN_D;
+}
+
+/*fa MTR_Acot_f yes */
+MTR_DCLSPC float MTR_CALL MTR_Acot_f(float num)
+{
+    return atanf(1 / num) * MTR_RADIAN_F;
+}
+
+/*fa MTR_Acot_d yes */
+MTR_DCLSPC double MTR_CALL MTR_Acot_d(double num)
+{
+    return atan(1 / num) * MTR_RADIAN_D;
+}
+
+/*fa MTR_AcotFast_f yes */
+MTR_DCLSPC float MTR_CALL MTR_AcotFast_f(float num)
+{
+    return atanf(1 / num) * MTR_RADIAN_F;
+}
+
+/*fa MTR_AcotFast_d yes */
+MTR_DCLSPC double MTR_CALL MTR_AcotFast_d(double num)
+{
+    return atan(1 / num) * MTR_RADIAN_D;
 }
 
 /*fa MTR_Loge_f yes */

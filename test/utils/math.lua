@@ -19,6 +19,12 @@ FileWriteLineFast("test/output.txt", "TanFast_f(30): " .. TanFast_f(30),
  FM_APPEND);
 FileWriteLineFast("test/output.txt", "TanFast_d(30): " .. TanFast_d(30),
  FM_APPEND);
+FileWriteLineFast("test/output.txt", "Cot_f(30): " .. Cot_f(30), FM_APPEND);
+FileWriteLineFast("test/output.txt", "Cot_d(30): " .. Cot_d(30), FM_APPEND);
+FileWriteLineFast("test/output.txt", "CotFast_f(30): " .. CotFast_f(30),
+ FM_APPEND);
+FileWriteLineFast("test/output.txt", "CotFast_d(30): " .. CotFast_d(30),
+ FM_APPEND);
 FileWriteLineFast("test/output.txt", "Asin_f(0.5): " .. Asin_f(0.5), FM_APPEND);
 FileWriteLineFast("test/output.txt", "Asin_d(0.5): " .. Asin_d(0.5), FM_APPEND);
 FileWriteLineFast("test/output.txt", "AsinFast_f(0.5): " .. AsinFast_f(0.5),
@@ -36,6 +42,12 @@ FileWriteLineFast("test/output.txt", "Atan_d(0.5): " .. Atan_d(0.5), FM_APPEND);
 FileWriteLineFast("test/output.txt", "AtanFast_f(0.5): " .. AtanFast_f(0.5),
  FM_APPEND);
 FileWriteLineFast("test/output.txt", "AtanFast_d(0.5): " .. AtanFast_d(0.5),
+ FM_APPEND);
+FileWriteLineFast("test/output.txt", "Acot_f(0.5): " .. Acot_f(0.5), FM_APPEND);
+FileWriteLineFast("test/output.txt", "Acot_d(0.5): " .. Acot_d(0.5), FM_APPEND);
+FileWriteLineFast("test/output.txt", "AcotFast_f(0.5): " .. AcotFast_f(0.5),
+ FM_APPEND);
+FileWriteLineFast("test/output.txt", "AcotFast_d(0.5): " .. AcotFast_d(0.5),
  FM_APPEND);
 FileWriteLineFast("test/output.txt", "Loge_f(2): " .. Loge_f(2), FM_APPEND);
 FileWriteLineFast("test/output.txt", "Loge_d(2): " .. Loge_d(2), FM_APPEND);
