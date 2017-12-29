@@ -94,6 +94,10 @@ ABSTRACTION_SPRITE = abstraction/sprite
 ABSTRACTION_SPRITE_LUA = abstraction/sprite_lua
 ABSTRACTION_SPRITE_SQUIRREL = abstraction/sprite_squirrel
 ABSTRACTION_SPRITE_DUKTAPE = abstraction/sprite_duktape
+ABSTRACTION_ANIMATED_SPRITE = abstraction/animated_sprite
+ABSTRACTION_ANIMATED_SPRITE_LUA = abstraction/animated_sprite_lua
+ABSTRACTION_ANIMATED_SPRITE_SQUIRREL = abstraction/animated_sprite_squirrel
+ABSTRACTION_ANIMATED_SPRITE_DUKTAPE = abstraction/animated_sprite_duktape
 ABSTRACTION_FONT = abstraction/font
 ABSTRACTION_FONT_LUA = abstraction/font_lua
 ABSTRACTION_FONT_SQUIRREL = abstraction/font_squirrel
@@ -207,6 +211,12 @@ ifeq ($(MOD), plugin)
 	make -j$(CORES) -C src/$(ABSTRACTION_SPRITE_LUA) PREFIX=$(PREFIX)
 	make -j$(CORES) -C src/$(ABSTRACTION_SPRITE_SQUIRREL) PREFIX=$(PREFIX)
 	make -j$(CORES) -C src/$(ABSTRACTION_SPRITE_DUKTAPE) PREFIX=$(PREFIX)
+	make -j$(CORES) -C src/$(ABSTRACTION_ANIMATED_SPRITE) PREFIX=$(PREFIX)
+	make -j$(CORES) -C src/$(ABSTRACTION_ANIMATED_SPRITE_LUA) PREFIX=$(PREFIX)
+	make -j$(CORES) -C src/$(ABSTRACTION_ANIMATED_SPRITE_SQUIRREL) \
+	 PREFIX=$(PREFIX)
+	make -j$(CORES) -C src/$(ABSTRACTION_ANIMATED_SPRITE_DUKTAPE) \
+	 PREFIX=$(PREFIX)
 	make -j$(CORES) -C src/$(ABSTRACTION_FONT) PREFIX=$(PREFIX)
 	make -j$(CORES) -C src/$(ABSTRACTION_FONT_LUA) PREFIX=$(PREFIX)
 	make -j$(CORES) -C src/$(ABSTRACTION_FONT_SQUIRREL) PREFIX=$(PREFIX)
