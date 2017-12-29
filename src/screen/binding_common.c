@@ -25,6 +25,21 @@ MTR_SCRIPT_FUNC_I_V(MTR_SF_ScreenGetWidth, MTR_ScreenGetWidth)
 MTR_SCRIPT_FUNC_I_V(MTR_SF_ScreenGetHeight, MTR_ScreenGetHeight)
 MTR_SCRIPT_FUNC_B_V(MTR_SF_ScreenXed, MTR_ScreenXed)
 
+#ifdef lua_h
+MTR_SCRIPT_FUNC(MTR_SF_ScreenGetDesktopSizes)
+{
+    int width;
+    int height;
+    MTR_ScreenGetDesktopSizes(&width, &height);
+    MTR_SF_PUSH_INT(width);
+    MTR_SF_PUSH_INT(height);
+    return 2;
+}
+#endif
+
+MTR_SCRIPT_FUNC_I_V(MTR_SF_ScreenGetDesktopWidth, MTR_ScreenGetDesktopWidth)
+MTR_SCRIPT_FUNC_I_V(MTR_SF_ScreenGetDesktopHeight, MTR_ScreenGetDesktopHeight)
+
 void MTR_ScriptsRegisterAll(void)
 {
     #ifdef MTR_MOD_PLUGIN
@@ -41,6 +56,11 @@ void MTR_ScriptsRegisterAll(void)
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, ScreenGetWidth);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, ScreenGetHeight);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, ScreenXed);
+    #ifdef lua_h
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, ScreenGetDesktopSizes);
+    #endif
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, ScreenGetDesktopWidth);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, ScreenGetDesktopHeight);
 }
 
 #endif

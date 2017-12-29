@@ -135,3 +135,65 @@ MTR_DCLSPC mtrScreen_t *MTR_CALL MTR_GetScreen(void)
 
     return mtrScreen;
 }
+
+MTR_DCLSPC void MTR_CALL MTR_SdlVideoInit(void)
+{
+    if(SDL_WasInit(SDL_INIT_VIDEO | SDL_INIT_EVENTS) == 0) {
+        if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) == 0)
+            MTR_LogWrite(
+             "SDL library with video and events subsystems initialized", 1,
+              MTR_LMT_INFO);
+        else {
+            MTR_Notify(
+             "Unable to initialize SDL library with video and events "
+             "subsystems", 1, MTR_LMT_ERROR);
+            free(mtrScreen);
+            MTR_Notify("Screen not initialized", 0, MTR_LMT_ERROR);
+            return false;
+        }
+    }
+}
+
+/*fa MTR_ScreenGetDesktopWidth yes */
+MTR_DCLSPC int MTR_CALL MTR_ScreenGetDesktopWidth(void)
+{
+    SDL_DisplayMode desktopDisplayMode;
+
+    MTR_SdlVideoInit();
+
+    if (SDL_GetDesktopDisplayMode(0, &desktopDisplayMode) == 0) {
+        return desktopDisplayMode.w;
+    } else {
+        return 0;
+    }
+}
+
+/*fa MTR_ScreenGetDesktopHeight yes */
+MTR_DCLSPC int MTR_CALL MTR_ScreenGetDesktopHeight(void)
+{
+    SDL_DisplayMode desktopDisplayMode;
+
+    MTR_SdlVideoInit();
+
+    if (SDL_GetDesktopDisplayMode(0, &desktopDisplayMode) == 0) {
+        return desktopDisplayMode.h;
+    } else {
+        return 0;
+    }
+}
+
+/*fa MTR_ScreenGetDesktopSizes yes */
+MTR_DCLSPC void MTR_CALL MTR_ScreenGetDesktopSizes(int *width, int *height)
+{
+    SDL_DisplayMode desktopDisplayMode;
+
+    MTR_SdlVideoInit();
+
+    if (SDL_GetDesktopDisplayMode(0, &desktopDisplayMode) == 0) {
+        *width = desktopDisplayMode.w;
+        *height = desktopDisplayMode.h;
+    } else {
+        *width = 0;
+        *height = 0;
+    }
+}

@@ -5,14 +5,14 @@
 
 #define MTR_VERSION_LAUNCHER                        0x000100U /* inc minor */
 
-#define MTR_VERSION_SCREEN_SDL2                     0x000301U /* not incremented */
-#define MTR_VERSION_SCREEN_SDL2_LUA                 0x000200U /* not incremented */
-#define MTR_VERSION_SCREEN_SDL2_SQUIRREL            0x000100U /* not incremented */
-#define MTR_VERSION_SCREEN_SDL2_DUKTAPE             0x000100U /* not incremented */
-#define MTR_VERSION_SCREEN_SDL2_GPU                 0x000300U /* not incremented */
-#define MTR_VERSION_SCREEN_SDL2_GPU_LUA             0x000200U /* not incremented */
-#define MTR_VERSION_SCREEN_SDL2_GPU_SQUIRREL        0x000100U /* not incremented */
-#define MTR_VERSION_SCREEN_SDL2_GPU_DUKTAPE         0x000100U /* not incremented */
+#define MTR_VERSION_SCREEN_SDL2                     0x000400U /* inc minor */
+#define MTR_VERSION_SCREEN_SDL2_LUA                 0x000300U /* inc minor */
+#define MTR_VERSION_SCREEN_SDL2_SQUIRREL            0x000200U /* inc minor */
+#define MTR_VERSION_SCREEN_SDL2_DUKTAPE             0x000200U /* inc minor */
+#define MTR_VERSION_SCREEN_SDL2_GPU                 0x000400U /* inc minor */
+#define MTR_VERSION_SCREEN_SDL2_GPU_LUA             0x000300U /* inc minor */
+#define MTR_VERSION_SCREEN_SDL2_GPU_SQUIRREL        0x000200U /* inc minor */
+#define MTR_VERSION_SCREEN_SDL2_GPU_DUKTAPE         0x000200U /* inc minor */
 
 #define MTR_VERSION_TEXTURE_SDL2_IMAGE              0x000400U /* inc minor */
 #define MTR_VERSION_TEXTURE_SDL2_IMAGE_LUA          0x000300U /* inc minor */
