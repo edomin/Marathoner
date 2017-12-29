@@ -490,6 +490,21 @@
         return 0;                              \
     }
 
+#define MTR_SCRIPT_FUNC_V_U32t1F3(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)                     \
+    {                                          \
+        uint32_t u32_1;                        \
+        float f1;                              \
+        float f2;                              \
+        float f3;                              \
+        MTR_SF_GET_UINT32(u32_1, 1);           \
+        MTR_SF_GET_SINGLE(f1, 2);              \
+        MTR_SF_GET_SINGLE(f2, 3);              \
+        MTR_SF_GET_SINGLE(f3, 4);              \
+        func(u32_1, f1, f2, f3);               \
+        return 0;                              \
+    }
+
 #define MTR_SCRIPT_FUNC_V_U32t1F4(sfunc, func) \
     MTR_SCRIPT_FUNC(sfunc)                     \
     {                                          \
@@ -611,6 +626,23 @@
         MTR_SF_GET_SINGLE(f2, 3);                \
         MTR_SF_GET_INT(i1, 4);                   \
         func(u32_1, f1, f2, i1);                 \
+        return 0;                                \
+    }
+
+#define MTR_SCRIPT_FUNC_V_U32t1F3I1(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)                       \
+    {                                            \
+        uint32_t u32_1;                          \
+        float f1;                                \
+        float f2;                                \
+        float f3;                                \
+        int i1;                                  \
+        MTR_SF_GET_UINT32(u32_1, 1);             \
+        MTR_SF_GET_SINGLE(f1, 2);                \
+        MTR_SF_GET_SINGLE(f2, 3);                \
+        MTR_SF_GET_SINGLE(f3, 4);                \
+        MTR_SF_GET_INT(i1, 5);                   \
+        func(u32_1, f1, f2, f3, i1);             \
         return 0;                                \
     }
 
@@ -1539,6 +1571,34 @@
         return 1;                                          \
     }
 
+#define MTR_SCRIPT_FUNC_B_U32t1F1(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)                     \
+    {                                          \
+        uint32_t u32_1;                        \
+        float f1;                              \
+        bool result;                           \
+        MTR_SF_GET_UINT32(u32_1, 1);           \
+        MTR_SF_GET_SINGLE(f1, 2);              \
+        result = func(u32_1, f1);              \
+        MTR_SF_PUSH_BOOL(result);              \
+        return 1;                              \
+    }
+
+#define MTR_SCRIPT_FUNC_B_U32t1F2(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)                     \
+    {                                          \
+        uint32_t u32_1;                        \
+        float f1;                              \
+        float f2;                              \
+        bool result;                           \
+        MTR_SF_GET_UINT32(u32_1, 1);           \
+        MTR_SF_GET_SINGLE(f1, 2);              \
+        MTR_SF_GET_SINGLE(f2, 3);              \
+        result = func(u32_1, f1, f2);          \
+        MTR_SF_PUSH_BOOL(result);              \
+        return 1;                              \
+    }
+
 #define MTR_SCRIPT_FUNC_B_U32t1F2S1(sfunc, func) \
     MTR_SCRIPT_FUNC(sfunc)                       \
     {                                            \
@@ -2248,6 +2308,25 @@
         MTR_SF_GET_INT(i3, 4);                    \
         MTR_SF_GET_INT(i4, 5);                    \
         result = func(u32_1, i1, i2, i3, i4);     \
+        MTR_SF_PUSH_UINT32(result);               \
+        return 1;                                 \
+    }
+
+#define MTR_SCRIPT_FUNC_U32t_U32t1F4(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)                        \
+    {                                             \
+        uint32_t u32_1;                           \
+        float f1;                                 \
+        float f2;                                 \
+        float f3;                                 \
+        float f4;                                 \
+        uint32_t result;                          \
+        MTR_SF_GET_UINT32(u32_1, 1);              \
+        MTR_SF_GET_SINGLE(f1, 2);                 \
+        MTR_SF_GET_SINGLE(f2, 3);                 \
+        MTR_SF_GET_SINGLE(f3, 4);                 \
+        MTR_SF_GET_SINGLE(f4, 5);                 \
+        result = func(u32_1, f1, f2, f3, f4);     \
         MTR_SF_PUSH_UINT32(result);               \
         return 1;                                 \
     }
