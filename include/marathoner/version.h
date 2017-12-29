@@ -36,7 +36,7 @@
 #define MTR_VERSION_PRIMITIVE_SDL2_GPU_SQUIRREL     0x000100U /* not incremented */
 #define MTR_VERSION_PRIMITIVE_SDL2_GPU_DUKTAPE      0x000100U /* not incremented */
 
-#define MTR_VERSION_AUDIO_SDL2_MIXER                0x000300U /* not incremented */
+#define MTR_VERSION_AUDIO_SDL2_MIXER                0x000301U /* inc patch */
 #define MTR_VERSION_AUDIO_SDL2_MIXER_LUA            0x000201U /* not incremented */
 #define MTR_VERSION_AUDIO_SDL2_MIXER_SQUIRREL       0x000101U /* not incremented */
 #define MTR_VERSION_AUDIO_SDL2_MIXER_DUKTAPE        0x000101U /* not incremented */

@@ -191,7 +191,8 @@ MTR_DCLSPC bool MTR_CALL MTR_AudioInit(uint32_t sndDmSize,
     }
     else
     {
-        MTR_Notify("Unable to initialize SDL_mixer", 1, MTR_LMT_ERROR);
+        MTR_Notify("Unable to initialize SDL2_mixer", 1, MTR_LMT_ERROR);
+        MTR_LogWrite_s("SDL2_mixer error: ", 1, MTR_LMT_ERROR, Mix_GetError());
         Mix_Quit();
         return false;
     }
