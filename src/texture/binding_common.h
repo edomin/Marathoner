@@ -49,6 +49,14 @@ MTR_FUNC(void, MTR_TextureBlitRegionScaled_f, uint32_t, float, float, float,
  float, float, float, float, float);
 MTR_FUNC(void, MTR_TextureBlitRegionAngled_f, uint32_t, float, float, float,
  float, float, float, float, float, float);
+MTR_FUNC(void, MTR_TextureBlitRegionHorSheared_f, uint32_t, float, float, float,
+ float, float, float, float, float);
+MTR_FUNC(void, MTR_TextureBlitRegionHorShearedByAngle_f, uint32_t, float, float,
+ float, float, float, float, float, float);
+MTR_FUNC(void, MTR_TextureBlitRegionVerSheared_f, uint32_t, float, float, float,
+ float, float, float, float, float);
+MTR_FUNC(void, MTR_TextureBlitRegionVerShearedByAngle_f, uint32_t, float, float,
+ float, float, float, float, float, float);
 MTR_FUNC(void, MTR_TextureBlitRegionFlipped_f, uint32_t, float, float, float,
  float, float, float, int);
 MTR_FUNC(void, MTR_TextureBlitRegionGeneral_f, uint32_t, float, float, float,

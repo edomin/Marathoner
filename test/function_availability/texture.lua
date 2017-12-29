@@ -59,6 +59,14 @@ fa.FunctionSupported(TextureBlitRegionScaled_f, "MTR_TextureBlitRegionScaled_f",
  TextureFunctionSupported);
 fa.FunctionSupported(TextureBlitRegionAngled_f, "MTR_TextureBlitRegionAngled_f",
  TextureFunctionSupported);
+fa.FunctionSupported(TextureBlitRegionHorSheared_f,
+ "MTR_TextureBlitRegionHorSheared_f", TextureFunctionSupported);
+fa.FunctionSupported(TextureBlitRegionHorShearedByAngle_f,
+ "MTR_TextureBlitRegionHorShearedByAngle_f", TextureFunctionSupported);
+fa.FunctionSupported(TextureBlitRegionVerSheared_f,
+ "MTR_TextureBlitRegionVerSheared_f", TextureFunctionSupported);
+fa.FunctionSupported(TextureBlitRegionVerShearedByAngle_f,
+ "MTR_TextureBlitRegionVerShearedByAngle_f", TextureFunctionSupported);
 fa.FunctionSupported(TextureBlitRegionFlipped_f,
  "MTR_TextureBlitRegionFlipped_f", TextureFunctionSupported);
 fa.FunctionSupported(TextureBlitRegionGeneral_f,

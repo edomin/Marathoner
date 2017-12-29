@@ -937,6 +937,218 @@ MTR_DCLSPC void MTR_CALL MTR_TextureBlitRegionAngled_f(uint32_t texNum, float x,
     }
 }
 
+/*fa MTR_TextureBlitRegionHorSheared_f yes */
+MTR_DCLSPC void MTR_CALL MTR_TextureBlitRegionHorSheared_f(uint32_t texNum,
+ float x, float y, float rx, float ry, float rw, float rh, float shearFactor,
+ float originY)
+{
+    mtrTexture_t *texture;
+    float         s1;
+    float         t1;
+    float         s2;
+    float         t2;
+    float         offsetX;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
+    if (texNum == 0)
+        return;
+
+    texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
+
+    s1 = rx / texture->texture->w;
+    s2 = (rx + (rw - 1)) / texture->texture->w;
+    t1 = ry / texture->texture->h;
+    t2 = (ry + (rh - 1)) / texture->texture->h;
+
+    offsetX = shearFactor * (rh - originY);
+
+    /* top left */
+    MTR_TextureFillShearedValue(blitShearedValues, 0,
+     x + rh * shearFactor - offsetX, y, s1, t1);
+    /* top right */
+    MTR_TextureFillShearedValue(blitShearedValues, 1,
+     x + rh * shearFactor + rw - offsetX, y, s2, t1);
+    /* bottom left */
+    MTR_TextureFillShearedValue(blitShearedValues, 2, x - offsetX, y + rh, s1,
+     t2);
+
+    /* bottom left */
+    MTR_TextureFillShearedValue(blitShearedValues, 3, x - offsetX, y + rh, s1,
+     t2);
+    /* top right */
+    MTR_TextureFillShearedValue(blitShearedValues, 4,
+     x + rh * shearFactor + rw - offsetX, y, s2, t1);
+    /* bottom right */
+    MTR_TextureFillShearedValue(blitShearedValues, 5, x + rw - offsetX, y + rh,
+     s2, t2);
+
+    GPU_TriangleBatch(texture->texture, mtrScreen->target, 6,
+     blitShearedValues, 0, NULL, GPU_BATCH_XY_ST);
+}
+
+/*fa MTR_TextureBlitRegionHorShearedByAngle_f yes */
+MTR_DCLSPC void MTR_CALL MTR_TextureBlitRegionHorShearedByAngle_f(
+ uint32_t texNum, float x, float y, float rx, float ry, float rw, float rh,
+ float angle, float originY)
+{
+    mtrTexture_t *texture;
+    float         shearFactor;
+    float         s1;
+    float         t1;
+    float         s2;
+    float         t2;
+    float         offsetX;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
+    if (texNum == 0)
+        return;
+
+    if ((angle >= 90) || (angle <= -90))
+        return;
+
+    angle += 90;
+
+    texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
+
+    s1 = rx / texture->texture->w;
+    s2 = (rx + (rw - 1)) / texture->texture->w;
+    t1 = ry / texture->texture->h;
+    t2 = (ry + (rh - 1)) / texture->texture->h;
+
+    shearFactor = 1.0f / tanf(angle * MTR_DEGREE_F);
+    offsetX = shearFactor * (rh - originY);
+
+    /* top left */
+    MTR_TextureFillShearedValue(blitShearedValues, 0,
+     x + rh * shearFactor - offsetX, y, s1, t1);
+    /* top right */
+    MTR_TextureFillShearedValue(blitShearedValues, 1,
+     x + rh * shearFactor + rw - offsetX, y, s2, t1);
+    /* bottom left */
+    MTR_TextureFillShearedValue(blitShearedValues, 2, x - offsetX, y + rh, s1,
+     t2);
+
+    /* bottom left */
+    MTR_TextureFillShearedValue(blitShearedValues, 3, x - offsetX, y + rh, s1,
+     t2);
+    /* top right */
+    MTR_TextureFillShearedValue(blitShearedValues, 4,
+     x + rh * shearFactor + rw - offsetX, y, s2, t1);
+    /* bottom right */
+    MTR_TextureFillShearedValue(blitShearedValues, 5, x + rw - offsetX, y + rh,
+     s2, t2);
+
+    GPU_TriangleBatch(texture->texture, mtrScreen->target, 6,
+     blitShearedValues, 0, NULL, GPU_BATCH_XY_ST);
+}
+
+/*fa MTR_TextureBlitRegionVerSheared_f yes */
+MTR_DCLSPC void MTR_CALL MTR_TextureBlitRegionVerSheared_f(uint32_t texNum,
+ float x, float y, float rx, float ry, float rw, float rh, float shearFactor,
+ float originX)
+{
+    mtrTexture_t *texture;
+    float         s1;
+    float         t1;
+    float         s2;
+    float         t2;
+    float         offsetY;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
+    if (texNum == 0)
+        return;
+
+    texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
+
+    s1 = rx / texture->texture->w;
+    s2 = (rx + (rw - 1)) / texture->texture->w;
+    t1 = ry / texture->texture->h;
+    t2 = (ry + (rh - 1)) / texture->texture->h;
+
+    offsetY = shearFactor * (rw - originX);
+
+    /* bottom left */
+    MTR_TextureFillShearedValue(blitShearedValues, 0, x,
+     y + rw * shearFactor - offsetY, s1, t2);
+    /* top left */
+    MTR_TextureFillShearedValue(blitShearedValues, 1, x,
+     y + rw * shearFactor + rh - offsetY,
+     s1, t1);
+    /* bottom right */
+    MTR_TextureFillShearedValue(blitShearedValues, 2, x + rw, y - offsetY, s2,
+     t2);
+
+    /* bottom right */
+    MTR_TextureFillShearedValue(blitShearedValues, 3, x + rw, y - offsetY, s2,
+     t2);
+    /* top left */
+    MTR_TextureFillShearedValue(blitShearedValues, 4, x,
+     y + rw * shearFactor + rh - offsetY, s1, t1);
+    /* top right */
+    MTR_TextureFillShearedValue(blitShearedValues, 5, x + rw, y + rh - offsetY,
+     s2, t1);
+
+    GPU_TriangleBatch(texture->texture, mtrScreen->target, 6,
+     blitShearedValues, 0, NULL, GPU_BATCH_XY_ST);
+}
+
+/*fa MTR_TextureBlitRegionVerShearedByAngle_f yes */
+MTR_DCLSPC void MTR_CALL MTR_TextureBlitRegionVerShearedByAngle_f(
+ uint32_t texNum, float x, float y, float rx, float ry, float rw, float rh,
+ float angle, float originX)
+{
+    mtrTexture_t *texture;
+    float         shearFactor;
+    float         s1;
+    float         t1;
+    float         s2;
+    float         t2;
+    float         offsetY;
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
+    if (texNum == 0)
+        return;
+
+    if ((angle >= 90) || (angle <= -90))
+        return;
+
+    angle += 90;
+
+    texture = IK_GET_DATA(mtrTexture_t *, mtrTextureKeeper, texNum);
+
+    s1 = rx / texture->texture->w;
+    s2 = (rx + (rw - 1)) / texture->texture->w;
+    t1 = ry / texture->texture->h;
+    t2 = (ry + (rh - 1)) / texture->texture->h;
+
+    shearFactor = 1.0f / tanf(angle * MTR_DEGREE_F);
+    offsetY = shearFactor * (rw - originX);
+
+    /* bottom left */
+    MTR_TextureFillShearedValue(blitShearedValues, 0, x,
+     y + rw * shearFactor - offsetY, s1, t2);
+    /* top left */
+    MTR_TextureFillShearedValue(blitShearedValues, 1, x,
+     y + rw * shearFactor + rh - offsetY,
+     s1, t1);
+    /* bottom right */
+    MTR_TextureFillShearedValue(blitShearedValues, 2, x + rw, y - offsetY, s2,
+     t2);
+
+    /* bottom right */
+    MTR_TextureFillShearedValue(blitShearedValues, 3, x + rw, y - offsetY, s2,
+     t2);
+    /* top left */
+    MTR_TextureFillShearedValue(blitShearedValues, 4, x,
+     y + rw * shearFactor + rh - offsetY, s1, t1);
+    /* top right */
+    MTR_TextureFillShearedValue(blitShearedValues, 5, x + rw, y + rh - offsetY,
+     s2, t1);
+
+    GPU_TriangleBatch(texture->texture, mtrScreen->target, 6,
+     blitShearedValues, 0, NULL, GPU_BATCH_XY_ST);
+}
+
 /*fa MTR_TextureBlitRegionFlipped_f yes */
 MTR_DCLSPC void MTR_CALL MTR_TextureBlitRegionFlipped_f(uint32_t texNum, float x,
  float y, float rx, float ry, float rw, float rh, int flip)

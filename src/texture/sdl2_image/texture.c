@@ -908,6 +908,46 @@ MTR_DCLSPC void MTR_CALL MTR_TextureBlitRegionAngled_f(uint32_t texNum, float x,
     }
 }
 
+/*fa MTR_TextureBlitRegionHorSheared_f dummy */
+MTR_DCLSPC void MTR_CALL MTR_TextureBlitRegionHorSheared_f(uint32_t texNum,
+ float x, float y, float rx, float ry, float rw, float rh, float shearFactor,
+ float originY)
+{
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
+    return;
+}
+
+/*fa MTR_TextureBlitRegionHorShearedByAngle_f dummy */
+MTR_DCLSPC void MTR_CALL MTR_TextureBlitRegionHorShearedByAngle_f(
+ uint32_t texNum, float x, float y, float rx, float ry, float rw, float rh,
+ float angle, float originY)
+{
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
+    return;
+}
+
+/*fa MTR_TextureBlitRegionVerSheared_f dummy */
+MTR_DCLSPC void MTR_CALL MTR_TextureBlitRegionVerSheared_f(uint32_t texNum,
+ float x, float y, float rx, float ry, float rw, float rh, float shearFactor,
+ float originX)
+{
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
+    return;
+}
+
+/*fa MTR_TextureBlitRegionVerShearedByAngle_f dummy */
+MTR_DCLSPC void MTR_CALL MTR_TextureBlitRegionVerShearedByAngle_f(
+ uint32_t texNum, float x, float y, float rx, float ry, float rw, float rh,
+ float angle, float originX)
+{
+    MTR_TEXTURE_CHECK_IF_NOT_INITED();
+
+    return;
+}
+
 /*fa MTR_TextureBlitRegionFlipped_f yes */
 MTR_DCLSPC void MTR_CALL MTR_TextureBlitRegionFlipped_f(uint32_t texNum, float x,
  float y, float rx, float ry, float rw, float rh, int flip)
