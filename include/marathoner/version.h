@@ -98,10 +98,10 @@
 #define MTR_VERSION_UTILS_MATH_SQUIRREL             0x000200U /* inc minor */
 #define MTR_VERSION_UTILS_MATH_DUKTAPE              0x000200U /* inc minor */
 
-#define MTR_VERSION_ABSTRACTION_SPRITE              0x000200U /* not incremented */
-#define MTR_VERSION_ABSTRACTION_SPRITE_LUA          0x000101U /* not incremented */
-#define MTR_VERSION_ABSTRACTION_SPRITE_SQUIRREL     0x000101U /* not incremented */
-#define MTR_VERSION_ABSTRACTION_SPRITE_DUKTAPE      0x000101U /* not incremented */
+#define MTR_VERSION_ABSTRACTION_SPRITE              0x000300U /* inc minor */
+#define MTR_VERSION_ABSTRACTION_SPRITE_LUA          0x000200U /* inc minor */
+#define MTR_VERSION_ABSTRACTION_SPRITE_SQUIRREL     0x000200U /* inc minor */
+#define MTR_VERSION_ABSTRACTION_SPRITE_DUKTAPE      0x000200U /* inc minor */
 
 #define MTR_VERSION_ABSTRACTION_FONT                0x000300U /* not incremented */
 #define MTR_VERSION_ABSTRACTION_FONT_LUA            0x000201U /* not incremented */
