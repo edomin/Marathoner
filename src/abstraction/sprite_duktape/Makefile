@@ -8,6 +8,6 @@ ifeq ($(MOD), plugin)
 else
   LIBS = -lduktape
 endif
-PREREQS = ../gui_binding_common.h ../gui_binding_common.c
+PREREQS = ../sprite_binding_common.h ../sprite_binding_common.c
 
 include ../../../makefiles/Binding.mk
