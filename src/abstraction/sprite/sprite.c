@@ -16,8 +16,7 @@ MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
     report->prereqs = NULL;
     report->prereqSubsystemsCount = 1;
     report->prereqSubsystems = malloc(sizeof(char *) * report->prereqSubsystemsCount);
-    if (report->prereqSubsystems == NULL)
-    {
+    if (report->prereqSubsystems == NULL) {
         free(report);
         return NULL;
     }
@@ -53,8 +52,7 @@ MTR_DCLSPC bool MTR_CALL MTR_SpriteInit(uint32_t dmSize, uint32_t reservedCount)
 
     mtrSpriteKeeper = (mtrIndexkeeper_t *)MTR_IndexkeeperCreate(dmSize,
      reservedCount, sizeof(mtrSprite_t));
-    if (mtrSpriteKeeper == NULL)
-    {
+    if (mtrSpriteKeeper == NULL) {
         MTR_Notify("Unable to create indexkeeper structure for sprites", 1,
          MTR_LMT_FATAL);
         return false;
@@ -93,8 +91,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_SpriteLoad(const char *filename, int clipWidth,
     sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, freeIndex);
 
     sprite->textureIndex = MTR_TextureLoad(filename);
-    if (sprite->textureIndex == 0)
-    {
+    if (sprite->textureIndex == 0U) {
         MTR_Notify("Unable to load sprite", 1, MTR_LMT_ERROR);
         MTR_IndexkeeperFreeIndex(mtrSpriteKeeper, freeIndex);
         return 0U;
@@ -141,8 +138,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_SpriteLoad(const char *filename, int clipWidth,
     MTR_LogWrite_i("Clips count:", 1, MTR_LMT_INFO, sprite->clipsCount);
 
     sprite->clip = malloc(sizeof(mtrClip_t) * sprite->clipsCount);
-    if (sprite->clip == NULL)
-    {
+    if (sprite->clip == NULL) {
         MTR_Notify("Unable to allocate memory for clips' coords array", 1,
          MTR_LMT_ERROR);
         MTR_IndexkeeperFreeIndex(mtrSpriteKeeper, freeIndex);
@@ -151,8 +147,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_SpriteLoad(const char *filename, int clipWidth,
         return 0U;
     }
 
-    for (i = 0; i < sprite->clipsCount; i++)
-    {
+    for (i = 0; i < sprite->clipsCount; i++) {
         sprite->clip[i].x = sprite->clipWidth *
          (fmodl(i, sprite->colsCount));
         sprite->clip[i].y = sprite->clipHeight * (i / sprite->colsCount);
@@ -189,8 +184,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_SpriteLoadSimple(const char *filename,
     sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, freeIndex);
 
     sprite->textureIndex = MTR_TextureLoad(filename);
-    if (sprite->textureIndex == 0)
-    {
+    if (sprite->textureIndex == 0U) {
         MTR_Notify("Unable to load sprite", 1, MTR_LMT_ERROR);
         MTR_IndexkeeperFreeIndex(mtrSpriteKeeper, freeIndex);
         return 0U;
@@ -211,14 +205,13 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_SpriteLoadSimple(const char *filename,
     sprite->colsCount = 1;
     sprite->clipsCount = 1;
     sprite->clip = malloc(sizeof(mtrClip_t) * sprite->clipsCount);
-    if (sprite->clip == NULL)
-    {
+    if (sprite->clip == NULL) {
         MTR_Notify("Unable to allocate memory for clips' coords array", 1,
          MTR_LMT_ERROR);
         MTR_IndexkeeperFreeIndex(mtrSpriteKeeper, freeIndex);
         if (sprite->name != mtrDefaultSpriteName)
             free(sprite->name);
-        return 0;
+        return 0U;
     }
 
     sprite->clip[0].x = 0;
@@ -256,8 +249,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_SpriteLoadAtlas(const char *filename,
     sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, freeIndex);
 
     sprite->textureIndex = MTR_TextureLoad(filename);
-    if (sprite->textureIndex == 0)
-    {
+    if (sprite->textureIndex == 0U) {
         MTR_Notify("Unable to load sprite", 1, MTR_LMT_ERROR);
         MTR_IndexkeeperFreeIndex(mtrSpriteKeeper, freeIndex);
         return 0U;
@@ -279,8 +271,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_SpriteLoadAtlas(const char *filename,
     MTR_LogWrite_i("Clips count:", 1, MTR_LMT_INFO, sprite->clipsCount);
 
     sprite->clip = malloc(sizeof(mtrClip_t) * sprite->clipsCount);
-    if (sprite->clip == NULL)
-    {
+    if (sprite->clip == NULL) {
         MTR_Notify("Unable to allocate memory for clips' coords array", 1,
          MTR_LMT_ERROR);
         MTR_IndexkeeperFreeIndex(mtrSpriteKeeper, freeIndex);
@@ -289,8 +280,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_SpriteLoadAtlas(const char *filename,
         return 0U;
     }
 
-    for (i = 0; i < sprite->clipsCount; i++)
-    {
+    for (i = 0; i < sprite->clipsCount; i++) {
         sprite->clip[i].x = 0;
         sprite->clip[i].y = 0;
         sprite->clip[i].w = 0;
@@ -354,8 +344,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_SpriteCreateFromTexture(const char *name,
     MTR_LogWrite_i("Clips count:", 1, MTR_LMT_INFO, sprite->clipsCount);
 
     sprite->clip = malloc(sizeof(mtrClip_t) * sprite->clipsCount);
-    if (sprite->clip == NULL)
-    {
+    if (sprite->clip == NULL) {
         MTR_Notify("Unable to allocate memory for clips' coords array", 1,
          MTR_LMT_ERROR);
         MTR_IndexkeeperFreeIndex(mtrSpriteKeeper, freeIndex);
@@ -364,8 +353,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_SpriteCreateFromTexture(const char *name,
         return 0U;
     }
 
-    for (i = 0; i < sprite->clipsCount; i++)
-    {
+    for (i = 0; i < sprite->clipsCount; i++) {
         sprite->clip[i].x = 0;
         sprite->clip[i].y = 0;
         sprite->clip[i].w = 0;
@@ -385,7 +373,7 @@ MTR_DCLSPC bool MTR_CALL MTR_SpriteSetAtlasFrame(uint32_t sprNum, int clipNum,
     mtrSprite_t *sprite;
     MTR_SPRITE_CHECK_IF_NOT_INITED(false);
 
-    if (sprNum == 0)
+    if (sprNum == 0U)
         return false;
 
     sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
@@ -406,6 +394,20 @@ MTR_DCLSPC bool MTR_CALL MTR_SpriteSetAtlasFrame(uint32_t sprNum, int clipNum,
     return true;
 }
 
+/*fa MTR_SpriteGetFramesCount yes */
+MTR_DCLSPC int MTR_CALL MTR_SpriteGetFramesCount(uint32_t sprNum)
+{
+    mtrSprite_t *sprite;
+    MTR_SPRITE_CHECK_IF_NOT_INITED(0);
+
+    if (sprNum == 0U)
+        return 0;
+
+    sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+
+    return sprite->clipsCount;
+}
+
 /*fa MTR_SpriteGetFrameSizes yes */
 MTR_DCLSPC void MTR_CALL MTR_SpriteGetFrameSizes(uint32_t sprNum, int clipNum,
  int *width, int *height)
@@ -413,7 +415,7 @@ MTR_DCLSPC void MTR_CALL MTR_SpriteGetFrameSizes(uint32_t sprNum, int clipNum,
     mtrSprite_t *sprite;
     MTR_SPRITE_CHECK_IF_NOT_INITED();
 
-    if (sprNum == 0)
+    if (sprNum == 0U)
         return;
 
     sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
@@ -434,7 +436,7 @@ MTR_DCLSPC int MTR_CALL MTR_SpriteGetFrameWidth(uint32_t sprNum, int clipNum)
     mtrSprite_t *sprite;
     MTR_SPRITE_CHECK_IF_NOT_INITED(0);
 
-    if (sprNum == 0)
+    if (sprNum == 0U)
         return 0;
 
     sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
@@ -451,7 +453,7 @@ MTR_DCLSPC int MTR_CALL MTR_SpriteGetFrameHeight(uint32_t sprNum, int clipNum)
     mtrSprite_t *sprite;
     MTR_SPRITE_CHECK_IF_NOT_INITED(0);
 
-    if (sprNum == 0)
+    if (sprNum == 0U)
         return 0;
 
     sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
@@ -469,7 +471,7 @@ MTR_DCLSPC void MTR_CALL MTR_SpriteGetFrameCoords(uint32_t sprNum, int clipNum,
     mtrSprite_t *sprite;
     MTR_SPRITE_CHECK_IF_NOT_INITED();
 
-    if (sprNum == 0)
+    if (sprNum == 0U)
         return;
 
     sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
@@ -490,7 +492,7 @@ MTR_DCLSPC int MTR_CALL MTR_SpriteGetFrameX(uint32_t sprNum, int clipNum)
     mtrSprite_t *sprite;
     MTR_SPRITE_CHECK_IF_NOT_INITED(0);
 
-    if (sprNum == 0)
+    if (sprNum == 0U)
         return 0;
 
     sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
@@ -507,7 +509,7 @@ MTR_DCLSPC int MTR_CALL MTR_SpriteGetFrameY(uint32_t sprNum, int clipNum)
     mtrSprite_t *sprite;
     MTR_SPRITE_CHECK_IF_NOT_INITED(0);
 
-    if (sprNum == 0)
+    if (sprNum == 0U)
         return 0;
 
     sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
@@ -525,7 +527,7 @@ MTR_DCLSPC void MTR_CALL MTR_SpriteGetFrameAnchors(uint32_t sprNum, int clipNum,
     mtrSprite_t *sprite;
     MTR_SPRITE_CHECK_IF_NOT_INITED();
 
-    if (sprNum == 0)
+    if (sprNum == 0U)
         return;
 
     sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
@@ -546,7 +548,7 @@ MTR_DCLSPC int MTR_CALL MTR_SpriteGetFrameAnchorX(uint32_t sprNum, int clipNum)
     mtrSprite_t *sprite;
     MTR_SPRITE_CHECK_IF_NOT_INITED(0);
 
-    if (sprNum == 0)
+    if (sprNum == 0U)
         return 0;
 
     sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
@@ -563,7 +565,7 @@ MTR_DCLSPC int MTR_CALL MTR_SpriteGetFrameAnchorY(uint32_t sprNum, int clipNum)
     mtrSprite_t *sprite;
     MTR_SPRITE_CHECK_IF_NOT_INITED(0);
 
-    if (sprNum == 0)
+    if (sprNum == 0U)
         return 0;
 
     sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
