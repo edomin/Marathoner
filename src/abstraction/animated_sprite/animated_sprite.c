@@ -31,14 +31,24 @@ MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(AnimatedSprite, FA_FUNCTIONS_COUNT)
 MTR_DCLSPC bool MTR_CALL MTR_AnimatedSpriteInit(uint32_t dmSize,
  uint32_t reservedCount)
 {
+    #ifdef MTR_MOD_PLUGIN
+    bool ok = true;
+    #endif
     MTR_LogWrite("Initializing animated sprite abstraction manager", 0,
      MTR_LMT_INFO);
 
     #ifdef MTR_MOD_PLUGIN
-    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_SpriteFree, "sprite");
-    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_SpriteGetFramesCount, "sprite");
-    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_SpriteDrawScaled_f, "sprite");
-    MTR_FIND_FUNCTION_IN_SUBSYSTEM(MTR_SpriteDrawGeneral_f, "sprite");
+    MTR_FIND_FUNCTION(MTR_SpriteFree, "Abstraction_sprite");
+    MTR_FIND_FUNCTION(MTR_SpriteGetFramesCount, "Abstraction_sprite");
+    MTR_FIND_FUNCTION(MTR_SpriteDrawScaled_f, "Abstraction_sprite");
+    MTR_FIND_FUNCTION(MTR_SpriteDrawGeneral_f, "Abstraction_sprite");
+
+    if (ok)
+        MTR_LogWrite("Added dependent functions", 1, MTR_LMT_INFO);
+    else {
+        MTR_Notify("Functions not added", 1, MTR_LMT_FATAL);
+        return false;
+    }
     #endif
 
     mtrAnimatedSpriteKeeper = (mtrIndexkeeper_t *)MTR_IndexkeeperCreate(dmSize,

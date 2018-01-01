@@ -7,9 +7,6 @@
 #endif
 #include "fa/Abstraction_animated_sprite.h"
 
-//#include <math.h>
-//#include <string.h>
-
 typedef struct mtrAnimatedSprite_t {
     float    animSpeed;
     float    currentFrame;
