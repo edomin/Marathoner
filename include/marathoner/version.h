@@ -118,4 +118,9 @@
 #define MTR_VERSION_ABSTRACTION_GUI_SQUIRREL        0x000100U /* not incremented */
 #define MTR_VERSION_ABSTRACTION_GUI_DUKTAPE         0x000100U /* not incremented */
 
+#define MTR_VERSION_ABSTRACTION_SCENE               0x000000U /* initial */
+#define MTR_VERSION_ABSTRACTION_SCENE_LUA           0x000000U /* initial */
+#define MTR_VERSION_ABSTRACTION_SCENE_SQUIRREL      0x000000U /* initial */
+#define MTR_VERSION_ABSTRACTION_SCENE_DUKTAPE       0x000000U /* initial */
+
 #endif

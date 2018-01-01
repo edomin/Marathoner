@@ -106,6 +106,10 @@ ABSTRACTION_GUI = abstraction/gui
 ABSTRACTION_GUI_LUA = abstraction/gui_lua
 ABSTRACTION_GUI_SQUIRREL = abstraction/gui_squirrel
 ABSTRACTION_GUI_DUKTAPE = abstraction/gui_duktape
+ABSTRACTION_SCENE = abstraction/scene
+ABSTRACTION_SCENE_LUA = abstraction/scene_lua
+ABSTRACTION_SCENE_SQUIRREL = abstraction/scene_squirrel
+ABSTRACTION_SCENE_DUKTAPE = abstraction/scene_duktape
 
 ifeq ($(MOD), plugin)
 all: $(PLATFORM)
@@ -225,6 +229,10 @@ ifeq ($(MOD), plugin)
 	make -j$(CORES) -C src/$(ABSTRACTION_GUI_LUA) PREFIX=$(PREFIX)
 	make -j$(CORES) -C src/$(ABSTRACTION_GUI_SQUIRREL) PREFIX=$(PREFIX)
 	make -j$(CORES) -C src/$(ABSTRACTION_GUI_DUKTAPE) PREFIX=$(PREFIX)
+	make -j$(CORES) -C src/$(ABSTRACTION_SCENE) PREFIX=$(PREFIX)
+	make -j$(CORES) -C src/$(ABSTRACTION_SCENE_LUA) PREFIX=$(PREFIX)
+	make -j$(CORES) -C src/$(ABSTRACTION_SCENE_SQUIRREL) PREFIX=$(PREFIX)
+	make -j$(CORES) -C src/$(ABSTRACTION_SCENE_DUKTAPE) PREFIX=$(PREFIX)
 endif
 
 engine:
