@@ -13,6 +13,8 @@ MTR_SCRIPT_FUNC_U32t_S1U32t1I1(MTR_SF_SpriteCreateFromTexture,
  MTR_SpriteCreateFromTexture)
 MTR_SCRIPT_FUNC_B_U32t1I7(MTR_SF_SpriteSetAtlasFrame, MTR_SpriteSetAtlasFrame)
 MTR_SCRIPT_FUNC_I_U32t1(MTR_SF_SpriteGetFramesCount, MTR_SpriteGetFramesCount)
+MTR_SCRIPT_FUNC_V_U32t1I2(MTR_SF_SpriteSetFrameAnchorY,
+ MTR_SpriteSetFrameAnchorY)
 
 #ifdef lua_h
 MTR_SCRIPT_FUNC(MTR_SF_SpriteGetFrameSizes)
@@ -109,6 +111,7 @@ void MTR_ScriptsRegisterAll(void)
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteCreateFromTexture);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteSetAtlasFrame);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteGetFramesCount);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteSetFrameAnchorY);
     #ifdef lua_h
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_sprite", SpriteGetFrameSizes);
     #endif

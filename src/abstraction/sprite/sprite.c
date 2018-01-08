@@ -408,6 +408,23 @@ MTR_DCLSPC int MTR_CALL MTR_SpriteGetFramesCount(uint32_t sprNum)
     return sprite->clipsCount;
 }
 
+/*fa MTR_SpriteSetFrameAnchorY yes */
+MTR_DCLSPC void MTR_CALL MTR_SpriteSetFrameAnchorY(uint32_t sprNum, int clipNum, int anchorY)
+{
+    mtrSprite_t *sprite;
+    MTR_SPRITE_CHECK_IF_NOT_INITED();
+
+    if (sprNum == 0U)
+        return ;
+
+    sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
+
+    if (clipNum >= sprite->clipsCount)
+        return ;
+
+    sprite->clip[clipNum].anchorY = anchorY;
+}
+
 /*fa MTR_SpriteGetFrameSizes yes */
 MTR_DCLSPC void MTR_CALL MTR_SpriteGetFrameSizes(uint32_t sprNum, int clipNum,
  int *width, int *height)
@@ -420,7 +437,7 @@ MTR_DCLSPC void MTR_CALL MTR_SpriteGetFrameSizes(uint32_t sprNum, int clipNum,
 
     sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
 
-    if (clipNum > sprite->clipsCount) {
+    if (clipNum >= sprite->clipsCount) {
         *width = 0;
         *height = 0;
         return;
@@ -441,7 +458,7 @@ MTR_DCLSPC int MTR_CALL MTR_SpriteGetFrameWidth(uint32_t sprNum, int clipNum)
 
     sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
 
-    if (clipNum > sprite->clipsCount)
+    if (clipNum >= sprite->clipsCount)
         return 0;
 
     return sprite->clip[clipNum].w;
@@ -458,7 +475,7 @@ MTR_DCLSPC int MTR_CALL MTR_SpriteGetFrameHeight(uint32_t sprNum, int clipNum)
 
     sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
 
-    if (clipNum > sprite->clipsCount)
+    if (clipNum >= sprite->clipsCount)
         return 0;
 
     return sprite->clip[clipNum].h;
@@ -476,7 +493,7 @@ MTR_DCLSPC void MTR_CALL MTR_SpriteGetFrameCoords(uint32_t sprNum, int clipNum,
 
     sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
 
-    if (clipNum > sprite->clipsCount) {
+    if (clipNum >= sprite->clipsCount) {
         *x = 0;
         *y = 0;
         return;
@@ -497,7 +514,7 @@ MTR_DCLSPC int MTR_CALL MTR_SpriteGetFrameX(uint32_t sprNum, int clipNum)
 
     sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
 
-    if (clipNum > sprite->clipsCount)
+    if (clipNum >= sprite->clipsCount)
         return 0;
 
     return sprite->clip[clipNum].x;
@@ -514,7 +531,7 @@ MTR_DCLSPC int MTR_CALL MTR_SpriteGetFrameY(uint32_t sprNum, int clipNum)
 
     sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
 
-    if (clipNum > sprite->clipsCount)
+    if (clipNum >= sprite->clipsCount)
         return 0;
 
     return sprite->clip[clipNum].y;
@@ -532,7 +549,7 @@ MTR_DCLSPC void MTR_CALL MTR_SpriteGetFrameAnchors(uint32_t sprNum, int clipNum,
 
     sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
 
-    if (clipNum > sprite->clipsCount) {
+    if (clipNum >= sprite->clipsCount) {
         *anchorX = 0;
         *anchorY = 0;
         return;
@@ -553,7 +570,7 @@ MTR_DCLSPC int MTR_CALL MTR_SpriteGetFrameAnchorX(uint32_t sprNum, int clipNum)
 
     sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
 
-    if (clipNum > sprite->clipsCount)
+    if (clipNum >= sprite->clipsCount)
         return 0;
 
     return sprite->clip[clipNum].anchorX;
@@ -570,7 +587,7 @@ MTR_DCLSPC int MTR_CALL MTR_SpriteGetFrameAnchorY(uint32_t sprNum, int clipNum)
 
     sprite = IK_GET_DATA(mtrSprite_t *, mtrSpriteKeeper, sprNum);
 
-    if (clipNum > sprite->clipsCount)
+    if (clipNum >= sprite->clipsCount)
         return 0;
 
     return sprite->clip[clipNum].anchorY;
