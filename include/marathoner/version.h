@@ -79,14 +79,14 @@
 #define MTR_VERSION_TIMER_EMSCRIPTEN_SQUIRREL       0x000000U /* not incremented */
 #define MTR_VERSION_TIMER_EMSCRIPTEN_DUKTAPE        0x000000U /* not incremented */
 
-#define MTR_VERSION_TTF_SDL2_TTF                    0x000200U /* not incremented */
-#define MTR_VERSION_TTF_SDL2_TTF_LUA                0x000200U /* not incremented */
-#define MTR_VERSION_TTF_SDL2_TTF_SQUIRREL           0x000100U /* not incremented */
-#define MTR_VERSION_TTF_SDL2_TTF_DUKTAPE            0x000100U /* not incremented */
-#define MTR_VERSION_TTF_FREETYPE2                   0x000000U /* not incremented */
-#define MTR_VERSION_TTF_FREETYPE2_LUA               0x000000U /* not incremented */
-#define MTR_VERSION_TTF_FREETYPE2_SQUIRREL          0x000000U /* not incremented */
-#define MTR_VERSION_TTF_FREETYPE2_DUKTAPE           0x000000U /* not incremented */
+#define MTR_VERSION_TTF_SDL2_TTF                    0x000300U /* inc minor */
+#define MTR_VERSION_TTF_SDL2_TTF_LUA                0x000300U /* inc minor */
+#define MTR_VERSION_TTF_SDL2_TTF_SQUIRREL           0x000200U /* inc minor */
+#define MTR_VERSION_TTF_SDL2_TTF_DUKTAPE            0x000200U /* inc minor */
+#define MTR_VERSION_TTF_FREETYPE2                   0x000100U /* inc minor */
+#define MTR_VERSION_TTF_FREETYPE2_LUA               0x000100U /* inc minor */
+#define MTR_VERSION_TTF_FREETYPE2_SQUIRREL          0x000100U /* inc minor */
+#define MTR_VERSION_TTF_FREETYPE2_DUKTAPE           0x000100U /* inc minor */
 
 #define MTR_VERSION_UTILS_COLOR                     0x000300U /* not incremented */
 #define MTR_VERSION_UTILS_COLOR_LUA                 0x000200U /* not incremented */

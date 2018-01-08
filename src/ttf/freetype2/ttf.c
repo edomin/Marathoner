@@ -260,8 +260,13 @@ MTR_DCLSPC void MTR_CALL MTR_TtfGetGlyphSizes(uint32_t fontNum,
         }
     }
 
-    *w = faceGlyph->bitmap.width;
-    *h = faceGlyph->bitmap.rows;
+    if (glyph == 0x20U) { /* space */
+        *w = font->width;
+        *h = font->height;
+    } else {
+        *w = faceGlyph->bitmap.width;
+        *h = faceGlyph->bitmap.rows;
+    }
 }
 
 /*fa MTR_TtfGetGlyphWidth yes */
@@ -274,7 +279,11 @@ MTR_DCLSPC int MTR_CALL MTR_TtfGetGlyphWidth(uint32_t fontNum, uint32_t glyph)
 
     if (fontNum == 0)
         return 0;
+
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
+
+    if (glyph == 0x20U) /* space */
+        return font->width;
 
     glyph_index = FT_Get_Char_Index(font->face[font->currentFace].face, glyph);
     mtrFtError = FT_Load_Glyph(font->face[font->currentFace].face, glyph_index,
@@ -304,7 +313,11 @@ MTR_DCLSPC int MTR_CALL MTR_TtfGetGlyphHeight(uint32_t fontNum, uint32_t glyph)
 
     if (fontNum == 0)
         return 0;
+
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
+
+    if (glyph == 0x20U) /* space */
+        return font->height;
 
     glyph_index = FT_Get_Char_Index(font->face[font->currentFace].face, glyph);
     mtrFtError = FT_Load_Glyph(font->face[font->currentFace].face, glyph_index,
@@ -322,6 +335,36 @@ MTR_DCLSPC int MTR_CALL MTR_TtfGetGlyphHeight(uint32_t fontNum, uint32_t glyph)
     }
 
     return faceGlyph->bitmap.rows;
+}
+
+/*fa MTR_TtfGetGlyphOffsetY yes */
+MTR_DCLSPC int MTR_CALL MTR_TtfGetGlyphOffsetY(uint32_t fontNum, uint32_t glyph)
+{
+    mtrTtf_t        *font;
+    FT_UInt          glyph_index;
+    FT_GlyphSlot     faceGlyph;
+    MTR_TTF_CHECK_IF_NOT_INITED(0);
+
+    if (fontNum == 0)
+        return 0;
+    font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
+
+    glyph_index = FT_Get_Char_Index(font->face[font->currentFace].face, glyph);
+    mtrFtError = FT_Load_Glyph(font->face[font->currentFace].face, glyph_index,
+     FT_LOAD_DEFAULT);
+    if (mtrFtError)
+        return 0;
+    faceGlyph = font->face[font->currentFace].face->glyph;
+
+    if (faceGlyph->format != FT_GLYPH_FORMAT_BITMAP)
+    {
+        mtrFtError = FT_Render_Glyph(faceGlyph,
+         FT_RENDER_MODE_NORMAL);
+        if (mtrFtError)
+            return 0;
+    }
+
+    return faceGlyph->bitmap_top;
 }
 
 /*fa MTR_TtfRenderGlyph yes */

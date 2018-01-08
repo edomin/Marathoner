@@ -45,6 +45,7 @@ MTR_SCRIPT_FUNC(MTR_SF_TtfGetGlyphSizes)
 
 MTR_SCRIPT_FUNC_I_U32t2(MTR_SF_TtfGetGlyphWidth, MTR_TtfGetGlyphWidth)
 MTR_SCRIPT_FUNC_I_U32t2(MTR_SF_TtfGetGlyphHeight, MTR_TtfGetGlyphHeight)
+MTR_SCRIPT_FUNC_I_U32t2(MTR_SF_TtfGetGlyphOffsetY, MTR_TtfGetGlyphOffsetY)
 MTR_SCRIPT_FUNC_P_U32t1U8t3U32t1(MTR_SF_TtfRenderGlyph, MTR_TtfRenderGlyph)
 
 void MTR_ScriptsRegisterAll(void)
@@ -69,6 +70,7 @@ void MTR_ScriptsRegisterAll(void)
     #endif
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TtfGetGlyphWidth);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TtfGetGlyphHeight);
+    MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TtfGetGlyphOffsetY);
     MTR_FIND_AND_ADD_FUNCTION(MTR_SOURCE_MODULE, TtfRenderGlyph);
 
     MTR_ScriptsRegisterVariable_i("FS_NORMAL", MTR_FS_NORMAL);

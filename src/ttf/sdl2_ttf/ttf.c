@@ -249,8 +249,13 @@ MTR_DCLSPC void MTR_CALL MTR_TtfGetGlyphSizes(uint32_t fontNum,
         return;
     }
 
-    *w = advance;
-    *h = font->height;
+    if (glyph == 0x20U) { /* space */
+        *w = font->width;
+        *w = font->height;
+    } else {
+        *w = advance;
+        *h = TTF_FontHeight(font->font[font->height]);//font->height;
+    }
 }
 
 /*fa MTR_TtfGetGlyphWidth yes */
@@ -265,6 +270,9 @@ MTR_DCLSPC int MTR_CALL MTR_TtfGetGlyphWidth(uint32_t fontNum, uint32_t glyph)
         return 0;
 
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
+
+    if (glyph == 0x20U) /* space */
+        return font->width;
 
     glyphMetricsGet = TTF_GlyphMetrics(font->font[font->height], glyph, NULL,
      NULL, NULL, NULL, &advance);
@@ -285,7 +293,16 @@ MTR_DCLSPC int MTR_CALL MTR_TtfGetGlyphHeight(uint32_t fontNum, uint32_t glyph)
 
     font = IK_GET_DATA(mtrTtf_t *, mtrTtfKeeper, fontNum);
 
-    return font->height;
+    if (glyph == 0x20U) /* space */
+        return font->height;
+
+    return TTF_FontHeight(font->font[font->height]);//font->height;
+}
+
+/*fa MTR_TtfGetGlyphOffsetY yes */
+MTR_DCLSPC int MTR_CALL MTR_TtfGetGlyphOffsetY(uint32_t fontNum, uint32_t glyph)
+{
+    return 0;
 }
 
 /*fa MTR_TtfRenderGlyph yes */
