@@ -315,6 +315,19 @@
         return 0;                              \
     }
 
+#define MTR_SCRIPT_FUNC_V_U32t1I2(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)                     \
+    {                                          \
+        uint32_t u32_1;                        \
+        int i1;                                \
+        int i2;                                \
+        MTR_SF_GET_UINT32(u32_1, 1);           \
+        MTR_SF_GET_INT(i1, 2);                 \
+        MTR_SF_GET_INT(i2, 3);                 \
+        func(u32_1, i1, i2);                   \
+        return 0;                              \
+    }
+
 #define MTR_SCRIPT_FUNC_V_U32t1I4(sfunc, func) \
     MTR_SCRIPT_FUNC(sfunc)                     \
     {                                          \
@@ -2804,6 +2817,19 @@
         result = func(i1, i2);            \
         MTR_SF_PUSH_SINGLE(result);       \
         return 1;                         \
+    }
+
+#define MTR_SCRIPT_FUNC_F_U32t1I1(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)                     \
+    {                                          \
+        uint32_t u32_1;                        \
+        int i1;                                \
+        float result;                          \
+        MTR_SF_GET_UINT32(u32_1, 1);           \
+        MTR_SF_GET_INT(i1, 2);                 \
+        result = func(u32_1, i1);              \
+        MTR_SF_PUSH_SINGLE(result);            \
+        return 1;                              \
     }
 
 #define MTR_SCRIPT_FUNC_F_F1(sfunc, func) \
