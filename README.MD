@@ -195,6 +195,7 @@ Domain):
   * "test/media/helicopter.png"
   * "test/media/helicopter_anim.png"
   * "test/media/castleFloor.png"
+  * "test/media/town_tileset_day.png"
   * "test/media/mbf_big_00.png"
   * "test/media/mbf_big_04.png"
   * "test/media/bu-a-ninja-and-shields.ogg"
