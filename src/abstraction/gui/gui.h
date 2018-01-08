@@ -51,8 +51,9 @@ static struct mtrNkGui {
 mtrIndexkeeper_t *mtrGuiFontKeeper;
 mtrIndexkeeper_t *mtrGuiImageKeeper;
 /* Buffer used by function mtrNkGetTextWidth */
-char getTextWidthBuffer[0x10000];
+char        getTextWidthBuffer[0x10000];
 static bool mtrGuiInited = false;
+int         mtrTreeTabId;
 #define MTR_GUI_CHECK_IF_NOT_INITED(returnValue) \
     if (!mtrGuiInited)                           \
         return returnValue;

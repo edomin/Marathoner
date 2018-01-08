@@ -361,6 +361,8 @@ MTR_DCLSPC bool MTR_CALL MTR_GuiInit(uint32_t fontDmSize,
         return false;
     }
 
+    mtrTreeTabId = 0;
+
     MTR_LogWrite("GUI abstraction subsystem initialized", 0, MTR_LMT_INFO);
     mtrGuiInited = true;
     return true;
@@ -854,7 +856,8 @@ MTR_DCLSPC void MTR_CALL MTR_GuiLabelColoredWrap_rgba(const char *string,
 MTR_DCLSPC bool MTR_CALL MTR_GuiTreeTabBegin(const char *title, bool maximized)
 {
     MTR_GUI_CHECK_IF_NOT_INITED(false);
-    return nk_tree_push(&mtrNkGui.ctx, NK_TREE_TAB, title, maximized);
+    mtrTreeTabId++;
+    return nk_tree_push_id(&mtrNkGui.ctx, NK_TREE_TAB, title, maximized, mtrTreeTabId);
 }
 
 /*fa MTR_GuiTreeTabEnd yes */

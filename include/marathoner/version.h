@@ -113,7 +113,7 @@
 #define MTR_VERSION_ABSTRACTION_FONT_SQUIRREL       0x000201U /* not incremented */
 #define MTR_VERSION_ABSTRACTION_FONT_DUKTAPE        0x000101U /* not incremented */
 
-#define MTR_VERSION_ABSTRACTION_GUI                 0x000200U /* not incremented */
+#define MTR_VERSION_ABSTRACTION_GUI                 0x000201U /* inc patch */
 #define MTR_VERSION_ABSTRACTION_GUI_LUA             0x000100U /* not incremented */
 #define MTR_VERSION_ABSTRACTION_GUI_SQUIRREL        0x000100U /* not incremented */
 #define MTR_VERSION_ABSTRACTION_GUI_DUKTAPE         0x000100U /* not incremented */
