@@ -45,13 +45,16 @@ MTR_FUNC(uint32_t, MTR_TtfLoad, const char *);
 MTR_FUNC(void, MTR_TtfFree, uint32_t);
 MTR_FUNC(int, MTR_TtfGetGlyphHeight, uint32_t, uint32_t);
 MTR_FUNC(void, MTR_TtfGetGlyphSizes, uint32_t, uint32_t, int *, int *);
+MTR_FUNC(int, MTR_TtfGetGlyphOffsetY, uint32_t, uint32_t);
 MTR_FUNC(mtrPixels_t *, MTR_TtfRenderGlyph, uint32_t, uint8_t, uint8_t, uint8_t,
  uint32_t);
 MTR_FUNC(uint32_t, MTR_TextureCreate, const char *, int, int);
 MTR_FUNC(bool, MTR_TextureReceivePixelsToPos, uint32_t, mtrPixels_t *, int,
  int);
+MTR_FUNC(void, MTR_SpriteSetFrameAnchorY, uint32_t, int, int);
 MTR_FUNC(int, MTR_SpriteGetFrameWidth, uint32_t, int);
 MTR_FUNC(int, MTR_SpriteGetFrameHeight, uint32_t, int);
+MTR_FUNC(int, MTR_SpriteGetFrameAnchorY, uint32_t, int);
 MTR_FUNC(void, MTR_SpriteDraw_f, uint32_t, int, float, float);
 MTR_FUNC(uint32_t, MTR_SpriteCreateFromTexture, const char *, uint32_t, int);
 MTR_FUNC(bool, MTR_SpriteSetAtlasFrame, uint32_t, int, int, int, int, int, int,
