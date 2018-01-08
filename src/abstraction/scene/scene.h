@@ -88,6 +88,7 @@ mtrIndexkeeper_t *mtrSceneKeeper;
 static bool       mtrSceneInited = false;
 int               mtrSceneMouseX;
 int               mtrSceneMouseY;
+int               mtrSceneMouseWheel;
 
 #define DEFAULT_OBJECT_DM_SIZE        MTR_IKDM_MEDIUM
 #define DEFAULT_OBJECT_RESERVED_COUNT 4096

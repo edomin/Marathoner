@@ -31,6 +31,27 @@ MTR_SCRIPT_FUNC_B_U32t1I5(MTR_SF_SceneCameraSetScrollingKeys,
  MTR_SceneCameraSetScrollingKeys)
 MTR_SCRIPT_FUNC_B_U32t1I1F1(MTR_SF_SceneCameraSetScrollingSpeed,
  MTR_SceneCameraSetScrollingSpeed)
+
+#ifdef lua_h
+MTR_SCRIPT_FUNC(MTR_SF_SceneCameraGetScenePos)
+{
+    uint32_t sceneNum;
+    int      cameraNum;
+    float    sceneX;
+    float    sceneY;
+    MTR_SF_GET_UINT32(sceneNum, 1);
+    MTR_SF_GET_INT(cameraNum, 2);
+    MTR_SF_GET_SINGLE(sceneX, 3);
+    MTR_SF_GET_SINGLE(sceneY, 4);
+    MTR_SceneCameraGetScenePos(sceneNum, cameraNum, &sceneX, &sceneY);
+    MTR_SF_PUSH_INT(sceneX);
+    MTR_SF_PUSH_INT(sceneY);
+    return 2;
+}
+#endif
+
+MTR_SCRIPT_FUNC_F_U32t1I1(MTR_SF_SceneCameraGetSceneX, MTR_SceneCameraGetSceneX)
+MTR_SCRIPT_FUNC_F_U32t1I1(MTR_SF_SceneCameraGetSceneY, MTR_SceneCameraGetSceneY)
 MTR_SCRIPT_FUNC_B_U32t1I1(MTR_SF_SceneDisableCamera, MTR_SceneDisableCamera)
 MTR_SCRIPT_FUNC_B_U32t1(MTR_SF_SceneUpdate, MTR_SceneUpdate)
 MTR_SCRIPT_FUNC_B_U32t1(MTR_SF_SceneDraw, MTR_SceneDraw)
@@ -62,6 +83,11 @@ void MTR_ScriptsRegisterAll(void)
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneCameraSetScrollingKeys);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene",
      SceneCameraSetScrollingSpeed);
+    #ifdef lua_h
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneCameraGetScenePos);
+    #endif
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneCameraGetSceneX);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneCameraGetSceneY);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneDisableCamera);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneUpdate);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneDraw);

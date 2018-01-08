@@ -24,6 +24,9 @@ MTR_FUNC(bool, MTR_SceneCameraSetMouseDragButton, uint32_t, int, int);
 MTR_FUNC(bool, MTR_SceneCameraSetScrollingKeys, uint32_t, int, int, int, int,
  int);
 MTR_FUNC(bool, MTR_SceneCameraSetScrollingSpeed, uint32_t, int, float);
+MTR_FUNC(void, MTR_SceneCameraGetScenePos, uint32_t, int, float *, float *);
+MTR_FUNC(float, MTR_SceneCameraGetSceneX, uint32_t, int);
+MTR_FUNC(float, MTR_SceneCameraGetSceneY, uint32_t, int);
 MTR_FUNC(bool, MTR_SceneDisableCamera, uint32_t, int);
 MTR_FUNC(bool, MTR_SceneUpdate, uint32_t);
 MTR_FUNC(bool, MTR_SceneDraw, uint32_t);

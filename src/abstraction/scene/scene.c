@@ -27,7 +27,7 @@ MTR_DCLSPC mtrReport* MTR_CALL MTR_CreateReport(void)
 
 MTR_SUBSYSTEM_FUNCTION_SUPPORTED_FUNC(Scene, FA_FUNCTIONS_COUNT)
 
-/*fa MTR_GameInit yes */
+/*fa MTR_SceneInit yes */
 MTR_DCLSPC bool MTR_CALL MTR_SceneInit(uint32_t sceneDmSize,
  uint32_t sceneReservedCount)
 {
@@ -257,7 +257,7 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_SceneCreateDefault(const char *name, int width,
 
 /*fa MTR_SceneAddTileLayer yes */
 MTR_DCLSPC bool MTR_CALL MTR_SceneAddTileLayer(uint32_t sceneNum,
- int tileLayerIndex, float tileWidth, float tileHeight, int rows, int cols,
+ int tileLayerIndex, float tileWidth, float tileHeight, int cols, int rows,
  uint32_t missingTileColor)
 {
     int i;
@@ -275,8 +275,8 @@ MTR_DCLSPC bool MTR_CALL MTR_SceneAddTileLayer(uint32_t sceneNum,
 
     scene->tileLayer[tileLayerIndex].tileWidth = tileWidth;
     scene->tileLayer[tileLayerIndex].tileHeight = tileHeight;
-    scene->tileLayer[tileLayerIndex].rows = rows;
     scene->tileLayer[tileLayerIndex].cols = cols;
+    scene->tileLayer[tileLayerIndex].rows = rows;
     scene->tileLayer[tileLayerIndex].missingTileColor = missingTileColor;
 
     scene->tileLayer[tileLayerIndex].tile = malloc(sizeof(mtrTile_t *) * cols);
@@ -596,6 +596,69 @@ MTR_DCLSPC bool MTR_CALL MTR_SceneCameraSetScrollingSpeed(uint32_t sceneNum,
     return true;
 }
 
+/*fa MTR_SceneCameraGetScenePos yes */
+MTR_DCLSPC void MTR_CALL MTR_SceneCameraGetScenePos(uint32_t sceneNum,
+ int cameraIndex, float *sceneX, float *sceneY)
+{
+    mtrScene_t *scene;
+    MTR_SCENE_CHECK_IF_NOT_INITED();
+
+    if (sceneNum == 0U) {
+        *sceneX = 0.0f;
+        *sceneY = 0.0f;
+        return;
+    }
+
+    scene = IK_GET_DATA(mtrScene_t *, mtrSceneKeeper, sceneNum);
+
+    if (cameraIndex >= scene->camerasCount) {
+        *sceneX = 0.0f;
+        *sceneY = 0.0f;
+        return;
+    }
+
+    *sceneX = scene->camera[cameraIndex].sceneX;
+    *sceneY = scene->camera[cameraIndex].sceneY;
+
+    return true;
+}
+
+/*fa MTR_SceneCameraGetSceneX yes */
+MTR_DCLSPC float MTR_CALL MTR_SceneCameraGetSceneX(uint32_t sceneNum,
+ int cameraIndex)
+{
+    mtrScene_t *scene;
+    MTR_SCENE_CHECK_IF_NOT_INITED(0.0f);
+
+    if (sceneNum == 0U)
+        return 0.0f;
+
+    scene = IK_GET_DATA(mtrScene_t *, mtrSceneKeeper, sceneNum);
+
+    if (cameraIndex >= scene->camerasCount)
+        return 0.0f;
+
+    return scene->camera[cameraIndex].sceneX;
+}
+
+/*fa MTR_SceneCameraGetSceneY yes */
+MTR_DCLSPC float MTR_CALL MTR_SceneCameraGetSceneY(uint32_t sceneNum,
+ int cameraIndex)
+{
+    mtrScene_t *scene;
+    MTR_SCENE_CHECK_IF_NOT_INITED(0.0f);
+
+    if (sceneNum == 0U)
+        return 0.0f;
+
+    scene = IK_GET_DATA(mtrScene_t *, mtrSceneKeeper, sceneNum);
+
+    if (cameraIndex >= scene->camerasCount)
+        return 0.0f;
+
+    return scene->camera[cameraIndex].sceneY;
+}
+
 /*fa MTR_SceneDisableCamera yes */
 MTR_DCLSPC bool MTR_CALL MTR_SceneDisableCamera(uint32_t sceneNum,
  int cameraIndex)
@@ -618,41 +681,63 @@ MTR_DCLSPC bool MTR_CALL MTR_SceneDisableCamera(uint32_t sceneNum,
 
 MTR_DCLSPC void MTR_CALL MTR_SceneUpdateCamera(uint32_t sceneNum, int cameraNum)
 {
-    mtrScene_t *scene;
-    mtrCamera_t camera;
+    mtrScene_t  *scene;
+    mtrCamera_t *camera;
+    bool         scrollLeft;
+    bool         scrollRight;
+    bool         scrollUp;
+    bool         scrollDown;
 
     scene = IK_GET_DATA(mtrScene_t *, mtrSceneKeeper, sceneNum);
 
-    camera = scene->camera[cameraNum];
-    if (camera.cursorScrolling) {
-        if (mtrSceneMouseX <= camera.outputX)
-            camera.sceneX -= camera.scrollingSpeed;
-        else if (mtrSceneMouseX >= camera.outputX + camera.outputWidth - 1.0f)
-            camera.sceneX += camera.scrollingSpeed;
-        if (mtrSceneMouseY <= camera.outputY)
-            camera.sceneY -= camera.scrollingSpeed;
-        else if (mtrSceneMouseY >= camera.outputY + camera.outputHeight - 1.0f)
-            camera.sceneY += camera.scrollingSpeed;
+    camera = &scene->camera[cameraNum];
 
-        if (camera.sceneX < 0.0f - camera.outputWidth * camera.sceneScale * (1.0f + camera.horBoundOutFactor)) {
-            if (camera.sceneX > scene->width + camera.outputWidth * camera.sceneScale * (1.0f + camera.horBoundOutFactor))
-                camera.sceneX = (scene->width - camera.outputWidth * camera.sceneScale) / 2.0f;
-            else
-                camera.sceneX = 0.0f - camera.outputWidth * camera.sceneScale * (1.0f + camera.horBoundOutFactor);
-        } else {
-            if (camera.sceneX > scene->width + camera.outputWidth * camera.sceneScale * (1.0f + camera.horBoundOutFactor))
-                camera.sceneX = scene->width + camera.outputWidth * camera.sceneScale * (1.0f + camera.horBoundOutFactor);
-        }
+    if (mtrSceneMouseWheel != 0) {
+        camera->sceneScale += ((float)mtrSceneMouseWheel * 0.1f);
+        if (camera->sceneScale > camera->maxScale)
+            camera->sceneScale = camera->maxScale;
+        if (camera->sceneScale < camera->minScale)
+            camera->sceneScale = camera->minScale;
+    }
 
-        if (camera.sceneY < 0.0f - camera.outputHeight * camera.sceneScale * (1.0f + camera.verBoundOutFactor)) {
-            if (camera.sceneY > scene->height + camera.outputHeight * camera.sceneScale * (1.0f + camera.verBoundOutFactor))
-                camera.sceneY = (scene->height - camera.outputHeight * camera.sceneScale) / 2.0f;
-            else
-                camera.sceneY = 0.0f - camera.outputHeight * camera.sceneScale * (1.0f + camera.verBoundOutFactor);
-        } else {
-            if (camera.sceneY > scene->height + camera.outputHeight * camera.sceneScale * (1.0f + camera.verBoundOutFactor))
-                camera.sceneY = scene->height + camera.outputHeight * camera.sceneScale * (1.0f + camera.verBoundOutFactor);
-        }
+    scrollLeft = MTR_KeyboardPressed(camera->keyScrollLeft) ||
+     ((mtrSceneMouseX <= camera->outputX) && (camera->cursorScrolling));
+    scrollRight = MTR_KeyboardPressed(camera->keyScrollRight) ||
+     ((mtrSceneMouseX >= camera->outputX + camera->outputWidth - 1.0f) &&
+     (camera->cursorScrolling));
+    scrollUp = MTR_KeyboardPressed(camera->keyScrollUp) ||
+     ((mtrSceneMouseY <= camera->outputY) && (camera->cursorScrolling));
+    scrollDown = MTR_KeyboardPressed(camera->keyScrollDown) ||
+     ((mtrSceneMouseY >= camera->outputY + camera->outputHeight - 1.0f) &&
+     (camera->cursorScrolling));
+
+    if (scrollLeft)
+        camera->sceneX -= camera->scrollingSpeed / camera->sceneScale;
+    else if (scrollRight)
+        camera->sceneX += camera->scrollingSpeed / camera->sceneScale;
+    if (scrollUp)
+        camera->sceneY -= camera->scrollingSpeed / camera->sceneScale;
+    else if (scrollDown)
+        camera->sceneY += camera->scrollingSpeed / camera->sceneScale;
+
+    if (camera->sceneX < 0.0f - camera->outputWidth / camera->sceneScale * camera->horBoundOutFactor) {
+//        if (camera->sceneX > scene->width - camera->outputWidth * camera->sceneScale * (0.0f + camera->horBoundOutFactor))
+//            camera->sceneX = (scene->width - camera->outputWidth * camera->sceneScale) / 2.0f;
+//        else
+            camera->sceneX = 0.0f - camera->outputWidth / camera->sceneScale * camera->horBoundOutFactor;
+    } else {
+        if (camera->sceneX > scene->width - camera->outputWidth / camera->sceneScale * camera->horBoundOutFactor)
+            camera->sceneX = scene->width - camera->outputWidth / camera->sceneScale * camera->horBoundOutFactor;
+    }
+
+    if (camera->sceneY < 0.0f - camera->outputHeight / camera->sceneScale * camera->verBoundOutFactor) {
+//        if (camera->sceneY > scene->height - camera->outputHeight * camera->sceneScale * (0.0f + camera->verBoundOutFactor))
+//            camera->sceneY = (scene->height - camera->outputHeight * camera->sceneScale) / 2.0f;
+//        else
+            camera->sceneY = 0.0f - camera->outputHeight / camera->sceneScale * camera->verBoundOutFactor;
+    } else {
+        if (camera->sceneY > scene->height - camera->outputHeight / camera->sceneScale * camera->verBoundOutFactor)
+            camera->sceneY = scene->height - camera->outputHeight / camera->sceneScale * camera->verBoundOutFactor;
     }
 }
 
@@ -669,6 +754,7 @@ MTR_DCLSPC bool MTR_CALL MTR_SceneUpdate(uint32_t sceneNum)
     scene = IK_GET_DATA(mtrScene_t *, mtrSceneKeeper, sceneNum);
 
     MTR_MouseGetXY(&mtrSceneMouseX, &mtrSceneMouseY);
+    mtrSceneMouseWheel = MTR_MouseGetWheelRelative();
 
     for (i = 0; i < scene->camerasCount; i++) {
         if (scene->camera[i].enabled)
@@ -682,7 +768,7 @@ MTR_DCLSPC void MTR_CALL MTR_SceneDrawTileLayer(uint32_t sceneNum,
  int cameraNum, int tileLayerNum)
 {
     mtrScene_t    *scene;
-    mtrCamera_t    camera;
+    mtrCamera_t   *camera;
     mtrTileLayer_t tileLayer;
     int            i;
     int            j;
@@ -695,42 +781,42 @@ MTR_DCLSPC void MTR_CALL MTR_SceneDrawTileLayer(uint32_t sceneNum,
 
     scene = IK_GET_DATA(mtrScene_t *, mtrSceneKeeper, sceneNum);
 
-    camera = scene->camera[cameraNum];
+    camera = &scene->camera[cameraNum];
     tileLayer = scene->tileLayer[tileLayerNum];
 
     tileWidth = tileLayer.tileWidth;
     tileHeight = tileLayer.tileHeight;
-    tileFirstCol = camera.sceneX / tileWidth;
-    tileLastCol = (camera.sceneX + (camera.outputWidth - 1.0f) * camera.sceneScale) / tileWidth;
-    tileFirstRow = camera.sceneY / tileHeight;
-    tileLastRow = (camera.sceneY + (camera.outputHeight - 1.0f) * camera.sceneScale) / tileHeight;
+    tileFirstCol = camera->sceneX / tileWidth - 1;
+    tileLastCol = (camera->sceneX + (camera->outputWidth - 1.0f) / camera->sceneScale) / tileWidth;
+    tileFirstRow = camera->sceneY / tileHeight - 1;
+    tileLastRow = (camera->sceneY + (camera->outputHeight - 1.0f) / camera->sceneScale) / tileHeight;
 
     for (i = tileFirstCol; i <= tileLastCol; i++) {
         for (j = tileFirstRow; j <= tileLastRow; j++) {
-            float tileOutputX = (i * tileWidth - camera.sceneX) * camera.sceneScale;
-            float tileOutputY = (j * tileHeight - camera.sceneY) * camera.sceneScale;
-            if ((i >= 0) && (i <= tileLayer.cols - 1) && (j >= 0) &&
-             (j <= tileLayer.rows - 1)) {
+            float tileOutputX = (i * tileWidth - camera->sceneX) * camera->sceneScale;
+            float tileOutputY = (j * tileHeight - camera->sceneY) * camera->sceneScale;
+            if ((i >= 0) && (i < tileLayer.cols) && (j >= 0) &&
+             (j < tileLayer.rows)) {
                 if (tileLayer.tile[i][j].sprite != 0U) {
                     MTR_SpriteDrawScaled_f(tileLayer.tile[i][j].sprite,
                      tileLayer.tile[i][j].clip, tileOutputX, tileOutputY,
-                     camera.sceneScale, camera.sceneScale);
+                     camera->sceneScale, camera->sceneScale);
                 } else {
                     MTR_PrimitiveRectangleFilled_ca_f(tileOutputX, tileOutputY,
-                     tileOutputX + (tileWidth - 1.0f) * camera.sceneScale,
-                     tileOutputY + (tileHeight - 1.0f) * camera.sceneScale,
+                     tileOutputX + (tileWidth - 0.0f) * camera->sceneScale,
+                     tileOutputY + (tileHeight - 0.0f) * camera->sceneScale,
                      tileLayer.missingTileColor);
                 }
             } else {
                 MTR_PrimitiveRectangleFilled_ca_f(tileOutputX, tileOutputY,
-                 tileOutputX + (tileWidth - 1.0f) * camera.sceneScale,
-                 tileOutputY + (tileHeight - 1.0f) * camera.sceneScale,
+                 tileOutputX + (tileWidth - 0.0f) * camera->sceneScale,
+                 tileOutputY + (tileHeight - 0.0f) * camera->sceneScale,
                  tileLayer.missingTileColor);
             }
         }
     }
 
-    tileFirstCol = camera.sceneX;
+    tileFirstCol = camera->sceneX;
 }
 
 MTR_DCLSPC void MTR_CALL MTR_SceneDrawCamera(uint32_t sceneNum, int cameraNum)
