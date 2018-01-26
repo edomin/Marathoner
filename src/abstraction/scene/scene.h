@@ -80,6 +80,7 @@ typedef struct mtrScene_t {
     mtrTileLayer_t   *tileLayer;
     mtrIndexkeeper_t *objectKeeper;
     uint32_t          nextSceneNum;
+    uint32_t          outSceneColor;
 } mtrScene_t;
 
 //mtrScene_t       *mtrScene;

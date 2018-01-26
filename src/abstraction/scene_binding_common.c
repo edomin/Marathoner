@@ -7,12 +7,17 @@ MTR_SCRIPT_FUNC_I_S1(MTR_SF_SceneFunctionSupported, MTR_SceneFunctionSupported)
 MTR_SCRIPT_FUNC_B_U32t2(MTR_SF_SceneInit, MTR_SceneInit)
 MTR_SCRIPT_FUNC_U32t_S1I2U32t2I3(MTR_SF_SceneCreate, MTR_SceneCreate)
 MTR_SCRIPT_FUNC_U32t_S1I2(MTR_SF_SceneCreateDefault, MTR_SceneCreateDefault)
+MTR_SCRIPT_FUNC_B_U32t2(MTR_SF_SceneSetOutSceneColor, MTR_SceneSetOutSceneColor)
 MTR_SCRIPT_FUNC_B_U32t1I1F2I2U32t1(MTR_SF_SceneAddTileLayer,
  MTR_SceneAddTileLayer)
 MTR_SCRIPT_FUNC_B_U32t1I3U32t1I1(MTR_SF_SceneTileLayerSetTile,
  MTR_SceneTileLayerSetTile)
 MTR_SCRIPT_FUNC_B_U32t1I3(MTR_SF_SceneTileLayerRemoveTile,
  MTR_SceneTileLayerRemoveTile)
+MTR_SCRIPT_FUNC_F_U32t1I1(MTR_SF_SceneTileLayerGetTileWidth,
+ MTR_SceneTileLayerGetTileWidth)
+MTR_SCRIPT_FUNC_F_U32t1I1(MTR_SF_SceneTileLayerGetTileHeight,
+ MTR_SceneTileLayerGetTileHeight)
 MTR_SCRIPT_FUNC_B_U32t1I1F7(MTR_SF_SceneAddCamera, MTR_SceneAddCamera)
 MTR_SCRIPT_FUNC_B_U32t1I1F7(MTR_SF_SceneCameraSetSizes, MTR_SceneCameraSetSizes)
 MTR_SCRIPT_FUNC_B_U32t1I1F2B1(MTR_SF_SceneCameraSetBoundOut,
@@ -52,6 +57,18 @@ MTR_SCRIPT_FUNC(MTR_SF_SceneCameraGetScenePos)
 
 MTR_SCRIPT_FUNC_F_U32t1I1(MTR_SF_SceneCameraGetSceneX, MTR_SceneCameraGetSceneX)
 MTR_SCRIPT_FUNC_F_U32t1I1(MTR_SF_SceneCameraGetSceneY, MTR_SceneCameraGetSceneY)
+MTR_SCRIPT_FUNC_F_U32t1I1(MTR_SF_SceneCameraGetSceneScale,
+ MTR_SceneCameraGetSceneScale)
+MTR_SCRIPT_FUNC_F_U32t1I1F1(MTR_SF_SceneViewxToX, MTR_SceneViewxToX)
+MTR_SCRIPT_FUNC_F_U32t1I1F1(MTR_SF_SceneViewyToY, MTR_SceneViewyToY)
+MTR_SCRIPT_FUNC_I_U32t1I2F1(MTR_SF_SceneViewxToTileLayerCol,
+ MTR_SceneViewxToTileLayerCol)
+MTR_SCRIPT_FUNC_I_U32t1I2F1(MTR_SF_SceneViewyToTileLayerRow,
+ MTR_SceneViewyToTileLayerRow)
+MTR_SCRIPT_FUNC_F_U32t1I3(MTR_SF_SceneTileLayerColToViewx,
+ MTR_SceneTileLayerColToViewx)
+MTR_SCRIPT_FUNC_F_U32t1I3(MTR_SF_SceneTileLayerRowToViewy,
+ MTR_SceneTileLayerRowToViewy)
 MTR_SCRIPT_FUNC_B_U32t1I1(MTR_SF_SceneDisableCamera, MTR_SceneDisableCamera)
 MTR_SCRIPT_FUNC_B_U32t1(MTR_SF_SceneUpdate, MTR_SceneUpdate)
 MTR_SCRIPT_FUNC_B_U32t1(MTR_SF_SceneDraw, MTR_SceneDraw)
@@ -66,9 +83,12 @@ void MTR_ScriptsRegisterAll(void)
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneInit);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneCreate);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneCreateDefault);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneSetOutSceneColor);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneAddTileLayer);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneTileLayerSetTile);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneTileLayerRemoveTile);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneTileLayerGetTileWidth);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneTileLayerGetTileHeight);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneAddCamera);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneCameraSetSizes);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneCameraSetBoundOut);
@@ -88,6 +108,13 @@ void MTR_ScriptsRegisterAll(void)
     #endif
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneCameraGetSceneX);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneCameraGetSceneY);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneCameraGetSceneScale);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneViewxToX);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneViewyToY);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneViewxToTileLayerCol);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneViewyToTileLayerRow);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneTileLayerColToViewx);
+    MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneTileLayerRowToViewy);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneDisableCamera);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneUpdate);
     MTR_FIND_AND_ADD_FUNCTION("Abstraction_scene", SceneDraw);

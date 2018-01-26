@@ -255,6 +255,22 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_SceneCreateDefault(const char *name, int width,
     return freeIndex;
 }
 
+/*fa MTR_SceneSetOutSceneColor yes */
+MTR_DCLSPC bool MTR_CALL MTR_SceneSetOutSceneColor(uint32_t sceneNum,
+ uint32_t color)
+{
+    mtrScene_t *scene;
+    MTR_SCENE_CHECK_IF_NOT_INITED(false);
+
+    if (sceneNum == 0U)
+        return false;
+
+    scene = IK_GET_DATA(mtrScene_t *, mtrSceneKeeper, sceneNum);
+    scene->outSceneColor = color;
+
+    return true;
+}
+
 /*fa MTR_SceneAddTileLayer yes */
 MTR_DCLSPC bool MTR_CALL MTR_SceneAddTileLayer(uint32_t sceneNum,
  int tileLayerIndex, float tileWidth, float tileHeight, int cols, int rows,
@@ -356,6 +372,42 @@ MTR_DCLSPC bool MTR_CALL MTR_SceneTileLayerRemoveTile(uint32_t sceneNum,
     scene->tileLayer[tileLayerIndex].tile[col][row].clip = 0;
 
     return true;
+}
+
+/*fa MTR_SceneTileLayerGetTileWidth yes */
+MTR_DCLSPC float MTR_CALL MTR_SceneTileLayerGetTileWidth(uint32_t sceneNum,
+ int tileLayerIndex)
+{
+    mtrScene_t *scene;
+    MTR_SCENE_CHECK_IF_NOT_INITED(false);
+
+    if (sceneNum == 0U)
+        return false;
+
+    scene = IK_GET_DATA(mtrScene_t *, mtrSceneKeeper, sceneNum);
+
+    if (tileLayerIndex >= scene->tileLayersCount)
+        return false;
+
+    return scene->tileLayer[tileLayerIndex].tileWidth;
+}
+
+/*fa MTR_SceneTileLayerGetTileHeight yes */
+MTR_DCLSPC float MTR_CALL MTR_SceneTileLayerGetTileHeight(uint32_t sceneNum,
+ int tileLayerIndex)
+{
+    mtrScene_t *scene;
+    MTR_SCENE_CHECK_IF_NOT_INITED(false);
+
+    if (sceneNum == 0U)
+        return false;
+
+    scene = IK_GET_DATA(mtrScene_t *, mtrSceneKeeper, sceneNum);
+
+    if (tileLayerIndex >= scene->tileLayersCount)
+        return false;
+
+    return scene->tileLayer[tileLayerIndex].tileHeight;
 }
 
 /*fa MTR_SceneAddCamera yes */
@@ -659,6 +711,186 @@ MTR_DCLSPC float MTR_CALL MTR_SceneCameraGetSceneY(uint32_t sceneNum,
     return scene->camera[cameraIndex].sceneY;
 }
 
+/*fa MTR_SceneCameraGetSceneScale yes */
+MTR_DCLSPC float MTR_CALL MTR_SceneCameraGetSceneScale(uint32_t sceneNum,
+ int cameraIndex)
+{
+    mtrScene_t *scene;
+    MTR_SCENE_CHECK_IF_NOT_INITED(0.0f);
+
+    if (sceneNum == 0U)
+        return 0.0f;
+
+    scene = IK_GET_DATA(mtrScene_t *, mtrSceneKeeper, sceneNum);
+
+    if (cameraIndex >= scene->camerasCount)
+        return 0.0f;
+
+    return scene->camera[cameraIndex].sceneScale;
+}
+
+/* Convert screen coord to scene coord */
+/*fa MTR_SceneViewxToX yes */
+MTR_DCLSPC float MTR_CALL MTR_SceneViewxToX(uint32_t sceneNum, int cameraIndex,
+ float viewX)
+{
+    mtrScene_t  *scene;
+    mtrCamera_t *camera;
+    MTR_SCENE_CHECK_IF_NOT_INITED(0.0f);
+
+    if (sceneNum == 0U)
+        return 0.0f;
+
+    scene = IK_GET_DATA(mtrScene_t *, mtrSceneKeeper, sceneNum);
+
+    if (cameraIndex >= scene->camerasCount)
+        return 0.0f;
+
+    camera = &scene->camera[cameraIndex];
+
+    return camera->sceneX + viewX * camera->sceneScale;
+}
+
+/* Convert screen coord to scene coord */
+/*fa MTR_SceneViewyToY yes */
+MTR_DCLSPC float MTR_CALL MTR_SceneViewyToY(uint32_t sceneNum, int cameraIndex,
+ float viewY)
+{
+    mtrScene_t  *scene;
+    mtrCamera_t *camera;
+    MTR_SCENE_CHECK_IF_NOT_INITED(0.0f);
+
+    if (sceneNum == 0U)
+        return 0.0f;
+
+    scene = IK_GET_DATA(mtrScene_t *, mtrSceneKeeper, sceneNum);
+
+    if (cameraIndex >= scene->camerasCount)
+        return 0.0f;
+
+    camera = &scene->camera[cameraIndex];
+
+    return camera->sceneY + viewY * camera->sceneScale;
+}
+
+/* Convert screen x to tile layer col */
+/*fa MTR_SceneViewxToTileLayerCol yes */
+MTR_DCLSPC int MTR_CALL MTR_SceneViewxToTileLayerCol(uint32_t sceneNum,
+ int cameraIndex, int tileLayerIndex, float viewX)
+{
+    mtrScene_t     *scene;
+    mtrCamera_t    *camera;
+    mtrTileLayer_t *tileLayer;
+    int             col;
+    MTR_SCENE_CHECK_IF_NOT_INITED(0);
+
+    if (sceneNum == 0U)
+        return -1;
+
+    scene = IK_GET_DATA(mtrScene_t *, mtrSceneKeeper, sceneNum);
+
+    if (cameraIndex >= scene->camerasCount)
+        return -1;
+    if (tileLayerIndex >= scene->tileLayersCount)
+        return -1;
+
+    camera = &scene->camera[cameraIndex];
+    tileLayer = &scene->tileLayer[tileLayerIndex];
+
+    col = (camera->sceneX + viewX / camera->sceneScale) / tileLayer->tileWidth;
+    if ((col < 0) || (col >= tileLayer->cols))
+        return -1;
+
+    return col;
+}
+
+/* Convert screen y to tile layer row */
+/*fa MTR_SceneViewyToTileLayerRow yes */
+MTR_DCLSPC int MTR_CALL MTR_SceneViewyToTileLayerRow(uint32_t sceneNum,
+ int cameraIndex, int tileLayerIndex, float viewY)
+{
+    mtrScene_t     *scene;
+    mtrCamera_t    *camera;
+    mtrTileLayer_t *tileLayer;
+    int             row;
+    MTR_SCENE_CHECK_IF_NOT_INITED(0);
+
+    if (sceneNum == 0U)
+        return -1;
+
+    scene = IK_GET_DATA(mtrScene_t *, mtrSceneKeeper, sceneNum);
+
+    if (cameraIndex >= scene->camerasCount)
+        return -1;
+    if (tileLayerIndex >= scene->tileLayersCount)
+        return -1;
+
+    camera = &scene->camera[cameraIndex];
+    tileLayer = &scene->tileLayer[tileLayerIndex];
+
+    row = (camera->sceneY + viewY / camera->sceneScale) / tileLayer->tileHeight;
+    if ((row < 0) || (row >= tileLayer->rows))
+        return -1;
+
+    return row;
+}
+
+/*fa MTR_SceneTileLayerColToViewx yes */
+MTR_DCLSPC float MTR_CALL MTR_SceneTileLayerColToViewx(uint32_t sceneNum,
+ int cameraIndex, int tileLayerIndex, int col)
+{
+    mtrScene_t     *scene;
+    mtrCamera_t    *camera;
+    mtrTileLayer_t *tileLayer;
+    float           tileWidth;
+    MTR_SCENE_CHECK_IF_NOT_INITED(0);
+
+    if (sceneNum == 0U)
+        return -1;
+
+    scene = IK_GET_DATA(mtrScene_t *, mtrSceneKeeper, sceneNum);
+
+    if (cameraIndex >= scene->camerasCount)
+        return -1;
+    if (tileLayerIndex >= scene->tileLayersCount)
+        return -1;
+
+    camera = &scene->camera[cameraIndex];
+    tileLayer = &scene->tileLayer[tileLayerIndex];
+
+    tileWidth = tileLayer->tileWidth;
+
+    return (col * tileWidth - camera->sceneX) * camera->sceneScale;
+}
+
+/*fa MTR_SceneTileLayerRowToViewy yes */
+MTR_DCLSPC float MTR_CALL MTR_SceneTileLayerRowToViewy(uint32_t sceneNum,
+ int cameraIndex, int tileLayerIndex, int row)
+{
+    mtrScene_t     *scene;
+    mtrCamera_t    *camera;
+    mtrTileLayer_t *tileLayer;
+    float           tileHeight;
+    MTR_SCENE_CHECK_IF_NOT_INITED(0);
+
+    if (sceneNum == 0U)
+        return -1;
+
+    scene = IK_GET_DATA(mtrScene_t *, mtrSceneKeeper, sceneNum);
+
+    if (cameraIndex >= scene->camerasCount)
+        return -1;
+    if (tileLayerIndex >= scene->tileLayersCount)
+        return -1;
+
+    camera = &scene->camera[cameraIndex];
+    tileLayer = &scene->tileLayer[tileLayerIndex];
+
+    tileHeight = tileLayer->tileHeight;
+
+    return (row * tileHeight - camera->sceneY) * camera->sceneScale;
+}
+
 /*fa MTR_SceneDisableCamera yes */
 MTR_DCLSPC bool MTR_CALL MTR_SceneDisableCamera(uint32_t sceneNum,
  int cameraIndex)
@@ -811,7 +1043,7 @@ MTR_DCLSPC void MTR_CALL MTR_SceneDrawTileLayer(uint32_t sceneNum,
                 MTR_PrimitiveRectangleFilled_ca_f(tileOutputX, tileOutputY,
                  tileOutputX + (tileWidth - 0.0f) * camera->sceneScale,
                  tileOutputY + (tileHeight - 0.0f) * camera->sceneScale,
-                 tileLayer.missingTileColor);
+                 scene->outSceneColor);
             }
         }
     }
