@@ -34,7 +34,7 @@ Instructions for building third-party libraries can be found in:
 * [doc/building_third_party_libraries_win64.md](https://github.com/edomin/Marathoner/blob/master/doc/building_third_party_libraries_win64.md)
 
 ##### Building Engine
-Path to all needed toolchains' binaries must be in PATH varisble.  
+Path to all needed toolchains' binaries must be in PATH variable.  
 Used compilers:  
 
 * Windows 32bit - TDM GCC 5.1.0
