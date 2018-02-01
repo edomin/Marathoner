@@ -26,6 +26,11 @@ MTR_RequireMarathonerGetSubsystemModuleIdFunc MTR_RequireMarathonerGetSubsystemM
 typedef void (MTR_CALL * MTR_RequireConfigfileGetKeyNameFunc)(
  MTR_ConfigfileGetKeyNameFunc_t);
 MTR_RequireConfigfileGetKeyNameFunc MTR_RequireConfigfileGetKeyName;
+
+typedef void (MTR_CALL * MTR_RequireGetCurrentDirectoryFunc)(
+ MTR_GetCurrentDirectoryFunc_t);
+MTR_RequireGetCurrentDirectoryFunc MTR_RequireGetCurrentDirectory;
+
 typedef void (MTR_CALL * MTR_RequireConfigfileGetSectionNameFunc)(
  MTR_ConfigfileGetSectionNameFunc_t);
 MTR_RequireConfigfileGetSectionNameFunc MTR_RequireConfigfileGetSectionName;

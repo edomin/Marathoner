@@ -9,6 +9,9 @@ fa.FunctionSupported(MarathonerGetModuleVersion,
 fa.FunctionSupported(MarathonerGetSubsystemModuleId,
  "MTR_MarathonerGetSubsystemModuleId", MarathonerFunctionSupported);
 
+fa.FunctionSupported(GetCurrentDirectory, "MTR_GetCurrentDirectory",
+ MarathonerFunctionSupported);
+
 fa.FunctionSupported(ConfigfileGetKeyName, "MTR_ConfigfileGetKeyName",
  MarathonerFunctionSupported);
 fa.FunctionSupported(ConfigfileGetSectionName, "MTR_ConfigfileGetSectionName",

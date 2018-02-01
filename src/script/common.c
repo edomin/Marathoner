@@ -28,6 +28,7 @@ MTR_SCRIPT_FUNC_U32t_S1(MTR_SF_MarathonerGetModuleVersion,
 MTR_SCRIPT_FUNC_S_S1(MTR_SF_MarathonerGetSubsystemModuleId,
  MTR_MarathonerGetSubsystemModuleId)
 #endif
+MTR_SCRIPT_FUNC_S_V(MTR_SF_GetCurrentDirectory, MTR_GetCurrentDirectory)
 MTR_SCRIPT_FUNC_S_S2I1(MTR_SF_ConfigfileGetKeyName, MTR_ConfigfileGetKeyName)
 MTR_SCRIPT_FUNC_S_S1I1(MTR_SF_ConfigfileGetSectionName,
  MTR_ConfigfileGetSectionName)
@@ -171,6 +172,8 @@ void MTR_ScriptsRegisterAll(void)
     MTR_ScriptsRegisterFunction(MTR_SF_MarathonerGetSubsystemModuleId,
      "MarathonerGetSubsystemModuleId");
     #endif
+    MTR_ScriptsRegisterFunction(MTR_SF_GetCurrentDirectory,
+     "GetCurrentDirectory");
     MTR_ScriptsRegisterFunction(MTR_SF_ConfigfileGetKeyName,
      "ConfigfileGetKeyName");
     MTR_ScriptsRegisterFunction(MTR_SF_ConfigfileKeyExists,

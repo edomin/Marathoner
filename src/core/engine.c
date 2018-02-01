@@ -1,6 +1,7 @@
 #include "log.h"
 #include "messagebox.h"
 #include "notification.h"
+#include "directory.h"
 #include "configfile.h"
 #include "indexkeeper.h"
 #include "file.h"
@@ -8,7 +9,6 @@
 #include "clipboard.h"
 #include "string_buffer.h"
 #ifdef MTR_MOD_PLUGIN
-    #include "directory.h"
     #include "so.h"
     #include "plugin_loader.h"
 #endif
@@ -33,6 +33,8 @@ void RequireEngineFuncs(uint8_t plugin)
      MTR_MarathonerGetModuleVersion);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireMarathonerGetSubsystemModuleId,
      MTR_MarathonerGetSubsystemModuleId);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireGetCurrentDirectory,
+     MTR_GetCurrentDirectory);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConfigfileGetKeyName,
      MTR_ConfigfileGetKeyName);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConfigfileGetSectionName,

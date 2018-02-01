@@ -45,6 +45,8 @@ MTR_MarathonerGetVersionFunc_t            MTR_MarathonerGetVersion;
 MTR_MarathonerGetModuleVersionFunc_t      MTR_MarathonerGetModuleVersion;
 MTR_MarathonerGetSubsystemModuleIdFunc_t  MTR_MarathonerGetSubsystemModuleId;
 
+MTR_GetCurrentDirectoryFunc_t             MTR_GetCurrentDirectory;
+
 MTR_ConfigfileGetKeyNameFunc_t            MTR_ConfigfileGetKeyName;
 MTR_ConfigfileGetSectionNameFunc_t        MTR_ConfigfileGetSectionName;
 MTR_ConfigfileKeyExistsFunc_t             MTR_ConfigfileKeyExists;

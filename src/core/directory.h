@@ -4,7 +4,6 @@
 #ifdef __MINGW32__
     #include <windows.h>
 #else
-//    #include <emscripten.h>
     #include <dirent.h>
 #endif
 #include <string.h>
@@ -23,7 +22,7 @@ typedef struct mtrDirectory_t{
     bool            endOfDirectory;
 } mtrDirectory_t;
 
-char *MTR_GetCurrentDirectory(void);
+char *MTR_CALL MTR_GetCurrentDirectory(void);
 /* directoryName format: "./<directoryName>/" */
 mtrDirectory_t *MTR_DirectoryOpen(const char *directoryName);
 bool MTR_DirectoryNextFile(mtrDirectory_t *directory);

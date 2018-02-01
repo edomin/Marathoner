@@ -1,7 +1,7 @@
 #ifndef MTR_VERSION_H
 #define MTR_VERSION_H
 
-#define MTR_VERSION_MARATHONER                      0x000302U /* inc patch */
+#define MTR_VERSION_MARATHONER                      0x000400U /* inc minor */
 
 #define MTR_VERSION_LAUNCHER                        0x000100U /* inc minor */
 

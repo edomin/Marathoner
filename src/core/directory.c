@@ -1,7 +1,8 @@
 #include "directory.h"
 
 /* Win32 only */
-char *MTR_GetCurrentDirectory(void)
+/*fa MTR_GetCurrentDirectory yes */
+char *MTR_CALL MTR_GetCurrentDirectory(void)
 {
     char *directoryName;
     int directoryNameLength;

@@ -75,6 +75,9 @@ MTR_ENGINE_FUNC(int, MTR_MarathonerFunctionSupported, const char *);
 MTR_ENGINE_FUNC(uint32_t, MTR_MarathonerGetVersion, void);
 MTR_ENGINE_FUNC(uint32_t, MTR_MarathonerGetModuleVersion, const char *);
 MTR_ENGINE_FUNC(char *, MTR_MarathonerGetSubsystemModuleId, const char *);
+
+MTR_ENGINE_FUNC(char *, MTR_GetCurrentDirectory, void);
+
 MTR_ENGINE_FUNC(char *, MTR_ConfigfileGetKeyName, const char *, const char *,
  int);
 MTR_ENGINE_FUNC(char *, MTR_ConfigfileGetSectionName, const char *, int);

@@ -263,10 +263,10 @@ fa.h: $(FADIR)/core.h
 
 $(FADIR)/core.h: $(FAGEN)$(HOST_EXE_EXT) log.c notification.c configfile.c \
  messagebox.c file.c clipboard.c string_buffer.c options.c console.c version.c \
- module.c
+ module.c directory.c
 	$(FAGEN) $(FADIR)/core.h $(PLATFORM) log.c notification.c configfile.c \
      messagebox.c file.c clipboard.c string_buffer.c options.c console.c \
-     version.c module.c
+     version.c module.c directory.c
 
 ../../include/marathoner/engine.h: ../../include/marathoner/marathoner.h
 

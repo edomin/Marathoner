@@ -27,6 +27,12 @@ MTR_DCLSPC void MTR_CALL MTR_RequireMarathonerGetSubsystemModuleId(
     MTR_MarathonerGetSubsystemModuleId = MarathonerGetSubsystemModuleIdFunc;
 }
 
+MTR_DCLSPC void MTR_CALL MTR_RequireGetCurrentDirectory(
+ MTR_GetCurrentDirectoryFunc_t GetCurrentDirectoryFunc)
+{
+    MTR_GetCurrentDirectory = GetCurrentDirectoryFunc;
+}
+
 MTR_DCLSPC void MTR_CALL MTR_RequireConfigfileGetKeyName(
  MTR_ConfigfileGetKeyNameFunc_t ConfigfileGetKeyNameFunc)
 {
