@@ -70,4 +70,3 @@ MTR_DCLSPC void MTR_CALL MTR_PrimitiveLineTo_ca_f(float, float, uint32_t);
 MTR_DCLSPC void MTR_CALL MTR_PrimitiveLineEnd(void);
 
 #endif
-
