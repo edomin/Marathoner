@@ -2,24 +2,15 @@
 #define MTR_MARATHONER_H
 
 #include "marathoner/version.h"
-#include "marathoner/types.h"
 #include "marathoner/function_attribute.h"
+#include "marathoner/types.h"
 #include "marathoner/common.h"
 
 #ifdef __MINGW32__
     #include "marathoner/platform_specific/windows.h"
 #endif
 
-//#ifdef __EMSCRIPTEN__
-//    #include <dlfcn.h>
-//    #include <dirent.h>
-//#endif
 #include <stdlib.h> /* for malloc */
-
-/* TODO macro. Usage: TODO(message) */
-/* Source: gcc.pdf - 6.62.12 Diagnostic Pragmas */
-#define DO_PRAGMA(x) _Pragma (#x)
-#define TODO(x) DO_PRAGMA(message ("TODO - " #x))
 
 /* Get valid pointer given type from indexkeeper data array */
 #define IK_GET_DATA(type, ik, num) (type)(&((type)ik->data)[num])
