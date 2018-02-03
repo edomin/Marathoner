@@ -21,11 +21,6 @@ char *MTR_CALL MTR_GetCurrentDirectory(void)
 mtrDirectory_t *MTR_DirectoryOpen(const char *directoryName)
 {
     mtrDirectory_t *mtrDirectory;
-    #ifdef __MINGW32__
-    char *dirTempName;
-    #else
-
-    #endif
 
     if (directoryName == NULL)
         return NULL;
@@ -35,73 +30,31 @@ mtrDirectory_t *MTR_DirectoryOpen(const char *directoryName)
         return NULL;
 
     mtrDirectory->endOfDirectory = false;
-    #ifdef __MINGW32__
-    dirTempName = malloc(strlen(directoryName) + 1);
-    if (dirTempName == NULL)
-    {
+    mtrDirectory->d = opendir(directoryName);
+    if (mtrDirectory->d == NULL) {
         free(mtrDirectory);
         return NULL;
     }
-    strcpy(dirTempName, directoryName);
-    strcat(dirTempName, "*");
-
-    mtrDirectory->hf = FindFirstFile(dirTempName, &mtrDirectory->FindFileData);
-    free(dirTempName);
-    if(mtrDirectory->hf == INVALID_HANDLE_VALUE)
-    {
-        free(mtrDirectory);
-        return NULL;
-    }
-    mtrDirectory->firstFile = true;
-    #else
-    mtrDirectory.d = opendir(directoryName);
-    if (mtrDirectory.d == NULL)
-    {
-        free(mtrDirectory);
-        return NULL;
-    }
-    #endif
 
     return mtrDirectory;
 }
 
 bool MTR_DirectoryNextFile(mtrDirectory_t *directory)
 {
-    #ifdef __MINGW32__
-    if (directory->firstFile)
-    {
-        directory->firstFile = false;
-        return true;
-    }
-    else
-        if (FindNextFile(directory->hf, &directory->FindFileData) == 0)
-        {
-            directory->endOfDirectory = true;
-            return false;
-        }
-        else
-            return true;
-    #else
-    directory.dir = readdir(directory.d);
-    if (directory.dir == NULL)
-    {
+    directory->dir = readdir(directory->d);
+    if (directory->dir == NULL) {
         directory->endOfDirectory = true;
         return false;
     }
     else
         return true;
-    #endif
 }
 
 char *MTR_DirectoryGetFilename(mtrDirectory_t *directory)
 {
     if (directory->endOfDirectory)
         return NULL;
-    #ifdef __MINGW32__
-    return directory->FindFileData.cFileName;
-    #else
-    return directory.dir->d_name;
-    #endif
+    return directory->dir->d_name;
 }
 
 bool MTR_DirectoryFileIsDir(mtrDirectory_t *directory)
@@ -120,13 +73,8 @@ bool MTR_DirectoryFileIsDir(mtrDirectory_t *directory)
 
 void MTR_DirectoryClose(mtrDirectory_t *directory)
 {
-    if (directory != NULL)
-    {
-        #ifdef __MINGW32__
-        FindClose(directory->hf);
-        #else
-        closedir(directory.d);
-        #endif
+    if (directory != NULL) {
+        closedir(directory->d);
         free(directory);
     }
 }

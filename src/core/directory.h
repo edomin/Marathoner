@@ -2,8 +2,6 @@
 #define MTR_CORE_DIRECTORY_H
 
 #ifdef __MINGW32__
-    #include <windows.h>
-#else
     #include <dirent.h>
 #endif
 #include <string.h>
@@ -11,14 +9,8 @@
 #include "marathoner/engine.h"
 
 typedef struct mtrDirectory_t{
-    #ifdef __MINGW32__
-    WIN32_FIND_DATA FindFileData;
-    HANDLE          hf;
-    bool            firstFile;
-    #else
     DIR            *d;
     struct dirent  *dir;
-    #endif
     bool            endOfDirectory;
 } mtrDirectory_t;
 
