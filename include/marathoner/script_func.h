@@ -3096,6 +3096,18 @@
         return 1;                           \
     }
 
+#define MTR_SCRIPT_FUNC_P_V(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)               \
+    {                                    \
+        void *result;                    \
+        result = func();                 \
+        if (result != NULL)              \
+            MTR_SF_PUSH_POINTER(result); \
+        else                             \
+            MTR_SF_PUSH_NIL();           \
+        return 1;                        \
+    }
+
 #define MTR_SCRIPT_FUNC_P_U32t1U8t3U32t1(sfunc, func)  \
     MTR_SCRIPT_FUNC(sfunc)                             \
     {                                                  \
