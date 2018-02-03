@@ -64,7 +64,7 @@
 #define MTR_VERSION_PNG_LIBPNG                      0x000000U /* not incremented */
 #define MTR_VERSION_PNG_LIBPNG_LUA                  0x000000U /* not incremented */
 #define MTR_VERSION_PNG_LIBPNG_SQUIRREL             0x000000U /* not incremented */
-#define MTR_VERSION_PNG_LIBPNG_DUKTAPE              0x000000U /* not incremented */
+#define MTR_VERSION_PNG_LIBPNG_DUKTAPE              0x000001U /* inc patch */
 
 #define MTR_VERSION_SCRIPT_LUA                      0x000300U /* not incremented */
 #define MTR_VERSION_SCRIPT_SQUIRREL                 0x000200U /* not incremented */
