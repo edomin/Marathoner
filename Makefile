@@ -79,6 +79,10 @@ JSON_CJSON = json/cjson
 JSON_CJSON_LUA = json/cjson_lua
 JSON_CJSON_SQUIRREL = json/cjson_squirrel
 JSON_CJSON_DUKTAPE = json/cjson_duktape
+PAK_PHYSFS = pak/physfs
+PAK_PHYSFS_LUA = pak/physfs_lua
+PAK_PHYSFS_SQUIRREL = pak/physfs_squirrel
+PAK_PHYSFS_DUKTAPE = pak/physfs_duktape
 UTILS_COLOR = utils/color
 UTILS_COLOR_LUA = utils/color_lua
 UTILS_COLOR_SQUIRREL = utils/color_squirrel
@@ -197,6 +201,11 @@ ifeq ($(MOD), plugin)
 	make -j$(CORES) -C src/$(JSON_CJSON_LUA) PREFIX=$(PREFIX)
 	make -j$(CORES) -C src/$(JSON_CJSON_SQUIRREL) PREFIX=$(PREFIX)
 	make -j$(CORES) -C src/$(JSON_CJSON_DUKTAPE) PREFIX=$(PREFIX)
+
+	make -j$(CORES) -C src/$(PAK_PHYSFS) PREFIX=$(PREFIX)
+	make -j$(CORES) -C src/$(PAK_PHYSFS_LUA) PREFIX=$(PREFIX)
+	make -j$(CORES) -C src/$(PAK_PHYSFS_SQUIRREL) PREFIX=$(PREFIX)
+	make -j$(CORES) -C src/$(PAK_PHYSFS_DUKTAPE) PREFIX=$(PREFIX)
 
 	make -j$(CORES) -C src/$(UTILS_COLOR) PREFIX=$(PREFIX)
 	make -j$(CORES) -C src/$(UTILS_COLOR_LUA) PREFIX=$(PREFIX)

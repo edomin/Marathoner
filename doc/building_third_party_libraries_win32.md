@@ -193,6 +193,18 @@ $ cp libminini.a /usr/local/mingw32/lib
 $ cp nuklear.h /usr/local/mingw32/include
 ```
 
+[PhysFS](https://icculus.org/physfs/)
+
+```
+$ mkdir build
+$ cd build
+$ cmake .. -G "MSYS Makefiles" -DCMAKE_INSTALL_PREFIX=/usr/local/mingw32
+$ make
+$ make install
+$ cd ..
+$ rm -r -f build
+```
+
 [saneopt](https://github.com/mmalecki/saneopt)
 
 ```
