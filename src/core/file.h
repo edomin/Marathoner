@@ -13,8 +13,16 @@ typedef struct mtrFile_t {
 } mtrFile_t;
 
 static const char *mtrFileMode[] __attribute__((used)) = {"r", "w", "a"};
+mtrIndexkeeper_t  *mtrFileKeeper;
+MTR_Stdio          MTR_FileStdio;
+MTR_StdioExt       MTR_FileStdioExt;
 
-mtrIndexkeeper_t *mtrFileKeeper;
+#ifdef __MINGW32__
+    int MTR_STDCALL __freadable(FILE *);
+    int MTR_STDCALL __fwritable(FILE *);
+#else
+    #include <stdio_ext.h>
+#endif
 
 bool MTR_CALL MTR_FileInit(uint32_t dmSize, uint32_t reservedCount);
 uint32_t MTR_CALL MTR_FileOpen(const char *filename, int mode);
