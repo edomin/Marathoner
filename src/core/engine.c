@@ -111,6 +111,14 @@ void RequireEngineFuncs(uint8_t plugin)
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileWriteLine, MTR_FileWriteLine);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileWriteFast, MTR_FileWriteFast);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileWriteLineFast, MTR_FileWriteLineFast);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileExists, MTR_FileExists);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileGetStdFopen, MTR_FileGetStdFopen);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileGetStdFclose, MTR_FileGetStdFclose);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileGetStdFeof, MTR_FileGetStdFeof);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileGetStdFtell, MTR_FileGetStdFtell);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileGetStdFseek, MTR_FileGetStdFseek);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileGetStdFread, MTR_FileGetStdFread);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileGetStdFwrite, MTR_FileGetStdFwrite);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireClipboardPutText, MTR_ClipboardPutText);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireClipboardGetText, MTR_ClipboardGetText);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireStringBufferAdd, MTR_StringBufferAdd);

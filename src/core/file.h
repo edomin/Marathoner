@@ -31,5 +31,13 @@ void MTR_CALL MTR_FileWriteFast(const char* filename, const char *text,
  int mode);
 void MTR_CALL MTR_FileWriteLineFast(const char* filename, const char *text,
  int mode);
+bool MTR_CALL MTR_FileExists(const char* filename);
+MTR_FopenFunc MTR_CALL MTR_FileGetStdFopen(void);
+MTR_FcloseFunc MTR_CALL MTR_FileGetStdFclose(void);
+MTR_FeofFunc MTR_CALL MTR_FileGetStdFeof(void);
+MTR_FtellFunc MTR_CALL MTR_FileGetStdFtell(void);
+MTR_FseekFunc MTR_CALL MTR_FileGetStdFseek(void);
+MTR_FreadFunc MTR_CALL MTR_FileGetStdFread(void);
+MTR_FwriteFunc MTR_CALL MTR_FileGetStdFwrite(void);
 
 #endif

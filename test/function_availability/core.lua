@@ -81,6 +81,22 @@ fa.FunctionSupported(FileWriteFast, "MTR_FileWriteFast",
  MarathonerFunctionSupported);
 fa.FunctionSupported(FileWriteLineFast, "MTR_FileWriteLineFast",
  MarathonerFunctionSupported);
+fa.FunctionSupported(FileExists, "MTR_FileExists",
+ MarathonerFunctionSupported);
+fa.FunctionSupported(FileGetStdFopen, "MTR_FileGetStdFopen",
+ MarathonerFunctionSupported);
+fa.FunctionSupported(FileGetStdFclose, "MTR_FileGetStdFclose",
+ MarathonerFunctionSupported);
+fa.FunctionSupported(FileGetStdFeof, "MTR_FileGetStdFeof",
+ MarathonerFunctionSupported);
+fa.FunctionSupported(FileGetStdFtell, "MTR_FileGetStdFtell",
+ MarathonerFunctionSupported);
+fa.FunctionSupported(FileGetStdFseek, "MTR_FileGetStdFseek",
+ MarathonerFunctionSupported);
+fa.FunctionSupported(FileGetStdFread, "MTR_FileGetStdFread",
+ MarathonerFunctionSupported);
+fa.FunctionSupported(FileGetStdFwrite, "MTR_FileGetStdFwrite",
+ MarathonerFunctionSupported);
 
 fa.FunctionSupported(ClipboardPutText, "MTR_ClipboardPutText",
  MarathonerFunctionSupported);

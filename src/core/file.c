@@ -198,3 +198,54 @@ void MTR_CALL MTR_FileWriteLineFast(const char* filename, const char *text,
     fprintf(file, "%s\n", text);
     fclose(file);
 }
+
+/*fa MTR_FileExists yes */
+bool MTR_CALL MTR_FileExists(const char* filename)
+{
+    if (access(filename, F_OK) != -1)
+        return true;
+    else
+        return false;
+}
+
+/*fa MTR_FileGetStdFopen yes */
+MTR_FopenFunc MTR_CALL MTR_FileGetStdFopen(void)
+{
+    return fopen;
+}
+
+/*fa MTR_FileGetStdFclose yes */
+MTR_FcloseFunc MTR_CALL MTR_FileGetStdFclose(void)
+{
+    return fclose;
+}
+
+/*fa MTR_FileGetStdFeof yes */
+MTR_FeofFunc MTR_CALL MTR_FileGetStdFeof(void)
+{
+    return feof;
+}
+
+/*fa MTR_FileGetStdFtell yes */
+MTR_FtellFunc MTR_CALL MTR_FileGetStdFtell(void)
+{
+    return ftell;
+}
+
+/*fa MTR_FileGetStdFseek yes */
+MTR_FseekFunc MTR_CALL MTR_FileGetStdFseek(void)
+{
+    return fseek;
+}
+
+/*fa MTR_FileGetStdFread yes */
+MTR_FreadFunc MTR_CALL MTR_FileGetStdFread(void)
+{
+    return fread;
+}
+
+/*fa MTR_FileGetStdFwrite yes */
+MTR_FwriteFunc MTR_CALL MTR_FileGetStdFwrite(void)
+{
+    return fwrite;
+}

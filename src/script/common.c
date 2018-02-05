@@ -99,6 +99,14 @@ MTR_SCRIPT_FUNC_B_U32t1S1(MTR_SF_FileWrite, MTR_FileWrite)
 MTR_SCRIPT_FUNC_B_U32t1S1(MTR_SF_FileWriteLine, MTR_FileWriteLine)
 MTR_SCRIPT_FUNC_V_S2I1(MTR_SF_FileWriteFast, MTR_FileWriteFast)
 MTR_SCRIPT_FUNC_V_S2I1(MTR_SF_FileWriteLineFast, MTR_FileWriteLineFast)
+MTR_SCRIPT_FUNC_B_S1(MTR_SF_FileExists, MTR_FileExists)
+MTR_SCRIPT_FUNC_P_V(MTR_SF_FileGetStdFopen, MTR_FileGetStdFopen)
+MTR_SCRIPT_FUNC_P_V(MTR_SF_FileGetStdFclose, MTR_FileGetStdFclose)
+MTR_SCRIPT_FUNC_P_V(MTR_SF_FileGetStdFeof, MTR_FileGetStdFeof)
+MTR_SCRIPT_FUNC_P_V(MTR_SF_FileGetStdFtell, MTR_FileGetStdFtell)
+MTR_SCRIPT_FUNC_P_V(MTR_SF_FileGetStdFseek, MTR_FileGetStdFseek)
+MTR_SCRIPT_FUNC_P_V(MTR_SF_FileGetStdFread, MTR_FileGetStdFread)
+MTR_SCRIPT_FUNC_P_V(MTR_SF_FileGetStdFwrite, MTR_FileGetStdFwrite)
 MTR_SCRIPT_FUNC_B_S1(MTR_SF_ClipboardPutText, MTR_ClipboardPutText)
 MTR_SCRIPT_FUNC_S_V(MTR_SF_ClipboardGetText, MTR_ClipboardGetText)
 MTR_SCRIPT_FUNC_U32t_S1I1(MTR_SF_StringBufferAdd, MTR_StringBufferAdd)
@@ -239,6 +247,14 @@ void MTR_ScriptsRegisterAll(void)
     MTR_ScriptsRegisterFunction(MTR_SF_FileWriteLine, "FileWriteLine");
     MTR_ScriptsRegisterFunction(MTR_SF_FileWriteFast, "FileWriteFast");
     MTR_ScriptsRegisterFunction(MTR_SF_FileWriteLineFast, "FileWriteLineFast");
+    MTR_ScriptsRegisterFunction(MTR_SF_FileExists, "FileExists");
+    MTR_ScriptsRegisterFunction(MTR_SF_FileGetStdFopen, "FileGetStdFopen");
+    MTR_ScriptsRegisterFunction(MTR_SF_FileGetStdFclose, "FileGetStdFclose");
+    MTR_ScriptsRegisterFunction(MTR_SF_FileGetStdFeof, "FileGetStdFeof");
+    MTR_ScriptsRegisterFunction(MTR_SF_FileGetStdFtell, "FileGetStdFtell");
+    MTR_ScriptsRegisterFunction(MTR_SF_FileGetStdFseek, "FileGetStdFseek");
+    MTR_ScriptsRegisterFunction(MTR_SF_FileGetStdFread, "FileGetStdFread");
+    MTR_ScriptsRegisterFunction(MTR_SF_FileGetStdFwrite, "FileGetStdFwrite");
 
     MTR_ScriptsRegisterFunction(MTR_SF_ClipboardPutText, "ClipboardPutText");
     MTR_ScriptsRegisterFunction(MTR_SF_ClipboardGetText, "ClipboardGetText");

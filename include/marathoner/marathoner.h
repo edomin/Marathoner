@@ -138,6 +138,14 @@ MTR_ENGINE_FUNC(bool, MTR_FileWrite, uint32_t, const char *);
 MTR_ENGINE_FUNC(bool, MTR_FileWriteLine, uint32_t, const char *);
 MTR_ENGINE_FUNC(void, MTR_FileWriteFast, const char *, const char *, int);
 MTR_ENGINE_FUNC(void, MTR_FileWriteLineFast, const char *, const char *, int);
+MTR_ENGINE_FUNC(bool, MTR_FileExists, const char*);
+MTR_ENGINE_FUNC(MTR_FopenFunc, MTR_FileGetStdFopen, void);
+MTR_ENGINE_FUNC(MTR_FcloseFunc, MTR_FileGetStdFclose, void);
+MTR_ENGINE_FUNC(MTR_FeofFunc, MTR_FileGetStdFeof, void);
+MTR_ENGINE_FUNC(MTR_FtellFunc, MTR_FileGetStdFtell, void);
+MTR_ENGINE_FUNC(MTR_FseekFunc, MTR_FileGetStdFseek, void);
+MTR_ENGINE_FUNC(MTR_FreadFunc, MTR_FileGetStdFread, void);
+MTR_ENGINE_FUNC(MTR_FwriteFunc, MTR_FileGetStdFwrite, void);
 
 MTR_ENGINE_FUNC(bool, MTR_ClipboardPutText, const char *);
 MTR_ENGINE_FUNC(char *, MTR_ClipboardGetText, void);

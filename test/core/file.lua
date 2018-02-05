@@ -16,4 +16,21 @@ end;
 buffer, size = FileRead(file);
 FileWriteLineFast("test/output.txt", size, FM_APPEND);
 FileWriteLineFast("test/output.txt", buffer, FM_APPEND);
+
+if (FileExists("test/output.txt")) then
+    FileWriteLineFast("test/output.txt", "File 'test/output.txt' exists",
+     FM_APPEND);
+else
+    FileWriteLineFast("test/output.txt",
+     "File 'test/output.txt' are not exists", FM_APPEND);
+end;
+
+if (FileExists("test/output_9000.txt")) then
+    FileWriteLineFast("test/output.txt",
+     "File 'test/output_9000.txt' exists", FM_APPEND);
+else
+    FileWriteLineFast("test/output.txt",
+     "File 'test/output_9000.txt' are not exists", FM_APPEND);
+end;
+
 FileClose(file);

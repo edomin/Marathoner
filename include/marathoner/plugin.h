@@ -98,6 +98,14 @@ MTR_FileWriteFunc_t                       MTR_FileWrite;
 MTR_FileWriteLineFunc_t                   MTR_FileWriteLine;
 MTR_FileWriteFastFunc_t                   MTR_FileWriteFast;
 MTR_FileWriteLineFastFunc_t               MTR_FileWriteLineFast;
+MTR_FileExistsFunc_t                      MTR_FileExists;
+MTR_FileGetStdFopenFunc_t                 MTR_FileGetStdFopen;
+MTR_FileGetStdFcloseFunc_t                MTR_FileGetStdFclose;
+MTR_FileGetStdFeofFunc_t                  MTR_FileGetStdFeof;
+MTR_FileGetStdFtellFunc_t                 MTR_FileGetStdFtell;
+MTR_FileGetStdFseekFunc_t                 MTR_FileGetStdFseek;
+MTR_FileGetStdFreadFunc_t                 MTR_FileGetStdFread;
+MTR_FileGetStdFwriteFunc_t                MTR_FileGetStdFwrite;
 
 MTR_ClipboardPutTextFunc_t                MTR_ClipboardPutText;
 MTR_ClipboardGetTextFunc_t                MTR_ClipboardGetText;
