@@ -17,6 +17,9 @@ $(OBJ): $(SUBSYSTEM).c $(MODULE_H) $(PREREQS) \
 
 $(SUBSYSTEM).c: $(ROOTDIR)/include/marathoner/plugin_common.c
 
+$(ROOTDIR)/include/marathoner/plugin_common.c: \
+ $(ROOTDIR)/include/marathoner/plugin_common.h
+
 $(MODULE_H): $(ROOTDIR)/include/marathoner/plugin.h
 
 $(FADIR)/$(MODULE_NAME).h: $(FAGEN)$(HOST_EXE_EXT) $(SUBSYSTEM).c

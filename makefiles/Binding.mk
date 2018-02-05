@@ -10,5 +10,10 @@ $(OBJ): binding.c binding.h $(PREREQS) \
 
 binding.c: $(ROOTDIR)/include/marathoner/plugin_common.c
 
+$(ROOTDIR)/include/marathoner/plugin_common.c: \
+ $(ROOTDIR)/include/marathoner/plugin_common.h
+
+$(MODULE_H): $(ROOTDIR)/include/marathoner/plugin.h
+
 binding.h: $(ROOTDIR)/include/marathoner/plugin.h \
  $(ROOTDIR)/include/marathoner/binding_common.h

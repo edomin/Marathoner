@@ -11,7 +11,11 @@ $(OBJ): $(MODULE).c $(MODULE).h $(PREREQS) \
 	-mkdir $(OBJSDIR)/$(SUBSYSTEM)
 	$(CC) $(CFLAGS) $(CEXFLAGS) $(INCDIRS) -c $(MODULE).c -o $(OBJ)
 
-$(MODULE).c: $(ROOTDIR)/include/marathoner/plugin_common.c
+$(MODULE).c: \
+ $(ROOTDIR)/include/marathoner/plugin_common.c
+
+$(ROOTDIR)/include/marathoner/plugin_common.c: \
+ $(ROOTDIR)/include/marathoner/plugin_common.h
 
 $(MODULE).h: $(ROOTDIR)/include/marathoner/plugin.h
 

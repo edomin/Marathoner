@@ -13,6 +13,9 @@ $(OBJ): $(MODULE).c $(MODULE).h $(PREREQS) \
 
 $(MODULE).c: $(ROOTDIR)/include/marathoner/plugin_common.c
 
+$(ROOTDIR)/include/marathoner/plugin_common.c: \
+ $(ROOTDIR)/include/marathoner/plugin_common.h
+
 $(MODULE).h: $(ROOTDIR)/include/marathoner/plugin.h
 
 $(FADIR)/$(MODULE_NAME).h: $(FAGEN)$(HOST_EXE_EXT) $(MODULE).c
