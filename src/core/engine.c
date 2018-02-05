@@ -89,7 +89,8 @@ void RequireEngineFuncs(uint8_t plugin)
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireShowSelectFolderDialog,
      MTR_ShowSelectFolderDialog);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireNotify, MTR_Notify);
-    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireIndexkeeperCreate, MTR_IndexkeeperCreate);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireIndexkeeperCreate,
+     MTR_IndexkeeperCreate);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireIndexkeeperGetFreeIndex,
      MTR_IndexkeeperGetFreeIndex);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireIndexkeeperFreeIndex,
@@ -110,7 +111,8 @@ void RequireEngineFuncs(uint8_t plugin)
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileWrite, MTR_FileWrite);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileWriteLine, MTR_FileWriteLine);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileWriteFast, MTR_FileWriteFast);
-    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileWriteLineFast, MTR_FileWriteLineFast);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileWriteLineFast,
+     MTR_FileWriteLineFast);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileExists, MTR_FileExists);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileGetStdFopen, MTR_FileGetStdFopen);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileGetStdFclose, MTR_FileGetStdFclose);
