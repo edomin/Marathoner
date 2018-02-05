@@ -197,7 +197,7 @@ $(OBJSDIR)/console.o: console.c console.h
 $(OBJSDIR)/so.o: so.c so.h
 	$(CC) $(CFLAGS) $(INCDIRS) -c so.c -o $(OBJSDIR)/so.o
 
-$(OBJSDIR)/fa.o: fa.c fa.h
+$(OBJSDIR)/fa.o: fa.c fa.h $(FADIR)/core.h
 	$(CC) $(CFLAGS) $(INCDIRS) -c fa.c -o $(OBJSDIR)/fa.o
 
 
