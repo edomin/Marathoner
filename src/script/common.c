@@ -105,8 +105,12 @@ MTR_SCRIPT_FUNC_P_V(MTR_SF_FileGetStdFclose, MTR_FileGetStdFclose)
 MTR_SCRIPT_FUNC_P_V(MTR_SF_FileGetStdFeof, MTR_FileGetStdFeof)
 MTR_SCRIPT_FUNC_P_V(MTR_SF_FileGetStdFtell, MTR_FileGetStdFtell)
 MTR_SCRIPT_FUNC_P_V(MTR_SF_FileGetStdFseek, MTR_FileGetStdFseek)
+MTR_SCRIPT_FUNC_P_V(MTR_SF_FileGetStdRewind, MTR_FileGetStdRewind)
 MTR_SCRIPT_FUNC_P_V(MTR_SF_FileGetStdFread, MTR_FileGetStdFread)
 MTR_SCRIPT_FUNC_P_V(MTR_SF_FileGetStdFwrite, MTR_FileGetStdFwrite)
+MTR_SCRIPT_FUNC_P_V(MTR_SF_FileGetStdFprintf, MTR_FileGetStdFprintf)
+MTR_SCRIPT_FUNC_P_V(MTR_SF_FileGetStdFreadable, MTR_FileGetStdFreadable)
+MTR_SCRIPT_FUNC_P_V(MTR_SF_FileGetStdFwritable, MTR_FileGetStdFwritable)
 MTR_SCRIPT_FUNC_B_S1(MTR_SF_ClipboardPutText, MTR_ClipboardPutText)
 MTR_SCRIPT_FUNC_S_V(MTR_SF_ClipboardGetText, MTR_ClipboardGetText)
 MTR_SCRIPT_FUNC_U32t_S1I1(MTR_SF_StringBufferAdd, MTR_StringBufferAdd)
@@ -253,8 +257,14 @@ void MTR_ScriptsRegisterAll(void)
     MTR_ScriptsRegisterFunction(MTR_SF_FileGetStdFeof, "FileGetStdFeof");
     MTR_ScriptsRegisterFunction(MTR_SF_FileGetStdFtell, "FileGetStdFtell");
     MTR_ScriptsRegisterFunction(MTR_SF_FileGetStdFseek, "FileGetStdFseek");
+    MTR_ScriptsRegisterFunction(MTR_SF_FileGetStdRewind, "FileGetStdRewind");
     MTR_ScriptsRegisterFunction(MTR_SF_FileGetStdFread, "FileGetStdFread");
     MTR_ScriptsRegisterFunction(MTR_SF_FileGetStdFwrite, "FileGetStdFwrite");
+    MTR_ScriptsRegisterFunction(MTR_SF_FileGetStdFprintf, "FileGetStdFprintf");
+    MTR_ScriptsRegisterFunction(MTR_SF_FileGetStdFreadable,
+     "FileGetStdFreadable");
+    MTR_ScriptsRegisterFunction(MTR_SF_FileGetStdFwritable,
+     "FileGetStdFwritable");
 
     MTR_ScriptsRegisterFunction(MTR_SF_ClipboardPutText, "ClipboardPutText");
     MTR_ScriptsRegisterFunction(MTR_SF_ClipboardGetText, "ClipboardGetText");

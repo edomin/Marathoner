@@ -168,12 +168,24 @@ MTR_RequireFileGetStdFtellFunc MTR_RequireFileGetStdFtell;
 typedef void (MTR_CALL * MTR_RequireFileGetStdFseekFunc)(
  MTR_FileGetStdFseekFunc_t);
 MTR_RequireFileGetStdFseekFunc MTR_RequireFileGetStdFseek;
+typedef void (MTR_CALL * MTR_RequireFileGetStdRewindFunc)(
+ MTR_FileGetStdRewindFunc_t);
+MTR_RequireFileGetStdRewindFunc MTR_RequireFileGetStdRewind;
 typedef void (MTR_CALL * MTR_RequireFileGetStdFreadFunc)(
  MTR_FileGetStdFreadFunc_t);
 MTR_RequireFileGetStdFreadFunc MTR_RequireFileGetStdFread;
 typedef void (MTR_CALL * MTR_RequireFileGetStdFwriteFunc)(
  MTR_FileGetStdFwriteFunc_t);
 MTR_RequireFileGetStdFwriteFunc MTR_RequireFileGetStdFwrite;
+typedef void (MTR_CALL * MTR_RequireFileGetStdFprintfFunc)(
+ MTR_FileGetStdFprintfFunc_t);
+MTR_RequireFileGetStdFprintfFunc MTR_RequireFileGetStdFprintf;
+typedef void (MTR_CALL * MTR_RequireFileGetStdFreadableFunc)(
+ MTR_FileGetStdFreadableFunc_t);
+MTR_RequireFileGetStdFreadableFunc MTR_RequireFileGetStdFreadable;
+typedef void (MTR_CALL * MTR_RequireFileGetStdFwritableFunc)(
+ MTR_FileGetStdFwritableFunc_t);
+MTR_RequireFileGetStdFwritableFunc MTR_RequireFileGetStdFwritable;
 
 typedef void (MTR_CALL * MTR_RequireClipboardPutTextFunc)(
  MTR_ClipboardPutTextFunc_t);

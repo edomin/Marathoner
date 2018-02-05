@@ -93,9 +93,17 @@ fa.FunctionSupported(FileGetStdFtell, "MTR_FileGetStdFtell",
  MarathonerFunctionSupported);
 fa.FunctionSupported(FileGetStdFseek, "MTR_FileGetStdFseek",
  MarathonerFunctionSupported);
+fa.FunctionSupported(FileGetStdRewind, "MTR_FileGetStdRewind",
+ MarathonerFunctionSupported);
 fa.FunctionSupported(FileGetStdFread, "MTR_FileGetStdFread",
  MarathonerFunctionSupported);
 fa.FunctionSupported(FileGetStdFwrite, "MTR_FileGetStdFwrite",
+ MarathonerFunctionSupported);
+fa.FunctionSupported(FileGetStdFprintf, "MTR_FileGetStdFprintf",
+ MarathonerFunctionSupported);
+fa.FunctionSupported(FileGetStdFreadable, "MTR_FileGetStdFreadable",
+ MarathonerFunctionSupported);
+fa.FunctionSupported(FileGetStdFwritable, "MTR_FileGetStdFwritable",
  MarathonerFunctionSupported);
 
 fa.FunctionSupported(ClipboardPutText, "MTR_ClipboardPutText",

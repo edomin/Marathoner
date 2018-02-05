@@ -117,8 +117,16 @@ void RequireEngineFuncs(uint8_t plugin)
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileGetStdFeof, MTR_FileGetStdFeof);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileGetStdFtell, MTR_FileGetStdFtell);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileGetStdFseek, MTR_FileGetStdFseek);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileGetStdRewind,
+     MTR_FileGetStdRewind);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileGetStdFread, MTR_FileGetStdFread);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileGetStdFwrite, MTR_FileGetStdFwrite);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileGetStdFprintf,
+     MTR_FileGetStdFprintf);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileGetStdFreadable,
+     MTR_FileGetStdFreadable);
+    MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileGetStdFwritable,
+     MTR_FileGetStdFwritable);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireClipboardPutText, MTR_ClipboardPutText);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireClipboardGetText, MTR_ClipboardGetText);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireStringBufferAdd, MTR_StringBufferAdd);

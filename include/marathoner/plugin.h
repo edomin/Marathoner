@@ -104,8 +104,12 @@ MTR_FileGetStdFcloseFunc_t                MTR_FileGetStdFclose;
 MTR_FileGetStdFeofFunc_t                  MTR_FileGetStdFeof;
 MTR_FileGetStdFtellFunc_t                 MTR_FileGetStdFtell;
 MTR_FileGetStdFseekFunc_t                 MTR_FileGetStdFseek;
+MTR_FileGetStdRewindFunc_t                MTR_FileGetStdRewind;
 MTR_FileGetStdFreadFunc_t                 MTR_FileGetStdFread;
 MTR_FileGetStdFwriteFunc_t                MTR_FileGetStdFwrite;
+MTR_FileGetStdFprintfFunc_t               MTR_FileGetStdFprintf;
+MTR_FileGetStdFreadableFunc_t             MTR_FileGetStdFreadable;
+MTR_FileGetStdFwritableFunc_t             MTR_FileGetStdFwritable;
 
 MTR_ClipboardPutTextFunc_t                MTR_ClipboardPutText;
 MTR_ClipboardGetTextFunc_t                MTR_ClipboardGetText;

@@ -238,6 +238,12 @@ MTR_FseekFunc MTR_CALL MTR_FileGetStdFseek(void)
     return fseek;
 }
 
+/*fa MTR_FileGetStdRewind yes */
+MTR_RewindFunc MTR_CALL MTR_FileGetStdRewind(void)
+{
+    return rewind;
+}
+
 /*fa MTR_FileGetStdFread yes */
 MTR_FreadFunc MTR_CALL MTR_FileGetStdFread(void)
 {
@@ -249,3 +255,22 @@ MTR_FwriteFunc MTR_CALL MTR_FileGetStdFwrite(void)
 {
     return fwrite;
 }
+
+/*fa MTR_FileGetStdFprintf yes */
+MTR_FprintfFunc MTR_CALL MTR_FileGetStdFprintf(void)
+{
+    return fprintf;
+}
+
+/*fa MTR_FileGetStdFreadable yes */
+MTR_FreadableFunc MTR_CALL MTR_FileGetStdFreadable(void)
+{
+    return __freadable;
+}
+
+/*fa MTR_FileGetStdFwritable yes */
+MTR_FwritableFunc MTR_CALL MTR_FileGetStdFwritable(void)
+{
+    return __fwritable;
+}
+

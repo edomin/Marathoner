@@ -37,7 +37,11 @@ MTR_FcloseFunc MTR_CALL MTR_FileGetStdFclose(void);
 MTR_FeofFunc MTR_CALL MTR_FileGetStdFeof(void);
 MTR_FtellFunc MTR_CALL MTR_FileGetStdFtell(void);
 MTR_FseekFunc MTR_CALL MTR_FileGetStdFseek(void);
+MTR_RewindFunc MTR_CALL MTR_FileGetStdRewind(void);
 MTR_FreadFunc MTR_CALL MTR_FileGetStdFread(void);
 MTR_FwriteFunc MTR_CALL MTR_FileGetStdFwrite(void);
+MTR_FprintfFunc MTR_CALL MTR_FileGetStdFprintf(void);
+MTR_FreadableFunc MTR_CALL MTR_FileGetStdFreadable(void);
+MTR_FwritableFunc MTR_CALL MTR_FileGetStdFwritable(void);
 
 #endif
