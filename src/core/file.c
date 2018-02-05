@@ -26,6 +26,19 @@ bool MTR_CALL MTR_FileInit(uint32_t dmSize, uint32_t reservedCount)
         file->bufLength = 0;
     }
 
+    MTR_FileStdio.Fopen = MTR_FileGetStdFopen();
+    MTR_FileStdio.Fclose = MTR_FileGetStdFclose();
+    MTR_FileStdio.Feof = MTR_FileGetStdFeof();
+    MTR_FileStdio.Ftell = MTR_FileGetStdFtell();
+    MTR_FileStdio.Fseek = MTR_FileGetStdFseek();
+    MTR_FileStdio.Rewind = MTR_FileGetStdRewind();
+    MTR_FileStdio.Fread = MTR_FileGetStdFread();
+    MTR_FileStdio.Fwrite = MTR_FileGetStdFwrite();
+    MTR_FileStdio.Fprintf = MTR_FileGetStdFprintf();
+
+    MTR_FileStdioExt.Freadable = MTR_FileGetStdFreadable();
+    MTR_FileStdioExt.Fwritable = MTR_FileGetStdFwritable();
+
     return true;
 }
 
@@ -59,7 +72,7 @@ uint32_t MTR_CALL MTR_FileOpen(const char *filename, int mode)
 
     freeIndex = MTR_IndexkeeperGetFreeIndex(mtrFileKeeper);
     file = IK_GET_DATA(mtrFile_t *, mtrFileKeeper, freeIndex);
-    file->file =  fopen(filename, openMode);
+    file->file =  MTR_FileStdio.Fopen(filename, openMode);
     if (file->file == NULL)
     {
         MTR_LogWrite("Unable to open file.", 0, MTR_LMT_ERROR);
@@ -77,7 +90,7 @@ bool MTR_CALL MTR_FileClose(uint32_t fileNum)
 
     file = IK_GET_DATA(mtrFile_t *, mtrFileKeeper, fileNum);
 
-    success = fclose(file->file);
+    success = MTR_FileStdio.Fclose(file->file);
     if (success == EOF)
         return false;
 
@@ -102,22 +115,22 @@ size_t MTR_CALL MTR_FileRead(uint32_t fileNum, char **buffer)
         file->bufLength = 0;
     }
 
-    #ifndef __MINGW32__
-    if (__freadable(file->file) == 0)
+//    #ifndef __MINGW32__
+    if (MTR_FileStdioExt.Freadable(file->file) == 0)
     {
         *buffer = NULL;
         return 0;
     }
-    #endif
+//    #endif
 
-    if (fseek(file->file, 0, SEEK_END) != 0)
+    if (MTR_FileStdio.Fseek(file->file, 0, SEEK_END) != 0)
     {
         *buffer = NULL;
         return 0;
     }
 
-    fileSizeResult = ftell(file->file);
-    rewind(file->file);
+    fileSizeResult = MTR_FileStdio.Ftell(file->file);
+    MTR_FileStdio.Rewind(file->file);
     if (fileSizeResult == -1L)
     {
         *buffer = NULL;
@@ -132,7 +145,7 @@ size_t MTR_CALL MTR_FileRead(uint32_t fileNum, char **buffer)
         return 0;
     }
 
-    readedSize = fread(file->buffer, 1, fileSize, file->file);
+    readedSize = MTR_FileStdio.Fread(file->buffer, 1, fileSize, file->file);
     file->buffer[readedSize] = '\0';
     file->bufLength = readedSize;
     *buffer = file->buffer;
@@ -146,12 +159,12 @@ bool MTR_CALL MTR_FileWrite(uint32_t fileNum, const char *string)
 
     file = IK_GET_DATA(mtrFile_t *, mtrFileKeeper, fileNum);
 
-    #ifndef __MINGW32__
-    if (__fwritable(file->file) == 0)
+//    #ifndef __MINGW32__
+    if (MTR_FileStdioExt.Fwritable(file->file) == 0)
         return false;
-    #endif
+//    #endif
 
-    fprintf(file->file, "%s", string);
+    MTR_FileStdio.Fprintf(file->file, "%s", string);
 
     return true;
 }
@@ -163,12 +176,12 @@ bool MTR_CALL MTR_FileWriteLine(uint32_t fileNum, const char *string)
 
     file = IK_GET_DATA(mtrFile_t *, mtrFileKeeper, fileNum);
 
-    #ifndef __MINGW32__
-    if (__fwritable(file->file) == 0)
+//    #ifndef __MINGW32__
+    if (MTR_FileStdioExt.Fwritable(file->file) == 0)
         return false;
-    #endif
+//    #endif
 
-    fprintf(file->file, "%s\n", string);
+    MTR_FileStdio.Fprintf(file->file, "%s\n", string);
 
     return true;
 }
@@ -179,11 +192,11 @@ void MTR_CALL MTR_FileWriteFast(const char* filename, const char *text,
 {
     FILE *file;
     if (mode == MTR_FM_WRITE)
-        file = fopen(filename, "w");
+        file = MTR_FileStdio.Fopen(filename, "w");
     else
-        file = fopen(filename, "a");
-    fprintf(file, "%s\n", text);
-    fclose(file);
+        file = MTR_FileStdio.Fopen(filename, "a");
+    MTR_FileStdio.Fprintf(file, "%s\n", text);
+    MTR_FileStdio.Fclose(file);
 }
 
 /*fa MTR_FileWriteLineFast yes */
@@ -192,11 +205,11 @@ void MTR_CALL MTR_FileWriteLineFast(const char* filename, const char *text,
 {
     FILE *file;
     if (mode == MTR_FM_WRITE)
-        file = fopen(filename, "w");
+        file = MTR_FileStdio.Fopen(filename, "w");
     else
-        file = fopen(filename, "a");
-    fprintf(file, "%s\n", text);
-    fclose(file);
+        file = MTR_FileStdio.Fopen(filename, "a");
+    MTR_FileStdio.Fprintf(file, "%s\n", text);
+    MTR_FileStdio.Fclose(file);
 }
 
 /*fa MTR_FileExists yes */
