@@ -3,11 +3,6 @@
 
 #include "marathoner/marathoner.h"
 
-#include <stdio.h>
-#ifndef __MINGW32__
-    #include <stdio_ext.h>
-#endif
-
 #include "marathoner/engine.h"
 #include "indexkeeper.h"
 

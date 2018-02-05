@@ -274,3 +274,20 @@ MTR_FwritableFunc MTR_CALL MTR_FileGetStdFwritable(void)
     return __fwritable;
 }
 
+#ifdef __MINGW32__
+MTR_STDCALL int __freadable(FILE *stream)
+{
+    if (stream != NULL)
+        return -1;
+    else
+        return 0;
+}
+
+MTR_STDCALL int __fwritable(FILE *stream)
+{
+    if (stream != NULL)
+        return -1;
+    else
+        return 0;
+}
+#endif
