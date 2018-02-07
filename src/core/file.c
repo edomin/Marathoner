@@ -115,13 +115,11 @@ size_t MTR_CALL MTR_FileRead(uint32_t fileNum, char **buffer)
         file->bufLength = 0;
     }
 
-//    #ifndef __MINGW32__
     if (MTR_FileStdioExt.Freadable(file->file) == 0)
     {
         *buffer = NULL;
         return 0;
     }
-//    #endif
 
     if (MTR_FileStdio.Fseek(file->file, 0, SEEK_END) != 0)
     {

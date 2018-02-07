@@ -200,7 +200,6 @@ $(OBJSDIR)/so.o: so.c so.h
 $(OBJSDIR)/fa.o: fa.c fa.h $(FADIR)/core.h
 	$(CC) $(CFLAGS) $(INCDIRS) -c fa.c -o $(OBJSDIR)/fa.o
 
-
 $(OBJSDIR)/module.o: module.c module.h
 	$(CC) $(CFLAGS) $(INCDIRS) -c module.c -o $(OBJSDIR)/module.o
 

@@ -35,6 +35,7 @@ void RequireEngineFuncs(uint8_t plugin)
      MTR_MarathonerGetSubsystemModuleId);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireGetCurrentDirectory,
      MTR_GetCurrentDirectory);
+
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConfigfileGetKeyName,
      MTR_ConfigfileGetKeyName);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConfigfileGetSectionName,
@@ -65,10 +66,12 @@ void RequireEngineFuncs(uint8_t plugin)
      MTR_ConfigfileWriteString);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConfigfileCreateSection,
      MTR_ConfigfileCreateSection);
+
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireLogWrite, MTR_LogWrite);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireLogWrite_s, MTR_LogWrite_s);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireLogWrite_i, MTR_LogWrite_i);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireLogWrite_d, MTR_LogWrite_d);
+
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireShowSimpleMessageBox,
      MTR_ShowSimpleMessageBox);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireShowYesNoMessageBox,
@@ -88,7 +91,9 @@ void RequireEngineFuncs(uint8_t plugin)
      MTR_ShowOpenFileDialog);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireShowSelectFolderDialog,
      MTR_ShowSelectFolderDialog);
+
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireNotify, MTR_Notify);
+
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireIndexkeeperCreate,
      MTR_IndexkeeperCreate);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireIndexkeeperGetFreeIndex,
@@ -101,10 +106,12 @@ void RequireEngineFuncs(uint8_t plugin)
      MTR_IndexkeeperGetReservedDataCount);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireIndexkeeperDestroy,
      MTR_IndexkeeperDestroy);
+
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireEncodingUtf8ToUcs4,
      MTR_EncodingUtf8ToUcs4);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireEncodingUtf8Codepoints,
      MTR_EncodingUtf8Codepoints);
+
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileOpen, MTR_FileOpen);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileClose, MTR_FileClose);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileRead, MTR_FileRead);
@@ -133,8 +140,10 @@ void RequireEngineFuncs(uint8_t plugin)
      MTR_FileSetStdioFuncs);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireFileSetStdioExtFuncs,
      MTR_FileSetStdioExtFuncs);
+
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireClipboardPutText, MTR_ClipboardPutText);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireClipboardGetText, MTR_ClipboardGetText);
+
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireStringBufferAdd, MTR_StringBufferAdd);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireStringBufferDelete,
      MTR_StringBufferDelete);
@@ -144,6 +153,7 @@ void RequireEngineFuncs(uint8_t plugin)
      MTR_StringBufferGetString);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireStringBufferGetMaxLen,
      MTR_StringBufferGetMaxLen);
+
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireOptionsAlias, MTR_OptionsAlias);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireOptionsGet, MTR_OptionsGet);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireOptionsGet_b, MTR_OptionsGet_b);
@@ -151,8 +161,10 @@ void RequireEngineFuncs(uint8_t plugin)
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireOptionsGet_l, MTR_OptionsGet_l);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireOptionsGet_f, MTR_OptionsGet_f);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireOptionsGet_d, MTR_OptionsGet_d);
+
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConsoleShow, MTR_ConsoleShow);
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireConsoleHide, MTR_ConsoleHide);
+
     MTR_REQUIRE_ENGINE_FUNC(MTR_RequireSoLoadSymbol, MTR_SoLoadSymbol);
 }
 
