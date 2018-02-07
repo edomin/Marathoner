@@ -271,7 +271,7 @@ int MTR_STDCALL MTR_PakFseek(FILE *file, long int offset, int origin)
             break;
         case SEEK_END:
             success = PHYSFS_seek((PHYSFS_File *)file,
-             PHYSFS_fileLength((PHYSFS_File *)file) - 1 + offset);
+             PHYSFS_fileLength((PHYSFS_File *)file) + offset);
             break;
         default:
             success = false;
