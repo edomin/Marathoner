@@ -2166,6 +2166,46 @@
         return 1;                           \
     }
 
+#define MTR_SCRIPT_FUNC_B_P2(sfunc, func) \
+    MTR_SCRIPT_FUNC(sfunc)                \
+    {                                     \
+        void *p1;                         \
+        void *p2;                         \
+        bool result;                      \
+        MTR_SF_GET_POINTER(p1, 1);        \
+        MTR_SF_GET_POINTER(p2, 2);        \
+        result = func(p1, p2);            \
+        MTR_SF_PUSH_BOOL(result);         \
+        return 1;                         \
+    }
+
+#define MTR_SCRIPT_FUNC_B_P9(sfunc, func)                  \
+    MTR_SCRIPT_FUNC(sfunc)                                 \
+    {                                                      \
+        void *p1;                                          \
+        void *p2;                                          \
+        void *p3;                                          \
+        void *p4;                                          \
+        void *p5;                                          \
+        void *p6;                                          \
+        void *p7;                                          \
+        void *p8;                                          \
+        void *p9;                                          \
+        bool result;                                       \
+        MTR_SF_GET_POINTER(p1, 1);                         \
+        MTR_SF_GET_POINTER(p2, 2);                         \
+        MTR_SF_GET_POINTER(p3, 3);                         \
+        MTR_SF_GET_POINTER(p4, 4);                         \
+        MTR_SF_GET_POINTER(p5, 5);                         \
+        MTR_SF_GET_POINTER(p6, 6);                         \
+        MTR_SF_GET_POINTER(p7, 7);                         \
+        MTR_SF_GET_POINTER(p8, 8);                         \
+        MTR_SF_GET_POINTER(p9, 9);                         \
+        result = func(p1, p2, p3, p4, p5, p6, p7, p8, p9); \
+        MTR_SF_PUSH_BOOL(result);                          \
+        return 1;                                          \
+    }
+
 #define MTR_SCRIPT_FUNC_I_V(sfunc, func) \
     MTR_SCRIPT_FUNC(sfunc)               \
     {                                    \
