@@ -287,6 +287,49 @@ MTR_FwritableFunc MTR_CALL MTR_FileGetStdFwritable(void)
     return __fwritable;
 }
 
+/*fa MTR_FileSetStdioFuncs yes */
+bool MTR_CALL MTR_FileSetStdioFuncs(MTR_FopenFunc fopenFunc,
+ MTR_FcloseFunc fcloseFunc, MTR_FeofFunc feofFunc, MTR_FtellFunc ftellFunc,
+ MTR_FseekFunc fseekFunc, MTR_RewindFunc rewindFunc, MTR_FreadFunc freadFunc,
+ MTR_FwriteFunc fwriteFunc, MTR_FprintfFunc fprintfFunc)
+{
+    if ((fopenFunc == NULL) || (fcloseFunc == NULL) || (feofFunc == NULL) ||
+     (ftellFunc == NULL) || (fseekFunc == NULL) || (rewindFunc == NULL) ||
+     (freadFunc == NULL) || (fwriteFunc == NULL) || (fprintfFunc == NULL)) {
+        MTR_LogWrite(
+         "Unable to set Stdio funcs. All function pointers must be non NULL", 0,
+         MTR_LMT_ERROR);
+         return false;
+    }
+    MTR_FileStdio.Fopen = fopenFunc;
+    MTR_FileStdio.Fclose = fcloseFunc;
+    MTR_FileStdio.Feof = feofFunc;
+    MTR_FileStdio.Ftell = ftellFunc;
+    MTR_FileStdio.Fseek = fseekFunc;
+    MTR_FileStdio.Rewind = rewindFunc;
+    MTR_FileStdio.Fread = freadFunc;
+    MTR_FileStdio.Fwrite = fwriteFunc;
+    MTR_FileStdio.Fprintf = fprintfFunc;
+
+    return true;
+}
+
+/*fa MTR_FileSetStdioExtFuncs yes */
+bool MTR_CALL MTR_FileSetStdioExtFuncs(MTR_FreadableFunc freadableFunc,
+ MTR_FwritableFunc fwritableFunc)
+{
+    if ((freadableFunc == NULL) || (fwritableFunc == NULL)) {
+        MTR_LogWrite(
+         "Unable to set StdioExt funcs. All function pointers must be non NULL",
+         0, MTR_LMT_ERROR);
+         return false;
+    }
+    MTR_FileStdioExt.Freadable = freadableFunc;
+    MTR_FileStdioExt.Fwritable = fwritableFunc;
+
+    return true;
+}
+
 #ifdef __MINGW32__
 MTR_STDCALL int __freadable(FILE *stream)
 {

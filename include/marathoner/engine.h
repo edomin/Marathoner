@@ -186,6 +186,12 @@ MTR_RequireFileGetStdFreadableFunc MTR_RequireFileGetStdFreadable;
 typedef void (MTR_CALL * MTR_RequireFileGetStdFwritableFunc)(
  MTR_FileGetStdFwritableFunc_t);
 MTR_RequireFileGetStdFwritableFunc MTR_RequireFileGetStdFwritable;
+typedef void (MTR_CALL * MTR_RequireFileSetStdioFuncsFunc)(
+ MTR_FileSetStdioFuncsFunc_t);
+MTR_RequireFileSetStdioFuncsFunc MTR_RequireFileSetStdioFuncs;
+typedef void (MTR_CALL * MTR_RequireFileSetStdioExtFuncsFunc)(
+ MTR_FileSetStdioExtFuncsFunc_t);
+MTR_RequireFileSetStdioExtFuncsFunc MTR_RequireFileSetStdioExtFuncs;
 
 typedef void (MTR_CALL * MTR_RequireClipboardPutTextFunc)(
  MTR_ClipboardPutTextFunc_t);

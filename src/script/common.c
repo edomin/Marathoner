@@ -111,6 +111,8 @@ MTR_SCRIPT_FUNC_P_V(MTR_SF_FileGetStdFwrite, MTR_FileGetStdFwrite)
 MTR_SCRIPT_FUNC_P_V(MTR_SF_FileGetStdFprintf, MTR_FileGetStdFprintf)
 MTR_SCRIPT_FUNC_P_V(MTR_SF_FileGetStdFreadable, MTR_FileGetStdFreadable)
 MTR_SCRIPT_FUNC_P_V(MTR_SF_FileGetStdFwritable, MTR_FileGetStdFwritable)
+MTR_SCRIPT_FUNC_B_P9(MTR_SF_FileSetStdioFuncs, MTR_FileSetStdioFuncs)
+MTR_SCRIPT_FUNC_B_P2(MTR_SF_FileSetStdioExtFuncs, MTR_FileSetStdioExtFuncs)
 MTR_SCRIPT_FUNC_B_S1(MTR_SF_ClipboardPutText, MTR_ClipboardPutText)
 MTR_SCRIPT_FUNC_S_V(MTR_SF_ClipboardGetText, MTR_ClipboardGetText)
 MTR_SCRIPT_FUNC_U32t_S1I1(MTR_SF_StringBufferAdd, MTR_StringBufferAdd)
@@ -265,6 +267,9 @@ void MTR_ScriptsRegisterAll(void)
      "FileGetStdFreadable");
     MTR_ScriptsRegisterFunction(MTR_SF_FileGetStdFwritable,
      "FileGetStdFwritable");
+    MTR_ScriptsRegisterFunction(MTR_SF_FileSetStdioFuncs, "FileSetStdioFuncs");
+    MTR_ScriptsRegisterFunction(MTR_SF_FileSetStdioExtFuncs,
+     "FileSetStdioExtFuncs");
 
     MTR_ScriptsRegisterFunction(MTR_SF_ClipboardPutText, "ClipboardPutText");
     MTR_ScriptsRegisterFunction(MTR_SF_ClipboardGetText, "ClipboardGetText");

@@ -110,6 +110,8 @@ MTR_FileGetStdFwriteFunc_t                MTR_FileGetStdFwrite;
 MTR_FileGetStdFprintfFunc_t               MTR_FileGetStdFprintf;
 MTR_FileGetStdFreadableFunc_t             MTR_FileGetStdFreadable;
 MTR_FileGetStdFwritableFunc_t             MTR_FileGetStdFwritable;
+MTR_FileSetStdioFuncsFunc_t               MTR_FileSetStdioFuncs;
+MTR_FileSetStdioExtFuncsFunc_t            MTR_FileSetStdioExtFuncs;
 
 MTR_ClipboardPutTextFunc_t                MTR_ClipboardPutText;
 MTR_ClipboardGetTextFunc_t                MTR_ClipboardGetText;

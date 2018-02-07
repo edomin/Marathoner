@@ -150,6 +150,11 @@ MTR_ENGINE_FUNC(MTR_FwriteFunc, MTR_FileGetStdFwrite, void);
 MTR_ENGINE_FUNC(MTR_FprintfFunc, MTR_FileGetStdFprintf, void);
 MTR_ENGINE_FUNC(MTR_FreadableFunc, MTR_FileGetStdFreadable, void);
 MTR_ENGINE_FUNC(MTR_FwritableFunc, MTR_FileGetStdFwritable, void);
+MTR_ENGINE_FUNC(bool, MTR_FileSetStdioFuncs, MTR_FopenFunc, MTR_FcloseFunc,
+ MTR_FeofFunc, MTR_FtellFunc, MTR_FseekFunc, MTR_RewindFunc, MTR_FreadFunc,
+ MTR_FwriteFunc, MTR_FprintfFunc);
+MTR_ENGINE_FUNC(bool, MTR_FileSetStdioExtFuncs, MTR_FreadableFunc,
+ MTR_FwritableFunc);
 
 MTR_ENGINE_FUNC(bool, MTR_ClipboardPutText, const char *);
 MTR_ENGINE_FUNC(char *, MTR_ClipboardGetText, void);

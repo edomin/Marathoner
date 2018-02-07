@@ -65,6 +65,9 @@ void *FileGetStdFwrite(void)
 void *FileGetStdFprintf(void)
 void *FileGetStdFreadable(void)
 void *FileGetStdFwritable(void)
+/* Look "test/pak/pak.lua" */
+bool FileSetStdioFuncs(void *, void *, void *, void *, void *, void *, void *, void *, void *)
+bool FileSetStdioExtFuncs(void *, void *)
 
 bool ClipboardPutText(const char* text)
 const char *ClipboardGetText()

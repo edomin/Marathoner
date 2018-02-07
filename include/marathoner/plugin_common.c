@@ -73,6 +73,8 @@ MTR_REQUIRE_FUNC(FileGetStdFwrite)
 MTR_REQUIRE_FUNC(FileGetStdFprintf)
 MTR_REQUIRE_FUNC(FileGetStdFreadable)
 MTR_REQUIRE_FUNC(FileGetStdFwritable)
+MTR_REQUIRE_FUNC(FileSetStdioFuncs)
+MTR_REQUIRE_FUNC(FileSetStdioExtFuncs)
 
 MTR_REQUIRE_FUNC(ClipboardPutText)
 MTR_REQUIRE_FUNC(ClipboardGetText)
