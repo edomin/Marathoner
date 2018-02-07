@@ -1,5 +1,5 @@
-#ifndef MTR_PAK_PHYSFS_LUA_H
-#define MTR_PAK_PHYSFS_LUA_H
+#ifndef MTR_PACKAGE_PHYSFS_LUA_H
+#define MTR_PACKAGE_PHYSFS_LUA_H
 
 #include "lua.h"
 #include "lualib.h"
@@ -7,10 +7,10 @@
 
 #include "marathoner/plugin.h"
 
-#define MTR_SOURCE_MODULE "PAK_PhysFS"
+#define MTR_SOURCE_MODULE "Package_PhysFS"
 #ifdef MTR_MOD_STATIC
     #define MTR_BINDING
-    #define MTR_ScriptsRegisterAll MTR_PAK_PhysFS_LuaRegisterAll
+    #define MTR_ScriptsRegisterAll MTR_Package_PhysFS_LuaRegisterAll
 #endif
 #include "marathoner/binding_common.h"
 #include "../binding_common.h"

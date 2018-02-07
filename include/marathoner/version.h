@@ -88,10 +88,10 @@
 #define MTR_VERSION_TTF_FREETYPE2_SQUIRREL          0x000100U /* inc minor */
 #define MTR_VERSION_TTF_FREETYPE2_DUKTAPE           0x000100U /* inc minor */
 
-#define MTR_VERSION_PAK_PHYSFS                      0x000000U /* initial */
-#define MTR_VERSION_PAK_PHYSFS_LUA                  0x000000U /* initial */
-#define MTR_VERSION_PAK_PHYSFS_SQUIRREL             0x000000U /* initial */
-#define MTR_VERSION_PAK_PHYSFS_DUKTAPE              0x000000U /* initial */
+#define MTR_VERSION_PACKAGE_PHYSFS                  0x000000U /* initial */
+#define MTR_VERSION_PACKAGE_PHYSFS_LUA              0x000000U /* initial */
+#define MTR_VERSION_PACKAGE_PHYSFS_SQUIRREL         0x000000U /* initial */
+#define MTR_VERSION_PACKAGE_PHYSFS_DUKTAPE          0x000000U /* initial */
 
 #define MTR_VERSION_UTILS_COLOR                     0x000300U /* not incremented */
 #define MTR_VERSION_UTILS_COLOR_LUA                 0x000200U /* not incremented */

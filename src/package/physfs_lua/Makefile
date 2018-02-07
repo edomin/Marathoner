@@ -1,8 +1,8 @@
 include ../../../makefiles/Build.mk
 
-SUBSYSTEM = pak
+SUBSYSTEM = package
 MODULE = physfs_lua
-MODULE_NAME = PAK_PhysFS_Lua
+MODULE_NAME = Package_PhysFS_Lua
 include ../../../makefiles/Lua_libs.mk
 PREREQS = ../binding_common.h ../binding_common.c
 

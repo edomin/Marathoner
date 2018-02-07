@@ -1,8 +1,8 @@
 include ../../../makefiles/Build.mk
 
-SUBSYSTEM = pak
+SUBSYSTEM = package
 MODULE = physfs
-MODULE_NAME = PAK_PhysFS
+MODULE_NAME = Package_PhysFS
 LIBS = -lphysfs
 
 include ../../../makefiles/Subsystem.mk

@@ -5,5 +5,5 @@
 #endif
 #include "../binding_common.c"
 
-MTR_BINDING_COMMON_CODE(PAK_PhysFS_Lua, MTR_VERSION_PAK_PHYSFS_LUA,
- "PAK_PhysFS")
+MTR_BINDING_COMMON_CODE(Package_PhysFS_Duktape,
+ MTR_VERSION_PACKAGE_PHYSFS_DUKTAPE, "Package_PhysFS")

@@ -1,12 +1,12 @@
 include ../../../makefiles/Build.mk
 
-SUBSYSTEM = pak
-MODULE = physfs_duktape
-MODULE_NAME = PAK_PhysFS_Duktape
+SUBSYSTEM = package
+MODULE = physfs_squirrel
+MODULE_NAME = Package_PhysFS_Squirrel
 ifeq ($(MOD), plugin)
-  LIBS = -lduktape.dll
+  LIBS = -lsquirrel.dll
 else
-  LIBS = -lduktape
+  LIBS = -lsquirrel_static
 endif
 PREREQS = ../binding_common.h ../binding_common.c
 
