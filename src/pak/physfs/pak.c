@@ -284,6 +284,13 @@ int MTR_STDCALL MTR_PakFseek(FILE *file, long int offset, int origin)
         return -1;
 }
 
+void MTR_STDCALL MTR_PakRewind(FILE *file)
+{
+    MTR_PAK_CHECK_IF_NOT_INITED();
+
+    PHYSFS_seek((PHYSFS_File *)file, 0UL);
+}
+
 size_t MTR_STDCALL MTR_PakFread(void *ptr, size_t size, size_t count,
  FILE *file)
 {
@@ -298,6 +305,42 @@ size_t MTR_STDCALL MTR_PakFwrite(const void *ptr, size_t size, size_t count,
     MTR_PAK_CHECK_IF_NOT_INITED(0UL);
 
     return PHYSFS_writeBytes((PHYSFS_File *)file, ptr, size * count) / size;
+}
+
+int MTR_STDCALL MTR_PakFprintf(FILE *file, const char *format, ...)
+{
+    va_list aptr;
+    int     ret;
+    MTR_PAK_CHECK_IF_NOT_INITED(-1);
+
+    va_start(aptr, format);
+    ret = vsprintf(mtrPakBuffer, format, aptr);
+    va_end(aptr);
+
+    if (ret < 0)
+        return ret;
+
+    return PHYSFS_writeBytes((PHYSFS_File *)file, mtrPakBuffer, ret);
+}
+
+int MTR_STDCALL MTR_PakFreadable(FILE *stream)
+{
+    MTR_PAK_CHECK_IF_NOT_INITED(0);
+
+    if (stream != NULL)
+        return -1;
+    else
+        return 0;
+}
+
+int MTR_STDCALL MTR_PakFwritable(FILE *stream)
+{
+    MTR_PAK_CHECK_IF_NOT_INITED(0);
+
+    if (stream != NULL)
+        return -1;
+    else
+        return 0;
 }
 
 /*fa MTR_PakGetFopen yes */
@@ -340,6 +383,14 @@ MTR_DCLSPC MTR_FseekFunc MTR_CALL MTR_PakGetFseek(void)
     return MTR_PakFseek;
 }
 
+/*fa MTR_PakGetRewind yes */
+MTR_DCLSPC MTR_RewindFunc MTR_CALL MTR_PakGetRewind(void)
+{
+    MTR_PAK_CHECK_IF_NOT_INITED(NULL);
+
+    return MTR_PakRewind;
+}
+
 /*fa MTR_PakGetFread yes */
 MTR_DCLSPC MTR_FreadFunc MTR_CALL MTR_PakGetFread(void)
 {
@@ -354,4 +405,28 @@ MTR_DCLSPC MTR_FwriteFunc MTR_CALL MTR_PakGetFwrite(void)
     MTR_PAK_CHECK_IF_NOT_INITED(NULL);
 
     return MTR_PakFwrite;
+}
+
+/*fa MTR_PakGetFprintf yes */
+MTR_DCLSPC MTR_FprintfFunc MTR_CALL MTR_PakGetFprintf(void)
+{
+    MTR_PAK_CHECK_IF_NOT_INITED(NULL);
+
+    return MTR_PakFprintf;
+}
+
+/*fa MTR_PakGetFreadable yes */
+MTR_DCLSPC MTR_FreadableFunc MTR_CALL MTR_PakGetFreadable(void)
+{
+    MTR_PAK_CHECK_IF_NOT_INITED(NULL);
+
+    return MTR_PakFreadable;
+}
+
+/*fa MTR_PakGetFwritable yes */
+MTR_DCLSPC MTR_FwritableFunc MTR_CALL MTR_PakGetFwritable(void)
+{
+    MTR_PAK_CHECK_IF_NOT_INITED(NULL);
+
+    return MTR_PakFwritable;
 }

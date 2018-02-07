@@ -11,7 +11,11 @@ MTR_FUNC(MTR_FcloseFunc, MTR_PakGetFclose, void);
 MTR_FUNC(MTR_FeofFunc, MTR_PakGetFeof, void);
 MTR_FUNC(MTR_FtellFunc, MTR_PakGetFtell, void);
 MTR_FUNC(MTR_FseekFunc, MTR_PakGetFseek, void);
+MTR_FUNC(MTR_RewindFunc, MTR_PakGetRewind, void);
 MTR_FUNC(MTR_FreadFunc, MTR_PakGetFread, void);
 MTR_FUNC(MTR_FwriteFunc, MTR_PakGetFwrite, void);
+MTR_FUNC(MTR_FprintfFunc, MTR_PakGetFprintf, void);
+MTR_FUNC(MTR_FreadableFunc, MTR_PakGetFreadable, void);
+MTR_FUNC(MTR_FwritableFunc, MTR_PakGetFwritable, void);
 
 #endif

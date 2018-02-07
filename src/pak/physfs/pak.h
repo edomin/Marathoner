@@ -17,8 +17,10 @@ typedef struct mtrPak_t {
     char *currentFilename;
 } mtrPak_t;
 
-mtrPak_t mtrPak;
+mtrPak_t    mtrPak;
 static bool mtrPakInited = false;
+char        mtrPakBuffer[1048576];
+
 #define MTR_PAK_CHECK_IF_NOT_INITED(returnValue) \
     if (!mtrPakInited)                           \
         return returnValue;
