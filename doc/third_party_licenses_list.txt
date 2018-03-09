@@ -19,6 +19,7 @@ libwebp         BSD-3-clause
 lua             MIT
 minIni          Apache 2
 nuklear         Public Domain
+PhysFS          Zlib
 saneopt         MIT
 SDL_gpu         MIT
 SDL2            Zlib
