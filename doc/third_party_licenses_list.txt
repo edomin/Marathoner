@@ -1,5 +1,6 @@
 bzip2           BSD-like
 cJSON           MIT
+dr_wav          Unlicense
 duktape         MIT
 Freetype        BSD-like
 giflib          X Consortium-like (MIT-like)
@@ -13,6 +14,7 @@ libogg          BSD-like
 libpng          libpng (Zlib)
 libtiff         BSD-like
 libvorbis       BSD-like
+libvorbisfile   BSD-like
 libwebp         BSD-3-clause
 lua             MIT
 minIni          Apache 2

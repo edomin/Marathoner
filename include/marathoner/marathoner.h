@@ -501,6 +501,16 @@ mtrPlugin *mtrPluginData;
 #define MTR_FS_UNDERLINE                0x04
 #define MTR_FS_STRIKETHROUGH            0x08
 
+/* PCM sample format */
+#define MTR_PCM_SINGLE                  0
+#define MTR_PCM_SINGLE_INTERLEAVED      1
+#define MTR_PCM_SINT8_INTERLEAVED       2
+#define MTR_PCM_UINT8_INTERLEAVED       3
+#define MTR_PCM_SINT16_INTERLEAVED      4
+#define MTR_PCM_UINT16_INTERLEAVED      5
+#define MTR_PCM_SINT32_INTERLEAVED      6
+#define MTR_PCM_UINT32_INTERLEAVED      7
+
 /* GUI window attributes */
 #define MTR_GUI_WINDOW_BORDER           0x0001
 #define MTR_GUI_WINDOW_MOVABLE          0x0002

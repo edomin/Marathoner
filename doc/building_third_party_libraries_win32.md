@@ -25,6 +25,12 @@ $ make
 $ make install
 ```
 
+[dr_wav](https://github.com/mackron/dr_libs)
+
+```
+$ cp dr_wav.h /usr/local/mingw32/include
+```
+
 [duktape](http://duktape.org/)
 
 ```

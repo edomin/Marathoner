@@ -79,6 +79,8 @@ JSON_CJSON = json/cjson
 JSON_CJSON_LUA = json/cjson_lua
 JSON_CJSON_SQUIRREL = json/cjson_squirrel
 JSON_CJSON_DUKTAPE = json/cjson_duktape
+OGG_LIBVORBISFILE = ogg/libvorbisfile
+WAV_DR_WAV = wav/dr_wav
 PACKAGE_PHYSFS = package/physfs
 PACKAGE_PHYSFS_LUA = package/physfs_lua
 PACKAGE_PHYSFS_SQUIRREL = package/physfs_squirrel
@@ -201,6 +203,10 @@ ifeq ($(MOD), plugin)
 	make -j$(CORES) -C src/$(JSON_CJSON_LUA) PREFIX=$(PREFIX)
 	make -j$(CORES) -C src/$(JSON_CJSON_SQUIRREL) PREFIX=$(PREFIX)
 	make -j$(CORES) -C src/$(JSON_CJSON_DUKTAPE) PREFIX=$(PREFIX)
+
+	make -j$(CORES) -C src/$(OGG_LIBVORBISFILE) PREFIX=$(PREFIX)
+
+	make -j$(CORES) -C src/$(WAV_DR_WAV) PREFIX=$(PREFIX)
 
 	make -j$(CORES) -C src/$(PACKAGE_PHYSFS) PREFIX=$(PREFIX)
 	make -j$(CORES) -C src/$(PACKAGE_PHYSFS_LUA) PREFIX=$(PREFIX)

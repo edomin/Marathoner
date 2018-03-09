@@ -23,6 +23,21 @@ typedef struct mtrPixels_t {
     int   pixelformat;
 } mtrPixels_t;
 
+typedef struct mtrPcm_t {
+    int      format;
+    void   **data; /* If noninterleaved:
+                    *   first index - channel num
+                    *   second index - sample num
+                    * If interleaved:
+                    *   first index - 0
+                    *   second index - sample num
+                    */
+    long int samples;
+    int      channels;
+    bool     interleaved;
+    long int sampleRate;
+} mtrPcm_t;
+
 #if defined(MTR_MOD_PLUGIN)
     #define MTR_EXTERN
 #else
