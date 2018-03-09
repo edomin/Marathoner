@@ -186,6 +186,18 @@ MTR_ENGINE_FUNC(void *, MTR_SoLoadSymbol, uint32_t, const char *);
 mtrPlugin *mtrPluginData;
 #endif /* MTR_MOD_PLUGIN */
 
+/* Endianness */
+#define MTR_LITTLE_ENDIAN               0
+#define MTR_BIG_ENDIAN                  1
+#define MTR_UNKNOWN_ENDIAN              2
+#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+    #define MTR_ENDIANNESS MTR_LITTLE_ENDIAN
+#elif __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
+    #define MTR_ENDIANNESS MTR_BIG_ENDIAN
+#else
+    #define MTR_ENDIANNESS MTR_UNKNOWN_ENDIAN
+#endif
+
 /* Log Message Types */
 #define MTR_LMT_INFO                    0
 #define MTR_LMT_NOTE                    1
