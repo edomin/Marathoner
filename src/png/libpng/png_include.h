@@ -19,4 +19,3 @@ static bool  mtrPngInited = false;
 mtrPixels_t *tempPixels;
 
 #endif
-
