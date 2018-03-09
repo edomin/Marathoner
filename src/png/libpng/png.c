@@ -45,7 +45,7 @@ MTR_DCLSPC void MTR_CALL MTR_PngInit(void)
 
 }
 
-/*fa MTR_PngLoadFast yes */
+/*fa MTR_PngLoadSimple yes */
 MTR_DCLSPC mtrPixels_t *MTR_CALL MTR_PngLoadSimple(const char *filename)
 {
     FILE         *file;
@@ -254,7 +254,7 @@ MTR_DCLSPC mtrPixels_t *MTR_CALL MTR_PngLoadSimple(const char *filename)
     return tempPixels;
 }
 
-/*fa MTR_PngSaveFast yes */
+/*fa MTR_PngSaveSimple yes */
 MTR_DCLSPC bool MTR_CALL MTR_PngSaveSimple(const char *filename,
  mtrPixels_t *pixels)
 {
