@@ -295,9 +295,14 @@ void MTR_STDCALL MTR_PackageRewind(FILE *file)
 size_t MTR_STDCALL MTR_PackageFread(void *ptr, size_t size, size_t count,
  FILE *file)
 {
+    int64_t result;
     MTR_PACKAGE_CHECK_IF_NOT_INITED(0UL);
 
-    return PHYSFS_readBytes((PHYSFS_File *)file, ptr, size * count) / size;
+    result = PHYSFS_readBytes((PHYSFS_File *)file, ptr, size * count) / size;
+    if (result == -1)
+        return 0;
+    else
+        return result;
 }
 
 size_t MTR_STDCALL MTR_PackageFwrite(const void *ptr, size_t size, size_t count,
