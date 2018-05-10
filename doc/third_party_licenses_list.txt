@@ -4,12 +4,17 @@ dr_wav          Unlicense
 duktape         MIT
 Freetype        BSD-like
 giflib          X Consortium-like (MIT-like)
-glew            Modified BSD License && Mesa 3-D License (MIT) && Khronos License (MIT)
-glfw            Zlib
+GLib            LGPL 2.1
+HarfBuzz        MIT
 lazy-winapi     MIT
+libffi          MIT
 libflac         BSD-like
+libiconv        LGPL
+libintl         LGPL 2.1
+libintl-lite    BSL 1.0
 libjpeg         BSD-like
 libmodplug      Public Domain
+libmpg123       LGPL 2.1
 libogg          BSD-like
 libpng          libpng (Zlib)
 libtiff         BSD-like
@@ -20,6 +25,7 @@ lua             MIT
 minIni          Apache 2
 nuklear         Public Domain
 PhysFS          Zlib
+PortAudio       MIT
 saneopt         MIT
 SDL_gpu         MIT
 SDL2            Zlib
@@ -27,10 +33,7 @@ SDL2_gfx        Zlib
 SDL2_image      Zlib
 SDL2_mixer      Zlib
 SDL2_ttf        Zlib
-smpeg2          LGPL 2
 Squirrel        MIT
-stb_image       Public Domain
-stb_image_write Public Domain
 stb_rect_pack   Public Domain
 tigr            Public Domain
 tinyfiledialogs Zlib
