@@ -17,4 +17,3 @@
 MTR_BINDING_COMMON_HEADER()
 
 #endif
-
