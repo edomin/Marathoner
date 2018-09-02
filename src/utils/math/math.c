@@ -41,17 +41,17 @@ MTR_DCLSPC float MTR_CALL MTR_SinFast_f(float num)
     float sine;
     float num2 = num;
 
-    if (num2 < 0)
-        num2 = 360 - fmodf(-num2 + 180, 360) - 180;
+    if (num2 < 0.0f)
+        num2 = 360.0f - fmodf(-num2 + 180.0f, 360.0f) - 180.0f;
     else
-        num2 = fmodf(num2 + 180, 360) - 180;
+        num2 = fmodf(num2 + 180.0f, 360.0f) - 180.0f;
     num2 = num2 * MTR_DEGREE_F;
-    if (num2 < 0)
+    if (num2 < 0.0f)
         sine = num2 * (1.27323954f + 0.405284735f * num2);
     else
         sine = num2*(1.27323954f - 0.405284735f * num2);
 
-    if (sine < 0)
+    if (sine < 0.0f)
         sine = sine * (-0.225f * (sine + 1.0f) + 1.0f);
     else
         sine = sine * (0.225f * (sine - 1.0f) + 1.0f);
@@ -65,17 +65,17 @@ MTR_DCLSPC double MTR_CALL MTR_SinFast_d(double num)
     double sine;
     double num2 = num;
 
-    if (num2 < 0)
-        num2 = 360 - fmod(-num2 + 180, 360) - 180;
+    if (num2 < 0.0)
+        num2 = 360.0 - fmod(-num2 + 180.0, 360.0) - 180.0;
     else
-        num2 = fmod(num2 + 180, 360) - 180;
+        num2 = fmod(num2 + 180.0, 360.0) - 180.0;
     num2 = num2 * MTR_DEGREE_D;
-    if (num2 < 0)
+    if (num2 < 0.0)
         sine = num2 * (1.27323954 + 0.405284735 * num2);
     else
         sine = num2*(1.27323954 - 0.405284735 * num2);
 
-    if (sine < 0)
+    if (sine < 0.0)
         sine = sine * (-0.225 * (sine + 1.0) + 1.0);
     else
         sine = sine * (0.225 * (sine - 1.0) + 1.0);
@@ -100,10 +100,10 @@ MTR_DCLSPC float MTR_CALL MTR_CosFast_f(float num)
 {
     float num2 = num;
 
-    if (num2 < 0)
-        num2 = 360 - fmodf(-num2, 360);
+    if (num2 < 0.0f)
+        num2 = 360.0f - fmodf(-num2, 360.0f);
     else
-        num2 = fmodf(num2, 360);
+        num2 = fmodf(num2, 360.0f);
     num2 = num2 * MTR_DEGREE_F;
     if (num2 < -3.14159265f)
         num2 += 6.28318531f;
@@ -115,7 +115,7 @@ MTR_DCLSPC float MTR_CALL MTR_CosFast_f(float num)
     if (num2 >  3.14159265f)
         num2 -= 6.28318531f;
 
-    if (num2 < 0)
+    if (num2 < 0.0f)
         return (1.27323954f * num2 + 0.405284735f * num2 * num2);
 
     return (1.27323954f * num2 - 0.405284735f * num2 * num2);
@@ -127,10 +127,10 @@ MTR_DCLSPC double MTR_CALL MTR_CosFast_d(double num)
 {
     double num2 = num;
 
-    if (num2 < 0)
-        num2 = 360 - fmod(-num2, 360);
+    if (num2 < 0.0)
+        num2 = 360.0 - fmod(-num2, 360.0);
     else
-        num2 = fmod(num2, 360);
+        num2 = fmod(num2, 360.0);
     num2 = num2 * MTR_DEGREE_D;
     if (num2 < -3.14159265)
         num2 += 6.28318531;
@@ -142,7 +142,7 @@ MTR_DCLSPC double MTR_CALL MTR_CosFast_d(double num)
     if (num2 >  3.14159265)
         num2 -= 6.28318531;
 
-    if (num2 < 0)
+    if (num2 < 0.0)
         return (1.27323954 * num2 + 0.405284735 * num2 * num2);
 
     return (1.27323954 * num2 - 0.405284735 * num2 * num2);
@@ -686,13 +686,13 @@ MTR_DCLSPC int MTR_CALL MTR_Sign(int num)
 /*fa MTR_Sign_l yes */
 MTR_DCLSPC long int MTR_CALL MTR_Sign_l(long int num)
 {
-    return ((num > 0) ? 1L : ((num < 0) ? -1L : 0L));
+    return ((num > 0L) ? 1L : ((num < 0L) ? -1L : 0L));
 }
 
 /*fa MTR_Sign_ll yes */
 MTR_DCLSPC long long int MTR_CALL MTR_Sign_ll(long long int num)
 {
-    return ((num > 0) ? 1LL : ((num < 0) ? -1LL : 0LL));
+    return ((num > 0LL) ? 1LL : ((num < 0LL) ? -1LL : 0LL));
 }
 
 /*fa MTR_Sign_f partial */
