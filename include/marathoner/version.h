@@ -61,7 +61,7 @@
 #define MTR_VERSION_JSON_CJSON_SQUIRREL                  0x000100U /* not incremented */
 #define MTR_VERSION_JSON_CJSON_DUKTAPE                   0x000100U /* not incremented */
 
-#define MTR_VERSION_PNG_LIBPNG                           0x000000U /* not incremented */
+#define MTR_VERSION_PNG_LIBPNG                           0x000001U /* inc patch */
 #define MTR_VERSION_PNG_LIBPNG_LUA                       0x000000U /* not incremented */
 #define MTR_VERSION_PNG_LIBPNG_SQUIRREL                  0x000000U /* not incremented */
 #define MTR_VERSION_PNG_LIBPNG_DUKTAPE                   0x000001U /* inc patch */
