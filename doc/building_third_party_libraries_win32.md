@@ -211,6 +211,14 @@ $ cd ..
 $ rm -r -f build
 ```
 
+[PortAudio](http://www.portaudio.com/)
+
+```
+$ ./configure --prefix=/usr/local/mingw32 --build=mingw32
+$ make
+$ make install
+```
+
 [saneopt](https://github.com/mmalecki/saneopt)
 
 ```

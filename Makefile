@@ -55,6 +55,10 @@ AUDIO_SDL2_MIXER = audio/sdl2_mixer
 AUDIO_SDL2_MIXER_LUA = audio/sdl2_mixer_lua
 AUDIO_SDL2_MIXER_SQUIRREL = audio/sdl2_mixer_squirrel
 AUDIO_SDL2_MIXER_DUKTAPE = audio/sdl2_mixer_duktape
+AUDIO_PORTAUDIO = audio/portaudio
+AUDIO_PORTAUDIO_LUA = audio/portaudio_lua
+AUDIO_PORTAUDIO_SQUIRREL = audio/portaudio_squirrel
+AUDIO_PORTAUDIO_DUKTAPE = audio/portaudio_duktape
 KEYBOARD_SDL2 = keyboard/sdl2
 KEYBOARD_SDL2_LUA = keyboard/sdl2_lua
 KEYBOARD_SDL2_SQUIRREL = keyboard/sdl2_squirrel
@@ -178,6 +182,10 @@ ifeq ($(MOD), plugin)
 	make -j$(CORES) -C src/$(AUDIO_SDL2_MIXER_LUA) PREFIX=$(PREFIX)
 	make -j$(CORES) -C src/$(AUDIO_SDL2_MIXER_SQUIRREL) PREFIX=$(PREFIX)
 	make -j$(CORES) -C src/$(AUDIO_SDL2_MIXER_DUKTAPE) PREFIX=$(PREFIX)
+	make -j$(CORES) -C src/$(AUDIO_PORTAUDIO) PREFIX=$(PREFIX)
+	make -j$(CORES) -C src/$(AUDIO_PORTAUDIO_LUA) PREFIX=$(PREFIX)
+	make -j$(CORES) -C src/$(AUDIO_PORTAUDIO_SQUIRREL) PREFIX=$(PREFIX)
+	make -j$(CORES) -C src/$(AUDIO_PORTAUDIO_DUKTAPE) PREFIX=$(PREFIX)
 
 	make -j$(CORES) -C src/$(KEYBOARD_SDL2) PREFIX=$(PREFIX)
 	make -j$(CORES) -C src/$(KEYBOARD_SDL2_LUA) PREFIX=$(PREFIX)

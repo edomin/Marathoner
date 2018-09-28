@@ -40,6 +40,10 @@
 #define MTR_VERSION_AUDIO_SDL2_MIXER_LUA                 0x000201U /* not incremented */
 #define MTR_VERSION_AUDIO_SDL2_MIXER_SQUIRREL            0x000101U /* not incremented */
 #define MTR_VERSION_AUDIO_SDL2_MIXER_DUKTAPE             0x000101U /* not incremented */
+#define MTR_VERSION_AUDIO_PORTAUDIO                      0x000000U /* initial */
+#define MTR_VERSION_AUDIO_PORTAUDIO_LUA                  0x000000U /* initial */
+#define MTR_VERSION_AUDIO_PORTAUDIO_SQUIRREL             0x000000U /* initial */
+#define MTR_VERSION_AUDIO_PORTAUDIO_DUKTAPE              0x000000U /* initial */
 
 #define MTR_VERSION_KEYBOARD_SDL2                        0x000300U /* not incremented */
 #define MTR_VERSION_KEYBOARD_SDL2_LUA                    0x000201U /* not incremented */

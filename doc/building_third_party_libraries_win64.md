@@ -217,6 +217,19 @@ $ cd ..
 $ rm -r -f build
 ```
 
+[PortAudio](http://www.portaudio.com/)
+
+```
+$ mkdir temp
+$ cd temp
+$ cmake .. -G "MSYS Makefiles" -DCMAKE_INSTALL_PREFIX=/usr/local/x86_64-w64-mingw32
+$ make
+$ make install
+$ cp libportaudio_static.a /usr/local/x86_64-w64-mingw32/lib
+$ cd ..
+$ rm -r -f temp
+```
+
 [saneopt](https://github.com/mmalecki/saneopt)
 
 ```
