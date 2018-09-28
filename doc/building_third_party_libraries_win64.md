@@ -92,6 +92,16 @@ $ make
 $ make install
 ```
 
+[inih](https://github.com/benhoyt/inih)
+
+```
+$ x86_64-w64-mingw32-gcc -c ini.c -o ini.o -O2 -Wall -DINI_ALLOW_MULTILINE=0 \
+-DINI_STOP_ON_FIRST_ERROR=1 -DINI_HANDLER_LINENO=1 -DINI_ALLOW_REALLOC=1
+$ ar rcs libinih.a ini.o
+$ cp ini.h /usr/local/x86_64-w64-mingw32/include
+$ cp libinih.a /usr/local/x86_64-w64-mingw32/lib
+```
+
 [lazy-winapi](https://github.com/DoumanAsh/lazy-winapi.c)
 
 ```
@@ -384,6 +394,15 @@ $ ar rcs libtinyfiledialogs.a tinyfiledialogs.o
 $ cp tinyfiledialogs.h /usr/local/x86_64-w64-mingw32/include
 $ cp *.a /usr/local/x86_64-w64-mingw32/lib
 $ cp tinyfiledialogs.dll /usr/local/x86_64-w64-mingw32/bin
+```
+
+[utf](https://github.com/andlabs/utf)
+
+```
+$ x86_64-w64-mingw32-gcc -Wall -O2 -c utf.c -o utf.o
+$ x86_64-w64-mingw32-gcc-ar rcs libutf.a utf.o
+$ cp utf.h /usr/local/x86_64-w64-mingw32/include
+$ cp libutf.a /usr/local/x86_64-w64-mingw32/lib
 ```
 
 [utf8](https://github.com/haipome/utf8)

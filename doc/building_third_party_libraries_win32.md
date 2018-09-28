@@ -86,6 +86,26 @@ $ make
 $ make install
 ```
 
+[icu](http://site.icu-project.org/download)
+
+```
+$ $ ./configure --prefix=/usr/local/mingw32 --enable-static=yes \
+--with-library-bits=32 --target=mingw32 --build=mingw32 \
+CFLAGS="-O3 -DLOCALE_NAME_MAX_LENGTH=85 -DWINVER=0x601" \
+CXXFLAGS="-O3 -DLOCALE_NAME_MAX_LENGTH=85 -DWINVER=0x601"
+$ make
+```
+
+[inih](https://github.com/benhoyt/inih)
+
+```
+$ mingw32-gcc -c ini.c -o ini.o -O2 -Wall -DINI_ALLOW_MULTILINE=0 \
+-DINI_STOP_ON_FIRST_ERROR=1 -DINI_HANDLER_LINENO=1 -DINI_ALLOW_REALLOC=1
+$ ar rcs libinih.a ini.o
+$ cp ini.h /usr/local/mingw32/include
+$ cp libinih.a /usr/local/mingw32/lib
+```
+
 [lazy-winapi](https://github.com/DoumanAsh/lazy-winapi.c)
 
 ```
@@ -360,6 +380,15 @@ $ ar rcs libtinyfiledialogs.a tinyfiledialogs.o
 $ cp tinyfiledialogs.h /usr/local/mingw32/include
 $ cp *.a /usr/local/mingw32/lib
 $ cp tinyfiledialogs.dll /usr/local/mingw32/bin
+```
+
+[utf](https://github.com/andlabs/utf)
+
+```
+$ mingw32-gcc -Wall -O2 -c utf.c -o utf.o
+$ ar rcs libutf.a utf.o
+$ cp utf.h /usr/local/mingw32/include
+$ cp libutf.a /usr/local/mingw32/lib
 ```
 
 [utf8](https://github.com/haipome/utf8)
