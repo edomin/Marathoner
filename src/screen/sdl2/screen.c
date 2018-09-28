@@ -306,7 +306,7 @@ MTR_DCLSPC void MTR_CALL MTR_SdlVideoInit(void)
              "subsystems", 1, MTR_LMT_ERROR);
             free(mtrScreen);
             MTR_Notify("Screen not initialized", 0, MTR_LMT_ERROR);
-            return false;
+            return;
         }
     }
 }

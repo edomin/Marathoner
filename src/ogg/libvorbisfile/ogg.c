@@ -207,14 +207,14 @@ void MTR_OggFillTempPcmInterleaved(int format, OggVorbis_File *vorbisFile,
 
     if (samplesReaded <= 0) {
         ov_clear(vorbisFile);
-        return NULL;
+        return;
     }
 
     mtrOggTempPcm.channels = vorbisInfo->channels;
     mtrOggTempPcm.data = malloc(sizeof(void *));
     if (mtrOggTempPcm.data == NULL) {
         ov_clear(vorbisFile);
-        return NULL;
+        return;
     }
 
     mtrOggTempPcm.samples = samplesCount;
@@ -223,7 +223,7 @@ void MTR_OggFillTempPcmInterleaved(int format, OggVorbis_File *vorbisFile,
     if (mtrOggTempPcm.data[0] == NULL) {
         ov_clear(vorbisFile);
         MTR_OggFreeTempPcm();
-        return NULL;
+        return;
     }
 
     memcpy(mtrOggTempPcm.data[0], pcmChannelsInterleaved,

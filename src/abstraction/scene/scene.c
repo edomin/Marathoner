@@ -672,7 +672,7 @@ MTR_DCLSPC void MTR_CALL MTR_SceneCameraGetScenePos(uint32_t sceneNum,
     *sceneX = scene->camera[cameraIndex].sceneX;
     *sceneY = scene->camera[cameraIndex].sceneY;
 
-    return true;
+    return;
 }
 
 /*fa MTR_SceneCameraGetSceneX yes */
