@@ -19,6 +19,9 @@ ifeq ($(PLATFORM), win64)
      -lversion -luuid -lvorbisfile -lFLAC -lmodplug.dll -lvorbis -logg -lstdc++
   endif
 endif
+ifeq ($(PLATFORM), linux_x86_64)
+  LIBS = -lSDL2_mixer
+endif
 ifeq ($(PLATFORM), html5)
   CEXFLAGS = -s USE_SDL=2
   LIBS = -lSDL2_mixer -s USE_SDL=2 -s USE_VORBIS=1 -s USE_OGG=1 -lFLAC -lmodplug

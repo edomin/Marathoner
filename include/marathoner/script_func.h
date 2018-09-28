@@ -57,7 +57,7 @@
     int         mtrSfIntTemp;
     void       *mtrSfPointerTemp;
     #if ((defined (_SQ64)) && (LLONG_MAX == INT64_MAX))
-        int64_t mtrSFInt64Temp;
+        SQInteger mtrSFInt64Temp;
     #endif
 
     #define MTR_SCRIPT_FUNC(funcname)                  SQInteger funcname(HSQUIRRELVM v)

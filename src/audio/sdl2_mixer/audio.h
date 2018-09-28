@@ -11,6 +11,10 @@
 #endif
 #include "SDL2/SDL_mixer.h"
 
+#if (SDL_MIXER_MINOR_VERSION == 0) && (SDL_MIXER_PATCHLEVEL < 2)
+    #define MIX_INIT_MID MIX_INIT_FLUIDSYNTH
+#endif
+
 #include "marathoner/plugin.h"
 #ifdef MTR_MOD_STATIC
     #define fa faAudio

@@ -72,17 +72,21 @@ MTR_DCLSPC bool MTR_CALL MTR_AudioInit(uint32_t sndDmSize,
         MTR_LogWrite("Unable to initialize SDL audio subsystem", 1,
          MTR_LMT_INFO);
 
-    initFlags = MIX_INIT_FLAC | MIX_INIT_MOD | MIX_INIT_MODPLUG | MIX_INIT_MP3 |
-     MIX_INIT_OGG | MIX_INIT_FLUIDSYNTH;
+    initFlags = MIX_INIT_FLAC | MIX_INIT_MOD | MIX_INIT_MP3 | MIX_INIT_OGG |
+     MIX_INIT_MID;
+    #if (SDL_MIXER_MINOR_VERSION == 0) && (SDL_MIXER_PATCHLEVEL < 2)
+    initFlags |= MIX_INIT_MODPLUG;
+    #endif
+
     initResult = Mix_Init(initFlags);
     if(initResult != initFlags)
     {
-        if (initResult == 0)
+        /*if (initResult == 0)
         {
             MTR_Notify("Unable to load libraries needed by SDL_mixer", 1,
              MTR_LMT_ERROR);
             return false;
-        }
+        }*/
 
         MTR_LogWrite("Unable to initialize support of this formats:", 1,
          MTR_LMT_WARNING);
@@ -90,14 +94,16 @@ MTR_DCLSPC bool MTR_CALL MTR_AudioInit(uint32_t sndDmSize,
             MTR_LogWrite("FLAC", 2, MTR_LMT_WARNING);
         if ((initResult & MIX_INIT_MOD) == 0)
             MTR_LogWrite("MOD", 2, MTR_LMT_WARNING);
+        #if (SDL_MIXER_MINOR_VERSION == 0) && (SDL_MIXER_PATCHLEVEL < 2)
         if ((initResult & MIX_INIT_MODPLUG) == 0)
             MTR_LogWrite("MODPlug", 2, MTR_LMT_WARNING);
+        #endif
         if ((initResult & MIX_INIT_MP3) == 0)
             MTR_LogWrite("MP3", 2, MTR_LMT_WARNING);
         if ((initResult & MIX_INIT_OGG) == 0)
             MTR_LogWrite("OGG", 2, MTR_LMT_WARNING);
-        if ((initResult & MIX_INIT_FLUIDSYNTH) == 0)
-            MTR_LogWrite("FluidSynth", 2, MTR_LMT_WARNING);
+        if ((initResult & MIX_INIT_MID) == 0)
+            MTR_LogWrite("MIDI", 2, MTR_LMT_WARNING);
     }
     else
         MTR_LogWrite("Support of the every SDL_mixer audio format initialized",
@@ -311,9 +317,6 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_AudioMusicLoad(const char *filename)
         musicType = Mix_GetMusicType(music->music);
         switch(musicType)
         {
-            case MUS_NONE:
-                MTR_LogWrite_s("Music type:", 2, MTR_LMT_INFO, "unknown");
-                break;
             case MUS_CMD:
                 MTR_LogWrite_s("Music type:", 2, MTR_LMT_INFO,
                  "music playing via external music player");
@@ -333,16 +336,19 @@ MTR_DCLSPC uint32_t MTR_CALL MTR_AudioMusicLoad(const char *filename)
             case MUS_MP3:
                 MTR_LogWrite_s("Music type:", 2, MTR_LMT_INFO, "MP3");
                 break;
+            #if (SDL_MIXER_MINOR_VERSION == 0) && (SDL_MIXER_PATCHLEVEL < 2)
             case MUS_MP3_MAD:
                 MTR_LogWrite_s("Music type:", 2, MTR_LMT_INFO,
                  "MP3 playing via MAD audio decoder");
                 break;
-            case MUS_FLAC:
-                MTR_LogWrite_s("Music type:", 2, MTR_LMT_INFO, "FLAC");
-                break;
             case MUS_MODPLUG:
                 MTR_LogWrite_s("Music type:", 2, MTR_LMT_INFO, "tracker music");
                 break;
+            #endif
+            case MUS_FLAC:
+                MTR_LogWrite_s("Music type:", 2, MTR_LMT_INFO, "FLAC");
+                break;
+            case MUS_NONE:
             default:
                 MTR_LogWrite_s("Music type:", 2, MTR_LMT_INFO, "unknown");
                 break;

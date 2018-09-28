@@ -17,6 +17,9 @@ ifeq ($(PLATFORM), win64)
     LIBS = -lvorbisfile -lvorbis -logg
   endif
 endif
+ifeq ($(PLATFORM), linux_x86_64)
+  LIBS = -lvorbisfile
+endif
 ifeq ($(PLATFORM), html5)
   LIBS = -s USE_VORBIS=1 -s USE_OGG=1
 endif

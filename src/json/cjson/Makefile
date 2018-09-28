@@ -9,6 +9,9 @@ endif
 ifeq ($(PLATFORM), win64)
   LIBS = -lcjson -lssp
 endif
+ifeq ($(PLATFORM), linux_x86_64)
+  LIBS = -lcjson
+endif
 ifeq ($(PLATFORM), html5)
   LIBS = -lcjson
 endif

@@ -14,7 +14,7 @@
 #ifdef MTR_MOD_STATIC
     #define fa faWav
 #endif
-#include "fa/Wav_dr_wav.h"
+#include "fa/WAV_dr_wav.h"
 
 static bool  mtrWavInited = false;
 MTR_Stdio    MTR_WavStdio;

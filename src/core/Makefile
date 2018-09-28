@@ -6,6 +6,9 @@ endif
 ifeq ($(PLATFORM), win64)
   LDEXFLAGS = -L$(PREFIX)/lib
 endif
+ifeq ($(PLATFORM), linux_x86_64)
+  LDEXFLAGS = -L$(PREFIX)/lib
+endif
 ifeq ($(PLATFORM), html5)
   LDEXFLAGS = -L$(PREFIX)/lib
 #  LDEXFLAGS = -L$(PREFIX)/lib -s MAIN_MODULE=1
@@ -85,7 +88,9 @@ endif
 
 TARGETS = $(BINDIR)/Marathoner
 ifeq ($(MOD), plugin)
-  TARGETS += $(BINDIR)/Launcher
+  ifneq ($(PLATFORM), linux_x86_64)
+    TARGETS += $(BINDIR)/Launcher
+  endif
 endif
 
 all: $(TARGETS)
@@ -94,17 +99,21 @@ $(BINDIR)/Marathoner: $(MTR_OBJS)
 ifeq ($(MOD), static)
   ifeq ($(PLATFORM), win32)
 	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) \
-	 $(MTR_OBJS) $(MOD_OBJS) -lminini -lutf8 -ltinyfiledialogs -lole32 \
+	 $(MTR_OBJS) $(MOD_OBJS) -lminini -lutf -ltinyfiledialogs -lole32 \
 	 -lshlwapi -llazy_winapi -lsaneopt $(LIBS)
   endif
   ifeq ($(PLATFORM), win64)
 	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) \
-	 $(MTR_OBJS) $(MOD_OBJS) -lminini -lutf8 -ltinyfiledialogs -lole32 \
+	 $(MTR_OBJS) $(MOD_OBJS) -lminini -lutf -ltinyfiledialogs -lole32 \
 	 -lshlwapi -llazy_winapi -lsaneopt $(LIBS)
+  endif
+  ifeq ($(PLATFORM), linux_x86_64)
+	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) \
+	 $(MTR_OBJS) $(MOD_OBJS) -lminini -lutf -ltinyfiledialogs -lsaneopt $(LIBS)
   endif
   ifeq ($(PLATFORM), html5)
 	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) \
-	 $(MTR_OBJS) $(MOD_OBJS) -lminini -lutf8 $(LIBS) \
+	 $(MTR_OBJS) $(MOD_OBJS) -lminini -lutf $(LIBS) \
 	 --preload-file ../../Marathoner.cfg@/ \
 	 --preload-file ../../autorun@/autorun
   endif
@@ -112,13 +121,17 @@ endif
 ifeq ($(MOD), plugin)
   ifeq ($(PLATFORM), win32)
 	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) \
-	 $(MTR_OBJS) -lminini -Wl,-Bstatic -lutf8 -Wl,-Bstatic -ltinyfiledialogs \
+	 $(MTR_OBJS) -lminini -Wl,-Bstatic -lutf -Wl,-Bstatic -ltinyfiledialogs \
 	 -lole32 -lshlwapi -llazy_winapi -lsaneopt
   endif
   ifeq ($(PLATFORM), win64)
 	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) \
-	 $(MTR_OBJS) -lminini -Wl,-Bstatic -lutf8 -Wl,-Bstatic -ltinyfiledialogs \
+	 $(MTR_OBJS) -lminini -Wl,-Bstatic -lutf -Wl,-Bstatic -ltinyfiledialogs \
 	 -lole32 -lshlwapi -llazy_winapi -lsaneopt
+  endif
+  ifeq ($(PLATFORM), linux_x86_64)
+	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) \
+	 $(MTR_OBJS) -ldl -lminini -lutf -ltinyfiledialogs -lsaneopt
   endif
 #  ifeq ($(PLATFORM), html5)
 #	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) \

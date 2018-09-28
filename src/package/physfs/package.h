@@ -1,6 +1,8 @@
 #ifndef MTR_PACKAGE_PHYSFS_H
 #define MTR_PACKAGE_PHYSFS_H
 
+#include <stdarg.h>
+
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wundef"
 #include "physfs.h"

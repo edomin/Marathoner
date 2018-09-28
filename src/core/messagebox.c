@@ -18,7 +18,7 @@ void MTR_CALL MTR_ShowSimpleMessageBox(uint8_t type, const char *title,
     else
         resultMessage = message;
 
-    #ifdef __MINGW32__
+    #ifdef __GNUC__
     switch (type)
     {
         case MTR_DMT_INFO:
@@ -47,11 +47,11 @@ void MTR_CALL MTR_ShowSimpleMessageBox(uint8_t type, const char *title,
     #endif
 }
 
-/* MinGW only */
+/* GCC only */
 /*fa MTR_ShowYesNoMessageBox yes */
 bool MTR_CALL MTR_ShowYesNoMessageBox(const char *title, const char *message)
 {
-    #ifdef __MINGW32__
+    #ifdef __GNUC__
     const char *emptyString = "";
     const char *resultTitle;
     const char *resultMessage;
@@ -90,7 +90,7 @@ bool MTR_CALL MTR_ShowOkCancelMessageBox(const char *title, const char *message)
     else
         resultMessage = message;
 
-    #ifdef __MINGW32__
+    #ifdef __GNUC__
     return tinyfd_messageBox(resultTitle, resultMessage, "okcancel", "info", 0);
     #else
     int answer;
@@ -140,7 +140,7 @@ const char *MTR_CALL MTR_ShowInputDialog(const char *title, const char *message,
     else
         resultDefaultInput = defaultInput;
 
-    #ifdef __MINGW32__
+    #ifdef __GNUC__
     return tinyfd_inputBox(resultTitle, resultMessage, resultDefaultInput);
     #else
     #pragma GCC diagnostic push
@@ -161,12 +161,12 @@ const char *MTR_CALL MTR_ShowInputDialog(const char *title, const char *message,
     #endif
 }
 
-/* MinGW only */
+/* GCC only */
 /*fa MTR_ShowPasswordDialog yes */
 const char *MTR_CALL MTR_ShowPasswordDialog(const char *title,
  const char *message)
 {
-    #ifdef __MINGW32__
+    #ifdef __GNUC__
     const char *emptyString = "";
     const char *resultTitle;
     const char *resultMessage;
@@ -218,12 +218,12 @@ void MTR_CALL MTR_ClearFileFilters(void)
     mtrFileFiltersCount = 0;
 }
 
-/* MinGW only */
+/* GCC only */
 /*fa MTR_ShowSaveFileDialog yes */
 const char *MTR_CALL MTR_ShowSaveFileDialog(const char *title,
  const char *defaultPathAndFile, const char *singleFilterDescription)
 {
-    #ifdef __MINGW32__
+    #ifdef __GNUC__
     const char *emptyString = "";
     const char *resultTitle;
     const char *resultDefaultPathAndFile;
@@ -245,12 +245,12 @@ const char *MTR_CALL MTR_ShowSaveFileDialog(const char *title,
     #endif
 }
 
-/* MinGW only */
+/* GCC only */
 /*fa MTR_ShowOpenFileDialog yes */
 const char *MTR_CALL MTR_ShowOpenFileDialog(const char *title,
  const char *defaultPathAndFile, const char *singleFilterDescription)
 {
-    #ifdef __MINGW32__
+    #ifdef __GNUC__
     const char *emptyString = "";
     const char *resultTitle;
     const char *resultDefaultPathAndFile;
@@ -272,12 +272,12 @@ const char *MTR_CALL MTR_ShowOpenFileDialog(const char *title,
     #endif
 }
 
-/* MinGW only */
+/* GCC only */
 /*fa MTR_ShowSelectFolderDialog yes */
 const char *MTR_CALL MTR_ShowSelectFolderDialog(const char *title,
  const char *defaultPath)
 {
-    #ifdef __MINGW32__
+    #ifdef __GNUC__
     const char *emptyString = "";
     const char *resultTitle;
     const char *resultDefaultPath;

@@ -3,7 +3,9 @@
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-variable"
-#pragma GCC diagnostic ignored "-Werror"
+#ifdef __MINGW32__
+    #pragma GCC diagnostic ignored "-Werror"
+#endif
 #include "vorbis/vorbisfile.h"
 #pragma GCC diagnostic pop
 
@@ -11,7 +13,7 @@
 #ifdef MTR_MOD_STATIC
     #define fa faOgg
 #endif
-#include "fa/Ogg_libvorbisfile.h"
+#include "fa/OGG_libvorbisfile.h"
 
 static bool  mtrOggInited = false;
 MTR_Stdio    MTR_OggStdio;

@@ -1,9 +1,7 @@
 #ifndef MTR_CORE_DIRECTORY_H
 #define MTR_CORE_DIRECTORY_H
 
-#ifdef __MINGW32__
-    #include <dirent.h>
-#endif
+#include <dirent.h>
 #include <string.h>
 
 #include "marathoner/engine.h"

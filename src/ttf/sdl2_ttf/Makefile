@@ -19,6 +19,9 @@ ifeq ($(PLATFORM), win64)
      -luuid -lfreetype -lpng -lz -lbz2
   endif
 endif
+ifeq ($(PLATFORM), linux_x86_64)
+  LIBS = -lSDL2_ttf
+endif
 ifeq ($(PLATFORM), html5)
   CEXFLAGS = -s USE_SDL=2 -s USE_SDL_TTF=2
   LIBS = -s USE_SDL=2 -s USE_SDL_TTF=2 -s USE_FREETYPE=2

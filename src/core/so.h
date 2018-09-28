@@ -10,7 +10,11 @@
     #include <windows.h>
     typedef HMODULE mtrSoHandle_t;
 #else
-    #include <emscripten.h>
+    #ifdef __EMSCRIPTEN__
+        #include <emscripten.h>
+    #else
+        #include <dlfcn.h>
+    #endif
     typedef void *mtrSoHandle_t;
 #endif
 

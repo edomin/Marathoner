@@ -7,11 +7,15 @@
 #include "so.h"
 #include "marathoner/engine.h"
 
-#ifdef __MINGW32__
-    #ifdef __MINGW64__
-        #define MTR_PLUGIN_DIR "win64/plugin/"
+#ifdef __GNUC__
+    #ifdef __MINGW32__
+        #ifdef __MINGW64__
+            #define MTR_PLUGIN_DIR "win64/plugin/"
+        #else
+            #define MTR_PLUGIN_DIR "win32/plugin/"
+        #endif
     #else
-        #define MTR_PLUGIN_DIR "win32/plugin/"
+        #define MTR_PLUGIN_DIR "linux_x86_64/plugin/"
     #endif
 #endif
 

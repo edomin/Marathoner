@@ -10,7 +10,7 @@ int MTR_LogPrintfCommon(char *format, ...)
     ret = vsprintf(mtrLogBuffer, format, aptr);
     va_end(aptr);
 
-    #ifdef __MINGW32__
+    #ifndef __EMSCRIPTEN__
     fprintf(mtrLogFile, "%s", mtrLogBuffer);
     #endif
     MTR_ConsolePrint(mtrLogBuffer);
@@ -24,7 +24,7 @@ void MTR_LogWriteMeta(uint8_t messageType, uint8_t level)
 
     time(&mtrCurrentTime);
     mtrNow = localtime(&mtrCurrentTime);
-    #ifdef __MINGW32__
+    #ifndef __EMSCRIPTEN__
     mtrLogFile = fopen(logFilename, "a");
     #endif
     MTR_LogPrintfCommon("[%i-%i-%i %i:%i:%i] ",
@@ -64,7 +64,7 @@ void MTR_CALL MTR_LogInit(const char *filename)
         logFilename = "Marathoner.log";
     time(&mtrCurrentTime);
     mtrNow = localtime(&mtrCurrentTime);
-    #ifdef __MINGW32__
+    #ifndef __EMSCRIPTEN__
     mtrLogFile = fopen(logFilename, "w");
     #endif
     MTR_LogPrintfCommon("[%i-%i-%i %i:%i:%i]          Begin Logging.\n",
@@ -81,7 +81,7 @@ void MTR_CALL MTR_LogWrite(const char *message, uint8_t level,
 {
     MTR_LogWriteMeta(messageType, level);
     MTR_LogPrintfCommon("%s\n", message);
-    #ifdef __MINGW32__
+    #ifndef __EMSCRIPTEN__
     fclose(mtrLogFile);
     #endif
 }
@@ -92,7 +92,7 @@ void MTR_CALL MTR_LogWrite_s(const char *message, uint8_t level,
 {
     MTR_LogWriteMeta(messageType, level);
     MTR_LogPrintfCommon("%s %s\n", message, argument);
-    #ifdef __MINGW32__
+    #ifndef __EMSCRIPTEN__
     fclose(mtrLogFile);
     #endif
 }
@@ -103,7 +103,7 @@ void MTR_CALL MTR_LogWrite_i(const char *message, uint8_t level,
 {
     MTR_LogWriteMeta(messageType, level);
     MTR_LogPrintfCommon("%s %i\n", message, argument);
-    #ifdef __MINGW32__
+    #ifndef __EMSCRIPTEN__
     fclose(mtrLogFile);
     #endif
 }
@@ -114,7 +114,7 @@ void MTR_CALL MTR_LogWrite_d(const char *message, uint8_t level,
 {
     MTR_LogWriteMeta(messageType, level);
     MTR_LogPrintfCommon("%s %f\n", message, argument);
-    #ifdef __MINGW32__
+    #ifndef __EMSCRIPTEN__
     fclose(mtrLogFile);
     #endif
 }

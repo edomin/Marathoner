@@ -1,9 +1,10 @@
 #include "directory.h"
 
-/* Win32 only */
+/* Windows only */
 /*fa MTR_GetCurrentDirectory yes */
 char *MTR_CALL MTR_GetCurrentDirectory(void)
 {
+    #ifdef __MINGW32__
     char *directoryName;
     int directoryNameLength;
 
@@ -16,6 +17,9 @@ char *MTR_CALL MTR_GetCurrentDirectory(void)
         return directoryName;
     else
         return NULL;
+    #else
+    return NULL;
+    #endif
 }
 
 mtrDirectory_t *MTR_DirectoryOpen(const char *directoryName)

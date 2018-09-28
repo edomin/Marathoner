@@ -3,7 +3,7 @@
 /*fa MTR_ClipboardPutText yes */
 bool MTR_CALL MTR_ClipboardPutText(const char* text)
 {
-    #if !defined(__EMSCRIPTEN__)
+    #if defined(__MINGW32__)
     bool success;
     success = true;
     if (!Clipboard_open())
@@ -22,7 +22,7 @@ bool MTR_CALL MTR_ClipboardPutText(const char* text)
 /*fa MTR_ClipboardGetText yes */
 char *MTR_CALL MTR_ClipboardGetText(void)
 {
-    #if !defined(__EMSCRIPTEN__)
+    #if defined(__MINGW32__)
     size_t size;
     char  *text;
     bool   success;

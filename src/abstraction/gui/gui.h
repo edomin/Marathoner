@@ -2,6 +2,7 @@
 #define MTR_ABSTRACTION_GUI_H
 
 #include <string.h>
+#include <stdarg.h>
 
 #define NK_INCLUDE_FIXED_TYPES
 #define NK_INCLUDE_STANDARD_IO

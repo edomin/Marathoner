@@ -18,6 +18,9 @@ ifeq ($(PLATFORM), win64)
     LIBS = -lpng -lz
   endif
 endif
+ifeq ($(PLATFORM), linux_x86_64)
+  LIBS = -lpng
+endif
 ifeq ($(PLATFORM), html5)
   CEXFLAGS = -s USE_LIBPNG=1 -s USE_ZLIB=1
   LIBS = -s USE_LIBPNG=1 -s USE_ZLIB=1

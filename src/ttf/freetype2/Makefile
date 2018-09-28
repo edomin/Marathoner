@@ -17,11 +17,18 @@ ifeq ($(PLATFORM), win64)
     LIBS = -lfreetype -lpng -lz -lbz2
   endif
 endif
+ifeq ($(PLATFORM), linux_x86_64)
+  LIBS = -lfreetype
+endif
 ifeq ($(PLATFORM), html5)
   CEXFLAGS = -s USE_FREETYPE=2
   LIBS = -s USE_FREETYPE=2
 endif
 
-XINCDIRS = -I$(PREFIX)/include/freetype2
+ifeq ($(CROSSPLATFORM), yes)
+  XINCDIRS = -I$(PREFIX)/include/freetype2
+else
+  XINCDIRS = -I/usr/include/freetype2
+endif
 
 include ../../../makefiles/Subsystem.mk

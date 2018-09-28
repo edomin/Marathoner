@@ -1,5 +1,5 @@
-#win32, win64, html5
-PLATFORM = win32
+#win32, win64, linux_x86_64 html5
+PLATFORM = linux_x86_64
 #static, plugin
 MOD = plugin
 # yes, no
@@ -22,6 +22,18 @@ ifeq ($(OS), Windows_NT)
   ifeq ($(PROCESSOR_ARCHITECTURE), AMD64)
     HOST = win64
   endif
+else
+  ifeq ($(shell uname -s), Linux)
+    ifeq ($(shell uname -m), x86_64)
+      HOST = linux_x86_64
+    endif
+  endif
+endif
+
+ifeq ($(PLATFORM), $(HOST))
+  CROSSPLATFORM = no
+else
+  CROSSPLATFORM = yes
 endif
 
 ifeq ($(HOST_BUILD), yes)
@@ -32,16 +44,27 @@ ifeq ($(HOST_BUILD), yes)
   ifeq ($(HOST), win64)
     HOST_EXE_EXT = .exe
   endif
+  ifeq ($(HOST), linux_x86_64)
+    HOST_EXE_EXT =
+  endif
 endif
 
 ifneq ($(NUMBER_OF_PROCESSORS),)
   CORES = $(NUMBER_OF_PROCESSORS)
 else
-  CORES = 1
+  ifneq ($(shell nproc),)
+    CORES = $(shell nproc)
+  else
+    CORES = 1
+  endif
 endif
 
 ifeq ($(PLATFORM), win32)
-  PREFIX = /usr/local/mingw32
+  ifeq ($(CROSSPLATFORM), yes)
+    PREFIX = /usr/local/i686-w64-mingw32
+  else
+    PREFIX = /usr/local
+  endif
   CC = mingw32-gcc
   LD = mingw32-gcc
   AR = ar
@@ -73,7 +96,11 @@ ifeq ($(PLATFORM), win32)
   EXE_EXT = .exe
 endif
 ifeq ($(PLATFORM), win64)
-  PREFIX = /usr/local/x86_64-w64-mingw32
+  ifeq ($(CROSSPLATFORM), yes)
+    PREFIX = /usr/local/x86_64-w64-mingw32
+  else
+    PREFIX = /usr/local
+  endif
   CC = x86_64-w64-mingw32-gcc
   LD = x86_64-w64-mingw32-gcc
   AR = x86_64-w64-mingw32-gcc-ar
@@ -106,12 +133,49 @@ ifeq ($(PLATFORM), win64)
   A_EXT = .a
   EXE_EXT = .exe
 endif
+ifeq ($(PLATFORM), linux_x86_64)
+  ifeq ($(CROSSPLATFORM), yes)
+    PREFIX = /usr/local/x86_64-linux-gnu
+  else
+    PREFIX = /usr/local
+  endif
+  CC = x86_64-linux-gnu-gcc
+  LD = x86_64-linux-gnu-gcc
+  AR = x86_64-linux-gnu-ar
+  CFLAGS = -Wall -Wextra -Wno-unused-parameter -Wshadow -Werror -mmmx -msse \
+   -msse2 -mfpmath=sse
+  ifeq ($(MORE_WARNINGS), yes)
+    CFLAGS += -Wbad-function-cast -Wcast-qual \
+     -Wdeclaration-after-statement -Wdouble-promotion \
+     -Wduplicated-cond -Wfloat-equal \
+     -Wformat-nonliteral -Wformat-security -Wformat-signedness -Winit-self \
+     -Wlogical-op -Wmisleading-indentation -Wnull-dereference \
+     -Wredundant-decls -Wshift-overflow=2 -Wswitch-default -Wuninitialized \
+     -Wundef -Wvla
+  endif
+  #LDFLAGS = -Wl,-Bstatic
+  LDFLAGS =
+  ifeq ($(DEBUG), no)
+    CFLAGS += -O2 -Wdisabled-optimization
+    LDFLAGS += -s
+  endif
+  ifeq ($(DEBUG), yes)
+    CFLAGS += -O0 -ggdb3 -fvar-tracking
+  endif
+  ARFLAGS = rcs
+  SO_PR = lib
+  SO_EXT = .so
+  A_PR = lib
+  A_EXT = .a
+  EXE_EXT =
+endif
 ifeq ($(PLATFORM), html5)
   PREFIX = /usr/local/emscripten
   CC = emcc
   LD = emcc
   AR = emar
-  CFLAGS = -Wall -Wextra -Wno-unused-parameter -Wshadow -Werror -s EMTERPRETIFY=1 -s EMTERPRETIFY_ASYNC=1
+  CFLAGS = -Wall -Wextra -Wno-unused-parameter -Wshadow -Werror \
+   -s EMTERPRETIFY=1 -s EMTERPRETIFY_ASYNC=1
   ifeq ($(MORE_WARNINGS), yes)
     CFLAGS += -Wbad-function-cast -Wcast-qual -Wdeclaration-after-statement \
      -Wdouble-promotion -Wfloat-equal -Wformat-nonliteral -Wformat-security \
@@ -129,7 +193,7 @@ ifeq ($(PLATFORM), html5)
     CFLAGS += -O0 -g
     LDFLAGS += -O0 -g3 -s ASSERTIONS=2 \
      -s STACK_OVERFLOW_CHECK=2 -s ALIASING_FUNCTION_POINTERS=0
-	#Not creating source maps for modules with -g4 flag
+    #Not creating source maps for modules with -g4 flag
   endif
   ARFLAGS = rcs
   SO_PR = lib

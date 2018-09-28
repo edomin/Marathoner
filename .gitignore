@@ -1,9 +1,9 @@
-Marathoner.cbp
-*.layout
+Marathoner
+fagen
 *.dll
+*.so
 *.o
 *.log
-TODO
 emsdk_set_env.bat
 .project
 *.res
@@ -24,6 +24,11 @@ win64/binding_init_func/*
 win64/binding_init_func_call/*
 win64/lib/*.txt
 win64/obj/objs.txt
+linux_x86_64/fa/*
+linux_x86_64/binding_init_func/*
+linux_x86_64/binding_init_func_call/*
+linux_x86_64/lib/*.txt
+linux_x86_64/obj/objs.txt
 html5/fa/*
 html5/binding_init_func/*
 html5/binding_init_func_call/*
@@ -35,3 +40,4 @@ html5/*.html
 html5/*.map
 html5/*.mem
 html5/*.js
+*.geany

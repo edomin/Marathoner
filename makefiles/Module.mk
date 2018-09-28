@@ -1,14 +1,13 @@
-LDFLAGS += -shared -Wl,--kill-at -L$(PREFIX)/lib -L$(PREFIX)/bin
-#ifeq ($(PLATFORM), win32)
-#  ifeq ($(DEBUG), no)
-#    LDFLAGS += -s
-#  endif
-#endif
-#ifeq ($(PLATFORM), win64)
-#  ifeq ($(DEBUG), no)
-#    LDFLAGS += -s
-#  endif
-#endif
+LDFLAGS += -shared -L$(PREFIX)/lib
+ifeq ($(PLATFORM), win32)
+  LDFLAGS += -L$(PREFIX)/bin -Wl,--kill-at
+endif
+ifeq ($(PLATFORM), win64)
+  LDFLAGS += -L$(PREFIX)/bin -Wl,--kill-at
+endif
+ifeq ($(PLATFORM), linux_x86_64)
+  CFLAGS += -fPIC
+endif
 ifeq ($(PLATFORM), html5)
 #  LDFLAGS += -s SIDE_MODULE=1 -O2
   LDFLAGS += SIDE_MODULE=1
@@ -55,6 +54,9 @@ ifeq ($(PLATFORM), win64)
   RES = $(OBJSDIR)/$(SUBSYSTEM)/$(MODULE).res
   OBJS = $(OBJ) $(RES)
   PLUGIN_DESCRIPTION = "$(MODULE_NAME) plugin for Marathoner Engine"
+endif
+ifeq ($(PLATFORM), linux_x86_64)
+  OBJS = $(OBJ)
 endif
 
 CONST = $(shell echo $(MODULE_NAME) | tr a-z A-Z)

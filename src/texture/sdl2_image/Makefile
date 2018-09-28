@@ -19,6 +19,9 @@ ifeq ($(PLATFORM), win64)
      -luuid -ltiff -ljpeg -lwebp
   endif
 endif
+ifeq ($(PLATFORM), linux_x86_64)
+  LIBS = -lSDL2_image
+endif
 ifeq ($(PLATFORM), html5)
   CEXFLAGS = -s USE_SDL=2 -s USE_SDL_IMAGE=2 \
    -s SDL2_IMAGE_FORMATS="['bmp','gif','lbm','pcx','png','pnm','tga','xcf','xpm','xv']"

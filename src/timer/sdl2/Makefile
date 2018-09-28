@@ -17,6 +17,9 @@ ifeq ($(PLATFORM), win64)
     LIBS = -lSDL2 -lwinmm -limm32 -lole32 -loleaut32 -lversion -luuid
   endif
 endif
+ifeq ($(PLATFORM), linux_x86_64)
+  LIBS = -lSDL2
+endif
 ifeq ($(PLATFORM), html5)
   CEXFLAGS = -s USE_SDL=2
   LIBS = -s USE_SDL=2

@@ -262,6 +262,8 @@ win32: prebuild windows_common fagen plugins engine
 
 win64: prebuild windows_common fagen plugins engine
 
+linux_x86_64: prebuild fagen plugins engine
+
 html5: prebuild fagen
 
 prebuild:
@@ -276,6 +278,9 @@ endif
 ifeq ($(PLATFORM), win64)
 	-mkdir $(BINDIR)
 	-mkdir $(RCDIR)
+endif
+ifeq ($(PLATFORM), linux_x86_64)
+	-mkdir $(BINDIR)
 endif
 ifeq ($(MOD), static)
 	-mkdir $(PLATFORM)/binding_init_func
@@ -301,6 +306,10 @@ ifeq ($(PLATFORM), win64)
 	-rm -f -r $(PLATFORM)/rcgen.exe
 	-rm -f -r $(PLATFORM)/Launcher.exe
 endif
+ifeq ($(PLATFORM), linux_x86_64)
+	-rm -f -r $(BINDIR)
+	-rm -f -r $(PLATFORM)/Launcher
+endif
 ifeq ($(PLATFORM), html5)
 	-rm -f -r $(PLATFORM)/marathoner.html
 	-rm -f -r $(PLATFORM)/marathoner.js
@@ -313,4 +322,4 @@ endif
 
 remake: clean all
 
-.PHONY: prebuild common windows_common remake clean all win32 win64
+.PHONY: prebuild common windows_common remake clean all win32 win64 linux_x86_64 html5
