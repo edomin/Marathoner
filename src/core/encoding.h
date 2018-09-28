@@ -3,7 +3,7 @@
 
 #include <string.h>
 
-#include "utf8.h"
+#include "utf.h"
 
 #include "marathoner/engine.h"
 

@@ -1,17 +1,24 @@
 #include "encoding.h"
 
-size_t MTR_CALL MTR_EncodingUtf8ToUcs4(const char *utf8Text, uint32_t **ucs4Text)
+size_t MTR_CALL MTR_EncodingUtf8ToUcs4(const char *utf8Text,
+ uint32_t **ucs4Text)
 {
-    size_t len;
-    size_t max;
-    size_t n;
-    int    illegal;
+    size_t      len;
+    size_t      i;
+    const char *utf8Rune = utf8Text;
 
     if (utf8Text == NULL)
-        return 0;
-    len = strlen(utf8Text);
-    max = len + 1;
-    *ucs4Text = malloc(sizeof(ucs4_t) * max);
+        return 0UL;
+    len = utf8RuneCount(utf8Text, 0UL);
+    *ucs4Text = malloc(sizeof(uint32_t) * len);
+    if (*ucs4Text == NULL)
+        return 0UL;
+
+    for (i = 0UL; i < len; i++)
+        utf8Rune = utf8DecodeRune(utf8Rune, 0UL, &(*ucs4Text[i]));
+
+    return len;
+}
     if (*ucs4Text == NULL)
         return 0;
     illegal = 0;
@@ -21,10 +28,5 @@ size_t MTR_CALL MTR_EncodingUtf8ToUcs4(const char *utf8Text, uint32_t **ucs4Text
 
 size_t MTR_CALL MTR_EncodingUtf8Codepoints(const char *utf8Text)
 {
-    size_t    result;
-    uint32_t *ucs4Text;
-    ucs4Text = NULL;
-    result = MTR_EncodingUtf8ToUcs4(utf8Text, &ucs4Text);
-    free(ucs4Text);
-    return result;
+    return utf8RuneCount(utf8Text, strlen(utf8Text));
 }
