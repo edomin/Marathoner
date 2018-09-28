@@ -214,8 +214,12 @@ void MTR_NkHandleEvents(void)
         nk_input_motion(ctx, mouseX, mouseY);
 
     mouseRelWheel = MTR_MouseGetWheelRelative();
-    if (mouseRelWheel != 0)
-        nk_input_scroll(ctx, (float)mouseRelWheel);
+    if (mouseRelWheel != 0) {
+        struct nk_vec2 mouseRelWheelVec2;
+        mouseRelWheelVec2.x = 0.0f;
+        mouseRelWheelVec2.y = (float)mouseRelWheel;
+        nk_input_scroll(ctx, mouseRelWheelVec2);
+    }
 
     if (MTR_MousePress(MTR_MOUSE_LEFT))
         nk_input_button(ctx, NK_BUTTON_LEFT, mouseX, mouseY, 1);
