@@ -1,8 +1,8 @@
 ### Building on Windows for Windows 32bit
-This is my list of commands for building prereqisites. Every block of commands runs from directory of library extracted from archive.  
-Before building you need to create directory /usr/local/mingw32 (\<path_to_msys2\>/usr/local/mingw32) and add path to compiler to PATH environment variable (and temporary delete paths to other compilers from PATH).  
+This is my list of commands for building prereqisites. Every block of commands runs from directory of library extracted from archive.
+Before building you need to create directory /usr/local/i686-w64-mingw32 (\<path_to_msys2\>/usr/local/i686-w64-mingw32) and add path to compiler to PATH environment variable (and temporary delete paths to other compilers from PATH).
 For building I used toolchain MinGW-W64 i686 based on GCC 7.2.0.
-Also for building of some libraries you need:  
+Also for building of some libraries you need:
 
 * CMake (I use CMake 3.5.2)
 * Python (I use Python 2.7.13)
@@ -61,7 +61,7 @@ $ cp tmp/output/duktape.dll /usr/local/i686-w64-mingw32/bin
 $ rm -r -f tmp
 ```
 
-[Freetype](http://www.freetype.org)  
+[Freetype](http://www.freetype.org)
 Dependencies: bzip2, libpng, zlib
 
 ```
@@ -70,7 +70,7 @@ BZIP2_CFLAGS="-I/usr/local/i686-w64-mingw32/include" \
 BZIP2_LIBS="-L/usr/local/i686-w64-mingw32/lib -lbz2"
 $ make
 $ make install
-```  
+```
 Dependencies: bzip2, harfbuzz, libpng, zlib
 
 ```
@@ -89,7 +89,7 @@ $ make
 $ make install
 ```
 
-[GLib](https://ftp.gnome.org/pub/gnome/sources/glib/)  
+[GLib](https://ftp.gnome.org/pub/gnome/sources/glib/)
 Dependencies: libffi, libiconv, libintl, zlib
 
 ```
@@ -102,7 +102,7 @@ $ make
 $ make install
 ```
 
-[HarfBuzz](https://www.freedesktop.org/wiki/Software/HarfBuzz/)  
+[HarfBuzz](https://www.freedesktop.org/wiki/Software/HarfBuzz/)
 Dependencies: Freetype, GLib, ICU
 
 ```
@@ -167,7 +167,7 @@ $ make
 $ make install
 ```
 
-[libFLAC](https://xiph.org/flac/)  
+[libFLAC](https://xiph.org/flac/)
 Dependencies: libogg
 
 ```
@@ -191,7 +191,7 @@ $ make
 $ make install
 ```
 
-[libintl](https://www.gnu.org/software/gettext/)  
+[libintl](https://www.gnu.org/software/gettext/)
 Dependencies: libiconv
 
 ```
@@ -249,7 +249,7 @@ $ make
 $ make install
 ```
 
-[libpng](http://www.libpng.org/pub/png/libpng.html)  
+[libpng](http://www.libpng.org/pub/png/libpng.html)
 Dependencies: zlib
 
 ```
@@ -260,7 +260,7 @@ $ make
 $ make install
 ```
 
-[libtiff](http://simplesystems.org/libtiff/)  
+[libtiff](http://simplesystems.org/libtiff/)
 Dependencies: JPEG, liblzma, zlib
 
 ```
@@ -273,7 +273,7 @@ $ cd ..
 $ rm -r -f tmp
 ```
 
-[libvorbis](https://www.xiph.org/vorbis/)  
+[libvorbis](https://www.xiph.org/vorbis/)
 Dependencies: libogg
 
 ```
@@ -284,7 +284,7 @@ $ make
 $ make install
 ```
 
-[libwebp](https://developers.google.com/speed/webp/download)  
+[libwebp](https://developers.google.com/speed/webp/download)
 Dependencies: GIFLIB, JPEG, libpng, libTIFF, zlib
 
 ```
@@ -359,7 +359,7 @@ $ cp include/saneopt.h /usr/local/i686-w64-mingw32/include
 $ cp libsaneopt.a /usr/local/i686-w64-mingw32/lib
 ```
 
-[SDL2_gpu](https://github.com/grimfang4/sdl-gpu)  
+[SDL2_gpu](https://github.com/grimfang4/sdl-gpu)
 Dependencies: SDL2
 
 ```
@@ -385,7 +385,7 @@ $ make
 $ make install
 ```
 
-[SDL2_gfx](http://www.ferzkopp.net/wordpress/2016/01/02/sdl_gfx-sdl2_gfx/)  
+[SDL2_gfx](http://www.ferzkopp.net/wordpress/2016/01/02/sdl_gfx-sdl2_gfx/)
 Dependencies: SDL2
 
 ```
@@ -402,7 +402,7 @@ $ cp .libs/SDL2_gfx.dll /usr/local/i686-w64-mingw32/bin
 $ cp .libs/libSDL2_gfx.dll.a /usr/local/i686-w64-mingw32/lib
 ```
 
-[SDL2_image](https://www.libsdl.org/projects/SDL_image/)  
+[SDL2_image](https://www.libsdl.org/projects/SDL_image/)
 Dependencies: libjpeg, libpng, libtiff, libwebp, SDL2
 
 ```
@@ -419,7 +419,7 @@ $ cp .libs/*.a /usr/local/i686-w64-mingw32/lib
 $ cp .libs/SDL2_image.dll /usr/local/i686-w64-mingw32/bin
 ```
 
-[SDL2_mixer](https://www.libsdl.org/projects/SDL_mixer/)  
+[SDL2_mixer](https://www.libsdl.org/projects/SDL_mixer/)
 Dependencies: libFLAC, libmodplug, libmpg123, libogg, libvorbis, SDL2
 
 ```
@@ -435,7 +435,7 @@ $ make
 $ make install
 ```
 
-[SDL2_ttf](https://www.libsdl.org/projects/SDL_ttf/)  
+[SDL2_ttf](https://www.libsdl.org/projects/SDL_ttf/)
 Dependencies: Freetype, SDL2
 
 ```
