@@ -5,13 +5,12 @@ ifneq ($(PLATFORM), html5)
    $(PLATFORM) platform)
 endif
 SUBSYSTEM = timer
-MODULE = emscripten_lua
-MODULE_NAME = Timer_Emscripten_Lua
-include ../../../makefiles/Lua_libs.mk
+MODULE = emscripten_squirrel
+MODULE_NAME = Timer_Emscripten_Squirrel
 PREREQS = ../binding_common.h ../binding_common.c
 
 ifeq ($(CROSSPLATFORM), no)
-  XINCDIRS = -I/usr/include/lua5.3
+  XINCDIRS = -I/usr/include/squirrel3
 endif
 
 include ../../../makefiles/Binding.mk

@@ -1,5 +1,9 @@
 include ../../../makefiles/Build.mk
 
+ifneq ($(PLATFORM), html5)
+  $(error Emscripten-based timer module can not be compiled for $(PLATFORM) \
+   platform)
+endif
 SUBSYSTEM = timer
 MODULE = emscripten
 MODULE_NAME = Timer_Emscripten
