@@ -100,16 +100,17 @@ ifeq ($(MOD), static)
   ifeq ($(PLATFORM), win32)
 	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) \
 	 $(MTR_OBJS) $(MOD_OBJS) -lminini -lutf -ltinyfiledialogs -lole32 \
-	 -lshlwapi -llazy_winapi -lsaneopt $(LIBS)
+	 -lshlwapi -lclipboard -lsaneopt $(LIBS)
   endif
   ifeq ($(PLATFORM), win64)
 	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) \
 	 $(MTR_OBJS) $(MOD_OBJS) -lminini -lutf -ltinyfiledialogs -lole32 \
-	 -lshlwapi -llazy_winapi -lsaneopt $(LIBS)
+	 -lshlwapi -lclipboard -lsaneopt $(LIBS)
   endif
   ifeq ($(PLATFORM), linux_x86_64)
 	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) \
-	 $(MTR_OBJS) $(MOD_OBJS) -lminini -lutf -ltinyfiledialogs -lsaneopt $(LIBS)
+	 $(MTR_OBJS) $(MOD_OBJS) -lminini -lutf -ltinyfiledialogs -lclipboard \
+	 -lxcb -lpthread -lsaneopt $(LIBS)
   endif
   ifeq ($(PLATFORM), html5)
 	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) \
@@ -122,16 +123,17 @@ ifeq ($(MOD), plugin)
   ifeq ($(PLATFORM), win32)
 	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) \
 	 $(MTR_OBJS) -lminini -Wl,-Bstatic -lutf -Wl,-Bstatic -ltinyfiledialogs \
-	 -lole32 -lshlwapi -llazy_winapi -lsaneopt
+	 -lole32 -lshlwapi -lclipboard -lsaneopt
   endif
   ifeq ($(PLATFORM), win64)
 	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) \
 	 $(MTR_OBJS) -lminini -Wl,-Bstatic -lutf -Wl,-Bstatic -ltinyfiledialogs \
-	 -lole32 -lshlwapi -llazy_winapi -lsaneopt
+	 -lole32 -lshlwapi -lclipboard -lsaneopt
   endif
   ifeq ($(PLATFORM), linux_x86_64)
 	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) \
-	 $(MTR_OBJS) -ldl -lminini -lutf -ltinyfiledialogs -lsaneopt
+	 $(MTR_OBJS) -ldl -lminini -lutf -ltinyfiledialogs -lclipboard -lxcb \
+	 -lpthread -lsaneopt
   endif
 #  ifeq ($(PLATFORM), html5)
 #	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Marathoner$(EXE_EXT) \
@@ -145,12 +147,12 @@ $(BINDIR)/Launcher: $(LCHR_OBJS)
 ifeq ($(MOD), plugin)
   ifeq ($(PLATFORM), win32)
 	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Launcher$(EXE_EXT) \
-	 $(LCHR_OBJS) -lminini -Wl,-Bstatic -ltigr -ld3d9 -llazy_winapi \
+	 $(LCHR_OBJS) -lminini -Wl,-Bstatic -ltigr -ld3d9 -lclipboard \
 	 -Wl,-Bstatic -ltinyfiledialogs -lole32 -lshlwapi
   endif
   ifeq ($(PLATFORM), win64)
 	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Launcher$(EXE_EXT) \
-	 $(LCHR_OBJS) -lminini -Wl,-Bstatic -ltigr -ld3d9 -llazy_winapi \
+	 $(LCHR_OBJS) -lminini -Wl,-Bstatic -ltigr -ld3d9 -lclipboard \
 	 -Wl,-Bstatic -ltinyfiledialogs -lole32 -lshlwapi
   endif
 endif

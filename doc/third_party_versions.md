@@ -13,7 +13,7 @@ Versions of third-party libraries than I use. If you have problems with building
 | ICU             | 57.1             | 61.1               |                  |            |
 | inih            | r41              |                    | latest           |            |
 | JPEG            | 9c               |                    |                  |            |
-| lazy-winapi.c   | commit 90bc18c on 11 Feb 2017 |       |                  |            |
+| libclipboard    | 1.0              | 1.0                | 1.0              |            |
 | libffi          | 3.2.1            |                    |                  |            |
 | libiconv        | 1.15             |                    |                  |            |
 | libFLAC         | 1.3.2            |                    |                  |            |

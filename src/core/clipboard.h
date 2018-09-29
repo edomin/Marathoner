@@ -1,11 +1,12 @@
 #ifndef MTR_CORE_CLIPBOARD_H
 #define MTR_CORE_CLIPBOARD_H
 
-#ifdef __MINGW32__
-    #include "lazy_winapi.h"
-#endif
+#include "libclipboard.h"
 
 #include "marathoner/engine.h"
+
+static bool clipboardInitialized __attribute__((used)) = false;
+clipboard_c *clipboard;
 
 bool MTR_CALL MTR_ClipboardPutText(const char* text);
 char *MTR_CALL MTR_ClipboardGetText(void);

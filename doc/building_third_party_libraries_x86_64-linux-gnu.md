@@ -18,8 +18,6 @@ $ cmake .. -DCMAKE_C_FLAGS="-fPIC" -DENABLE_CJSON_TEST=Off \
  -DBUILD_SHARED_LIBS=Off
 $ make
 $ sudo make install
-$ cd ..
-$ rm -r -f build
 ```
 
 [dr_wav](https://github.com/mackron/dr_libs)
@@ -63,6 +61,18 @@ $ sudo apt install libfreetype6-dev
 
 ```
 $ sudo apt install libinih-dev
+```
+
+[libclipboard](https://jtanx.github.io/libclipboard/)
+
+```
+$ mkdir build
+$ cd build
+$ cmake .. \
+ -DCMAKE_C_FLAGS="-std=c99 -Wall -pedantic -g -I./include -I../include"
+$ make
+$ sudo make install
+$ sudo cp include/libclipboard-config.h /usr/local/include
 ```
 
 [libpng](http://www.libpng.org/pub/png/libpng.html)
@@ -141,8 +151,7 @@ $ mkdir build
 $ cd build
 $ cmake ..
 $ make
-$ cd ..
-$ rm -r -f build
+$ sudo make install
 ```
 
 [SDL2_image](https://www.libsdl.org/projects/SDL_image/)

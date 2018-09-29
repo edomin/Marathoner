@@ -6,7 +6,7 @@ Freetype        BSD-like
 giflib          X Consortium-like (MIT-like)
 GLib            LGPL 2.1
 HarfBuzz        MIT
-lazy-winapi     MIT
+libclipboard    MIT
 libffi          MIT
 libflac         BSD-like
 libiconv        LGPL
