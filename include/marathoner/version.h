@@ -92,9 +92,9 @@
 #define MTR_VERSION_TTF_FREETYPE2_SQUIRREL               0x000100U /* inc minor */
 #define MTR_VERSION_TTF_FREETYPE2_DUKTAPE                0x000100U /* inc minor */
 
-#define MTR_VERSION_OGG_LIBVORBISFILE                    0x000001U /* inc minor */
+#define MTR_VERSION_OGG_LIBVORBISFILE                    0x000001U /* inc patch */
 
-#define MTR_VERSION_WAV_DR_WAV                           0x000001U /* inc minor */
+#define MTR_VERSION_WAV_DR_WAV                           0x000001U /* inc patch */
 
 #define MTR_VERSION_PACKAGE_PHYSFS                       0x000000U /* initial */
 #define MTR_VERSION_PACKAGE_PHYSFS_LUA                   0x000000U /* initial */
@@ -131,7 +131,7 @@
 #define MTR_VERSION_ABSTRACTION_GUI_SQUIRREL             0x000100U /* not incremented */
 #define MTR_VERSION_ABSTRACTION_GUI_DUKTAPE              0x000100U /* not incremented */
 
-#define MTR_VERSION_ABSTRACTION_SCENE                    0x000000U /* initial */
+#define MTR_VERSION_ABSTRACTION_SCENE                    0x000001U /* inc patch */
 #define MTR_VERSION_ABSTRACTION_SCENE_LUA                0x000000U /* initial */
 #define MTR_VERSION_ABSTRACTION_SCENE_SQUIRREL           0x000000U /* initial */
 #define MTR_VERSION_ABSTRACTION_SCENE_DUKTAPE            0x000000U /* initial */
