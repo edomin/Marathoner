@@ -1,6 +1,5 @@
 #include "directory.h"
 
-/* Windows only */
 /*fa MTR_GetCurrentDirectory yes */
 char *MTR_CALL MTR_GetCurrentDirectory(void)
 {
@@ -17,8 +16,28 @@ char *MTR_CALL MTR_GetCurrentDirectory(void)
         return directoryName;
     else
         return NULL;
-    #else
-    return NULL;
+    #endif
+    #ifdef __GNUC__
+    char buffer[4096];
+    char *success = NULL;
+    char *directoryName = NULL;
+    int directoryNameLength;
+
+    success = getcwd(buffer, 4096);
+    if (!success)
+        return NULL;
+
+    directoryNameLength = strlen(buffer);
+    directoryName = malloc(sizeof(char) * (directoryNameLength + 1));
+    if (!directoryName)
+        return NULL;
+
+    if (!strcpy(directoryName, buffer)) {
+        free(directoryName);
+        return NULL;
+    }
+
+    return directoryName;
     #endif
 }
 

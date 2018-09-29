@@ -3,6 +3,9 @@
 
 #include <dirent.h>
 #include <string.h>
+#if defined(__GNUC__) && !defined(__MINGW32__)
+    #include <unistd.h>
+#endif
 
 #include "marathoner/engine.h"
 
