@@ -41,3 +41,5 @@ html5/*.map
 html5/*.mem
 html5/*.js
 *.geany
+
+linux_x86_64/Launcher
