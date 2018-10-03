@@ -37,6 +37,7 @@ Squirrel        MIT
 stb_rect_pack   Public Domain
 tigr            Public Domain
 tinyfiledialogs Zlib
+utf             MIT
 utf8            Public Domain
 xz (liblzma)    Public Domain
 zlib            Zlib
