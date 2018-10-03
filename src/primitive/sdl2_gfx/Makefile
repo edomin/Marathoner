@@ -18,6 +18,11 @@ ifeq ($(PLATFORM), win64)
   endif
 endif
 ifeq ($(PLATFORM), linux_x86_64)
+  ifeq ($(CROSSPLATFORM), yes)
+    CEXFLAGS = -I$(PREFIX)/include/SDL2
+  else
+    CEXFLAGS = -I/usr/include/SDL2
+  endif
   LIBS = -lSDL2_gfx
 endif
 ifeq ($(PLATFORM), html5)
