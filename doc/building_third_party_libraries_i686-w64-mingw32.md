@@ -468,15 +468,6 @@ $ rm -r -f build
 $ cp stb_rect_pack.h /usr/local/i686-w64-mingw32/include
 ```
 
-[tigr](https://bitbucket.org/rmitton/tigr/overview)
-
-```
-$ i686-w64-mingw32-gcc -o tigr.o -c tigr.c -Wall -O2 -D_WIN32_WINNT=0x0500
-$ ar rcs libtigr.a tigr.o
-$ cp tigr.h /usr/local/i686-w64-mingw32/include
-$ cp libtigr.a /usr/local/i686-w64-mingw32/lib
-```
-
 [tinyfiledialogs](https://sourceforge.net/projects/tinyfiledialogs/)
 
 ```

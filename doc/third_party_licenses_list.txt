@@ -35,7 +35,6 @@ SDL2_mixer      Zlib
 SDL2_ttf        Zlib
 Squirrel        MIT
 stb_rect_pack   Public Domain
-tigr            Public Domain
 tinyfiledialogs Zlib
 utf             MIT
 utf8            Public Domain

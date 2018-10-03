@@ -1,8 +1,6 @@
 #ifndef MTR_LAUNCHER_H
 #define MTR_LAUNCHER_H
 
-#include <windows.h>
-#include <shlwapi.h>
 #include <stdint.h>
 #include <limits.h>
 #include <stdbool.h>
@@ -11,6 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <stdarg.h>
 
 #define NK_INCLUDE_FIXED_TYPES
 #define NK_INCLUDE_STANDARD_IO
@@ -20,12 +19,17 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wcast-qual"
 #pragma GCC diagnostic ignored "-Wfloat-equal"
-#ifdef __MINGW64__
-    #pragma GCC diagnostic ignored "-Wnull-dereference"
-#endif
+#pragma GCC diagnostic ignored "-Wnull-dereference"
 #include "nuklear.h"
 #pragma GCC diagnostic pop
-#include "tigr.h"
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wswitch-default"
+#include "SDL2/SDL.h"
+#pragma GCC diagnostic pop
+
+#include "SDL2/SDL2_gfxPrimitives.h"
+#include "SDL2/SDL2_gfxPrimitives_font.h"
 
 #include "log.h"
 #include "notification.h"
@@ -39,42 +43,45 @@
 #define WINDOW_WIDTH  640
 #define WINDOW_HEIGHT 600
 
+#if defined(__GNUC__) && !defined(__MINGW32__)
+    #define MAX_PATH 8192
+#endif
+
 typedef struct mtrSubsystem {
     const char **plugin;
     int          pluginsCount;
     int          currentPlugin;
 } mtrSubsystem;
 
-typedef struct nkTigrFont {
+typedef struct lchrFont {
     struct nk_user_font nk;
     int                 height;
-    TigrFont           *font;
-} nkTigrFont;
+    int                 width;
+    unsigned char      *font;
+} lchrFont;
 
-static struct nk_tigr {
-    Tigr             *dsp;
-    Tigr             *backdrop;
+static struct nkLauncher {
+    SDL_Window       *dsp;
+    SDL_Renderer     *backdrop;
     unsigned int      width;
     unsigned int      height;
     int               is_touch_down;
     int               touch_down_id;
     struct nk_context ctx;
     struct nk_buffer  cmds;
-    int               clipX;
-    int               clipY;
-    int               clipW;
-    int               clipH;
-} tigr;
+} launcher;
 
 static struct mouse {
     int x;
     int y;
-    int buttonsCurrent;
-    int buttonsPrevious;
+    int currentMousestate[5];
+    int previousMousestate[5];
+    int relativeWheel;
 } mouse;
 
-bool keysCurrent[256];
-bool keysPrevious[256];
+const uint8_t *currentKeystate;
+uint8_t        previousKeystate[SDL_NUM_SCANCODES];
+char           utf8char[SDL_TEXTINPUTEVENT_TEXT_SIZE];
 
 bool *lchrPluginEnabled;
 

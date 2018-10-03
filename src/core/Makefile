@@ -7,6 +7,11 @@ ifeq ($(PLATFORM), win64)
   LDEXFLAGS = -L$(PREFIX)/lib
 endif
 ifeq ($(PLATFORM), linux_x86_64)
+  ifeq ($(CROSSPLATFORM), yes)
+    LCHR_C_EX_FLAGS = -I$(PREFIX)/include/SDL2
+  else
+    LCHR_C_EX_FLAGS = -I/usr/include/SDL2
+  endif
   LDEXFLAGS = -L$(PREFIX)/lib
 endif
 ifeq ($(PLATFORM), html5)
@@ -88,9 +93,7 @@ endif
 
 TARGETS = $(BINDIR)/Marathoner
 ifeq ($(MOD), plugin)
-  ifneq ($(PLATFORM), linux_x86_64)
-    TARGETS += $(BINDIR)/Launcher
-  endif
+  TARGETS += $(BINDIR)/Launcher
 endif
 
 all: $(TARGETS)
@@ -155,10 +158,15 @@ ifeq ($(MOD), plugin)
 	 $(LCHR_OBJS) -lminini -Wl,-Bstatic -ltigr -ld3d9 -lclipboard \
 	 -Wl,-Bstatic -ltinyfiledialogs -lole32 -lshlwapi
   endif
+  ifeq ($(PLATFORM), linux_x86_64)
+	$(LD) $(LDFLAGS) $(LDEXFLAGS) -o $(BINDIR)/Launcher$(EXE_EXT) \
+	 $(LCHR_OBJS) -ldl -lminini -lSDL2_gfx -lSDL2 -lclipboard -lxcb -lpthread \
+	 -ltinyfiledialogs
+  endif
 endif
 
 $(OBJSDIR)/launcher.o: launcher.c launcher.h
-	$(CC) $(CFLAGS) -Wno-unused-function $(INCDIRS) -c launcher.c \
+	$(CC) $(CFLAGS) $(LCHR_C_EX_FLAGS) -Wno-unused-function $(INCDIRS) -c launcher.c \
 	 -o $(OBJSDIR)/launcher.o
 
 $(OBJSDIR)/engine.o: engine.c log.h notification.h configfile.h messagebox.h \

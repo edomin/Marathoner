@@ -40,7 +40,6 @@ Versions of third-party libraries than I use. If you have problems with building
 | SDL2_ttf        | 2.0.14           |                    | latest           |            |
 | Squirrel        | 3.1              |                    | latest           |            |
 | stb_rect_pack   | 0.11             |                    | 0.11             |            |
-| tigr            | 1.3              |                    |                  |            |
 | tinyfiledialogs | 3.3.5            |                    | 3.3.5            |            |
 | utf             | commit 1507075 on 3 Dec 2016  |       |                  |            |
 | liblzma         | 5.2.4            |                    |                  |            |
