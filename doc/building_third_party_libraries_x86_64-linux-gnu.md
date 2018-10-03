@@ -140,7 +140,10 @@ $ sudo apt install libsdl2-dev
 [SDL2_gfx](http://www.ferzkopp.net/wordpress/2016/01/02/sdl_gfx-sdl2_gfx/)
 
 ```
-$ sudo apt install libsdl2-gfx-dev
+$ ./configure --disable-sdltest
+$ make
+$ sudo make install
+$ sudo cp SDL2_gfxPrimitives_font.h /usr/local/include/SDL2
 ```
 
 [SDL2_gpu](https://github.com/grimfang4/sdl-gpu)
