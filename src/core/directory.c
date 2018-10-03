@@ -17,7 +17,7 @@ char *MTR_CALL MTR_GetCurrentDirectory(void)
     else
         return NULL;
     #endif
-    #ifdef __GNUC__
+    #if defined(__GNUC__) && !defined(__MINGW32__)
     char buffer[4096];
     char *success = NULL;
     char *directoryName = NULL;
