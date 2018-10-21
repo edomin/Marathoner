@@ -26,6 +26,23 @@ size_t MTR_CALL MTR_EncodingUtf8ToUcs4(const char *utf8Text,
     return n;
 }
 
+size_t MTR_CALL MTR_EncodingUcs4ToUtf8(const uint32_t *ucs4Text,
+ char **utf8Text, size_t codepoints)
+{
+    size_t i;
+
+    if (ucs4Text == NULL)
+        return 0UL;
+    *ucs4Text = malloc(sizeof(uint32_t) * codepoints);
+    if (*ucs4Text == NULL)
+        return 0UL;
+
+    for (i = 0UL; i < len; i++)
+        utf16Rune = utf16DecodeRune(utf16Rune, 0UL, &(*ucs4Text[i]));
+
+    return len;
+}*/
+
 size_t MTR_CALL MTR_EncodingUtf8Codepoints(const char *utf8Text)
 {
     return utf8RuneCount(utf8Text, strlen(utf8Text));
