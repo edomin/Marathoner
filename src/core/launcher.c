@@ -715,6 +715,19 @@ bool RunEngine() {
 return false;
 }
 
+bool LchrScreenXed(void)
+{
+    SDL_Event events[32];
+    int       numEvents;
+
+    numEvents = SDL_PeepEvents(events, 32, SDL_GETEVENT, SDL_QUIT, SDL_QUIT);
+
+    if (numEvents == 0)
+        return false;
+
+    return true;
+}
+
 int main(int argc, char** argv) {
     int                error;
     int                i;
@@ -976,8 +989,7 @@ int main(int argc, char** argv) {
     }
 
 
-    while (!quit) {
-    //while (!tigrClosed(screen) && !tigrKeyDown(screen, TK_ESCAPE) && !quit) {
+    while (!quit && !LchrScreenXed() && !currentKeystate[MTR_KEY_ESCAPE]) {
         SDL_Delay(0.06f);
         nk_input_begin(ctx);
         NkLchrHandleEvents();
@@ -1041,7 +1053,7 @@ int main(int argc, char** argv) {
             nk_layout_row_dynamic(ctx, 16, 1);
             nk_label_colored(ctx, "Autorun:", NK_TEXT_LEFT, headerColor);
 
-            nk_layout_row(ctx, NK_STATIC, 16, 3, autorunRatio);
+            nk_layout_row(ctx, NK_STATIC, 24, 3, autorunRatio);
             nk_label(ctx, "Action:", NK_TEXT_LEFT);
             nk_label(ctx, "runScript", NK_TEXT_LEFT);
             nk_spacing(ctx, 1);

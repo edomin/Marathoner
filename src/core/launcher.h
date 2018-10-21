@@ -40,7 +40,7 @@
 #include "plugin_loader.h"
 #include "marathoner/marathoner.h"
 
-#define WINDOW_WIDTH  640
+#define WINDOW_WIDTH  800
 #define WINDOW_HEIGHT 600
 
 #if defined(__GNUC__) && !defined(__MINGW32__)
