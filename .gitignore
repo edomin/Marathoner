@@ -10,7 +10,6 @@ emsdk_set_env.bat
 *.rc
 *.exe
 README-SDL.txt
-autorun/*
 Marathoner.cfg
 test/output*
 win32/fa/*
@@ -42,3 +41,4 @@ html5/*.js
 *.geany
 
 linux_x86_64/Launcher
+build/*
