@@ -1,0 +1,33 @@
+include(options)
+
+set(CMAKE_SYSTEM_NAME Linux)
+set(CMAKE_SYSTEM_PROCESSOR x86_64)
+
+if (
+ NOT (
+  (CMAKE_HOST_SYSTEM_NAME STREQUAL CMAKE_SYSTEM_NAME)
+  AND (CMAKE_HOST_SYSTEM_PROCESSOR STREQUAL CMAKE_SYSTEM_PROCESSOR)
+ )
+)
+    set(CROSSBUILD ON)
+endif()
+
+set(CMAKE_C_COMPILER x86_64-linux-gnu-gcc)
+#set(CMAKE_CXX_COMPILER x86_64-linux-gnu-g++)
+
+if (MTR_DEP_PREFIX SREEQUAL "")
+    if (CROSSBUILD)
+        set(CMAKE_FIND_ROOT_PATH /usr/local/x86_64-linux-gnu)
+    else()
+        set(CMAKE_FIND_ROOT_PATH /usr/local)
+    endif()
+endif()
+#set(ENV{PKG_CONFIG_LIBDIR} ${CMAKE_FIND_ROOT_PATH}/lib/pkgconfig/:/usr/lib/x86_64-linux-gnu/pkgconfig)
+set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+if (CROSSBUILD)
+    set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+    set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+else()
+    set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY BOTH)
+    set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE BOTH)
+endif()
